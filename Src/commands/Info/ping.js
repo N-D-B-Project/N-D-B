@@ -1,8 +1,9 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const Discord = require("discord.js");
 
 module.exports = class ping extends BaseCommand {
   constructor() {
-    super("pong", "latencia", []);
+    super("ping", "pong", "latencia", []);
   }
 
   async run(client, message, args) {

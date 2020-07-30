@@ -7,7 +7,7 @@ module.exports = class ReadyEvent extends BaseEvent {
   async run(client) {
     console.log(client.user.tag + " has logged in.");
     console.log(
-      `Estou em ${client.users.cache.size} Users, In ${client.channels.cache.size} Channels and ${client.guilds.cache.size} Servers!`
+      `Estou em ${client.guilds.cache.size} Servers, ${client.users.cache.size} Users e ${client.channels.cache.size} Channels!`
     );
     var status = [
       { name: "Best Bot of Discord", type: "LISTENING" },

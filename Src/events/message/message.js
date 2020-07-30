@@ -12,6 +12,17 @@ module.exports = class MessageEvent extends BaseEvent {
       guildId: message.guild.id,
     });
     const prefix = guildConfig.get("prefix");
+    if (message.content.startsWith(prefix)) {
+      const [cmdName, ...cmdArgs] = message.content
+        .slice(prefix.length)
+        .trim()
+        .split(/\s+/);
+      const command = client.commands.get(cmdName);
+      if (command) {
+        command.run(client, message, cmdArgs);
+      }
+    }
+    /*
     if (message.content.startsWith(client.prefix)) {
       const [cmdName, ...cmdArgs] = message.content
         .slice(client.prefix.length)
@@ -22,6 +33,8 @@ module.exports = class MessageEvent extends BaseEvent {
         command.run(client, message, cmdArgs);
       }
     }
-    if (!message.content.startsWith(client.prefix)) return;
+*/
+    // if (!message.content.startsWith(client.prefix)) return;
+    if (!message.content.startsWith(prefix)) return;
   }
 };

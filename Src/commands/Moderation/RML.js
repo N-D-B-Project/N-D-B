@@ -1,8 +1,9 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const Discord = require("discord.js");
 
 module.exports = class RML extends BaseCommand {
   constructor() {
-    super("Lenda", "RichardMilos", []);
+    super("RML", "Lenda", "RichardMilos", []);
   }
 
   async run(client, message, args) {

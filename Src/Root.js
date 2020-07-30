@@ -1,8 +1,15 @@
 require("dotenv").config();
+
 const { Client } = require("discord.js");
+const { ErelaClient } = require("erela.js");
+
 const { registerCommands, registerEvents } = require("./utils/registry");
+
 const client = new Client();
+
 const mongoose = require("mongoose");
+
+const Config = require("../Config/Config.json");
 
 mongoose.connect("mongodb://localhost/NDBase", {
   useCreateIndex: true,
@@ -10,21 +17,25 @@ mongoose.connect("mongodb://localhost/NDBase", {
   useUnifiedTopology: true,
 });
 
-let subpasta = ["Accessibility", "Info", "Interaction", "Moderation", "test"];
-
-subpasta.forEach((sub) => {
-  try {
-    let commandFile = require(`./Commands/${sub}/${command}.js`);
-    delete require.cache[require.resolve(`./Commands/${sub}/${command}.js`)];
-    return commandFile.run(client, message, args);
-  } catch (err) {}
-});
-
 (async () => {
   client.commands = new Map();
   client.events = new Map();
+  // client.prefix = Config.prefix;
+
   await registerCommands(client, "../commands");
   await registerEvents(client, "../events");
-  await client.login(process.env.DISCORD_BOT_TOKEN);
+
+  client.login(process.env.DISCORD_BOT_TOKEN);
+
+  client.music = new ErelaClient(client, [
+    {
+      host: process.env.HOST,
+      port: process.env.PORT,
+      password: process.env.PASSWORD,
+    },
+  ]);
+
+  client.music.on("nodeConnect", (node) => console.log(node));
+
   console.log("Hello World!");
 })();

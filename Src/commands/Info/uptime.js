@@ -1,8 +1,9 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const Discord = require("discord.js");
 
 module.exports = class uptime extends BaseCommand {
   constructor() {
-    super("tempo", []);
+    super("uptime", "tempo", []);
   }
 
   async run(client, message, args) {

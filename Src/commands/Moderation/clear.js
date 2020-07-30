@@ -1,8 +1,9 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const Discord = require("discord.js");
 
 module.exports = class clear extends BaseCommand {
   constructor() {
-    super("limpar", "limpeza", []);
+    super("clear", "limpar", "limpeza", []);
   }
 
   async run(client, message, args) {

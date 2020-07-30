@@ -1,4 +1,5 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+const Discord = require("discord.js");
 
 module.exports = class userinfo extends BaseCommand {
   constructor() {

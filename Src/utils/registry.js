@@ -3,7 +3,7 @@ const fs = require("fs").promises;
 const BaseCommand = require("./structures/BaseCommand");
 const BaseEvent = require("./structures/BaseEvent");
 
-async function registerCommands(client, dir = "../commands") {
+async function registerCommands(client, dir = "") {
   const filePath = path.join(__dirname, dir);
   const files = await fs.readdir(filePath);
   for (const file of files) {
@@ -14,15 +14,17 @@ async function registerCommands(client, dir = "../commands") {
       if (Command.prototype instanceof BaseCommand) {
         const cmd = new Command();
         client.commands.set(cmd.name, cmd);
+        /*
         cmd.aliases.forEach((alias) => {
           client.commands.set(alias, cmd);
         });
+*/
       }
     }
   }
 }
 
-async function registerEvents(client, dir = "../events") {
+async function registerEvents(client, dir = "") {
   const filePath = path.join(__dirname, dir);
   const files = await fs.readdir(filePath);
   for (const file of files) {
