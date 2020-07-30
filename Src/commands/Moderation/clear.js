@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = class clear extends BaseCommand {
   constructor() {
-    super("clear", "limpar", "limpeza", []);
+    super("clear", "Moderation", []);
   }
 
   async run(client, message, args) {

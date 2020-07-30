@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = class eightball extends BaseCommand {
   constructor() {
-    super("8ball", "bola8", "bolaoito", []);
+    super("8ball", "Interaction", []);
   }
 
   async run(client, message, args) {

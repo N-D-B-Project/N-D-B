@@ -1,12 +1,14 @@
+/*
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 
-module.exports = class RML extends BaseCommand {
+module.exports = class join extends BaseCommand {
   constructor() {
-    super("RML", "Moderation", []);
+    super("join", "music", []);
   }
 
   async run(client, message, args) {
-    message.channel.send("<a:MJa_RicardoMilosLenda:665847403269586955>");
+    const { channel }
   }
 };
+*/

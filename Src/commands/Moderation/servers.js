@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = class servers extends BaseCommand {
   constructor() {
-    super("faltaquanto", "servers", "server", "quantofalta", []);
+    super("faltaquanto", "Moderation", []);
   }
 
   async run(client, message, args) {

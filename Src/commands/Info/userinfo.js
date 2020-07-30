@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = class userinfo extends BaseCommand {
   constructor() {
-    super("userinfo", []);
+    super("userinfo", "Info", []);
   }
 
   async run(client, message, args) {
