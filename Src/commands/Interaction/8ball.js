@@ -15,6 +15,16 @@ module.exports = class eightball extends BaseCommand {
       "Definitivamente não",
       "Dimi viado",
       "Não sei responder a esta pergunta",
+      "Mamma mia",
+      "Óbvio",
+      "'-'",
+      "icarai",
+      "Sad Boy",
+      "190",
+      "Moshi moshi keisatsu desu ka?",
+      "Kon'nichiwa, keisatsudesu ka?",
+      "apenas o akinator sabe responder",
+      "pesquise no google",
     ];
 
     let result = Math.floor(Math.random() * replies.length);

@@ -7,7 +7,7 @@ module.exports = class userinfo extends BaseCommand {
   }
 
   async run(client, message, args) {
-    let uEmbed = new MessageEmbed()
+    let uEmbed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTitle("User Info")
       .setThumbnail(message.guild.iconURL)

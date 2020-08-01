@@ -46,6 +46,7 @@ async function registerMusicEvents(client, dir = "") {
   for (const file of files) {
     const stat = await fs.lstat(path.join(filePath, file));
     if (stat.isDirectory()) registerMusicEvents(client, path.join(dir, file));
+    /*
     if (file.endsWith(".js")) {
       const Event = require(path.join(filePath, file));
       if (Event.prototype instanceof BaseEvent) {
@@ -53,6 +54,7 @@ async function registerMusicEvents(client, dir = "") {
         client.on(event.name, event.run.bind(event, client));
       }
     }
+    */
   }
 }
 
