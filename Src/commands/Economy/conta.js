@@ -78,7 +78,7 @@ module.exports = class ContaCommand extends BaseCommand {
             message.author.displayAvatarURL({ format: "jpg" })
           );
   
-          ctx.drawImage(avatar, 25, 25, 150, 150);
+          ctx.drawImage(avatar, 25, 25, 150, 150); // Tamanho do Avatar
   
           const final = new Discord.MessageAttachment(
             canvas.toBuffer(),
