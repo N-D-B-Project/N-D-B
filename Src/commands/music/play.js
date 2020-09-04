@@ -1,14 +1,14 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class play extends BaseCommand {
+module.exports = class PlayCommand extends BaseCommand {
   constructor() {
     super("play", "music", []);
   }
 
   async run(client, message, args) {
-    const query = args.join(" ");
-    //console.log(query);
+    /*
     const { channel } = message.member.voice;
     if (channel) {
       const player = client.music.players.spawn({
@@ -24,6 +24,9 @@ module.exports = class play extends BaseCommand {
         "Por Favor conecte-se a um na canal de voz para utilizar este comando!"
       );
     }
+    */
+    const query = args.join(" ");
+    //console.log(query);
     const searchResults = await client.music.search(query, message.author);
     //console.log(searchResults);
     //console.log(searchResults.tracks.length);

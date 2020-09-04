@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class uptime extends BaseCommand {
+module.exports = class UptimeCommand extends BaseCommand {
   constructor() {
     super("uptime", "Info", []);
   }

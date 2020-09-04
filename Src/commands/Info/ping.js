@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class ping extends BaseCommand {
+module.exports = class PingCommand extends BaseCommand {
   constructor() {
     super("ping", "Info", []);
   }

@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class eightball extends BaseCommand {
+module.exports = class EightBallCommand extends BaseCommand {
   constructor() {
     super("8ball", "Interaction", []);
   }
@@ -23,20 +24,20 @@ module.exports = class eightball extends BaseCommand {
       "190",
       "Moshi moshi keisatsu desu ka?",
       "Kon'nichiwa, keisatsudesu ka?",
-      "apenas o akinator sabe responder",
-      "pesquise no google",
+      "Apenas o akinator sabe responder",
+      "Pesquise no google",
     ];
 
     let result = Math.floor(Math.random() * replies.length);
     let question = args.slice(0).join(" ");
 
     let Embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag)
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(`8Ball!`)
       .setColor(`RANDOM`)
       .addField("Pergunta", question)
       .addField("Resposta", replies[result]);
-
+    message.delete().catch((O_o) => {});
     message.channel.send(Embed);
   }
 };

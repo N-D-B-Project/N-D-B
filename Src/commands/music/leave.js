@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class leave extends BaseCommand {
+module.exports = class LeaveCommand extends BaseCommand {
   constructor() {
     super("leave", "music", []);
   }

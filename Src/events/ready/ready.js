@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const BaseEvent = require("../../utils/structures/BaseEvent");
 const { ErelaClient } = require("erela.js");
+const { Guild } = require("discord.js");
 
 //const { registerMusicEvents } = require("../../utils/registry");
 
@@ -10,7 +11,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     super("ready");
   }
   async run(client) {
-    console.log(client.user.tag + " has logged in.");
+    console.log(client.user.tag + " Esta Online!");
     console.log(
       `Estou em ${client.guilds.cache.size} Servers, ${client.users.cache.size} Users e ${client.channels.cache.size} Channels!`
     );
@@ -48,7 +49,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     );
     client.music.on("trackStart", (player, track) =>
       //player.textChannel.send(`Now playing: ${track.title}`)
-      console.log(".")
+      console.log("")
     );
     client.music.on("queueEnd", (player) => {
       //player.textChannel.send("Queue has ended.");

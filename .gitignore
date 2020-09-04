@@ -3,4 +3,6 @@ package-lock.json/
 logs/
 token.json/
 .env/
+env/
 git.txt/
+Backup/

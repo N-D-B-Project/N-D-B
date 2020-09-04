@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class clear extends BaseCommand {
+module.exports = class ClearCommand extends BaseCommand {
   constructor() {
     super("clear", "Moderation", []);
   }
@@ -10,7 +11,7 @@ module.exports = class clear extends BaseCommand {
     if (!message.member.permissions.has("MANAGE_MESSAGES"))
       return message.reply("Lhe faltam permissões para isso");
     const deleteCount = parseInt(args[0], 10);
-    if (!deleteCount || deleteCount < 1 || deleteCount > 99)
+    if (!deleteCount || deleteCount < 1 || deleteCount > 100)
       return message.reply(
         "__Forneça um numero de 1/99 para deletar as mensagens__."
       );

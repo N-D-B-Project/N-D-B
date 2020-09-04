@@ -1,7 +1,8 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class userinfo extends BaseCommand {
+module.exports = class UserInfoCommand extends BaseCommand {
   constructor() {
     super("userinfo", "Info", []);
   }
@@ -20,7 +21,7 @@ module.exports = class userinfo extends BaseCommand {
       .addField("**ID:**", `${message.author.id}`, true)
       .addField("**Status:**", `${message.author.presence.status}`, true)
       .addField("**Created At:**", `${message.author.createdAt}`, true)
-      .setFooter(`TestBot | Footer`, client.user.displayAvatarURL);
+      .setFooter("N-D-B", client.user.displayAvatarURL);
 
     message.channel.send(uEmbed);
   }

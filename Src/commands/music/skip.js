@@ -1,9 +1,10 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
 let USED = false;
 
-module.exports = class skip extends BaseCommand {
+module.exports = class SkipCommand extends BaseCommand {
   constructor() {
     super("skip", "music", []);
   }
@@ -15,22 +16,19 @@ module.exports = class skip extends BaseCommand {
     if (player && channel) {
       if (player.voiceChannel.id === channel.id) {
         const members = channel.members.filter((m) => !m.user.bot);
-        //console.log(members.size);
         if (members.size === 1) {
           player.stop();
           message.channel.send(`Pulando Musica... ${player.queue[0].title}`);
         } else {
           if (!USED) {
             USED = true;
-            const voteRequired = Math.ceil(members.size * 0.6);
+            const votesRequired = Math.ceil(members.size * 0.6);
             const embed = new Discord.MessageEmbed()
               .setAuthor(client.user.tag, client.user.displayAvatarURL())
               .setTitle("Pular musica")
               .setDescription(
-                `Total de votos necessários para pular a musica: ${voteRequired}`
-              )
-              .addField("Musica", `${player.queue.title}`)
-              .setColor("#00c26f");
+                `Total de votos necessários para pular a musica: ${votesRequired}`
+              );
             const msg = await message.channel.send(embed);
             await msg.react("✅");
             await msg.react("❌");
@@ -52,16 +50,14 @@ module.exports = class skip extends BaseCommand {
 
             try {
               const reactions = await msg.awaitReactions(filter, {
-                max: voteRequired,
+                max: votesRequired,
                 time: 10000,
                 errors: ["time"],
               });
-              //console.log(reactions);
               const totalVotes = reactions
                 .get("✅")
-                .users.cache.filter((u = !u.bot));
-              //console.log(totalVotes.size);
-              if (totalVotes.size >= voteRequired) {
+                .users.cache.filter((u) => !u.bot);
+              if (totalVotes.size >= votesRequired) {
                 player.stop();
                 USED = false;
               }

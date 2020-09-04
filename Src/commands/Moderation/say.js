@@ -1,19 +1,19 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class say extends BaseCommand {
+module.exports = class SayCommand extends BaseCommand {
   constructor() {
     super("say", "Moderation", []);
   }
 
   async run(client, message, args) {
-    if (message.member.id === 330047048009252864) {
-      const sayMessage = args.join(" ");
-      message.delete().catch((O_o) => {});
-      message.channel.send(sayMessage);
-    }
-    if (!message.member.id === 330047048009252864) {
-      message.channel.send("Somente meu Domo pode usar este comando seu Corno");
-    }
+    //if (message.author.id === 330047048009252864) {
+    const sayMessage = args.join(" ");
+    message.delete().catch((O_o) => {});
+    message.channel.send(sayMessage);
+    //} else {
+    //message.channel.send("Somente meu Dono pode usar este comando seu Corno");
+    //}
   }
 };

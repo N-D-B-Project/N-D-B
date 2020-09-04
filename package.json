@@ -13,9 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^2.6.1",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",
-    "mongoose": "^5.9.25"
+    "mongoose": "^5.9.25",
+    "node-pre-gyp": "^0.15.0"
   }
 }

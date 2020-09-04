@@ -1,8 +1,8 @@
-/*
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
+const AB = require("../../../Config/Abbreviations.json");
 
-module.exports = class join extends BaseCommand {
+module.exports = class JoinCommand extends BaseCommand {
   constructor() {
     super("join", "music", []);
   }
@@ -25,5 +25,3 @@ module.exports = class join extends BaseCommand {
     }
   }
 };
-
-*/

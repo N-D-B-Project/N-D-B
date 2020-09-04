@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 
 const Config = require("../Config/Config.json");
 
-mongoose.connect("mongodb://localhost/NDBase", {
+mongoose.connect(process.env.DBC, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,6 +24,7 @@ mongoose.connect("mongodb://localhost/NDBase", {
 (async () => {
   client.login(process.env.DISCORD_BOT_TOKEN);
 
+  /*
   const nodes = [
     {
       host: process.env.HOST,
@@ -31,7 +32,7 @@ mongoose.connect("mongodb://localhost/NDBase", {
       password: process.env.PASSWORD,
     },
   ];
-  /*
+  
   client.music = new ErelaClient(
     client,
      nodes, [
@@ -48,6 +49,7 @@ mongoose.connect("mongodb://localhost/NDBase", {
   client.commands = new Map();
   client.events = new Map();
   // client.prefix = Config.prefix;
+  cprefix = Config.prefix;
 
   //await registerMusicEvents(client.music, "../musicevents");
   await registerCommands(client, "../commands");
