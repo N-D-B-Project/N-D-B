@@ -1,8 +1,7 @@
 node_modules/
 package-lock.json/
 logs/
-token.json/
-.env/
+.env
 env/
-git.txt/
+git.txt
 Backup/
