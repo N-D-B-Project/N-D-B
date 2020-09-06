@@ -8,6 +8,7 @@ module.exports = class RMLCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    message.delete().catch((O_o) => {});
     message.channel.send("<a:MJa_RicardoMilosLenda:665847403269586955>");
   }
 };

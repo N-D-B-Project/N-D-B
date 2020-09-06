@@ -19,6 +19,7 @@ module.exports = class JoinCommand extends BaseCommand {
       //console.log(client.musicPlayers);
       //console.log("Conectado em um canal de voz.");
     } else {
+      message.delete().catch((O_o) => {});
       message.channel.send(
         "Por Favor conecte-se a um na canal de voz para utilizar este comando!"
       );

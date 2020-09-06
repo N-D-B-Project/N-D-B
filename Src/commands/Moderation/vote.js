@@ -12,7 +12,7 @@ module.exports = class VoteCommand extends BaseCommand {
 
     let Emoji = [
       "<a:Accept:719710630881525881> - Para concordar",
-      "<a:Denided:719710607405875321> - Para discordar",
+      "<a:Denied:719710607405875321> - Para discordar",
     ];
 
     let Embed = new Discord.MessageEmbed()

@@ -16,6 +16,7 @@ module.exports = class BanCommand extends BaseCommand {
       try {
         let bannedMember = await message.guild.members.ban(args);
         if (bannedMember)
+          message.delete().catch((O_o) => {});
           message.channel.send(bannedMember.tag + `B A N I D O ${banEmoji}`);
         //console.log(bannedMember.tag + `B A N I D O ${banEmoji}`);
       } catch (err) {

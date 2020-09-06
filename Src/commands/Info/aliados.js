@@ -27,7 +27,7 @@ module.exports = class AliadosCommand extends BaseCommand {
       .addField("N-O-Z", `Reaja com ${NOZEmoji} para ver o link de convite do N-O-Z`) 
       .addField("Kaori Miyazono", `Reaja com ${KAORIEmoji} para ver o link de convite da Kaori Miyazono`)
       .setTimestamp()
-
+      message.delete().catch((O_o) => {});
       message.channel.send(HomePage).then(message => {
         message.react(NOZEmoji).then(r => {})
         message.react(KAORIEmoji).then(r => {})

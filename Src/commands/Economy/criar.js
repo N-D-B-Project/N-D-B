@@ -36,6 +36,7 @@ module.exports = class CriarCommand extends BaseCommand {
           //console.warn(`${message.author.tag} Tentou criar outra conta na NDCash`);
           return message.reply(`Você já possui uma conta NDCash! Utilize o comando conta!`);
         }
+        message.delete().catch((O_o) => {});
       }
     )
   }

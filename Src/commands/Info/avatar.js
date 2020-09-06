@@ -25,6 +25,7 @@ module.exports = class AvatarCommand extends BaseCommand {
       .setURL(avatar)
       .setTimestamp()
       .setFooter(client.user.tag, client.user.displayAvatarURL());
+    message.delete().catch((O_o) => {});
     message.channel.send(Embed);
   }
 };

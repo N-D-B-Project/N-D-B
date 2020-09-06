@@ -14,6 +14,7 @@ module.exports = class ShuffleCommand extends BaseCommand {
     if (channel && player) {
       if (channel.id === player.voiceChannel.id) {
         player.queue.shuffle();
+        message.delete().catch((O_o) => {});
         message.channel.send("Fila embaralhada!");
       }
     }

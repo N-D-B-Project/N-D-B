@@ -69,6 +69,7 @@ module.exports = class SearchCommand extends BaseCommand {
             }
             if (!player.playing) player.play();
           } else {
+            message.delete().catch((O_o) => {});
             message.channel.send("Cancelado. Nenhuma musica colocada na fila.");
           }
         } catch (err) {
@@ -76,6 +77,7 @@ module.exports = class SearchCommand extends BaseCommand {
         }
       }
     } else {
+      message.delete().catch((O_o) => {});
       message.channel.send("Você não está conectado a um canal de voz.");
     }
   }

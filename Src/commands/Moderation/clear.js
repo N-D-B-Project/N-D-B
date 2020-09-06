@@ -20,10 +20,11 @@ module.exports = class ClearCommand extends BaseCommand {
       limit: deleteCount + 1,
     });
     message.channel.bulkDelete(fetched);
+    message.delete().catch((O_o) => {});
     message.channel
       .send(`🗑 ${args[0]} mensagens deletadas!`)
       .catch((error) =>
-        console.log(`Não foi possível deletar mensagens devido a: ${error}`)
+        console.error(`Não foi possível deletar as mensagens devido a: ${error}`)
       );
   }
 };

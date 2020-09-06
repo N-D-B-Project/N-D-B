@@ -22,7 +22,7 @@ mongoose.connect(process.env.DBC, {
 });
 
 (async () => {
-  client.login(process.env.DISCORD_BOT_TOKEN);
+  client.login(process.env.TOKEN);
 
   /*
   const nodes = [

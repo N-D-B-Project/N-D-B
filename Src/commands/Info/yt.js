@@ -16,6 +16,7 @@ module.exports = class YTCommand extends BaseCommand {
       .setTitle(`${ytlogo} clique aqui`)
       .setURL("https://www.youtube.com/channel/UCbljj-LSlXuiB1EprNDl8MA")
       .setTimestamp();
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 };

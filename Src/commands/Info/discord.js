@@ -16,6 +16,7 @@ module.exports = class DiscordCommand extends BaseCommand {
       .setTitle(`${discordlogo} clique aqui`)
       .setURL("https://discord.gg/mMapzad")
       .setTimestamp();
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 };

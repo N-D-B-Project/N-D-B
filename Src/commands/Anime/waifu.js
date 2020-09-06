@@ -66,6 +66,7 @@ module.exports = class WaifuCommand extends BaseCommand {
       .setTitle("Sua Waifu é:")
       .setImage(waifu)
       .setTimestamp();
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 };

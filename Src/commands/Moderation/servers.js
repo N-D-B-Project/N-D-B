@@ -20,7 +20,7 @@ module.exports = class ServersCommand extends BaseCommand {
       .addField(falta, "❔")
       .setColor(`#00c26f`)
       .setTimestamp();
-
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 };

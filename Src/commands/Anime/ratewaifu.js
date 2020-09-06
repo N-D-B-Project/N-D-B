@@ -28,7 +28,7 @@ module.exports = class RateWaifuCommand extends BaseCommand {
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setDescription(`Eu lhe dou a nota ${nota}!`)
       .setTimestamp();
-
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 }

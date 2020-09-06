@@ -22,7 +22,7 @@ module.exports = class UserInfoCommand extends BaseCommand {
       .addField("**Status:**", `${message.author.presence.status}`, true)
       .addField("**Created At:**", `${message.author.createdAt}`, true)
       .setFooter("N-D-B", client.user.displayAvatarURL);
-
+    message.delete().catch((O_o) => {});
     message.channel.send(uEmbed);
   }
 };

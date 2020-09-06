@@ -21,7 +21,7 @@ module.exports = class UptimeCommand extends BaseCommand {
       .setTitle("N-D-B Bot Uptime")
       .setColor("RANDOM")
       .setDescription(`${uptime}`);
-
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
   }
 };

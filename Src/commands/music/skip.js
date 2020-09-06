@@ -66,9 +66,8 @@ module.exports = class SkipCommand extends BaseCommand {
               USED = false;
             }
           } else {
-            message.channel.send(
-              "Este comando não pode ser utilizado neste momento"
-            );
+            message.delete().catch((O_o) => {});
+            message.channel.send("Este comando não pode ser utilizado neste momento");
           }
         }
       }

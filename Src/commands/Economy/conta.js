@@ -84,7 +84,7 @@ module.exports = class ContaCommand extends BaseCommand {
             canvas.toBuffer(),
             "valor.png"
           );
-  
+          message.delete().catch((O_o) => {});
           return message.channel.send(final);
         }
       }

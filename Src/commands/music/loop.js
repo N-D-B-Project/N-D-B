@@ -14,6 +14,7 @@ module.exports = class LoopCommand extends BaseCommand {
     if (channel && player) {
       if (channel.id === player.voiceChannel.id) {
         player.setQueueRepeat(!player.queueRepeat);
+        message.delete().catch((O_o) => {});
         message.channel.send(
           `Fila em loop ${player.queueRepeat ? "Ativada" : "Desativada"}!`
         );

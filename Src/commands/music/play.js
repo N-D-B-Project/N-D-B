@@ -42,7 +42,7 @@ module.exports = class PlayCommand extends BaseCommand {
       .setDescription(tracksInfo)
       .setFooter("Resultado da Pesquisa")
       .setColor("#00c26f");
-
+    message.delete().catch((O_o) => {});
     message.channel.send(embed);
 
     const filter = (m) =>

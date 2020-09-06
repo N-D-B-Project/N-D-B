@@ -13,6 +13,7 @@ module.exports = class PingCommand extends BaseCommand {
       .setTitle("Ping?")
       .setColor("RANDOM")
       .setFooter("ping", client.user.displayAvatarURL);
+    message.delete().catch((O_o) => {});
     const ms = await message.channel.send(embed1);
 
     let embed2 = new Discord.MessageEmbed()
