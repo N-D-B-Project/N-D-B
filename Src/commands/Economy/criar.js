@@ -1,7 +1,7 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const AB = require("../../../Config/Abbreviations.json");
+const AB = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
@@ -36,7 +36,6 @@ module.exports = class CriarCommand extends BaseCommand {
           //console.warn(`${message.author.tag} Tentou criar outra conta na NDCash`);
           return message.reply(`Você já possui uma conta NDCash! Utilize o comando conta!`);
         }
-        message.delete().catch((O_o) => {});
       }
     )
   }

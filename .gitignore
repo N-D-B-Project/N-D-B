@@ -4,4 +4,5 @@ logs/
 .env
 env/
 git.txt
+heroku.txt
 Backup/

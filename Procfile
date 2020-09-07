@@ -1,1 +1,1 @@
-worker: 
+worker: nodemon Src/Root.js

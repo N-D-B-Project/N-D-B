@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const mongoose = require("mongoose");
 const Canvas = require("canvas");
 const Color = require("../../../Config/Colours.json");
-const AB = require("../../../Config/Abbreviations.json");
+const AB = require("../../../Config/Abbreviations.js");
 
 /*
 const DefaultImg = require("../../Models/Img/Economy/Default.png");
@@ -16,7 +16,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Profile = require("../../database/schemas/Profile")
+const Profile = require("../../database/schemas/Profile");
 
 module.exports = class ContaCommand extends BaseCommand {
   constructor() {

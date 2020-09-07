@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const profileCodeSchema = mongoose.Schema({
+const threeDSCodeSchema = mongoose.Schema({
   //_id: mongoose.Schema.Types.ObjectId,
   username: {
     type: mongoose.SchemaTypes.String,
@@ -16,14 +16,6 @@ const profileCodeSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.String,
     unique: true,
   },
-  WiiUCode: {
-    type: mongoose.SchemaTypes.String,
-    unique: true,
-  },
-  SwitchCode: {
-      type: mongoose.SchemaTypes.String,
-      unique: true,
-  },
 });
 
-module.exports = mongoose.model("ProfileCode", profileCodeSchema);
+module.exports = mongoose.model("ThreeDSCode", threeDSCodeSchema);

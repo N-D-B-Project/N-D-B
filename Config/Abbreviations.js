@@ -18,33 +18,42 @@
 }
 */
 
+const BaseCommand = require("../Src/utils/structures/BaseCommand");
 const Discord = require("discord.js");
 
-// Client Abbreviations
+module.exports = class AbbreviationsFile extends BaseCommand {
+  constructor() {
+    super('AB', 'Config', []);
+  }
 
-const ClientTag = client.user.tag;
-const ClientId = client.user.id;
-const ClientPicURL = client.user.displayAvatarURL;
+  async run(client, message, args) {
+    // Client Abbreviations
 
-// Message
+    const ClientTag = client.user.tag;
+    const ClientId = client.user.id;
+    const ClientPicURL = client.user.displayAvatarURL;
 
-const MSGSender = message.channel.send;
-const MSGDelete = message.delete;
-const MSGReply = message.reply;
-const MSGReact = message.react;
-const MSGContent = message.content;
-const MSGEmbed = Discord.MessageEmbed;
+    // Message
 
-// Mention
+    const MSGSender = message.channel.send;
+    const MSGDelete = message.delete;
+    const MSGReply = message.reply;
+    const MSGReact = message.react;
+    const MSGContent = message.content;
+    const MSGEmbed = Discord.MessageEmbed;
 
-const Mention = message.author;
-const MentionTag = message.author.tag;
-const MentionId = message.author.id;
-const MentionPicURL = message.author.displayAvatarURL;
-const FirstMention = message.author.users.first;
+    // Mention
 
-// GuildId
+    const Mention = message.author;
+    const MentionTag = message.author.tag;
+    const MentionId = message.author.id;
+    const MentionPicURL = message.author.displayAvatarURL;
+    const FirstMention = message.author.users.first;
 
-const GuildMembers = message.guild.members.get;
-const GuildTag = message.guild.tag;
-const GuildId = message.guild.id;
+    // GuildId
+
+    const GuildMembers = message.guild.members.get;
+    const GuildTag = message.guild.tag;
+    const GuildId = message.guild.id;
+  }
+}

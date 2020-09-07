@@ -1,6 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const AB = require("../../../Config/Abbreviations.json");
+const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class UnmuteCommand extends BaseCommand {
   constructor() {
