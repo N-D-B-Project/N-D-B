@@ -18,10 +18,10 @@
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",
     "mongoose": "^5.9.25",
-    "node-pre-gyp": "^0.15.0"
+    "node-pre-gyp": "^0.15.0",
+    "nodemon": "^2.0.4"
   },
   "devDependencies": {
-    "bl": "^1.2.3",
-    "nodemon": "^2.0.4"
+    "bl": "^1.2.3"
   }
 }
