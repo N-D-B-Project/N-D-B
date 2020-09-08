@@ -2,6 +2,10 @@
   "name": "n-d-b",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "main": "Src/Root.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
