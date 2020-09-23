@@ -16,7 +16,14 @@ module.exports = class SwitchCodeCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    Code.findOne({ userId: message.author.id,},
+
+    if(!args[0]) { 
+      const Mention = message.author;
+    } else {
+      const Mention = message.mentions.users.first() || client.users.cache.get(args[0]);
+    }
+
+    Code.findOne({ userId: Mention,},
       async (err, code) => {
         if(!code) {
           if(err) console.error("SwitchCode Error: " + err);
@@ -34,7 +41,7 @@ module.exports = class SwitchCodeCommand extends BaseCommand {
           if(err) console.error("Code Error: " + err)
           if(!args[0]) {
             const embed = new Discord.MessageEmbed()
-              .setAuthor(message.author.tag, message.author.displayAvatarURL())
+              .setAuthor(`${Mention.tag}`, `${Mention.displayAvatarURL()}`)
               .setTitle("Switch FriendCode")
               .setDescription(code.SwitchCode)
               .setTimestamp()

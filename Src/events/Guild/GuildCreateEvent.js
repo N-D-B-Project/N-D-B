@@ -12,7 +12,7 @@ module.exports = class GuildCreateEvent extends BaseEvent {
         guildId: guild.id,
         guildName: guild.name,
       });
-      console.log('N-D-B Entrou no Server. Salvo na DataBase!');
+      console.log('N-D-B Entrou no Server:' +guild.name+'. Salvo na DataBase!');
     } catch (err) {
       console.log(err);
     }

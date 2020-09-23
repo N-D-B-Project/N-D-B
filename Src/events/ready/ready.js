@@ -2,9 +2,6 @@ require("dotenv").config();
 
 const BaseEvent = require("../../utils/structures/BaseEvent");
 const { ErelaClient } = require("erela.js");
-const { Guild } = require("discord.js");
-
-//const { registerMusicEvents } = require("../../utils/registry");
 
 module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
@@ -41,8 +38,10 @@ module.exports = class ReadyEvent extends BaseEvent {
         password: process.env.PASSWORD,
       },
     ]);
+    
     client.music.on("nodeConnect", (node) =>
-      console.log("Novo Node Conectado")
+      //console.log("Novo Node Conectado")
+      console.log("Lavalink Node Conectado!")
     );
     client.music.on("nodeError", (node, error) =>
       console.log(`Node error: ${error.message}`)
@@ -55,7 +54,5 @@ module.exports = class ReadyEvent extends BaseEvent {
       //player.textChannel.send("Queue has ended.");
       //client.music.players.destroy(player.guild.id);
     });
-
-    //await registerMusicEvents(client.music, "../../musicevents");
   }
 };

@@ -25,15 +25,15 @@ module.exports = class AntiRaidCommand extends BaseCommand {
         "717100558095351878", // ADM
         "717769754345209966"  // Cargo Rápido
     ].includes(r.id))) {
-        return MsgSender(`${Mention} este comando é restrito para a Staff!`)
+        return message.channel.send(`${Mention} este comando é restrito para a Staff!`)
     } else if (Content.includes("on")) {
       await Membros.setPermissions(67174465);
-      await MsgSenderSender(`O Sistema de AntiRaid foi Ligado por ${Mention}`)
+      await message.channel.send(`O Sistema de AntiRaid foi Ligado por ${Mention}`)
     } else if (Content.includes("off")) {
       await Membros.setPermissions(133684545);
-      await MsgSender(`O Sistema de AntiRaid foi Desligado por ${Mention}`)
+      await message.channel.send(`O Sistema de AntiRaid foi Desligado por ${Mention}`)
     } else {
-      return MsgSender(`${Mention} ${SintaxErr}`)
+      return message.channel.send(`${Mention} ${SintaxErr}`)
     }
   }
 }
