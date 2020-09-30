@@ -20,7 +20,7 @@ const GuildConfigSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.String,
         required: false,
     },
-    memberLogChannel: {
+    mutedRole: {
         type: mongoose.SchemaTypes.String,
         required: false,
     },

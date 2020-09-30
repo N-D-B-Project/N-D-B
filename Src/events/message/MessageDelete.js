@@ -16,6 +16,7 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
   }
   
   async run(client, message) {
+    //if(message.author.bot) return;
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id
     })

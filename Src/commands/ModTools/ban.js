@@ -14,7 +14,7 @@ module.exports = class BanCommand extends BaseCommand {
       message.channel.send("Você não tem permissão para utilizar este comando");
     } else {
       try {
-        let bannedMember = await message.guild.members.ban(args);
+        const bannedMember = await message.guild.members.ban(args);
         if (bannedMember)
           message.delete().catch((O_o) => {});
           message.channel.send(bannedMember.tag + `B A N I D O ${banEmoji}`);

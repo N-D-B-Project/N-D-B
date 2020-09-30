@@ -5,7 +5,7 @@ const Discord = require("discord.js");
 
 module.exports = class TestCommand extends BaseCommand {
   constructor() {
-    super("test", "testing", []);
+    super("test", "Test", []);
   }
 
   async run(client, message, args) {

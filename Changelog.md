@@ -1,0 +1,1 @@
+29/09/2020: Alguns comandos deletados, arquivos organizados, alteração em alguns códigos

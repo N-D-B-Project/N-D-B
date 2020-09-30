@@ -1,6 +1,13 @@
 const BaseEvent = require("../../utils/structures/BaseEvent");
 const GuildConfig = require("../../database/schemas/GuildConfig");
+const mongoose = require("mongoose");
 const Config = require("../../../Config/Config.json");
+
+mongoose.connect(process.env.DBC, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
     super("message");
@@ -8,6 +15,7 @@ module.exports = class MessageEvent extends BaseEvent {
 
   async run(client, message, guild) {
     if (message.author.bot) return;
+    if(message.channel.type === "DM") return;
 
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id,

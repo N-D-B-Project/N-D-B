@@ -14,11 +14,11 @@ async function registerCommands(client, dir = "") {
       if (Command.prototype instanceof BaseCommand) {
         const cmd = new Command();
         client.commands.set(cmd.name, cmd);
-        /*
+        
         cmd.aliases.forEach((alias) => {
           client.commands.set(alias, cmd);
         });
-        */
+        
       }
     }
   }

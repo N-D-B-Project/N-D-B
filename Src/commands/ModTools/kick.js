@@ -11,7 +11,7 @@ module.exports = class KickCommand extends BaseCommand {
     if (!message.member.hasPermission("KICK_MEMBERS"))
       message.channel.send("Você não tem permissão para utilizar este comando");
     else {
-      let member = message.guild.members.cache.get(args);
+      const member = message.guild.members.cache.get(args);
       if (member) {
         try {
           await member.kick();

@@ -2,16 +2,26 @@ require("dotenv").config();
 
 const BaseEvent = require("../../utils/structures/BaseEvent");
 const { ErelaClient } = require("erela.js");
+const colors = require("colors");
+
+const options = {
+	timeZone: 'America/Sao_Paulo',
+	hour: 'numeric',
+    minute: 'numeric',
+    seconds: 'numeric'
+};
+const date = new Intl.DateTimeFormat([], options);
 
 module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
     super("ready");
   }
   async run(client) {
-    console.log(client.user.tag + " Esta Online!");
-    console.log(
-      `Estou em ${client.guilds.cache.size} Servers, ${client.users.cache.size} Users e ${client.channels.cache.size} Channels!`
-    );
+    console.log(date.format(new Date()).grey, "Client".cyan, client.user.tag + " Esta Online!".magenta);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.size}       `, " Servers".magenta);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta);
+    
     var status = [
       { name: "Best Bot of Discord", type: "LISTENING" },
       { name: "Utilize &help para ver os comandos", type: "WATCHING" },
@@ -41,7 +51,8 @@ module.exports = class ReadyEvent extends BaseEvent {
     
     client.music.on("nodeConnect", (node) =>
       //console.log("Novo Node Conectado")
-      console.log("Lavalink Node Conectado!")
+      console.log(" "),
+      console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Conectado!".magenta)
     );
     client.music.on("nodeError", (node, error) =>
       console.log(`Node error: ${error.message}`)
