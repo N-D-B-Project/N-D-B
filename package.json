@@ -19,10 +19,11 @@
   "dependencies": {
     "canvas": "^2.6.1",
     "colors": "^1.4.0",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",
-    "mongoose": "^5.9.25",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.7",
     "node-pre-gyp": "^0.15.0",
     "nodemon": "^2.0.4"
   },

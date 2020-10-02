@@ -2,9 +2,5 @@ node_modules/
 package-lock.json
 logs/
 .env
-env/
-git.txt
-heroku.txt
 Backup/
-a fazer.txt
-utilidades.txt
+Text Files/

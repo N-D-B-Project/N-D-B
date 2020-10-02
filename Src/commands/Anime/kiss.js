@@ -17,7 +17,7 @@ module.exports = class KissCommand extends BaseCommand {
     });
     //quem info
     let quemTag;
-    let quem = message.content.slice(process.env.PREFIX.length).split(" ");
+    let quem = message.content.slice(args[0]).split(" ");
     quem = quem[1];
     try {
       quemTag = message.mentions.users.first().tag;

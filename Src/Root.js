@@ -1,24 +1,22 @@
 require("dotenv").config();
 
 const { Client } = require("discord.js");
-const colors = require("colors");
+const client = new Client({ partials: ["MESSAGE", "REACTION", "CHANNEL"]});
 
 const {
   registerCommands,
   registerEvents,
-} = require("./utils/registry");
+} = require("./utils/registry")
 
-const client = new Client({ partials: ["MESSAGE", "REACTION", "CHANNEL"]});
-
+const colors = require("colors");
 const mongoose = require("mongoose");
-
 const Config = require("../Config/Config.json");
 
 const options = {
 	timeZone: 'America/Sao_Paulo',
 	hour: 'numeric',
     minute: 'numeric',
-    seconds: 'numeric'
+      seconds: 'numeric'
 };
 const date = new Intl.DateTimeFormat([], options);
 
