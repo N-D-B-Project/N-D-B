@@ -12,7 +12,13 @@ const Code = require("../../../../database/schemas/SwitchCodes");
 
 module.exports = class UpdateSwitchCodeCommand extends BaseCommand {
   constructor() {
-    super('uswitchcode', 'Console', []);
+    super(
+      '3dscode', //name
+      'Console FriendCode', //category
+      [''], //aliases
+      '', //usage
+      'Atualiza seu Friend Code do 3DS' //description
+    );
   }
 
   async run(client, message, args) {

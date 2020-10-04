@@ -12,7 +12,13 @@ const Profile = require("../../database/schemas/Profile.js");
 
 module.exports = class CriarCommand extends BaseCommand {
   constructor() {
-    super('criar', 'Economy', []);
+    super(
+      'criar', //name
+      'Economy', //category
+      ['Create'], //aliases
+      '', //usage
+      'Cria sua conta na NDCash' //description
+    );
   }
 
   async run(client, message, args) {

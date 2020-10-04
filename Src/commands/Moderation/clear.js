@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class ClearCommand extends BaseCommand {
   constructor() {
-    super("clear", "Moderation", []);
+    super(
+      'clear', //name
+      'Moderation', //category
+      ['limpar'], //aliases
+      'clear <Nº de 1 a 100>', //usage
+      'Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando' //description
+    );
   }
 
   async run(client, message, args) {

@@ -6,7 +6,13 @@ const trimArray = require("../../Tools/trimArray");
 
 module.exports = class UserInfoCommand extends BaseCommand {
   constructor() {
-    super("userinfo", "Info", []);
+    super(
+      'userinfo', //name
+      'Info', //category
+      [''], //aliases
+      'userinfo <mencione um usuário>', //usage
+      'Mostra suas informações ou do usuário mencionado' //description
+    );
   }
 
   async run(client, message, [target], args) {

@@ -2,9 +2,15 @@ const BaseCommand = require("../../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const AB = require("../../../../Config/Abbreviations.js");
 
-module.exports = class DiscordCommand extends BaseCommand {
+module.exports = class DevDiscordCommand extends BaseCommand {
   constructor() {
-    super("discord", "info", []);
+    super(
+      'devdiscord', //name
+      'OwnerInfo', //category
+      ['botdiscord'], //aliases
+      '', //usage
+      'Manda o link de convite do Discord do meu Dev' //description
+    );
   }
 
   async run(client, message, args) {

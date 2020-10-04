@@ -10,7 +10,13 @@ mongoose.connect(process.env.DBC, {
 
 module.exports = class AntiRaidCommand extends BaseCommand {
   constructor() {
-    super('lockdown', 'ModTools', []);
+    super(
+      'antiraid', //name
+      'ModTools', //category
+      ['lockdown'], //aliases
+      'antiraid on | off>', //usage
+      'Bloqueia o servidor inteiro para nenhum membro mandar mensagens' //description
+    );
   }
 
   async run(client, message, args) {

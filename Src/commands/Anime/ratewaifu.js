@@ -4,22 +4,28 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class RateWaifuCommand extends BaseCommand {
   constructor() {
-    super('ratewaifu', 'Anime', []);
+    super(
+      'ratewaifu', //name
+      'Anime', //category
+      ['avaliarwaifu'], //aliases
+      'ratewaifu <mencione um usuário>', //usage
+      'o Bot lhe avalia dando uma nota de o quão waifu você é' //description
+    );
   }
 
   async run(client, message, args) {
     let notas = [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ]
 
     let nota = notas [Math.floor(Math.random() * notas.length)];

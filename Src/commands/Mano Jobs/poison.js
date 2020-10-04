@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class PoisonCommand extends BaseCommand {
   constructor() {
-    super('poison', 'ManoJobs', []);
+    super(
+        'poison', //name
+        'Mano Jobs', //category
+        [''], //aliases
+        'poison <Nº do Poison> <Usuário> <Tempo> <Motivo>', //usage
+        'Comando exclusivo do Server Mano Jobs Gamers\nAplica o Poison no usuário que infligiu as regras' //description
+      );
   }
 
   async run(/*client,*/ message, args) {

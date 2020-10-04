@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class SayCommand extends BaseCommand {
   constructor() {
-    super("say", "Moderation", []);
+    super(
+      'say', //name
+      'Moderation', //category
+      ['dizer', 'diga', 'falar', 'fale'], //aliases
+      'say <Mensagem a ser dita pelo Bot>', //usage
+      'O Bot apaga sua mensagem e reenvia ela' //description
+    );
   }
 
   async run(client, message, args) {

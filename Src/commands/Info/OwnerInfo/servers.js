@@ -1,10 +1,16 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const AB = require("../../../Config/Abbreviations.js");
+const AB = require("../../../../Config/Abbreviations.js");
 
 module.exports = class ServersCommand extends BaseCommand {
   constructor() {
-    super("faltaquanto", "Moderation", []);
+    super(
+      'servers', //name
+      'OwnerInfo', //category
+      ['faltaquanto', 'verificação', 'botverification'], //aliases
+      '', //usage
+      'Mostra quantos server faltam para o Bot ser verificado' //description
+    );
   }
 
   async run(client, message, args) {

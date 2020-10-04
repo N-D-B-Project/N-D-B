@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class LeaveCommand extends BaseCommand {
   constructor() {
-    super("leave", "music", []);
+    super(
+      'leave', //name
+      'Music', //category
+      ['sair'], //aliases
+      '', //usage
+      'Faz com que o bot saia ca call' //description
+    );
   }
 
   async run(client, message, args) {

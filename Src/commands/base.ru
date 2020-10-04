@@ -4,9 +4,12 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class "nome do comando" extends BaseCommand {
   constructor() {
-    super('', '', []
-    description: '',
-    usage: ''
+    super(
+      '', //name
+      '', //category
+      [''], //aliases
+      '', //usage
+      '' //description
     );
   }
 

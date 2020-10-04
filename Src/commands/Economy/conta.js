@@ -20,7 +20,13 @@ const Profile = require("../../database/schemas/Profile");
 
 module.exports = class ContaCommand extends BaseCommand {
   constructor() {
-    super('conta', 'Economy', []);
+    super(
+      'conta', //name
+      'Economy', //category
+      ['bal'], //aliases
+      '', //usage
+      'Mostra quanto NDCash (dinheiro) você tem' //description
+    );
   }
 
   async run(client, message, args) {

@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const { Client } = require("discord.js");
 const client = new Client({ partials: ["MESSAGE", "REACTION", "CHANNEL"]});
+const { Collection } = require('discord.js')
 
 const {
   registerCommands,
@@ -26,7 +27,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 }, function(err, db) {
   if(!err) {
-    console.log(date.format(new Date()).grey, "System".cyan, "Database  ", "MongoDB Conectado!".magenta)
+    console.log(date.format(new Date()).grey, "System".cyan, "Database  ", "MongoDB Conectado!".magenta,"     INFO".yellow,"   Loaded".green)
   } else if(err) {
     console.error("MongoDB Error: " + err)
   }
@@ -35,12 +36,17 @@ mongoose.connect(process.env.DBC, {
 (async () => {
   client.login(process.env.TOKEN);
   
+  client.commands = new Collection();
+  client.events = new Collection();
+  //client.aliases = new Collection();
+  client.musicPlayers = new Collection();
+  
   client.musicPlayers = new Map();
-  client.commands = new Map();
+  //client.commands = new Map();
   client.events = new Map();
- 
-  await registerCommands(client, "../commands");
-  await registerEvents(client, "../events");
+  
+  await registerCommands(client, "../Commands");
+  await registerEvents(client, "../Events");
   console.log(" ");
-  console.log(date.format(new Date()).grey, "System".cyan, "Debug     ", "Hello World!".magenta);
+  console.log(date.format(new Date()).grey, "System".cyan, "Debug     ", "Hello World!".magenta,"           INFO".yellow,"   Loaded".green);
 })();

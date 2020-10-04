@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class RMLCommand extends BaseCommand {
   constructor() {
-    super("RML", "Moderation", []);
+    super(
+      'RML', //name
+      'Moderation', //category
+      ['RicardoMilos', 'RichardMilos', 'Lenda'], //aliases
+      '', //usage
+      'Manda um Emoji do Milos' //description
+    );
   }
 
   async run(client, message, args) {

@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class KickCommand extends BaseCommand {
   constructor() {
-    super("kick", "ModTools", []);
+    super(
+      'kick', //name
+      'ModTools', //category
+      ['expulsar'], //aliases
+      'kick <mencione um usuário>', //usage
+      'Expulsa do servidor o usuário mencionado' //description
+    );
   }
 
   async run(client, message, args) {

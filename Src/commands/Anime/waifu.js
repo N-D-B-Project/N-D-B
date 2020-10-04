@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class WaifuCommand extends BaseCommand {
   constructor() {
-    super("waifu", "Anime", []);
+    super(
+      'waifu', //name
+      'Anime', //category
+      [''], //aliases
+      '', //usage
+      'O Bot manda um Gif com uma Waifu e uma porcentagem(%)' //description
+    );
   }
 
   async run(client, message, args) {

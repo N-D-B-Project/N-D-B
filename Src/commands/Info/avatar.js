@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class AvatarCommand extends BaseCommand {
   constructor() {
-    super("avatar", "Info", []);
+    super(
+      'avatar', //name
+      'Info', //category
+      [''], //aliases
+      'avatar <mencione um usuário>', //usage
+      'Exibe seu avatar ou do usuário mencionado' //description
+    );
   }
 
   async run(client, message, args) {

@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class VoteCommand extends BaseCommand {
   constructor() {
-    super("vote", "Moderation", ["votar"]);
+    super(
+      'vote', //name
+      'Moderation', //category
+      ['votar', 'votação'], //aliases
+      'vote <Sobre a Votação>', //usage
+      'Inicia uma votação' //description
+    );
   }
 
   async run(client, message, args) {

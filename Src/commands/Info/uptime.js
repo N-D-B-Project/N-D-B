@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class UptimeCommand extends BaseCommand {
   constructor() {
-    super("uptime", "Info", []);
+    super(
+      'uptime', //name
+      'Info', //category
+      [''], //aliases
+      '', //usage
+      'Mostra quanto tempo o Bot está Online' //description
+    );
   }
 
   async run(client, message, args) {

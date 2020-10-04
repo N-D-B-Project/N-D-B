@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class LoopCommand extends BaseCommand {
   constructor() {
-    super("loop", "music", []);
+    super(
+      'loop', //name
+      'Music', //category
+      ['ciclo'], //aliases
+      '', //usage
+      'Liga ou desliga o loop da fila' //description
+    );
   }
 
   async run(client, message, args) {

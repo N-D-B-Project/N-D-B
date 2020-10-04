@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class PlayCommand extends BaseCommand {
   constructor() {
-    super("play", "music", []);
+    super(
+      'play', //name
+      '', //category
+      ['p', 'tocar'], //aliases
+      'play <Nome da Musica>', //usage
+      'Pesquisa a musica mostra uma lista você seleciona o Nº e o Bot toca a musica' //description
+    );
   }
 
   async run(client, message, args) {

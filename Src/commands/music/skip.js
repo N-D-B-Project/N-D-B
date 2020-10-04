@@ -6,7 +6,13 @@ let USED = false;
 
 module.exports = class SkipCommand extends BaseCommand {
   constructor() {
-    super("skip", "music", []);
+    super(
+      'skip', //name
+      'Music', //category
+      ['pular'], //aliases
+      '', //usage
+      'Cria uma votação para pular a musica atual' //description
+    );
   }
 
   async run(client, message, args) {

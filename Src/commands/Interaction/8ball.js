@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class EightBallCommand extends BaseCommand {
   constructor() {
-    super("8ball", "Interaction", []);
+    super(
+      '8ball', //name
+      'Interaction', //category
+      ['eightball'], //aliases
+      '8ball <Sua Pergunta>', //usage
+      'O Bot responde sua pergunta com algo aleatório' //description
+    );
   }
 
   async run(client, message, args) {

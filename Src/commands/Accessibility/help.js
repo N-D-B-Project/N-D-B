@@ -13,7 +13,13 @@ mongoose.connect(process.env.DBC, {
 
 module.exports = class HelpCommand extends BaseCommand {
   constructor() {
-    super('help', 'Accessibility', []);
+    super(
+        'help', //name
+        'Accessibility', //category
+        ['ajuda'], // aliases
+        'help || help <Comando>', //usage
+        'Mostra todos os comandos e como utilizar-los' //description
+    );
   }
 
   async run(client, message, [command], args) {
@@ -45,10 +51,10 @@ module.exports = class HelpCommand extends BaseCommand {
         let categories;
         if(!Config.owner.includes(message.author.id)) {
             categories = removeDuplicates(client.commands.filter(cmd => cmd.category !== "Owner").map(cmd => cmd.category));
-        } /*else {
+        } else {
             categories = removeDuplicates(client.commands.map(cmd => cmd.category));
         }
-            */
+        
         for(const category of categories) {
             embed.addField(`**${capitalise(category)}**`, client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(" "));
         }

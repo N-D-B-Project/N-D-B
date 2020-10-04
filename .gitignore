@@ -4,3 +4,4 @@ logs/
 .env
 Backup/
 Text Files/
+.vscode/

@@ -17,10 +17,10 @@ module.exports = class ReadyEvent extends BaseEvent {
     super("ready");
   }
   async run(client) {
-    console.log(date.format(new Date()).grey, "Client".cyan, client.user.tag + " Esta Online!".magenta);
-    console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.size}       `, " Servers".magenta);
-    console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta);
-    console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta);
+    console.log(date.format(new Date()).grey, "Client".cyan, client.user.tag + " Esta Online!".magenta,"           INFO".yellow,"   Loaded".green);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.size}       `, " Servers".magenta,"                INFO".yellow,"   Loaded".green);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta,"                  INFO".yellow,"   Loaded".green);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
     
     var status = [
       { name: "Best Bot of Discord", type: "LISTENING" },
@@ -52,10 +52,10 @@ module.exports = class ReadyEvent extends BaseEvent {
     client.music.on("nodeConnect", (node) =>
       //console.log("Novo Node Conectado")
       console.log(" "),
-      console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Conectado!".magenta)
+      console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Conectado!".magenta,"        INFO".yellow,"   Loaded".green)
     );
-    client.music.on("nodeError", (node, error) =>
-      console.log(`Node error: ${error.message}`)
+    client.music.on("nodeError", (node, error) =>     
+      console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Error!".magenta,"            INFO".yellow,"   Not Loaded".red),
     );
     client.music.on("trackStart", (player, track) =>
       //player.textChannel.send(`Now playing: ${track.title}`)
@@ -65,5 +65,8 @@ module.exports = class ReadyEvent extends BaseEvent {
       //player.textChannel.send("Queue has ended.");
       //client.music.players.destroy(player.guild.id);
     });
+
+    //console.log(date.format(new Date()).grey, `${client.commands.size}`.cyan,"    Commands", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
+    //console.log(date.format(new Date()).grey, `${client.events.size}`.cyan, "     Events  ", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
   }
 };

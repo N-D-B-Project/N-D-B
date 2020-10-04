@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class QueueCommand extends BaseCommand {
   constructor() {
-    super("queue", "music", []);
+    super(
+      'queue', //name
+      'Music', //category
+      ['fila'], //aliases
+      '', //usage
+      'Mostra a fila de musicas' //description
+    );
   }
 
   async run(client, message, args) {

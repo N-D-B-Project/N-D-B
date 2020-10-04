@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class ShuffleCommand extends BaseCommand {
   constructor() {
-    super("shuffle", "music", []);
+    super(
+      'shuffle', //name
+      'Music', //category
+      ['misturar'], //aliases
+      '', //usage
+      'Põe em ordem aleatória as musicas da fila' //description
+    );
   }
 
   async run(client, message, args) {

@@ -1,9 +1,9 @@
 module.exports = class BaseCommand {
-  constructor(name, category, aliases) {
+  constructor(name, category, aliases, description, usage) {
 		this.name = name;
-		this.aliases = [];
-		this.description = 'No description provided.';
-		this.category = 'Miscellaneous';
-		this.usage = 'No usage provided.';
-  }
+		this.category = category || 'Miscellaneous';
+		this.aliases = aliases || [] ;
+		this.description = description || 'No description provided.';
+		this.usage = usage || 'No usage provided.';
+	}
 }

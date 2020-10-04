@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class PingCommand extends BaseCommand {
   constructor() {
-    super("ping", "Info", []);
+    super(
+      'ping', //name
+      'Info', //category
+      ['pong'], //aliases
+      '', //usage
+      'Mostra a latência do Bot com a API do Discord' //description
+    );
   }
 
   async run(client, message, args) {

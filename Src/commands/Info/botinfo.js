@@ -10,7 +10,13 @@ const ms = require("ms");
 
 module.exports = class BotInfoCommand extends BaseCommand {
   constructor() {
-    super('botinfo', 'info', []);
+    super(
+      'botinfo', //name
+      'Info', //category
+      [''], //aliases
+      '', //usage
+      'Mostra as informações do Bot' //description
+    );
   }
 
   async run(client, message, args) {

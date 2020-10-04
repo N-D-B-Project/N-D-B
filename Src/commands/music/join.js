@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class JoinCommand extends BaseCommand {
   constructor() {
-    super("join", "music", []);
+    super(
+      'join', //name
+      'Music', //category
+      ['entrar', 'entre', 'enter'], //aliases
+      '', //usage
+      'Faz com que o Bot entre na call' //description
+    );
   }
 
   async run(client, message, args) {

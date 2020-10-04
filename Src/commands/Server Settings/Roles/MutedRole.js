@@ -11,7 +11,13 @@ mongoose.connect(process.env.DBC, {
 
 module.exports = class SetDefaultRoleCommand extends BaseCommand {
   constructor() {
-    super('setmutedrole', 'Server Settings', []);
+    super(
+      'mutedrole', //name
+      'Server Settings', //category
+      [''], //aliases
+      'mutedrole <Id do Cargo>', //usage
+      'Defini o cargo de Mute do server' //description
+    );
   }
 
   async run(client, message, args) {
@@ -24,7 +30,7 @@ module.exports = class SetDefaultRoleCommand extends BaseCommand {
         const SintaxErrEmbed = new Discord.MessageEmbed()
           .setTitle("❌ | Erro de Sintaxe")
           .setColor("RANDOM")
-          .setDescription("Utilize: "+guildConfig.prefix+"setmutedrole <Cargo ID>")
+          .setDescription("Utilize: "+guildConfig.prefix+"mutedrole <Cargo ID>")
           .setTimestamp();
         if(!args[0]) return message.channel.send(SintaxErrEmbed)
         

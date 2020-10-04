@@ -10,7 +10,13 @@ const trimArray = require("../../Tools/trimArray");
 
 module.exports = class ServerInfoCommand extends BaseCommand {
   constructor() {
-    super('serverinfo', 'Info', []);
+    super(
+      'serverinfo', //name
+      'Info', //category
+      [''], //aliases
+      '', //usage
+      'Mostra as informações do Servidor' //description
+    );
   }
 
   async run(client, message, args) {

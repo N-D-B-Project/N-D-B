@@ -12,7 +12,13 @@ const Code = require("../../../database/schemas/WiiUCodes");
 
 module.exports = class WiiUCodeCommand extends BaseCommand {
   constructor() {
-    super('wiiucode', 'Console', []);
+    super(
+      'wiiucode', //name
+      'Console FriendCode', //category
+      [''], //aliases
+      '', //usage
+      'Registra ou mostra seu Friend Code do WiiU' //description
+    );
   }
 
   async run(client, message, args) {

@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class AntiRaidCommand extends BaseCommand {
   constructor() {
-    super('testlockdown', 'Central', []);
+    super(
+      'testantiraid', //name
+      'Central', //category
+      [''], //aliases
+      'testantiraid on | off', //usage
+      'Bloqueia o servidor inteiro para nenhum membro mandar mensagens' //description
+    );
   }
 
   async run(client, message, args) {

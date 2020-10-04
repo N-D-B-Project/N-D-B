@@ -2,7 +2,13 @@ const BaseCommand = require("../../utils/structures/BaseCommand");
 
 module.exports = class report extends BaseCommand {
   constructor() {
-    super("report", "reportar", []);
+    super(
+      'report', //name
+      'Accessibility', //category
+      ['reportar'], //aliases
+      '', //usage
+      'reporta um usuário para a staff do server' //description
+    );
   }
 
   async run(client, message, args) {

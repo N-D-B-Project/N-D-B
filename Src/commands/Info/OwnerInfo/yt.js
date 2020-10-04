@@ -2,9 +2,15 @@ const BaseCommand = require("../../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const AB = require("../../../../Config/Abbreviations.js");
 
-module.exports = class YTCommand extends BaseCommand {
+module.exports = class DevYTCommand extends BaseCommand {
   constructor() {
-    super("yt", "info", []);
+    super(
+      'devyt', //name
+      'OwnerInfo', //category
+      ['botyt', 'youtubechannel'], //aliases
+      '', //usage
+      'Manda o link do canal do Youtube meu Dev' //description
+    );
   }
 
   async run(client, message, args) {

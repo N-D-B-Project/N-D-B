@@ -7,7 +7,13 @@ const constants = ["queueall", "stopselect"];
 
 module.exports = class SearchCommand extends BaseCommand {
   constructor() {
-    super("search", "music", []);
+    super(
+      'search', //name
+      'Music', //category
+      ['pesquisar'], //aliases
+      'search <Nome da musica>', //usage
+      'Pesquisa uma musica e a adiciona na fila' //description
+    );
   }
 
   async run(client, message, args) {

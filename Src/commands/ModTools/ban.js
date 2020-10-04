@@ -4,7 +4,13 @@ const AB = require("../../../Config/Abbreviations.js");
 
 module.exports = class BanCommand extends BaseCommand {
   constructor() {
-    super("ban", "ModTools", []);
+    super(
+      'ban', //name
+      'ModTools', //category
+      ['banir'], //aliases
+      'ban <mencione um usuário>', //usage
+      'Bani o usuário mencionado do servidor' //description
+    );
   }
 
   async run(client, message, args) {

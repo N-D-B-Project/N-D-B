@@ -12,7 +12,13 @@ const Code = require("../../../../database/schemas/ThreeDSCodes");
 
 module.exports = class UpdateThreeDSCodeCommand extends BaseCommand {
   constructor() {
-    super('u3dscode', 'Console', []);
+    super(
+      '3dscode', //name
+      'Console FriendCode', //category
+      [''], //aliases
+      '', //usage
+      'Atualiza seu Friend Code do 3DS' //description
+    );
   }
 
   async run(client, message, args) {
