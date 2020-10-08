@@ -2,6 +2,7 @@ const BaseCommand = require('../../utils/structures/BaseCommand');
 const Discord = require('discord.js');
 const mongoose = require("mongoose");
 const GuildConfig = require("../../database/schemas/GuildConfig");
+//const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
     useNewUrlParser: true,

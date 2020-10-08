@@ -1,6 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const AB = require("../../../Config/Abbreviations.js");
+//const {} = require("../../../Config/Abbreviations.js");
 
 const selections = new Set();
 const constants = ["queueall", "stopselect"];

@@ -5,11 +5,11 @@ const Discord = require("discord.js");
 module.exports = class BanCommand extends BaseCommand {
   constructor() {
     super(
-      'ban', //name
+      'unban', //name
       'ModTools', //category
-      ['banir'], //aliases
-      'ban <mencione um usuário>', //usage
-      'Bane o usuário mencionado do servidor' //description
+      ['desbanir'], //aliases
+      'unban <mencione um usuário>', //usage
+      'desbane o usuário mencionado do servidor' //description
     );
   }
 
@@ -27,14 +27,12 @@ module.exports = class BanCommand extends BaseCommand {
         const Reason = args[1] || "Motivo não especificado";
         const target = message.guild.members.cache.get(Mention.id);
         if(!Mention) {
-          message.channel.send("Mencione quem você quer banir");
+          message.channel.send("Mencione quem você quer desbanir");
         } else {
-          target.ban({
-            reason: reason
-          });
+          target.ban(target, reason);
             //.then(console.log("B A N I D O"))
             //.catch(console.error);
-          message.channel.send(`${Mention.tag} foi B A N I D O(A) ${banEmoji}\nMotivo: ${Reason}`);
+          message.channel.send(`${Mention.tag} foi desbanido(a)`);
         }
       } catch (err) {
         console.log(err);

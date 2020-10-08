@@ -1,59 +1,99 @@
-/*
-{
-    "ClientTag": "client.user.tag",
-    "ClientId": "client.user.id",
-    "ClientPicURL": "client.user.displayAvatarURL",
-    "MSGSender": "message.channel.send",
-    "MSGDelete": "message.delete",
-    "MSGReply": "message.reply",
-    "MSGReact": "message.react",
-    "MSGContent": "message.content",
-    "Mention": "message.author",
-    "MentionTag": "message.author.tag",
-    "MentionId": "message.author.id",
-    "MentionPicURL": "message.author.displayAvatarURL",
-    "FirstMention": "message.author.users.first",
-    "GuildMembers" : "message.guild.members.get",
-    "GuildId": "message.guild.id"
-}
-*/
+const BaseCommand = require('../Src/utils/structures/BaseCommand');
 
-const BaseCommand = require("../Src/utils/structures/BaseCommand");
-const Discord = require("discord.js");
-
-module.exports = class AbbreviationsFile extends BaseCommand {
+module.exports = class TetsCommand extends BaseCommand {
   constructor() {
-    super('AB', 'Config', []);
+    super('tets', 'sf', []);
   }
 
-  async run(client, message, args) {
-    // Client Abbreviations
+  run(client, message, args) {
 
-    const ClientTag = client.user.tag;
-    const ClientId = client.user.id;
-    const ClientPicURL = client.user.displayAvatarURL;
+  // Client
 
-    // Message
+  const ClientTag = client.user.tag;
+  const ClientId = client.user.id;
+  const ClientPicURL = client.user.displayAvatarURL();
 
-    const MSGSender = message.channel.send;
-    const MSGDelete = message.delete;
-    const MSGReply = message.reply;
-    const MSGReact = message.react;
-    const MSGContent = message.content;
-    const MSGEmbed = Discord.MessageEmbed;
+  // Message
 
-    // Mention
+  const MSGSender = message.channel.send;
+  const MSGDelete = message.delete;
+  const MSGReply = message.reply;
+  const MSGReact = message.react;
+  const MSGContent = message.content;
+  const MSGEmbed = Discord.MessageEmbed();
 
-    const Mention = message.author;
-    const MentionTag = message.author.tag;
-    const MentionId = message.author.id;
-    const MentionPicURL = message.author.displayAvatarURL;
-    const FirstMention = message.author.users.first;
+  // Mention
 
-    // GuildId
+  const Mention = message.author;
+  const MentionTag = message.author.tag;
+  const MentionId = message.author.id;
+  const MentionPicURL = message.author.displayAvatarURL();
+  const FirstMention = message.author.users.first;
+  const LatsMention = message.author.users.last;
 
-    const GuildMembers = message.guild.members.get;
-    const GuildTag = message.guild.tag;
-    const GuildId = message.guild.id;
+  // Guild
+
+  const guildName = message.guild.name;
+  const guildId = message.guild.id;
+  const guildIcon = message.guild.iconURL();
+  const guildOwnerTag = message.guild.owner.user.tag;
+  const guildOwnerId = message.guild.owner.id;
+  const guildRegion = message.guild.region;
+  const guildBoost = message.guild.premiumTier;
+  const guildFilter = message.guild.explicitContentFilter;
+  const guildVerification = message.guild.verificationLevel;
+  const guildCreated = message.guild.createdTimestamp;
+  const guildRoles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
+  const guildEmojis = message.guild.emojis.cache;
+  const guildMembers = message.guild.members.cache;
+  const guildNormalMembers = message.guild.memberCount;
+  //const guildBotMembers = message.guild.member.user.bot;
+  const guildPremiumMembers = message.guild.premiumSubscriptionCount;
+  //const guildMemberPresence = message.guild.member.presence.status;
+  const guildChannels = message.guild.channels.cache;
+
+    module.exports = {
+      //Client
+      ClientTag,
+      ClientId,
+      ClientPicURL,
+    
+      //Message
+      MSGSender,
+      MSGDelete,
+      MSGReply,
+      MSGReact,
+      MSGContent,
+      MSGEmbed,
+    
+      //Mention
+      Mention,
+      MentionTag,
+      MentionId,
+      MentionPicURL,
+      FirstMention,
+      LatsMention,
+    
+      //Guild
+      guildName,
+      guildId,
+      guildIcon,
+      guildOwnerTag,
+      guildOwnerId,
+      guildRegion,
+      guildBoost,
+      guildFilter,
+      guildVerification,
+      guildCreated,
+      guildRoles,
+      guildEmojis,
+      guildMembers,
+      guildNormalMembers,
+      //guildBotMembers,
+      guildPremiumMembers,
+      //guildMemberPresence,
+      guildChannels
+    }
   }
 }
+

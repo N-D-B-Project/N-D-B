@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const mongoose = require("mongoose");
 const Canvas = require("canvas");
 const Color = require("../../../Config/Colours.json");
-const AB = require("../../../Config/Abbreviations.js");
+//const {} = require("../../../Config/Abbreviations.js");
 
 /*
 const DefaultImg = require("../../Models/Img/Economy/Default.png");

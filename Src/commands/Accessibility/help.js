@@ -5,6 +5,7 @@ const removeDuplicates = require("../../Tools/removeDuplicates");
 const capitalise = require("../../Tools/capitalise");
 const GuildConfig = require("../../database/schemas/GuildConfig");
 const Config = require("../../../Config/Config.json");
+//const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
     useNewUrlParser: true,
@@ -55,8 +56,9 @@ module.exports = class HelpCommand extends BaseCommand {
             categories = removeDuplicates(client.commands.map(cmd => cmd.category));
         }
         
-        for(const category of categories) {
-            embed.addField(`**${capitalise(category)}**`, client.commands.filter(cmd => cmd.category === category).map(cmd => `\`${cmd.name}\``).join(" "));
+        for (const category of categories) {
+            embed.addField(`**${capitalise(category)}**`, client.commands.filter(cmd =>
+                cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
         }
         return message.channel.send(embed);
     }

@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const userDetails = require("../../Tools/userDetails");
 const moment = require('moment');
 const trimArray = require("../../Tools/trimArray");
+//const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class UserInfoCommand extends BaseCommand {
   constructor() {

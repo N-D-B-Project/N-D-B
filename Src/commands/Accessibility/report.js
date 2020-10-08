@@ -1,4 +1,5 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
+//const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class report extends BaseCommand {
   constructor() {
