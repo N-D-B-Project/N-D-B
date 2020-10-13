@@ -15,24 +15,7 @@ module.exports = class EightBallCommand extends BaseCommand {
 
   async run(client, message, args) {
     if (!args[0]) return message.reply("Você não perguntou nada!");
-    let replies = [
-      "Sim",
-      "Não",
-      "Definitivamente sim",
-      "Definitivamente não",
-      "Dimi viado",
-      "Não sei responder a esta pergunta",
-      "Mamma mia",
-      "Óbvio",
-      "'-'",
-      "icarai",
-      "Sad Boy",
-      "190",
-      "Moshi moshi keisatsu desu ka?",
-      "Kon'nichiwa, keisatsudesu ka?",
-      "Apenas o akinator sabe responder",
-      "Pesquise no google",
-    ];
+    const replies = require("../../Tools/replies");
 
     let result = Math.floor(Math.random() * replies.length);
     let question = args.slice(0).join(" ");

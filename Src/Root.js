@@ -41,9 +41,9 @@ mongoose.connect(process.env.DBC, {
   //client.aliases = new Collection();
   client.musicPlayers = new Collection();
   
-  client.musicPlayers = new Map();
+  //client.musicPlayers = new Map();
   //client.commands = new Map();
-  client.events = new Map();
+  //client.events = new Map();
   
   await registerCommands(client, "../Commands");
   await registerEvents(client, "../Events");

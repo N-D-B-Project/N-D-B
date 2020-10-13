@@ -8,7 +8,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Profile = require("../../database/schemas/Profile.js");
+const Profile = require("../../database/schemas/ProfileNDCash");
 
 module.exports = class CriarCommand extends BaseCommand {
   constructor() {

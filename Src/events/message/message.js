@@ -42,5 +42,9 @@ module.exports = class MessageEvent extends BaseEvent {
       }
     }
     if (!message.content.startsWith(prefix)) return;
+    const FindPrefix = guildConfig.prefix;
+    if(message.content === 708822043420000366) {
+      message.channel.send(`Meu prefix para esse Server é: ${FindPrefix}`)
+    }
   }
 };

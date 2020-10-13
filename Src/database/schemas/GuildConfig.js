@@ -28,6 +28,10 @@ const GuildConfigSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.String,
         required: false,
     },
+    XpChannelId: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
 });
 
 module.exports = mongoose.model('GuildConfig', GuildConfigSchema);

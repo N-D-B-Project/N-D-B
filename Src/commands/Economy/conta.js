@@ -16,7 +16,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Profile = require("../../database/schemas/Profile");
+const Profile = require("../../database/schemas/ProfileNDCash");
 
 module.exports = class ContaCommand extends BaseCommand {
   constructor() {

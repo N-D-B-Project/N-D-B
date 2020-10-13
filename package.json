@@ -1,7 +1,8 @@
 {
   "name": "n-d-b",
   "version": "1.0.0",
-  "description": "",
+  "description": "Nedcloar's Discord Bot",
+  "repository": "https://github.com/NedcloarBR/N-D-B",
   "engines": {
     "node": "12.x",
     "npm": "6.x"
@@ -14,11 +15,12 @@
     "lavalink": "java -jar lavalink.jar"
   },
   "keywords": [],
-  "author": "",
+  "author": "NedcloarBR",
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.6.1",
     "colors": "^1.4.0",
+    "discord-xp": "^1.0.6",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",

@@ -1,6 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const {} = require("../../../Config/Abbreviations.js");
+//const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class "nome do comando" extends BaseCommand {
   constructor() {

@@ -47,7 +47,7 @@ module.exports = class HelpCommand extends BaseCommand {
         embed.setDescription([
             `Esses são os comandos disponíveis`,
             `O prefix para esse servidor é ${guildConfig.prefix}`,
-            `Parâmetros do Comando: \`<>\` = necessário & \`[]\` = opcional`
+            `Parâmetros do Comando: \n \`<>\` = necessário \n \`[]\` = opcional`
         ])
         let categories;
         if(!Config.owner.includes(message.author.id)) {
@@ -55,7 +55,6 @@ module.exports = class HelpCommand extends BaseCommand {
         } else {
             categories = removeDuplicates(client.commands.map(cmd => cmd.category));
         }
-        
         for (const category of categories) {
             embed.addField(`**${capitalise(category)}**`, client.commands.filter(cmd =>
                 cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
