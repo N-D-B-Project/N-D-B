@@ -1,8 +1,14 @@
 {
   "name": "n-d-b",
-  "version": "1.0.0",
   "description": "Nedcloar's Discord Bot",
-  "repository": "https://github.com/NedcloarBR/N-D-B",
+  "version": "9.0",
+  "author": "NedcloarBR",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NedcloarBR/N-D-B"
+  },
+  "license": "ISC",
+  "keywords": [ "Discord", "Discord.js", "JavaScript", "Bot", "NedcloarBR" ],
   "engines": {
     "node": "12.x",
     "npm": "6.x"
@@ -15,9 +21,6 @@
     "lavalink": "java -jar lavalink.jar",
     "hiero": "java -jar runnable-hiero.jar"
   },
-  "keywords": [],
-  "author": "NedcloarBR",
-  "license": "ISC",
   "dependencies": {
     "canvacord": "^5.0.7",
     "canvas": "^2.6.1",
