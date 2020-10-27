@@ -7,9 +7,9 @@ const Levels = require("discord-xp");
 module.exports = class LevelCommand extends BaseCommand {
   constructor() {
     super(
-      'level', //name
+      'levell', //name
       'LevelXP', //category
-      ['nivel'], //aliases
+      ['nivell'], //aliases
       '', //usage
       'Mostra seu LevelXP' //description
     );

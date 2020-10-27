@@ -16,15 +16,18 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    //if(message.author.bot) return;
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id
     })
     const FindChannel = guildConfig.deleteMsgChannelId;
     const Channel = client.channels.cache.get(`${FindChannel}`);
     //const Channel = client.channels.cache.get("731288262035112045");
+    if(message.channel === Channel) return;
+    //if(message.author.bot) return;
+    
     if(Channel) {
-      const embed = new Discord.MessageEmbed()
+      try {
+        const embed = new Discord.MessageEmbed()
         .setTitle("Mensagem Deletada")
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .addField("Deletada no Canal", message.channel)
@@ -32,6 +35,10 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
         .setColor("RANDOM")
         .setTimestamp()
       Channel.send(embed)
+
+      } catch (error) {
+        return;
+      }
     }
   }
 }

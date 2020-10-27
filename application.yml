@@ -40,7 +40,7 @@ logging:
   file:
     max-history: 30
     max-size: 1GB
-  path: ./logs/
+  path: ./Src/logs/
 
   level:
     root: INFO

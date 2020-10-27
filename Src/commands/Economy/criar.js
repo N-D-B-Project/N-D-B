@@ -8,7 +8,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Profile = require("../../database/schemas/ProfileNDCash");
+const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class CriarCommand extends BaseCommand {
   constructor() {
@@ -23,11 +23,11 @@ module.exports = class CriarCommand extends BaseCommand {
 
   async run(client, message, args) {
 
-    Profile.findOne ({ userId: message.author.id, },
-      async (err, profile) => {
+    Cash.findOne ({ userId: message.author.id, },
+      async (err, cash) => {
         if(err) console.error("Economy Error: " + err);
-        if(!profile) {
-          const newProfile = new Profile({
+        if(!cash) {
+          const newCash = new Cash({
             username: message.author.tag,
             userId: message.author.id,
             ndcash: 0,
@@ -35,7 +35,7 @@ module.exports = class CriarCommand extends BaseCommand {
             emprego: "Desempregado",
             skin: "Default",
           });
-          newProfile.save().catch((err) => console.error("newProfile Err: " + err));
+          newCash.save().catch((err) => console.error("newCash Err: " + err));
           //console.log(`${message.author.tag} criou sua conta na NDCash!`);
           return message.reply(`Sua conta NDCash está criada! Utilize o comando conta!`);
         } else {

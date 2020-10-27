@@ -21,7 +21,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.size}       `, " Servers".magenta,"                INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta,"                  INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
-    
+
     var status = [
       { name: "Best Bot of Discord", type: "LISTENING" },
       { name: "Utilize &help para ver os comandos", type: "WATCHING" },

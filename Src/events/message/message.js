@@ -14,7 +14,7 @@ module.exports = class MessageEvent extends BaseEvent {
   }
 
   async run(client, message, guild) {
-    if (message.author.bot) return;
+    if(message.author.bot) return;
     if(message.channel.type === "DM") return;
 
     const guildConfig = await GuildConfig.findOne({

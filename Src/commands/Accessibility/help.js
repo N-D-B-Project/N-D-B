@@ -12,12 +12,12 @@ mongoose.connect(process.env.DBC, {
     useUnifiedTopology: true,
 });
 
-module.exports = class HelpCommand extends BaseCommand {
+module.exports = class HelppCommand extends BaseCommand {
   constructor() {
     super(
-        'help', //name
+        'helpp', //name
         'Accessibility', //category
-        ['ajuda'], // aliases
+        ['ajudaa'], // aliases
         'help || help <Comando>', //usage
         'Mostra todos os comandos e como utilizar-los' //description
     );
@@ -31,7 +31,7 @@ module.exports = class HelpCommand extends BaseCommand {
         .setFooter(`Requisitado por ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
         .setTimestamp();
     if(command) {
-        const cmd = client.commands.get(command) || client.commands.get(aliases.get(command));
+        const cmd = client.commands.get(command) /*|| client.commands.get(aliases.get(command))*/;
         if(!cmd) return message.channel.send(`Comando Invalido: \`${command}\``)
 
         embed.setAuthor(`${capitalise(cmd.name)} Comando Help`, client.user.displayAvatarURL());
@@ -53,7 +53,7 @@ module.exports = class HelpCommand extends BaseCommand {
         if(!Config.owner.includes(message.author.id)) {
             categories = removeDuplicates(client.commands.filter(cmd => cmd.category !== "Owner").map(cmd => cmd.category));
         } else {
-            categories = removeDuplicates(client.commands.map(cmd => cmd.category));
+            categories = removeDuplicates(client.commands.map(cmd => cmd.category || cmd.aliases));
         }
         for (const category of categories) {
             embed.addField(`**${capitalise(category)}**`, client.commands.filter(cmd =>

@@ -1,99 +1,120 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const Canvas = require("canvas");
+const jimp = require("jimp");
 const Color = require("../../../Config/Colours.json");
 //const {} = require("../../../Config/Abbreviations.js");
-
-/*
-const DefaultImg = require("../../Models/Img/Economy/Default.png");
-const DeluxeImg = require("../../Models/Img/Economy/Deluxe.png");
-const CreatorImg = require("../../Models/Img/Economy/Creator.png");
-*/
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const Profile = require("../../database/schemas/ProfileNDCash");
+const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class ContaCommand extends BaseCommand {
   constructor() {
     super(
-      'conta', //name
-      'Economy', //category
-      ['bal'], //aliases
-      '', //usage
-      'Mostra quanto NDCash (dinheiro) você tem' //description
+      "conta", //name
+      "Economy", //category
+      ["bal"], //aliases
+      "", //usage
+      "Mostra quanto NDCash (dinheiro) você tem" //description
     );
   }
-
   async run(client, message, args) {
-    Profile.findOne({ userId: message.author.id,}, 
-      async (err, profile) => {
-        if(!profile) {
-          if(err) console.error("Economy Error: " + err);
-          message.reply("Você Não possui uma conta NDCash! Para criar-lá utilize o comando criar!")
-        } else {
-          const canvas = Canvas.createCanvas(700, 700); // Tamanho Da imagem X/Y
-          const ctx = canvas.getContext("2d");
+    const Mention = message.mentions.members.first() || client.users.cache.get(args[0]);
 
-          const testImg = require("../../Models/Img/Economy/text.png");
+    const avatar = await jimp.read(message.author.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }));
+    const mask = await jimp.read("./Src/Img/Economy/mask.png");
+    const infos = await jimp.read("./Src/Img/Economy/infos.png");
+    const total = await jimp.read("./Src/Img/Economy/total.png");
 
-          if(profile.skin === "Default") {
-            var background = await Canvas.loadImage(
-              `${textImg}`
-            );
-          } else if (profile.skin === "Deluxe") {
-            var background = await Canvas.loadImage(
-              "https://www.drodd.com/images14/black16.jpg"
-            );
-          } else if (profile.skin === "Creator") {
-            var background = await Canvas.loadImage(
-              "https://www.drodd.com/images14/black16.jpg"
-            );
-          }
-          ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-          ctx.strokeStyle = Color.green_dark;
-          ctx.strokeRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = Color.green_dark;
-          let size1 = 50
-          let size2 = 40
+    const Default = await jimp.read("./Src/Img/Economy/default.gif");
+    //const Deluxe = await jimp.read("./Src/Img/Economy/deluxe.png/gif");
+    //const Creator = await jimp.read("./Src/Img/Economy/creator.png/gif");
 
-          do {
-            ctx.font = `${(size1 -= 5)}px sans-serif`;
-          } while (ctx.measureText(message.author.tag).width > canvas.width - 225);
+    const Font = await jimp.loadFont("./Src/Fonts/fnt/Sephora.fnt");
 
-          ctx.fillText(message.author.tag, 200, 65);
-          let valor = "Seu Dinheiro: N¥" + profile.ndcash;
-          do {
-            ctx.font = `${(size2 -= 5)}px sans-serif`;
-          } while (ctx.measureText(valor).width > canvas.width - 225);
-          ctx.fillText(valor, 200, 110);
-  
-          ctx.beginPath();
-  
-          ctx.arc(100, 100, 75, 0, Math.PI * 2, true);
-  
-          ctx.closePath();
-  
-          ctx.clip();
-  
-          const avatar = await Canvas.loadImage(
-            message.author.displayAvatarURL({ format: "jpg" })
-          );
-  
-          ctx.drawImage(avatar, 25, 25, 150, 150); // Tamanho do Avatar
-  
-          const final = new Discord.MessageAttachment(
-            canvas.toBuffer(),
-            "valor.png"
-          );
-          message.delete().catch((O_o) => {});
-          return message.channel.send(final);
+    const Deluxe = await jimp.read("./Src/Img/Economy/default.gif");
+    const Creator = await jimp.read("./Src/Img/Economy/default.gif");
+
+    Cash.findOne({ userId: message.author.id }, async (err, cash) => {
+      if (!cash) {
+        if (err) console.error("Economy Error: " + err);
+        message.reply(
+          "Você Não possui uma conta NDCash! Para criar-lá utilize o comando criar!"
+        );
+      } else {
+        if (cash.skin === "Default") {
+          var background = await jimp.read("./Src/Img/Economy/default.gif");
+        } else if (cash.skin === "Deluxe") {
+          var background = await jimp.read("./Src/Img/Economy/default.gif");
+        } else if (cash.skin === "Creator") {
+          var background = await jimp.read("./Src/Img/Economy/default.gif");
         }
+        // message.reply("Seu Dinheiro: N¥" + cash.ndcash + "\nPor enquanto vai ficar assim pois as imagens de conta estão sendo feitas!");
+
+        mask.resize(256, 256);
+        avatar.resize(256, 256);
+        infos.resize(1024, 1024);
+        avatar.mask(mask);
+        
+        background.resize(1024, 512);
+        //background.composite(infos, 400, 90);
+        background.composite(avatar, 90, 90);
+        background.print(Font, 400, 180, message.author.tag);
+        background.print(Font, 400, 260, "N¥" + cash.ndcash)
+        .write('conta.png');
+        //const ContaIMG = {files: ['conta.png']}
+
+        const ContaEmbed = new Discord.MessageEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+          .setTitle("Economy System")
+          .attachFiles(['conta.png'])
+	        .setImage('attachment://conta.png')
+          .setColor("#00c26f")
+          .setFooter("NDCash | " + client.user.tag, client.user.displayAvatarURL())
+          .setTimestamp();
+        message.channel.send(ContaEmbed)
+        //message.channel.send(``, {files: ['conta.png']});
       }
-    )
+    });
   }
-}
+};
+
+
+/*Cash.findOne({ userId: Mention.id }, async (err, mcash) => {
+          if (mcash.skin === "Default") {
+            var background = await jimp.read("./Src/Img/Economy/default.gif");
+          } else if (mcash.skin === "Deluxe") {
+            var background = await jimp.read("./Src/Img/Economy/default.gif");
+          } else if (mcash.skin === "Creator") {
+            var background = await jimp.read("./Src/Img/Economy/default.gif");
+          }
+          // message.reply("Seu Dinheiro: N¥" + cash.ndcash + "\nPor enquanto vai ficar assim pois as imagens de conta estão sendo feitas!");
+  
+          mask.resize(256, 256);
+          avatar.resize(256, 256);
+          infos.resize(1024, 1024);
+          avatar.mask(mask);
+          
+          background.resize(1024, 512);
+          //background.composite(infos, 400, 90);
+          background.composite(avatar, 90, 90);
+          background.print(Font, 400, 180, message.mention.tag);
+          background.print(Font, 400, 260, "N¥" + mcash.ndcash)
+          .write('conta.png');
+          //const ContaIMG = {files: ['conta.png']}
+  
+          const MContaEmbed = new Discord.MessageEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+            .setTitle("Economy System")
+            .attachFiles(['conta.png'])
+            .setImage('attachment://conta.png')
+            .setColor("#00c26f")
+            .setFooter("NDCash | " + client.user.tag, client.user.displayAvatarURL())
+            .setTimestamp();
+          message.channel.send(MContaEmbed)
+          //message.channel.send(``, {files: ['conta.png']});
+        });*/

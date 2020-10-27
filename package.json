@@ -12,22 +12,26 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./Src/Root.js",
     "start": "node ./Src/Root.js",
-    "lavalink": "java -jar lavalink.jar"
+    "lavalink": "java -jar lavalink.jar",
+    "hiero": "java -jar runnable-hiero.jar"
   },
   "keywords": [],
   "author": "NedcloarBR",
   "license": "ISC",
   "dependencies": {
+    "canvacord": "^5.0.7",
     "canvas": "^2.6.1",
     "colors": "^1.4.0",
     "discord-xp": "^1.0.6",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "erela.js": "^1.1.8",
-    "moment": "^2.29.0",
-    "mongoose": "^5.10.7",
-    "node-pre-gyp": "^0.15.0",
-    "nodemon": "^2.0.4"
+    "jimp": "^0.16.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.10.9",
+    "nodemon": "^2.0.5",
+    "parse-ms": "^2.1.0",
+    "say": "^0.16.0"
   },
   "devDependencies": {
     "bl": "^1.2.3",

@@ -14,7 +14,7 @@ mongoose.connect(process.env.DBC, {
 module.exports = class RankCommand extends BaseCommand {
   constructor() {
     super(
-      'rank', //name
+      'rankk', //name
       'LevelXP', //category
       [''], //aliases
       '', //usage
