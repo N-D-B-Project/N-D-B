@@ -13,7 +13,7 @@ module.exports = class PoisonCommand extends BaseCommand {
       );
   }
 
-  async run(/*client,*/ message, args) {
+  async run(client, message, args) {
 
     const Membros = await message.guild.roles.cache.get(r => r.id === "647439532144328716")
     const Mention = message.author;

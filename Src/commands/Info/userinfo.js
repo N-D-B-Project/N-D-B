@@ -17,7 +17,7 @@ module.exports = class UserInfoCommand extends BaseCommand {
   }
 
   async run(client, message, [target], args) {
-    const Membro = message.mentions.users.last() || message.guild.members.cache.get(target) || message.member;
+    const Membro = message.mentions.users.last() || message.guild.members.cache.get(target) || message.member || message.author;
     const Cargos = Membro.roles.cache
       .sort((a, b) => b.position - a.position)
       .map(role => role.toString())
@@ -27,18 +27,14 @@ module.exports = class UserInfoCommand extends BaseCommand {
 
     if(MembroStatus === "online") {
       var status = "<:online:734891023657992394>"
-    }
-    if(MembroStatus === "dnd") {
+    } else if(MembroStatus === "dnd") {
       var status = "<:dnd:734891023729295421>"
-    }
-    if(MembroStatus === "idle") {
+    } else if(MembroStatus === "idle") {
       var status = "<:idle:734891023930491012>"
-    }
-    if(MembroStatus === "offline") {
+    } else if(MembroStatus === "offline") {
       var status = "<:off:734891023951724564>"
     }
-    
-
+  
     const embed = new Discord.MessageEmbed()
       .setColor(Membro.displayHexColor || "RANDOM")
       .setThumbnail(Membro.user.displayAvatarURL({dynamic: true, size: 512}))

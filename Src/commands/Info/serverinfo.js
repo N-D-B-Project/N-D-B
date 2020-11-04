@@ -63,7 +63,7 @@ module.exports = class ServerInfoCommand extends BaseCommand {
             `**❯ Emojis Animados:** ${guildEmojis.filter(guildEmojis => guildEmojis.animated).size}`,
             `**❯ Membros:** ${guildNormalMembers}`,
             `**❯ Humanos:** ${guildMembers.filter(member => !member.user.bot).size}`,
-            `**❯ Bots:** ${guildMembers.filter(member => !member.user.bots).size}`,
+            `**❯ Bots:** ${guildMembers.filter(member => member.user.bots).size}`,
             `**❯ Canais de Texto:** ${guildChannels.filter(channel => channel.type === "text").size}`,
             `**❯ Canais de Voz:** ${guildChannels.filter(channel => channel.type === "voice").size}`,
             `**❯ Boosts:** ${guildPremiumMembers || "0"}`,

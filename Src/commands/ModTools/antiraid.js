@@ -32,10 +32,11 @@ module.exports = class AntiRaidCommand extends BaseCommand {
 
     const SintaxErr = new Discord.MessageEmbed()
       .setTitle("❌ | Erro de Sintaxe")
-      //.setAuthor(client.user.tag, client.user.displayAvatarURL())
+      .setAuthor(client.user.tag, client.user.displayAvatarURL())
       .setColor("RANDOM")
       .setDescription(`O método correto de utilizar o comando é: lockdown on | off`)
       .setTimestamp()
+    if(!args[0]) return message.channel.send(`${Mention} ${SintaxErr}`);
     if(!message.member.hasPermission("MANAGE_GUILD")) {
       message.channel.send(`${Mention} este comando é restrito para a Staff!`)
 
@@ -47,8 +48,6 @@ module.exports = class AntiRaidCommand extends BaseCommand {
       await Membros.setPermissions(133684545).catch(console.error);
       await message.channel.send(`O Sistema de AntiRaid foi Desligado por ${Mention}`)
       
-    } else {
-      return message.channel.send(`${Mention} ${SintaxErr}`)
     }
   }
 }

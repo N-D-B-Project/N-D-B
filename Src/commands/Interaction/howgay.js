@@ -5,9 +5,9 @@ const Discord = require("discord.js");
 module.exports = class HowGayCommand extends BaseCommand {
   constructor() {
     super(
-      'HowGay', //name
+      'howgay', //name
       'Interaction', //category
-      [''], //aliases
+      ['HowGay'], //aliases
       'HowGay <Mencione um usuário>', //usage
       'Diz o quão gay é o usuário mencionado' //description
     );

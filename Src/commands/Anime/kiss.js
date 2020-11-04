@@ -31,7 +31,7 @@ module.exports = class KissCommand extends BaseCommand {
     } catch (e) {
       await message.delete().catch((O_o) => {});
       message.channel.send(
-        `${sender}, Depois do $kiss vc deve mencionar um user!`
+        `${sender}, Mencione um Usuário!`
       );
       return;
     }
@@ -78,7 +78,7 @@ module.exports = class KissCommand extends BaseCommand {
           if (quemTag === "Kaori Miyazono#5192") {
             return;
           }
-          console.log("RETORNAR");
+          //console.log("RETORNAR");
           Retornar();
         } else {
         }
@@ -130,7 +130,7 @@ module.exports = class KissCommand extends BaseCommand {
               .catch((error) =>
                 console.error("Failed to clear reactions: ", error)
               );
-            console.log("RETORNAR 2 !");
+            //console.log("RETORNAR 2 !");
             Retornar();
           } else {
           }

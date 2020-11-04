@@ -5,9 +5,9 @@ const Discord = require("discord.js");
 module.exports = class DevYTCommand extends BaseCommand {
   constructor() {
     super(
-      'devyt', //name
+      'yt', //name
       'OwnerInfo', //category
-      ['botyt', 'youtubechannel'], //aliases
+      ['devyt', 'botyt', 'youtubechannel'], //aliases
       '', //usage
       'Manda o link do canal do Youtube meu Dev' //description
     );

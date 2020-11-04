@@ -5,9 +5,9 @@ const Discord = require("discord.js");
 module.exports = class DevDiscordCommand extends BaseCommand {
   constructor() {
     super(
-      'devdiscord', //name
+      'discord', //name
       'OwnerInfo', //category
-      ['botdiscord'], //aliases
+      ['devdiscord', 'botdiscord'], //aliases
       '', //usage
       'Manda o link de convite do Discord do meu Dev' //description
     );

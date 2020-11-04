@@ -22,6 +22,9 @@ module.exports = class ContaCommand extends BaseCommand {
   }
   async run(client, message, args) {
     const Payment = parseInt(args[1]);
+
+    if(!args[0]) return message.reply("Mencione o Usuário o qual que dar NDCash")
+    
     const Mention = message.mentions.members.first() || client.users.cache.get(args[0]);
 
     if(!Mention) return message.reply("Não encontrei esse usuário");

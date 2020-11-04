@@ -1,1 +1,0 @@
-Comandos de teste para o servidor Central de Bots
