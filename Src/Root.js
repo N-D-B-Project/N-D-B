@@ -29,7 +29,8 @@ mongoose.connect(process.env.DBC, {
   if(!err) {
     console.log(date.format(new Date()).grey, "System".cyan, "Database  ", "MongoDB Conectado!".magenta,"     INFO".yellow,"   Loaded".green)
   } else if(err) {
-    console.error("MongoDB Error: " + err)
+    console.error(date.format(new Date()).grey, "System".cyan, "Database  ", "MongoDB Error     ".magenta,"     INFO".yellow,"   Not Loaded".red)
+    console.error("MongoDB Error: \n" + err)
   }
 });
 

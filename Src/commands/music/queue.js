@@ -7,72 +7,44 @@ module.exports = class QueueCommand extends BaseCommand {
     super(
       'queue', //name
       'Music', //category
-      ['fila'], //aliases
+      ['fila', 'lista'], //aliases
       '', //usage
-      'Mostra a fila de musicas' //description
+      'Mostra a lista de musicas que serão tocadas' //description
     );
   }
 
   async run(client, message, args) {
-    const player = client.music.players.get(message.guild.id);
-    if (player) {
-      let currentPage = 0;
-      const embeds = generateQueueEmbed(player.queue);
-      const queueEmbed = await message.channel.send(
-        `Pagina Atual: ${currentPage + 1}/${embeds.length}`,
-        embeds[currentPage]
-      );
-      await queueEmbed.react("⬅️");
-      await queueEmbed.react("➡️");
-      await queueEmbed.react("❌");
+    const player = message.client.music.players.get(message.guild.id);
+    //if (!player) return message.reply("Player não iniciado nesse servidor");
+    const PlayerEmbed = new Discord.MessageEmbed()
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setColor("#00c26f")
+      .setTitle("Player")
+      .addField(":no_entry_sign: Player não iniciado em", `${message.guild.name}`)
+      .setFooter(client.user.tag, client.user.displayAvatarURL)
+      .setTimestamp();
+    ////
 
-      const filter = (reaction, user) =>
-        ["⬅️", "➡️", "❌"].includes(reaction.emoji.name) &&
-        message.author.id === user.id;
-      const collector = queueEmbed.createReactionCollector(filter);
+    const queue = player.queue;
+    const embed = new Discord.MessageEmbed().setAuthor(`Lista do server: ${message.guild.name}`);
 
-      collector.on("collect", async (reaction, user) => {
-        // If there are 2 embeds.
-        if (reaction.emoji.name === "➡️") {
-          if (currentPage < embeds.length - 1) {
-            currentPage++;
-            queueEmbed.edit(
-              `Pagina Atual: ${currentPage + 1}/${embeds.length}`,
-              embeds[currentPage]
-            );
-          }
-        } else if (reaction.emoji.name === "⬅️") {
-          if (currentPage !== 0) {
-            --currentPage;
-            queueEmbed.edit(
-              `Pagina Atual: ${currentPage + 1}/${embeds.length}`,
-              embeds[currentPage]
-            );
-          }
-        } else {
-          collector.stop();
-          //console.log('Stopped collector..');
-          await queueEmbed.delete();
-        }
-      });
-    }
+    if(queue.current) embed.addField("Tocando Agora: ", `[${queue.current.title}](${queue.current.uri})`);
+
+    const multiple = 10;
+    const page = args.length && Number(args[0]) ? Number(args[0]) : 1;
+
+    const end = page * multiple;
+    const start = end - multiple;
+
+    const tracks = queue.slice(start, end);
+
+    if(!tracks.length) embed.setDescription(`Sem musicas ${page > 1 ? `Pagina ${page}` : "Lista:"}.`);
+        else embed.setDescription(tracks.map((track, i) => `${start + (++i)} - [${track.title}](${track.uri})`).join("\n"));
+
+    const maxPages = Math.ceil(queue.length / multiple);
+
+    embed.setFooter(`Pagina ${page > maxPages ? maxPages : page} / ${maxPages}`);
+
+    return message.reply(embed);
   }
-};
-
-function generateQueueEmbed(queue) {
-  const embeds = [];
-  let k = 10;
-  for (let i = 0; i < queue.length; i += 10) {
-    const current = queue.slice(i, k);
-    let j = i;
-    k += 10;
-    const info = current
-      .map((track) => `${++j}) [${track.title}](${track.uri})`)
-      .join("\n");
-    const embed = new Discord.MessageEmbed().setDescription(
-      `**[Musica Atual: ${queue[0].title}](${queue[0].uri})**\n${info}`
-    );
-    embeds.push(embed);
-  }
-  return embeds;
 }

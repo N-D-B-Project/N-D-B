@@ -1,7 +1,9 @@
 require("dotenv").config();
 
 const BaseEvent = require("../../utils/structures/BaseEvent");
-const { ErelaClient } = require("erela.js");
+const { Manager } = require("erela.js");
+const Spotify  = require("erela.js-spotify");
+
 const colors = require("colors");
 
 const options = {
@@ -22,40 +24,39 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta,"                  INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
 
-    var status = [
-      { name: "Best Bot of Discord", type: "LISTENING" },
-      { name: "Utilize &help para ver os comandos", type: "WATCHING" },
-      { name: `&YT para ver o canal do meu criador`, type: "WATCHING" },
-      {
-        name: "Terraria",
-        type: "STREAMING",
-        url: "https://twitch.tv/Nedcloar_BR",
-      },
-      { name: "Minecraft", type: "PLAYING" },
-      { name: "GTA V", type: "PLAYING" },
-    ];
+    const Status = require("../../Tools/Status");
     function setStatus() {
-      var altstatus = status[Math.floor(Math.random() * status.length)];
-      client.user.setPresence({ activity: altstatus });
+      const AStatus = Status[Math.floor(Math.random() * Status.length)];
+      client.user.setPresence({ activity: AStatus });
     }
     setStatus();
     setInterval(() => setStatus(), 5000);
 
-    client.music = new ErelaClient(client, [
-      {
-        host: process.env.HOST,
-        port: process.env.PORT,
-        password: process.env.PASSWORD,
+    const clientID = process.env.SpotifyID;
+    const clientSecret = process.env.SpotifySecret;
+
+    client.music = new Manager({
+      plugins: [ new Spotify({ clientID, clientSecret }) ],
+      nodes: [
+        {
+          host: process.env.HOST,
+          port: 7000 || process.env.PORT,
+          password: process.env.PASSWORD,
+        },
+      ],
+      send(id, payload) {
+        const guild = client.guilds.cache.get(id);
+        if(guild) guild.shard.send(payload);
       },
-    ]);
+    })
     
     client.music.on("nodeConnect", (node) =>
       //console.log("Novo Node Conectado")
       console.log(" "),
       console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Conectado!".magenta,"        INFO".yellow,"   Loaded".green)
     );
-    client.music.on("nodeError", (node, error) =>     
-      console.log(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Error!".magenta,"            INFO".yellow,"   Not Loaded".red),
+    client.music.on("nodeError", (node, error) =>      
+      console.error(date.format(new Date()).grey, "Music".cyan, " Lavalink  ", "Node Error!".magenta,"            INFO".yellow,"   Not Loaded".red + `\n ${error}`),
     );
     client.music.on("trackStart", (player, track) =>
       //player.textChannel.send(`Now playing: ${track.title}`)
@@ -65,7 +66,9 @@ module.exports = class ReadyEvent extends BaseEvent {
       //player.textChannel.send("Queue has ended.");
       //client.music.players.destroy(player.guild.id);
     });
-
+    client.music.init(client.user.id);
+    
+    client.on("raw", (d) => client.music.updateVoiceState(d));
     //console.log(date.format(new Date()).grey, `${client.commands.size}`.cyan,"    Commands", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
     //console.log(date.format(new Date()).grey, `${client.events.size}`.cyan, "     Events  ", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
   }

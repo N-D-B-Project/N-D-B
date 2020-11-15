@@ -5,3 +5,6 @@ logs/
 Backup/
 Text Files/
 .vscode/
+**/*.ru
+./conta.png
+runnable-hiero.jar

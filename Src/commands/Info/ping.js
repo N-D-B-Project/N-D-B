@@ -31,7 +31,7 @@ module.exports = class PingCommand extends BaseCommand {
           message.createdTimestamp - message.createdTimestamp
         )}ms.\n🖥 The API Latency is ${client.ws.ping}ms.`
       )
-      .setFooter("ping", client.user.displayAvatarURL);
+      .setFooter("ping", client.user.displayAvatarURL());
     ms.edit(embed2);
   }
 };

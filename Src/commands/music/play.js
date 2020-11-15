@@ -1,87 +1,155 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
+const hD = require("humanize-duration");
 
 module.exports = class PlayCommand extends BaseCommand {
   constructor() {
     super(
-      'play', //name
-      '', //category
-      ['p', 'tocar'], //aliases
-      'play <Nome da Musica>', //usage
-      'Pesquisa a musica mostra uma lista você seleciona o Nº e o Bot toca a musica' //description
+      "play", //name
+      "Music", //category
+      ["p", "tocar"], //aliases
+      "play <Nome da Musica>", //usage
+      "Toca a musica escolhida no canal de voz" //description
     );
   }
 
   async run(client, message, args) {
-    /*
+    const player = client.music.create({
+      guild: message.guild.id,
+      voiceChannel: message.member.voice.channel.id,
+      textChannel: message.channel.id,
+    });
+
+    if (player.state !== "CONNECTED") player.connect();
+
+    const PlayerEmbed = new Discord.MessageEmbed()
+      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setColor("#00c26f")
+      .setTitle("Player")
+      .addField(
+        ":no_entry_sign: Player não iniciado em",
+        `${message.guild.name}`
+      )
+      .setThumbnail()
+      .setFooter(client.user.tag, client.user.displayAvatarURL())
+      .setTimestamp();
+    ////
+    //console.log(player);
+    // if(!player) return message.reply("player não iniciado nesse servidor");
+    if (!player) return message.channel.send(PlayerEmbed);
+
     const { channel } = message.member.voice;
-    if (channel) {
-      const player = client.music.players.spawn({
-        guild: message.guild,
-        voiceChannel: channel,
-        textChannel: message.channel,
-      });
-      //client.musicPlayers.set(message.guild.id, player);
-      //console.log(client.musicPlayers);
-      //console.log("Conectado em um canal de voz.");
-    } else {
-      message.channel.send(
-        "Por Favor conecte-se a um na canal de voz para utilizar este comando!"
+
+    if (!channel) return message.reply("Você não está em um canal de voz");
+    if (channel.id !== player.voiceChannel)
+      return message.reply("Você não está no mesmo canal de voz");
+
+    if (!args.length)
+      return message.reply(
+        "Você deve digitar um link ou algo para mim pesquisar"
       );
+
+    const search = (
+      message.content.slice(6),
+      message.content,
+      message.author,
+      args,
+      //...args,
+      args[0],
+      args.join(" ")
+    )
+    let res;
+
+    const SpotLink = [
+      "https://open.spotify"
+    ]
+
+    if(message.content.includes(SpotLink)) {
+      var YSEmoji = "<:Spotify:775154334832001044>"
+    } else if(!message.content.includes(SpotLink)) {
+      var YSEmoji = "<:youtube:730741995416453150>"
     }
-    */
-    const query = args.join(" ");
-    //console.log(query);
-    const searchResults = await client.music.search(query, message.author);
-    //console.log(searchResults);
-    //console.log(searchResults.tracks.length);
-    let i = 0;
-    const tracks = searchResults.tracks.slice(0, 3);
-    const tracksInfo = tracks
-      .map((r) => `${++i}) ${r.title} - ${r.uri}`)
-      .join("\n");
-    //console.log(tracksInfo);
-
-    const embed = new Discord.MessageEmbed()
-      .setAuthor(client.user.tag, client.user.displayAvatarURL())
-      .setDescription(tracksInfo)
-      .setFooter("Resultado da Pesquisa")
-      .setColor("#00c26f");
-    message.delete().catch((O_o) => {});
-    message.channel.send(embed);
-
-    const filter = (m) =>
-      message.author.id === m.author.id &&
-      m.content >= 1 &&
-      m.content <= tracks.length;
 
     try {
-      const response = await message.channel.awaitMessages(filter, {
-        max: 1,
-        time: 1000000,
-        errors: ["time"],
-      });
-
-      if (response) {
-        const entry = response.first().content;
-        //console.log(entry);
-        const player = client.music.players.get(message.guild.id);
-        const track = tracks[entry - 1];
-        player.queue.add(track);
-
-        const embed2 = new Discord.MessageEmbed()
-          .setAuthor(client.user.tag, client.user.displayAvatarURL())
-          .setDescription("Musica adicionada na fila")
-          .addField("Musica", `${track.title}`)
+      res = await player.search(search, ...args, message.author);
+      if (res.loadType === "LOAD_FAILED") {
+        throw res.exception;
+        //message.channel.send("Ocorreu um erro");
+      }
+      if (res.loadType === "NO_MATCHES") {
+        if (!player.queue.current) {
+          setTimeout(() => player.destroy(), 60000);
+        }
+        return message.channel.send("Nenhuma musica foi encontrada");
+      }
+      //if (res.loadType === "SEARCH_RESULT");
+      
+      if (res.loadType === "SEARCH_RESULT" || "TRACK_LOADED") {
+        player.queue.add(res.tracks[0]);
+  
+        const { author, duration, identifier, isSeekable, isStream, requester, thumbnail, title, track, uri, } = player.queue.current || res.tracks[0];
+  
+        if (!player.playing && !player.paused && !player.queue.size)
+          player.play();
+        const timer = hD(duration, {
+          language: "pt",
+          units: ["h", "m", "s"],
+        }); //, { language: "pt", units: ["h", "m", "s"], decimal: ":"}
+        const Embed = new Discord.MessageEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setThumbnail(`${res.tracks[0].thumbnail}`)
           .setColor("#00c26f")
-          .setFooter(client.user.tag, client.user.displayAvatarURL);
-
-        message.channel.send(embed2);
-        if (!player.playing) player.play();
+          .setDescription(":musical_note: Musica adicionada na fila")
+          .addField(
+            `${YSEmoji} Musica`,
+            `[${res.tracks[0].title}](${uri})`
+          )
+          .addFields(
+            { name: ":crown: Autor", value: author, inline: true },
+            { name: "⏲️ Tempo", value: timer, inline: true },
+            //{ name: ":newspaper: URL", value: `[Clique aqui para abrir](${uri})`, inline: false }
+          )
+          .setFooter(message.guild.name, message.guild.iconURL())
+          .setTimestamp();
+        return message.channel.send(Embed);
+      }
+      
+      if (res.loadType === "PLAYLIST_LOADED") {
+        const URL = args.join(" ");
+        player.queue.add(res.tracks);
+  
+        if (
+          !player.playing &&
+          !player.paused &&
+          player.queue.totalSize === res.tracks.length
+        )
+          player.play();
+        const timer2 = hD(res.playlist.duration, {
+          language: "pt",
+          units: ["h", "m", "s"],
+        }); //, { language: "pt", units: ["h", "m", "s"], decimal: ":"}
+        const PlaylistEmbed = new Discord.MessageEmbed()
+          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setThumbnail(res.tracks[0].thumbnail)
+          .setColor("#00c26f")
+          .setDescription(":notes: Playlist adicionada na fila")
+          .addField(
+            `${YSEmoji} Playlist`,
+            `[${res.playlist.name}](${URL})`
+          )
+          .addFields(
+            { name: ":crown: Autor", value: res.tracks[0].author, inline: true, },
+            { name: "⏲️ Tempo", value: timer2, inline: true },
+            //{ name: ":newspaper: URL", value: `[Clique aqui para abrir](${URL})`, inline: false, }
+          )
+          .setFooter(message.guild.name, message.guild.iconURL())
+          .setTimestamp();
+        return message.channel.send(PlaylistEmbed);
       }
     } catch (err) {
-      console.log(err);
+      //return message.reply(`Erro ao pesquisar: ${err.message}`);
+      console.log(`Erro ao pesquisar: ${err.message}`);
     }
   }
 };

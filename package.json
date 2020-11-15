@@ -1,7 +1,7 @@
 {
   "name": "n-d-b",
   "description": "Nedcloar's Discord Bot",
-  "version": "9.0.0",
+  "version": "6.0.0",
   "author": "NedcloarBR",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "dev": "nodemon ./Src/Root.js",
     "start": "node ./Src/Root.js",
     "lavalink": "java -jar lavalink.jar",
+    "music": "java -jar lavalink.jar",
     "hiero": "java -jar runnable-hiero.jar"
   },
   "dependencies": {
@@ -35,13 +36,17 @@
     "discord-xp": "^1.0.6",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
-    "erela.js": "^1.1.8",
+    "erela.js": "^2.2.0",
+    "erela.js-spotify": "^1.2.0",
+    "humanize-duration": "^3.24.0",
     "jimp": "^0.16.1",
+    "lyrics-finder": "^21.4.0",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.11",
+    "mongoose": "^5.10.14",
     "nodemon": "^2.0.6",
     "parse-ms": "^2.1.0",
-    "say": "^0.16.0"
+    "say": "^0.16.0",
+    "solenolyrics": "^5.0.0"
   },
   "devDependencies": {
     "bl": "^1.2.3",
