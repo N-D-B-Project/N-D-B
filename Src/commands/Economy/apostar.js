@@ -10,14 +10,14 @@ mongoose.connect(process.env.DBC, {
 const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class ApostarCommand extends BaseCommand {
-  constructor() {
-    super(
-      "apostar", //name
-      "Economy", //category
-      ["gamble"], //aliases
-      "apostar <Quantidade>", //usage
-      "Aposte seu dinheiro e tenha chaçe de dobrar seu dinheiro" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "apostar", //name
+      category: "Economy", //category
+      aliases: ["gamble"], //aliases
+      usage: "apostar <Quantidade>", //usage
+      description: "Aposte seu dinheiro e tenha chaçe de dobrar seu dinheiro" //description
+    });
   }
 
   async run(client, message, args) {

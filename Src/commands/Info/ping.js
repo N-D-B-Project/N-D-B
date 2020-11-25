@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class PingCommand extends BaseCommand {
-  constructor() {
-    super(
-      'ping', //name
-      'Info', //category
-      ['pong'], //aliases
-      '', //usage
-      'Mostra a latência do Bot com a API do Discord' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'ping', //name
+      category: 'Info', //category
+      aliases: ['pong'], //aliases
+      usage: '', //usage
+      description: 'Mostra a latência do Bot com a API do Discord' //description
+    });
   }
 
   async run(client, message, args) {

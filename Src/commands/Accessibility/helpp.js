@@ -13,14 +13,14 @@ mongoose.connect(process.env.DBC, {
 });
 
 module.exports = class HelppCommand extends BaseCommand {
-  constructor() {
-    super(
-        'helpp', //name
-        'Accessibility', //category
-        ['ajudaa'], // aliases
-        'help || help <Comando>', //usage
-        'Mostra todos os comandos e como utilizar-los' //description
-    );
+  constructor(...args) {
+    super(...args, {
+        name: 'helpp', //name
+        category: 'Accessibility', //category
+        aliases: ['ajudaa'], // aliases
+        usage: 'help || help <Comando>', //usage
+        description: 'Mostra todos os comandos e como utilizar-los' //description
+    });
   }
 
   async run(client, message, [command], args) {
@@ -50,7 +50,7 @@ module.exports = class HelppCommand extends BaseCommand {
             `Parâmetros do Comando: \n \`<>\` = necessário \n \`[]\` = opcional`
         ])
         let categories;
-        if(!Config.owner.includes(message.author.id)) {
+        if(!Config.owners.includes(message.author.id)) {
             categories = removeDuplicates(client.commands.filter(cmd => cmd.category !== "Owner").map(cmd => cmd.category));
         } else {
             categories = removeDuplicates(client.commands.map(cmd => cmd.category || cmd.aliases));

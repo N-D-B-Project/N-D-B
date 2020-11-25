@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class VolumeCommand extends BaseCommand {
-  constructor() {
-    super(
-      'volume', //name
-      'Music', //category
-      [''], //aliases
-      '', //usage
-      'Aumenta ou diminui o volume do Player' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'volume', //name
+      category: 'Music', //category
+      aliases: [''], //aliases
+      usage: '', //usage
+      description: 'Aumenta ou diminui o volume do Player' //description
+    });
   }
 
   async run(client, message, args) {

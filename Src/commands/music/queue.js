@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class QueueCommand extends BaseCommand {
-  constructor() {
-    super(
-      'queue', //name
-      'Music', //category
-      ['fila', 'lista'], //aliases
-      '', //usage
-      'Mostra a lista de musicas que serão tocadas' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'queue', //name
+      category: 'Music', //category
+      aliases: ['fila', 'lista'], //aliases
+      usage: '', //usage
+      description: 'Mostra a lista de musicas que serão tocadas' //description
+    });
   }
 
   async run(client, message, args) {

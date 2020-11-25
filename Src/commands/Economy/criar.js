@@ -11,14 +11,14 @@ mongoose.connect(process.env.DBC, {
 const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class CriarCommand extends BaseCommand {
-  constructor() {
-    super(
-      'criar', //name
-      'Economy', //category
-      ['Create'], //aliases
-      '', //usage
-      'Cria sua conta na NDCash' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'criar', //name
+      category: 'Economy', //category
+      aliases: ['Create'], //aliases
+      usage: '', //usage
+      description: 'Cria sua conta na NDCash' //description
+    });
   }
 
   async run(client, message, args) {

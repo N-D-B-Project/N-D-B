@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class LoopCommand extends BaseCommand {
-  constructor() {
-    super(
-      'loop', //name
-      'Music', //category
-      ['repeat', 'repetir'], //aliases
-      '', //usage
-      'Põe a musica ou a fila de musicas em loop' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'loop', //name
+      category: 'Music', //category
+      aliases: ['repeat', 'repetir'], //aliases
+      usage: '', //usage
+      description: 'Põe a musica ou a fila de musicas em loop' //description
+    });
   }
 
   async run(client, message, args) {

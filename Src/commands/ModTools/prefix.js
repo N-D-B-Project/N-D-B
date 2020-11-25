@@ -10,14 +10,14 @@ mongoose.connect(process.env.DBC, {
 });
 
 module.exports = class ChangePrefixCommand extends BaseCommand {
-  constructor() {
-    super(
-      'setprefix', //name
-      'ModTools', //category
-      ['definirprefix', 'definirprefixo', 'alterarprefix', 'alterarprefixo', 'changeprefix'], //aliases
-      'setprefix <Novo Prefix>', //usage
-      'Altera na DataBase o Prefix do server' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'setprefix', //name
+      category: 'ModTools', //category
+      aliases: ['definirprefix', 'definirprefixo', 'alterarprefix', 'alterarprefixo', 'changeprefix'], //aliases
+      usage: 'setprefix <Novo Prefix>', //usage
+      description: 'Altera na DataBase o Prefix do server' //description
+    });
   }
 
   async run(client, message, args) {

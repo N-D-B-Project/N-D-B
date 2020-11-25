@@ -5,14 +5,14 @@ const hD = require("humanize-duration");
 const ms = require("parse-ms");
 
 module.exports = class NowPlayingCommand extends BaseCommand {
-  constructor() {
-    super(
-      'nowplaying', //name
-      'Music', //category
-      ['np'], //aliases
-      '', //usage
-      'Mostra qual musica está tocando e quando tempo falta para acabar' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'nowplaying', //name
+      category: 'Music', //category
+      aliases: ['np'], //aliases
+      usage: '', //usage
+      description: 'Mostra qual musica está tocando e quando tempo falta para acabar' //description
+    });
   }
 
   async run(client, message, args) {

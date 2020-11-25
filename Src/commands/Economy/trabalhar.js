@@ -10,14 +10,14 @@ mongoose.connect(process.env.DBC, {
 });
 
 module.exports = class TrabalharCommand extends BaseCommand {
-  constructor() {
-    super(
-      "trabalhar", //name
-      "Economy", //category
-      ["work"], //aliases
-      "", //usage
-      "Trabalhe para ganhar NDCash (dinheiro)" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "trabalhar", //name
+      category: "Economy", //category
+      aliases: ["work"], //aliases
+      usage: "", //usage
+      description: "Trabalhe para ganhar NDCash (dinheiro)" //description
+    });
   }
 
   async run(client, message, args) {

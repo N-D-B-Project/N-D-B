@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class JoinCommand extends BaseCommand {
-  constructor() {
-    super(
-      'join', //name
-      'Music', //category
-      ['entrar', 'entre', 'enter'], //aliases
-      '', //usage
-      'Faz com que o Bot entre na call' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'join', //name
+      category: 'Music', //category
+      aliases: ['entrar', 'entre', 'enter'], //aliases
+      usage: '', //usage
+      description: 'Faz com que o Bot entre na call' //description
+    });
   }
 
   async run(client, message, args) {

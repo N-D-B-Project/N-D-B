@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class SkipCommand extends BaseCommand {
-  constructor() {
-    super(
-      'skip', //name
-      'Music', //category
-      ['pular'], //aliases
-      '', //usage
-      'Pula para a proxima musica da lista' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'skip', //name
+      category: 'Music', //category
+      aliases: ['pular'], //aliases
+      usage: '', //usage
+      description: 'Pula para a proxima musica da lista' //description
+    });
   }
 
   async run(client, message, args) {

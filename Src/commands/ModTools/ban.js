@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class BanCommand extends BaseCommand {
-  constructor() {
-    super(
-      'ban', //name
-      'ModTools', //category
-      ['banir'], //aliases
-      'ban <mencione um usuário>', //usage
-      'Bane o usuário mencionado do servidor' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'ban', //name
+      category: 'ModTools', //category
+      aliases: ['banir'], //aliases
+      usage: 'ban <mencione um usuário>', //usage
+      description: 'Bane o usuário mencionado do servidor' //description
+    });
   }
 
   async run(client, message, args) {

@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class DevYTCommand extends BaseCommand {
-  constructor() {
-    super(
-      'yt', //name
-      'OwnerInfo', //category
-      ['devyt', 'botyt', 'youtubechannel'], //aliases
-      '', //usage
-      'Manda o link do canal do Youtube meu Dev' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'yt', //name
+      category: 'OwnerInfo', //category
+      aliases: ['devyt', 'botyt', 'youtubechannel'], //aliases
+      usage: '', //usage
+      description: 'Manda o link do canal do Youtube meu Dev' //description
+    });
   }
 
   async run(client, message, args) {

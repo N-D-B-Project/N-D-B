@@ -14,14 +14,14 @@ mongoose.connect(process.env.DBC, {
 });
 
 module.exports = class HelppCommand extends BaseCommand {
-  constructor() {
-    super(
-        'help', //name
-        'Accessibility', //category
-        ['ajuda'], // aliases
-        'help || help <Comando>', //usage
-        'Mostra todos os comandos e como utilizar-los' //description
-    );
+  constructor(...args) {
+    super(...args, {
+        name: 'help', //name
+        category: 'Accessibility', //category
+        aliases: ['ajuda'], // aliases
+        usage: 'help || help <Comando>', //usage
+        description: 'Mostra todos os comandos e como utilizar-los' //description
+    });
   }
 
   async run(client, message, [command], args) {
@@ -51,7 +51,7 @@ module.exports = class HelppCommand extends BaseCommand {
         //MenuReact.react("");
         
     } else {
-        const cmd = client.commands.get(command) /*|| client.commands.get(aliases.get(command))*/;
+        const cmd = client.commands.get(command) /*|| client.commands.get(client.aliases.get(command))*/;
         if(!cmd) return message.channel.send(`Comando Invalido: \`${command}\``)
 
         embed.setAuthor(`${capitalise(cmd.name)} Comando Help`, client.user.displayAvatarURL());

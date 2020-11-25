@@ -11,14 +11,14 @@ mongoose.connect(process.env.DBC, {
 
 
 module.exports = class SetDefaultRoleCommand extends BaseCommand {
-  constructor() {
-    super(
-      'setrole', //name
-      'Server Settings', //category
-      ['defaultrole'], //aliases
-      'setrole <Id do Cargo>', //usage
-      'Defini o Cargo padrão do servidor\nNecessário para o funcionamento do comando de lockdown' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'setrole', //name
+      category: 'Server Settings', //category
+      aliases: ['defaultrole'], //aliases
+      usage: 'setrole <Id do Cargo>', //usage
+      description: 'Defini o Cargo padrão do servidor\nNecessário para o funcionamento do comando de lockdown' //description
+    });
   }
 
   async run(client, message, args) {

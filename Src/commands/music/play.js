@@ -4,14 +4,14 @@ const Discord = require("discord.js");
 const hD = require("humanize-duration");
 
 module.exports = class PlayCommand extends BaseCommand {
-  constructor() {
-    super(
-      "play", //name
-      "Music", //category
-      ["p", "tocar"], //aliases
-      "play <Nome da Musica>", //usage
-      "Toca a musica escolhida no canal de voz" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "play", //name
+      category: "Music", //category
+      aliases: ["p", "tocar"], //aliases
+      usage: "play <Nome da Musica>", //usage
+      description: "Toca a musica escolhida no canal de voz" //description
+    });
   }
 
   async run(client, message, args) {

@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class UptimeCommand extends BaseCommand {
-  constructor() {
-    super(
-      'uptime', //name
-      'Info', //category
-      [''], //aliases
-      '', //usage
-      'Mostra quanto tempo o Bot está Online' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'uptime', //name
+      category: 'Info', //category
+      aliases: [''], //aliases
+      usage: '', //usage
+      description: 'Mostra quanto tempo o Bot está Online' //description
+    });
   }
 
   async run(client, message, args) {

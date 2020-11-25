@@ -4,14 +4,14 @@ const Discord = require("discord.js");
 const levels = require("../../Tools/bassboost");
 
 module.exports = class BassBoostCommand extends BaseCommand {
-  constructor() {
-    super(
-      'bassboost', //name
-      'Music', //category
-      ['Bass', 'bass', 'bb'], //aliases
-      'bassboost <level>', //usage
-      'Aumenta o grave da Musica' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'bassboost', //name
+      category: 'Music', //category
+      aliases: ['Bass', 'bass', 'bb'], //aliases
+      usage: 'bassboost <level>', //usage
+      description: 'Aumenta o grave da Musica' //description
+    });
   }
 
   async run(client, message, args) {

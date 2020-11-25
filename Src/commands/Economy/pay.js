@@ -11,14 +11,14 @@ mongoose.connect(process.env.DBC, {
 const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class ContaCommand extends BaseCommand {
-  constructor() {
-    super(
-      "pay", //name
-      "Economy", //category
-      ["pagar"], //aliases
-      "pay <Mencione um usuário> <Valor>", //usage
-      "Doa NDCash (dinheiro) para outro usuário" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "pay", //name
+      category: "Economy", //category
+      aliases: ["pagar"], //aliases
+      usage: "pay <Mencione um usuário> <Valor>", //usage
+      description: "Doa NDCash (dinheiro) para outro usuário" //description
+    });
   }
   async run(client, message, args) {
     const Payment = parseInt(args[1]);

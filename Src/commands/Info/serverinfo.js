@@ -1,23 +1,23 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const {
-    filterLevels,
-    verificationLevels,
-    regions 
+  filterLevels,
+  verificationLevels,
+  regions 
 } = require("../../Tools/ServersDetails");
 const moment = require("moment");
 const trimArray = require("../../Tools/trimArray");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ServerInfoCommand extends BaseCommand {
-  constructor() {
-    super(
-      'serverinfo', //name
-      'Info', //category
-      [''], //aliases
-      '', //usage
-      'Mostra as informações do Servidor' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'serverinfo', //name
+      category: 'Info', //category
+      aliases: [''], //aliases
+      usage: '', //usage
+      description: 'Mostra as informações do Servidor' //description
+    });
   }
 
   async run(client, message, args) {

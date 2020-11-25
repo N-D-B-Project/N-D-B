@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class LeaveCommand extends BaseCommand {
-  constructor() {
-    super(
-      'leave', //name
-      'Music', //category
-      ['sair'], //aliases
-      '', //usage
-      'Faz com que o bot saia da call' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'leave', //name
+      category: 'Music', //category
+      aliases: ['sair'], //aliases
+      usage: '', //usage
+      description: 'Faz com que o bot saia da call' //description
+    });
   }
 
   async run(client, message, args) {

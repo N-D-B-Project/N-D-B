@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class AliadosCommand extends BaseCommand {
-  constructor() {
-    super(
-      'aliados', //name
-      'OwnerInfo', //category
-      ['otherbots'], //aliases
-      '', //usage
-      'Mostra os Bots dos amigos do meu Dev' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'aliados', //name
+      category: 'OwnerInfo', //category
+      aliases: ['otherbots'], //aliases
+      usage: '', //usage
+      description: 'Mostra os Bots dos amigos do meu Dev' //description
+    });
   }
 
   async run(client, message, args) {

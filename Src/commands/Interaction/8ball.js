@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class EightBallCommand extends BaseCommand {
-  constructor() {
-    super(
-      '8ball', //name
-      'Interaction', //category
-      ['eightball'], //aliases
-      '8ball <Sua Pergunta>', //usage
-      'O Bot responde sua pergunta com algo aleatório' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: '8ball', //name
+      category: 'Interaction', //category
+      aliases: ['eightball'], //aliases
+      usage: '8ball <Sua Pergunta>', //usage
+      description: 'O Bot responde sua pergunta com algo aleatório' //description
+    });
   }
 
   async run(client, message, args) {

@@ -30,14 +30,17 @@
     "hiero": "java -jar runnable-hiero.jar"
   },
   "dependencies": {
+    "@extreme_hero/deeptype": "^1.0.1",
     "canvacord": "^5.0.8",
     "canvas": "^2.6.1",
     "colors": "^1.4.0",
+    "diff": "^5.0.0",
     "discord-xp": "^1.0.6",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "erela.js": "^2.2.0",
     "erela.js-spotify": "^1.2.0",
+    "glob": "^7.1.6",
     "humanize-duration": "^3.24.0",
     "jimp": "^0.16.1",
     "lyrics-finder": "^21.4.0",
@@ -45,8 +48,10 @@
     "mongoose": "^5.10.14",
     "nodemon": "^2.0.6",
     "parse-ms": "^2.1.0",
+    "path": "^0.12.7",
     "say": "^0.16.0",
-    "solenolyrics": "^5.0.0"
+    "solenolyrics": "^5.0.0",
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "bl": "^1.2.3",

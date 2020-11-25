@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ClearQueueCommand extends BaseCommand {
-  constructor() {
-    super(
-      "clearqueue", //name
-      "Music", //category
-      ["cq", "limparlista", "limparfila"], //aliases
-      "", //usage
-      "Limpa a lista de musicas" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "clearqueue", //name
+      category: "Music", //category
+      aliases: ["cq", "limparlista", "limparfila"], //aliases
+      usage: "", //usage
+      description: "Limpa a lista de musicas" //description
+    });
   }
 
   async run(client, message, args) {

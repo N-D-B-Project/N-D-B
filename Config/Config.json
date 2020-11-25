@@ -1,6 +1,5 @@
 {
   "prefix": "&",
-  "owner": [
-    "330047048009252864"
-  ]
+  "owners": ["330047048009252864", "336678075611873281"],
+  "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"]
 }

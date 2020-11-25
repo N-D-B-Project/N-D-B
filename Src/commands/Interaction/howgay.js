@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class HowGayCommand extends BaseCommand {
-  constructor() {
-    super(
-      'howgay', //name
-      'Interaction', //category
-      ['HowGay'], //aliases
-      'HowGay <Mencione um usuário>', //usage
-      'Diz o quão gay é o usuário mencionado' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'howgay', //name
+      category: 'Interaction', //category
+      aliases: ['HowGay'], //aliases
+      usage: 'HowGay <Mencione um usuário>', //usage
+      description: 'Diz o quão gay é o usuário mencionado' //description
+    });
   }
 
   async run(client, message, args) {

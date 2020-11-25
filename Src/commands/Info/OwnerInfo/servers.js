@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ServersCommand extends BaseCommand {
-  constructor() {
-    super(
-      'servers', //name
-      'OwnerInfo', //category
-      ['faltaquanto', 'verificação', 'botverification'], //aliases
-      '', //usage
-      'Mostra quantos server faltam para o Bot ser verificado' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'servers', //name
+      category: 'OwnerInfo', //category
+      aliases: ['faltaquanto', 'verificação', 'botverification'], //aliases
+      usage: '', //usage
+      description: 'Mostra quantos server faltam para o Bot ser verificado' //description
+    });
   }
 
   async run(client, message, args) {

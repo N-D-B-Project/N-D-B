@@ -4,14 +4,14 @@ const Discord = require("discord.js");
 const solenolyrics = require("solenolyrics");
 
 module.exports = class LyricsCommand extends BaseCommand {
-  constructor() {
-    super(
-      'lyrics', //name
-      'Music', //category
-      ['ly', 'letra'], //aliases
-      '', //usage
-      'Mostra a Letra da musica que está tocando' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'lyrics', //name
+      category: 'Music', //category
+      aliases: ['ly', 'letra'], //aliases
+      usage: '', //usage
+      description: 'Mostra a Letra da musica que está tocando' //description
+    });
   }
 
   async run(client, message, args) {

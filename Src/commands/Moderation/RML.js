@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class RMLCommand extends BaseCommand {
-  constructor() {
-    super(
-      'RML', //name
-      'Moderation', //category
-      ['RicardoMilos', 'RichardMilos', 'Lenda'], //aliases
-      '', //usage
-      'Manda um Emoji do Milos' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'RML', //name
+      category: 'Moderation', //category
+      aliases: ['RicardoMilos', 'RichardMilos', 'Lenda'], //aliases
+      usage: '', //usage
+      description: 'Manda um Emoji do Milos' //description
+    });
   }
 
   async run(client, message, args) {

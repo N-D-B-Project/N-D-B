@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class KickCommand extends BaseCommand {
-  constructor() {
-    super(
-      'kick', //name
-      'ModTools', //category
-      ['expulsar'], //aliases
-      'kick <mencione um usuário>', //usage
-      'Expulsa o usuário mencionado do servidor' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'kick', //name
+      category: 'ModTools', //category
+      aliases: ['expulsar'], //aliases
+      usage: 'kick <mencione um usuário>', //usage
+      description: 'Expulsa o usuário mencionado do servidor' //description
+    });
   }
 
   async run(client, message, args) {

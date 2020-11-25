@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class VoteCommand extends BaseCommand {
-  constructor() {
-    super(
-      'vote', //name
-      'Moderation', //category
-      ['votar', 'votação'], //aliases
-      'vote <Sobre a Votação>', //usage
-      'Inicia uma votação' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'vote', //name
+      category: 'Moderation', //category
+      aliases: ['votar', 'votação'], //aliases
+      usage: 'vote <Sobre a Votação>', //usage
+      description: 'Inicia uma votação' //description
+    });
   }
 
   async run(client, message, args) {

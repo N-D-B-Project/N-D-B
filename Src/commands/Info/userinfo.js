@@ -6,14 +6,14 @@ const trimArray = require("../../Tools/trimArray");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class UserInfoCommand extends BaseCommand {
-  constructor() {
-    super(
-      'userinfo', //name
-      'Info', //category
-      [''], //aliases
-      'userinfo <mencione um usuário>', //usage
-      'Mostra suas informações ou do usuário mencionado' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'userinfo', //name
+      category: 'Info', //category
+      aliases: [''], //aliases
+      usage: 'userinfo <mencione um usuário>', //usage
+      description: 'Mostra suas informações ou do usuário mencionado' //description
+    });
   }
 
   async run(client, message, [target], args) {

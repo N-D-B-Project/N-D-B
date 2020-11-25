@@ -11,14 +11,14 @@ mongoose.connect(process.env.DBC, {
 
 
 module.exports = class SetDefaultRoleCommand extends BaseCommand {
-  constructor() {
-    super(
-      'mutedrole', //name
-      'Server Settings', //category
-      [''], //aliases
-      'mutedrole <Id do Cargo>', //usage
-      'Defini o cargo de Mute do server' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'mutedrole', //name
+      category: 'Server Settings', //category
+      aliases: [''], //aliases
+      usage: 'mutedrole <Id do Cargo>', //usage
+      description: 'Defini o cargo de Mute do server' //description
+    });
   }
 
   async run(client, message, args) {

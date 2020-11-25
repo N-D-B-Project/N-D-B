@@ -4,14 +4,14 @@ const kisses = require("../../Tools/Kiss")
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class KissCommand extends BaseCommand {
-  constructor() {
-    super(
-      'kiss', //name
-      'Anime', //category
-      ['beijar'], //aliases
-      'kiss <mencione um usuário>', //usage
-      'Ao mencionar um usuário aparece um Gif dizendo que você beijou' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'kiss', //name
+      category: 'Anime', //category
+      aliases: ['beijar'], //aliases
+      usage: 'kiss <mencione um usuário>', //usage
+      description: 'Ao mencionar um usuário aparece um Gif dizendo que você beijou' //description
+    });
   }
 
   async run(client, message, args) {

@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ResumeCommand extends BaseCommand {
-  constructor() {
-    super(
-      'resume', //name
-      'Music', //category
-      ['continuar'], //aliases
-      '', //usage
-      'Tira a musica do pause' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'resume', //name
+      category: 'Music', //category
+      aliases: ['continuar'], //aliases
+      usage: '', //usage
+      description: 'Tira a musica do pause' //description
+    });
   }
 
   async run(client, message, args) {

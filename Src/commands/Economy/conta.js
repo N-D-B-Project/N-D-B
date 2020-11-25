@@ -13,14 +13,14 @@ mongoose.connect(process.env.DBC, {
 const Cash = require("../../database/schemas/NDCash");
 
 module.exports = class ContaCommand extends BaseCommand {
-  constructor() {
-    super(
-      "conta", //name
-      "Economy", //category
-      ["bal"], //aliases
-      "", //usage
-      "Mostra quanto NDCash (dinheiro) você tem" //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: "conta", //name
+      category: "Economy", //category
+      aliases: ["bal"], //aliases
+      usage: "", //usage
+      description: "Mostra quanto NDCash (dinheiro) você tem" //description
+    });
   }
   async run(client, message, args) {
     const Mention = message.mentions.members.first() || client.users.cache.get(args[0]);

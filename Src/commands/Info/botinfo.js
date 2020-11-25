@@ -17,14 +17,14 @@ const os = require("os");
 const ms = require("ms");
 
 module.exports = class BotInfoCommand extends BaseCommand {
-  constructor() {
-    super(
-      'botinfo', //name
-      'Info', //category
-      [''], //aliases
-      '', //usage
-      'Mostra as informações do Bot' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'botinfo', //name
+      category: 'Info', //category
+      aliases: [''], //aliases
+      usage: '', //usage
+      description: 'Mostra as informações do Bot' //description
+    });
   }
 
   async run(client, message, args) {
@@ -39,7 +39,7 @@ module.exports = class BotInfoCommand extends BaseCommand {
       `**❯ <:topgg:761642656626769930> ** [Vote no Top.gg](Waiting approval)`,
       `**❯ <:discord:739591596248530985> ** [Me Adicione ao seu Server!](${"https://discord.com/api/oauth2/authorize?client_id=708822043420000366&permissions=8&scope=bot"})`,
 
-      `**❯ Lista de Comandos: ** \`${FindPrefix}help\``
+      `**❯ Lista de Comandos: ** \`${FindPrefix}help || helpp\``
     ]
 
     const core = os.cpus()[0]

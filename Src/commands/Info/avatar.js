@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class AvatarCommand extends BaseCommand {
-  constructor() {
-    super(
-      'avatar', //name
-      'Info', //category
-      [''], //aliases
-      'avatar <mencione um usuário>', //usage
-      'Exibe seu avatar ou do usuário mencionado' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'avatar', //name
+      category: 'Info', //category
+      aliases: [''], //aliases
+      usage: 'avatar <mencione um usuário>', //usage
+      description: 'Exibe seu avatar ou do usuário mencionado' //description
+    });
   }
 
   async run(client, message, args) {

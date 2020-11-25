@@ -21,9 +21,9 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
     })
     const FindChannel = guildConfig.deleteMsgChannelId;
     const Channel = client.channels.cache.get(`${FindChannel}`);
-    //const Channel = client.channels.cache.get("731288262035112045");
     if(message.channel === Channel) return;
-    //if(message.author.bot) return;
+    if(message.author.bot || !message.guild) return;
+    const attachments = message.attachments.size ? message.attachments.map(attachment => attachment.proxyURL) : null;
     
     if(Channel) {
       try {
@@ -31,7 +31,10 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
         .setTitle("Mensagem Deletada")
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .addField("Deletada no Canal", message.channel)
-        .setDescription(message.content)
+        .setDescription([
+          message.content, 
+          `${attachments ? `**❯ Arquivos Anexados:** ${attachments.join('\n')}` : ''}`
+        ])
         .setColor("RANDOM")
         .setTimestamp()
       Channel.send(embed)

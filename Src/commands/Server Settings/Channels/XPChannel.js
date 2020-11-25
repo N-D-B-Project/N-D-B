@@ -11,14 +11,14 @@ mongoose.connect(process.env.DBC, {
 
 
 module.exports = class SetDeletedMessagesChannelCommand extends BaseCommand {
-  constructor() {
-    super(
-      'setxpchannel', //name
-      'Server Settings', //category
-      [''], //aliases
-      'setxpchannel <Id do canal>', //usage
-      'Define me qual canal o Bot mandará as mensagens quando algum membro sobe de nível' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'setxpchannel', //name
+      category: 'Server Settings', //category
+      aliases: [''], //aliases
+      usage: 'setxpchannel <Id do canal>', //usage
+      description: 'Define me qual canal o Bot mandará as mensagens quando algum membro sobe de nível' //description
+    });
   }
 
   async run(client, message, args) {

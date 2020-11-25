@@ -3,14 +3,14 @@ const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ShuffleCommand extends BaseCommand {
-  constructor() {
-    super(
-      'shuffle', //name
-      'Music', //category
-      ['misturar'], //aliases
-      '', //usage
-      'Põe em ordem aleatória as musicas da fila' //description
-    );
+  constructor(...args) {
+    super(...args, {
+      name: 'shuffle', //name
+      category: 'Music', //category
+      aliases: ['misturar'], //aliases
+      usage: '', //usage
+      description: 'Põe em ordem aleatória as musicas da fila' //description
+    });
   }
 
   async run(client, message, args) {
