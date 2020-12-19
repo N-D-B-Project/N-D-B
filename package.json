@@ -25,9 +25,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./Src/Root.js",
     "start": "node ./Src/Root.js",
-    "lavalink": "java -jar lavalink.jar",
-    "music": "java -jar lavalink.jar",
-    "hiero": "java -jar runnable-hiero.jar"
+    "lavalink": "java -jar Lavalink.jar",
+    "music": "java -jar Lavalink.jar",
+    "hiero": "java -jar runnable-hiero.jar",
+    "Boot": "pm2 start ./Src/Root.js"
   },
   "dependencies": {
     "@extreme_hero/deeptype": "^1.0.1",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "bl": "^1.2.3",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "pm2": "^4.5.1"
   }
 }

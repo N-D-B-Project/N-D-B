@@ -29,7 +29,7 @@ module.exports = class KickCommand extends BaseCommand {
           target.kick()
             //.then(console.log("Expulso"))
             //.catch(console.error);
-          message.channel.send(`${Mention.tag} foi expulso(a) do servidor`);
+          message.channel.send(`${Mention} foi expulso(a) do servidor`);
         }
       } catch (err) {
         console.log(err);

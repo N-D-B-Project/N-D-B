@@ -24,17 +24,17 @@ module.exports = class BanCommand extends BaseCommand {
           || message.guild.members.cache.get(args[0]) 
           || message.guild.members.cache.find(x => x.user.username.toLowerCase() === args.slice(0).join(" ") 
           || x.user.username === args[0]);
-        const Reason = args[1] || "Motivo não especificado";
+        const Reason = args.slice(1).join(" ") || "Motivo não especificado";
         const target = message.guild.members.cache.get(Mention.id);
         if(!Mention) {
           message.channel.send("Mencione quem você quer banir");
         } else {
           target.ban({
-            reason: reason
+            reason: Reason
           });
             //.then(console.log("B A N I D O"))
             //.catch(console.error);
-          message.channel.send(`${Mention.tag} foi B A N I D O(A) ${banEmoji}\nMotivo: ${Reason}`);
+          message.channel.send(`${Mention} Foi ${banEmoji}\nMotivo: ${Reason}`);
         }
       } catch (err) {
         console.log(err);

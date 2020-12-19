@@ -26,7 +26,7 @@ module.exports = class SetVerificationChannelCommand extends BaseCommand {
       const guildConfig = await GuildConfig.findOne({
         guildId: message.guild.id
       })
-      const FindChannel = guildConfig.deleteMsgChannelId;
+      const FindChannel = guildConfig.VerificationChannelId;
       const Channel = client.channels.cache.get(`${FindChannel}`);
       const SintaxErrEmbed = new Discord.MessageEmbed()
         .setTitle("❌ | Erro de Sintaxe")
@@ -35,7 +35,7 @@ module.exports = class SetVerificationChannelCommand extends BaseCommand {
         .setTimestamp();
       if(!args[0]) return message.channel.send(SintaxErrEmbed)
       
-      guildConfig.deleteMsgChannelId = args[0]
+      guildConfig.VerificationChannelId = args[0]
       guildConfig.save().catch((err) => console.log("SetVerificationChannel Error: " + err))
       const SetChannelEmbed = new Discord.MessageEmbed()
         .setTitle("✔ | Canal Definido!")

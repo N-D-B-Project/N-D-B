@@ -15,7 +15,7 @@ module.exports = class SetDeletedMessagesChannelCommand extends BaseCommand {
     super(...args, {
       name: 'setdelchannel', //name
       category: 'Server Settings', //category
-      aliases: [''], //aliases
+      aliases: ['sdc'], //aliases
       usage: 'setdelchannel <Id do canal>', //usage
       description: 'Define me qual canal o Bot mandará as mensagens deletadas por algum membro' //description
     });

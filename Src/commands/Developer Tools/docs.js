@@ -17,7 +17,7 @@ module.exports = class DocsCommand extends BaseCommand {
     });
   }
 
-  async run(client, message, args, ...query) {
+  async run(client, message, /*args,*/ ...query) {
     const url = `https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`;
 
     const docFetch = await fetch(url);
@@ -41,7 +41,7 @@ module.exports = class DocsCommand extends BaseCommand {
             { max: 1, time: 10000, errors: ['time'] }
         );
     } catch (error) {
-        msg.reaction.removeAll()
+        msg.reactions.removeAll()
     }
 
     if(react && react.first()) msg.delete();

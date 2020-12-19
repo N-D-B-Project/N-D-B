@@ -29,10 +29,10 @@ module.exports = class BanCommand extends BaseCommand {
         if(!Mention) {
           message.channel.send("Mencione quem você quer desbanir");
         } else {
-          target.ban(target, reason);
+          message.guild.members.unban(target);
             //.then(console.log("B A N I D O"))
             //.catch(console.error);
-          message.channel.send(`${Mention.tag} foi desbanido(a)`);
+          message.channel.send(`${Mention} foi desbanido(a)\nMotivo do Banimento: ${Reason}`);
         }
       } catch (err) {
         console.log(err);

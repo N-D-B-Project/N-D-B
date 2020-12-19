@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const { Client, Collection, Permissions } = require("discord.js");
-const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL"]});
+const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL", "USER"]});
 
 const {
   registerCommands,
