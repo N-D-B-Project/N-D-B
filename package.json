@@ -28,7 +28,8 @@
     "lavalink": "java -jar Lavalink.jar",
     "music": "java -jar Lavalink.jar",
     "hiero": "java -jar runnable-hiero.jar",
-    "Boot": "pm2 start ./Src/Root.js"
+    "Boot": "pm2 start ./Src/Root.js",
+    "Shard": "nodemon ./Src/Shard.js"
   },
   "dependencies": {
     "@extreme_hero/deeptype": "^1.0.1",

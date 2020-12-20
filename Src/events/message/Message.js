@@ -5,6 +5,7 @@ const Config = require("../../../Config/Config.json");
 const formatArray = require("../../Tools/formatArray");
 const formatPerms = require("../../Tools/formatPerms");
 //const checkOwner = require("../../Tools/checkOwner");
+const Blacklist = require('../../database/schemas/Blacklist');
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
@@ -53,6 +54,11 @@ module.exports = class MessageEvent extends BaseEvent {
       const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
 
       if(command) {
+        const blacklistData = await Blacklist.findOne({ User: message.author.id });
+        if (blacklistData && blacklistData.Blacklist === true) {
+          return message.reply('Você está na **Blacklist** do Bot portanto não pod utilizar nenhum comando')
+       }
+
         if (command.ownerOnly && !client.Tools.checkOwner(message.author.id)) {
           return message.reply("Comando restrito para o Dono do Bot");
         }
