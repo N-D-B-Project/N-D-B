@@ -21,7 +21,8 @@ module.exports = class ReadyEvent extends BaseEvent {
   async run(client) {
     console.log(date.format(new Date()).grey, "Client".cyan, client.user.tag + " Esta Online!".magenta,"           INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.size}       `, " Servers".magenta,"                INFO".yellow,"   Loaded".green);
-    console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta,"                  INFO".yellow,"   Loaded".green);
+    //console.log(date.format(new Date()).grey, "Client".cyan, `${client.users.cache.size}       `, "Users".magenta,"                  INFO".yellow,"   Loaded".green);
+    console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}`, "      Users".magenta,"                  INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
 
     const Status = require("../../Tools/Status");
@@ -69,7 +70,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     client.music.init(client.user.id);
     
     client.on("raw", (d) => client.music.updateVoiceState(d));
-    //console.log(date.format(new Date()).grey, `${client.commands.size}`.cyan,"    Commands", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
-    //console.log(date.format(new Date()).grey, `${client.events.size}`.cyan, "     Events  ", "  Carregando...".magenta,            "INFO".yellow,   "Loaded".green)
+    // console.log(date.format(new Date()).grey, `${client.commands.size}`.cyan,"    Commands", "  Carregando...".magenta,"          INFO".yellow,   "   Loaded".green)
+    // console.log(date.format(new Date()).grey, `${client.events.size}`.cyan, "     Events  ", "  Carregando...".magenta,"          INFO".yellow,   "   Loaded".green)
   }
 };

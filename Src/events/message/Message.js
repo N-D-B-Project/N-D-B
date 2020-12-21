@@ -6,6 +6,7 @@ const formatArray = require("../../Tools/formatArray");
 const formatPerms = require("../../Tools/formatPerms");
 //const checkOwner = require("../../Tools/checkOwner");
 const Blacklist = require('../../database/schemas/Blacklist');
+const ms = require('ms');
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
@@ -15,6 +16,8 @@ mongoose.connect(process.env.DBC, {
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
     super("message");
+
+    this.buckets = new Map();
   }
 
   async run(client, message, guild) {
@@ -52,6 +55,15 @@ module.exports = class MessageEvent extends BaseEvent {
         .trim()
         .split(/ +/g);
       const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
+
+      if (!client.owners.includes(message.author.id)) {
+        let remaining = await this._runLimits(message, command);
+        if (remaining) {
+          remaining = ms(remaining - Date.now(), { long: true });
+          message.channel.send(`Sorry **${message.author}**, you have to wait **${remaining}** before running this command.`);
+          return;
+        }
+      }
 
       if(command) {
         const blacklistData = await Blacklist.findOne({ User: message.author.id });
@@ -117,4 +129,55 @@ module.exports = class MessageEvent extends BaseEvent {
       }
     }
   }
+
+  _timeout(userId, commandName) {
+		return () => {
+			const bucket = this.buckets.get(`${userId}-${commandName}`);
+			if (bucket && bucket.timeout) {
+				this.client.clearTimeout(bucket.timeout);
+			}
+
+			this.buckets.delete(`${userId}-${commandName}`);
+		};
+	}
+
+	_runLimits(message, command) {
+		const tout = this._timeout(message.author.id, command.name);
+
+		let bucket = this.buckets.get(`${message.author.id}-${command.name}`);
+		if (!bucket) {
+			bucket = {
+				reset: command.ratelimit.reset,
+				remaining: command.ratelimit.bucket,
+				timeout: this.client.setTimeout(tout, command.ratelimit.reset)
+			};
+
+			this.buckets.set(`${message.author.id}-${command.name}`, bucket);
+		}
+
+		if (bucket.remaining === 0) {
+			if (command.ratelimit.stack) {
+				if (bucket.limited) {
+					if (bucket.timeout) {
+						this.client.clearTimeout(bucket.timeout);
+					}
+
+					bucket.reset = (bucket.resetsIn - Date.now()) + command.ratelimit.reset;
+					bucket.timeout = this.client.setTimeout(tout, bucket.reset);
+					bucket.resetsIn = Date.now() + bucket.reset;
+				}
+
+				bucket.limited = true;
+			}
+
+			if (!bucket.resetsIn) {
+				bucket.resetsIn = Date.now() + bucket.reset;
+			}
+
+			return bucket.resetsIn;
+		}
+
+		--bucket.remaining;
+		return null;
+  };
 };

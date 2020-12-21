@@ -3,6 +3,7 @@ require("dotenv").config();
 const { Client, Collection, Permissions } = require("discord.js");
 const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL", "USER"]});
 
+const { loadLanguages } = require("./utils/Language");
 const {
   registerCommands,
   registerEvents,
@@ -51,11 +52,12 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
   
   //await registerCommands(client, "../Commands");
   await registerEvents(client, "../Events");
+  loadLanguages(client);
 
   client.Registry = new Registry(client)
   await client.Registry.loadCommands();
   //await client.Registry.loadEvents();
   
-  console.log(" ");
+  //console.log(" ");
   console.log(date.format(new Date()).grey, "System".cyan, "Debug     ", "Hello World!".magenta,"           INFO".yellow,"   Loaded".green);
 })();

@@ -1,4 +1,11 @@
+const { Util } = require('discord.js');
 const { Permissions } = require('discord.js');
+
+const DEFAULT_RATELIMIT = {
+	reset: 5000,
+	bucket: 1,
+	stack: true
+};
 module.exports = class BaseCommand {
 
 	constructor(client, name, options = {}) {
@@ -14,6 +21,7 @@ module.exports = class BaseCommand {
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
 		this.args = options.args || false;
+		this.ratelimit = Util.mergeDefault(DEFAULT_RATELIMIT, options.ratelimit || DEFAULT_RATELIMIT);
 	}
 
 	async run(message, args) {
