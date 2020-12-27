@@ -52,7 +52,7 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
   
   //await registerCommands(client, "../Commands");
   await registerEvents(client, "../Events");
-  loadLanguages(client);
+  await loadLanguages(client);
 
   client.Registry = new Registry(client)
   await client.Registry.loadCommands();

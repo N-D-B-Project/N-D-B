@@ -11,15 +11,13 @@ const GuildConfigSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    prefix: {
-        type: mongoose.SchemaTypes.String,
-        required: true,
-        default: '&',
-    },
-    language: {
+    defaultRole: {
         type: mongoose.SchemaTypes.String,
         required: false,
-        default: "portuguese"
+    },
+    mutedRole: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
     },
 });
 

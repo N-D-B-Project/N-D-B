@@ -1,6 +1,7 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
+const language = require("../../utils/Language");
 
 module.exports = class TestCommand extends BaseCommand {
   constructor(...args) {
@@ -15,6 +16,7 @@ module.exports = class TestCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    message.channel.send("Funfa")
+    const { guild } = message;
+    message.channel.send(`${language(guild, 'TEST_COMMAND')}`)
   }
 }

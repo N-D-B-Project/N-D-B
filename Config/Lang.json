@@ -1,6 +1,10 @@
 {
-    "languages": ["pt-BR", "english", "spanish"], 
+    "languages": ["portuguese", "english", "spanish"], 
     "translations": {
-        
+        "TEST_COMMAND": {
+            "portuguese": "Funfa",
+            "english": "Works",
+            "spanish": "Obras"
+        }
     }
 }

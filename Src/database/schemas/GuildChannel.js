@@ -11,15 +11,17 @@ const GuildConfigSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    prefix: {
-        type: mongoose.SchemaTypes.String,
-        required: true,
-        default: '&',
-    },
-    language: {
+    deleteMsgChannelId: {
         type: mongoose.SchemaTypes.String,
         required: false,
-        default: "portuguese"
+    },
+    XpChannelId: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
+    VerificationChannelId: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
     },
 });
 
