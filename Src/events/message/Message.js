@@ -2,10 +2,9 @@ const BaseEvent = require("../../utils/structures/BaseEvent");
 const GuildConfig = require("../../database/schemas/GuildConfig");
 const mongoose = require("mongoose");
 const Config = require("../../../Config/Config.json");
-const formatArray = require("../../Tools/formatArray");
-const formatPerms = require("../../Tools/formatPerms");
 //const checkOwner = require("../../Tools/checkOwner");
 const Blacklist = require('../../database/schemas/Blacklist');
+const Disable = require('../../database/schemas/DisableCommands')
 const ms = require('ms');
 
 mongoose.connect(process.env.DBC, {
@@ -35,6 +34,14 @@ module.exports = class MessageEvent extends BaseEvent {
       }).save();
       console.log(`Server: ${message.guild.name} Salvo na DataBase!`);
     }
+    // Disable.findOne({
+    //   name: "global"
+    // }, (err, data) => {
+    //   if (err) console.log(err);
+    //       if (data) {
+    //           if (data.cmds.includes(command)) return message.channel.send("Este comando está desabilitado no momento").then(async m => await m.delete({ timeout: 5000 }));
+    //       } 
+    // });
 
     const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${client.user.id}> `);
@@ -56,6 +63,7 @@ module.exports = class MessageEvent extends BaseEvent {
         .split(/ +/g);
       const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
 
+      /*
       if (!client.owners.includes(message.author.id)) {
         let remaining = await this._runLimits(message, command);
         if (remaining) {
@@ -64,6 +72,7 @@ module.exports = class MessageEvent extends BaseEvent {
           return;
         }
       }
+      */
 
       if(command) {
         const blacklistData = await Blacklist.findOne({ User: message.author.id });
@@ -101,8 +110,8 @@ module.exports = class MessageEvent extends BaseEvent {
               .missing(userPermCheck);
             if (missing.length) {
               return message.reply(
-                `You are missing ${formatArray(
-                  missing.map(formatPerms)
+                `You are missing ${client.Tools.formatArray(
+                  missing.map(client.Tools.formatPerms)
                 )} permissions, you need them to use this command!`
               );
             }
@@ -117,8 +126,8 @@ module.exports = class MessageEvent extends BaseEvent {
               .missing(botPermCheck);
             if (missing.length) {
               return message.reply(
-                `Faltam as seguintes Permissões: ${formatArray(
-                  missing.map(formatPerms)
+                `Faltam as seguintes Permissões: ${client.Tools.formatArray(
+                  missing.map(client.Tools.formatPerms)
                 )} Para executar esse Comando!`
               );
             }
@@ -129,7 +138,7 @@ module.exports = class MessageEvent extends BaseEvent {
       }
     }
   }
-
+/*
   _timeout(userId, commandName) {
 		return () => {
 			const bucket = this.buckets.get(`${userId}-${commandName}`);
@@ -180,4 +189,5 @@ module.exports = class MessageEvent extends BaseEvent {
 		--bucket.remaining;
 		return null;
   };
+  */
 };

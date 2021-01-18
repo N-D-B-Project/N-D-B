@@ -26,10 +26,10 @@ module.exports = class LoopCommand extends BaseCommand {
     // if(!Player) return message.reply("Player não iniciado nesse servidor");
     if(!Player) return message.channel.send(PlayerEmbed);
 
-    const { Channel } = message.member.voice;
+    const { channel } = message.member.voice;
     
-    if(!Channel) return message.reply("Você não está em um canal de voz");
-    if(Channel.id !== Player.voiceChannel) return message.reply("Você não está no mesmo canal de voz");
+    if(!channel) return message.reply("Você não está em um canal de voz");
+    if(channel.id !== Player.voiceChannel) return message.reply("Você não está no mesmo canal de voz");
   
     if(args.length && /queue/i.test(args[0])) {
       Player.setQueueRepeat(!Player.queueRepeat);

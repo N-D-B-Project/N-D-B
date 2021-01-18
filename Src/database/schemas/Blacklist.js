@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema({
+const BlacklistSchema = mongoose.Schema({
     User: String,
     Blacklist: Boolean
 });
 
-module.exports = mongoose.model('Blacklist', Schema);
+module.exports = mongoose.model('Blacklist', BlacklistSchema);

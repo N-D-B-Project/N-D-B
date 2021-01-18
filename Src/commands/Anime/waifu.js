@@ -1,6 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const waifus = require("../../Tools/Waifu");
+
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class WaifuCommand extends BaseCommand {
@@ -15,6 +15,7 @@ module.exports = class WaifuCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    const waifus = client.Tools.waifus;
     //console.log(`${waifus.length} Gifs de waifu!`);
     let waifu = waifus[Math.floor(Math.random() * waifus.length)];
     let user;

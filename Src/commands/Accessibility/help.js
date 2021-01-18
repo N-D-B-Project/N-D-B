@@ -1,8 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const removeDuplicates = require("../../Tools/removeDuplicates");
-const capitalise = require("../../Tools/capitalise");
 const GuildConfig = require("../../database/schemas/GuildConfig");
 const Config = require("../../../Config/Config.json");
 //const {} = require("../../../Config/Abbreviations.js");
@@ -54,7 +52,7 @@ module.exports = class HelppCommand extends BaseCommand {
         const cmd = client.commands.get(command) /*|| client.commands.get(client.aliases.get(command))*/;
         if(!cmd) return message.channel.send(`Comando Invalido: \`${command}\``)
 
-        embed.setAuthor(`${capitalise(cmd.name)} Comando Help`, client.user.displayAvatarURL());
+        embed.setAuthor(`${client.Tools.capitalize(cmd.name)} Comando Help`, client.user.displayAvatarURL());
         embed.setDescription([
             `**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : "Nenhuma Aliases"}`,
             `**❯ Descrição:** ${cmd.description}`,

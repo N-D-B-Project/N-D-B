@@ -1,6 +1,5 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const kisses = require("../../Tools/Kiss")
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class KissCommand extends BaseCommand {
@@ -15,6 +14,7 @@ module.exports = class KissCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    const kisses = client.Tools.kisses;
     let sender = message.author;
     let senderTag = message.author.tag;
     let senderId = message.author.id;

@@ -88,7 +88,7 @@ module.exports = class PlayCommand extends BaseCommand {
       if (res.loadType === "SEARCH_RESULT" || "TRACK_LOADED") {
         player.queue.add(res.tracks[0]);
   
-        const { author, duration, identifier, isSeekable, isStream, requester, thumbnail, title, track, uri, } = player.queue.current || res.tracks[0];
+        const { author, duration, identifier, isSeekable, isStream, requester, thumbnail, title, track, uri, } =res.tracks[0];
   
         if (!player.playing && !player.paused && !player.queue.size)
           player.play();
@@ -98,12 +98,12 @@ module.exports = class PlayCommand extends BaseCommand {
         }); //, { language: "pt", units: ["h", "m", "s"], decimal: ":"}
         const Embed = new Discord.MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL())
-          .setThumbnail(`${res.tracks[0].thumbnail}`)
+          .setThumbnail(`${thumbnail}`)
           .setColor("#00c26f")
           .setDescription(":musical_note: Musica adicionada na fila")
           .addField(
             `${YSEmoji} Musica`,
-            `[${res.tracks[0].title}](${uri})`
+            `[${title}](${uri})`
           )
           .addFields(
             { name: ":crown: Autor", value: author, inline: true },

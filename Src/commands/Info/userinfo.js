@@ -1,8 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const userDetails = require("../../Tools/userDetails");
 const moment = require('moment');
-const trimArray = require("../../Tools/trimArray");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class UserInfoCommand extends BaseCommand {
@@ -42,7 +40,7 @@ module.exports = class UserInfoCommand extends BaseCommand {
         `**❯ Username:** ${Membro.user.username}`,
 				`**❯ Descriminador:** ${Membro.user.discriminator}`,
 				`**❯ ID:** ${Membro.id}`,
-				`**❯ Insignias:** ${userFlags.length ? userFlags.map(flag => userDetails[flag]).join(', ') : 'Nenhum'}`,
+				`**❯ Insignias:** ${userFlags.length ? userFlags.map(flag => client.Tools.userDetails[flag]).join(', ') : 'Nenhum'}`,
 				`**❯ Avatar:** [Download Avatar](${Membro.user.displayAvatarURL({ dynamic: true })})`,
 				`**❯ Conta criada em:** ${moment(Membro.user.createdTimestamp).format('LT')} ${moment(Membro.user.createdTimestamp).format('DD/MM/YYYY')} ${moment(Membro.user.createdTimestamp).fromNow()}`,
 				`**❯ Status:** ${status}`,
@@ -53,7 +51,7 @@ module.exports = class UserInfoCommand extends BaseCommand {
 				`**❯ Maior Cargo:** ${Membro.roles.highest.id === message.guild.id ? 'Nenhum' : Membro.roles.highest.name}`,
 				`**❯ Entrou em:** ${moment(Membro.joinedAt).format('LL LTS')}`,
 				`**❯ Cargo Hoist:** ${Membro.roles.hoist ? Membro.roles.hoist.name : 'Nenhum'}`,
-				`**❯ Cargos [${Cargos.length}]:** ${Cargos.length < 10 ? Cargos.join(', ') : Cargos.length > 10 ? trimArray(Cargos) : 'Nenhum'}`,
+				`**❯ Cargos [${Cargos.length}]:** ${Cargos.length < 10 ? Cargos.join(', ') : Cargos.length > 10 ? client.Tools.trimArray(Cargos) : 'Nenhum'}`,
 				`\u200b`
       ]);
     message.channel.send(embed);

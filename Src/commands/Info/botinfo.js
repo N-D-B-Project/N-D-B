@@ -1,7 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 const { version: djversion } = require("discord.js");
-const formatBytes = require("../../Tools/formatBytes");
 //const {} = require("../../../Config/Abbreviations.js");
 const mongoose = require("mongoose");
 const GuildConfig = require("../../database/schemas/GuildConfig");
@@ -68,8 +67,8 @@ module.exports = class BotInfoCommand extends BaseCommand {
             `\u3000 Modelo: ${core.model}`,
             `\u3000 Velocidade: ${core.speed}MHz`,
             `**❯ Memoria:**`,
-            `\u3000 Total: ${formatBytes(process.memoryUsage().heapTotal)}`,
-            `\u3000 Usado: ${formatBytes(process.memoryUsage().heapUsed)}`,
+            `\u3000 Total: ${client.Tools.formatBytes(process.memoryUsage().heapTotal)}`,
+            `\u3000 Usado: ${client.Tools.formatBytes(process.memoryUsage().heapUsed)}`,
         ])
         .setDescription(description)
         .setTimestamp();

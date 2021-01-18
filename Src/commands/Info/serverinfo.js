@@ -1,12 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
-const {
-  filterLevels,
-  verificationLevels,
-  regions 
-} = require("../../Tools/ServersDetails");
 const moment = require("moment");
-const trimArray = require("../../Tools/trimArray");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ServerInfoCommand extends BaseCommand {
@@ -21,6 +15,13 @@ module.exports = class ServerInfoCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+
+    const {
+      filterLevels,
+      verificationLevels,
+      regions 
+    } = client.Tools.ServerDetails
+
     const guildName = message.guild.name;
     const guildId = message.guild.id;
     const guildIcon = message.guild.iconURL();
@@ -76,7 +77,7 @@ module.exports = class ServerInfoCommand extends BaseCommand {
             `**❯ Offline:** ${guildMembers.filter(member => member.presence.status === "offline").size}`,
             "\u200b"
         ])
-        .addField(`Cargos [${guildRoles.length - 1}]`, guildRoles.length < 10 ? guildRoles.join(", ") : guildRoles.length > 10 ? trimArray(guildRoles) : "Nenhum")
+        .addField(`Cargos [${guildRoles.length - 1}]`, guildRoles.length < 10 ? guildRoles.join(", ") : guildRoles.length > 10 ? client.Tools.trimArray(guildRoles) : "Nenhum")
         .setTimestamp();
     message.channel.send(embed)
   }

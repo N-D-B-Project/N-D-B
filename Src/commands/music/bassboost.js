@@ -1,7 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
-const levels = require("../../Tools/bassboost");
 
 module.exports = class BassBoostCommand extends BaseCommand {
   constructor(...args) {
@@ -34,7 +33,7 @@ module.exports = class BassBoostCommand extends BaseCommand {
     if (channel.id !== player.voiceChannel) return message.reply("Você não está no mesmo canal de voz.");
 
     let level = "low";
-    if (args.length && args[0].toLowerCase() in levels) level = args[0].toLowerCase();
+    if (args.length && args[0].toLowerCase() in client.Tools.levels) level = args[0].toLowerCase();
     if(args[0] === "off") {
       const BassOffEmbed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())

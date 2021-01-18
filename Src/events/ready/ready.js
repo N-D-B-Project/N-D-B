@@ -25,9 +25,8 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}`, "      Users".magenta,"                  INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
 
-    const Status = require("../../Tools/Status");
     function setStatus() {
-      const AStatus = Status[Math.floor(Math.random() * Status.length)];
+      const AStatus = client.Tools.Status[Math.floor(Math.random() * client.Tools.Status.length)];
       client.user.setPresence({ activity: AStatus });
     }
     setStatus();
