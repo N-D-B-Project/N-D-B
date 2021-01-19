@@ -4,7 +4,7 @@ const { Client, Collection, Permissions } = require("discord.js");
 const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL", "USER"]});
 const WOKCommands = require("wokcommands");
 
-const { loadLanguages } = require("./utils/Language");
+const { loadLanguages } = require("./Features/Language");
 const {
   registerCommands,
   registerEvents,

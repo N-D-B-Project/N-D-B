@@ -13,7 +13,6 @@ module.exports = class DisableCommand extends BaseCommand {
       usage: 'disable <cmdName>',
       description: 'Desabilita um Comando',
       ownerOnly: true,
-      testOnly: true
     });
   }
 

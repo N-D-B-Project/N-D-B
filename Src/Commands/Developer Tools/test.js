@@ -1,7 +1,6 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
-const language = require("../../utils/Language");
 
 module.exports = class TestCommand extends BaseCommand {
   constructor(...args) {
@@ -11,13 +10,12 @@ module.exports = class TestCommand extends BaseCommand {
       aliases: ['t'], //aliases
       usage: '', //usage
       description: 'comando de teste', //description
-      testOnly: true,
       ownerOnly: true
     });
   }
 
-  async run(client, message, args) {
+  async run(client, message, args, instance) {
     const { guild } = message;
-    message.channel.send(`${language(guild, 'TEST_COMMAND')}`)
+    message.channel.send(instance.messageHandler.get(guild, 'TEST_COMMAND'));
   }
 }
