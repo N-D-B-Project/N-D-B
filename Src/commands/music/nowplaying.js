@@ -2,6 +2,7 @@ const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const ms = require("parse-ms");
+const moment = require("moment");
 
 module.exports = class NowPlayingCommand extends BaseCommand {
   constructor(...args) {
@@ -44,8 +45,17 @@ module.exports = class NowPlayingCommand extends BaseCommand {
     
     const time = ms(song.duration);
     const done = ms(player.position);
-    const Duration = `[${done.hours ? done.hours > 10 ? done.hours : `0${done.hours}` : ""}${done.minutes ? done.minutes >= 10 ? done.minutes : `0${done.minutes}` : "00"}:${done.seconds ? done.seconds > 10 ? done.seconds : `0${done.seconds}` : ""}` + " / " + `${time.hours ? time.hours > 10 ? time.hours : `0${time.hours}` : ""}${time.hours ? ":" : ""}${time.minutes ? time.minutes >= 10 ? time.minutes : `0${time.minutes}` : "00"}:${time.seconds ? time.seconds > 10 ? time.seconds : `0${time.seconds}` : ""}]`
-    const percent = client.Tools.percentage(player.position, player.queue.current.duration, 20);
+    // const DuratioN = `[${done.hours ? done.hours > 10 ? done.hours : `0${done.hours}` : ""}${done.minutes ? done.minutes >= 10 ? done.minutes : `0${done.minutes}` : "00"}:${done.seconds ? done.seconds > 10 ? done.seconds : `0${done.seconds}` : ""}` + " / " + `${time.hours ? time.hours > 10 ? time.hours : `0${time.hours}` : ""}${time.hours ? ":" : ""}${time.minutes ? time.minutes >= 10 ? time.minutes : `0${time.minutes}` : "00"}:${time.seconds ? time.seconds > 10 ? time.seconds : `0${time.seconds}` : ""}]`
+    const Duration1 = `[${done.hours ? done.hours > 10 ? done.hours : `0${done.hours}` : ""}${done.minutes ? done.minutes >= 10 ? done.minutes : `0${done.minutes}` : "00"}:${done.seconds ? done.seconds > 10 ? done.seconds : `0${done.seconds}` : ""}] `;
+    const Duration2 = ` [${time.hours ? time.hours > 10 ? time.hours : `0${time.hours}` : ""}${time.hours ? ":" : ""}${time.minutes ? time.minutes >= 10 ? time.minutes : `0${time.minutes}` : "00"}:${time.seconds ? time.seconds > 10 ? time.seconds : `0${time.seconds}` : ""}]`;
+
+    // const percent = client.Tools.percentage(player.position, player.queue.current.duration, 20);
+    const Duration = moment.duration({ms: player.position});
+    const progress = moment.duration({ms: player.duration});
+    // const progressBar = ['▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬'];
+    const progressBar = ['▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬', '▬'];
+    const calcul = Math.round(progressBar.length * (Duration/ (duration)));
+    progressBar[calcul] = '🔘';
     const NPEmbed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setThumbnail(thumbnail)
@@ -60,8 +70,11 @@ module.exports = class NowPlayingCommand extends BaseCommand {
           { name: "📢 BassBoost", value: BB, inline: true},
           { name: "🔁 Loop", value: `${player.trackRepeat ? `${V} Musica` : player.queueRepeat ? `${V} Queue` : `${X} Não`}`, inline: true },
           { name: "🔊 Volume", value: `${player.volume}%`, inline: true },
-          { name: "⏳ Duração", value: Duration },
-          { name: "⌚ Tempo", value: `${percent.bar} ${Math.round(percent.percent)}%` }
+          { name: "⏳ Duração", value: Duration1 + progressBar.join('') + Duration2, inline: false }
+          // { name: "⏳ Duração", value: `${Duration1} ${progressBar.join('')} ${Duration2}`, inline: false },
+          // { name: "⏳ Duração", value: DuratioN + progressBar.join('') },
+          // { name: "⌚ Tempo", value: `${percent.bar} ${Math.round(percent.percent)}%` }
+          // { name: "⌚ Tempo", value: '[`' + progress.minutes() + ':' + progress.seconds() + '` ] ' +  + ' [`' + Duration.minutes() + ':' + Duration.seconds() + '`]' }
         )
         .setFooter(message.guild.name, message.guild.iconURL())
         .setTimestamp();
