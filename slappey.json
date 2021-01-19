@@ -1,4 +1,5 @@
 {
   "name": "N-D-B Definitive Edition",
-  "language": "js"
+  "language": "js",
+  "manager": "yarn"
 }

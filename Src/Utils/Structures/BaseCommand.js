@@ -18,6 +18,7 @@ module.exports = class BaseCommand {
 		this.userPerms = new Permissions(options.userPerms).freeze();
 		this.botPerms = new Permissions(options.botPerms).freeze();
 		this.guildOnly = options.guildOnly || false;
+		this.testOnly = options.testOnly || false;
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
 		this.args = options.args || false;

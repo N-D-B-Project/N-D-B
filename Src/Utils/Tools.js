@@ -10,14 +10,18 @@ module.exports = class Registry {
     checkOwner(target) {
 		return this.client.owners.includes(target);
     }
+
+    checkTestGuild(target) {
+        return this.client.testGuilds.includes(target);
+    }
     
     reportError(client, guild, error, string) {
         const embed = new MessageEmbed()
         .setColor(client.config.color)
         .setDescription(`
-        This happened in: \`${guild.name}\`
-        When it happened: \`${string}\`
-        ERROR MESSAGE:\n
+        Error ocorreu em: \`${guild.name}\`
+        Ocorreu no Comando: \`${string}\`
+        Erro: \n
         ${error}`)
         .setFooter("my god that's a lot of errors. good job fab, you ignoramus");
         client.channels.cache.get(ndbbugs).send(embed);

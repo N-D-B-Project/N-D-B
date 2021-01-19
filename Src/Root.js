@@ -53,7 +53,7 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
   client.colors = Colours;
   client.config = Config;
   client.owners = Config.owners;
-  client.testGuild = Config.testGuild;
+  client.testGuilds = Config.testGuilds;
   client.Tools = new Tools(client);
   
   //await registerCommands(client, "../Commands");

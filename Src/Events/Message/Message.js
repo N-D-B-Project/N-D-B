@@ -87,6 +87,10 @@ module.exports = class MessageEvent extends BaseEvent {
         if(command.guildOnly && !message.guild) {
           return message.reply("Comando Restrito para outro Servidor");
         }
+        
+        if(command.testOnly && !client.Tools.checkTestGuild(message.guild)) {
+          return message.reply("Este Comando só pode ser utilizado no servidor de testes do meu Dev!")
+        }
 
         if(command.nsfw && !message.channel.nsfw) {
           return message.reply(

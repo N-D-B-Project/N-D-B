@@ -13,10 +13,12 @@ module.exports = class DisableCommand extends BaseCommand {
       usage: 'disable <cmdName>',
       description: 'Desabilita um Comando',
       ownerOnly: true,
+      testOnly: true
     });
   }
 
   async run(client, message, args) {
+    message.channel.send('010101')
     // if (!args.length) return message.channel.send("Diga qual comando devo desabilitar");
     // let command = client.commands.get(args[0].toLowerCase()) || client.commands.get(client.aliases.get(args[0].toLowerCase()));
     // if (!command) return message.channel.send("Esse comando não existe");

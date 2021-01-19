@@ -11,6 +11,7 @@ module.exports = class TestCommand extends BaseCommand {
       aliases: ['t'], //aliases
       usage: '', //usage
       description: 'comando de teste', //description
+      testOnly: true,
       ownerOnly: true
     });
   }
