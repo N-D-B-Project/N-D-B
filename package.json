@@ -54,7 +54,8 @@
     "path": "^0.12.7",
     "say": "^0.16.0",
     "solenolyrics": "^5.0.0",
-    "util": "^0.12.3"
+    "util": "^0.12.3",
+    "wokcommands": "^1.2.1"
   },
   "devDependencies": {
     "bl": "^1.2.3",

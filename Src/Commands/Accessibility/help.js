@@ -11,7 +11,7 @@ mongoose.connect(process.env.DBC, {
     useUnifiedTopology: true,
 });
 
-module.exports = class HelppCommand extends BaseCommand {
+module.exports = class HelpCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
         name: 'help', //name

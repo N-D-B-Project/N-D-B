@@ -1046,7 +1046,7 @@ discord-xp@^1.1.7:
   dependencies:
     mongoose "^5.7.1"
 
-discord.js@^12.5.1:
+discord.js@^12.5.0, discord.js@^12.5.1:
   version "12.5.1"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.1.tgz#992b45753e3815526a279914ccc281d3496f5990"
   integrity sha512-VwZkVaUAIOB9mKdca0I5MefPMTQJTNg0qdgi1huF3iwsFwJ0L5s/Y69AQe+iPmjuV6j9rtKoG0Ta0n9vgEIL6w==
@@ -2075,7 +2075,7 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.11.8, mongoose@^5.7.1:
+mongoose@^5.10.15, mongoose@^5.11.8, mongoose@^5.7.1:
   version "5.11.12"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.11.12.tgz#452d28ef04b9c6a9601e62a54064851c3b57d4ee"
   integrity sha512-70wST9hnVlPbt5nKClPKJo54ULIACOVGYdg8fyj17sWtCJLyURCDahhzUh+oUA7WVykOW2ZMqWm2kujBIWYagg==
@@ -3292,6 +3292,15 @@ widest-line@^3.1.0:
   integrity sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
   dependencies:
     string-width "^4.0.0"
+
+wokcommands@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/wokcommands/-/wokcommands-1.2.1.tgz#7a4922420fd0e594eeb09af87ff3ba10a68353c7"
+  integrity sha512-QSJQ+qaJ9RjX2gz8HMZSr31TwoP4lviF7lyRL6saHXwoZLsVbrHZ3VF1R48Z5FiqJvArN+yTF4OgCr4som4hzw==
+  dependencies:
+    discord.js "^12.5.0"
+    dotenv "^8.2.0"
+    mongoose "^5.10.15"
 
 word-wrap@~1.2.3:
   version "1.2.3"

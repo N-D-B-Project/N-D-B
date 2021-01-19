@@ -25,6 +25,25 @@ module.exports = class ReadyEvent extends BaseEvent {
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}`, "      Users".magenta,"                  INFO".yellow,"   Loaded".green);
     console.log(date.format(new Date()).grey, "Client".cyan, `${client.channels.cache.size}       `, "Channels".magenta,"               INFO".yellow,"   Loaded".green);
 
+    const messagesPath = ''
+    const dbOptions = {
+      keepAlive: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    }
+
+    new client.wok(client, {
+      commandsDir: 'Commands',
+      featureDir: 'Features',
+      messagesPath,
+      showWarns: false,
+      dbOptions
+    })
+    .setMongoPath(process.env.MONGO_URI)
+    .setColor(client.co);
+    
+    
     function setStatus() {
       const AStatus = client.Tools.Status[Math.floor(Math.random() * client.Tools.Status.length)];
       client.user.setPresence({ activity: AStatus });

@@ -1,6 +1,7 @@
 const BaseCommand = require("../../utils/structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
+const exec = require("child_process");
 
 module.exports = class RebootCommand extends BaseCommand {
   constructor(...args) {
@@ -16,6 +17,9 @@ module.exports = class RebootCommand extends BaseCommand {
 
   async run(client, message, args) {
     message.channel.send("Reiniciando o Bot...");
-    process.exit();
+    // process.exit();
+    // console.log("rs");
+    // exec(rs);
+    // client.destroy();
   }
 }
