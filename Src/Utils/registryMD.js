@@ -1,7 +1,7 @@
 const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
-const Command = require('./structures/BaseCommand');
+const Command = require('./Structures/BaseCommand');
 const Event = require('./structures/BaseEvent');
 module.exports = class Registry {
 

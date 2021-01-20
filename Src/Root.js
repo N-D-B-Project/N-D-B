@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const { Client, Collection, Permissions } = require("discord.js");
 const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL", "USER"]});
-const WOKCommands = require("wokcommands");
+// const WOKCommands = require("wokcommands");
 
 const { loadLanguages } = require("./Features/Language");
 const {
@@ -43,7 +43,7 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
 
 (async () => {
   client.login(process.env.TOKEN);
-  client.wok = WOKCommands;
+  // client.wok = WOKCommands;
   
   client.commands = new Collection();
   client.events = new Collection();
@@ -56,7 +56,7 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
   client.testGuilds = Config.testGuilds;
   client.Tools = new Tools(client);
   
-  //await registerCommands(client, "../Commands");
+  // await registerCommands(client, "../Commands");
   await registerEvents(client, "../Events");
   await loadLanguages(client);
 

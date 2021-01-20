@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand.js");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
@@ -14,8 +14,8 @@ module.exports = class TestCommand extends BaseCommand {
     });
   }
 
-  async run(client, message, args, instance) {
+  async run(client, message, args,) {
     const { guild } = message;
-    message.channel.send(instance.messageHandler.get(guild, 'TEST_COMMAND'));
+    message.channel.send();
   }
 }

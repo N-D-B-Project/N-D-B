@@ -71,25 +71,35 @@ module.exports = class ReadyEvent extends BaseEvent {
     client.on("raw", (d) => client.music.updateVoiceState(d));
     // console.log(date.format(new Date()).grey, `${client.commands.size}`.cyan,"    Commands", "  Carregando...".magenta,"          INFO".yellow,   "   Loaded".green)
     // console.log(date.format(new Date()).grey, `${client.events.size}`.cyan, "     Events  ", "  Carregando...".magenta,"          INFO".yellow,   "   Loaded".green)
-  
-    const messagesPath = 'messages.json';
-    const dbOptions = {
-      keepAlive: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    }
+    
+    //const wok = client.wok;
+    // const messagesPath = 'messages.json';
+    // const dbOptions = {
+      // keepAlive: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+      // useFindAndModify: false,
+    // }
 
-    new client.wok(client, {
-      commandsDir: 'Commands',
-      featureDir: 'Features',
-      messagesPath,
-      showWarns: false,
-      dbOptions
-    })
-    .setMongoPath(process.env.DBC)
-    .setDefaultPrefix("&")
-    .setColor("#00c26f");
+    // new client.wok(client, {
+      // commandsDir: 'Commands',
+      // featureDir: 'Features',
+      // messagesPath,
+      // showWarns: false,
+      // dbOptions
+    // })
+    // .setMongoPath(process.env.DBC)
+    // .setDefaultPrefix("&")
+    // .setColor("#00c26f");
+    
+    // client.wok.on('databaseConnected', (connection, state) => {
+    //   console.log('The state is', state)
+    // })
   
+    // // Ran when a server owner attempts to set a language that you have not supported yet
+    // client.wok.on('languageNotSupported', (message, lang) => {
+    //   console.log('Attempted to set language to', lang)
+    // })
+    
   }
 };

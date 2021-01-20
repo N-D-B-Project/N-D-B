@@ -137,8 +137,12 @@ module.exports = class MessageEvent extends BaseEvent {
             }
           }
         }
+
+        //const WOKCommands = require('wokcommands');
+
+        //const instance = WOKCommands;
         
-        command.run(client, message, args);
+        command.run(client, message, args /*, instance */);
       }
     }
   }
