@@ -20,14 +20,14 @@ module.exports = class Registry {
 	}
 
     async loadCommands() {
-        return glob(`${this.directory}commands/**/*.js`).then(commands => {
+        return glob(`${this.directory}Commands/**/*.js`).then(commands => {
             for (const commandFile of commands) {
                 delete require.cache[commandFile];
                 const { name } = path.parse(commandFile);
                 const File = require(commandFile);
                 if (!this.isClass(File)) throw new TypeError(`Comando: \`${name}\` Não Exportou uma Class`);
                 const command = new File(this.client, name.toLowerCase());
-                if (!(command instanceof Command)) throw new TypeError(`Comando: \`${name}\` Não está em Commands`);
+                // if (!(command instanceof Command)) throw new TypeError(`Comando: \`${name}\` Não está em Commands`);
                 this.client.commands.set(command.name, command);
                 if (command.aliases.length) {
                     for (const alias of command.aliases) {
@@ -52,4 +52,45 @@ module.exports = class Registry {
             }
         });
     }
+
+    async reloadCommands(Name) {
+		return glob(`${this.directory}Commands/**/*.js`).then((commands) => {
+			if (Name.toLowerCase() == 'all') {
+				for (const commandFile of commands) {
+					delete require.cache[require.resolve(commandFile)];
+					const { name } = path.parse(commandFile);
+					const File = require(commandFile);
+					if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
+					const command = new File(this.client, name.toLocaleLowerCase());
+					if (!command instanceof Command) throw new TypeError(`Comamnd ${name} doesnt belong in Commands.`);
+					this.client.commands.delete(command.name);
+					this.client.commands.set(command.name, command);
+					if (command.aliases.length) {
+						for (const alias of command.aliases) {
+							this.client.aliases.delete(alias);
+							this.client.aliases.set(alias, command.name);
+						}
+					}
+				}
+				return true;
+			} else {
+				let cmd = commands.find((command) => command.toLowerCase().match(Name.toLowerCase()));
+				if (!cmd) return false;
+				delete require.cache[require.resolve(cmd)];
+				const { name } = path.parse(cmd);
+				const File = require(cmd);
+				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
+				const command = new File(this.client, name.toLocaleLowerCase());
+				if (!command instanceof Command) throw new TypeError(`Comamnd ${name} doesnt belong in Commands.`);
+				this.client.commands.delete(command.name);
+				this.client.commands.set(command.name, command);
+				if (command.aliases.length) {
+					this.client.aliases.delete(command.aliases);
+					this.client.aliases.set(command.aliases, command.name);
+				}
+				return true;
+			}
+		});
+	}
+
 }

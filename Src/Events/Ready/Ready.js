@@ -75,21 +75,21 @@ module.exports = class ReadyEvent extends BaseEvent {
     //const wok = client.wok;
     // const messagesPath = 'messages.json';
     // const dbOptions = {
-      // keepAlive: true,
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      // useFindAndModify: false,
+    //   keepAlive: true,
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    //   useFindAndModify: false,
     // }
 
     // new client.wok(client, {
-      // commandsDir: 'Commands',
-      // featureDir: 'Features',
-      // messagesPath,
-      // showWarns: false,
-      // dbOptions
+    //   commandsDir: 'Commands',
+    //   featureDir: 'Features',
+    //   messagesPath,
+    //   showWarns: false,
+    //   dbOptions
     // })
     // .setMongoPath(process.env.DBC)
-    // .setDefaultPrefix("&")
+    // .setDefaultPrefix("&&")
     // .setColor("#00c26f");
     
     // client.wok.on('databaseConnected', (connection, state) => {
