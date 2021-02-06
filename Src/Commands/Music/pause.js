@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class PauseCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'pause', //name
-      category: 'Music', //category
-      aliases: ['pausar'], //aliases
-      usage: '', //usage
-      description: 'Pausa a musica' //description
+      name: 'pause',
+      category: 'Music',
+      aliases: ['pausar'],
+      usage: '',
+      description: 'Pausa a musica'
     });
   }
 

@@ -1,7 +1,7 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../../database/schemas/GuildConfig");
+const GuildConfig = require("../../../Database/Schemas/GuildConfig");
 //const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
@@ -9,15 +9,14 @@ mongoose.connect(process.env.DBC, {
     useUnifiedTopology: true,
 });
 
-
 module.exports = class SetDefaultRoleCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'setrole', //name
-      category: 'Server Settings', //category
-      aliases: ['defaultrole'], //aliases
-      usage: 'setrole <Id do Cargo>', //usage
-      description: 'Defini o Cargo padrão do servidor\nNecessário para o funcionamento do comando de lockdown' //description
+      name: 'setrole',
+      category: 'Server Settings',
+      aliases: ['defaultrole'],
+      usage: 'setrole <Id do Cargo>',
+      description: 'Defini o Cargo padrão do servidor\nNecessário para o funcionamento do comando de lockdown'
     });
   }
 

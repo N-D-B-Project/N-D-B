@@ -1,10 +1,10 @@
-const BaseEvent = require("../../utils/structures/BaseEvent");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const BaseEvent = require("../../Utils/Structures/BaseEvent");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 const mongoose = require("mongoose");
 const Config = require("../../../Config/Config.json");
 //const checkOwner = require("../../Tools/checkOwner");
-const Blacklist = require('../../database/schemas/Blacklist');
-const Disable = require('../../database/schemas/DisableCommands')
+const Blacklist = require('../../Database/Schemas/Blacklist');
+const Disable = require('../../Database/Schemas/DisableCommands')
 const ms = require('ms');
 
 mongoose.connect(process.env.DBC, {

@@ -1,7 +1,7 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require('../../database/schemas/GuildConfig');
+const GuildConfig = require('../../Database/Schemas/GuildConfig');
 //const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
@@ -12,11 +12,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class ChangePrefixCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'setprefix', //name
-      category: 'ModTools', //category
-      aliases: ['definirprefix', 'definirprefixo', 'alterarprefix', 'alterarprefixo', 'changeprefix'], //aliases
-      usage: 'setprefix <Novo Prefix>', //usage
-      description: 'Altera na DataBase o Prefix do server' //description
+      name: 'setprefix',
+      category: 'Moderation',
+      aliases: ['definirprefix', 'definirprefixo', 'alterarprefix', 'alterarprefixo', 'changeprefix'],
+      usage: 'setprefix <Novo Prefix>',
+      description: 'Altera na DataBase o Prefix do server'
     });
   }
 

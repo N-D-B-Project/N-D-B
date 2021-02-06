@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ReloadCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'reload', //name
-      category: 'Developer Tools', //category
-      aliases: [''], //aliases
-      usage: 'reload <cmdName>', //usage
-      description: 'Reinicia algum Comando', //description
+      name: 'reload',
+      category: 'Developer Tools',
+      aliases: [''],
+      usage: 'reload <cmdName>',
+      description: 'Reinicia algum Comando',
       ownerOnly: true
     });
   }

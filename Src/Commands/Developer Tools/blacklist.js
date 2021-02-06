@@ -1,4 +1,4 @@
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const BaseCommand = require('../../Utils/Structures/BaseCommand');
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
 
@@ -7,7 +7,7 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const User = require("../../database/schemas/Blacklist")
+const User = require("../../Database/Schemas/Blacklist")
 
 module.exports = class BlacklistCommand extends BaseCommand {
 

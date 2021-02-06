@@ -1,8 +1,8 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const { Types } = require("mongoose");
-const Disable = require("../../database/schemas/DisableCommands");
+const Disable = require("../../Database/Schemas/DisableCommands");
 
 module.exports = class DisableCommand extends BaseCommand {
   constructor(...args) {

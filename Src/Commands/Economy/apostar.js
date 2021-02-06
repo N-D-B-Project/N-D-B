@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const mongoose = require("mongoose");
@@ -7,16 +7,16 @@ mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-const Cash = require("../../database/schemas/NDCash");
+const Cash = require("../../Database/Schemas/NDCash");
 
 module.exports = class ApostarCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: "apostar", //name
-      category: "Economy", //category
-      aliases: ["gamble"], //aliases
-      usage: "apostar <Quantidade>", //usage
-      description: "Aposte seu dinheiro e tenha chaçe de dobrar seu dinheiro" //description
+      name: "apostar",
+      category: "Economy",
+      aliases: ["gamble"],
+      usage: "apostar <Quantidade>",
+      description: "Aposte seu dinheiro e tenha chaçe de dobrar seu dinheiro"
     });
   }
 

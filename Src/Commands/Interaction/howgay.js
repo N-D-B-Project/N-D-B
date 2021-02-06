@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class HowGayCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'howgay', //name
-      category: 'Interaction', //category
-      aliases: ['HowGay'], //aliases
-      usage: 'HowGay <Mencione um usuário>', //usage
-      description: 'Diz o quão gay é o usuário mencionado' //description
+      name: 'howgay',
+      category: 'Interaction',
+      aliases: ['HowGay'],
+      usage: 'HowGay <Mencione um usuário>',
+      description: 'Diz o quão gay é o usuário mencionado'
     });
   }
 

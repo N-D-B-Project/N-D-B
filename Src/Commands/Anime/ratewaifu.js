@@ -6,11 +6,11 @@ const AB = require("../../../Config/Abbreviations.js");
 module.exports = class RateWaifuCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'ratewaifu', //name
-      category: 'Anime', //category
-      aliases: ['avaliarwaifu'], //aliases
-      usage: 'ratewaifu <mencione um usuário>', //usage
-      description: 'o Bot lhe avalia dando uma nota de o quão waifu você é' //description
+      name: 'ratewaifu',
+      category: 'Anime',
+      aliases: ['avaliarwaifu'],
+      usage: 'ratewaifu <mencione um usuário>',
+      description: 'o Bot lhe avalia dando uma nota de o quão waifu você é'
     });
   }
 

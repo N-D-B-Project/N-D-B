@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ClearQueueCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: "clearqueue", //name
-      category: "Music", //category
-      aliases: ["cq", "limparlista", "limparfila"], //aliases
-      usage: "", //usage
-      description: "Limpa a lista de musicas" //description
+      name: "clearqueue",
+      category: "Music",
+      aliases: ["cq", "limparlista", "limparfila"],
+      usage: "",
+      description: "Limpa a lista de musicas"
     });
   }
 

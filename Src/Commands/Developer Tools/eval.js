@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 
 const Discord = require("discord.js");
 const { inspect } = require("util");
@@ -8,11 +8,11 @@ const { Type } = require("@extreme_hero/deeptype")
 module.exports = class EvalCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'eval', //name
-      category: 'Developer Tools', //category
-      aliases: ['ev'], //aliases
-      usage: '', //usage
-      description: 'Exibe informações do Bot', //description
+      name: 'eval',
+      category: 'Developer Tools',
+      aliases: ['ev'],
+      usage: '',
+      description: 'Exibe informações do Bot',
       ownerOnly: true
     });
   }

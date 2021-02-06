@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const mongo = require("./mongodb");
-const GuildConfig = require("../database/schemas/GuildConfig");
+const mongo = require("./MongoDB");
+const GuildConfig = require("../Database/Schemas/GuildConfig");
 //const {} = require("../../../Config/Abbreviations.js");
 const Lang = require("../../Config/Lang.json");
 

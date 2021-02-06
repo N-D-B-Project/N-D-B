@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class TestCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'snipe', //name
-      category: 'Interacion', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'Mostra a ultima mensagem deletada no canal', //description
+      name: 'snipe',
+      category: 'Interacion',
+      aliases: [''],
+      usage: '',
+      description: 'Mostra a ultima mensagem deletada no canal',
     });
   }
 

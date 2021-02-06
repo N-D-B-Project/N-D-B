@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class VoteCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'vote', //name
-      category: 'Moderation', //category
-      aliases: ['votar', 'votação'], //aliases
-      usage: 'vote <Sobre a Votação>', //usage
-      description: 'Inicia uma votação' //description
+      name: 'vote',
+      category: 'Moderation',
+      aliases: ['votar', 'votação'],
+      usage: 'vote <Sobre a Votação>',
+      description: 'Inicia uma votação'
     });
   }
 

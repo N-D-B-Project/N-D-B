@@ -2,7 +2,7 @@ const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const Command = require('./Structures/BaseCommand');
-const Event = require('./structures/BaseEvent');
+const Event = require('./Structures/BaseEvent');
 module.exports = class Registry {
 
     constructor(client) {

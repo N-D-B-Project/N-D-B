@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class SayCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'say', //name
-      category: 'Moderation', //category
-      aliases: ['dizer', 'diga', 'falar', 'fale'], //aliases
-      usage: 'say <Mensagem a ser dita pelo Bot>', //usage
-      description: 'O Bot apaga sua mensagem e reenvia ela' //description
+      name: 'say',
+      category: 'Moderation',
+      aliases: ['dizer', 'diga', 'falar', 'fale'],
+      usage: 'say <Mensagem a ser dita pelo Bot>',
+      description: 'O Bot apaga sua mensagem e reenvia ela'
     });
   }
 

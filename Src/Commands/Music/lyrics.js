@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class LyricsCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-        name: 'lyrics', //name
-        category: 'Music', //category
-        aliases: ['ly', 'letra'], //aliases
-        usage: '', //usage
-        description: 'Mostra a Letra da musica que está tocando' //description
+        name: 'lyrics',
+        category: 'Music',
+        aliases: ['ly', 'letra'],
+        usage: '',
+        description: 'Mostra a Letra da musica que está tocando'
     });
   }
 

@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const mongoose = require("mongoose");
@@ -12,16 +12,16 @@ mongoose.connect(process.env.DBC, {
 module.exports = class TrabalharCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: "trabalhar", //name
-      category: "Economy", //category
-      aliases: ["work"], //aliases
-      usage: "", //usage
-      description: "Trabalhe para ganhar NDCash (dinheiro)" //description
+      name: "trabalhar",
+      category: "Economy",
+      aliases: ["work"],
+      usage: "",
+      description: "Trabalhe para ganhar NDCash (dinheiro)"
     });
   }
 
   async run(client, message, args) {
-    const Cash = require("../../database/schemas/NDCash");
+    const Cash = require("../../Database/Schemas/NDCash");
 
     const reward = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
     

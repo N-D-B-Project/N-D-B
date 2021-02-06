@@ -1,7 +1,7 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../../database/schemas/GuildConfig");
+const GuildConfig = require("../../../Database/Schemas/GuildConfig");
 //const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
@@ -13,11 +13,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class SetDefaultRoleCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'mutedrole', //name
-      category: 'Server Settings', //category
-      aliases: [''], //aliases
-      usage: 'mutedrole <Id do Cargo>', //usage
-      description: 'Defini o cargo de Mute do server' //description
+      name: 'mutedrole',
+      category: 'Server Settings',
+      aliases: [''],
+      usage: 'mutedrole <Id do Cargo>',
+      description: 'Defini o cargo de Mute do server'
     });
   }
 

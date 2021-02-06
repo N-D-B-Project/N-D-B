@@ -1,15 +1,15 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class DevYTCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'yt', //name
-      category: 'OwnerInfo', //category
-      aliases: ['devyt', 'botyt', 'youtubechannel'], //aliases
-      usage: '', //usage
-      description: 'Manda o link do canal do Youtube meu Dev' //description
+      name: 'yt',
+      category: 'OwnerInfo',
+      aliases: ['devyt', 'botyt', 'youtubechannel'],
+      usage: '',
+      description: 'Manda o link do canal do Youtube meu Dev'
     });
   }
 

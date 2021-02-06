@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class TempBanCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'tempban', //name
-      category: 'ModTools', //category
-      aliases: ['tempbanir'], //aliases
-      usage: 'ban <mencione um usuário> <tempo do banimento> <motivo>', //usage
-      description: 'Bane o usuário mencionado do servidor' //description
+      name: 'tempban',
+      category: 'Moderation',
+      aliases: ['tempbanir'],
+      usage: 'ban <mencione um usuário> <tempo do banimento> <motivo>',
+      description: 'Bane o usuário mencionado do servidor'
     });
   }
 

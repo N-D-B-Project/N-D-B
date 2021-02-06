@@ -1,8 +1,8 @@
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageDelete
-const BaseEvent = require('../../utils/structures/BaseEvent');
+const BaseEvent = require('../../Utils/Structures/BaseEvent');
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 
 mongoose.connect(process.env.DBC, {
   useCreateIndex: true,

@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ShuffleCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'shuffle', //name
-      category: 'Music', //category
-      aliases: ['misturar'], //aliases
-      usage: '', //usage
-      description: 'Põe em ordem aleatória as musicas da fila' //description
+      name: 'shuffle',
+      category: 'Music',
+      aliases: ['misturar'],
+      usage: '',
+      description: 'Põe em ordem aleatória as musicas da fila'
     });
   }
 

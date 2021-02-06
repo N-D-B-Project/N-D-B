@@ -1,7 +1,7 @@
-const BaseEvent = require("../../utils/structures/BaseEvent");
+const BaseEvent = require("../../Utils/Structures/BaseEvent");
 const Config = require("../../../Config/Config.json");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,

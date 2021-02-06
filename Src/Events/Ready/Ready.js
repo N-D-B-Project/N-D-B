@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const BaseEvent = require("../../utils/structures/BaseEvent");
+const BaseEvent = require("../../Utils/Structures/BaseEvent");
 const { Manager } = require("erela.js");
 const Spotify  = require("erela.js-spotify");
 

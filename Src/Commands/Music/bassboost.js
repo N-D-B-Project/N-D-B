@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class BassBoostCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'bassboost', //name
-      category: 'Music', //category
-      aliases: ['Bass', 'bass', 'bb'], //aliases
-      usage: 'bassboost <level>', //usage
-      description: 'Aumenta o grave da Musica' //description
+      name: 'bassboost',
+      category: 'Music',
+      aliases: ['Bass', 'bass', 'bb'],
+      usage: 'bassboost <level>',
+      description: 'Aumenta o grave da Musica'
     });
   }
 

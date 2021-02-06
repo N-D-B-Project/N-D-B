@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class BanCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'unban', //name
-      category: 'ModTools', //category
-      aliases: ['desbanir'], //aliases
-      usage: 'unban <mencione um usuário>', //usage
-      description: 'desbane o usuário mencionado do servidor' //description
+      name: 'unban',
+      category: 'Moderation',
+      aliases: ['desbanir'],
+      usage: 'unban <mencione um usuário>',
+      description: 'desbane o usuário mencionado do servidor'
     });
   }
 

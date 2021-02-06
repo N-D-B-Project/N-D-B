@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const exec = require("child_process");
@@ -6,11 +6,11 @@ const exec = require("child_process");
 module.exports = class RebootCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'reboot', //name
-      category: 'Developer Tools', //category
-      aliases: ['reiniciar'], //aliases
+      name: 'reboot',
+      category: 'Developer Tools',
+      aliases: ['reiniciar'],
       usage: '', //usage
-      description: 'Reinicia o Bot', //description
+      description: 'Reinicia o Bot',
       ownerOnly: true
     });
   }

@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class AvatarCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'avatar', //name
-      category: 'Info', //category
-      aliases: [''], //aliases
-      usage: 'avatar <mencione um usuário>', //usage
-      description: 'Exibe seu avatar ou do usuário mencionado' //description
+      name: 'avatar',
+      category: 'Info',
+      aliases: [''],
+      usage: 'avatar <mencione um usuário>',
+      description: 'Exibe seu avatar ou do usuário mencionado'
     });
   }
 

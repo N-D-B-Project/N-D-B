@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class KickCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'kick', //name
-      category: 'ModTools', //category
-      aliases: ['expulsar'], //aliases
-      usage: 'kick <mencione um usuário>', //usage
-      description: 'Expulsa o usuário mencionado do servidor' //description
+      name: 'kick',
+      category: 'Moderation',
+      aliases: ['expulsar'],
+      usage: 'kick <mencione um usuário>',
+      description: 'Expulsa o usuário mencionado do servidor'
     });
   }
 

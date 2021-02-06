@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
 //const {} = require("../../../Config/Abbreviations.js");
@@ -8,16 +8,16 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Cash = require("../../database/schemas/NDCash");
+const Cash = require("../../Database/Schemas/NDCash");
 
 module.exports = class CriarCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'criar', //name
-      category: 'Economy', //category
-      aliases: ['Create'], //aliases
-      usage: '', //usage
-      description: 'Cria sua conta na NDCash' //description
+      name: 'criar',
+      category: 'Economy',
+      aliases: ['Create'],
+      usage: '',
+      description: 'Cria sua conta na NDCash'
     });
   }
 

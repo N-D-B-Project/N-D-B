@@ -1,11 +1,11 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 // const mongoose = require("mongoose");
 const mongo = require("../../Features/MongoDB");
 const { languages } = require("../../../Config/Lang.json");
 const  { setLanguage } = require("../../Features/Language");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 // const LanguageSchema = require("../../database/schemas/Language");
 
 // mongoose.connect(process.env.DBC, {

@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const ms = require("parse-ms");
@@ -7,11 +7,11 @@ const moment = require("moment");
 module.exports = class NowPlayingCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-        name: 'nowplaying', //name
-        category: 'Music', //category
-        aliases: ['np'], //aliases
-        usage: '', //usage
-        description: 'Mostra qual musica está tocando e quando tempo falta para acabar' //description
+        name: 'nowplaying',
+        category: 'Music',
+        aliases: ['np'],
+        usage: '',
+        description: 'Mostra qual musica está tocando e quando tempo falta para acabar'
     });
   }
 

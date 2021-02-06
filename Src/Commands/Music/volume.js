@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class VolumeCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'volume', //name
-      category: 'Music', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'Aumenta ou diminui o volume do Player' //description
+      name: 'volume',
+      category: 'Music',
+      aliases: [''],
+      usage: '',
+      description: 'Aumenta ou diminui o volume do Player'
     });
   }
 

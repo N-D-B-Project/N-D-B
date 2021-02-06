@@ -27,7 +27,7 @@
     "dev": "nodemon ./Src/Root.js",
     "start": "node ./Src/Root.js",
     "lavalink": "java -jar Lavalink.jar",
-    "music": "java -jar Lavalink.jar",
+    "Music": "java -jar Lavalink.jar",
     "hiero": "java -jar runnable-hiero.jar",
     "Boot": "pm2 start ./Src/Root.js",
     "Shard": "nodemon ./Src/Shard.js"

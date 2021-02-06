@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class QueueCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'queue', //name
-      category: 'Music', //category
-      aliases: ['fila', 'lista'], //aliases
-      usage: '', //usage
-      description: 'Mostra a lista de musicas que serão tocadas' //description
+      name: 'queue',
+      category: 'Music',
+      aliases: ['fila', 'lista'],
+      usage: '',
+      description: 'Mostra a lista de musicas que serão tocadas'
     });
   }
 

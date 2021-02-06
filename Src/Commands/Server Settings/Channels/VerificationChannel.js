@@ -1,7 +1,7 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../../database/schemas/GuildConfig");
+const GuildConfig = require("../../../Database/Schemas/GuildConfig");
 //const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
@@ -13,11 +13,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class SetVerificationChannelCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'setverificationchannel', //name
-      category: 'Server Settings', //category
-      aliases: ['svc'], //aliases
-      usage: 'svc <Id do canal>', //usage
-      description: 'Define me qual canal o Bot irá criar uma verificação' //description
+      name: 'setverificationchannel',
+      category: 'Server Settings',
+      aliases: ['svc'],
+      usage: 'svc <Id do canal>',
+      description: 'Define me qual canal o Bot irá criar uma verificação'
     });
   }
 

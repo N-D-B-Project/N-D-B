@@ -1,4 +1,4 @@
-const BaseEvent = require('../../utils/structures/BaseEvent');
+const BaseEvent = require('../../Utils/Structures/BaseEvent');
 const Discord = require("discord.js");
 
 module.exports = class MessageDeleteEvent extends BaseEvent {

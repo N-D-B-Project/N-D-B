@@ -1,5 +1,6 @@
 // https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-messageUpdate
-const BaseEvent = require('../../utils/structures/BaseEvent');
+const BaseEvent = require('../../Utils/Structures/BaseEvent');
+const Discord = require("discord.js");
 module.exports = class MessageUpdateEvent extends BaseEvent {
   constructor() {
     super('messageUpdate');

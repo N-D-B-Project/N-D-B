@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const moment = require('moment');
 //const {} = require("../../../Config/Abbreviations.js");
@@ -6,11 +6,11 @@ const moment = require('moment');
 module.exports = class UserInfoCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'userinfo', //name
-      category: 'Info', //category
-      aliases: [''], //aliases
-      usage: 'userinfo <mencione um usuário>', //usage
-      description: 'Mostra suas informações ou do usuário mencionado' //description
+      name: 'userinfo',
+      category: 'Info',
+      aliases: [''],
+      usage: 'userinfo <mencione um usuário>',
+      description: 'Mostra suas informações ou do usuário mencionado'
     });
   }
 

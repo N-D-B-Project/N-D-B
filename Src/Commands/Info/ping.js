@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class PingCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'ping', //name
-      category: 'Info', //category
-      aliases: ['pong'], //aliases
-      usage: '', //usage
-      description: 'Mostra a latência do Bot com a API do Discord' //description
+      name: 'ping',
+      category: 'Info',
+      aliases: ['pong'],
+      usage: '',
+      description: 'Mostra a latência do Bot com a API do Discord'
     });
   }
 

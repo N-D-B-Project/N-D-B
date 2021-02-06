@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const moment = require("moment");
 //const {} = require("../../../Config/Abbreviations.js");
@@ -6,11 +6,11 @@ const moment = require("moment");
 module.exports = class ServerInfoCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'serverinfo', //name
-      category: 'Info', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'Mostra as informações do Servidor' //description
+      name: 'serverinfo',
+      category: 'Info',
+      aliases: [''],
+      usage: '',
+      description: 'Mostra as informações do Servidor'
     });
   }
 

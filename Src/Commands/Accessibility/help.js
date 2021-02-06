@@ -1,7 +1,7 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 const Config = require("../../../Config/Config.json");
 //const {} = require("../../../Config/Abbreviations.js");
 const color = require("../../../Config/Colours.json");
@@ -14,11 +14,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class HelpCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-        name: 'help', //name
-        category: 'Accessibility', //category
-        aliases: ['ajuda'], // aliases
-        usage: 'help || help <Comando>', //usage
-        description: 'Mostra todos os comandos e como utilizar-los' //description
+        name: 'help',
+        category: 'Accessibility',
+        aliases: ['ajuda'],
+        usage: 'help || help <Comando>',
+        description: 'Mostra todos os comandos e como utilizar-los'
     });
   }
 

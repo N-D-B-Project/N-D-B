@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const hD = require("humanize-duration");
@@ -6,11 +6,11 @@ const hD = require("humanize-duration");
 module.exports = class PlayCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: "play", //name
-      category: "Music", //category
-      aliases: ["p", "tocar"], //aliases
-      usage: "play <Nome da Musica>", //usage
-      description: "Toca a musica escolhida no canal de voz" //description
+      name: "play",
+      category: "Music",
+      aliases: ["p", "tocar"],
+      usage: "play <Nome da Musica>",
+      description: "Toca a musica escolhida no canal de voz"
     });
   }
 

@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class LeaveCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'leave', //name
-      category: 'Music', //category
-      aliases: ['sair'], //aliases
-      usage: '', //usage
-      description: 'Faz com que o bot saia da call' //description
+      name: 'leave',
+      category: 'Music',
+      aliases: ['sair'],
+      usage: '',
+      description: 'Faz com que o bot saia da call'
     });
   }
 

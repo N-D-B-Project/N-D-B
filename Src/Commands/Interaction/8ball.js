@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class EightBallCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: '8ball', //name
-      category: 'Interaction', //category
-      aliases: ['eightball'], //aliases
-      usage: '8ball <Sua Pergunta>', //usage
-      description: 'O Bot responde sua pergunta com algo aleatório' //description
+      name: '8ball',
+      category: 'Interaction',
+      aliases: ['eightball'],
+      usage: '8ball <Sua Pergunta>',
+      description: 'O Bot responde sua pergunta com algo aleatório'
     });
   }
 

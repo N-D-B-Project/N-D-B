@@ -1,15 +1,15 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class AliadosCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'aliados', //name
-      category: 'OwnerInfo', //category
-      aliases: ['otherbots'], //aliases
-      usage: '', //usage
-      description: 'Mostra os Bots dos amigos do meu Dev' //description
+      name: 'aliados',
+      category: 'OwnerInfo',
+      aliases: ['otherbots'],
+      usage: '',
+      description: 'Mostra os Bots dos amigos do meu Dev' 
     });
   }
 

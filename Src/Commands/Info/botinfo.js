@@ -1,9 +1,9 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const { version: djversion } = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 
 mongoose.connect(process.env.DBC, {
   useNewUrlParser: true,
@@ -18,11 +18,11 @@ const ms = require("ms");
 module.exports = class BotInfoCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'botinfo', //name
-      category: 'Info', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'Mostra as informações do Bot' //description
+      name: 'botinfo',
+      category: 'Info',
+      aliases: [''],
+      usage: '',
+      description: 'Mostra as informações do Bot'
     });
   }
 

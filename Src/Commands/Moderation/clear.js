@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ClearCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'clear', //name
-      category: 'Moderation', //category
-      aliases: ['limpar'], //aliases
-      usage: 'clear <Nº de 1 a 100>', //usage
-      description: 'Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando' //description
+      name: 'clear',
+      category: 'Moderation',
+      aliases: ['limpar'],
+      usage: 'clear <Nº de 1 a 100>',
+      description: 'Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando'
     });
   }
 

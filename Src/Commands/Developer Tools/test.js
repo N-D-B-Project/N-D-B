@@ -7,11 +7,11 @@ module.exports = class TestCommand extends BaseCommand {
   
   constructor(...args) {
     super(...args, {
-      name: 'test', //name
-      category: 'Developer Tools', //category
-      aliases: ['t'], //aliases
-      usage: '', //usage
-      description: 'comando de teste', //description
+      name: 'test',
+      category: 'Developer Tools',
+      aliases: ['t'],
+      usage: '',
+      description: 'comando de teste',
       ownerOnly: true
     });
   }
@@ -20,6 +20,7 @@ module.exports = class TestCommand extends BaseCommand {
     const { guild } = message;
     const tmsg = "TEST_COMMAND"
     //message.channel.send(`${Language(guild, tmsg)}.`);
-    message.reply(instance.messageHandler.get(guild, tmsg));
+    //message.reply(instance.messageHandler.get(guild, tmsg));
+    message.channel.send(tmsg)
   }
 }

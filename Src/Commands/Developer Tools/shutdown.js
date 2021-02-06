@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class ShutdownCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'shutdown', //name
-      category: 'Developer Tools', //category
-      aliases: ['desligar'], //aliases
-      usage: '', //usage
-      description: 'Deliga o Bot', //description
+      name: 'shutdown',
+      category: 'Developer Tools',
+      aliases: ['desligar'],
+      usage: '',
+      description: 'Deliga o Bot',
       ownerOnly: true
     });
   }

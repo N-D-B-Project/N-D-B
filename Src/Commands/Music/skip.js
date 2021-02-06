@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class SkipCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'skip', //name
-      category: 'Music', //category
-      aliases: ['pular'], //aliases
-      usage: '', //usage
-      description: 'Pula para a proxima musica da lista' //description
+      name: 'skip',
+      category: 'Music',
+      aliases: ['pular'],
+      usage: '',
+      description: 'Pula para a proxima musica da lista'
     });
   }
 

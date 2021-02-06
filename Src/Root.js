@@ -8,9 +8,9 @@ const { loadLanguages } = require("./Features/Language");
 const {
   registerCommands,
   registerEvents,
-} = require("./utils/registryA");
-const Registry = require("./utils/registryMD");
-const Tools = require("./utils/Tools");
+} = require("./Utils/registryA");
+const Registry = require("./Utils/registryMD");
+const Tools = require("./Utils/Tools");
 
 const colors = require("colors");
 const mongoose = require("mongoose");

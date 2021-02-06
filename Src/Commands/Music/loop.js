@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class LoopCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'loop', //name
-      category: 'Music', //category
-      aliases: ['repeat', 'repetir'], //aliases
-      usage: '', //usage
-      description: 'Põe a musica ou a fila de musicas em loop' //description
+      name: 'loop',
+      category: 'Music',
+      aliases: ['repeat', 'repetir'],
+      usage: '',
+      description: 'Põe a musica ou a fila de musicas em loop'
     });
   }
 

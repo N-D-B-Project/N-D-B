@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class KissCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'kiss', //name
-      category: 'Anime', //category
-      aliases: ['beijar'], //aliases
-      usage: 'kiss <mencione um usuário>', //usage
-      description: 'Ao mencionar um usuário aparece um Gif dizendo que você beijou' //description
+      name: 'kiss',
+      category: 'Anime',
+      aliases: ['beijar'],
+      usage: 'kiss <mencione um usuário>',
+      description: 'Ao mencionar um usuário aparece um Gif dizendo que você beijou'
     });
   }
 

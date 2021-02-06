@@ -5,11 +5,11 @@ const Discord = require("discord.js");
 module.exports = class UptimeCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'uptime', //name
-      category: 'Info', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'Mostra quanto tempo o Bot está Online' //description
+      name: 'uptime',
+      category: 'Info',
+      aliases: [''],
+      usage: '',
+      description: 'Mostra quanto tempo o Bot está Online'
     });
   }
 

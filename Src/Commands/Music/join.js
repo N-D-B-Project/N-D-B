@@ -1,15 +1,15 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class JoinCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'join', //name
-      category: 'Music', //category
-      aliases: ['entrar', 'entre', 'enter'], //aliases
-      usage: '', //usage
-      description: 'Faz com que o Bot entre na call' //description
+      name: 'join',
+      category: 'Music',
+      aliases: ['entrar', 'entre', 'enter'],
+      usage: '',
+      description: 'Faz com que o Bot entre na call'
     });
   }
 

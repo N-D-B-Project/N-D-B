@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
 const jimp = require("jimp");
@@ -10,16 +10,16 @@ mongoose.connect(process.env.DBC, {
   useUnifiedTopology: true,
 });
 
-const Cash = require("../../database/schemas/NDCash");
+const Cash = require("../../Database/Schemas/NDCash");
 
 module.exports = class ContaCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: "conta", //name
-      category: "Economy", //category
-      aliases: ["bal"], //aliases
-      usage: "", //usage
-      description: "Mostra quanto NDCash (dinheiro) você tem" //description
+      name: "conta",
+      category: "Economy",
+      aliases: ["bal"],
+      usage: "",
+      description: "Mostra quanto NDCash (dinheiro) você tem"
     });
   }
   async run(client, message, args) {

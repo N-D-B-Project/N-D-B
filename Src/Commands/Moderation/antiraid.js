@@ -1,8 +1,8 @@
-const BaseCommand = require('../../utils/structures/BaseCommand');
+const BaseCommand = require('../../Utils/Structures/BaseCommand');
 const Discord = require('discord.js');
 const mongoose = require("mongoose");
 //const {} = require("../../../Config/Abbreviations.js");
-const GuildConfig = require("../../database/schemas/GuildConfig");
+const GuildConfig = require("../../Database/Schemas/GuildConfig");
 
 mongoose.connect(process.env.DBC, {
     useNewUrlParser: true,
@@ -12,11 +12,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class AntiRaidCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'antiraid', //name
-      category: 'ModTools', //category
-      aliases: ['lockdown'], //aliases
-      usage: 'antiraid on | off>', //usage
-      description: 'Bloqueia o servidor inteiro para nenhum membro mandar mensagens' //description
+      name: 'antiraid',
+      category: 'Moderation',
+      aliases: ['lockdown'],
+      usage: 'antiraid on | off>',
+      description: 'Bloqueia o servidor inteiro para nenhum membro mandar mensagens'
     });
   }
 

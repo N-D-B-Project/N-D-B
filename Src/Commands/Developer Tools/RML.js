@@ -1,15 +1,16 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class RMLCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'RML', //name
-      category: 'Moderation', //category
-      aliases: ['RicardoMilos', 'RichardMilos', 'Lenda'], //aliases
+      name: 'RML',
+      category: 'Developer Tools',
+      aliases: ['RicardoMilos', 'RichardMilos', 'Lenda'],
       usage: '', //usage
-      description: 'Manda um Emoji do Milos' //description
+      description: 'Manda um Emoji do Milos',
+      ownerOnly: true,
     });
   }
 

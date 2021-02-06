@@ -1,4 +1,4 @@
-const BaseCommand = require("../../utils/structures/BaseCommand");
+const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 
 //const {} = require("../../../Config/Abbreviations.js");
@@ -6,11 +6,11 @@ const Discord = require("discord.js");
 module.exports = class WaifuCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'waifu', //name
-      category: 'Anime', //category
-      aliases: [''], //aliases
-      usage: '', //usage
-      description: 'O Bot manda um Gif com uma Waifu e uma porcentagem(%)' //description
+      name: 'waifu',
+      category: 'Anime',
+      aliases: [''],
+      usage: '',
+      description: 'O Bot manda um Gif com uma Waifu e uma porcentagem(%)'
     });
   }
 

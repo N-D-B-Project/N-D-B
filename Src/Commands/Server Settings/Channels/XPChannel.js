@@ -1,7 +1,7 @@
-const BaseCommand = require("../../../utils/structures/BaseCommand");
+const BaseCommand = require("../../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-const GuildConfig = require("../../../database/schemas/GuildConfig");
+const GuildConfig = require("../../../Database/Schemas/GuildConfig");
 //const {} = require("../../../Config/Abbreviations.js");
 
 mongoose.connect(process.env.DBC, {
@@ -13,11 +13,11 @@ mongoose.connect(process.env.DBC, {
 module.exports = class SetDeletedMessagesChannelCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'setxpchannel', //name
-      category: 'Server Settings', //category
-      aliases: [''], //aliases
-      usage: 'setxpchannel <Id do canal>', //usage
-      description: 'Define me qual canal o Bot mandará as mensagens quando algum membro sobe de nível' //description
+      name: 'setxpchannel',
+      category: 'Server Settings',
+      aliases: [''],
+      usage: 'setxpchannel <Id do canal>',
+      description: 'Define me qual canal o Bot mandará as mensagens quando algum membro sobe de nível'
     });
   }
 
