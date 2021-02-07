@@ -1,4 +1,4 @@
-const BaseCommand = require('../Src/utils/structures/BaseCommand');
+const BaseCommand = require('../Src/Utils/Structures/BaseCommand');
 
 module.exports = class TetsCommand extends BaseCommand {
   constructor() {

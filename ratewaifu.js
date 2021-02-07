@@ -1,5 +1,6 @@
 const BaseCommand = require('../../Utils/Structures/BaseCommand');
 const Discord = require('discord.js');
+const AB = require("../../../Config/Abbreviations.js");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class RateWaifuCommand extends BaseCommand {

@@ -25,38 +25,87 @@ module.exports = class AliadosCommand extends BaseCommand {
     const KAORIEmoji = client.emojis.cache.get("748965055177162772")
     //("<:KaoriMiyazono:748965055177162772>");
 
+    message.channel.send(
+      new Discord.MessageEmbed()
+        .setAuthor(client.user.tag, client.user.displayAvatarURL())
+        .setColor("#00c26f")
+        .setDescription("Esses são os Bots dos amigos do meu Criador!")
+        .addFields(
+          { name : `N-O-Z ${NOZEmoji}`, value: `Esse é o N-O-Z Bot focado em Administração Criado por Wesley#7777 Para adciona-lo ao seu servidor [Clique aqui](${NOZ})` },
+          { name : `Kaori Miyazono ${KAORIEmoji}`, value: `Essa é a Kaori Miyazono Bot focada em Animes Criado por Ness.js#2021 Para adciona-lo ao seu servidor [Clique aqui](${KAORI})` }
+        )
+        .setTimestamp()
+    )
 
-    const HomePage = new Discord.MessageEmbed()
-      .setAuthor(client.user.tag, client.user.displayAvatarURL())
-      .setColor("RANDOM")
-      .setDescription("Esses são os Bots dos amigos do meu Criador!")
-      .addField("N-O-Z", `Reaja com ${NOZEmoji} para ver o link de convite do N-O-Z`) 
-      .addField("Kaori Miyazono", `Reaja com ${KAORIEmoji} para ver o link de convite da Kaori Miyazono`)
-      .setTimestamp()
-      message.delete().catch((O_o) => {});
-      message.channel.send(HomePage).then(message => {
-        message.react(NOZEmoji).then(r => {})
-        message.react(KAORIEmoji).then(r => {})
 
-        const NOZFilter = (reaction, user) =>
-        [`${NOZEmoji}`].includes(reaction.emoji.name) &&
-        message.author.id === user.id;
 
-        const NOZCollector = message.createReactionCollector(NOZFilter);
 
-        NOZCollector.on("collect", reaction => {
-          
-        })
 
-        const KAORIFilter = (reaction, user) =>
-        [`${KAORIEmoji}`].includes(reaction.emoji.name) &&
-        message.author.id === user.id;
 
-        const KAORICollector = message.createReactionCollector(KAORIFilter);
+    // const Timer = 60000
 
-        KAORICollector.on("collect", reaction => {
-          
-        })
-      })
+    // const HomePage = new Discord.MessageEmbed()
+    //   .setAuthor(client.user.tag, client.user.displayAvatarURL())
+    //   .setColor("#00c26f")
+    //   .setDescription("Esses são os Bots dos amigos do meu Criador!")
+    //   .addField("N-O-Z", `Reaja com ${NOZEmoji} para ver o link de convite do N-O-Z`) 
+    //   .addField("Kaori Miyazono", `Reaja com ${KAORIEmoji} para ver o link de convite da Kaori Miyazono`)
+    //   .setTimestamp()
+    //   message.delete().catch((O_o) => {});
+    //   message.channel.send(HomePage).then((RMsg) => {
+    //     RMsg.react(NOZEmoji).then(r => {
+    //       const NOZFilter = (reaction, user) =>
+    //         [`${NOZEmoji}`].includes(reaction.emoji.name) &&
+    //         message.author.id === user.id;
+
+    //         const NOZCollector = message.createReactionCollector(NOZFilter, {time: Timer});
+
+    //         NOZCollector.on("collect", reaction => {
+    //             RMsg.edit(
+    //               new Discord.MessageEmbed()
+    //                 .setAuthor(client.user.tag, client.user.displayAvatarURL())
+    //                 .setColor("#00c26f")
+    //                 .setDescription([
+    //                   `Esse é o N-O-Z Bot criado por Wesley#7777`,
+    //                   `Bot focado em adminitração`
+    //                   `Para adiciona-lo no seu servidor clique no link abaixo!`
+    //                 ])
+    //                 .addFields(
+    //                   { name: "Link", value: ("Clique aqui")[`${NOZ}`] }
+    //                 )
+    //                 .setThumbnail()
+    //                 .setFooter("Comando Aliados")
+    //                 .setTimestamp()
+    //             )
+    //         })
+    //     })
+
+    //     RMsg.react(KAORIEmoji).then(r => {
+    //       const KAORIFilter = (reaction, user) =>
+    //       [`${KAORIEmoji}`].includes(reaction.emoji.name) &&
+    //       message.author.id === user.id;
+
+    //       const KAORICollector = message.createReactionCollector(KAORIFilter, {time: Timer});
+
+    //       KAORICollector.on("collect", reaction => {
+    //         RMsg.edit(
+    //           new Discord.MessageEmbed()
+    //             .setAuthor(client.user.tag, client.user.displayAvatarURL())
+    //             .setColor("#00c26f")
+    //             .setDescription([
+    //               `Essa é a Kaori Miyazono Bot criado por Ness.js#2021`,
+    //               `Bot focado em Animes`,
+    //               `Para adiciona-lo no seu servidor clique no link abaixo!`
+    //             ])
+    //             .addFields(
+    //               { name: "Link", value: ("Clique aqui")[`${KAORI}`] }
+    //             )
+    //             .setThumbnail()
+    //             .setFooter("Comando Aliados")
+    //             .setTimestamp()
+    //         )
+    //       })
+    //     })
+    //   })
   }
 };
