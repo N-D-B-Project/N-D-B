@@ -11,7 +11,7 @@ if (process.env.PORT) {
 if (process.env.PASSWORD) {
     application = application.replace('youshallnotpass', process.env.PASSWORD)
 }
-fs.writeFileSync('./application.yml', application)
+fs.writeFileSync('../application.yml', application)
 
 const download = function (url, dest, cb) { //modified code from https://stackoverflow.com/a/22907134
     const file = fs.createWriteStream(dest);
