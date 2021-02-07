@@ -40,7 +40,7 @@ module.exports = class ReadyEvent extends BaseEvent {
       nodes: [
         {
           host: process.env.HOST,
-          port: 7000 || process.env.PORT,
+          port: 80 /*7000*/ || process.env.PORT,
           password: process.env.PASSWORD,
         },
       ],
