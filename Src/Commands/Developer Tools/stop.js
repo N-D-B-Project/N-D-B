@@ -6,17 +6,18 @@ const exec = require("child_process");
 module.exports = class RebootCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
-      name: 'reboot',
+      name: 'stop',
       category: 'Developer Tools',
-      aliases: ['reiniciar', 'restart'],
+      aliases: ['desligar'],
       usage: '', //usage
-      description: 'Reinicia o Bot',
+      description: 'Desliga o Bot',
       ownerOnly: true
     });
   }
 
   async run(client, message, args) {
-    message.channel.send("Reiniciando o Bot...");
+    message.channel.send("Desligando o Bot...");
     process.exit();
+    client.destroy();
   }
 }

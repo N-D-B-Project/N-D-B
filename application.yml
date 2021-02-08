@@ -1,5 +1,5 @@
 server: # REST and WS server
-  port: 80 # 
+  port: 7000 # 80
   address: 0.0.0.0
 lavalink:
   server:
@@ -8,10 +8,10 @@ lavalink:
       youtube: true
       bandcamp: false
       soundcloud: false
-      twitch: false
+      twitch: true
       vimeo: false
       mixer: false
-      http: false
+      http: true
       local: true
     bufferDurationMs: 400
     youtubePlaylistLoadLimit: 6 # Number of pages at 100 each

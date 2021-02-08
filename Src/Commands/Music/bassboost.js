@@ -14,6 +14,21 @@ module.exports = class BassBoostCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+
+    const levels = {
+      //none: 0.0,
+      low: 0.10,
+      medium: 0.15,
+      high: 0.25,
+      veryhigh: 0.5,
+      ultrahigh: 0.75,
+      megahigh: 1,
+      extreme: 2,
+      earhape: 10,
+      surdo: 1000,
+      infinity: 999999999999999999999,
+    }
+
     const PlayerEmbed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setColor("#00c26f")
@@ -25,7 +40,7 @@ module.exports = class BassBoostCommand extends BaseCommand {
     const player = message.client.music.players.get(message.guild.id);
     // if(!player) return message.reply("player não iniciado nesse servidor");
     if(!player) return message.channel.send(PlayerEmbed);
-    if(!args[0]) return message.channel.send("Esses são os níveis disponíveis\n none: 0.0\n low: 0.10\n medium: 0.15\n high: 0.25\n veryhigh: 0.5\n ultrahigh: 0.75\n megahigh: 1\n extreme: 2\n earhape: 10\n surdo: 1000\n")
+    if(!args[0]) return message.channel.send(`Esses são os níveis disponíveis ${levels}`)
 
     const { channel } = message.member.voice || message.author.voice;
     
@@ -33,7 +48,7 @@ module.exports = class BassBoostCommand extends BaseCommand {
     if (channel.id !== player.voiceChannel) return message.reply("Você não está no mesmo canal de voz.");
 
     let level = "low";
-    if (args.length && args[0].toLowerCase() in client.Tools.levels) level = args[0].toLowerCase();
+    if (args.length && args[0].toLowerCase() in levels) level = args[0].toLowerCase();
     if(args[0] === "off") {
       const BassOffEmbed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())

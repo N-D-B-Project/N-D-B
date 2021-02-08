@@ -3,6 +3,7 @@ require("dotenv").config();
 const BaseEvent = require("../../Utils/Structures/BaseEvent");
 const { Manager } = require("erela.js");
 const Spotify  = require("erela.js-spotify");
+const Deezer = require("erela.js-deezer");
 
 const colors = require("colors");
 
@@ -36,11 +37,14 @@ module.exports = class ReadyEvent extends BaseEvent {
     const clientSecret = process.env.SpotifySecret;
 
     client.music = new Manager({
-      plugins: [ new Spotify({ clientID, clientSecret }) ],
+      plugins: [ 
+        new Spotify({ clientID, clientSecret }),
+        new Deezer() 
+      ],
       nodes: [
         {
           host: process.env.HOST,
-          port: 80 /*7000*/ || process.env.PORT,
+          port: 7000 || process.env.PORT,
           password: process.env.PASSWORD,
         },
       ],
