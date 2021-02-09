@@ -8,6 +8,7 @@ const { loadLanguages } = require("./Features/Language");
 const {
   registerCommands,
   registerEvents,
+  registerMusicEvents,
 } = require("./Utils/registryA");
 const Registry = require("./Utils/registryMD");
 const Tools = require("./Utils/Tools");
@@ -59,6 +60,7 @@ client.defaultPerms = new Permissions(Config.defaultPerms).freeze();
   
   // await registerCommands(client, "../Commands");
   await registerEvents(client, "../Events");
+  
   await loadLanguages(client);
 
   client.Registry = new Registry(client)

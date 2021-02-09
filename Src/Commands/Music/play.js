@@ -64,12 +64,16 @@ module.exports = class PlayCommand extends BaseCommand {
     const SpotLink = [
       "https://open.spotify"
     ]
+    const DeLink = [
+      "https://www.deezer"
+    ]
 
     if(message.content.includes(SpotLink)) {
       var YSEmoji = "<:Spotify:775154334832001044>"
-    } else if(!message.content.includes(SpotLink)) {
-      var YSEmoji = "<:youtube:730741995416453150>"
-    }
+    } else if (message.content.includes(DeLink)) {
+      var YSEmoji = ""
+    } else if(!message.content.includes(SpotLink) && !message.content.includes(DeLink)) 
+    var YSEmoji = "<:youtube:730741995416453150>"
 
     try {
       res = await player.search(search, ...args, message.author);

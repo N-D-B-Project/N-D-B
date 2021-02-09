@@ -22,7 +22,7 @@ module.exports = class TestCommand extends BaseCommand {
         .addFields(
             // { name: "Messagem Antiga", value: msg.OldContent },
             // { name: "Messagem Editada", value: msg.NewContent }
-            { name: "Messagem Editada", value: msg.OldContent }
+            { name: "Messagem Editada", value: msg.content }
         )
       .setColor("#00c26f")
       .setFooter("Mensagem Editada")
