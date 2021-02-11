@@ -81,6 +81,114 @@ module.exports = class Registry {
         return arr;
     }
 
+    percentage(current, max, length) {
+        current = parseInt(current);
+        max = parseInt(max);
+        let percent = current / max;
+        let result = "`[";
+        if (!length) length = 20;
+        for (let i = 0; i < length; i++) {
+            if (i < percent * length) {
+                result += "■";
+            } else {
+                result += "□";
+            }
+        }
+
+        percent = Math.trunc(percent * 10000) / 100;
+        result += "]`";
+        return { bar: result, percent: percent };
+    }
+
+    embedify(client, queue, page) {
+        let embeds = [];
+        if (!queue) return;
+        for (let i = 0; i < queue.length; i += 10) {
+            ++page;
+            let songArray = [];
+            let tracks = queue.slice(i, i+10);
+            let j = i;
+            for (let track of tracks) {
+                let msg = `${++j} - ${track.title}`;
+                songArray.push(msg);
+            }
+            let embed = new MessageEmbed()
+                .setColor(client.config.color)
+                .setDescription(`\`\`\`css
+        ${songArray.join("\n")}\`\`\``)
+                .setFooter(`Page ${page}/${Math.floor(queue.length / 10)}`)
+            embeds.push(embed);
+        }
+        return embeds;
+    }
+
+    clean(text) {
+        return text
+            .replace(/`/g, '`' + String.fromCharCode(8203))
+            .replace(/@/, '@' + String.fromCharCode(8203));
+    }
+    async lyricsify(client, message, song, page) {
+        let embeds = [];
+        let lyrics;
+        try {
+            lyrics = await find(song.title, req.author);
+            if (!lyrics) return null;
+        } catch (e) {
+            //reportError(client, message.guild, e, "In lyrics command: Couldn't search for lyrics");
+        }
+
+        lyrics = lyrics.split(" ");
+
+        if (lyrics.length > 200) {
+            ++page;
+            for (let i = 0; i < lyrics.length; i += 200) {
+                let temp = lyrics.slice(i, i + 200);
+                let embed = new MessageEmbed()
+                    .setColor("RANDOM")
+                    .setDescription(temp.join(" "))
+                    .setFooter(`Page ${page}/${Math.floor(lyrics / 200)}`);
+
+                embeds.push(embed);
+            }
+
+            return embeds;
+        } else {
+            let embed = new MessageEmbed()
+                .setColor("RANDOM")
+                .setDescription(lyrics.join(" "))
+                .setFooter("Page 1/1")
+
+            embeds.push(embed);
+
+            return embeds;
+        }
+    }
+    
+    Windows = {
+        Maria: "Microsoft Maria Desktop",
+        Zira: "Microsoft Zira Desktop",
+        David: "Microsoft David Desktop",
+    }
+
+    DateOptions = {
+        timeZone: 'America/Sao_Paulo',
+        hour: 'numeric',
+        minute: 'numeric',
+        seconds: 'numeric'
+    }
+
+    DateTime = new Intl.DateTimeFormat([], this.DateOptions);
+    DataLog = this.DateTime.format(new Date())
+
+    randomEmoji = [
+        "<a:OPensador:718195925327151134>",
+        "<a:Carregando2:718196278646800424>",
+        "<a:Carregando:718196232757182566>",
+        "<:DelayPing:718196166399098901>",
+        "<a:SapoDoido:718196095624413304>",
+        "<a:Block:718196377678774386>"
+    ]
+    
     kisses = [
         "https://media1.tenor.com/images/78095c007974aceb72b91aeb7ee54a71/tenor.gif",
         "https://i.imgur.com/OE7lSSY.gif",
@@ -235,104 +343,4 @@ module.exports = class Registry {
         surdo: 1000,
         infinity: 999999999999999999999,
     }
-
-    percentage(current, max, length) {
-        current = parseInt(current);
-        max = parseInt(max);
-        let percent = current / max;
-        let result = "`[";
-        if (!length) length = 20;
-        for (let i = 0; i < length; i++) {
-            if (i < percent * length) {
-                result += "■";
-            } else {
-                result += "□";
-            }
-        }
-
-        percent = Math.trunc(percent * 10000) / 100;
-        result += "]`";
-        return { bar: result, percent: percent };
-    }
-
-    embedify(client, queue, page) {
-        let embeds = [];
-        if (!queue) return;
-        for (let i = 0; i < queue.length; i += 10) {
-            ++page;
-            let songArray = [];
-            let tracks = queue.slice(i, i+10);
-            let j = i;
-            for (let track of tracks) {
-                let msg = `${++j} - ${track.title}`;
-                songArray.push(msg);
-            }
-            let embed = new MessageEmbed()
-                .setColor(client.config.color)
-                .setDescription(`\`\`\`css
-        ${songArray.join("\n")}\`\`\``)
-                .setFooter(`Page ${page}/${Math.floor(queue.length / 10)}`)
-            embeds.push(embed);
-        }
-        return embeds;
-    }
-
-    clean(text) {
-        return text
-            .replace(/`/g, '`' + String.fromCharCode(8203))
-            .replace(/@/, '@' + String.fromCharCode(8203));
-    }
-    async lyricsify(client, message, song, page) {
-        let embeds = [];
-        let lyrics;
-        try {
-            lyrics = await find(song.title, req.author);
-            if (!lyrics) return null;
-        } catch (e) {
-            //reportError(client, message.guild, e, "In lyrics command: Couldn't search for lyrics");
-        }
-
-        lyrics = lyrics.split(" ");
-
-        if (lyrics.length > 200) {
-            ++page;
-            for (let i = 0; i < lyrics.length; i += 200) {
-                let temp = lyrics.slice(i, i + 200);
-                let embed = new MessageEmbed()
-                    .setColor("RANDOM")
-                    .setDescription(temp.join(" "))
-                    .setFooter(`Page ${page}/${Math.floor(lyrics / 200)}`);
-
-                embeds.push(embed);
-            }
-
-            return embeds;
-        } else {
-            let embed = new MessageEmbed()
-                .setColor("RANDOM")
-                .setDescription(lyrics.join(" "))
-                .setFooter("Page 1/1")
-
-            embeds.push(embed);
-
-            return embeds;
-        }
-    }
-    
-    Windows = {
-        Maria: "Microsoft Maria Desktop",
-        Zira: "Microsoft Zira Desktop",
-        David: "Microsoft David Desktop",
-    }
-
-    DateOptions = {
-        timeZone: 'America/Sao_Paulo',
-        hour: 'numeric',
-        minute: 'numeric',
-        seconds: 'numeric'
-    }
-
-    DateTime = new Intl.DateTimeFormat([], this.DateOptions);
-    DataLog = this.DateTime.format(new Date())
-    
 }

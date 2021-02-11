@@ -45,7 +45,7 @@ module.exports = class ReadyEvent extends BaseEvent {
       },
     })
 
-    await registerMusicEvents(client.music, "../Events/Music")
+    //await registerMusicEvents(client.music, "../Music")
     
     client.music.on("nodeConnect", (node) =>
       //console.log("Novo Node Conectado")
