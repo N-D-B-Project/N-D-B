@@ -20,6 +20,10 @@ const Embed = require("../Config/Embed.json");
 const Colours = require("../Config/Colours.json");
 const Abbreviations = require("../Config/Abbreviations.json");
 
+//# Multi-Language
+const translate = require("@iamtraction/google-translate");
+const LangConfig = require("./Database/Schemas/GuildConfig");
+
 //% Console Logs
 const colors = require("colors");
 
@@ -71,6 +75,19 @@ mongoose.connect(process.env.DBC, {
   client.owners = Config.owners;
   client.testGuilds = Config.testGuilds;
   client.Tools = new Tools(client);
+
+  //# Multi-Language
+  client.translate = async (text, message) => {
+    let lang;
+    const langConfig = await LangConfig.findOne({ guildId: message.guild.id })
+    if(langConfig) {
+      lang = langConfig.language;
+    } else {
+      lang = "pt";
+    }
+    const translated = await translate(text, {from: 'pt', to: lang});
+    return translated.text;
+  }
 
   //TODO Registry
   // await registerCommands(client, "../Commands");

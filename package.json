@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
+    "@iamtraction/google-translate": "^1.1.2",
     "colors": "^1.4.0",
     "diff": "^5.0.0",
     "discord-xp": "^1.1.7",

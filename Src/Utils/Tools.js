@@ -163,6 +163,14 @@ module.exports = class Registry {
             return embeds;
         }
     }
+
+    Languages = [
+        "pt",
+        "en",
+        "es",
+        "fr",
+        "jp"
+    ]
     
     Windows = {
         Maria: "Microsoft Maria Desktop",
