@@ -7,9 +7,9 @@ module.exports = class RandomReactionEvent extends BaseEvent {
   }
   
   async run(client, message) {
-    const porcentagem = Math.floor(Math.random() * 51)
+    const porcentagem = Math.floor(Math.random() * 26)
 
-    if(porcentagem === 50) {
+    if(porcentagem === 25) {
         const React = client.Tools.randomEmoji[Math.floor(Math.random() * client.Tools.randomEmoji.length)]
         message.react(React)
     }

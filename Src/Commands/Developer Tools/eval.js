@@ -2,7 +2,7 @@ const BaseCommand = require("../../Utils/Structures/BaseCommand");
 
 const Discord = require("discord.js");
 const { inspect } = require("util");
-const { Type } = require("@extreme_hero/deeptype")
+const { Type } = require("@anishshobith/deeptype");
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class EvalCommand extends BaseCommand {

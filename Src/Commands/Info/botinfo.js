@@ -36,7 +36,7 @@ module.exports = class BotInfoCommand extends BaseCommand {
       `**❯ <:github:761642337448755202> ** [Clique na Estrela!](${"https://github.com/NedcloarBR/N-D-B"})`,
       `**❯ <:discord:739591596248530985> ** [Junte-se ao Server do meu Dev!](${"https://discord.gg/mMapzad"})`,
       `**❯ <:topgg:761642656626769930> ** [Vote no Top.gg](Waiting approval)`,
-      `**❯ <:discord:739591596248530985> ** [Me Adicione ao seu Server!](${"https://discord.com/api/oauth2/authorize?client_id=708822043420000366&permissions=8&scope=bot"})`,
+      `**❯ <:discord:739591596248530985> ** [Me Adicione ao seu Server!](${"https://discord.com/oauth2/authorize?client_id=708822043420000366&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fauth%2Fredirect&scope=bot%20applications.commands"})`,
 
       `**❯ Lista de Comandos: ** \`${FindPrefix}help || helpp\``
     ]

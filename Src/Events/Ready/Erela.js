@@ -60,6 +60,16 @@ module.exports = class ReadyEvent extends BaseEvent {
       console.log("")
     );
     client.music.on("queueEnd", (player) => {
+      if(client.config.settings.LeaveOnEmpty_Queue.enabled) {
+        setTimeout(()=>{
+            if(player.queue.size === 0){
+              client.channels.cache
+                .get(player.textChannel)
+                .send(`Eu sai do Canal: \`${client.channels.cache.get(player.voiceChannel).name}\` Pois o Canal ficou vazio por: \`${ms(client.config.settings.LeaveOnEmpty_Queue.time_delay, {long: true})}\``);
+              player.destroy();
+            }
+        }, client.config.settings.LeaveOnEmpty_Queue.time_delay);
+    }
       //player.textChannel.send("Fila de musicas acabou!");
       //client.music.players.destroy(player.guild.id);
     });

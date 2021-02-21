@@ -1,0 +1,38 @@
+{
+    "ClientTag": "client.user.tag",
+    "ClientId": "client.user.id",
+    "ClientPicURL": "client.user.displayAvatarURL()",
+    
+    "MSGSender": "message.channel.send",
+    "MSGDelete": "message.delete",
+    "MSGReply": "message.reply",
+    "MSGReact": "message.react",
+    "MSGContent": "message.content",
+    "MSGEmbed": "Discord.MessageEmbed()",
+
+    "Mention": "message.author",
+    "MentionTag": "message.author.tag",
+    "MentionId": "message.author.id",
+    "MentionPicURL": "message.author.displayAvatarURL()",
+    "FirstMention": "message.author.users.first",
+    "LatsMention": "message.author.users.last",
+
+    "guildName": "message.guild.name",
+    "guildId": "message.guild.id",
+    "guildIcon": "message.guild.iconURL()",
+    "guildOwnerTag": "message.guild.owner.user.tag",
+    "guildOwnerId": "message.guild.owner.id",
+    "guildRegion": "message.guild.region",
+    "guildBoost": "message.guild.premiumTier",
+    "guildFilter": "message.guild.explicitContentFilter",
+    "guildVerification": "message.guild.verificationLevel",
+    "guildCreated": "message.guild.createdTimestamp",
+    "guildRoles": "message.guild.roles.cache.sort((a, b) :> b.position - a.position).map(role :> role.toString())",
+    "guildEmojis": "message.guild.emojis.cache",
+    "guildMembers": "message.guild.members.cache",
+    "guildNormalMembers": "message.guild.memberCount",
+    "guildBotMembers": "message.guild.member.user.bot",
+    "guildPremiumMembers": "message.guild.premiumSubscriptionCount",
+    "guildMemberPresence": "message.guild.member.presence.status",
+    "guildChannels": "message.guild.channels.cache"
+}

@@ -21,6 +21,6 @@ module.exports = class TestCommand extends BaseCommand {
     const tmsg = "TEST_COMMAND"
     //message.channel.send(`${Language(guild, tmsg)}.`);
     //message.reply(instance.messageHandler.get(guild, tmsg));
-    message.channel.send(tmsg)
+    //message.channel.send(tmsg)
   }
 }

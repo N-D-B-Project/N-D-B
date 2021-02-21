@@ -4,14 +4,13 @@ const mongoose = require("mongoose");
 const GuildConfig = require("../../Database/Schemas/GuildConfig");
 const Config = require("../../../Config/Config.json");
 //const {} = require("../../../Config/Abbreviations.js");
-const color = require("../../../Config/Colours.json");
 
 mongoose.connect(process.env.DBC, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
-module.exports = class HelpCommand extends BaseCommand {
+module.exports = class HelppCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
         name: 'help',
@@ -23,33 +22,14 @@ module.exports = class HelpCommand extends BaseCommand {
   }
 
   async run(client, message, [command], args) {
-    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id })
-    
     const embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(`${message.guild.name} Help Menu`, message.guild.iconURL({ dynamic: true }))
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter(`Requisitado por ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
         .setTimestamp();
-    if(!command) {
-        const MenuEmbed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setColor(color.bot_grenn)
-            .setDescription("**__Reaja de acordo com a categoria desejada__**")
-            .addField("Categorias", "Anime = 🗻\nMusic = 🎶\nEconomy = 💵\nLevelXP = 🆙\nFun = 😄\nSocial = 👨‍👩‍👧‍👧\nModeration = 🛠")
-        const MenuReact = await message.channel.send(MenuEmbed);
-
-        MenuReact.react("🗻");
-        MenuReact.react("🎶");
-        MenuReact.react("💵");
-        MenuReact.react("🆙");
-        MenuReact.react("😄");
-        MenuReact.react("👨‍👩‍👧‍👧");
-        MenuReact.react("🛠");
-        //MenuReact.react("");
-        
-    } else {
-        const cmd = client.commands.get(command) /*|| client.commands.get(client.aliases.get(command))*/;
+    if(command) {
+        const cmd = client.commands.get(command) /*|| client.commands.get(aliases.get(command))*/;
         if(!cmd) return message.channel.send(`Comando Invalido: \`${command}\``)
 
         embed.setAuthor(`${client.Tools.capitalize(cmd.name)} Comando Help`, client.user.displayAvatarURL());
@@ -57,8 +37,26 @@ module.exports = class HelpCommand extends BaseCommand {
             `**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : "Nenhuma Aliases"}`,
             `**❯ Descrição:** ${cmd.description}`,
             `**❯ Categoria:** ${cmd.category}`,
-            `**❯ Modo de Usar:** ${guildConfig.prefix}${cmd.usage}`,
+            `**❯ Modo de Usar:** ${cmd.usage}`,
         ]);
+        return message.channel.send(embed);
+    } else {
+        const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id })
+        embed.setDescription([
+            `Esses são os comandos disponíveis`,
+            `O prefix para esse servidor é ${guildConfig.prefix}`,
+            `Parâmetros do Comando: \n \`<>\` = necessário \n \`[]\` = opcional`
+        ])
+        let categories;
+        if(!Config.owners.includes(message.author.id)) {
+            categories = client.Tools.removeDuplicates(client.commands.filter(cmd => cmd.category !== "Developer Tools" && "Server Settings" && "Settings").map(cmd => cmd.category));
+        } else {
+            categories = client.Tools.removeDuplicates(client.commands.map(cmd => cmd.category || cmd.aliases));
+        }
+        for (const category of categories) {
+            embed.addField(`**${client.Tools.capitalize(category)}**`, client.commands.filter(cmd =>
+                cmd.category === category).map(cmd => `\`${cmd.name}\``).join(' '));
+        }
         return message.channel.send(embed);
     }
   }

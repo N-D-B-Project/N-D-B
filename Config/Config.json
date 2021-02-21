@@ -3,5 +3,16 @@
   "owners": ["330047048009252864", "336678075611873281"],
   "testGuilds": ["717094267243462688"],
   "ndbbugs": ["800847836139880458", "800847760046948370"],
-  "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"]
+  "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"],
+
+  "settings": {
+    "leaveOnEmpty_Channel" : {
+      "enabled": true,
+      "time_delay": 6000 
+    },
+    "LeaveOnEmpty_Queue": {
+      "enabled": true,
+      "time_delay": 6000
+    }
+  }
 }

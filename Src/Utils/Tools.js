@@ -185,7 +185,7 @@ module.exports = class Registry {
         "<a:Carregando2:718196278646800424>",
         "<a:Carregando:718196232757182566>",
         "<:DelayPing:718196166399098901>",
-        "<a:SapoDoido:718196095624413304>",
+        //"<a:SapoDoido:718196095624413304>",
         "<a:Block:718196377678774386>"
     ]
     

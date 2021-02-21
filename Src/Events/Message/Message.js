@@ -46,7 +46,12 @@ module.exports = class MessageEvent extends BaseEvent {
     const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${client.user.id}> `);
 
-    const Prefix = guildConfig.get("prefix") || mentionRegexPrefix;
+    // const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
+    // const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+    // if (!prefixRegex.test(message.content)) return;
+    // const [, matchedPrefix] = message.content.match(prefixRegex);
+
+    const Prefix = guildConfig.get("prefix") || mentionRegexPrefix; // || prefixRegex;
     const FindPrefix = guildConfig.prefix;
     const prefix = message.content.match(mentionRegexPrefix) ?
       message.content.match(mentionRegexPrefix)[0] : Prefix;
