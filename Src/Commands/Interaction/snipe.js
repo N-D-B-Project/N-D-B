@@ -15,12 +15,12 @@ module.exports = class TestCommand extends BaseCommand {
 
   async run(client, message, args) {
     const msg = client.snipe.get(message.channel.id)
-    if(!msg) return message.channel.send("Nenhuma Mensagem deletada")
+    if(!msg) return message.channel.send(await client.translate("Nenhuma Mensagem deletada", message))
     const embed = new Discord.MessageEmbed()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setDescription(msg.content)
       .setColor("#00c26f")
-      .setFooter("Mensagem Apagada")
+      .setFooter(await client.translate("Mensagem Apagada", message))
       .setTimestamp()
     if(msg.image)embed.setImage(msg.image)
     

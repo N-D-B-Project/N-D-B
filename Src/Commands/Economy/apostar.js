@@ -30,24 +30,24 @@ module.exports = class ApostarCommand extends BaseCommand {
       async (err, cash) => {
         if (err) console.log("Economy Error: " + err);
         if (!cash) {
-          message.reply(
-            "Você ainda não possui uma conta NDCash! Utilize o comando criar para criar sua conta!"
-          );
+          message.reply(await client.translate(
+            "Você ainda não possui uma conta NDCash! Utilize o comando criar para criar sua conta!", message
+          ));
         } else if (cash) {
           if (cash.ndcash <= 0)
-            return message.reply(
-              "Você não possui dinheiro para fazer uma aposta"
-            );
+            return message.reply(await client.translate(
+              "Você não possui dinheiro para fazer uma aposta", message
+            ));
           if (!args[0])
-            return message.reply("Por favor diga o quanto você quer apostar");
+            return message.reply(await client.translate("Por favor diga o quanto você quer apostar", message));
           if (!Number.isInteger(parseInt(args[0])))
-            return message.reply(
-              "Você não pode apostar um número não inteiro!"
-            );
+            return message.reply(await client.translate(
+              "Você não pode apostar um número não inteiro!", message
+            ));
           if (cash.ndcash < aposta)
-            return message.reply(
-              "Você não possui dinheiro suficiente para apostar"
-            );
+            return message.reply(await client.translate(
+              "Você não possui dinheiro suficiente para apostar", message
+            ));
 
           if (wl == "l") {
             cash.ndcash -= aposta;
@@ -58,10 +58,10 @@ module.exports = class ApostarCommand extends BaseCommand {
                 message.author.displayAvatarURL({ size: 4096, dynamic: true })
               )
               .setColor("#00c26f")
-              .setTitle("Perdeu a Aposta ;-;")
-              .setDescription(
-                `Você perdeu a aposta. Você possui agora: ${cash.ndcash}`
-              )
+              .setTitle(await client.translate("Perdeu a Aposta 😢", message))
+              .setDescription(await client.translate(
+                `Você perdeu a aposta. Você possui agora: ${cash.ndcash}`, message
+              ))
               .setFooter(client.user.tag, client.user.displayAvatarURL())
               .setTimestamp();
             message.channel.send(PerdeuEmbed);
@@ -74,10 +74,10 @@ module.exports = class ApostarCommand extends BaseCommand {
                 message.author.displayAvatarURL({ size: 4096, dynamic: true })
               )
               .setColor("#00c26f")
-              .setTitle("Ganhou a Aposta!")
-              .setDescription(
-                `Você ganhou a aposta! Você possui agora: ${cash.ndcash}`
-              )
+              .setTitle(await client.translate("Ganhou a Aposta!", message))
+              .setDescription(await client.translate(
+                `Você ganhou a aposta! Você possui agora: ${cash.ndcash}`, message
+              ))
               .setFooter(client.user.tag, client.user.displayAvatarURL())
               .setTimestamp();
             message.channel.send(GanhouEmbed);

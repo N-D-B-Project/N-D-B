@@ -17,7 +17,7 @@ module.exports = class ContaCommand extends BaseCommand {
     super(...args, {
       name: "conta",
       category: "Economy",
-      aliases: ["bal"],
+      aliases: ["bal", "account"],
       usage: "",
       description: "Mostra quanto NDCash (dinheiro) você tem"
     });
@@ -42,9 +42,9 @@ module.exports = class ContaCommand extends BaseCommand {
     Cash.findOne({ userId: message.author.id }, async (err, cash) => {
       if (!cash) {
         if (err) console.error("Economy Error: " + err);
-        message.reply(
-          "Você Não possui uma conta NDCash! Para criar-lá utilize o comando criar!"
-        );
+        message.reply(await client.translate(
+          "Você Não possui uma conta NDCash! Para criar-lá utilize o comando criar!", message
+        ));
       } else {
         if (cash.skin === "Default") {
           var background = await jimp.read("./Src/Img/Economy/default.gif");
@@ -70,7 +70,7 @@ module.exports = class ContaCommand extends BaseCommand {
 
         const ContaEmbed = new Discord.MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-          .setTitle("Economy System")
+          .setTitle(await client.translate("Sistema de Economia", message))
           .attachFiles(['conta.png'])
 	        .setImage('attachment://conta.png')
           .setColor("#00c26f")

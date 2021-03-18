@@ -18,8 +18,8 @@ module.exports = class DevDiscordCommand extends BaseCommand {
     const embed = new Discord.MessageEmbed()
       .setAuthor(client.user.tag, client.user.displayAvatarURL())
       .setColor("#00c26f")
-      .setDescription("Este é o servidor do Discord do meu Criador!")
-      .setTitle(`${discordlogo} clique aqui`)
+      .setDescription(await client.translate("Este é o servidor do Discord do meu Criador!", message))
+      .setTitle(`${discordlogo}` + await client.translate(`clique aqui`, message))
       .setURL("https://discord.gg/mMapzad")
       .setTimestamp();
     message.delete().catch((O_o) => {});

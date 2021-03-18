@@ -27,7 +27,7 @@ module.exports = class AvatarCommand extends BaseCommand {
     let Embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setImage(avatar)
-      .setTitle("Baixar")
+      .setTitle(await client.translate("Baixar", message))
       .setURL(avatar)
       .setTimestamp()
       .setFooter(client.user.tag, client.user.displayAvatarURL());

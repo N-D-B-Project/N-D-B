@@ -9,26 +9,22 @@ module.exports = class ClearCommand extends BaseCommand {
       category: 'Moderation',
       aliases: ['limpar'],
       usage: 'clear <Nº de 1 a 100>',
-      description: 'Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando'
+      description: 'Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando',
+      userPerms: ["MANAGE_MESSAGES"]
     });
   }
 
   async run(client, message, args) {
-    if (!message.member.permissions.has("MANAGE_MESSAGES"))
-      return message.reply("Lhe faltam permissões para isso");
     const deleteCount = parseInt(args[0], 10);
     if (!deleteCount || deleteCount < 1 || deleteCount > 100)
-      return message.reply(
-        "__Forneça um numero de 1/99 para deletar as mensagens__."
-      );
-
+      return message.reply(await client.translate("__Forneça um numero de 1/99 para deletar as mensagens__.", message));
     const fetched = await message.channel.messages.fetch({
       limit: deleteCount + 1,
     });
     message.channel.bulkDelete(fetched);
     message.delete().catch((O_o) => {});
     message.channel
-      .send(`🗑 ${args[0]} mensagens deletadas!`)
+      .send(`🗑 ${args[0]}`, await client.translate(`mensagens deletadas!`, message))
       .catch((error) =>
         console.error(`Não foi possível deletar as mensagens devido a: ${error}`)
       );

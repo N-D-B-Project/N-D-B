@@ -1,5 +1,6 @@
 const BaseCommand = require("../../Utils/Structures/BaseCommand");
 const Discord = require("discord.js");
+
 //const {} = require("../../../Config/Abbreviations.js");
 
 module.exports = class BassBoostCommand extends BaseCommand {
@@ -52,7 +53,7 @@ module.exports = class BassBoostCommand extends BaseCommand {
     if(args[0] === "off") {
       const BassOffEmbed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-        .setColor("#00c26f")
+        .setColor(black)
         .setTitle(":loudspeaker: BassBoost")
         .setDescription("BassBoost Desativado")
         .setFooter(client.user.tag, client.user.displayAvatarURL())

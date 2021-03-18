@@ -29,10 +29,10 @@ module.exports = class AliadosCommand extends BaseCommand {
       new Discord.MessageEmbed()
         .setAuthor(client.user.tag, client.user.displayAvatarURL())
         .setColor("#00c26f")
-        .setDescription("Esses são os Bots dos amigos do meu Criador!")
+        .setDescription(await client.translate("Esses são os Bots dos amigos do meu Criador!", message))
         .addFields(
-          { name : `N-O-Z ${NOZEmoji}`, value: `Esse é o N-O-Z Bot focado em Administração Criado por Wesley#7777 Para adciona-lo ao seu servidor [Clique aqui](${NOZ})` },
-          { name : `Kaori Miyazono ${KAORIEmoji}`, value: `Essa é a Kaori Miyazono Bot focada em Animes Criado por Ness.js#2021 Para adciona-lo ao seu servidor [Clique aqui](${KAORI})` }
+          { name : `N-O-Z ${NOZEmoji}`, value: await client.translate(`Esse é o N-O-Z Bot focado em Administração Criado por Wesley#7777 Para adciona-lo ao seu servidor [Clique aqui]`, message) + `(${NOZ})` },
+          { name : `Kaori Miyazono ${KAORIEmoji}`, value: await client.translate(`Essa é a Kaori Miyazono Bot focada em Animes Criado por Ness.js#2021 Para adciona-lo ao seu servidor [Clique aqui]`, message) + `(${KAORI})` }
         )
         .setTimestamp()
     )

@@ -17,9 +17,9 @@ module.exports = class DevYTCommand extends BaseCommand {
     const ytlogo = "<:youtube:730741995416453150>";
     const embed = new Discord.MessageEmbed()
       .setAuthor(client.user.tag, client.user.displayAvatarURL())
-      .setColor("##00c26f")
-      .setDescription("Este é o canal do YouTube do meu Criador!")
-      .setTitle(`${ytlogo} clique aqui`)
+      .setColor("#00c26f")
+      .setDescription(await client.translate("Este é o canal do YouTube do meu Criador!", message))
+      .setTitle(`${ytlogo}` + await client.translate(`clique aqui`, message))
       .setURL("https://www.youtube.com/channel/UCbljj-LSlXuiB1EprNDl8MA")
       .setTimestamp();
     message.delete().catch((O_o) => {});

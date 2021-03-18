@@ -16,6 +16,6 @@ module.exports = class TestCommand extends BaseCommand {
   }
   
   async run(client, message, args) {
-    message.channel.send(await client.translate("Funciona"), message);
+    message.channel.send(await client.translate("Funciona", message));
   }
 }

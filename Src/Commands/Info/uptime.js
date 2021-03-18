@@ -20,12 +20,16 @@ module.exports = class UptimeCommand extends BaseCommand {
     totalSeconds %= 3600;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;
+    const T1 = await client.translate("Dias", message)
+    const T2 = await client.translate("Horas", message)
+    const T3 = await client.translate("Minutos", message)
+    const T4 = await client.translate("Segundos", message)
 
-    let uptime = `\n> 📅 ${days} Dias \n> ⌚ ${hours} Horas \n> 🕐 ${minutes} Minutos \n> ⏳ ${seconds} Segundos`;
+    let uptime = `\n> 📅 ${days} ${T1} \n> ⌚ ${hours} ${T2} \n> 🕐 ${minutes} ${T3} \n> ⏳ ${seconds} ${T4}`;
 
     const embed = new Discord.MessageEmbed()
       .setTitle("N-D-B Bot Uptime")
-      .setColor("RANDOM")
+      .setColor("#00c26f")
       .setDescription(`${uptime}`);
     message.delete().catch((O_o) => {});
     message.channel.send(embed);

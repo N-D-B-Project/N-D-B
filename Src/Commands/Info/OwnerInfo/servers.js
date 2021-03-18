@@ -20,10 +20,10 @@ module.exports = class ServersCommand extends BaseCommand {
     const quanto = `Estou em ${client.guilds.cache.size} Servers`;
     const falta = `Preciso estar em mais ${resta} para ser verificado`;
     const embed = new Discord.MessageEmbed()
-      .setAuthor(client.user.tag, client.avatarURL)
-      .setTitle("**__Verificação__**")
-      .addField(quanto, "✅")
-      .addField(falta, "❔")
+      .setAuthor(client.user.tag, client.user.displayAvatarURL())
+      .setTitle(await client.translate("**__Verificação__**", message))
+      .addField(await client.translate(quanto, message), "✅")
+      .addField(await client.translate(falta, message), "❔")
       .setColor(`#00c26f`)
       .setTimestamp();
     message.delete().catch((O_o) => {});

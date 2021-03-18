@@ -37,10 +37,10 @@ module.exports = class CriarCommand extends BaseCommand {
           });
           newCash.save().catch((err) => console.error("newCash Err: " + err));
           //console.log(`${message.author.tag} criou sua conta na NDCash!`);
-          return message.reply(`Sua conta NDCash está criada! Utilize o comando conta!`);
+          return message.reply(await client.translate(`Sua conta NDCash está criada! Utilize o comando conta!`, message));
         } else {
           //console.warn(`${message.author.tag} Tentou criar outra conta na NDCash`);
-          return message.reply(`Você já possui uma conta NDCash! Utilize o comando conta!`);
+          return message.reply(await client.translate(`Você já possui uma conta NDCash! Utilize o comando conta!`, message));
         }
       }
     )

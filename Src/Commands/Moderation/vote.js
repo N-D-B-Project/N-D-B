@@ -26,10 +26,10 @@ module.exports = class VoteCommand extends BaseCommand {
         message.author.tag,
         message.author.displayAvatarURL({ size: 4096, dynamic: true })
       )
-      .setTitle(`Iniciou uma votação:`)
+      .setTitle(await client.translate(`Iniciou uma votação:`, message))
       .setDescription(quest)
       .setColor("#00c26f")
-      .addFields({ name: "Como votar:", value: Emoji })
+      .addFields({ name: await client.translate("Como votar:", message), value: Emoji })
       .setTimestamp()
       .setFooter(client.user.tag, client.user.displayAvatarURL());
 

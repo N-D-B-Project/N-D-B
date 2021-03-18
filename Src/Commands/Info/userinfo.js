@@ -34,24 +34,24 @@ module.exports = class UserInfoCommand extends BaseCommand {
     }
   
     const embed = new Discord.MessageEmbed()
-      .setColor(Membro.displayHexColor || "RANDOM")
+      .setColor("#00c26f")
       .setThumbnail(Membro.user.displayAvatarURL({dynamic: true, size: 512}))
-      .addField("Usuário", [
-        `**❯ Username:** ${Membro.user.username}`,
-				`**❯ Descriminador:** ${Membro.user.discriminator}`,
-				`**❯ ID:** ${Membro.id}`,
-				`**❯ Insignias:** ${userFlags.length ? userFlags.map(flag => client.Tools.userDetails[flag]).join(', ') : 'Nenhum'}`,
-				`**❯ Avatar:** [Download Avatar](${Membro.user.displayAvatarURL({ dynamic: true })})`,
-				`**❯ Conta criada em:** ${moment(Membro.user.createdTimestamp).format('LT')} ${moment(Membro.user.createdTimestamp).format('DD/MM/YYYY')} ${moment(Membro.user.createdTimestamp).fromNow()}`,
-				`**❯ Status:** ${status}`,
-				`**❯ Game:** ${Membro.user.presence.game || 'Não esta jogando nada'}`,
+      .addField(await client.translate("Usuário", message), [
+        await client.translate(`**❯ Username:**`, message) + ` ${Membro.user.username}`,
+				await client.translate(`**❯ Descriminador:**`, message) + ` ${Membro.user.discriminator}`,
+				await client.translate(`**❯ ID:**`, message) + ` ${Membro.id}`,
+				await client.translate(`**❯ Insignias:**`, message) + ` ${userFlags.length ? userFlags.map(flag => client.Tools.userDetails[flag]).join(', ') : client.translate('Nenhum', message)}`,
+				await client.translate(`**❯ Avatar:** [Download Avatar]`, message) + `(${Membro.user.displayAvatarURL({ dynamic: true })})`,
+				await client.translate(`**❯ Conta criada em:**`, message) + ` ${moment(Membro.user.createdTimestamp).format('LT')} ${moment(Membro.user.createdTimestamp).format('DD/MM/YYYY')} ${moment(Membro.user.createdTimestamp).fromNow()}`,
+				await client.translate(`**❯ Status:**`, message) + ` ${status}`,
+				await client.translate(`**❯ Jogo:**`, message) + ` ${Membro.user.presence.game || client.translate('Não esta jogando nada', message)}`,
 				`\u200b`
 			])
 			.addField('Membro', [
-				`**❯ Maior Cargo:** ${Membro.roles.highest.id === message.guild.id ? 'Nenhum' : Membro.roles.highest.name}`,
-				`**❯ Entrou em:** ${moment(Membro.joinedAt).format('LL LTS')}`,
-				`**❯ Cargo Hoist:** ${Membro.roles.hoist ? Membro.roles.hoist.name : 'Nenhum'}`,
-				`**❯ Cargos [${Cargos.length}]:** ${Cargos.length < 10 ? Cargos.join(', ') : Cargos.length > 10 ? client.Tools.trimArray(Cargos) : 'Nenhum'}`,
+				await client.translate(`**❯ Maior Cargo:**`, message) + ` ${Membro.roles.highest.id === message.guild.id ? client.translate('Nenhum', message) : Membro.roles.highest.name}`,
+				await client.translate(`**❯ Entrou em:**`, message) + ` ${moment(Membro.joinedAt).format('LL LTS')}`,
+				await client.translate(`**❯ Cargo Hoist:**`, message) + ` ${Membro.roles.hoist ? Membro.roles.hoist.name : client.translate('Nenhum', message)}`,
+				await client.translate(`**❯ Cargos`, message) + ` [${Cargos.length}]:** ${Cargos.length < 10 ? Cargos.join(', ') : Cargos.length > 10 ? client.Tools.trimArray(Cargos) : client.translate('Nenhum', message)}`,
 				`\u200b`
       ]);
     message.channel.send(embed);

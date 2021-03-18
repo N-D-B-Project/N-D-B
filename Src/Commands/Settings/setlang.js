@@ -20,12 +20,18 @@ module.exports = class Command extends BaseCommand {
       "en",
       "es",
       "fr",
-      "jp"
+      "it",
+      "de",
+      "ja",
+      "ru",
+      "ko",
+      "zh-cn",
+      "zh-tw",
     ];
 
-    if(!args[0]) return message.reply("Você não definiu a Lingua");
+    if(!args[0]) return message.reply(await client.translate("Você não definiu a Lingua", message));
     const lang = args[0];
-    if (!(languages.includes(args[0]))) return message.reply("Não sei falar essa lingua ainda!") 
+    if (!(languages.includes(args[0]))) return message.reply(await client.translate("Não sei falar essa lingua ainda!", message)); 
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id,
     });
@@ -37,7 +43,9 @@ module.exports = class Command extends BaseCommand {
           guildID: message.guild.id,
           language: lang
         });
-        NewGuildConfig.save();
+        await NewGuildConfig.save();
     }
+    message.channel.send(await client.translate(`Agora irei falar em: \`${guildConfig.language}\``, message))
+    message.channel.send(await client.translate(`Bot está cerca de 90% traduzido!`, message))
   }
 }

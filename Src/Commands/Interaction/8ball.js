@@ -23,9 +23,9 @@ module.exports = class EightBallCommand extends BaseCommand {
     let Embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(`8Ball!`)
-      .setColor(`RANDOM`)
-      .addField("Pergunta", question)
-      .addField("Resposta", replies[result]);
+      .setColor("#00c26f")
+      .addField(await client.translate("Pergunta", message), question)
+      .addField(await client.translate("Resposta", message), replies[result]);
     message.delete().catch((O_o) => {});
     message.channel.send(Embed);
   }

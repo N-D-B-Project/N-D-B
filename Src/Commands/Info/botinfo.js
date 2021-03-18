@@ -33,42 +33,42 @@ module.exports = class BotInfoCommand extends BaseCommand {
     const FindPrefix = guildConfig.prefix;
 
     let description = [
-      `**❯ <:github:761642337448755202> ** [Clique na Estrela!](${"https://github.com/NedcloarBR/N-D-B"})`,
-      `**❯ <:discord:739591596248530985> ** [Junte-se ao Server do meu Dev!](${"https://discord.gg/mMapzad"})`,
-      `**❯ <:topgg:761642656626769930> ** [Vote no Top.gg](Waiting approval)`,
-      `**❯ <:discord:739591596248530985> ** [Me Adicione ao seu Server!](${"https://discord.com/oauth2/authorize?client_id=708822043420000366&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fauth%2Fredirect&scope=bot%20applications.commands"})`,
+      `**❯ <:github:761642337448755202>` + await client.translate(` ** [Clique na Estrela!]`, message) + `(${"https://github.com/NedcloarBR/N-D-B"})`,
+      `**❯ <:discord:739591596248530985>` + await client.translate(` ** [Junte-se ao Server do meu Dev!]`, message) + `(${"https://discord.gg/mMapzad"})`,
+      `**❯ <:topgg:761642656626769930>` + await client.translate(` ** [Vote no Top.gg]`, message) + `(Waiting approval)`,
+      `**❯ <:discord:739591596248530985>` + await client.translate(` ** [Me Adicione ao seu Server!]`, message) + `(${"https://discord.com/oauth2/authorize?client_id=708822043420000366&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fauth%2Fredirect&scope=bot%20applications.commands"})`,
 
-      `**❯ Lista de Comandos: ** \`${FindPrefix}help || helpp\``
+      await await client.translate(`**❯ Lista de Comandos: **`, message) + `\`${FindPrefix}help || helpp\``
     ]
 
     const core = os.cpus()[0]
     const embed = new Discord.MessageEmbed()
         .setTitle("Informações do Bot")
         .setThumbnail(client.user.displayAvatarURL())
-        .setColor(message.guild.me.displayHexColor || "RANDOM")
-        .addField("Geral", [
-            `**❯ Client:** ${client.user.tag} (${client.user.id})`,
-            `**❯ Comandos:** ${client.commands.size}`,
-            `**❯ Servidores:** ${client.guilds.cache.size.toLocaleString()}`,
-            `**❯ Usuários:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
-            `**❯ Canais:** ${client.channels.cache.size.toLocaleString()}`,
-            `**❯ Criado em:** ${utc(client.user.createdTimestamp).format("DD/MM/YYYY HH:mm:ss")}`,
-            `**❯ Node.JS:** ${process.version}`,
-            `**❯ Discord.JS:** v${djversion}`,
-            `**❯ Bot Version:** v${version}`,
+        .setColor("#00c26f")
+        .addField(await client.translate("Geral", message), [
+          await client.translate(`**❯ Client:**`, message) + `${client.user.tag} (${client.user.id})`,
+          await client.translate(`**❯ Comandos:**`, message) + ` ${client.commands.size}`,
+          await client.translate(`**❯ Servidores:**`, message) + ` ${client.guilds.cache.size.toLocaleString()}`,
+          await client.translate(`**❯ Usuários:**`, message) + ` ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
+          await client.translate(`**❯ Canais:**`, message) + ` ${client.channels.cache.size.toLocaleString()}`,
+          await client.translate(`**❯ Criado em:**`, message) + ` ${utc(client.user.createdTimestamp).format("DD/MM/YYYY HH:mm:ss")}`,
+          await client.translate(`**❯ Node.JS:**`, message) + ` ${process.version}`,
+          await client.translate(`**❯ Discord.JS:**`, message) + ` v${djversion}`,
+          await client.translate(`**❯ Bot Version:**`, message) + ` v${version}`,
             "\u200b"
         ])
-        .addField("System Info", [
-           `**❯ Tamanho do Projeto:** 312MB`,
-            `**❯ Plataforma:** ${process.platform}`,
-            //`**❯ Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
-            `**❯ CPU:**`,
-            `\u3000 Cores: ${os.cpus().length}`,
-            `\u3000 Modelo: ${core.model}`,
-            `\u3000 Velocidade: ${core.speed}MHz`,
-            `**❯ Memoria:**`,
-            `\u3000 Total: ${client.Tools.formatBytes(process.memoryUsage().heapTotal)}`,
-            `\u3000 Usado: ${client.Tools.formatBytes(process.memoryUsage().heapUsed)}`,
+        .addField(await client.translate("Informações do Sistema", message), [
+          await client.translate(`**❯ Tamanho do Projeto:**`, message) + ` 312MB`,
+          await client.translate(`**❯ Plataforma:**`, message) + ` ${process.platform}`,
+          //`**❯ Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
+          `**❯ CPU:**`,
+          await client.translate(`\u3000 Cores:`, message) + ` ${os.cpus().length}`,
+          await client.translate(`\u3000 Modelo:`, message) + ` ${core.model}`,
+          await client.translate(`\u3000 Velocidade:`, message) + ` ${core.speed}MHz`,
+          await client.translate(`**❯ Memoria:**`, message),
+          await client.translate(`\u3000 Total: `, message) + `${client.Tools.formatBytes(process.memoryUsage().heapTotal)}`,
+          await client.translate(`\u3000 Usado: `, message) + `${client.Tools.formatBytes(process.memoryUsage().heapUsed)}`,
         ])
         .setDescription(description)
         .setTimestamp();

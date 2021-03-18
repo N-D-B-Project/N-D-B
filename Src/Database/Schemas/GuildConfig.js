@@ -19,7 +19,7 @@ const GuildConfigSchema = new mongoose.Schema({
     language: {
         type: mongoose.SchemaTypes.String,
         required: false,
-        default: "portuguese"
+        default: "pt"
     },
 });
 

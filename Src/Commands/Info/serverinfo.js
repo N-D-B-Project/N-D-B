@@ -42,42 +42,42 @@ module.exports = class ServerInfoCommand extends BaseCommand {
     const guildChannels = message.guild.channels.cache;
 
     const embed = new Discord.MessageEmbed()
-        .setTitle(guildName, "Server Info")
-        .setColor("RANDOM")
+        .setTitle(guildName, await client.translate("Server Info", message))
+        .setColor("#00c26f")
         .setDescription("Essas são as informações sobre o servidor!")
         .setThumbnail(guildIcon)
         .addField('Guild', [
-            `**❯ Nome:** ${guildName}`,
-            `**❯ Id:** ${guildId}`,
-            `**❯ Dono:** ${guildOwnerTag} (${guildOwnerId})`,
-            `**❯ Região:** ${regions[guildRegion]}`,
-            `**❯ Boost Level:** ${guildBoost ? `Nível${guildBoost}` : `Nenhum`}`,
-            `**❯ Filtro Explicito:** ${filterLevels[guildFilter]}`,
-            `**❯ Nível de Verificação:** ${verificationLevels[guildVerification]}`,
-            `**❯ Criado em:** ${moment(guildCreated).format("LT")} ${moment(guildCreated).format("DD/MM/YYYY")} ${moment(guildCreated).fromNow()}`,
+          await client.translate(`**❯ Nome:**`, message) + ` ${guildName}`,
+          await client.translate(`**❯ Id:**`, message) + ` ${guildId}`,
+          await client.translate(`**❯ Dono:**`, message) + ` ${guildOwnerTag} (${guildOwnerId})`,
+          await client.translate(`**❯ Região:**`, message) + ` ${regions[guildRegion]}`,
+          await client.translate(`**❯ Nível do Boost:**`, message) + ` ${guildBoost}` ? await client.translate(`Nível`, message) + `${guildBoost}` : await client.translate(`Nenhum`, message),
+          await client.translate(`**❯ Filtro Explicito:**`, message) + ` ${filterLevels[guildFilter]}`,
+          await client.translate(`**❯ Nível de Verificação:**`, message) + ` ${verificationLevels[guildVerification]}`,
+          await client.translate(`**❯ Criado em:**`, message) + ` ${moment(guildCreated).format("LT")} ${moment(guildCreated).format("DD/MM/YYYY")} ${moment(guildCreated).fromNow()}`,
             "\u200b"
         ])
-        .addField("Estatísticas", [
-            `**❯ Cargos:** ${guildRoles.length}`,
-            `**❯ Emojis:** ${guildEmojis.size}`,
-            `**❯ Emojis Normais:** ${guildEmojis.filter(guildEmojis => !guildEmojis.animated).size}`,
-            `**❯ Emojis Animados:** ${guildEmojis.filter(guildEmojis => guildEmojis.animated).size}`,
-            `**❯ Membros:** ${guildNormalMembers}`,
-            `**❯ Humanos:** ${guildMembers.filter(member => !member.user.bot).size}`,
-            `**❯ Bots:** ${guildMembers.filter(member => member.user.bots).size}`,
-            `**❯ Canais de Texto:** ${guildChannels.filter(channel => channel.type === "text").size}`,
-            `**❯ Canais de Voz:** ${guildChannels.filter(channel => channel.type === "voice").size}`,
-            `**❯ Boosts:** ${guildPremiumMembers || "0"}`,
+        .addField(await client.translate("Estatísticas", message), [
+          await client.translate(`**❯ Cargos:**`, message) + ` ${guildRoles.length}`,
+          await client.translate(`**❯ Emojis:** `, message) + ` ${guildEmojis.size}`,
+          await client.translate(`**❯ Emojis Normais:**`, message) + ` ${guildEmojis.filter(guildEmojis => !guildEmojis.animated).size}`,
+          await client.translate(`**❯ Emojis Animados:**`, message) + ` ${guildEmojis.filter(guildEmojis => guildEmojis.animated).size}`,
+          await client.translate(`**❯ Membros:**`, message) + ` ${guildNormalMembers}`,
+          await client.translate(`**❯ Humanos:**`, message) + ` ${guildMembers.filter(member => !member.user.bot).size}`,
+          await client.translate(`**❯ Bots:**`, message) + ` ${guildMembers.filter(member => member.user.bots).size}`,
+          await client.translate(`**❯ Canais de Texto:**`, message) + ` ${guildChannels.filter(channel => channel.type === "text").size}`,
+          await client.translate(`**❯ Canais de Voz:**`, message) + ` ${guildChannels.filter(channel => channel.type === "voice").size}`,
+          await client.translate(`**❯ Impulsos:**`, message) + ` ${guildPremiumMembers || "0"}`,
             "\u200b"
         ])
-        .addField("Presença", [
-            `**❯ Online:** ${guildMembers.filter(member => member.presence.status === "online").size}`,
-            `**❯ Ausente:** ${guildMembers.filter(member => member.presence.status === "idle").size}`,
-            `**❯ Não Perturbe:** ${guildMembers.filter(member => member.presence.status === "dnd").size}`,
-            `**❯ Offline:** ${guildMembers.filter(member => member.presence.status === "offline").size}`,
+        .addField(await client.translate("Presença", message), [
+          await client.translate(`**❯ Online:**`, message) + ` ${guildMembers.filter(member => member.presence.status === "online").size}`,
+          await client.translate(`**❯ Ausente:**`, message) + ` ${guildMembers.filter(member => member.presence.status === "idle").size}`,
+          await client.translate(`**❯ Não Perturbe:**`, message) + ` ${guildMembers.filter(member => member.presence.status === "dnd").size}`,
+          await client.translate(`**❯ Offline:**`, message) + ` ${guildMembers.filter(member => member.presence.status === "offline").size}`,
             "\u200b"
         ])
-        .addField(`Cargos [${guildRoles.length - 1}]`, guildRoles.length < 10 ? guildRoles.join(", ") : guildRoles.length > 10 ? client.Tools.trimArray(guildRoles) : "Nenhum")
+        .addField(await client.translate(`Cargos`, message) `[${guildRoles.length - 1}]`, guildRoles.length < 10 ? guildRoles.join(", ") : guildRoles.length > 10 ? client.Tools.trimArray(guildRoles) : await client.translate("Nenhum", message))
         .setTimestamp();
     message.channel.send(embed)
   }

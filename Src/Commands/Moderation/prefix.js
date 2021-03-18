@@ -26,23 +26,23 @@ module.exports = class ChangePrefixCommand extends BaseCommand {
         guildId: message.guild.id
       })
       const SintaxErrEmbed = new Discord.MessageEmbed()
-        .setTitle("❌ | Erro de Sintaxe")
-        .setColor("RANDOM")
-        .setDescription("Utilize: "+guildConfig.prefix+"setprefix <Novo Prefix>")
+        .setTitle(await client.translate("❌ | Erro de Sintaxe"))
+        .setColor("#00c26f")
+        .setDescription(await client.translate("Utilize: "+guildConfig.prefix+"setprefix <Novo Prefix>", message))
         .setTimestamp();
       if(!args[0]) return message.channel.send(SintaxErrEmbed)
       
       const newPrefixEmbed = new Discord.MessageEmbed()
-        .setTitle("✔ | Prefix atualizado!")
-        .setColor("RANDOM")
-        .setDescription("Novo prefix: " + args[0])
+        .setTitle(await client.translate("✔ | Prefixo atualizado!", message))
+        .setColor("#00c26f")
+        .setDescription(await client.translate("Novo prefix: ", message) + args[0])
         .setTimestamp();
       guildConfig.prefix = args[0]
       guildConfig.save()
       message.channel.send(newPrefixEmbed)
 
     } else {
-      message.channel.send("Você não tem permissão para utilizar este comando")
+      message.channel.send(await client.translate("Você não tem permissão para utilizar este comando", message))
     }
   }
 }

@@ -24,15 +24,15 @@ module.exports = class HelppCommand extends BaseCommand {
   async run(client, message, [command], args) {
     const embed = new Discord.MessageEmbed()
         .setColor("RANDOM")
-        .setAuthor(`${message.guild.name} Help Menu`, message.guild.iconURL({ dynamic: true }))
+        .setAuthor(message.guild.name + await client.translate(` Help Menu`, message), message.guild.iconURL({ dynamic: true }))
         .setThumbnail(client.user.displayAvatarURL())
-        .setFooter(`Requisitado por ${message.author.tag}`, message.author.displayAvatarURL({ dynamic: true }))
+        .setFooter(`Requisitado por ${message.author.tag} ${message.author.displayAvatarURL({ dynamic: true })}`)
         .setTimestamp();
     if(command) {
         const cmd = client.commands.get(command) /*|| client.commands.get(aliases.get(command))*/;
-        if(!cmd) return message.channel.send(`Comando Invalido: \`${command}\``)
+        if(!cmd) return message.channel.send(await client.translate(`Comando Invalido: `, message) + `\`${command}\``)
 
-        embed.setAuthor(`${client.Tools.capitalize(cmd.name)} Comando Help`, client.user.displayAvatarURL());
+        embed.setAuthor(`${client.Tools.capitalize(cmd.name)}` + await client.translate(`Comando Help`, message), client.user.displayAvatarURL());
         embed.setDescription([
             `**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : "Nenhuma Aliases"}`,
             `**❯ Descrição:** ${cmd.description}`,
@@ -49,7 +49,7 @@ module.exports = class HelppCommand extends BaseCommand {
         ])
         let categories;
         if(!Config.owners.includes(message.author.id)) {
-            categories = client.Tools.removeDuplicates(client.commands.filter(cmd => cmd.category !== "Developer Tools" && "Server Settings" && "Settings").map(cmd => cmd.category));
+            categories = client.Tools.removeDuplicates(client.commands.filter(cmd => cmd.category !== "Developer Tools").map(cmd => cmd.category));
         } else {
             categories = client.Tools.removeDuplicates(client.commands.map(cmd => cmd.category || cmd.aliases));
         }

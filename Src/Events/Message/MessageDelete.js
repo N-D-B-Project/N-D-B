@@ -22,7 +22,7 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
     const FindChannel = guildConfig.deleteMsgChannelId;
     const Channel = client.channels.cache.get(`${FindChannel}`);
     if(message.channel === Channel) return;
-    if(message.author.bot || !message.guild) return;
+    //if(message.author.bot || !message.guild) return;
     const attachments = message.attachments.size ? message.attachments.map(attachment => attachment.proxyURL) : null;
     
     if(Channel) {

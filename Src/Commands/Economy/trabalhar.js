@@ -32,15 +32,15 @@ module.exports = class TrabalharCommand extends BaseCommand {
     Cash.findOne({userId: message.author.id,}, async (err, cash) => {
         if(!cash) {
           if (err) console.log("Economy Error: " + err);
-          message.reply("Você ainda não possui uma conta NDCash! Utilize o comando criar para criar sua conta!");
+          message.reply(await client.translate("Você ainda não possui uma conta NDCash! Utilize o comando criar para criar sua conta!", message));
         } else if(cash) {
           if(daily - (Date.now() - cash.daily) > 0) {
             const time = ms(daily - (Date.now() - cash.daily));
             const embed = new Discord.MessageEmbed()
               .setColor("#00c26f")
               .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 4096, dynamic: true }))
-              .setTitle("Você já trabalhou hoje!")
-              .setDescription(`Você pode trabalhar novamente em ${time.hours}h  ${time.minutes}m ${time.seconds}s`);
+              .setTitle(await client.translate("Você já trabalhou hoje!", message))
+              .setDescription(await client.translate(`Você pode trabalhar novamente em ${time.hours}h  ${time.minutes}m ${time.seconds}s`, message));
             return message.channel.send(embed);
           } else {
             cash.ndcash += premio;
@@ -51,9 +51,9 @@ module.exports = class TrabalharCommand extends BaseCommand {
             const embed = new Discord.MessageEmbed()
               .setColor("#00c26f")
               .setAuthor(message.author.tag, message.author.displayAvatarURL({ size: 4096, dynamic: true }))
-              .setTitle("Trabalho!")
+              .setTitle(await client.translate("Trabalho!", message))
               .setImage("https://i.imgur.com/mS6maZD.jpg")
-              .setDescription(`Você recebeu N¥${premio} pelo seu trabalho!`);
+              .setDescription(await client.translate(`Você recebeu N¥${premio} pelo seu trabalho!`, message));
             return message.channel.send(embed);
           }
         }

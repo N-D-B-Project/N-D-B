@@ -1,10 +1,9 @@
 //@ Client Options
-const { Client, Collection, Permissions } = require("discord.js");
+const { Discord, Client, Collection, Permissions } = require("discord.js");
 const client = new Client({ disableEveryone: true, partials: ["MESSAGE", "REACTION", "CHANNEL", "USER"]});
 //const WOKCommands = require("wokcommands");
 
 //TODO Registry
-const { loadLanguages } = require("./Features/Language");
 const {
   registerCommands,
   registerEvents,
@@ -21,8 +20,11 @@ const Colours = require("../Config/Colours.json");
 const Abbreviations = require("../Config/Abbreviations.json");
 
 //# Multi-Language
-const translate = require("@iamtraction/google-translate");
+//const translate = require("@iamtraction/google-translate");
+const translate = require("@k3rn31p4nic/google-translate-api");
 const LangConfig = require("./Database/Schemas/GuildConfig");
+const { loadLanguages } = require("./Features/Language");
+const Language = require("./Features/Language");
 
 //% Console Logs
 const colors = require("colors");
@@ -82,12 +84,13 @@ mongoose.connect(process.env.DBC, {
     const langConfig = await LangConfig.findOne({ guildId: message.guild.id })
     if(langConfig) {
       lang = langConfig.language;
-    } else {
+    } else if(!langConfig) {
       lang = "pt";
     }
-    const translated = await translate(text, {from: 'pt', to: lang});
+    const translated = await translate(text, { from: 'pt', to: lang });
     return translated.text;
   }
+  client.lang = Language
 
   //TODO Registry
   // await registerCommands(client, "../Commands");
