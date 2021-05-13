@@ -1,22 +1,19 @@
 const BaseEvent = require("../../Utils/Structures/BaseEvent");
 const GuildConfig = require("../../Database/Schemas/GuildConfig");
+const GuildConfigRoles = require('../../Database/Schemas/GuildRoles');
+const GuildConfigChannels = require('../../Database/Schemas/GuildChannel');
 const mongoose = require("mongoose");
-const Config = require("../../../Config/Config.json");
+const Config = require("../../Config/Config.json");
 //const checkOwner = require("../../Tools/checkOwner");
 const Blacklist = require('../../Database/Schemas/Blacklist');
 const Disable = require('../../Database/Schemas/DisableCommands')
 const ms = require('ms');
 
-mongoose.connect(process.env.DBC, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+require("../../Utils/Tools/InlineReply");
 
 module.exports = class MessageEvent extends BaseEvent {
   constructor() {
     super("message");
-
-    this.buckets = new Map();
   }
 
   async run(client, message, guild) {
@@ -26,36 +23,47 @@ module.exports = class MessageEvent extends BaseEvent {
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id,
     });
-    if (!guildConfig) {
+    if(!guildConfig) {
       await new GuildConfig({
         guildName: message.guild.name,
         guildId: message.guild.id,
         prefix: "&",
       }).save();
-      console.log(`Server: ${message.guild.name} Salvo na DataBase!`);
+      client.logger.dtb(`Server: ${message.guild.name} Salvo na DataBase!`);
     }
-    // Disable.findOne({
-    //   name: "global"
-    // }, (err, data) => {
-    //   if (err) console.log(err);
-    //       if (data) {
-    //           if (data.cmds.includes(command)) return message.channel.send("Este comando está desabilitado no momento").then(async m => await m.delete({ timeout: 5000 }));
-    //       } 
-    // });
+
+    const guildConfigRoles = await GuildConfigRoles.findOne({
+      guildId: message.guild.id,
+    });
+    if(!guildConfigRoles) {
+      await new GuildConfigRoles({
+        guildName: message.guild.name,
+        guildId: message.guild.id,
+      }).save();
+      client.logger.dtb(`Server: ${message.guild.name}(Roles) Salvo na DataBase!`);
+    }
+
+    const guildConfigChannels = await GuildConfigChannels.findOne({
+      guildId: message.guild.id,
+    });
+    if(!guildConfigChannels) {
+      await new GuildConfigChannels({
+        guildName: message.guild.name,
+        guildId: message.guild.id,
+      }).save();
+      client.logger.dtb(`Server: ${message.guild.name}(Channels) Salvo na DataBase!`);
+    }
 
     const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${client.user.id}> `);
 
-    // const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
-    // const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
-    // if (!prefixRegex.test(message.content)) return;
-    // const [, matchedPrefix] = message.content.match(prefixRegex);
-
-    const Prefix = guildConfig.get("prefix") || mentionRegexPrefix; // || prefixRegex;
+    const Prefix = guildConfig.get("prefix") || mentionRegexPrefix;
     const FindPrefix = guildConfig.prefix;
     const prefix = message.content.match(mentionRegexPrefix) ?
       message.content.match(mentionRegexPrefix)[0] : Prefix;
     client.prefix = prefix;
+
+    if(message.content == prefix) return;
 
     if(!message.content.startsWith(prefix)) return;
 
@@ -68,17 +76,6 @@ module.exports = class MessageEvent extends BaseEvent {
         .split(/ +/g);
       const command = client.commands.get(cmd.toLowerCase()) || client.commands.get(client.aliases.get(cmd.toLowerCase()));
 
-      /*
-      if (!client.owners.includes(message.author.id)) {
-        let remaining = await this._runLimits(message, command);
-        if (remaining) {
-          remaining = ms(remaining - Date.now(), { long: true });
-          message.channel.send(`Sorry **${message.author}**, you have to wait **${remaining}** before running this command.`);
-          return;
-        }
-      }
-      */
-
       if(command) {
         const blacklistData = await Blacklist.findOne({ User: message.author.id });
         if (blacklistData && blacklistData.Blacklist === true) {
@@ -90,6 +87,10 @@ module.exports = class MessageEvent extends BaseEvent {
         }
 
         if(command.guildOnly && !message.guild) {
+          return message.reply("Comando Restrito para outro Servidor");
+        }
+
+        if(command.mjonly && !client.Tools.checkMJGuild(message.guild)) {
           return message.reply("Comando Restrito para outro Servidor");
         }
         
@@ -143,60 +144,10 @@ module.exports = class MessageEvent extends BaseEvent {
           }
         }
         
-        command.run(client, message, args);
+        const tools = client.Tools
+        const player = client.music.players.get(message.guild.id);
+        command.run(client, message, args, prefix, player, tools, command);
       }
     }
   }
-/*
-  _timeout(userId, commandName) {
-		return () => {
-			const bucket = this.buckets.get(`${userId}-${commandName}`);
-			if (bucket && bucket.timeout) {
-				this.client.clearTimeout(bucket.timeout);
-			}
-
-			this.buckets.delete(`${userId}-${commandName}`);
-		};
-	}
-
-	_runLimits(message, command) {
-		const tout = this._timeout(message.author.id, command.name);
-
-		let bucket = this.buckets.get(`${message.author.id}-${command.name}`);
-		if (!bucket) {
-			bucket = {
-				reset: command.ratelimit.reset,
-				remaining: command.ratelimit.bucket,
-				timeout: this.client.setTimeout(tout, command.ratelimit.reset)
-			};
-
-			this.buckets.set(`${message.author.id}-${command.name}`, bucket);
-		}
-
-		if (bucket.remaining === 0) {
-			if (command.ratelimit.stack) {
-				if (bucket.limited) {
-					if (bucket.timeout) {
-						this.client.clearTimeout(bucket.timeout);
-					}
-
-					bucket.reset = (bucket.resetsIn - Date.now()) + command.ratelimit.reset;
-					bucket.timeout = this.client.setTimeout(tout, bucket.reset);
-					bucket.resetsIn = Date.now() + bucket.reset;
-				}
-
-				bucket.limited = true;
-			}
-
-			if (!bucket.resetsIn) {
-				bucket.resetsIn = Date.now() + bucket.reset;
-			}
-
-			return bucket.resetsIn;
-		}
-
-		--bucket.remaining;
-		return null;
-  };
-  */
 };

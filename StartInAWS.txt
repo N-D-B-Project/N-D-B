@@ -1,5 +1,0 @@
-Lavalink = pm2 start --name=Lavalink Lavalink.jar --interpreter=java --node-args=-jar
-
-Bot = pm2 start --name=N-D-B ./Src/Shard.js
-
-Bot = cd N-D-B/Src/   forever start Shard.js

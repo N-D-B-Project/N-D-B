@@ -15,6 +15,14 @@ const NDCashSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.String,
     default: "Desempregado",
   },
+  level: {
+    type: mongoose.SchemaTypes.Number,
+    default: 1,
+  },
+  worked: {
+    type: mongoose.SchemaTypes.Number,
+    default: 0
+  },
   skin: {
     type: mongoose.SchemaTypes.String,
     default: "Default",
@@ -26,6 +34,10 @@ const NDCashSchema = mongoose.Schema({
   propina: {
     type: Number,
     default: 0,
+  },
+  x2time: {
+    type: mongoose.SchemaTypes.Boolean,
+    default: false,
   },
   daily: {
     type: Number,

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const GuildConfigSchema = new mongoose.Schema({
+const GuildConfigRolesSchema = new mongoose.Schema({
     guildName: {
         type: mongoose.SchemaTypes.String,
         required: true,
@@ -21,4 +21,4 @@ const GuildConfigSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('GuildConfig', GuildConfigSchema);
+module.exports = mongoose.model('GuildConfigRoles', GuildConfigRolesSchema);

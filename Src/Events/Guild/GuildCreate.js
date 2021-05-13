@@ -1,6 +1,8 @@
-// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildCreate
 const BaseEvent = require('../../Utils/Structures/BaseEvent');
 const GuildConfig = require('../../Database/Schemas/GuildConfig');
+const GuildConfigRoles = require('../../Database/Schemas/GuildRoles');
+const GuildConfigChannels = require('../../Database/Schemas/GuildRoles');
+
 module.exports = class GuildCreateEvent extends BaseEvent {
   constructor() {
     super('guildCreate');
@@ -12,9 +14,17 @@ module.exports = class GuildCreateEvent extends BaseEvent {
         guildId: guild.id,
         guildName: guild.name,
       });
-      console.log('N-D-B Entrou no Server:' +guild.name+'. Salvo na DataBase!');
+      const guildConfigRoles = await GuildConfigRoles.create({
+        guildId: guild.id,
+        guildName: guild.name,
+      });
+      const guildConfigChannels = await GuildConfigChannels.create({
+        guildId: guild.id,
+        guildName: guild.name,
+      });
+      client.logger.dtb('N-D-B Entrou no Server:' +guild.name+'. Salvo na DataBase!');
     } catch (err) {
-      console.log(err);
+      client.logger.error(err);
     }
   }
 }

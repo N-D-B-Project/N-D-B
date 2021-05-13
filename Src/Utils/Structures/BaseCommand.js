@@ -26,7 +26,7 @@ module.exports = class BaseCommand {
 	}
 
 	async run(message, args) {
-		throw new Error(`Comando \`${this.name}\` Não proveu um metodo Run!`);
+		throw new Error(`Comando \`${this.name}\` Não proveu um método Run!`);
 	}
 
 };

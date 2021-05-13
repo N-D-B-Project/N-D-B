@@ -29,7 +29,8 @@ module.exports = class GuildCreateEvent extends BaseEvent {
             ])
             .addFields(
                 { name: "Prefix", value: "Meu Prefixo padrão é \`&\`!" },
-                { name: "Help", value: "Utilize o comando \`&help\` ou \`&helpp\` para ver meus comandos!" }
+                { name: "Help", value: "Utilize o comando \`&help\` para ver meus comandos!" },
+                { name: "Configurar", value: "Para me configurar utilize o comando &setup" }
             )
             .setFooter(client.user.tag, client.user.displayAvatarURL())
             .setTimestamp()

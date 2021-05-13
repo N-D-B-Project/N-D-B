@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "leaveOnEmpty_Channel" : {
+          "enabled": true,
+          "time_delay": 6000 
+        },
+        "LeaveOnEmpty_Queue": {
+          "enabled": true,
+          "time_delay": 6000
+        },
+        "selfDeaf": true,
+        "serverDeaf": true
+    },
+    "lyricssettings": {
+        "lyrics_finder": true,
+        "ksoft_api": {
+          "use_this_instead": false,
+          "api_key": ""
+        }
+      }
+}

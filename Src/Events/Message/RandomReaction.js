@@ -7,6 +7,7 @@ module.exports = class RandomReactionEvent extends BaseEvent {
   }
   
   async run(client, message) {
+    if(message.author.bot) return;
     const porcentagem = Math.floor(Math.random() * 26)
 
     if(porcentagem === 25) {

@@ -1,20 +1,20 @@
 server: # REST and WS server
-  port: 7000 # 80
+  port: 2333
   address: 0.0.0.0
 lavalink:
   server:
     password: "ndbmusic"
     sources:
       youtube: true
-      bandcamp: false
+      bandcamp: true
       soundcloud: false
       twitch: true
       vimeo: false
       mixer: false
       http: true
-      local: true
-    bufferDurationMs: 400
-    youtubePlaylistLoadLimit: 6 # Number of pages at 100 each
+      local: false
+    bufferDurationMs: 100
+    youtubePlaylistLoadLimit: 1 # Number of pages at 100 each
     youtubeSearchEnabled: true
     soundcloudSearchEnabled: true
     gc-warnings: true

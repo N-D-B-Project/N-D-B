@@ -6,7 +6,7 @@ module.exports = class Command extends BaseCommand {
   constructor(...args) {
     super(...args, {
       name: '',
-      category: '',
+      category: 'Developer Tools',
       aliases: [''],
       usage: '',
       description: '',
@@ -20,7 +20,7 @@ module.exports = class Command extends BaseCommand {
     });
   }
 
-  async run(client, message, args) {
+  async run(client, message, args, prefix, player, tools) {
     
   }
 }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const GuildConfigSchema = new mongoose.Schema({
+const GuildConfigChannelsSchema = new mongoose.Schema({
     guildName: {
         type: mongoose.SchemaTypes.String,
         required: true,
@@ -11,7 +11,11 @@ const GuildConfigSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    deleteMsgChannelId: {
+    logChannel: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
+    floodChannel: {
         type: mongoose.SchemaTypes.String,
         required: false,
     },
@@ -25,4 +29,4 @@ const GuildConfigSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('GuildConfig', GuildConfigSchema);
+module.exports = mongoose.model('GuildConfigChannels', GuildConfigChannelsSchema);

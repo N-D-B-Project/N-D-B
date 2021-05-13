@@ -21,6 +21,19 @@ const GuildConfigSchema = new mongoose.Schema({
         required: false,
         default: "pt"
     },
+    antispam: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
+    antialt: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    },
+    deletedlog: {
+        type: mongoose.SchemaTypes.String,
+        required: false,
+    }
+    
 });
 
 module.exports = mongoose.model('GuildConfig', GuildConfigSchema);
