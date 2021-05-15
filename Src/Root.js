@@ -2,12 +2,29 @@ require("dotenv").config();
 
 const Discord = require("discord.js");
 const client = new Discord.Client({ 
-  fetchAllMembers: false,
+  cacheGuilds: true,
+  cacheChannels: true,
+  cacheOverwrites: false,
+  cacheRoles: true,
+  cacheEmojis: true,
+  cachePresences:  true,
+  fetchAllMembers: true,
+  messageCacheMaxSize: 25,
+  messageCacheLifetime: 10000, 
+  messageSweepInterval: 12000,
   restTimeOffset: 0,
   shards: "auto",
   restWsBridgetimeout: 100,
   disableEveryone: true,
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER', "GUILD_MEMBER"]
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER', "GUILD_MEMBER"],
+  ws: { 
+    intents: [
+      "GUILDS",
+      "GUILD_MEMBERS",
+      "GUILD_MESSAGES",
+      "GUILD_EMOJIS",
+      'GUILD_MESSAGE_REACTIONS',
+  ]}
 });
 
 require('discord-buttons')(client)
