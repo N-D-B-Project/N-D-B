@@ -1,5 +1,0 @@
-Eventos de Systems
-Terminar/Melhorar Embed Comandos Setup
-Database
-GuildUpdate Event: Atualiza a Database
-MemberUpdate: IDEM
