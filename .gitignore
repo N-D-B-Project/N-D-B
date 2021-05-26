@@ -1,19 +1,22 @@
+# Folders
 node_modules/
+env/
+logs/
+Backup/
+Text Files/
+**/Ignore/
+.vscode/
+.vs/
+
+# Files
 package-lock.json
 yarn.lock
 yarn-error.log
 *.log
-logs/
 .env
-env/
-Backup/
-Text Files/
 **/*.ru
 ./conta.png
 runnable-hiero.jar
 AntiMerda.zip
-**/WOKcommands/
-**/Ignore/
 *.broken
-.vscode/
 Resolver.txt
