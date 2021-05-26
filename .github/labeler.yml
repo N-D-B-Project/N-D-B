@@ -1,0 +1,20 @@
+source:
+  - src/**/**/*
+
+commands:
+  - Src/Commands/**/*
+
+events:
+  - Src/Events/**/*
+
+examples:
+  - examples/**/*
+
+utils:
+  - Src/Utils/**/*
+
+structures:
+  - Src/Utils/Structures/*
+
+dependencies:
+  - any: ["package.json", yarn.lock ,"package-lock.json"]
