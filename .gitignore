@@ -19,4 +19,5 @@ yarn-error.log
 runnable-hiero.jar
 AntiMerda.zip
 *.broken
+*.disable
 Resolver.txt
