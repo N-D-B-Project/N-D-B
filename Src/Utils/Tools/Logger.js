@@ -18,6 +18,8 @@ const chalk = require("chalk"),
   DBColor = chalk.rgb(77, 179, 61)
   MusicColor = chalk.rgb(101, 174, 246)
   ProcColor = chalk.rgb(211, 250, 103)
+  EventColor = chalk.rgb(169, 147, 72)
+  CommandColor = chalk.rgb(95, 72, 169)
   token = process.env.DISCORD_TOKEN;
 
 chalk.level = 1;
@@ -65,6 +67,10 @@ function typeName(type, color) {
       return color ? MusicColor("MSC") : "MSC";
     case "proc":
       return color ? ProcColor("PRO") : "PRO";
+    case "event":
+      return color ? EventColor("EVT") : "EVT";
+    case "command":
+      return color ? CommandColor("CMN") : "CMN";
     default:
       return color ? blueBright("LOG") : "LOG";
   }
@@ -118,6 +124,12 @@ class Logger {
   }
   static music(...args) {
     this.log(...args, { type: "music" });
+  }
+  static command(...args) {
+    this.log(...args, { type: "command" });
+  }
+  static event(...args) {
+    this.log(...args, { type: "event" });
   }
   static proc(...args) {
     this.log(...args, { type: "proc" });
