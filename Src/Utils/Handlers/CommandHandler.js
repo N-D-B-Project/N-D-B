@@ -2,7 +2,7 @@ const path = require('path');
 const { promisify } = require('util');
 const glob = promisify(require('glob'));
 const Command = require('../Structures/BaseCommand');
-module.exports = class Registry {
+module.exports = class CommandHandler {
 
     constructor(client) {
         this.client = client;
