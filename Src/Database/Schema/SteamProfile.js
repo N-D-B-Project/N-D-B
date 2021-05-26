@@ -3,17 +3,17 @@ const mongoose = require("mongoose");
 const steamProfileSchema = mongoose.Schema({
   //_id: mongoose.Schema.Types.ObjectId,
   username: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     required: true,
     unique: true,
   },
   userId: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     required: true,
     unique: true,
   },
   SteamProfile: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     unique: true,
   },
 });

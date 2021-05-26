@@ -2,36 +2,39 @@ const mongoose = require('mongoose');
 
 const GuildConfigSchema = new mongoose.Schema({
     guildName: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: true,
         unique: true,
     },
     guildId: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: true,
         unique: true,
     },
     prefix: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: true,
         default: '&',
     },
     language: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: false,
         default: "pt"
     },
     antispam: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: false,
+        default: false,
     },
     antialt: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: false,
+        default: false,
     },
     deletedlog: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: false,
+        default: false,
     }
     
 });

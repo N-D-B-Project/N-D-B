@@ -2,29 +2,29 @@ const mongoose = require("mongoose");
 
 const NDCashSchema = mongoose.Schema({
   username: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     required: true,
     unique: true,
   },
   userId: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     required: true,
     unique: true,
   },
   emprego: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     default: "Desempregado",
   },
   level: {
-    type: mongoose.SchemaTypes.Number,
+    type: Number,
     default: 1,
   },
   worked: {
-    type: mongoose.SchemaTypes.Number,
+    type: Number,
     default: 0
   },
   skin: {
-    type: mongoose.SchemaTypes.String,
+    type: String,
     default: "Default",
   },
   ndcash: {
@@ -36,7 +36,7 @@ const NDCashSchema = mongoose.Schema({
     default: 0,
   },
   x2time: {
-    type: mongoose.SchemaTypes.Boolean,
+    type: Boolean,
     default: false,
   },
   daily: {
