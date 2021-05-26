@@ -1,11 +1,13 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
-const GuildConfig = require('../../Database/Schemas/GuildConfig');
-const GuildConfigRoles = require('../../Database/Schemas/GuildRoles');
-const GuildConfigChannels = require('../../Database/Schemas/GuildRoles');
+const GuildConfig = require('../../Database/Schema/GuildConfig');
+const GuildConfigRoles = require('../../Database/Schema/GuildRoles');
+const GuildConfigChannels = require('../../Database/Schema/GuildRoles');
 
 module.exports = class GuildUpdateEvent extends BaseEvent {
-  constructor() {
-    super('guildUpdate');
+  constructor(...args) {
+    super(...args, {
+        name: 'guildUpdate'
+    });
   }
   
   async run(client, oldGuild, newGuild) {

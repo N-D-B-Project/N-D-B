@@ -1,15 +1,17 @@
-// https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=e-guildDelete
 const BaseEvent = require('../../Utils/Structures/BaseEvent');
-const GuildConfig = require('../../Database/Schemas/GuildConfig');
-const GuildConfigRoles = require('../../Database/Schemas/GuildRoles');
-const GuildConfigChannels = require('../../Database/Schemas/GuildRoles');
+const GuildConfig = require('../../Database/Schema/GuildConfig');
+const GuildConfigRoles = require('../../Database/Schema/GuildRoles');
+const GuildConfigChannels = require('../../Database/Schema/GuildRoles');
 
 module.exports = class GuildDeleteEvent extends BaseEvent {
-  constructor() {
-    super('guildDelete');
+  constructor(...args) {
+    super(...args, {
+        name: 'guildDelete'
+    });
   }
   
   async run(client, guild) {
+    //! GuildConfigs
     try {
       const guildConfig = await GuildConfig.deleteOne({
         guildId: guild.id,

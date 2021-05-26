@@ -1,10 +1,12 @@
 const BaseEvent = require("../Utils/Structures/BaseEvent");
 const Discord = require("discord.js");
-const Logger = require("../Utils/Logger");
+const Logger = require("../Utils/Tools/Logger");
 
 module.exports = class ReadyEvent extends BaseEvent {
-  constructor() {
-    super("ready");
+  constructor(...args) {
+    super(...args, {
+        name: "ready",
+    });
   }
   async run(client) {
     client

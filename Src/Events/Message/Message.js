@@ -1,25 +1,33 @@
 const BaseEvent = require("../../Utils/Structures/BaseEvent");
-const GuildConfig = require("../../Database/Schemas/GuildConfig");
-const GuildConfigRoles = require('../../Database/Schemas/GuildRoles');
-const GuildConfigChannels = require('../../Database/Schemas/GuildChannel');
-const mongoose = require("mongoose");
+const Discord = require("discord.js");
+
+// Schemas
+const GuildConfig = require("../../Database/Schema/GuildConfig");
+const GuildConfigRoles = require('../../Database/Schema/GuildRoles');
+const GuildConfigChannels = require('../../Database/Schema/GuildChannel');
+const Cash = require("../../Database/Schema/NDCash");
+const Blacklist = require('../../Database/Schema/Blacklist');
+const Disable = require('../../Database/Schema/DisableCommands')
+
 const Config = require("../../Config/Config.json");
-//const checkOwner = require("../../Tools/checkOwner");
-const Blacklist = require('../../Database/Schemas/Blacklist');
-const Disable = require('../../Database/Schemas/DisableCommands')
 const ms = require('ms');
 
 require("../../Utils/Tools/InlineReply");
 
 module.exports = class MessageEvent extends BaseEvent {
-  constructor() {
-    super("message");
+  constructor(...args) {
+    super(...args, {
+        name: "message",
+        once: false
+    });
   }
 
   async run(client, message, guild) {
-    if (message.author.bot) return;
-    if (message.channel.type === "DM") return;
-
+    //# Check message type
+    if(message.author.bot) return;
+    if(message.channel.type === "DM") return;
+    
+    //! GuildConfigs
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id,
     });
@@ -54,6 +62,7 @@ module.exports = class MessageEvent extends BaseEvent {
       client.logger.dtb(`Server: ${message.guild.name}(Channels) Salvo na DataBase!`);
     }
 
+    //@ Prefix
     const mentionRegex = RegExp(`^<@!?${client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${client.user.id}> `);
 
@@ -69,6 +78,7 @@ module.exports = class MessageEvent extends BaseEvent {
 
     if(message.content.match(mentionRegex)) message.channel.send(`Meu Prefix para \`${message.guild.name}\` é: ${FindPrefix}`);
 
+    //$ Commands
     if(message.content.startsWith(prefix)) {
       const [ cmd, ...args ] = message.content
         .slice(prefix.length)
@@ -149,5 +159,79 @@ module.exports = class MessageEvent extends BaseEvent {
         command.run(client, message, args, prefix, player, tools, command);
       }
     }
+
+    //* AntiSpam
+    const usersMap = new Map();
+    const MutedRoleFind = guildConfigRoles.mutedRole;
+    const logChannelFind = guildConfigChannels.logChannel;
+    const floodChannelFind = guildConfigChannels.floodChannel;
+    const MutedRole = message.guild.roles.cache.find(r => r.id === `${MutedRoleFind}`);
+    const LogChannel = message.guild.roles.cache.find(r => r.id === `${logChannelFind}`);
+    const FloodChannel = message.guild.roles.cache.find(r => r.id === `${floodChannelFind}`);
+    
+    if(guildConfig.antispam == undefined || false) {
+      return;
+    } else if(guildConfig.antispam == true){
+      if(message.channel === FloodChannel || LogChannel) return; 
+      if(usersMap.has(message.author.id)) {
+        const userData  = usersMap.get(message.author.id);
+        let msgCount = userData.msgCount;
+        if(parseInt(msgCount) === 10) {
+          message.member.roles.add(MutedRole)
+          message.channel.send("mute")
+          LogChannel.send(
+            new Discord.MessageEmbed()
+            .setColor("#00c26f")
+            .setTitle("Membro Mutado pelo sistema Anti-Spam")
+            .setAuthor(message.member.name, message.member.iconURL())
+            .setDescription(`O Membro ${message.member.name} foi mutado por Flood`)
+            .setFooter(client.user.tag, client.user.displayAvatarURL())
+            .setTimestamp()
+          )
+        } else {
+          msgCount++;
+          userData.msgCount = msgCount;
+          userData.set(
+            message.author.id,
+            userData
+          );
+        } 
+      } else {
+        usersMap.set(message.author.id, {
+          msgCount: 1,
+          lastMessage: message,
+          timer: null
+        });
+        setTimeout(() => {
+          usersMap.delete(message.author.id);
+        }, 5000);
+      }
+    }
+
+    //% RandomReaction
+    const porcentagem = Math.floor(Math.random() * 26)
+
+    if(porcentagem === 25) {
+      const React = client.Tools.randomEmoji[Math.floor(Math.random() * client.Tools.randomEmoji.length)]
+      message.react(React)
+    }
+
+    //TODO Economy
+    Cash.findOne ({ userId: message.author.id, },
+      async (err, cash) => {
+        if(err) console.error("Economy Error: " + err);
+        if(!cash) {
+          const newCash = new Cash({
+            username: message.author.tag,
+            userId: message.author.id,
+            ndcash: 0,
+            propina: 0,
+            emprego: "Desempregado",
+            level: 1,
+            skin: "Default",
+          });
+          newCash.save().catch((err) => console.error("newCash Err: " + err));
+      }
+    })
   }
 };
