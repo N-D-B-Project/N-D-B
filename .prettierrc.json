@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json.schemastore.org/prettierrc",
+    "tabWidth": 2,
+    "useTabs": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "singleQuote": false,
+    "semi": true,
+    "printWidth": 80,
+    "arrowParens": "always",
+    "proseWrap": "preserve",
+    "endOfLine": "lf",
+    "overrides": [
+      {
+        "files": ".all-contributorsrc",
+        "options": { "parser": "json" }
+      }
+    ]
+  }
