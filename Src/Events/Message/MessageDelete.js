@@ -14,9 +14,11 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
   
   async run(client, message) {
     //# Check message author/type
-    if(message.author.bot) return;
-    if(message.channel.type === "DM") return;
-
+    try {
+      if(message.author.bot) return;
+      if(message.channel.type === "DM") return;
+    } catch {}
+    
     //$ DeletedLog
     const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id })
     const guildConfigChannels = await GuildConfigChannels.findOne({ guildId: message.guild.id })
