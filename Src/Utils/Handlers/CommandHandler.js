@@ -33,11 +33,6 @@ module.exports = class CommandHandler {
                         this.client.aliases.set(alias, command.name);
                     }
                 }
-                if (command.category) {
-                    for (const category of command.category) {
-                        this.client.category.set(command.category, command)
-                    }
-                }
             }
         });
     }

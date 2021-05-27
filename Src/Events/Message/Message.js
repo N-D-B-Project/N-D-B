@@ -89,35 +89,41 @@ module.exports = class MessageEvent extends BaseEvent {
       if(command) {
         const blacklistData = await Blacklist.findOne({ User: message.author.id });
         if (blacklistData && blacklistData.Blacklist === true) {
-          return message.reply('Você está na **Blacklist** do Bot portanto não pod utilizar nenhum comando')
+          return message.inlineReply('Você está na **Blacklist** do Bot portanto não pod utilizar nenhum comando')
        }
 
         if (command.ownerOnly && !client.Tools.checkOwner(message.author.id)) {
-          return message.reply("Comando restrito para o Dono do Bot");
+          return message.inlineReply("Comando restrito para o Dono do Bot");
         }
 
         if(command.guildOnly && !message.guild) {
-          return message.reply("Comando Restrito para outro Servidor");
+          return message.inlineReply("Comando Restrito para outro Servidor");
         }
 
         if(command.mjonly && !client.Tools.checkMJGuild(message.guild)) {
-          return message.reply("Comando Restrito para outro Servidor");
+          return message.inlineReply("Comando Restrito para outro Servidor");
         }
         
         if(command.testOnly && !client.Tools.checkTestGuild(message.guild)) {
-          return message.reply("Este Comando só pode ser utilizado no servidor de testes do meu Dev!")
+          return message.inlineReply("Este Comando só pode ser utilizado no servidor de testes do meu Dev!")
         }
 
         if(command.nsfw && !message.channel.nsfw) {
-          return message.reply(
+          return message.inlineReply(
             "Esse Comando só pode ser executado em canais NSFW"
           );
         }
 
         if(command.args && !args.length) {
-          return message.reply(
+          return message.inlineReply(
             "Esse comando precisa de mais Args para funcionar"
           );
+        }
+
+        if(command.disable === true) {
+          return message.inlineReply(
+            "Esse comando está desabilitado"
+          )
         }
 
         if (message.guild) {
@@ -129,7 +135,7 @@ module.exports = class MessageEvent extends BaseEvent {
               .permissionsFor(message.member)
               .missing(userPermCheck);
             if (missing.length) {
-              return message.reply(
+              return message.inlineReply(
                 `You are missing ${client.Tools.formatArray(
                   missing.map(client.Tools.formatPerms)
                 )} permissions, you need them to use this command!`
@@ -145,7 +151,7 @@ module.exports = class MessageEvent extends BaseEvent {
               .permissionsFor(message.member)
               .missing(botPermCheck);
             if (missing.length) {
-              return message.reply(
+              return message.inlineReply(
                 `Faltam as seguintes Permissões: ${client.Tools.formatArray(
                   missing.map(client.Tools.formatPerms)
                 )} Para executar esse Comando!`
