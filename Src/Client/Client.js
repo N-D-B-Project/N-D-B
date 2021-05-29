@@ -5,6 +5,7 @@ const Tools = require("../Utils/Tools/Tools");
 const Logger = require("../Utils/Tools/Logger");
 const CommandHandler = require("../Utils/Handlers/CommandHandler");
 const EventHandler = require("../Utils/Handlers/EventHandler");
+const ReactionRole = require("../Packages/ReactionRole/index.js");
 
 module.exports = class NDBClient extends Discord.Client {
   constructor(options = {}, sentry) {
@@ -79,11 +80,15 @@ module.exports = class NDBClient extends Discord.Client {
 
     mongoose.connect(this.dbc, connect, function (err, db) {
       if (!err) {
-        Logger.dtb("MongoDB Conectado!");
+        Logger.dtb("Client: MongoDB Conectado!");
       } else if (err) {
         Logger.error("MongoDB Error: \n" + err);
       }
     });
+
+    const react = new ReactionRole()
+
+    react.setURL(process.env.DBC)
 
     super.login((token = this.token));
     Logger.debug("Hello World");

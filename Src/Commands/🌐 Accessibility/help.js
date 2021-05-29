@@ -21,9 +21,9 @@ module.exports = class HelpCommand extends BaseCommand {
     const Timer = 120000
     var Categorias
     if(message.member.hasPermission("MANAGE_GUILD")) {
-        Categorias = "🎵 Music = 🎵\n💸 Economy = 💵\n👌 Interaction = 👌\n👮‍♂️ Moderation = 👮‍♂️"
+        Categorias = "🎵 Music = 🎵\n💸 Economy = 💵\n👌 Interaction = 👌\n🎨 ReactionRole = 🎨\n👮‍♂️ Moderation = 👮‍♂️"
     } else if(!message.member.hasPermission("MANAGE_GUILD")) {
-        Categorias = "🎵 Music = 🎵\n💸 Economy = 💵\n👌 Interaction = 👌"
+        Categorias = "🎵 Music = 🎵\n💸 Economy = 💵\n👌 Interaction = 👌\n🎨 ReactionRole = 🎨"
     }
     
     const embed = new Discord.MessageEmbed()
@@ -56,6 +56,7 @@ module.exports = class HelpCommand extends BaseCommand {
         ME.react("🎵");
         ME.react("💵");
         ME.react("👌");
+        ME.react("🎨");
         if(message.member.hasPermission("MANAGE_GUILD")) {
             ME.react("👮‍♂️");
         }
@@ -87,6 +88,18 @@ module.exports = class HelpCommand extends BaseCommand {
                             .setColor("#00c26f")
                             .addField(`**Comandos**`, client.commands.filter(cmd =>
                                 cmd.category === "💸 Economy").map(cmd => `\`${cmd.name}\``).join(' | '))
+                    )
+                    ME.reactions.removeAll();
+                    ME.react("🏠")
+                break;
+                case String("🎨"):
+                    ME.edit(
+                        new Discord.MessageEmbed()
+                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                            .setTitle("🎨 ReactionRole")
+                            .setColor("#00c26f")
+                            .addField(`**Comandos**`, client.commands.filter(cmd =>
+                                cmd.category === "🎨 ReactionRole").map(cmd => `\`${cmd.name}\``).join(' | '))
                     )
                     ME.reactions.removeAll();
                     ME.react("🏠")
@@ -124,6 +137,7 @@ module.exports = class HelpCommand extends BaseCommand {
                     ME.react("🎵");
                     ME.react("💵");
                     ME.react("👌");
+                    ME.react("🎨");
                     if(message.member.hasPermission("MANAGE_GUILD")) {
                         ME.react("👮‍♂️");
                     }

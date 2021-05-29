@@ -7,7 +7,7 @@ const GuildConfigSchema = new mongoose.Schema({
         unique: true,
     },
     guildId: {
-        type: String,
+        type: mongoose.SchemaTypes.String,
         required: true,
         unique: true,
     },
@@ -22,19 +22,23 @@ const GuildConfigSchema = new mongoose.Schema({
         default: "pt"
     },
     antispam: {
-        type: String,
+        type: Boolean,
         required: false,
         default: false,
     },
     antialt: {
-        type: String,
+        type: Boolean,
         required: false,
         default: false,
     },
     deletedlog: {
-        type: String,
+        type: Boolean,
         required: false,
         default: false,
+    },
+    reactionDM: {
+        type: Boolean,
+        default: true,
     }
     
 });
