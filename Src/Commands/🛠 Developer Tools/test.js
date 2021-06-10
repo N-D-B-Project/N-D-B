@@ -15,10 +15,7 @@ module.exports = class TestCommand extends BaseCommand {
     });
   }
   
-  async run(client, message, args, prefix, player, tools, command) {
-    // const msg1 = await client.translate("Funciona", message);
-    // message.channel.send("Funfa")
-    // message.inlineReply(prefix)
-    // message.channel.send(msg1);
+  async run(client, message, args, tools, prefix, player) {
+    
   }
 }
