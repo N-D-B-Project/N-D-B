@@ -8,7 +8,8 @@ module.exports = class ReactionRole {
 
         return mongoose.connect(dbURI, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         }, function (err, db) {
             if (!err) {
                 Logger.dtb("ReactionRole: MongoDB Conectado!");

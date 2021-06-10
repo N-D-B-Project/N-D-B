@@ -22,6 +22,8 @@ module.exports = class EditReactionRoleCommand extends BaseCommand {
       guildId: message.guild.id,
     });
 
+    const prefix = guildConfig.prefix || "&";
+
     let properUsage = new Discord.MessageEmbed()
       .setColor("#00c26f")
       .setDescription(

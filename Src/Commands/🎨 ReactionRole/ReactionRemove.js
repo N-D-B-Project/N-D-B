@@ -27,6 +27,11 @@ module.exports = class ReactionRemoveCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
+    const guildConfig = await GuildConfig.findOne({
+      guildId: message.guild.id,
+    });
+
+    const prefix = guildConfig.prefix || "&";
 
     let properUsage = new Discord.MessageEmbed()
       .setColor("#00c26f")
