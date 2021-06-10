@@ -27,16 +27,16 @@ module.exports = function (client) {
     },
   })
     .on("nodeConnect", (node) => {
-      client.logger.music("Node Conectado! " + node.options.identifier);
+      client.logger.music("Node Conectado! " + "node info: " + node.options.identifier);
     })
     .on("nodeCreate", (node) => {
-      client.logger.music("Node Criado! " + node.options.identifier);
+      client.logger.music("Node Criado! " + "node info: " + node.options.identifier);
     })
     .on("nodeReconnect", (node) => {
-      client.logger.music("Node Reconectado! " + node.options.identifier);
+      client.logger.music("Node Reconectado! " + "node info: " +  node.options.identifier);
     })
     .on("nodeDisconnect", (node) => {
-      client.logger.music("Node Desconectado! " + node.options.identifier);
+      client.logger.music("Node Desconectado! " + "node info: " + node.options.identifier);
     })
     .on("nodeError", (node, error) => {
       client.logger.music(

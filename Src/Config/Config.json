@@ -1,8 +1,11 @@
 {
+  "token": "process.env.DISCORD_TOKEN",
+  "Dev_Token": "process.env.Dev_Token",
   "prefix": "&",
   "owners": ["330047048009252864", "336678075611873281"],
   "testGuilds": ["717094267243462688"],
   "MJGuild": ["581478383800549386"],
   "ndbbugs": ["800847836139880458", "800847760046948370"],
-  "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"]
+  "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"],
+  "dev": true
 }

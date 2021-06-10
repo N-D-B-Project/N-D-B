@@ -6,6 +6,7 @@ const Logger = require("../Utils/Tools/Logger");
 const CommandHandler = require("../Utils/Handlers/CommandHandler");
 const EventHandler = require("../Utils/Handlers/EventHandler");
 const ReactionRole = require("../Packages/ReactionRole/index.js");
+const Variables = require("../Utils/Tools/Variables");
 
 module.exports = class NDBClient extends Discord.Client {
   constructor(options = {}, sentry) {
@@ -52,6 +53,7 @@ module.exports = class NDBClient extends Discord.Client {
     this.Tools = new Tools(this);
     this.logger = Logger;
     this.owners = options.owners;
+    this.mongoose = require("../Utils/Tools/Mongoose");
   }
 
   validate(options) {
@@ -62,33 +64,19 @@ module.exports = class NDBClient extends Discord.Client {
       throw new Error("Você deve definir um Token para o Client.");
     this.token = process.env.DISCORD_TOKEN;
 
-    if (!process.env.DBC)
+    if (!process.env.MongoURI)
       throw new Error("Você deve definir o link do MongoDB para o Client.");
-    this.dbc = process.env.DBC;
+    this.dbc = process.env.MongoURI;
   }
 
   async start(token = this.token) {
     this.CommandHandler.loadCommands();
     this.EventHandler.loadEvents();
-    
-    const connect = {
-      keepAlive: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    };
-
-    mongoose.connect(this.dbc, connect, function (err, db) {
-      if (!err) {
-        Logger.dtb("Client: MongoDB Conectado!");
-      } else if (err) {
-        Logger.error("MongoDB Error: \n" + err);
-      }
-    });
 
     const react = new ReactionRole()
 
-    react.setURL(process.env.DBC)
+    react.setURL(process.env.MongoURI)
+    this.mongoose.init()
 
     super.login((token = this.token));
     Logger.debug("Hello World");

@@ -99,10 +99,30 @@ module.exports = class Tools {
     }
 
     DataCheck(target) {
-        if(target == undefined || false) {
-            return false
+        if(target == undefined || !target) {
+            return "\`Não definido\`"
+        } else if(target == false) {
+            return "\`Desativado\`"
         } else if(target == true) {
-            return true
+            return "\`Ativo\`"
+        } else if(target) {
+            return target
+        }
+    }
+
+    CheckPlatform(platform) {
+        if(platform == "win32") {
+            return "<:windows:852676820213170196> Windows"
+        } else if(platform == "darwin") {
+            return "<:Apple:852677662983716884> Mac OS"
+        } else if(platform == "freebsd") {
+            return "<:freebsd:852678583641440296> FreeBSD"
+        } else if(platform == "linux") {
+            return "<:linux:852679127201742850> Linux"
+        } else if(platform == "sunos") {
+            return "Sunos"
+        } else if(platform == "android") {
+            return "<:android:852679609022808085> Android"
         }
     }
 
@@ -111,7 +131,7 @@ module.exports = class Tools {
         "<a:Carregando2:718196278646800424>",
         "<a:Carregando:718196232757182566>",
         "<:DelayPing:718196166399098901>",
-        //"<a:SapoDoido:718196095624413304>",
+        //"<a:SapoDoido:718196095624413304>", //! Desabilitado para não causar epilepsia nas pessoas
         "<a:Block:718196377678774386>"
     ]
     

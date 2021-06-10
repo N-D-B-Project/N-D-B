@@ -20,6 +20,7 @@ const chalk = require("chalk"),
   ProcColor = chalk.rgb(211, 250, 103)
   EventColor = chalk.rgb(169, 147, 72)
   CommandColor = chalk.rgb(95, 72, 169)
+  AppColor = chalk.rgb(67, 54, 205)
   token = process.env.DISCORD_TOKEN;
 
 chalk.level = 1;
