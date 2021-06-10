@@ -15,7 +15,8 @@ module.exports = class PlayCommand extends BaseCommand {
   }
 
   async run(client, message, args) {
-    const { channel } = message.member.voice;
+    try {
+      const { channel } = message.member.voice;
     if (!channel) return message.reply("Você não está em um canal de voz");
 
     const player = client.music.create({
@@ -154,6 +155,9 @@ module.exports = class PlayCommand extends BaseCommand {
     } catch (err) {
       //return message.reply(`Erro ao pesquisar: ${err.message}`);
       console.log(`Erro ao pesquisar: ${err.message}`);
+    }
+    } catch (error) {
+      client.logger.music(error)
     }
   }
 };

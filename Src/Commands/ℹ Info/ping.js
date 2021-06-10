@@ -28,8 +28,8 @@ module.exports = class PingCommand extends BaseCommand {
       .setColor("RANDOM")
       .setDescription(
         `📡A latencia é ${Math.floor(
-          message.createdTimestamp - message.createdTimestamp
-        )}ms.\n🖥"A latencia da API é ${client.ws.ping}ms.`
+          ms.createdTimestamp - message.createdTimestamp
+        )}ms.\n🖥A latencia da API é ${client.ws.ping}ms.`
       )
       .setFooter("ping", client.user.displayAvatarURL());
     ms.edit(embed2);
