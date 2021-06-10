@@ -12,7 +12,15 @@ const profileSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  boosters: [{ name: String, time: String }],
+  boosters: { name: String, time: String },
+  lastVote: {
+    type: Number,
+    default: 0,
+  },
+  totalVotes: {
+    type: Number,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model("Profile", profileSchema);

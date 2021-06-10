@@ -7,7 +7,7 @@ const GuildConfigSchema = new mongoose.Schema({
         unique: true,
     },
     guildId: {
-        type: mongoose.SchemaTypes.String,
+        type: String,
         required: true,
         unique: true,
     },
