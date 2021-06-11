@@ -9,8 +9,8 @@ Text Files/
 .vs/
 
 # Files
-package-lock.json
-yarn.lock
+yarn.lock                   
+#package-lock.json           #Comment this ignore to user the file in node.js.yml checks
 yarn-error.log
 *.log
 .env
