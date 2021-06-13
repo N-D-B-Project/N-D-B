@@ -10,6 +10,7 @@ module.exports = class Command extends BaseCommand {
       aliases: [''],
       usage: 'base64 <encode/decode> <texto>',
       description: 'Encripta ou Decripta um texto em Base64',
+      disable: true
     });
   }
 

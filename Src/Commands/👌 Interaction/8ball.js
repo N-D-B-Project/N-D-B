@@ -13,20 +13,20 @@ module.exports = class EightBallCommand extends BaseCommand {
     });
   }
 
-  async run(client, message, args) {
+  async run(client, message, args, tools) {
     if (!args[0]) return message.reply("Você não perguntou nada!");
-    const replies = require("../../Tools/replies");
 
-    let result = Math.floor(Math.random() * replies.length);
+    let result = Math.floor(Math.random() * tools.replies.length);
     let question = args.slice(0).join(" ");
 
     let Embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
-      .setTitle(`8Ball!`)
+      .setTitle(`🎱 8Ball!`)
       .setColor("#00c26f")
-      .addField("Pergunta", question)
-      .addField("Resposta", replies[result]);
-    message.delete().catch((O_o) => {});
+      .addField("❔ Pergunta", question, true)
+      .addField("🗣 Resposta", tools.replies[result], true)
+      .setTimestamp()
+    message.delete()
     message.channel.send(Embed);
   }
 };
