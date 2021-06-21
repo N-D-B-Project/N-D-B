@@ -8,17 +8,20 @@ module.exports = class MessageUpdateEvent extends BaseEvent {
     });
   }
   
-  async run(client, message, oldMessage, newMessage) {
+  async run(client, oldMessage, newMessage) {
     //# Check message author/type
-    if(message.author.bot) return;
-    if(message.channel.type === "DM") return;
-    
+    try {
+      if(newMessage.author.bot) return;
+      if(newMessage.channel.type === "DM") return;
+    } catch {}
+
     //! EditSnipe
-    client.editSnipe.set(message.channel.id, {
-      OldContent:oldMessage,
-      NewContent:newMessage,
-      author:message.author,
-      image:message.attachments.first() ? message.attachments.first().proxyURL : null
+    client.editSnipe.set(newMessage.channel.id, {
+      check:true,
+      OldContent:oldMessage.content,
+      NewContent:newMessage.content,
+      author:newMessage.author,
+      image:newMessage.attachments.first() ? newMessage.attachments.first().proxyURL : null
     })
   }
 }

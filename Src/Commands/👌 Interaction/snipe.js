@@ -15,7 +15,7 @@ module.exports = class TestCommand extends BaseCommand {
 
   async run(client, message, args) {
     const msg = client.snipe.get(message.channel.id)
-    if(!msg) return message.channel.send("Nenhuma Mensagem deletada")
+    if(!msg || msg.check === false) return message.channel.send("Nenhuma Mensagem deletada")
     const embed = new Discord.MessageEmbed()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setDescription(msg.content)

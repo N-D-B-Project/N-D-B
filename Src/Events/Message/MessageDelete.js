@@ -45,9 +45,10 @@ module.exports = class MessageDeleteEvent extends BaseEvent {
 
     //! Snipe
     client.snipe.set(message.channel.id, {
-        content:message.content,
-        author:message.author,
-        image:message.attachments.first() ? message.attachments.first().proxyURL : null
+      check:true,
+      content:message.content,
+      author:message.author,
+      image:message.attachments.first() ? message.attachments.first().proxyURL : null
     })
   }
 }
