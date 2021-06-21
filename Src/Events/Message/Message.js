@@ -162,7 +162,7 @@ module.exports = class MessageEvent extends BaseEvent {
         
         const tools = client.Tools
         const player = client.music.players.get(message.guild.id);
-        command.run(client, message, args, tools, prefix, player, command);
+        command.run(client, message, args, tools, Prefix, player, command);
       }
     }
 
