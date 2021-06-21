@@ -6,7 +6,7 @@ module.exports = class SayCommand extends BaseCommand {
   constructor(...args) {
     super(...args, {
       name: 'say',
-      category: '👮‍♂️ Moderation',
+      category: '👌 Interaction',
       aliases: ['dizer', 'diga', 'falar', 'fale'],
       usage: 'say <Mensagem a ser dita pelo Bot>',
       description: 'O Bot apaga sua mensagem e reenvia ela'
