@@ -17,7 +17,7 @@ module.exports = class ClearCommand extends BaseCommand {
   async run(client, message, args) {
     const deleteCount = parseInt(args[0], 10);
     if (!deleteCount || deleteCount < 1 || deleteCount > 100)
-      return message.reply("__Forneça um numero de 1/99 para deletar as mensagens__.");
+      return message.inlineReply("__Forneça um numero de 1/99 para deletar as mensagens__.");
     const fetched = await message.channel.messages.fetch({
       limit: deleteCount + 1,
     });

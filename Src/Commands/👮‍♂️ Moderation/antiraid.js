@@ -10,38 +10,49 @@ module.exports = class AntiRaidCommand extends BaseCommand {
       category: '👮‍♂️ Moderation',
       aliases: ['lockdown'],
       usage: 'antiraid on | off>',
-      description: 'Bloqueia o servidor inteiro para nenhum membro mandar mensagens'
+      description: 'Bloqueia o servidor inteiro para nenhum membro mandar mensagens',
+      userPerms: ["MANAGE_GUILD"]
     });
   }
 
-  async run(client, message, args) {
+  async run(client, message, args, tools, prefix) {
     const guildConfig = await GuildConfig.findOne({
       guildId: message.guild.id
     })
     const FindRole = guildConfig.defaultRole;
     const Membros = message.guild.roles.cache.find(r => r.id === `${FindRole}`);
     const Mention = message.author;
-    const MsgSender = message.channel.send;
     const Content = message.content;
 
     const SintaxErr = new Discord.MessageEmbed()
       .setTitle("❌ | Erro de Sintaxe")
       .setAuthor(client.user.tag, client.user.displayAvatarURL())
       .setColor("#00c26f")
-      .setDescription(`O método correto de utilizar o comando é: lockdown on | off`)
+      .setDescription(`O método correto de utilizar o comando é: ${prefix}lockdown on | off`)
       .setTimestamp()
-    if(!args[0]) return message.channel.send(`${Mention} ${SintaxErr}`);
-    if(!message.member.hasPermission("MANAGE_GUILD")) {
-      message.channel.send(`${Mention}`, `este comando é restrito para a Staff!`)
-
-    } else if (Content.includes("on")) {
+    if(!args[0]) return message.inlineReply(`${Mention} ${SintaxErr}`);
+    else if (Content.includes("on")) {
       await Membros.setPermissions(67174465).catch(console.error);
-      await message.channel.send(`O Sistema de AntiRaid foi Ligado por ${Mention}`)
-
+      await message.inlineReply(/*`O Sistema de AntiRaid foi Ligado por ${Mention}`*/
+        new Discord.MessageEmbed()
+          .setTitle("Sistema AntiRaid")  
+          .setAuthor(client.user.tag, client.user.displayAvatarURL())
+          .setColor("#00c26f")
+          .setDescription(`O Sistema de AntiRaid foi Ligado por ${Mention}`)
+          .setFooter(message.guild.name, message.guild.iconURL())
+          .setTimestamp()
+      );
     } else if (Content.includes("off")) {
       await Membros.setPermissions(133684545).catch(console.error);
-      await message.channel.send(`O Sistema de AntiRaid foi Desligado por ${Mention}`)
-      
+      await message.inlineReply(/*`O Sistema de AntiRaid foi Desligado por ${Mention}`*/
+        new Discord.MessageEmbed()
+          .setTitle("Sistema AntiRaid")  
+          .setAuthor(client.user.tag, client.user.displayAvatarURL())
+          .setColor("#00c26f")
+          .setDescription(`O Sistema de AntiRaid foi Desligado por ${Mention}`)
+          .setFooter(message.guild.name, message.guild.iconURL())
+          .setTimestamp()
+      );
     }
   }
 }
