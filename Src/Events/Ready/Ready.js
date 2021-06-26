@@ -25,12 +25,17 @@ module.exports = class ReadyEvent extends BaseEvent {
         setInterval(() => setStatus(), 120000);
 
         //@ Oleo De Macaco 🐵
-        const attachment = new Discord.MessageAttachment("./Src/Img/Videos/mamaco.mp4");
         const JobsChannel = client.channels.cache.get("708786184096055347");
         const NedChannel = client.channels.cache.get("796380307547881482");
         // const TestChannel = client.channels.cache.get("717094267767488554");
         const Oleo = '0 0 * * *'
         const Mamaco = cron.schedule(Oleo, () => {
+            let random = Math.floor(Math.random() * 10);
+            if(random === 5) {
+                var attachment = new Discord.MessageAttachment("./Src/Img/Videos/MamacoWhatsapp.mp4");
+            } else {
+                var attachment = new Discord.MessageAttachment("./Src/Img/Videos/Mamaco.mp4");
+            }
             JobsChannel.send("Meia Noite o Horario Oficial do Oleo de Mamaco 🐒 vlw!", attachment)
             NedChannel.send("Meia Noite o Horario Oficial do Oleo de Mamaco 🐒 vlw!", attachment)
             // TestChannel.send("Meia Noite o Horario Oficial do Oleo de Mamaco 🐒 vlw!", attachment)
