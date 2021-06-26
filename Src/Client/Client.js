@@ -7,6 +7,7 @@ const CommandHandler = require("../Utils/Handlers/CommandHandler");
 const EventHandler = require("../Utils/Handlers/EventHandler");
 const ReactionRole = require("../Packages/ReactionRole/index.js");
 const Variables = require("../Utils/Tools/Variables");
+const GuildConfig = require("../Database/Schema/GuildConfig")
 
 module.exports = class NDBClient extends Discord.Client {
   constructor(options = {}, sentry) {
@@ -54,6 +55,7 @@ module.exports = class NDBClient extends Discord.Client {
     this.logger = Logger;
     this.owners = options.owners;
     this.mongoose = require("../Utils/Tools/Mongoose");
+    this.languages = require('../Utils/Languages/language-meta.json');
   }
 
   validate(options) {
@@ -70,6 +72,7 @@ module.exports = class NDBClient extends Discord.Client {
   }
 
   async start(token = this.token) {
+    this.translations = await require('../Utils/Handlers/LanguageHandler')();
     this.CommandHandler.loadCommands();
     this.EventHandler.loadEvents();
 
@@ -80,5 +83,15 @@ module.exports = class NDBClient extends Discord.Client {
 
     super.login((token = this.token));
     Logger.debug("Hello World");
+  }
+
+  async translate(key, message, args) {
+    //const locale = this.config.Language;
+    const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id})
+    const locale = guildConfig.language
+    if(!locale) locale = this.config.Language
+    const language = this.translations.get(locale);
+    if (!language) throw 'linguagem invalida definida ou key não encontrada';
+    return language(key, args);
   }
 };

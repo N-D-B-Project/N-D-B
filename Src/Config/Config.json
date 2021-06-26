@@ -7,5 +7,6 @@
   "MJGuild": ["581478383800549386"],
   "ndbbugs": ["800847836139880458", "800847760046948370"],
   "defaultPerms" : ["SEND_MESSAGES", "VIEW_CHANNEL"],
-  "dev": true
+  "debug": true,
+  "Language": "pt-BR"
 }
