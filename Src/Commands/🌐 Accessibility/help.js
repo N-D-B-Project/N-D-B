@@ -38,7 +38,8 @@ module.exports = class HelpCommand extends BaseCommand {
 
         embed.setAuthor(`${client.Tools.capitalize(cmd.name)} Comando Help`, client.user.displayAvatarURL());
         embed.setDescription([
-            `**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : "Nenhuma Aliases"}`,
+            await client.translate("Accessibility/help:Command:Description:Alias", message, { ARG: cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : await client.translate("Accessibility/help:Command:Description:NoAlias", message)}),
+            //`**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(" ") : "Nenhuma Aliases"}`,
             `**❯ Descrição:** ${cmd.description}`,
             `**❯ Categoria:** ${cmd.category}`,
             `**❯ Modo de Usar:** ${guildConfig.prefix}${cmd.name}${cmd.usage}`,
