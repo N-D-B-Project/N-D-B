@@ -10,13 +10,7 @@ module.exports = class ReadyEvent extends BaseEvent {
   }
   async run(client) {
     client
-        //.on('debug', Logger.log)
-        .on('warn', Logger.log)
-        .on('shardError', error => {
-            Logger.error('A websocket connection encountered an error:', error);
-        })
         .on("raw", (d) => client.music.updateVoiceState(d))
-        
         .music.init(client.user.id)
 
 
