@@ -1,0 +1,23 @@
+{ 
+    "Menu": {
+        "Author": "{{ARG}} Menu de Ajuda",
+        "Footer": "Requisitado por {{ARG}}"
+    },
+
+    "Command": {
+        "Invalid": "Comando Invalido: ",
+        "Author":"{{ARG}} Menu de Ajuda",
+        "Description": {
+            "Alias": "**Aliases:** {{ARG}}",
+            "NoAlias": "Nenhuma Aliases",
+            "Description": "**Descrição:** {{ARG}}",
+            "Category": "**Categoria**",
+            "Usage": "**Modo de Usar:** {{ARG}}"
+        }  
+    },
+
+    "Menu2": {
+        "Description": "**__Reaja de acordo com a categoria desejada__**",
+        "Commands": "Comandos"
+    }
+}

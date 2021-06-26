@@ -17,6 +17,8 @@ module.exports = class Command extends BaseCommand {
     });
   }
 
+  //! await client.translate("Settings/setup:", message)
+
   async run(client, message, args, tools) {
         const guildConfig = await GuildConfig.findOne({ guildId: message.guild.id })
         const guildConfigRoles = await GuildConfigRoles.findOne({ guildId: message.guild.id })
@@ -33,10 +35,10 @@ module.exports = class Command extends BaseCommand {
         try {
             const HomeEmbed = new Discord.MessageEmbed()
                 .setColor("#00c26f")
-                .setTitle("Bot Setup")
+                .setTitle(await client.translate("Settings/setup:Menu:Title", message))
                 .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
                 .setAuthor(message.guild.name, message.guild.iconURL())
-                .setDescription('Essas são as opção de Configuração do Bot!')
+                .setDescription(await client.translate("Settings/setup:Menu:Description", message))
                 .addFields( 
                     { name : "Informações sobre itens Configurados", value : "Reaja com ℹ" },
                     { name : "Prefix", value : "Reaja com 🔘 para definir o Prefixo do Bot" },
@@ -68,7 +70,9 @@ module.exports = class Command extends BaseCommand {
                                 .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
                                 .setAuthor(message.guild.name, message.guild.iconURL())
                                 .setDescription('Essas são as Configurações do Bot!')
-                                .addFields( { name : "Prefix", value : prefix },
+                                .addFields( 
+                                    { name : "Prefix", value : prefix },
+                                    { name : "Linguagem", value : ""},
                                     { name : "DefaultRole", value : `${DefaultRole}: Cargo padrão do servidor, Serve para o sistema de Antiraid, Auto verificação, etc...` },
                                     { name : "MutedRole", value : `${MutedRole}: Cargo de mute do servidor, Serve para o sistema de Warns, Mute, etc...` },
                                     { name : "LogChannel", value : `${LogChannel}: Chat de logs do servidor, Serve para diversos sistemas com o intuito de passar o log das coisas que ocorrem com o servidor!` },
@@ -287,7 +291,7 @@ module.exports = class Command extends BaseCommand {
                                 { name : 'Menu', value : 'Reaja com 🏠 para voltar ao menu principal' },
                                 { name : "Anti-Spam", value : 'Reaja com 😆 para ativar ou desativar' },
                                 { name : "Log de Mensagens Deletadas", value : 'Reaja com 🗑 para ativar ou desativar' },
-                                { name: "Anti-Alt", value : 'Reaja com 🚫 para ativar ou desativar' },
+                                { name : "Anti-Alt", value : 'Reaja com 🚫 para ativar ou desativar' },
                             )
                             .setFooter(message.author.tag, message.author.displayAvatarURL())
                             .setTimestamp()
@@ -540,9 +544,9 @@ module.exports = class Command extends BaseCommand {
             }, 1000) //! Save DBs every 1 second to prevent some bugs...
 
         } catch (error) {
-            client.logger.error("Setup Error: " + error)
+            //client.logger.error("Setup Error: " + error)
+            console.log(error)
         }
 
     }
 }
-

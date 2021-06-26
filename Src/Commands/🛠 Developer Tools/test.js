@@ -16,6 +16,6 @@ module.exports = class TestCommand extends BaseCommand {
   }
   
   async run(client, message, args, tools, prefix, player) {
-    
+    message.inlineReply(await client.translate("Dev/test:Title:COMMENT", message, { GUILD: message.guild.name}))
   }
 }
