@@ -45,6 +45,7 @@ module.exports = class NDBClient extends Discord.Client {
     this.defaultPerms = new Discord.Permissions(options.defaultPerms).freeze();
     this.partials = ["MESSAGE", "CHANNEL", "REACTION", "USER", "GUILD_MEMBER"];
     this.config = options;
+    this.emoji = require("../Config/Emojis");
     this.commands = new Discord.Collection();
     this.events = new Discord.Collection();
     this.aliases = new Discord.Collection();
