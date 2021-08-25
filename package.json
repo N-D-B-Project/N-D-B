@@ -28,7 +28,7 @@
     "@anishshobith/deeptype": "^1.1.0",
     "@discordjs/opus": "^0.5.3",
     "@top-gg/sdk": "^3.1.1",
-    "canvacord": "^5.2.0",
+    "canvacord": "^5.2.3",
     "chalk": "^4.1.0",
     "child_process": "^1.0.2",
     "colors": "^1.4.0",
