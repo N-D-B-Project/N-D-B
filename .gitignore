@@ -1,0 +1,19 @@
+# Compiler
+Dist/
+node_modules/
+
+# Yarn Berry
+.yarn/cache/
+.yarn/unpluged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.js
+
+# IDE
+.vim/
+.vscode/
+
+# Config Files
+Config.json
+Emojis.json
+*.env

@@ -1,0 +1,23 @@
+{
+  "name": "n-d-b",
+  "version": "6.0.0",
+  "main": "./Src/Root.ts",
+  "author": "NedcloarBR#0026",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NedcloarBR/N-D-B"
+  },
+  "bugs": {
+    "url": "https://github.com/NedcloarBR/N-D-B/issues"
+  },
+  "homepage": "https://github.com/NedcloarBR/N-D-B",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --no-notify Src/Root.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
