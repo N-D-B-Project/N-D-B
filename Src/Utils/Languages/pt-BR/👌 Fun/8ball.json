@@ -1,0 +1,10 @@
+{
+  "Help": {
+    "Description": "O Bot responde sua pergunta com algo aleatório",
+    "Usage": "<Sua Pergunta>"
+  },
+
+  "Title": "🎱 8Ball!",
+  "Question": "❔ Pergunta",
+  "Reply": "🗣 Resposta"
+}

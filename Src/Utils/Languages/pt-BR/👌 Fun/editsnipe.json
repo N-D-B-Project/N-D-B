@@ -1,0 +1,11 @@
+{
+  "Help": {
+    "Description": "Mostra a ultima mensagem editada no canal",
+    "Usage": " "
+  },
+
+  "NoMsg": "Nenhuma Mensagem editada",
+  "OldMsg": "Mensagem Antiga",
+  "NewMsg": "Mensagem Editada",
+  "Footer": "Mensagem Editada"
+}

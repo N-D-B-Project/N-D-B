@@ -1,0 +1,352 @@
+{
+  "Help": {
+    "Description": "Configure o Bot utilizando esse comando",
+    "Usage": " "
+  },
+
+  "Buttons": {
+    "Labels": {
+      "Info": "Info",
+      "Geral": "Geral",
+      "Roles": "Cargos",
+      "Channels": "Canais",
+      "Systens": "Sistemas",
+      "Menu": "Menu Principal",
+      "Prefix": "Prefixo",
+      "Language": "Linguagem",
+      "RolesButtons": {
+        "Default": "Cargo Padrão",
+        "Muted": "Cargo de Mute"
+      },
+      "ChannelsButtons": {
+        "Logs": "Canal de Logs",
+        "Flood": "Canal de Flood"
+      }
+    }
+  },
+
+  "Menu": {
+    "Title": "Configuração do Bot",
+    "Description": "Essas são as opção de Configuração do Bot!",
+    "Fields": {
+      "1": "Informações sobre itens Configurados",
+      "2": "Prefixo",
+      "3": "Cargos",
+      "4": "Canais",
+      "5": "Sistemas",
+      "Content": {
+        "1": "Reaja com ℹ",
+        "2": "Reaja com 🔘 para definir o Prefixo do Bot",
+        "3": "Reaja com 🔑 para ver as opções",
+        "4": "Reaja com 📖 para ver as opções",
+        "5": "Reaja com 💾 para ver as opções"
+      }
+    }
+  },
+
+  "Info": {
+    "Title": "Configuração do Bot / Info",
+    "Description": "Essas são as Configurações do Bot!",
+    "Fields": {
+      "1": "Prefix",
+      "2": "Linguagem",
+      "3": "Cargo Padrão",
+      "4": "Cargo Mute",
+      "5": "Canal de Logs",
+      "6": "Canal de Flood",
+      "7": "Menu",
+      "Content": {
+        "3": "{{DefaultRole}}: Cargo padrão do servidor, Serve para o sistema de Antiraid, Auto verificação, etc...",
+        "4": "{{MutedRole}}: Cargo de mute do servidor, Serve para o sistema de Warns, Mute, etc...",
+        "5": "{{LogChannel}}: Canal de logs do servidor, Serve para diversos sistemas com o intuito de passar o log das coisas que ocorrem com o servidor!",
+        "6": "{{FloodChannel}}  Canal onde os membros podem Floodar sem tomar Mute e Ganhar XP",
+        "7": "Reaja com 🏠 para voltar ao menu principal"
+      }
+    }
+  },
+
+  "Geral": {
+    "Embed": {
+      "Title": "Bot Setup / Geral",
+      "Description": "Essas são as opção de Configuração do Bot Referente a Prefixo e Linguagem",
+      "Fields": {
+        "1": "Menu",
+        "2": "Prefixo",
+        "3": "Linguagem",
+        "Content": {
+          "1": "Reaja com 🏠 para voltar ao menu principal",
+          "2":"Reaja com 🔘 para definir o Prefixo do Bot",
+          "3": "Reaja com 🌎 para definir a Linguagem do Bot"
+        }
+      }
+    },
+    "Prefix": {
+      "Title": "Prefixo",
+      "Description": "Prefixo definido: {{PREFIX}}\nDigite o Prefixo desejado abaixo!",
+      "New": {
+        "Title": "✔ | Prefixo atualizado!",
+        "Description": "Novo prefix: {{PrefixFMsg}}",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    },
+    "Language": {
+      "Title": "Linguagem",
+      "Description": "Linguagem definida: {{LANGUAGE}}\nSelecione a Linguagem desejada abaixo!",
+      "New": {
+        "Title": "✔ | Linguagem atualizado!",
+        "Description": "Nova Linguagem: {{LANGUAGE}}",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    }
+  },
+
+  
+
+  "Roles": {
+    "Menu": {
+      "Title": "Configuração do Bot / Cargos",
+      "Description": "Essas são as opção de Configuração do Bot Referente a Cargos!",
+      "Fields": {
+        "1": "Menu",
+        "2": "Cargo Padrão",
+        "3": "Cargo Mute",
+        "Content": {
+          "1": "Reaja com 🏠 para voltar ao menu principal",
+          "2": "Reaja com 📦 para definir",
+          "3": "Reaja com 🔇 para definir"
+        }
+      }
+    },
+
+    "Default": {
+      "Title": "Cargo Padrão",
+      "Description": "Cargo: {{DefaultRole}}\nDigite o Cargo desejado abaixo!",
+      "New": {
+        "Title": "✔ | Cargo Definido!",
+        "Description": "Cargo: <@&{{DRFMsg}}>",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    },
+
+    "Mute": {
+      "Title": "Cargo Mute",
+      "Description": "Cargo: {{MutedRole}}\nDigite o Cargo desejado abaixo!",
+      "New": {
+        "Title": "✔ | Cargo Definido!",
+        "Description": "Cargo: <@&{{MRFMsg}}>",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    }
+  },
+
+  "Channels": {
+    "Menu": {
+      "Title": "Configuração do Bot / Canais",
+      "Description": "Essas são as opção de Configuração do Bot Referente a Canais!",
+      "Fields": {
+        "1": "Menu",
+        "2": "Canal de Logs",
+        "3": "Canal de Flood",
+        "Content": {
+          "1": "Reaja com 🏠 para voltar ao menu principal",
+          "2": "Reaja com 🗞 para definir",
+          "3": "Reaja com 😵 para definir"
+        }
+      }
+    },
+
+    "Logs": {
+      "Title": "Canal de Logs",
+      "Description": "Canal: {{LogChannel}}\nDigite o Canal desejado abaixo!",
+      "New": {
+        "Title": "✔ | Canal Definido!",
+        "Description": "Canal: <#{{LCFMsg}}>",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    },
+
+    "Flood": {
+      "Title": "Canal de Flood",
+      "Description": "Canal: {{FloodChannel}}\nDigite o Canal desejado abaixo!",
+      "New": {
+        "Title": "✔ | Canal Definido!",
+        "Description": "Canal: {{FCFMsg}}",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      }
+    }
+  },
+
+  "System": {
+    "Menu": {
+      "Title": "Configuração do Bot / Sistemas",
+      "Description": "Essas são as opção de Configuração do Bot Referente a Sistemas!",
+      "Fields": {
+        "1": "Menu",
+        "2": "Anti-Spam",
+        "3": "Log de Mensagens Deletadas",
+        "4": "Anti-Alt",
+        "Content": {
+          "1": "Reaja com 🏠 para voltar ao menu principal",
+          "2": "Reaja com 😆 para ativar ou desativar",
+          "3": "Reaja com 🗑 para ativar ou desativar",
+          "4": "Reaja com 🚫 para ativar ou desativar"
+        }
+      }
+    },
+
+    "AntiSpam": {
+      "Menu": {
+        "Title": "Sistema de Anti-Spam",
+        "Description": "Sistema Anti-Spam!\nStatus: {{DataCheck}}",
+        "Fields": {
+          "1": "Menu",
+          "2": "Ativar",
+          "3": "Desativar",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal",
+            "2": "Reaja com ✔",
+            "3": "Reaja com ❌"
+          }
+        }
+      },
+
+      "On": {
+        "Title": "Sistema de Anti-Spam",
+        "Description": "Sistema de Anti-Spam Ativado!",
+        "Fields": {
+          "1": "Menu",
+          "2": "💡 Dica: Flood",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal",
+            "2": "Caso o Servidor possua chat de Flood recomendo configura-lo na aba Channels do Menu!"
+          }
+        }
+      },
+
+      "Off": {
+        "Title": "Sistema de Anti-Spam",
+        "Description": "Sistema de Anti-Spam Desativado!",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      },
+
+      "Missing": {
+        "All": {
+          "Title": "Sistema Anti-Spam",
+          "Description": "Para você ativar esse sistema precisa primeiro é necessário definir os seguintes itens:",
+          "Fields": {
+            "1": "Cargo Mute",
+            "2": "Canal de Logs",
+            "3": "Menu",
+            "Content": {
+              "1": "Necessário para o bot aplicar o Mute quando ele infligir o Sistem ou remover o Mute quando o tempo passar",
+              "2": "Necessário para o bot avisar quando o Membro for Mutado e Desmutado pelo Sistema",
+              "3": "Reaja com 🏠 para voltar ao menu principal"
+            }
+          }
+        },
+
+        "NotAll": {
+          "Title": "Sistema Anti-Spam",
+          "Description": "Para você ativar esse sistema precisa primeiro é necessário definir o seguinte item:",
+          "Fields": {
+            "Menu": "Menu",
+            "Mute": "Cargo Mute",
+            "Log": "Canal de Logs",
+            "Content": {
+              "Menu": "Reaja com 🏠 para voltar ao menu principal",
+              "Mute": "Necessário para o bot aplicar o Mute quando ele infligir o Sistem ou remover o Mute quando o tempo passar",
+              "Log": "Necessário para o bot avisar quando o Membro for Mutado e Desmutado pelo Sistema"
+            }
+          }
+        }
+      }
+    },
+
+    "Dellog": {
+      "Title": "Sistema de Log das Mensagens Deletadas",
+      "Description": "Sistema Log de Mensagens Deletadas!\nStatus: {{DataCheck}}",
+      "Fields": {
+        "1": "Menu",
+        "2": "Ativar",
+        "3": "Desativar",
+        "Content": {
+          "1": "Reaja com 🏠 para voltar ao menu principal",
+          "2": "Reaja com ✔",
+          "3": "Reaja com ❌"
+        }
+      },
+
+      "On": {
+        "Title": "Sistema de Log das Mensagens Deletadas",
+        "Description": "Sistema de Log das Mensagens Deletadas Ativado!",
+        "Fields": {
+          "1": "Menu",
+          "2": "💡 Dica: Flood",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal",
+            "2": "Caso o Servidor possua chat de Flood recomendo configura-lo na aba Channels do Menu!"
+          }
+        }
+      },
+
+      "Off": {
+        "Title": "Sistema de Log das Mensagens Deletadas",
+        "Description": "Sistema de Log das Mensagens Deletadas Desativado!",
+        "Fields": {
+          "1": "Menu",
+          "Content": {
+            "1": "Reaja com 🏠 para voltar ao menu principal"
+          }
+        }
+      },
+
+      "Missing": {
+        "Title": "Sistema de Log das Mensagens Deletadas",
+        "Description": "Para você ativar esse sistema precisa primeiro é necessário definir o seguinte item:",
+        "Fields": {
+          "Menu": "Menu",
+          "Log": "Canal de Logs",
+          "Content": {
+            "Menu": "Reaja com 🏠 para voltar ao menu principal",
+            "Log": "Necessário para o bot Enviar a mensagem apagada"
+          }
+        }
+      }
+    }
+  }
+}

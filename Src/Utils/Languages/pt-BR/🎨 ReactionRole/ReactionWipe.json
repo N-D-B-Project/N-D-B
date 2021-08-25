@@ -1,0 +1,9 @@
+{
+  "Help": {
+    "Description": "Remove todas as Reaction Roles do Servidor",
+    "Usage": " "
+  },
+
+  "Description1": "O Servidor não possui nenhuma Reaction Role",
+  "Description2": "Toda(s) a(s): **{{Results}}** ${resultsHehe} foram apagadas com sucesso!"
+}

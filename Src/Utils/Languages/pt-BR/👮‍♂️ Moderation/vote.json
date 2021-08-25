@@ -1,0 +1,16 @@
+{
+  "Help": {
+    "Description": "Inicia uma votação",
+    "Usage": "<Sobre a Votação>"
+  },
+
+  "Emoji": {
+    "1": "<a:Accept:719710630881525881> - Para concordar",
+    "2": "<a:Denied:719710607405875321> - Para discordar"
+  },
+
+  "Embed": {
+    "Title": "Iniciou uma votação",
+    "Vote": "Como votar"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "SyntaxError": {
+    "Title": "{{EMOJI}} | Erro de Sintaxe",
+    "Description": "O Modo correto de se utilizar o comando é: {{PREFIX}}{{CMD}} {{USAGE}}"
+  }
+}

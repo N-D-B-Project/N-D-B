@@ -1,0 +1,19 @@
+{
+  "Help": {
+    "Description": "Configura o bot automaticamente",
+    "Usage": ""
+  },
+
+  "Home": {
+    "Title": "Configuração automatica do Bot",
+    "Description": "A configuração automatica irá criar canais e cargos no servidor\nSelecione a opção desejada!",
+    "Fields": {
+      "1": "Clique em <a:Accept:719710630881525881>",
+      "2": "Clique em <a:Denied:719710607405875321>",
+      "Content": {
+        "1": "Para confirmar",
+        "2": "Para cancelar"
+      }
+    }
+  }
+}
