@@ -13,11 +13,12 @@
   },
   "homepage": "https://github.com/NedcloarBR/N-D-B",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly --ignore-watch node_modules --no-notify Src/Root.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify Src/Root.ts"
   },
   "devDependencies": {
     "ts-node": "^10.2.1",
     "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.11.0",
     "typescript": "^4.3.5"
   }
 }
