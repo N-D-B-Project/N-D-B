@@ -15,7 +15,8 @@
   "scripts": {
     "build": "babel Src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify Src/Root.ts",
-    "test": "jest"
+    "test": "jest",
+    "lint:fix": "eslint --fix packages --ext ts,js"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
@@ -26,18 +27,28 @@
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/eslint": "^7",
+    "@types/eslint-plugin-prettier": "^3",
     "@types/jest": "^27.0.1",
+    "@types/prettier": "^2",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
     "jest": "^27.0.6",
+    "prettier": "^2.3.2",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",
     "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.ts, *.tsx": [
+      "eslint --fix"
+    ]
   }
 }
