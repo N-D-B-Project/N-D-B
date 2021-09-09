@@ -42,7 +42,8 @@
       "@Commands/*": ["./Src/Commands/*"],
       "@Languages/*": ["./Src/Utils/Languages/*"],
       "@Config/*": ["./Src/Config/*"],
-      "@Types/*": ["./Src/Types/*"]
+      "@Types/*": ["./Src/Types/*"],
+      "@Packages/*": ["./Src/Packages/*"]
     }
   },
   "include": ["Src", "Src/Root.ts"],

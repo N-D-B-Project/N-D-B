@@ -23,6 +23,7 @@ module.exports = {
         '@Languages/*': './Src/Utils/Languages/*',
         '@Config/*': './Src/Config/*',
         '@Types/*': './Src/Types/*',
+        "@Packages/*": "./Src/Packages/*"
       },
     }],
   ],

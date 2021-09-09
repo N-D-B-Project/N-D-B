@@ -16,7 +16,7 @@
     "build": "babel Src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules --no-notify Src/Root.ts",
     "test": "jest",
-    "lint:fix": "eslint --fix packages --ext ts,js",
+    "lint:fix": "eslint Src --fix",
     "update": "yarn upgrade-interactive"
   },
   "dependencies": {
