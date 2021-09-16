@@ -1,6 +1,6 @@
 import NDBClient from "@/Client/Client";
 import * as Discord from "discord.js";
-import Setup from "@Structures/Embeds/setup";
+import Setup from "@Structures/Embeds/Setup";
 
 export default class Embeds {
   client: NDBClient;

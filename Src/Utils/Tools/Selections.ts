@@ -11,5 +11,5 @@ export default class Selections {
     this.setup = new Setup(client);
   }
 
-    
+
 }

@@ -43,6 +43,34 @@ export default class MongoData {
     });
   };
 
+  initReactionRole = (dbURI: string) => {
+    const Connect = {
+      keepAlive: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    };
+
+    if (!dbURI) throw new TypeError("MongoDB URI não foi definido || ReactionRole");
+    mongoose.connect(dbURI, Connect).catch((e) => {
+      this.client.logger.error(`Mongoose Connection Error\n${e}`);
+    });
+
+    mongoose.connection.on("connected", () => {
+      this.client.logger.database("ReactionRole: MongoDB Conectado!");
+    });
+
+    mongoose.set("useFindAndModify", false);
+
+    mongoose.connection.on("err", (err) => {
+      this.client.logger.error(`Mongoose Connection error: ${err.stack}`);
+    });
+
+    mongoose.connection.on("disconnected", () => {
+      this.client.logger.error(`Mongoose Connection lost`);
+    });
+  }
+
   async FindGuildConfig(guild) {
     const guildConfig = await GuildConfig.findOne({ ID: guild.id });
     return guildConfig;
@@ -161,7 +189,7 @@ export default class MongoData {
     switch (target) {
       case "pt-BR":
         return ":flag_br: Português Brasileiro"
-      break;
+        break;
     }
   }
 

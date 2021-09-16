@@ -10,7 +10,7 @@ export default class Buttons {
     this.client = client;
     this.setup = new Setup(client);
   }
-  
+
   async Confirm(message: any) {
     return new Discord.MessageActionRow()
       .addComponents(
@@ -25,7 +25,7 @@ export default class Buttons {
           .setEmoji("719710607405875321")
           .setStyle("DANGER")
       )
-      
+
   }
-    
+
 }
