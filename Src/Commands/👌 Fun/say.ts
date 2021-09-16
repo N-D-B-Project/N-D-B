@@ -34,7 +34,7 @@ module.exports = class SayCommand extends BaseCommand {
 
   async run(client: NDBClient, message: any, args: any) {
     const saymsg = args.join(" ");
-    message.delete().catch((O_o: any) => {});
+    message.delete().catch((O_o: any) => { });
     message.channel.send({ content: saymsg });
   }
 

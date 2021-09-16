@@ -52,13 +52,13 @@ module.exports = class TogetherCommand extends BaseCommand {
               description: "Jogar Xadrez na chamada",
               emoji: "♟️"
             },
-            { 
+            {
               label: "Among Us (Betrayal)",
               value: "Betrayal",
               description: "Jogar `Among Us` na chamada",
               emoji: "👨‍🚀"
             },
-            { 
+            {
               label: "Pescaria (Fishing)",
               value: "Fishing",
               description: "Jogar Pescaria na chamada",
@@ -67,66 +67,67 @@ module.exports = class TogetherCommand extends BaseCommand {
           ])
       )
 
-      const HE = await message.reply({ embeds: [Embed], components: [GamesComponent] })
-      const filter = (interaction) => interaction.user.id === message.author.id;
+    const HE = await message.reply({ embeds: [Embed], components: [GamesComponent] })
+    const filter = (interaction) => interaction.user.id === message.author.id;
 
-      const collector = HE.createMessageComponentCollector({ filter, componentType: "SELECT_MENU", time: Timer });
+    const collector = HE.createMessageComponentCollector({ filter, componentType: "SELECT_MENU", time: Timer });
 
-      collector.on('collect', async (interaction) => {
-        if (interaction.user.id !== message.author.id) return;
+    collector.on('collect', async (interaction) => {
+      if (interaction.user.id !== message.author.id) return;
 
-        const ComponentReaction = interaction.values[0]
+      const ComponentReaction = interaction.values[0]
 
-        switch (ComponentReaction) {
-          case "Youtube":
-            if(message.member.voice.channel) {
-              client.together.createTogetherCode(message.member.voice.channel.id, 'youtube').then(async invite => {
-                return HE.edit({ content: `${invite.code}`, embeds: [], components: []})
-              })
-            } else {
-              HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
-            }
-          break;
-          case "Poker":
-            if(message.member.voice.channel) {
-              client.together.createTogetherCode(message.member.voice.channel.id, 'poker').then(async invite => {
-                return HE.edit({ content: `${invite.code}`, embeds: [], components: []})
-              })
-            } else {
-              HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
-            }
-          break;
-          case "Chess": 
-          if(message.member.voice.channel) {
-            client.together.createTogetherCode(message.member.voice.channel.id, 'chess').then(async invite => {
-              return HE.edit({ content: `${invite.code}`, embeds: [], components: []})
+      switch (ComponentReaction) {
+        case "Youtube":
+          if (message.member.voice.channel) {
+            client.together.createTogetherCode(message.member.voice.channel.id, 'youtube').then(async invite => {
+              return HE.edit({ content: `${invite.code}`, embeds: [], components: [] })
             })
           } else {
             HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
           }
           break;
-          case "Betrayal":
-            if(message.member.voice.channel) {
-              client.together.createTogetherCode(message.member.voice.channel.id, 'betrayal').then(async invite => {
-                return HE.edit({ content: `${invite.code}`, embeds: [], components: []})
-              })
-            } else {
-              HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
-            }
+        case "Poker":
+          if (message.member.voice.channel) {
+            client.together.createTogetherCode(message.member.voice.channel.id, 'poker').then(async invite => {
+              return HE.edit({ content: `${invite.code}`, embeds: [], components: [] })
+            })
+          } else {
+            HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
+          }
           break;
-          case "Fishing":
-            if(message.member.voice.channel) {
-              client.together.createTogetherCode(message.member.voice.channel.id, 'fishing').then(async invite => {
-                return HE.edit({ content: `${invite.code}`, embeds: [], components: []})
-              })
-            } else {
-              HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
-            }
+        case "Chess":
+          if (message.member.voice.channel) {
+            client.together.createTogetherCode(message.member.voice.channel.id, 'chess').then(async invite => {
+              return HE.edit({ content: `${invite.code}`, embeds: [], components: [] })
+            })
+          } else {
+            HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
+          }
           break;
-        }})
+        case "Betrayal":
+          if (message.member.voice.channel) {
+            client.together.createTogetherCode(message.member.voice.channel.id, 'betrayal').then(async invite => {
+              return HE.edit({ content: `${invite.code}`, embeds: [], components: [] })
+            })
+          } else {
+            HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
+          }
+          break;
+        case "Fishing":
+          if (message.member.voice.channel) {
+            client.together.createTogetherCode(message.member.voice.channel.id, 'fishing').then(async invite => {
+              return HE.edit({ content: `${invite.code}`, embeds: [], components: [] })
+            })
+          } else {
+            HE.edit({ content: "Você deve estar em um canal de voz", embeds: [], components: [] })
+          }
+          break;
+      }
+    })
   }
 
   async SlashRun(client: NDBClient, interaction: Discord.CommandInteraction, args: any) {
-    
+
   }
 };

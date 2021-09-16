@@ -26,36 +26,36 @@ module.exports = class EditSnipeCommand extends BaseCommand {
 
   async run(client: NDBClient, message: any, args: any) {
     const msg = client.editSnipe.get(message.channel.id)
-    if(!msg || msg.check === false) return message.reply(await client.translate("👌 Fun/editsnipe:NoMsg", message))
+    if (!msg || msg.check === false) return message.reply(await client.translate("👌 Fun/editsnipe:NoMsg", message))
     const embed = new Discord.MessageEmbed()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setDescription(msg.content)
-      .addFields( 
+      .addFields(
         { name: await client.translate("👌 Fun/editsnipe:OldMsg", message), value: msg.OldContent },
         { name: await client.translate("👌 Fun/editsnipe:NewMsg", message), value: msg.NewContent }
       )
       .setColor("#00c26f")
       .setFooter(await client.translate("👌 Fun/editsnipe:Footer", message))
       .setTimestamp()
-    if(msg.image)embed.setImage(msg.image)
+    if (msg.image) embed.setImage(msg.image)
 
     message.reply({ embeds: [embed] })
   }
 
   async SlashRun(client: NDBClient, interaction: Discord.CommandInteraction, args: any) {
     const msg = client.editSnipe.get(interaction.channel.id)
-    if(!msg || msg.check === false) return interaction.followUp(await client.translate("👌 Fun/editsnipe:NoMsg", interaction))
+    if (!msg || msg.check === false) return interaction.followUp(await client.translate("👌 Fun/editsnipe:NoMsg", interaction))
     const embed = new Discord.MessageEmbed()
       .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
       .setDescription(msg.content)
-      .addFields( 
+      .addFields(
         { name: await client.translate("👌 Fun/editsnipe:OldMsg", interaction), value: msg.OldContent },
         { name: await client.translate("👌 Fun/editsnipe:NewMsg", interaction), value: msg.NewContent }
       )
       .setColor("#00c26f")
       .setFooter(await client.translate("👌 Fun/editsnipe:Footer", interaction))
       .setTimestamp()
-    if(msg.image)embed.setImage(msg.image)
+    if (msg.image) embed.setImage(msg.image)
 
     interaction.followUp({ embeds: [embed] })
   }

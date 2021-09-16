@@ -1,4 +1,4 @@
-import NDBClient from "@//Client/Client";
+import NDBClient from "@/Client/Client";
 import { CommandOptions } from "@Types/Options";
 import { BaseCommand } from "@Structures/BaseCommand";
 import * as Discord from "discord.js";
@@ -26,35 +26,35 @@ module.exports = class AntiSnipeCommand extends BaseCommand {
 
   async run(client: NDBClient, message: any, args: any) {
     client.snipe.set(message.channel.id, {
-      check:false,
-      content:null,
-      author:null,
-      image:null
+      check: false,
+      content: null,
+      author: null,
+      image: null
     })
     client.editSnipe.set(message.channel.id, {
-        check:false,
-        OldContent:null,
-        NewContent:null,
-        author:null,
-        image:null
+      check: false,
+      OldContent: null,
+      NewContent: null,
+      author: null,
+      image: null
     })
     message.reply(await client.translate("👌 Fun/antisnipe:Occulted", message))
   }
 
   async SlashRun(client: NDBClient, interaction: Discord.CommandInteraction, args: any) {
     client.snipe.set(interaction.channel.id, {
-      check:false,
-      content:null,
-      author:null,
-      image:null
+      check: false,
+      content: null,
+      author: null,
+      image: null
     })
     client.editSnipe.set(interaction.channel.id, {
-        check:false,
-        OldContent:null,
-        NewContent:null,
-        author:null,
-        image:null
+      check: false,
+      OldContent: null,
+      NewContent: null,
+      author: null,
+      image: null
     })
-    interaction.followUp({ content: await client.translate("👌 Fun/antisnipe:Occulted", interaction), ephemeral: true})
+    interaction.followUp({ content: await client.translate("👌 Fun/antisnipe:Occulted", interaction), ephemeral: true })
   }
 };
