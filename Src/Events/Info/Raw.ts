@@ -6,10 +6,10 @@ module.exports = class Event extends BaseEvent {
   constructor(client: NDBClient) {
     const name = "raw"
     const options = {
-        name: "raw",
-        type: "once",
+      name: "raw",
+      type: "once",
     }
-    
+
     super(client, name, options);
   }
 

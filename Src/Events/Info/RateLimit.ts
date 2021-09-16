@@ -6,14 +6,14 @@ module.exports = class RawLimitEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const name = "rateLimit"
     const options = {
-        name: "rateLimit",
-        type: "once"
+      name: "rateLimit",
+      type: "once"
     }
-    
+
     super(client, name, options);
   }
 
-  async run(client: NDBClient, { route, timeout}) {
-    if(client.config.Debug.Client === true) client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
+  async run(client: NDBClient, { route, timeout }) {
+    if (client.config.Debug.Client === true) client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
   }
 };

@@ -6,10 +6,10 @@ module.exports = class ErrorEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const name = "error"
     const options = {
-        name: "error",
-        type: "once"
+      name: "error",
+      type: "once"
     }
-    
+
     super(client, name, options);
   }
 

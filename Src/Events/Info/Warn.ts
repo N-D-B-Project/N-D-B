@@ -6,10 +6,10 @@ module.exports = class WarnEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const name = "warn"
     const options = {
-        name: "warn",
-        type: "once"
+      name: "warn",
+      type: "once"
     }
-    
+
     super(client, name, options);
   }
 
