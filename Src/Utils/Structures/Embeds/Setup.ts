@@ -8,7 +8,7 @@ export default class Setup {
     this.client = client;
   }
 
-  async HomeEmbed(message: any) {
+  async HomeEmbed(message: Discord.Message): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setColor('#00c26f')
       .setTitle(await this.client.translate('⚙ Settings/setup:Menu:Title', message))
@@ -41,7 +41,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async InfoEmbed(message: any, prefix: any, language: string, DefaultRole: string, MutedRole: string, LogChannel: string, FloodChannel: string) {
+  async InfoEmbed(message: Discord.Message, prefix: any, language: string, DefaultRole: string, MutedRole: string, LogChannel: string, FloodChannel: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setColor('#00c26f')
       .setTitle(await this.client.translate('⚙ Settings/setup:Info:Title', message))
@@ -82,7 +82,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async GeralEmbed(message: any) {
+  async GeralEmbed(message: Discord.Message): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setColor('#00c26f')
       .setTitle(await this.client.translate('⚙ Settings/setup:Geral:Embed:Title', message))
@@ -107,7 +107,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async PrefixEmbed(message: any, prefix: any) {
+  async PrefixEmbed(message: Discord.Message, prefix: any): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate('⚙ Settings/setup:Geral:Prefix:Title', message))
       .setColor('#00c26f')
@@ -115,7 +115,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async newPrefixEmbed(message: any, prefix: any) {
+  async newPrefixEmbed(message: Discord.Message, prefix: any): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate('⚙ Settings/setup:Geral:Prefix:New:Title', message))
       .setColor('#00c26f')
@@ -127,7 +127,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async LanguageEmbed(message: any, language: string) {
+  async LanguageEmbed(message: Discord.Message, language: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate('⚙ Settings/setup:Geral:Language:Title', message))
       .setColor('#00c26f')
@@ -135,7 +135,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async newLanguageEmbed(message: any, language: string) {
+  async newLanguageEmbed(message: Discord.Message, language: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate('⚙ Settings/setup:Geral:Language:New:Title', message))
       .setColor('#00c26f')
@@ -147,7 +147,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async RolesEmbed(message: any) {
+  async RolesEmbed(message: Discord.Message): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setColor("#00c26f")
       .setTitle(await this.client.translate("⚙ Settings/setup:Roles:Menu:Title", message))
@@ -163,7 +163,7 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async DREmbed(message: any, DefaultRole: string) {
+  async DREmbed(message: Discord.Message, DefaultRole: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("⚙ Settings/setup:Roles:Default:Title", message))
       .setColor("#00c26f")
@@ -171,7 +171,7 @@ export default class Setup {
       .setTimestamp();
   }
 
-  async newDREmbed(message: any, DRFMsg: string) {
+  async newDREmbed(message: Discord.Message, DRFMsg: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("⚙ Settings/setup:Roles:Default:New:Title", message))
       .setColor("#00c26f")
@@ -183,7 +183,7 @@ export default class Setup {
       .setTimestamp();
   }
 
-  async MREmbed(message: any, MutedRole: string) {
+  async MREmbed(message: Discord.Message, MutedRole: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("⚙ Settings/setup:Roles:Mute:Title", message))
       .setColor("#00c26f")
@@ -191,7 +191,7 @@ export default class Setup {
       .setTimestamp();
   }
 
-  async newMREmbed(message: any, MRFMsg: string) {
+  async newMREmbed(message: Discord.Message, MRFMsg: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("138846775Roles:Mute:New:Title", message))
       .setColor("#00c26f")
@@ -203,7 +203,7 @@ export default class Setup {
       .setTimestamp();
   }
 
-  async ChannelsEmbed(message: any) {
+  async ChannelsEmbed(message: Discord.Message): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setColor("#00c26f")
       .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Menu:Title", message))
@@ -219,24 +219,24 @@ export default class Setup {
       .setTimestamp()
   }
 
-  async LCEmbed(message: any, LogChannel: string) {
+  async LCEmbed(message: Discord.Message, LogChannel: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
-    .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Logs:Title", message))
-    .setColor("#00c26f")
-    .setDescription(await this.client.translate("⚙ Settings/setup:Channels:Logs:Description", message, { LogChannel: LogChannel }))
-    .setTimestamp();
+      .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Logs:Title", message))
+      .setColor("#00c26f")
+      .setDescription(await this.client.translate("⚙ Settings/setup:Channels:Logs:Description", message, { LogChannel: LogChannel }))
+      .setTimestamp();
   }
 
-  async newLCEmbed(message: any, LCFMsg: string) {
+  async newLCEmbed(message: Discord.Message, LCFMsg: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
-    .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Title", message))
-    .setColor("#00c26f")
-    .setDescription(await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Title", message, { LCFMsg: LCFMsg}))
-    .addFields( { name : await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Fields:1", message), value: await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Fields:Content:1", message) })
-    .setTimestamp();
+      .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Title", message))
+      .setColor("#00c26f")
+      .setDescription(await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Title", message, { LCFMsg: LCFMsg }))
+      .addFields({ name: await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Fields:1", message), value: await this.client.translate("⚙ Settings/setup:Channels:Logs:New:Fields:Content:1", message) })
+      .setTimestamp();
   }
 
-  async FCEmbed(message: any, FloodChannel: string) {
+  async FCEmbed(message: Discord.Message, FloodChannel: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Flood:Title", message))
       .setColor("#00c26f")
@@ -244,12 +244,29 @@ export default class Setup {
       .setTimestamp();
   }
 
-  async newFCEmbed(message: any, FCFMsg: string) { 
+  async newFCEmbed(message: Discord.Message, FCFMsg: string): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Title", message))
       .setColor("#00c26f")
       .setDescription(await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Description", message, { FCFMsg: FCFMsg }))
-      .addFields( { name : await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Fields:1", message), value: await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Fields:Content:1", message) })
+      .addFields({ name: await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Fields:1", message), value: await this.client.translate("⚙ Settings/setup:Channels:Flood:New:Fields:Content:1", message) })
       .setTimestamp();
+  }
+
+  async SystemEmbed(message: Discord.Message): Promise<Discord.MessageEmbed> {
+    return new Discord.MessageEmbed()
+      .setColor("#00c26f")
+      .setTitle(await this.client.translate("⚙ Settings/setup:System:Menu:Title", message))
+      .setThumbnail(this.client.user.displayAvatarURL({ dynamic: true }))
+      .setAuthor(message.guild.name, message.guild.iconURL())
+      .setDescription(await this.client.translate("⚙ Settings/setup:System:Menu:Description", message))
+      .addFields(
+        { name: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:1", message), value: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:Content:1", message) },
+        { name: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:2", message), value: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:Content:2", message) },
+        { name: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:3", message), value: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:Content:3", message) },
+        { name: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:4", message), value: await this.client.translate("⚙ Settings/setup:System:Menu:Fields:Content:4", message) },
+      )
+      .setFooter(message.author.tag, message.author.displayAvatarURL())
+      .setTimestamp()
   }
 }

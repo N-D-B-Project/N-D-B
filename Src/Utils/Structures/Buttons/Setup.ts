@@ -71,7 +71,7 @@ export default class SetupButtons {
         .setLabel(await this.client.translate("⚙ Settings/setup:Buttons:Labels:RolesButtons:Default", message))
         .setStyle("PRIMARY")
         .setEmoji("📦")
-      ),
+    ),
       new Discord.MessageButton()
         .setCustomId("MutedRole")
         .setLabel(await this.client.translate("⚙ Settings/setup:Buttons:Labels:RolesButtons:Muted", message))
@@ -87,11 +87,11 @@ export default class SetupButtons {
           .setLabel(await this.client.translate("⚙ Settings/setup:Buttons:Labels:ChannelsButtons:Logs", message))
           .setEmoji("🗞")
           .setStyle("PRIMARY")
-        ),
-        new Discord.MessageButton()
-          .setCustomId("FloodChannel")
-          .setLabel(await this.client.translate("⚙ Settings/setup:Buttons:Labels:ChannelsButtons:Flood", message))
-          .setEmoji("😵")
-          .setStyle("PRIMARY")
+      ),
+      new Discord.MessageButton()
+        .setCustomId("FloodChannel")
+        .setLabel(await this.client.translate("⚙ Settings/setup:Buttons:Labels:ChannelsButtons:Flood", message))
+        .setEmoji("😵")
+        .setStyle("PRIMARY")
   }
 }

@@ -35,11 +35,11 @@
       "4": "Canais",
       "5": "Sistemas",
       "Content": {
-        "1": "Reaja com ℹ",
-        "2": "Reaja com 🔘 para definir o Prefixo do Bot",
-        "3": "Reaja com 🔑 para ver as opções",
-        "4": "Reaja com 📖 para ver as opções",
-        "5": "Reaja com 💾 para ver as opções"
+        "1": "Clique em ℹ",
+        "2": "Clique em 🔘 para definir o Prefixo do Bot",
+        "3": "Clique em 🔑 para ver as opções",
+        "4": "Clique em 📖 para ver as opções",
+        "5": "Clique em 💾 para ver as opções"
       }
     }
   },
@@ -60,7 +60,7 @@
         "4": "{{MutedRole}}: Cargo de mute do servidor, Serve para o sistema de Warns, Mute, etc...",
         "5": "{{LogChannel}}: Canal de logs do servidor, Serve para diversos sistemas com o intuito de passar o log das coisas que ocorrem com o servidor!",
         "6": "{{FloodChannel}}  Canal onde os membros podem Floodar sem tomar Mute e Ganhar XP",
-        "7": "Reaja com 🏠 para voltar ao menu principal"
+        "7": "Clique em 🏠 para voltar ao menu principal"
       }
     }
   },
@@ -74,9 +74,9 @@
         "2": "Prefixo",
         "3": "Linguagem",
         "Content": {
-          "1": "Reaja com 🏠 para voltar ao menu principal",
-          "2":"Reaja com 🔘 para definir o Prefixo do Bot",
-          "3": "Reaja com 🌎 para definir a Linguagem do Bot"
+          "1": "Clique em 🏠 para voltar ao menu principal",
+          "2":"Clique em 🔘 para definir o Prefixo do Bot",
+          "3": "Clique em 🌎 para definir a Linguagem do Bot"
         }
       }
     },
@@ -89,7 +89,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -103,7 +103,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -121,9 +121,9 @@
         "2": "Cargo Padrão",
         "3": "Cargo Mute",
         "Content": {
-          "1": "Reaja com 🏠 para voltar ao menu principal",
-          "2": "Reaja com 📦 para definir",
-          "3": "Reaja com 🔇 para definir"
+          "1": "Clique em 🏠 para voltar ao menu principal",
+          "2": "Clique em 📦 para definir",
+          "3": "Clique em 🔇 para definir"
         }
       }
     },
@@ -137,7 +137,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -152,7 +152,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -168,9 +168,9 @@
         "2": "Canal de Logs",
         "3": "Canal de Flood",
         "Content": {
-          "1": "Reaja com 🏠 para voltar ao menu principal",
-          "2": "Reaja com 🗞 para definir",
-          "3": "Reaja com 😵 para definir"
+          "1": "Clique em 🏠 para voltar ao menu principal",
+          "2": "Clique em 🗞 para definir",
+          "3": "Clique em 😵 para definir"
         }
       }
     },
@@ -184,7 +184,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -199,7 +199,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       }
@@ -216,10 +216,10 @@
         "3": "Log de Mensagens Deletadas",
         "4": "Anti-Alt",
         "Content": {
-          "1": "Reaja com 🏠 para voltar ao menu principal",
-          "2": "Reaja com 😆 para ativar ou desativar",
-          "3": "Reaja com 🗑 para ativar ou desativar",
-          "4": "Reaja com 🚫 para ativar ou desativar"
+          "1": "Clique em 🏠 para voltar ao menu principal",
+          "2": "Clique em 😆 para ativar ou desativar",
+          "3": "Clique em 🗑 para ativar ou desativar",
+          "4": "Clique em 🚫 para ativar ou desativar"
         }
       }
     },
@@ -233,9 +233,9 @@
           "2": "Ativar",
           "3": "Desativar",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal",
-            "2": "Reaja com ✔",
-            "3": "Reaja com ❌"
+            "1": "Clique em 🏠 para voltar ao menu principal",
+            "2": "Clique em ✔",
+            "3": "Clique em ❌"
           }
         }
       },
@@ -247,7 +247,7 @@
           "1": "Menu",
           "2": "💡 Dica: Flood",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal",
+            "1": "Clique em 🏠 para voltar ao menu principal",
             "2": "Caso o Servidor possua chat de Flood recomendo configura-lo na aba Channels do Menu!"
           }
         }
@@ -259,7 +259,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       },
@@ -275,7 +275,7 @@
             "Content": {
               "1": "Necessário para o bot aplicar o Mute quando ele infligir o Sistem ou remover o Mute quando o tempo passar",
               "2": "Necessário para o bot avisar quando o Membro for Mutado e Desmutado pelo Sistema",
-              "3": "Reaja com 🏠 para voltar ao menu principal"
+              "3": "Clique em 🏠 para voltar ao menu principal"
             }
           }
         },
@@ -288,7 +288,7 @@
             "Mute": "Cargo Mute",
             "Log": "Canal de Logs",
             "Content": {
-              "Menu": "Reaja com 🏠 para voltar ao menu principal",
+              "Menu": "Clique em 🏠 para voltar ao menu principal",
               "Mute": "Necessário para o bot aplicar o Mute quando ele infligir o Sistem ou remover o Mute quando o tempo passar",
               "Log": "Necessário para o bot avisar quando o Membro for Mutado e Desmutado pelo Sistema"
             }
@@ -305,9 +305,9 @@
         "2": "Ativar",
         "3": "Desativar",
         "Content": {
-          "1": "Reaja com 🏠 para voltar ao menu principal",
-          "2": "Reaja com ✔",
-          "3": "Reaja com ❌"
+          "1": "Clique em 🏠 para voltar ao menu principal",
+          "2": "Clique em ✔",
+          "3": "Clique em ❌"
         }
       },
 
@@ -318,7 +318,7 @@
           "1": "Menu",
           "2": "💡 Dica: Flood",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal",
+            "1": "Clique em 🏠 para voltar ao menu principal",
             "2": "Caso o Servidor possua chat de Flood recomendo configura-lo na aba Channels do Menu!"
           }
         }
@@ -330,7 +330,7 @@
         "Fields": {
           "1": "Menu",
           "Content": {
-            "1": "Reaja com 🏠 para voltar ao menu principal"
+            "1": "Clique em 🏠 para voltar ao menu principal"
           }
         }
       },
@@ -342,7 +342,7 @@
           "Menu": "Menu",
           "Log": "Canal de Logs",
           "Content": {
-            "Menu": "Reaja com 🏠 para voltar ao menu principal",
+            "Menu": "Clique em 🏠 para voltar ao menu principal",
             "Log": "Necessário para o bot Enviar a mensagem apagada"
           }
         }
