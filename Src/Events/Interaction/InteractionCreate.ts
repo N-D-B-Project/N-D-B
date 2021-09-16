@@ -20,7 +20,7 @@ module.exports = class InteractionCreateEvent extends BaseEvent {
     if (!interaction.guild) return;
 
     if (interaction.isCommand()) {
-      await interaction.deferReply().catch(() => {});
+      await interaction.deferReply().catch(() => { });
 
       const _command: BaseCommand = client.commands.get(
         interaction.commandName
@@ -29,7 +29,7 @@ module.exports = class InteractionCreateEvent extends BaseEvent {
 
       const args = [];
       //interaction.options.data.array().map((x) => args.push(x.value));
-      
+
       const tools = client.Tools;
 
       await _command.SlashRun(client, interaction, args, tools);
@@ -37,12 +37,12 @@ module.exports = class InteractionCreateEvent extends BaseEvent {
       //   interaction.reply(response);
       // });
     }
-    
-    if(interaction.isButton()) {
+
+    if (interaction.isButton()) {
       interaction.deferUpdate()
     }
 
-    if(interaction.isSelectMenu()) {
+    if (interaction.isSelectMenu()) {
       interaction.deferUpdate()
     }
   }

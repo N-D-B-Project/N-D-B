@@ -38,7 +38,7 @@ module.exports = class MessageEvent extends BaseEvent {
 
     //@ Prefix
     const mentionRegex = RegExp(`^<@!${client.user.id}>$`);
-    const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `); 
+    const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
     const Prefix = guildConfig.get("Settings.Prefix") || mentionRegexPrefix;
     const prefix = message.content.match(mentionRegexPrefix)
@@ -80,15 +80,15 @@ module.exports = class MessageEvent extends BaseEvent {
         if (command.options.disable === true)
           return message.reply("Esse comando está desabilitado");
 
-        if(command.options.ndcash && !UserProfile.NDCash.NDCash)  {
+        if (command.options.ndcash && !UserProfile.NDCash.NDCash) {
           return message.reply("Você não possui NDCash o suficiente para utilizar esse comando")
-        } 
+        }
 
-        if(command.options.ndcash && UserProfile.NDCash.NDCash) {
+        if (command.options.ndcash && UserProfile.NDCash.NDCash) {
           UserProfile.NDCash.NDCash -= command.options.ndcash;
           UserProfile.save();
         }
-          
+
         const tools = client.Tools;
         //const player = client.music.players.get(message.guild.id);
         const player = null;
@@ -147,12 +147,12 @@ module.exports = class MessageEvent extends BaseEvent {
     //% RandomReaction
     const porcentagem = Math.floor(Math.random() * 26)
 
-    if(porcentagem === 25) {
+    if (porcentagem === 25) {
       const React = client.Tools.randomEmoji[Math.floor(Math.random() * client.Tools.randomEmoji.length)]
       message.react(React)
     }
 
-    
-    
+
+
   }
 };
