@@ -6,5 +6,5 @@ async function start(): Promise<void> {
 }
 
 start().catch((error: Error) => {
-  console.error(`Start Error: ${error.message}`);
+  console.error(`Start Error: ${error}`);
 })
