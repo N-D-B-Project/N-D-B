@@ -21,8 +21,8 @@ module.exports = class Command extends BaseCommand {
   }
 
   async run(client: NDBClient, message: any, args: any, tools: Tools) {
-    const guildConfig = await client.MongoDB.FindGuildConfig(message.guild);
-    const prefix = client.MongoDB.DataCheck(guildConfig.get('Settings.Prefix'));
+    const guildConfig = await client.MongoDB.FindGuildConfig(message.guild)
+    const prefix = await client.MongoDB.DataCheck(guildConfig.get('Settings.Prefix'));
     const language = client.MongoDB.DataCheckLanguage(guildConfig.get('Settings.Language'));
     const DefaultRole = client.MongoDB.DataCheckRoles(guildConfig.get('Roles.Default'));
     const MutedRole = client.MongoDB.DataCheckRoles(guildConfig.get('Roles.Muted'));
@@ -72,7 +72,7 @@ module.exports = class Command extends BaseCommand {
                   const PrefixFMsg = PrefixResponse.first().content
                   const newPrefixEmbed = await client.Tools.embeds.setup.newPrefixEmbed(message, PrefixFMsg)
                   PrefixResponse.first().delete()
-                  guildConfig.Settings.Prefix = PrefixFMsg
+                  guildConfig.$set({ "Settings.Prefix": PrefixFMsg })
                   HE.edit({ embeds: [newPrefixEmbed], components: [HomeButton] })
                   break
               /* Language */ case 'Language':
@@ -89,7 +89,7 @@ module.exports = class Command extends BaseCommand {
                     switch (ComponentReaction) {
                       case 'PTBR':
                         var lang = 'pt-BR'
-                        guildConfig.Settings.Language = lang
+                        guildConfig.$set({ "Settings.Language": lang })
                         var newLanguageEmbed = await client.Tools.embeds.setup.newLanguageEmbed(message, lang)
                         HE.edit({ embeds: [newLanguageEmbed], components: [HomeButton] })
                         break
@@ -129,7 +129,7 @@ module.exports = class Command extends BaseCommand {
                   const newDREmbed = await client.Tools.embeds.setup.newDREmbed(message, DRFMsg)
                   DRResponse.first().delete()
                   HE.edit({ embeds: [newDREmbed], components: [HomeButton] })
-                  guildConfig.Roles.Default = DRFMsg
+                  guildConfig.$set({ "Roles.Default": DRFMsg })
                   break;
                 /* Muted */ case "MutedRole":
                   const MREmbed = await client.Tools.embeds.setup.MREmbed(message, MutedRole)
@@ -145,7 +145,7 @@ module.exports = class Command extends BaseCommand {
                   const newMREmbed = await client.Tools.embeds.setup.newMREmbed(message, MRFMsg)
                   DRResponse.first().delete()
                   HE.edit({ embeds: [newMREmbed], components: [HomeButton] })
-                  guildConfig.Roles.Muted = DRFMsg
+                  guildConfig.$set({ "Roles.Muted": DRFMsg })
                   break;
               }
             })
@@ -177,7 +177,7 @@ module.exports = class Command extends BaseCommand {
                   const newLCEmbed = await client.Tools.embeds.setup.newLCEmbed(message, LCFMsg);
                   HE.edit({ embeds: [newLCEmbed], components: [HomeEmbed] });
                   LCResponse.first().delete()
-                  guildConfig.Channels.Logs = LCFMsg
+                  guildConfig.$set({ "Channels.Logs": LCFMsg })
                   break;
                 /* Flood */ case "FloodChannel":
                   const FCEmbed = await client.Tools.embeds.setup.FCEmbed(message, FloodChannel);
@@ -193,7 +193,7 @@ module.exports = class Command extends BaseCommand {
                   const newFCEmbed = await client.Tools.embeds.setup.newFCEmbed(message, FCFMsg);
                   HE.edit({ embeds: [newFCEmbed], components: [HomeEmbed] });
                   LCResponse.first().delete()
-                  guildConfig.Channels.Logs = LCFMsg
+                  guildConfig.$set({ "Channels.Logs": LCFMsg })
                   break;
               }
             })

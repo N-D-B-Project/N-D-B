@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
+import * as Discord from "discord.js";
 import { config } from "dotenv";
 import NDBClient from "@/Client/Client";
 import GuildConfig from "@Schema/GuildConfig";
 import UserProfile from "@Schema/UserProfile";
 config();
 
-export default class MongoData {
+export default class MongooseUtils {
   client: NDBClient;
 
-  constructor(client) {
+  constructor(client: NDBClient) {
     this.client = client;
   }
 
@@ -17,7 +18,6 @@ export default class MongoData {
       keepAlive: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     };
 
     if (!process.env.MongoURI)
@@ -32,7 +32,7 @@ export default class MongoData {
       this.client.logger.database("Client: MongoDB Conectado!");
     });
 
-    mongoose.set("useFindAndModify", false);
+    // mongoose.set("useFindAndModify", false);
 
     mongoose.connection.on("err", (err) => {
       this.client.logger.error(`Mongoose Connection error: ${err.stack}`);
@@ -52,17 +52,17 @@ export default class MongoData {
     };
 
     if (!dbURI) throw new TypeError("MongoDB URI não foi definido || ReactionRole");
-    mongoose.connect(dbURI, Connect).catch((e) => {
-      this.client.logger.error(`Mongoose Connection Error\n${e}`);
+    mongoose.connect(dbURI, Connect).catch((err: Error) => {
+      this.client.logger.error(`Mongoose Connection Error\n${err}`);
     });
 
     mongoose.connection.on("connected", () => {
       this.client.logger.database("ReactionRole: MongoDB Conectado!");
     });
 
-    mongoose.set("useFindAndModify", false);
+    // mongoose.set("useFindAndModify", false);
 
-    mongoose.connection.on("err", (err) => {
+    mongoose.connection.on("err", (err: Error) => {
       this.client.logger.error(`Mongoose Connection error: ${err.stack}`);
     });
 
@@ -71,12 +71,12 @@ export default class MongoData {
     });
   }
 
-  async FindGuildConfig(guild) {
-    const guildConfig = await GuildConfig.findOne({ ID: guild.id });
+  async FindGuildConfig(guild: Discord.Guild) {
+    const guildConfig = await GuildConfig.findOne({ ID: guild.id })
     return guildConfig;
   }
 
-  async CreateGuildConfig(guild) {
+  async CreateGuildConfig(guild: Discord.Guild) {
     try {
       await new GuildConfig({
         ID: guild.id,
@@ -114,29 +114,28 @@ export default class MongoData {
   //   }
   // }
 
-  async DeleteGuildConfig(guild) {
+  async DeleteGuildConfig(guild: Discord.Guild) {
     await GuildConfig.deleteOne({ ID: guild.id });
     this.client.logger.success(
       `${this.client.user.username} Saiu do Server ${guild.name} | Database Atualizada!`
     );
   }
 
-  async UpdateGuildConfig(oldGuild, newGuild) {
+  async UpdateGuildConfig(oldGuild: Discord.Guild, newGuild: Discord.Guild) {
     const guildConfig = await GuildConfig.findOne({ ID: oldGuild.id });
-    guildConfig.ID = newGuild.id;
-    guildConfig.Name = newGuild.name;
+    guildConfig.$set({ ID: newGuild.id, Name: newGuild.name });
     guildConfig.save();
     this.client.logger.success(
       `Servidor: ${oldGuild.name} - (oldName) |/| ${newGuild.name} - (newName)\nFoi atualizado e Salvo na DataBase!`
     );
   }
 
-  async FindUserProfile(target) {
+  async FindUserProfile(target: Discord.User) {
     const FindUserProfile = await UserProfile.findOne({ ID: target.id });
     return FindUserProfile;
   }
 
-  async CreateUserProfile(target) {
+  async CreateUserProfile(target: Discord.User) {
     try {
       await new UserProfile({
         ID: target.id,
@@ -185,11 +184,10 @@ export default class MongoData {
     }
   }
 
-  DataCheckLanguage(target) {
+  DataCheckLanguage(target: string) {
     switch (target) {
       case "pt-BR":
         return ":flag_br: Português Brasileiro"
-        break;
     }
   }
 
