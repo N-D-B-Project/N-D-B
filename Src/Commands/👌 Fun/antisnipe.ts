@@ -25,13 +25,13 @@ module.exports = class AntiSnipeCommand extends BaseCommand {
   }
 
   async run(client: NDBClient, message: any, args: any) {
-    client.snipe.set(message.channel.id, {
+    client.collections.snipe.set(message.channel.id, {
       check: false,
       content: null,
       author: null,
       image: null
     })
-    client.editSnipe.set(message.channel.id, {
+    client.collections.editSnipe.set(message.channel.id, {
       check: false,
       OldContent: null,
       NewContent: null,
@@ -42,13 +42,13 @@ module.exports = class AntiSnipeCommand extends BaseCommand {
   }
 
   async SlashRun(client: NDBClient, interaction: Discord.CommandInteraction, args: any) {
-    client.snipe.set(interaction.channel.id, {
+    client.collections.snipe.set(interaction.channel.id, {
       check: false,
       content: null,
       author: null,
       image: null
     })
-    client.editSnipe.set(interaction.channel.id, {
+    client.collections.editSnipe.set(interaction.channel.id, {
       check: false,
       OldContent: null,
       NewContent: null,
