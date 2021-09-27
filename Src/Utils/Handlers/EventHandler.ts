@@ -25,7 +25,7 @@ export default class EventHandler {
   }
 
   async loadEvents() {
-    return globProm(`${this.directory}events/**/*.ts`).then((events: any) => {
+    return globProm(`${this.directory}Events/**/*.ts`).then((events: any) => {
       for (const eventFile of events) {
         delete require.cache[eventFile];
         const { name } = path.parse(eventFile);
