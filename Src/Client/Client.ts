@@ -1,6 +1,6 @@
 //# Packages
 import * as Discord from "discord.js";
-import * as DiscordTogether from "discord-together"
+import { DiscordTogether } from "discord-together"
 
 //! Handlers
 import { CommandHandler } from "@Handlers/CommandHandler";
@@ -48,7 +48,7 @@ export default class NDBClient extends Discord.Client {
     this.Tools = new Tools(this);
     this.MongoDB = new MongoDB(this);
     this.collections = new Collections(this);
-    this.together = new DiscordTogether.DiscordTogether(this);
+    this.together = new DiscordTogether(this);
     this.ExpressApps = new ExpressApps(this);
   }
 
