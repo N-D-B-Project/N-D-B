@@ -17,3 +17,7 @@ node_modules/
 Config.json
 Emojis.json
 *.env
+
+
+# Other files
+*.ignore
