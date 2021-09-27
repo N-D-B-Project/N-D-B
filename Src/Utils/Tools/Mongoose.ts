@@ -7,7 +7,7 @@ import UserProfile from "@Schema/UserProfile";
 config();
 
 export default class MongooseUtils {
-  client: NDBClient;
+  private client: NDBClient;
 
   constructor(client: NDBClient) {
     this.client = client;
@@ -48,7 +48,6 @@ export default class MongooseUtils {
       keepAlive: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
     };
 
     if (!dbURI) throw new TypeError("MongoDB URI não foi definido || ReactionRole");

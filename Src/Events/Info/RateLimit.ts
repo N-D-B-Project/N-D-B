@@ -14,6 +14,6 @@ module.exports = class RawLimitEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, { route, timeout }) {
-    if (client.config.Debug.Client === true) client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
+    if (client.Config.Debug.Client === true) client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
   }
 };

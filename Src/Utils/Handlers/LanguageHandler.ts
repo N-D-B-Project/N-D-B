@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import * as path from "path";
 import i18next, { TFunction } from "i18next";
-import Backend from "i18next-node-fs-backend";
+import Backend from "i18next-fs-backend";
 
 async function walkDirectory(
   dir: string,
@@ -50,6 +50,7 @@ export default async (): Promise<Map<string, TFunction>> => {
 
   i18next.use(Backend);
   await i18next.init({
+    compatibilityJSON: 'v3',
     backend: options,
     debug: TF,
     fallbackLng: "pt-BR",
@@ -58,6 +59,9 @@ export default async (): Promise<Map<string, TFunction>> => {
     load: "all",
     ns: namespaces,
     preload: languages,
+  }, (err, t) => {
+    //if (err) console.error(err)
+    //console.log(t)
   });
 
   return new Map(languages.map((item) => [item, i18next.getFixedT(item)]));

@@ -37,7 +37,7 @@ export class EventHandler {
         const event = new File(this.client, name);
         if (!(event instanceof BaseEvent))
           throw new TypeError(`Event: ${name} não esta em Events`);
-        this.client.events.set(event.name, event);
+        this.client.collections.events.set(event.name, event);
         if (event.manyArgs === 2) {
           event.emitter[event.type](event.name, (args: any, args2: any) =>
             event.run(this.client, args, args2)

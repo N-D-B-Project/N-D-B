@@ -24,8 +24,8 @@ module.exports = class ReadyEvent extends BaseEvent {
 
     //* Logs
     client.logger.ready(`${client.user.tag} Está Online!`);
-    client.logger.event(`${client.events.size} Events`);
-    client.logger.command(`${client.commands.size} Commands`);
+    client.logger.event(`${client.collections.events.size} Events`);
+    client.logger.command(`${client.collections.commands.size} Commands`);
 
     //! Client Rich Presence
     function setStatus() {

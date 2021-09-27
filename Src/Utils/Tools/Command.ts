@@ -1,7 +1,7 @@
 import NDBClient from "@/Client/Client";
 
 export default class Command {
-  client: NDBClient;
+  private client: NDBClient;
 
   constructor(client) {
     this.client = client;
@@ -9,8 +9,8 @@ export default class Command {
 
   resolveCommand(nameOrAlias: string) {
     return (
-      this.client.commands.get(nameOrAlias) ??
-      this.client.commands.get(this.client.aliases.get(nameOrAlias)!)
+      this.client.collections.commands.get(nameOrAlias) ??
+      this.client.collections.commands.get(this.client.collections.aliases.get(nameOrAlias)!)
     );
   }
 

@@ -3,8 +3,8 @@ import * as Discord from "discord.js";
 import Setup from "@Structures/Embeds/Setup";
 
 export default class Embeds {
-  client: NDBClient;
-  setup: Setup;
+  private client: NDBClient;
+  public setup: Setup;
 
   constructor(client) {
     this.client = client;

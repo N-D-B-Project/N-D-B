@@ -16,8 +16,8 @@ export interface CommandOptions {
   usage: string;
   disable?: boolean;
   cooldown?: number;
-  userPerms: Array<string>;
-  botPerms: Array<string>;
+  userPerms?: Array<string>;
+  botPerms?: Array<string>;
   guildOnly?: boolean;
   ownerOnly?: boolean;
   nsfw?: boolean;

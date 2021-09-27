@@ -1,19 +1,16 @@
 import NDBClient from "@/Client/Client";
 import * as Discord from "discord.js";
-
-const Config = require("../../Config/Config.json");
-const ndbbugs = Config.ndbbugs;
 import Command from "@Tools/Command";
 import Embeds from "@Tools/Embeds";
 import Buttons from "@Tools/Buttons";
 import Selections from "@Tools/Selections";
 
 export default class Tools {
-  client: NDBClient;
-  command: Command;
-  embeds: Embeds;
-  buttons: Buttons;
-  selections: Selections;
+  private client: NDBClient;
+  public command: Command;
+  public embeds: Embeds;
+  public buttons: Buttons;
+  public selections: Selections;
 
   constructor(client) {
     this.client = client;
@@ -24,11 +21,11 @@ export default class Tools {
   }
 
   checkOwner(target) {
-    return Config.owners.includes(target);
+    return this.client.Config.Owners.includes(target);
   }
 
   checkTestGuild(target) {
-    return this.client.config.testGuilds.includes(target);
+    return this.client.Config.TestGuilds.includes(target);
   }
 
   categoryCheck(category, message) {
@@ -53,7 +50,7 @@ export default class Tools {
         Ocorreu no Comando: \`${string}\`
         Erro: \n
         ${error}`);
-    client.channels.cache.get(ndbbugs).send(embed);
+    client.channels.cache.get(this.client.Config.NDB_Bugs).send(embed);
   }
 
   capitalize(string) {

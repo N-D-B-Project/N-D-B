@@ -6,7 +6,7 @@ import { glob } from "glob";
 const globProm = promisify(glob);
 
 export class SlashHandler {
-  client: NDBClient;
+  private client: NDBClient;
 
   constructor(client) {
     this.client = client;
@@ -44,7 +44,7 @@ export class SlashHandler {
                 .get("717094267243462688")
                 ?.commands.create(command.options.SlashOptions)
                 .then((res) => {
-                  if (this.client.config.Debug.SlashCommands === true) console.log(res);
+                  if (this.client.Config.Debug.SlashCommands === true) console.log(res);
                   return res;
                 });
 

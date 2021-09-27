@@ -14,6 +14,6 @@ module.exports = class DebugEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, info: any) {
-    if (client.config.Debug.Client === true) client.logger.debug(info)
+    if (client.Config.Debug.Client === true) client.logger.debug(info)
   }
 };

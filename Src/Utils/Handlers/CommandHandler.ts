@@ -1,5 +1,4 @@
 import NDBClient from "@/Client/Client";
-//const { BaseCommand } = require("@Structures/BaseCommand");
 import { BaseCommand } from "@Structures/BaseCommand";
 import path from "path";
 import { promisify } from "util";
@@ -37,10 +36,10 @@ export class CommandHandler {
           const command = new File(this.client, name.toLowerCase());
           if (!(command instanceof BaseCommand))
             throw new TypeError(`Comando: \`${name}\` Não está em Commands`);
-          this.client.commands.set(command.options.name, command);
+          this.client.collections.commands.set(command.options.name, command);
           if (command.options.aliases.length) {
             for (const alias of command.options.aliases) {
-              this.client.aliases.set(alias, command.options.name);
+              this.client.collections.aliases.set(alias, command.options.name);
             }
           }
         }
