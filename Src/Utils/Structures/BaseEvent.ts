@@ -1,7 +1,7 @@
 import { EventOptions } from "@Types/Options";
 import NDBClient from "@/Client/Client";
 
-export class BaseEvent {
+export default class BaseEvent {
   client: NDBClient;
   name: string;
   type: any;

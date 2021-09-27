@@ -1,6 +1,6 @@
 import NDBClient from "@/Client/Client";
-import { BaseCommand } from "@Structures/BaseCommand";
-import { BaseEvent } from "@Structures/BaseEvent";
+import BaseCommand from "@Structures/BaseCommand";
+import BaseEvent from "@Structures/BaseEvent";
 import * as Discord from "discord.js";
 
 module.exports = class InteractionCreateEvent extends BaseEvent {
@@ -22,7 +22,7 @@ module.exports = class InteractionCreateEvent extends BaseEvent {
     if (interaction.isCommand()) {
       await interaction.deferReply().catch(() => { });
 
-      const _command: BaseCommand = client.commands.get(
+      const _command: BaseCommand = client.collections.commands.get(
         interaction.commandName
       ) as BaseCommand;
       if (process.env.Debug === "True") console.log(_command);

@@ -1,6 +1,6 @@
 import NDBClient from "@/Client/Client";
-import { BaseEvent } from "@Structures/BaseEvent";
-import { BaseCommand } from "@Structures/BaseCommand";
+import BaseEvent from "@Structures/BaseEvent";
+import BaseCommand from "@Structures/BaseCommand";
 import * as Discord from "discord.js";
 
 module.exports = class MessageEvent extends BaseEvent {

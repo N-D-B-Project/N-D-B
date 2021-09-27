@@ -5,7 +5,7 @@ import { promisify } from "util";
 import { glob } from "glob";
 const globProm = promisify(glob);
 
-export class SlashHandler {
+export default class SlashHandler {
   private client: NDBClient;
 
   constructor(client) {

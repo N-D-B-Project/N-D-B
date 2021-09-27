@@ -1,11 +1,11 @@
 import NDBClient from "@/Client/Client";
-const { BaseEvent } = require("@Structures/BaseEvent");
+const BaseEvent = require("@Structures/BaseEvent");
 import path from "path";
 import { promisify } from "util";
 import { glob } from "glob";
 const globProm = promisify(glob);
 
-export class EventHandler {
+export default class EventHandler {
   private client: NDBClient;
 
   constructor(client: NDBClient) {

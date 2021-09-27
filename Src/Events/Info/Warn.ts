@@ -1,5 +1,5 @@
 import NDBClient from "@/Client/Client";
-import { BaseEvent } from "@Structures/BaseEvent";
+import BaseEvent from "@Structures/BaseEvent";
 import * as Discord from "discord.js";
 
 module.exports = class WarnEvent extends BaseEvent {

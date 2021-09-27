@@ -1,5 +1,5 @@
 import NDBClient from "@/Client/Client";
-import { BaseEvent } from "@Structures/BaseEvent";
+import BaseEvent from "@Structures/BaseEvent";
 import * as Discord from "discord.js";
 
 module.exports = class MessageUpdateEvent extends BaseEvent {
@@ -19,7 +19,7 @@ module.exports = class MessageUpdateEvent extends BaseEvent {
     if (newMessage.author.bot || !newMessage.guild) return;
 
     //! EditSnipe
-    client.editSnipe.set(newMessage.channel.id, {
+    client.collections.editSnipe.set(newMessage.channel.id, {
       check: true,
       OldContent: oldMessage.content,
       NewContent: newMessage.content,

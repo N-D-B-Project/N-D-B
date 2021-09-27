@@ -1,5 +1,5 @@
 import NDBClient from "@/Client/Client";
-import { BaseEvent } from "@Structures/BaseEvent";
+import BaseEvent from "@Structures/BaseEvent";
 import * as Discord from "discord.js";
 import cron from "node-cron"
 
@@ -21,6 +21,7 @@ module.exports = class ReadyEvent extends BaseEvent {
     //% Create GuildConfigs on Client Start
     // const guild = client.guilds.cache.map((i) => i.id);
     // client.MongoDB.CreateOnStart(guild)
+
 
     //* Logs
     client.logger.ready(`${client.user.tag} Está Online!`);

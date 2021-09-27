@@ -1,6 +1,6 @@
 import NDBClient from "@/Client/Client";
 import { CommandOptions } from "@Types/Options";
-import { BaseCommand } from "@Structures/BaseCommand";
+import BaseCommand from "@Structures/BaseCommand";
 import * as Discord from "discord.js";
 import Tools from "@Tools/Tools";
 
@@ -80,7 +80,7 @@ module.exports = class HelpCommand extends BaseCommand {
             .setFooter(await client.translate("🌐 Accessibility/help:Menu:Footer", message, { ARG: message.author.tag }), message.author.displayAvatarURL({ dynamic: true }))
             .setTimestamp();
         if (command) {
-            const cmd = client.commands.get(command) /*|| client.commands.get(client.aliases.get(command))*/;
+            const cmd = client.collections.commands.get(command) /*|| client.commands.get(client.aliases.get(command))*/;
             if (!cmd) return message.reply({ content: `${await client.translate("🌐 Accessibility/help:Invalid", message), `\`${command}\``}` })
             Embed.setAuthor(await client.translate("🌐 Accessibility/help:Command:Author", message, { ARG: client.Tools.capitalize(cmd.name) }), client.user.displayAvatarURL())
             Embed.setDescription(`
@@ -127,7 +127,7 @@ module.exports = class HelpCommand extends BaseCommand {
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
                                         .setTitle(object.category)
                                         .setColor("#00c26f")
-                                        .addField(await client.translate("🌐 Accessibility/help:Menu2:Commands", message), client.commands.filter(cmd =>
+                                        .addField(await client.translate("🌐 Accessibility/help:Menu2:Commands", message), client.collections.commands.filter(cmd =>
                                             cmd.options.category === object.category).map(cmd => `\`${cmd.name}\``).join(' | '))
                                         .setFooter(client.user.tag, client.user.displayAvatarURL())
                                         .setTimestamp()

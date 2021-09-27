@@ -1,6 +1,6 @@
 import NDBClient from "@/Client/Client";
 import { CommandOptions } from "@Types/Options";
-import { BaseCommand } from "@Structures/BaseCommand";
+import BaseCommand from "@Structures/BaseCommand";
 import * as Discord from "discord.js";
 import Tools from "@Tools/Tools";
 

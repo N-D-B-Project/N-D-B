@@ -1,11 +1,11 @@
 import NDBClient from "@/Client/Client";
-import { BaseCommand } from "@Structures/BaseCommand";
+import BaseCommand from "@Structures/BaseCommand";
 import path from "path";
 import { promisify } from "util";
 import { glob } from "glob";
 const globProm = promisify(glob);
 
-export class CommandHandler {
+export default class CommandHandler {
   private client: NDBClient;
 
   constructor(client: NDBClient) {

@@ -3,9 +3,9 @@ import * as Discord from "discord.js";
 import { DiscordTogether } from "discord-together"
 
 //! Handlers
-import { CommandHandler } from "@Handlers/CommandHandler";
-import { EventHandler } from "@Handlers/EventHandler";
-import { SlashHandler } from "@Handlers/SlashHandler";
+import CommandHandler from "@Handlers/CommandHandler";
+import EventHandler from "@Handlers/EventHandler";
+import SlashHandler from "@Handlers/SlashHandler";
 import LanguageHandler from "@Handlers/LanguageHandler";
 
 //$ Configs

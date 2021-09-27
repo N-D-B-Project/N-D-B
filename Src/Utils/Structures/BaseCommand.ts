@@ -3,7 +3,7 @@ import { CommandOptions } from "@Types/Options";
 import NDBClient from "@/Client/Client";
 import * as Discord from "discord.js";
 
-export class BaseCommand {
+export default class BaseCommand {
   client: NDBClient;
   name: string;
   aliases: Array<string>;
