@@ -87,7 +87,7 @@ module.exports = class HelpCommand extends BaseCommand {
                 ${await client.translate("🌐 Accessibility/help:Command:Description:Aliases", message, { ARG: cmd.options.aliases.length ? cmd.options.aliases.map(alias => `\`${alias}\``).join(" | ") : await client.translate("🌐 Accessibility/help:Command:Description:NoAlias", message) })}
                 ${await client.translate("🌐 Accessibility/help:Command:Description:Description", message, { ARG: `${await client.translate(`${cmd.options.category}/${cmd.name}:Help:Description`, message)}` })}
                 ${await client.translate("🌐 Accessibility/help:Command:Description:Category", message, { ARG: cmd.options.category })}
-                ${await client.translate("🌐 Accessibility/help:Command:Description:Usage", message, { ARG: `${guildConfig.prefix}${cmd.name} ${await client.translate(`${cmd.options.category}/${cmd.name}:Help:Usage`, message)}` })}
+                ${await client.translate("🌐 Accessibility/help:Command:Description:Usage", message, { ARG: `${guildConfig.get("Settings.Prefix")}${cmd.name} ${await client.translate(`${cmd.options.category}/${cmd.name}:Help:Usage`, message)}` })}
                 `)
             return message.reply({ embeds: [Embed] });
         } else {
