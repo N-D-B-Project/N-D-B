@@ -11,7 +11,7 @@ export default class Embeds {
     this.setup = new Setup(client);
   }
 
-  async SyntaxError(message, prefix, cmdName, cmdUsage) {
+  async SyntaxError(message, prefix, cmdName, cmdUsage): Promise<Discord.MessageEmbed> {
     return new Discord.MessageEmbed()
       .setTitle(
         await this.client.translate("Tools/Embeds:SyntaxError:Title", message, {
