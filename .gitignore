@@ -4,6 +4,7 @@ node_modules/
 
 # Yarn Berry
 .yarn/
+.yarn/plugins/
 .yarn/cache/
 .yarn/unpluged/
 .yarn/build-state.yml
