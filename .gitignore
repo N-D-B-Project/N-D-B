@@ -3,21 +3,20 @@ Dist/
 node_modules/
 
 # Yarn Berry
+.yarn/
 .yarn/cache/
 .yarn/unpluged/
 .yarn/build-state.yml
 .yarn/install-state.gz
+.yarn/plugins/
+.yarn/releases/
 .pnp.js
 
 # IDE
-.vim/
-.vscode/
 
 # Config Files
-Config.json
-Emojis.json
 *.env
-
 
 # Other files
 *.ignore
+**/Logs/

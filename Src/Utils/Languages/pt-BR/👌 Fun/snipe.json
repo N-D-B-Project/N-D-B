@@ -1,9 +1,0 @@
-{
-  "Help": {
-    "Description": "Mostra a ultima mensagem deletada no canal",
-    "Usage": " "
-  },
-
-  "NoMsg": "Nenhuma Mensagem deletada",
-  "Footer": "Mensagem Apagada"
-}

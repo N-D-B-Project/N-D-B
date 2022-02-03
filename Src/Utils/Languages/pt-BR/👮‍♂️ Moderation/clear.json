@@ -1,9 +1,0 @@
-{
-  "Help": {
-    "Description": "Limpa a quantidade de mensagens de acordo com o Nº dito ao utilizar o comando",
-    "Usage": "<Nº de 1 a 100>"
-  },
-
-  "NoNumber": "__Forneça um numero de 1/99 para deletar as mensagens__.",
-  "Msg": "🗑 {{ARGS}} `mensagens deletadas!`"
-}

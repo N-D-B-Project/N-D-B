@@ -1,0 +1,35 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "$/": "./Src",
+          "@Client": "./Src/Client",
+          "@Structures": "./Src/Utils/Structures",
+          "@Handlers": "./Src/Utils/Handlers",
+          "@Schema": "./Src/Database/Schema",
+          "@Utils": "./Src/Utils",
+          "@Tools": "./Src/Utils/Tools",
+          "@Languages": "./Src/Utils/Languages",
+          "@Config": "./Src/Config",
+          "@Types": "./Src/Types",
+          "@Packages": "./Src/Packages",
+          "@APIs": "./Src/APIs"
+        }
+      }
+    ]
+  ],
+  "ignore": ["**/*.spec.ts", "node_modules"]
+}

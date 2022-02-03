@@ -28,25 +28,15 @@
     "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./Src/*"],
-      "@Client": ["./Src/Client/*"],
-      "@Structures/*": ["./Src/Utils/Structures/*"],
-      "@Handlers/*": ["./Src/Utils/Handlers/*"],
-      "@Schema/*": ["./Src/Database/Schema/*"],
-      "@Utils/*": ["./Src/Utils/*"],
-      "@Tools/*": ["./Src/Utils/Tools/*"],
-      "@Commands/*": ["./Src/Commands/*"],
-      "@Languages/*": ["./Src/Utils/Languages/*"],
-      "@Config/*": ["./Src/Config/*"],
-      "@Types/*": ["./Src/Types/*"],
-      "@Packages/*": ["./Src/Packages/*"]
+      "$/*": ["./Src/*"],
+      "@Client/*": ["./Src/Client/*"]
     }
   },
-  "include": ["Src", "Src/Root.ts"],
+  "include": ["Src"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

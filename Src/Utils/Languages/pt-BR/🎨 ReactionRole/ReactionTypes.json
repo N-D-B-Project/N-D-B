@@ -1,8 +1,0 @@
-{
-  "Help": {
-    "Description": "Mostra todos os tipos de Reaction Roles",
-    "Usage": " "
-  },
-
-  "Types": "`1` - Reagir adiciona o Cargo, tirar a reação remove o Cargo \n`2`- Reagir adiciona o Cargo, tirar a reação não remove o Cargo \n`3` - Reagir removerá o Cargo do usuário, tirar a reação não a devolverá o Cargo ao usuário \n`4` - Reagir removerá o Cargo, tirar a reação adiciona o Cargo \n`5` - Mesmo conceito do número 3 porém remove a reação do usuário\n`6` - Reagir para receber o Cargo e reagir novamene para remover o Cargo"
-}
