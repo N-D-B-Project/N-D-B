@@ -4,7 +4,7 @@
     "node": true
   },
   "extends": [
-    "airbnb-base",
+    // "airbnb-base",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
@@ -15,7 +15,17 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "indent": ["error", 2],
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": true,
+        "trailingComma": "all",
+        "singleQuote": false,
+        "printWidth": 120,
+        "arrowParens": "avoid"
+      }
+    ],
+    "indent": ["off", "tab"],
     "linebreak-style": ["error", "unix"],
     "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
     "comma-dangle": ["error", "always-multiline"],
