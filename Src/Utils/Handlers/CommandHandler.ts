@@ -10,7 +10,7 @@ export default class CommandHandler {
     this.client = client;
   }
 
-  private isClass(input) {
+  private isClass(input: any) {
     return (
       typeof input === "function" &&
       typeof input.prototype === "object" &&
