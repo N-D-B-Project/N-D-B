@@ -1324,6 +1324,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.12.0":
+  version: 7.17.2
+  resolution: "@babel/runtime@npm:7.17.2"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: a48702d271ecc59c09c397856407afa29ff980ab537b3da58eeee1aeaa0f545402d340a1680c9af58aec94dfdcbccfb6abb211991b74686a86d03d3f6956cacd
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.8.4":
   version: 7.17.0
   resolution: "@babel/runtime@npm:7.17.0"
@@ -1742,6 +1751,15 @@ __metadata:
     "@types/minimatch": "*"
     "@types/node": "*"
   checksum: 6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
+  languageName: node
+  linkType: hard
+
+"@types/i18next-fs-backend@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@types/i18next-fs-backend@npm:1.1.2"
+  dependencies:
+    i18next: ^21.0.1
+  checksum: 567ab61f65231490b272d15311e7eb127cb069743284d3e0527e7cc75671038dcb70feb5da9964b218a3bb28435365179c18bab721c94ed765f28263662e6de0
   languageName: node
   linkType: hard
 
@@ -3766,6 +3784,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next-fs-backend@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "i18next-fs-backend@npm:1.1.4"
+  checksum: 7da252aa618f82555a99709b0f8afed997b7b20aeb5e66c92fe13f5b676c80b8a3cad24a1e38c599c6ab6e9169c4be87268c30e48cf1965cbcc8a69ff76bd0a4
+  languageName: node
+  linkType: hard
+
+"i18next@npm:^21.0.1, i18next@npm:^21.6.11":
+  version: 21.6.11
+  resolution: "i18next@npm:21.6.11"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: 42716a7519d6066a8c9400639ab80fba0b568ae02205b1155ec9c4e627704bb2181dd182ff5eb0c91f6c67c8038ddd0754214e1932de5699d488c21ffd617c5e
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -4610,6 +4644,7 @@ __metadata:
     "@types/eslint": ^8
     "@types/express": ^4
     "@types/glob": ^7
+    "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^17.0.14
     "@types/prettier": ^2
     "@types/uuid": ^8
@@ -4631,6 +4666,8 @@ __metadata:
     express-promise-router: ^4.1.1
     flat-cache: ^3.0.4
     glob: ^7.2.0
+    i18next: ^21.6.11
+    i18next-fs-backend: ^1.1.4
     moment: ^2.29.1
     mongoose: ^6.2.0
     node-schedule: ^2.1.0
