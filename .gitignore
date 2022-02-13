@@ -21,3 +21,4 @@ node_modules/
 # Other files
 *.ignore
 **/Logs/
+.cache

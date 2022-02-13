@@ -15,21 +15,20 @@
       "module-resolver",
       {
         "alias": {
-          "$/": "./Src",
+          "~": "./Src",
           "@Client": "./Src/Client",
           "@Structures": "./Src/Utils/Structures",
           "@Handlers": "./Src/Utils/Handlers",
-          "@Schema": "./Src/Database/Schema",
+          "@Database": "./Src/Database",
           "@Utils": "./Src/Utils",
-          "@Tools": "./Src/Utils/Tools",
           "@Languages": "./Src/Utils/Languages",
-          "@Config": "./Src/Config",
-          "@Types": "./Src/Types",
           "@Packages": "./Src/Packages",
           "@APIs": "./Src/APIs"
         }
       }
-    ]
+    ],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ],
-  "ignore": ["**/*.spec.ts", "node_modules"]
+  "ignore": ["**/*.spec.ts", "node_modules", "**/*.d.ts"]
 }

@@ -19,20 +19,48 @@
   "scripts": {
     "update": "yarn upgrade-interactive",
     "build": "babel Src --extensions \".js,.ts\" --out-dir Dist --copy-files --no-copy-ignored",
-    "start": "NODE_ENV=Production node Dist/Root.js",
-    "start:dev": "NODE_ENV=Development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts"
+    "start": "NODE_ENV=Production isCompiled=true node Dist/Root.js",
+    "start:shard": "NODE_ENV=Production isCompiled=true node Dist/Shard.js",
+    "start:dev": "NODE_ENV=Development isCompiled=false ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.7.0",
+    "@discordjs/rest": "^0.3.0",
+    "chalk": "4.1.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "express": "^4.17.2",
+    "express-promise-router": "^4.1.1",
+    "flat-cache": "^3.0.4",
+    "glob": "^7.2.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.0",
+    "node-schedule": "^2.1.0",
+    "reflect-metadata": "^0.1.13",
+    "utf-8-validate": "^5.0.8",
+    "util": "^0.12.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
     "@babel/node": "^7.16.8",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/eslint": "^8",
+    "@types/express": "^4",
+    "@types/glob": "^7",
     "@types/node": "^17.0.14",
     "@types/prettier": "^2",
+    "@types/uuid": "^8",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "^5.10.2",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -45,8 +73,5 @@
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.5"
-  },
-  "dependencies": {
-    "discord.js": "^13.6.0"
   }
 }
