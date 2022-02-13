@@ -7,7 +7,7 @@ import { ClusterStatus } from "~/Types/enums";
 export default class ClusterCache {
   private static cache: Cache = flatCache.load(
     "clusters",
-    path.join(__dirname, "../../.cache")
+    path.join(__dirname, "../.cache")
   );
 
   public static getAll(): Cluster[] {

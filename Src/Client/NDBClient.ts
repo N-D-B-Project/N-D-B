@@ -41,4 +41,22 @@ export default class NDBClient extends Discord.Client {
       );
     });
   }
+
+  public setShardPresence(
+    type: Discord.ActivityType,
+    name: string,
+    url: string
+  ): Discord.Presence {
+    return this.user?.setPresence({
+      activities: [
+        {
+          // TODO: Discord.js won't accept all ActivityType's here
+          // Need to find a solution to remove "any"
+          type: type as any,
+          name,
+          url,
+        },
+      ],
+    });
+  }
 }
