@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { TFunction } from "i18next";
 import BaseEvent from "@Structures/BaseEvent";
 import BaseCommand from "@Structures/BaseCommand";
 
@@ -66,6 +67,7 @@ export class Collections {
       string,
       BaseEvent
     > = new Discord.Collection(),
+    public translations: Map<string, TFunction> = new Map()
   ) {
     this.commands = commands;
     this.aliases = aliases;

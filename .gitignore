@@ -12,6 +12,7 @@ node_modules/
 .yarn/plugins/
 .yarn/releases/
 .pnp.js
+yarn.lock
 
 # IDE
 

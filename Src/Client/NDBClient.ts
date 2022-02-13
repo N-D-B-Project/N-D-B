@@ -42,6 +42,19 @@ export default class NDBClient extends Discord.Client {
     });
   }
 
+  public async translate(
+    key: string,
+    info: Discord.Message | Discord.CommandInteraction | Discord.GuildChannel,
+    args?: Record<string, unknown>
+  ): Promise<any> {
+    const find = await this.Mongoose.FindGuildConfig(info.guild);
+    let locale = find.get("Settings.Language");
+    if (!locale) locale = "pt-BR";
+    const language = this.Collections.translations.get(locale);
+    if (!language) throw "Linguagem invalida || Key não encontrada";
+    return language(key, args);
+  }
+
   public setShardPresence(
     type: Discord.ActivityType,
     name: string,
