@@ -13,7 +13,7 @@ export default class ShardingClient {
 
   public async start(): Promise<void> {
     this.registerEvents();
-    this.ShardingManager.setMaxListeners(1);
+    this.ShardingManager.setMaxListeners(2);
 
     var ShardList = this.ShardingManager.shardList as number[];
     this.logger.info(`Spawning Shards: [${ShardList}]`);
