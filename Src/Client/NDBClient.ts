@@ -55,11 +55,11 @@ export default class NDBClient extends Discord.Client {
     return language(key, args);
   }
 
-  public setShardPresence(
+  public async setShardPresence(
     type: Discord.ActivityType,
     name: string,
     url: string
-  ): Discord.Presence {
+  ): Promise<Discord.Presence> {
     return this.user?.setPresence({
       activities: [
         {

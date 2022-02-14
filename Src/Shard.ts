@@ -1,7 +1,9 @@
 import "dotenv/config";
 import "reflect-metadata";
 import * as Discord from "discord.js";
+import AutoPoster from "topgg-autoposter";
 import ShardingClient from "@Client/ShardingClient";
+import util from "node:util";
 import SCApi from "@APIs/SCApi/Api";
 import {
   HttpService,
@@ -19,6 +21,7 @@ import UpdateClusterCache from "@APIs/SCApi/Jobs/UpdateClusterCache";
 import { Config } from "~/Config";
 import { MathTools, Sharding, Logger } from "@Utils/Tools";
 const logger: Logger = new Logger();
+const Wait = util.promisify(setTimeout);
 
 async function Start(): Promise<void> {
   const _HttpService = new HttpService();
@@ -31,11 +34,12 @@ async function Start(): Promise<void> {
   const ClusterAPI = new SCApi([_Root, _Cluster], 1);
   await ClusterAPI.start();
 
+  await Wait(2000);
+
   if (Config.Sharding.enable) {
-    await _RootService.Register();
-    // .catch((error: Error) => {
-    //   logger.error(`Root Register Error: ${error.stack}`);
-    // });
+    await _RootService.Register().catch((error: Error) => {
+      logger.error(`Root Register Error: ${error.stack}`);
+    });
   }
 
   var shardList: number[];
@@ -74,17 +78,22 @@ async function Start(): Promise<void> {
     shardList,
   });
 
+  const TopGG_Poster = AutoPoster(process.env.TopGG_Token, ShardingConfig)
+    .on("error", (error: Error) => {
+      logger.error(`TopGG Poster Error: ${error}`);
+    })
+    .on("posted", () => {
+      logger.info("Posted stats to Top.GG");
+    });
   const _Guilds = new GuildsController(ShardingConfig);
   const _Shards = new ShardsController(ShardingConfig);
 
   const ShardAPI = new SCApi([_Root, _Guilds, _Shards], 2);
-  const ShardingManager = new ShardingClient(ShardingConfig);
+  const ShardingManager = new ShardingClient(ShardingConfig, _JobService);
 
   try {
     await ShardingManager.start();
-
     await ShardAPI.start();
-    _JobService.start();
     if (Config.Sharding.enable) {
       await _RootService.ready();
     }

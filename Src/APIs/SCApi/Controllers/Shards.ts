@@ -75,8 +75,13 @@ export default class ShardsController implements Controller {
     let reqBody: SetShardPresencesRequest = res.locals.input;
 
     await this.shardManager.broadcastEval(
-      (client: NDBClient | any, context) => {
-        return client.setShardPresence(context.type, context.name, context.url);
+      async (client, context) => {
+        const NDBClient = client as NDBClient;
+        return await NDBClient.setShardPresence(
+          context.type,
+          context.name,
+          context.url
+        );
       },
       { context: { type: reqBody.type, name: reqBody.name, url: reqBody.url } }
     );

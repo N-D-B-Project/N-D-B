@@ -3,5 +3,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["Middlewares", "Nedcloar", "respawn", "SCAPI"]
+  "cSpell.words": [
+    "autoposter",
+    "Middlewares",
+    "Nedcloar",
+    "respawn",
+    "SCAPI",
+    "topgg"
+  ]
 }

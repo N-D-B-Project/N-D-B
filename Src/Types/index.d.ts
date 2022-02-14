@@ -19,6 +19,7 @@ declare global {
 
       //# APIs
       SCApi_Secret: string;
+      TopGG_Token: string;
     }
   }
 }

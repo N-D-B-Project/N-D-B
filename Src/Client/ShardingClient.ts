@@ -1,11 +1,15 @@
 import * as Discord from "discord.js";
 import { Logger } from "@Utils/Tools";
 import { Config } from "../Config";
+import { JobService } from "@APIs/SCApi/Services";
 
 export default class ShardingClient {
   private readonly logger: Logger = new Logger();
   private config: typeof Config = Config;
-  constructor(private ShardingManager: Discord.ShardingManager) {}
+  constructor(
+    private ShardingManager: Discord.ShardingManager,
+    private JobService: JobService
+  ) {}
 
   public async start(): Promise<void> {
     this.registerEvents();
@@ -19,6 +23,8 @@ export default class ShardingClient {
       delay: this.config.Sharding.spawnDelay * 1000,
       timeout: this.config.Sharding.spawnTimeout * 1000,
     });
+
+    this.JobService.start();
   }
 
   private registerEvents(): void {
