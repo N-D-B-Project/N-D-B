@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
 
-module.exports = class multipleResolvesEvent extends BaseEvent {
+export default class multipleResolvesEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "multipleResolves",
@@ -19,4 +19,4 @@ module.exports = class multipleResolvesEvent extends BaseEvent {
       `Type: ${type}, Promise: ${promise}, Reason ${reason}`
     );
   }
-};
+}

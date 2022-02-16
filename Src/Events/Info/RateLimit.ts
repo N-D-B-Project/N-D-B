@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
 
-module.exports = class rateLimitEvent extends BaseEvent {
+export default class rateLimitEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "rateLimit",
@@ -17,4 +17,4 @@ module.exports = class rateLimitEvent extends BaseEvent {
     if (client.Config.Debug.Client === true)
       client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
   }
-};
+}

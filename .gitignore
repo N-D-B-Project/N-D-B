@@ -23,3 +23,4 @@ yarn.lock
 *.ignore
 **/Logs/
 .cache
+Docs/

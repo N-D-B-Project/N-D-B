@@ -24,7 +24,7 @@
       "import { EventOptions } from \"~/Types\";",
       "import * as Discord from \"discord.js\";",
       "",
-      "module.exports = class Event extends BaseEvent {",
+      "export default class Event extends BaseEvent {",
       "  constructor(client: NDBClient) {",
       "    const options: EventOptions = {",
       "      name: \"\",",

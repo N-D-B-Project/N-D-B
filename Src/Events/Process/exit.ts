@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
 
-module.exports = class ExitEvent extends BaseEvent {
+export default class ExitEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "exit",
@@ -16,4 +16,4 @@ module.exports = class ExitEvent extends BaseEvent {
   async run(client: NDBClient, code) {
     client.logger.process("Exit", `Code: ${code}`);
   }
-};
+}

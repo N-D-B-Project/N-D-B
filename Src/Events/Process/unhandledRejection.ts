@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
 
-module.exports = class unhandledRejectionEvent extends BaseEvent {
+export default class unhandledRejectionEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "unhandledRejection",
@@ -21,4 +21,4 @@ module.exports = class unhandledRejectionEvent extends BaseEvent {
       }`
     );
   }
-};
+}

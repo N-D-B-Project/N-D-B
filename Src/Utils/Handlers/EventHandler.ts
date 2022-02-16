@@ -18,6 +18,28 @@ export default class EventHandler {
     );
   }
 
+  private findClass(module: any) {
+    if (module.__esModule) {
+      const def = Reflect.get(module, "default");
+      if (this.isClass(def)) {
+        return def;
+      }
+
+      let _class = null;
+      for (const prop of Object.keys(module)) {
+        const ref = Reflect.get(module, prop);
+        if (this.isClass(ref)) {
+          _class = ref;
+          break;
+        }
+      }
+
+      return _class;
+    }
+
+    return this.isClass(module) ? module : null;
+  }
+
   private get directory() {
     return `${path.dirname(require.main.filename)}${path.sep}`;
   }
@@ -36,9 +58,8 @@ export default class EventHandler {
       for (const eventFile of events) {
         delete require.cache[eventFile];
         const { name } = path.parse(eventFile);
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const File = require(eventFile);
-        if (!this.isClass(File)) {
+        const File = this.findClass(require(eventFile));
+        if (!File) {
           throw new TypeError(
             `Event: ${name} não exportou uma Class || não é um Evento do Discord.JS`
           );

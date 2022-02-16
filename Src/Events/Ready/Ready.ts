@@ -3,7 +3,7 @@ import BaseEvent from "@Structures/BaseEvent";
 import { EventOptions } from "~/Types";
 import * as Discord from "discord.js";
 
-module.exports = class ReadyEvent extends BaseEvent {
+export default class ReadyEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "ready",
@@ -22,4 +22,4 @@ module.exports = class ReadyEvent extends BaseEvent {
     client.logger.event(`${client.Collections.events.size} Events`);
     client.logger.command(`${client.Collections.commands.size} Commands`);
   }
-};
+}

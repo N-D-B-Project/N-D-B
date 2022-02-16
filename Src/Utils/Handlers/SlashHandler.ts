@@ -18,6 +18,28 @@ export default class SlashHandler {
     );
   }
 
+  private findClass(module: any) {
+    if (module.__esModule) {
+      const def = Reflect.get(module, "default");
+      if (this.isClass(def)) {
+        return def;
+      }
+
+      let _class = null;
+      for (const prop of Object.keys(module)) {
+        const ref = Reflect.get(module, prop);
+        if (this.isClass(ref)) {
+          _class = ref;
+          break;
+        }
+      }
+
+      return _class;
+    }
+
+    return this.isClass(module) ? module : null;
+  }
+
   private get directory() {
     return `${path.dirname(require.main.filename)}${path.sep}`;
   }
@@ -37,9 +59,8 @@ export default class SlashHandler {
         for (const commandFile of commands) {
           delete require.cache[commandFile];
           const { name } = path.parse(commandFile);
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          const File = require(commandFile);
-          if (!this.isClass(File)) {
+          const File = this.findClass(require(commandFile));
+          if (!File) {
             throw new TypeError(`Comando: \`${name}\` Não Exportou uma Class`);
           }
           const command = new File(this.client, name.toLowerCase());

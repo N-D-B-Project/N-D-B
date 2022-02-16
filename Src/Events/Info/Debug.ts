@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
 
-module.exports = class DebugEvent extends BaseEvent {
+export default class DebugEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "debug",
@@ -16,4 +16,4 @@ module.exports = class DebugEvent extends BaseEvent {
   async run(client: NDBClient, info: any) {
     if (client.Config.Debug.Client === true) client.logger.debug(info);
   }
-};
+}
