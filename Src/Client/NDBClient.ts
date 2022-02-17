@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import { ClientOptions, Collections, Config } from "~/Config";
 import { EventHandler, CommandHandler, SlashHandler } from "@Utils/Handlers";
 import { Logger, Tools, Mongoose } from "@Utils/Tools";
+import ExpressApps from "@APIs/Express/ExpressApps";
 
 export default class NDBClient extends Discord.Client {
   public ReadyState: boolean = false;
@@ -10,6 +11,7 @@ export default class NDBClient extends Discord.Client {
   private EventHandler: EventHandler = new EventHandler(this);
   private CommandHandler: CommandHandler = new CommandHandler(this);
   private SlashHandler: SlashHandler = new SlashHandler(this);
+  private readonly ExpressApps: ExpressApps = new ExpressApps(this);
   public readonly logger: Logger = new Logger();
   public readonly Tools: Tools = new Tools(this);
   public readonly Mongoose: Mongoose = new Mongoose(this);
@@ -26,6 +28,7 @@ export default class NDBClient extends Discord.Client {
       await this.SlashHandler.loadSlashCommands();
     });
     await this.Mongoose.start();
+    await this.ExpressApps.InitAll();
     var Token: string;
     switch (process.env.NODE_ENV) {
       case "Development":
