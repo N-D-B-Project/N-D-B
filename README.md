@@ -37,6 +37,13 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 ## 📝 To-Do
 
 - [ ] Sistema de musica com [Lavalink](https://github.com/freyacodes/Lavalink) & [Erela.JS](https://github.com/MenuDocs/erela.js) + ErelaPlugins
+- [ ] Sistemas
+  - [ ] Moderação
+    - [ ] Manual
+    - [ ] Automática
+  - [ ] Economia
+  - [ ] Tickets
+  - [ ] Reaction Role
 
 ## 📖 Licença
 
