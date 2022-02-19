@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import express from "express";
 
-export default class RPC {
+export default class Status {
   constructor(private client: NDBClient) {
     this.client = client;
   }
@@ -12,7 +12,7 @@ export default class RPC {
 
     RPCApp.set("json spaces", 1);
 
-    RPCApp.get("/N-D-B/RPCStatus/info", (req, res) => {
+    RPCApp.get("/N-D-B/Status", (req, res) => {
       res.json({
         gld: this.client.guilds.cache.size,
         usr: this.client.users.cache.size,
