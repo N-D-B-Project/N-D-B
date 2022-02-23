@@ -1,6 +1,11 @@
 import * as Discord from "discord.js";
 import { ClientOptions, Collections, Config } from "~/Config";
-import { EventHandler, CommandHandler, SlashHandler } from "@Utils/Handlers";
+import {
+  EventHandler,
+  CommandHandler,
+  SlashHandler,
+  LanguageHandler,
+} from "@Utils/Handlers";
 import { Logger, Tools, Mongoose } from "@Utils/Tools";
 import StartApps from "~/APIs/Apps/StartApps";
 
@@ -27,6 +32,7 @@ export default class NDBClient extends Discord.Client {
     this.once("ready", async () => {
       await this.SlashHandler.loadSlashCommands();
     });
+    this.Collections.translations = await LanguageHandler();
     await this.Mongoose.start();
     await this.StartApps.InitAll();
     var Token: string;
