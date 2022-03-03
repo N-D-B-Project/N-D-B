@@ -76,7 +76,7 @@ export default class SlashHandler {
                 ?.commands.create(command.options.SlashOptions)
                 .then((res) => {
                   if (this.client.Config.Debug.SlashCommands) {
-                    console.log(res.id);
+                    console.log(`(/) Command Name: ${res.name}, Id: ${res.id}`);
                   }
                   return res;
                 });

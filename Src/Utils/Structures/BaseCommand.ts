@@ -1,15 +1,16 @@
 import { CommandOptions } from "~/Types";
 import NDBClient from "@Client/NDBClient";
 import * as Discord from "discord.js";
+import { InteractionTools, MessageTools } from "../Tools";
 
 export default class BaseCommand {
+  public name: string;
   constructor(
     private client: NDBClient,
-    public name: string,
     public options: CommandOptions,
     public args: Array<string> | Discord.CommandInteractionOptionResolver
   ) {
-    this.name = name;
+    this.name = options.name;
     this.client = client;
     this.options = options;
     this.args = args;

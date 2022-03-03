@@ -1,4 +1,4 @@
-import { ClientOptions, Collections } from "./ClientUtils";
 import { Config } from "./Config";
+import { ClientOptions, Collections, InviteURL } from "./ClientUtils";
 
-export { ClientOptions, Config, Collections };
+export { Config, ClientOptions, Collections, InviteURL };

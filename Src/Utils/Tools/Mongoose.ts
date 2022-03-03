@@ -91,16 +91,19 @@ export default class Mongoose {
     );
   }
 
-  async FindUserProfile(target: Discord.User): Promise<mongoose.Document> {
+  async FindUserProfile(target: any): Promise<mongoose.Document> {
     const FindUserProfile = await UserProfile.findOne({ ID: target.id });
     return FindUserProfile;
   }
 
-  async CreateUserProfile(message: Discord.Message) {
+  async CreateUserProfile(
+    msgint: Discord.Message | Discord.Interaction,
+    author: any
+  ) {
     try {
       await new UserProfile({
-        ID: message.author.id,
-        Username: message.author.tag,
+        ID: author.id,
+        Username: author.tag,
         NDCash: {
           NDCash: 0,
           Emprego: "Desempregado",
@@ -112,30 +115,33 @@ export default class Mongoose {
         },
         Guilds: [
           {
-            ID: message.guild.id,
-            Name: message.guild.name,
+            ID: msgint.guild.id,
+            Name: msgint.guild.name,
             XP: 0,
             Level: 1,
           },
         ],
       }).save();
       this.client.logger.database(
-        `${message.author.tag} / ${message.author.id} | Perfil Criado na Database`
+        `${author.tag} / ${author.id} | Perfil Criado na Database`
       );
     } catch (error: any) {
       this.client.logger.error(error);
     }
   }
 
-  async AddGuildToProfile(message: Discord.Message) {
+  async AddGuildToProfile(
+    msgint: Discord.Message | Discord.Interaction,
+    author: any
+  ) {
     try {
-      const Profile = await this.FindUserProfile(message.author);
+      const Profile = await this.FindUserProfile(author);
       var GetGuilds = Profile.get("Guilds");
       const AllGuilds = GetGuilds;
       var Verify: boolean = false;
 
       AllGuilds.forEach(async (guild: any) => {
-        if (guild.ID == message.guild.id) {
+        if (guild.ID == msgint.guild.id) {
           Verify = true;
           return;
         }
@@ -145,8 +151,8 @@ export default class Mongoose {
         return;
       } else {
         const newGuild = {
-          ID: message.guild.id,
-          Name: message.guild.name,
+          ID: msgint.guild.id,
+          Name: msgint.guild.name,
           XP: 0,
           Level: 1,
         };
@@ -154,7 +160,7 @@ export default class Mongoose {
         GetGuilds = AllGuilds;
         await Profile.save();
         this.client.logger.database(
-          `${message.author.tag} / ${message.author.id} | Guild: ${message.guild.name} / ${message.guild.id} | Guild Added to Profile`
+          `${author.tag} / ${author.id} | Guild: ${msgint.guild.name} / ${msgint.guild.id} | Guild Added to Profile`
         );
       }
     } catch (error: any) {

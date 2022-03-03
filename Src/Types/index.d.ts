@@ -25,12 +25,13 @@ declare global {
 }
 
 export interface EventOptions {
-  name: keyof Discord.ClientEvents | keyof ProcessEvents;
+  name: keyof Discord.ClientEvents | keyof ProcessEvents | keyof EmitedEvents;
   type: "on" | "once";
   emitter: "client" | "process";
 }
 
 export interface CommandOptions {
+  name: string;
   aliases: Array<string>;
   description: string;
   category: string;
@@ -94,6 +95,17 @@ export interface ProcessEvents {
   unhandledRejection;
   multipleResolves;
   rejectionHandled;
+}
+
+export interface EmitedEvents {
+  Command;
+  React;
+  GuildOnly;
+  AutoComplete;
+  ButtonClick;
+  ContextMenu;
+  SelectMenu;
+  SlashCommand;
 }
 
 export interface IServer {

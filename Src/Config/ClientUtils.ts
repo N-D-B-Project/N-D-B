@@ -74,3 +74,6 @@ export class Collections {
     this.events = events;
   }
 }
+
+export const InviteURL: string =
+  "https://discord.com/api/oauth2/authorize?client_id=708822043420000366&permissions=8&scope=bot%20applications.commands";
