@@ -3,7 +3,6 @@ import BaseCommand from "@Structures/BaseCommand";
 import { InteractionTools, MessageTools } from ".";
 import * as Discord from "discord.js";
 import * as Mongoose from "mongoose";
-import { APIInteractionGuildMember } from "discord-api-types";
 
 export default class CommandTools {
   public constructor(private client: NDBClient) {

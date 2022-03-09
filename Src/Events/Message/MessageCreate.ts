@@ -52,11 +52,10 @@ export default class MessageCreateEvent extends BaseEvent {
       //TODO Doesn't working...
       if (message.content.match(mentionRegex)) {
         message.channel.send(
-          await client.translate(
-            "Events/Message/MessageCreate:MyPrefix",
-            message,
-            { GUILD_NAME: message.guild.name, PREFIX: Prefix }
-          )
+          await client.translate("Events/MessageCreate:MyPrefix", message, {
+            GUILD_NAME: message.guild.name,
+            PREFIX: Prefix,
+          })
         );
         return;
       }

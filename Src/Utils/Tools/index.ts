@@ -7,6 +7,7 @@ import { IGNORED_ERRORS } from "./Global";
 import CommandTools from "./Command";
 import InteractionTools from "./Interaction";
 import MessageTools from "./Message";
+import HelpCommandTools from "./Help";
 
 export {
   Logger,
@@ -18,4 +19,5 @@ export {
   CommandTools,
   InteractionTools,
   MessageTools,
+  HelpCommandTools,
 };

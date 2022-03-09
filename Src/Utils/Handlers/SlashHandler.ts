@@ -70,9 +70,10 @@ export default class SlashHandler {
 
           if (command.options.SlashOptions) {
             try {
+              this.client.Collections.SlashCommands.set(command.name, command);
               // const slashcommand = await this.client.application?.commands //! Global
               const slashcommand = await this.client.guilds.cache
-                .get("679066351456878633")
+                .get(this.client.Config.ServerOnly.ID[0])
                 ?.commands.create(command.options.SlashOptions)
                 .then((res) => {
                   if (this.client.Config.Debug.SlashCommands) {

@@ -61,7 +61,11 @@ export class Collections {
     > = new Discord.Collection(),
     public aliases: Discord.Collection<
       string,
-      unknown
+      string
+    > = new Discord.Collection(),
+    public SlashCommands: Discord.Collection<
+      string,
+      BaseCommand
     > = new Discord.Collection(),
     public events: Discord.Collection<
       string,
@@ -71,6 +75,7 @@ export class Collections {
   ) {
     this.commands = commands;
     this.aliases = aliases;
+    this.SlashCommands = SlashCommands;
     this.events = events;
   }
 }

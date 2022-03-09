@@ -17,7 +17,7 @@ export default class TestCommand extends BaseCommand {
       userPerms: [""],
       botPerms: [""],
       guildOnly: false,
-      ownerOnly: false,
+      ownerOnly: true,
       nsfw: false,
       ndcash: 0,
       SlashOptions: {
@@ -31,10 +31,7 @@ export default class TestCommand extends BaseCommand {
 
   async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
     const msg = await MessageTools.send(message.channel, {
-      content: await client.translate(
-        "Commands/🛠 Developer Tools/test:Test",
-        message
-      ),
+      content: await client.translate("🛠 Developer Tools/test:Test", message),
       embeds: [],
       components: [],
     });
@@ -53,7 +50,7 @@ export default class TestCommand extends BaseCommand {
       interaction,
       {
         content: await client.translate(
-          "Commands/🛠 Developer Tools/test:Test",
+          "🛠 Developer Tools/test:Test",
           interaction
         ),
         embeds: [],
