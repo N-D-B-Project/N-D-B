@@ -1,6 +1,6 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
-import { HelpCommandTools, MessageTools } from "@Utils/Tools";
+import { HelpCommandTools, InteractionTools, MessageTools } from "@Utils/Tools";
 import BaseCommand from "@Structures/BaseCommand";
 import * as Discord from "discord.js";
 
@@ -15,18 +15,18 @@ export default class HelpCommand extends BaseCommand {
       userPerms: ["SEND_interactionS"],
       botPerms: [""],
       ownerOnly: false,
-      // SlashOptions: {
-      //     name: "help",
-      //     description: "Mostra todos os comandos e como utilizar-los",
-      //     options: [
-      //         {
-      //             name: "comando",
-      //             description: "Mostra as informações do comando escolhido",
-      //             type: "STRING",
-      //             required: false
-      //         }
-      //     ]
-      // }
+      SlashOptions: {
+        name: "help",
+        description: "show all commands and how to use them",
+        ephemeral: true,
+        options: [
+          {
+            name: "command",
+            description: "show the help of a command",
+            type: "STRING",
+          },
+        ],
+      },
     };
     super(client, options, args);
   }
@@ -51,6 +51,32 @@ export default class HelpCommand extends BaseCommand {
     } else {
       const Tools = new HelpCommandTools(client);
       await Tools.Run(message, "message", cmd);
+    }
+  }
+
+  async SlashRun(
+    client: NDBClient,
+    interaction: Discord.CommandInteraction,
+    args: Discord.CommandInteractionOptionResolver
+  ) {
+    const command = args.getString("command");
+    const cmd = client.Collections.SlashCommands.get(String(command));
+    if (command) {
+      if (!cmd) {
+        await InteractionTools.reply(interaction, {
+          content: `${await client.translate(
+            "🌐 Accessibility/help:Command:Invalid",
+            interaction,
+            {
+              CMD: command,
+            }
+          )}`,
+        });
+        return;
+      }
+    } else {
+      const Tools = new HelpCommandTools(client);
+      await Tools.Run(interaction, "interaction", cmd);
     }
   }
 }

@@ -51,7 +51,9 @@ export interface CommandOptions {
 export type ConfigType = {
   Prefix: string;
   Owners: Array<string>;
-  TestGuilds: Array<string>;
+  TestGuilds: {
+    ID: Array<string>;
+  };
   NDB_Bugs: Array<string>;
   ServerOnly: {
     ID: Array<string>;

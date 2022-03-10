@@ -4,7 +4,7 @@ import "dotenv/config";
 export const Config: ConfigType = {
   Prefix: "&",
   Owners: ["330047048009252864"],
-  TestGuilds: ["717094267243462688"],
+  TestGuilds: { ID: ["717094267243462688"] },
   NDB_Bugs: ["800847836139880458", "800847760046948370"],
   ServerOnly: {
     ID: ["679066351456878633"],
