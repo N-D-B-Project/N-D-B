@@ -15,10 +15,13 @@ export default class HelpCommandTools {
     _Command: BaseCommand
   ) {
     var Tools: any;
+    var Collection: Discord.Collection<any, any>;
     if (type === "message") {
       Tools = MessageTools;
+      Collection = this.client.Collections.commands;
     } else {
       Tools = InteractionTools;
+      Collection = this.client.Collections.SlashCommands;
     }
     const cmdTools: CommandTools = new CommandTools(this.client);
     const guildConfig = await this.client.Mongoose.FindGuildConfig(
@@ -285,10 +288,9 @@ export default class HelpCommandTools {
                         "🌐 Accessibility/help:Menu2:Commands",
                         msgint
                       ),
-                      this.client.Collections.commands
-                        .filter(
-                          (cmd) => cmd.options.category === object.category
-                        )
+                      Collection.filter(
+                        (cmd) => cmd.options.category === object.category
+                      )
                         .map((cmd) => `\`${cmd.name}\``)
                         .join(" | ")
                     )
