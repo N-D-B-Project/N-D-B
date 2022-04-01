@@ -18,6 +18,25 @@ export const Config: ConfigType = {
     callbackUrl: "http://localhost:8888/",
     RootServiceUrl: "http://localhost:5008/",
   },
+  Music: {
+    Lavalink: true,
+    Player: {
+      AutoLeaveEmpty: {
+        Channel: {
+          Enable: true,
+          Delay: 60000
+        },
+        Queue: {
+          Enable: true,
+          Delay: 30000,
+        }
+      }
+    },
+    Client: {
+      selfDeaf: true,
+      serverDeaf: true
+    }
+  },
   APIs: {
     SCAPI: {
       Jobs: {

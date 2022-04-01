@@ -38,7 +38,10 @@ export default class TestCommand extends BaseCommand {
 
     await client.Tools.WAIT(3000);
 
-    MessageTools.edit(msg, "Tested!");
+    MessageTools.edit(
+      msg,
+      await client.translate("🛠 Developer Tools/test:Tested", message)
+    );
   }
 
   async SlashRun(
@@ -61,6 +64,9 @@ export default class TestCommand extends BaseCommand {
 
     await client.Tools.WAIT(3000);
 
-    InteractionTools.editReply(interaction, "Tested!");
+    InteractionTools.editReply(
+      interaction,
+      await client.translate("🛠 Developer Tools/test:Tested", interaction)
+    );
   }
 }

@@ -8,6 +8,7 @@ import CommandTools from "./Command";
 import InteractionTools from "./Interaction";
 import MessageTools from "./Message";
 import HelpCommandTools from "./Help";
+import AddSong from "./ErelaJS/AddSong";
 
 export {
   Logger,
@@ -20,4 +21,5 @@ export {
   InteractionTools,
   MessageTools,
   HelpCommandTools,
+  AddSong,
 };

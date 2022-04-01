@@ -25,9 +25,9 @@ declare global {
 }
 
 export interface EventOptions {
-  name: keyof Discord.ClientEvents | keyof ProcessEvents | keyof EmitedEvents;
+  name: keyof Discord.ClientEvents | keyof ProcessEvents | keyof EmitedEvents | keyof MusicEvents;
   type: "on" | "once";
-  emitter: "client" | "process";
+  emitter: "client" | "music" | "process";
 }
 
 export interface CommandOptions {
@@ -58,6 +58,25 @@ export type ConfigType = {
   ServerOnly: {
     ID: Array<string>;
   };
+  Music: {
+    Lavalink: boolean;
+    Player: {
+      AutoLeaveEmpty: {
+        Channel: {
+          Enable: boolean;
+          Delay: number;
+        };
+        Queue: {
+          Enable: boolean;
+          Delay: number;
+        }
+      }
+    }
+    Client: {
+      selfDeaf: boolean;
+      serverDeaf: boolean;
+    }
+  }
   Sharding: {
     enable: boolean;
     spawnDelay: number;
@@ -108,6 +127,22 @@ export interface EmitedEvents {
   ContextMenu;
   SelectMenu;
   SlashCommand;
+}
+
+export interface MusicEvents {
+  nodeConnect;
+  nodeCreate;
+  nodeDisconnect;
+  nodeError;
+  nodeReconnect;
+  playerCreate;
+  playerDestroy;
+  playerMove;
+  queueEnd;
+  trackError;
+  trackException;
+  trackStart;
+  trackStuck;
 }
 
 export interface IServer {
@@ -171,4 +206,40 @@ export interface Job {
   log: boolean;
   schedule: string;
   run(): Promise<void>;
+}
+
+export type ColorsType = {
+  Client: {
+    Green: string;
+    Red: string;
+  }
+}
+
+export type EmojisType = {
+  fail: string;
+  success: string;
+  thing: string;
+  loading: string;
+  loading2: string;
+  delayping: string;
+  Music: {
+    Youtube: string;
+    Spotify: string;
+    SoundCloud: string;
+    Deezer: string;
+    Facebook: string;
+    Apple: string;
+  }
+}
+
+export type URLListType = {
+  Music: {
+      Youtube: string;
+      ShortYoutube: string;
+      SoundCloud: string;
+      Spotify: string;
+      Deezer: string;
+      Facebook: string;
+      Apple: string;
+  }
 }

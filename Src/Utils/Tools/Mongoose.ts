@@ -54,7 +54,7 @@ export default class Mongoose {
           Default: null,
           Muted: null,
         },
-        Systens: {
+        Systems: {
           AntiSpam: false,
           Logs: {
             DeletedMessages: false,

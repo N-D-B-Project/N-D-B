@@ -60,10 +60,6 @@ export default async (): Promise<Map<string, TFunction>> => {
       load: "all",
       ns: namespaces,
       preload: languages,
-    },
-    (err, t) => {
-      // if (err) console.error(err);
-      console.log(t);
     }
   );
 

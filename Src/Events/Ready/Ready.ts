@@ -17,6 +17,9 @@ export default class ReadyEvent extends BaseEvent {
   async run(client: NDBClient) {
     client.ReadyState = true;
 
+    //# Music
+    if (client.Config.Music.Lavalink === true) client.ErelaManager.init(client.user.id)
+
     //* Logs
     client.logger.ready(`${client.user.tag} Está Online!`);
     client.logger.event(`${client.Collections.events.size} Events`);
