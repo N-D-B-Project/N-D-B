@@ -45,7 +45,7 @@
     "glob": "^7.2.0",
     "i18next": "20.6.1",
     "i18next-fs-backend": "^1.1.4",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "mongoose": "^6.2.8",
     "node-schedule": "^2.1.0",
     "parse-ms": "2.1.0",
