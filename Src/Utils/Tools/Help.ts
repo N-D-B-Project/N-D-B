@@ -113,6 +113,15 @@ export default class HelpCommandTools {
       });
     }
 
+    if(author.permissions.has("MANAGE_ROLES")) {
+      categories.push({
+        value: "reactionrole",
+        label: "Roles",
+        description: await this.client.translate("🌐 Accessibility/help:Selections:Description", msgint, { Category: "🎩 Reaction Roles" }),
+        emoji: "🎩",
+      });
+    }
+
     var CategoriesObject = [
       ...new Set([
         { value: "settings", category: "⚙ Settings" },
@@ -122,6 +131,7 @@ export default class HelpCommandTools {
         { value: "moderation", category: "👮‍♂️ Moderation" },
         { value: "nsfw", category: "🔞 NSFW" },
         { value: "devtools", category: "🛠 Developer Tools" },
+        { value: "reactionrole", category: "🎩 Reaction Roles" },
       ]),
     ];
 

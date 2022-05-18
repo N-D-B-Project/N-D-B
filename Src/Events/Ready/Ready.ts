@@ -18,7 +18,7 @@ export default class ReadyEvent extends BaseEvent {
     client.ReadyState = true;
 
     //# Music
-    if (client.Config.Music.Lavalink === true) client.ErelaManager.init(client.user.id)
+    // if (client.Config.Music.Lavalink) client.ErelaManager.init(client.user.id)
 
     //* Logs
     client.logger.ready(`${client.user.tag} Está Online!`);

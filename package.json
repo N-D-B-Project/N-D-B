@@ -53,7 +53,8 @@
     "topgg-autoposter": "^2.0.1",
     "utf-8-validate": "^5.0.9",
     "util": "^0.12.4",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",

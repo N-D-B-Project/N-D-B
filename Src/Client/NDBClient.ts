@@ -56,7 +56,11 @@ export default class NDBClient extends Discord.Client {
 
   public async translate(
     key: string,
-    info: Discord.Message | Discord.CommandInteraction | Discord.GuildChannel,
+    info:
+      | Discord.Message
+      | Discord.CommandInteraction
+      | Discord.GuildChannel
+      | Discord.PartialMessage,
     args?: Record<string, unknown>
   ): Promise<any> {
     const find = await this.Mongoose.FindGuildConfig(info.guild);

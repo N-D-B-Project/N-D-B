@@ -36,7 +36,9 @@ export default class CommandEvent extends BaseEvent {
         message,
         _Command,
         "message",
-        UserProfile
+        UserProfile,
+        Prefix,
+        args
       );
 
       if (Checker) {
@@ -45,68 +47,3 @@ export default class CommandEvent extends BaseEvent {
     }
   }
 }
-
-/*
-if (_Command) {
-      if (!message.guild && !Options.DM) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:DM",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.ownerOnly && !cmdTools.checkOwner(message.author.id)) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:OwnerOnly",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.guildOnly && !cmdTools.checkGuild(message.guild.id)) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:GuildOnly",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.nsfw && !Channel.nsfw) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:NSFW",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.disable) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:Disable",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.ndcash && !NDCash) {
-        message.reply(
-          await client.translate(
-            "Events/Message/MessageCreate/Command:NDCash",
-            message
-          )
-        );
-        return;
-      }
-      if (Options.ndcash && NDCash) {
-        NDCash -= Options.ndcash;
-        UserProfile.save();
-        return;
-      }
-      _Command.run(client, message, args);
-    }
-*/

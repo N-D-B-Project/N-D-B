@@ -12,8 +12,8 @@ export default class HelpCommand extends BaseCommand {
       description: "Mostra todos os comandos e como utilizar-los",
       category: "🌐 Accessibility",
       usage: "[Comando]",
-      userPerms: ["SEND_interactionS"],
-      botPerms: [""],
+      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS"],
+      botPerms: ["EMBED_LINKS"],
       ownerOnly: false,
       SlashOptions: {
         name: "help",

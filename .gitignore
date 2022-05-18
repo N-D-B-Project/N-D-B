@@ -1,6 +1,10 @@
-# Compiler
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Compiler / Dependencies
 Dist/
 node_modules/
+/.pnp
+.pnp.js
 
 # Yarn Berry
 .yarn/
@@ -14,8 +18,6 @@ node_modules/
 .pnp.js
 yarn.lock
 
-# IDE
-
 # Config Files
 *.env
 
@@ -24,3 +26,14 @@ yarn.lock
 **/Logs/
 .cache
 Docs/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

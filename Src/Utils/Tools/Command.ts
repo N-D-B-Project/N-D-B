@@ -41,7 +41,9 @@ export default class CommandTools {
     msgint: Discord.Message | Discord.CommandInteraction,
     _Command: BaseCommand,
     type: "message" | "interaction",
-    UserProfile: Mongoose.Document
+    UserProfile: Mongoose.Document,
+    prefix?: string,
+    args?: Array<string>
   ): Promise<boolean> {
     const Options = _Command.options;
     const Channel = msgint.channel as Discord.TextChannel;
@@ -59,6 +61,117 @@ export default class CommandTools {
       Tools = InteractionTools;
     }
 
+    if (type === "message") {
+      if (args.length < _Command.options.minArgs) {
+        Tools.reply(
+          msgint,
+          new Discord.MessageEmbed()
+            .setAuthor({
+              name: Author.tag,
+              iconURL: Author.displayAvatarURL(),
+            })
+            .setTitle(
+              await this.client.translate(
+                "Tools/Command:Checker:NoMinArgs:Title",
+                msgint
+              )
+            )
+            .setColor("#c20e00")
+            .setDescription(
+              await this.client.translate(
+                "Tools/Command:Checker:NoMinArgs:Description",
+                msgint
+              )
+            )
+            .addFields(
+              {
+                name: await this.client.translate(
+                  "Tools/Command:Checker:NoMinArgs:Fields:1",
+                  msgint
+                ),
+                value: await this.client.translate(
+                  "Tools/Command:Checker:NoMinArgs:Fields:Content:1",
+                  msgint,
+                  { Args: _Command.options.minArgs }
+                ),
+              },
+              {
+                name: await this.client.translate(
+                  "Tools/Command:Checker:NoMinArgs:Fields:2",
+                  msgint
+                ),
+                value: await this.client.translate(
+                  "Tools/Command:Checker:NoMinArgs:Fields:Content:2",
+                  msgint,
+                  {
+                    Usage: `${prefix}${_Command.name} ${_Command.options.usage}`,
+                  }
+                ),
+              }
+            )
+            .setFooter({
+              text: this.client.user.tag,
+              iconURL: this.client.user.displayAvatarURL(),
+            })
+        );
+        return false;
+      }
+
+      if (args.length > _Command.options.maxArgs) {
+        Tools.reply(
+          msgint,
+          new Discord.MessageEmbed()
+            .setAuthor({
+              name: Author.tag,
+              iconURL: Author.displayAvatarURL(),
+            })
+            .setTitle(
+              await this.client.translate(
+                "Tools/Command:Checker:TooManyArgs:Title",
+                msgint
+              )
+            )
+            .setColor("#c20e00")
+            .setDescription(
+              await this.client.translate(
+                "Tools/Command:Checker:TooManyArgs:Description",
+                msgint
+              )
+            )
+            .addFields(
+              {
+                name: await this.client.translate(
+                  "Tools/Command:Checker:TooManyArgs:Fields:1",
+                  msgint
+                ),
+                value: await this.client.translate(
+                  "Tools/Command:Checker:TooManyArgs:Fields:Content:1",
+                  msgint,
+                  { Args: _Command.options.maxArgs }
+                ),
+              },
+              {
+                name: await this.client.translate(
+                  "Tools/Command:Checker:TooManyArgs:Fields:2",
+                  msgint
+                ),
+                value: await this.client.translate(
+                  "Tools/Command:Checker:TooManyArgs:Fields:Content:2",
+                  msgint,
+                  {
+                    Usage: `${prefix}${_Command.name} ${_Command.options.usage}`,
+                  }
+                ),
+              }
+            )
+            .setFooter({
+              text: this.client.user.tag,
+              iconURL: this.client.user.displayAvatarURL(),
+            })
+        );
+        return false;
+      }
+    }
     if (!msgint.guild && !Options.DM) {
       Tools.reply(
         msgint,

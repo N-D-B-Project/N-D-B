@@ -15,6 +15,6 @@ export default class SelectMenuEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, interaction: Discord.SelectMenuInteraction) {
-    interaction.deferUpdate();
+    await interaction.deferUpdate();
   }
 }

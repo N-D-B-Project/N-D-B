@@ -25,7 +25,11 @@ declare global {
 }
 
 export interface EventOptions {
-  name: keyof Discord.ClientEvents | keyof ProcessEvents | keyof EmitedEvents | keyof MusicEvents;
+  name:
+    | keyof Discord.ClientEvents
+    | keyof ProcessEvents
+    | keyof EmitedEvents
+    | keyof MusicEvents;
   type: "on" | "once";
   emitter: "client" | "music" | "process";
 }
@@ -38,8 +42,10 @@ export interface CommandOptions {
   usage: string;
   disable?: boolean;
   cooldown?: number;
-  userPerms?: Array<string>;
-  botPerms?: Array<string>;
+  userPerms?: Array<Discord.PermissionString>;
+  botPerms?: Array<Discord.PermissionString>;
+  minArgs?: number;
+  maxArgs?: number;
   guildOnly?: boolean;
   ownerOnly?: boolean;
   nsfw?: boolean;
@@ -69,14 +75,14 @@ export type ConfigType = {
         Queue: {
           Enable: boolean;
           Delay: number;
-        }
-      }
-    }
+        };
+      };
+    };
     Client: {
       selfDeaf: boolean;
       serverDeaf: boolean;
-    }
-  }
+    };
+  };
   Sharding: {
     enable: boolean;
     spawnDelay: number;
@@ -127,6 +133,8 @@ export interface EmitedEvents {
   ContextMenu;
   SelectMenu;
   SlashCommand;
+  ReactionRoleAdd;
+  ReactionRoleRemove;
 }
 
 export interface MusicEvents {
@@ -160,7 +168,7 @@ export interface IServer {
     Default: number;
     Muted: number;
   };
-  Systens: {
+  Systems: {
     AntiSpam: boolean;
     Logs: {
       DeletedMessages: boolean;
@@ -194,6 +202,21 @@ export interface IUser {
   ];
 }
 
+export interface IRR {
+  ID: string;
+  Name: string;
+  DMInfoMSG: boolean;
+  Reactions: [
+    {
+      message: string;
+      channel: string;
+      role: string;
+      emoji: string;
+      option: number;
+    }
+  ];
+}
+
 export interface Controller {
   path: string;
   router: Express.Router;
@@ -212,8 +235,8 @@ export type ColorsType = {
   Client: {
     Green: string;
     Red: string;
-  }
-}
+  };
+};
 
 export type EmojisType = {
   fail: string;
@@ -229,17 +252,39 @@ export type EmojisType = {
     Deezer: string;
     Facebook: string;
     Apple: string;
-  }
-}
+  };
+};
 
 export type URLListType = {
   Music: {
-      Youtube: string;
-      ShortYoutube: string;
-      SoundCloud: string;
-      Spotify: string;
-      Deezer: string;
-      Facebook: string;
-      Apple: string;
-  }
+    Youtube: string;
+    ShortYoutube: string;
+    SoundCloud: string;
+    Spotify: string;
+    Deezer: string;
+    Facebook: string;
+    Apple: string;
+  };
+};
+
+export type CommandType = {
+  INTERACTION;
+  MESSAGE;
+};
+
+export interface ReactionsType {
+  message: string;
+  channel: string;
+  role: string;
+  emoji: string;
+  option: REACTION_OPTIONS;
+}
+
+enum REACTION_OPTIONS {
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
 }

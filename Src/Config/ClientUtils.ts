@@ -72,7 +72,9 @@ export class Collections {
       string,
       BaseEvent
     > = new Discord.Collection(),
-    public translations: Map<string, TFunction> = new Map()
+    public translations: Map<string, TFunction> = new Map(),
+    public languages: any = import("../Utils/Languages/language-meta.json"),
+    public react: Map<any, any> = new Map()
   ) {
     this.commands = commands;
     this.aliases = aliases;
@@ -87,9 +89,9 @@ export const InviteURL: string =
 export const Colors: ColorsType = {
   Client: {
     Green: "#00c26f",
-    Red: "#c20e00"
-  }
-}
+    Red: "#c20e00",
+  },
+};
 
 export const Emojis: EmojisType = {
   fail: "<:NotixDeny:719560576015138830>",
@@ -104,19 +106,18 @@ export const Emojis: EmojisType = {
     SoundCloud: "<:soundcloud:932065538014842950>",
     Deezer: "<:deezer:932065971336802334>",
     Facebook: "<:facebook:932066080996864070>",
-    Apple: "<:Apple:852677662983716884>"
-  }
-}
+    Apple: "<:Apple:852677662983716884>",
+  },
+};
 
 export const URLList: URLListType = {
   Music: {
-      Youtube: "https://www.youtube.com",
-      ShortYoutube: "https://youtu.be",
-      SoundCloud: "https://soundcloud.com",
-      Spotify: "https://open.spotify.com",
-      Deezer: "https://www.deezer",
-      Facebook: "https://facebook.com",
-      Apple: "https://music.apple.com/"
-  }
-}
-
+    Youtube: "https://www.youtube.com",
+    ShortYoutube: "https://youtu.be",
+    SoundCloud: "https://soundcloud.com",
+    Spotify: "https://open.spotify.com",
+    Deezer: "https://www.deezer",
+    Facebook: "https://facebook.com",
+    Apple: "https://music.apple.com/",
+  },
+};

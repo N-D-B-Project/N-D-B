@@ -15,6 +15,6 @@ export default class ButtonClickEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, interaction: Discord.ButtonInteraction) {
-    interaction.deferUpdate();
+    await interaction.update({ fetchReply: true });
   }
 }

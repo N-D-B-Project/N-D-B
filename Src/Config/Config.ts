@@ -24,18 +24,18 @@ export const Config: ConfigType = {
       AutoLeaveEmpty: {
         Channel: {
           Enable: true,
-          Delay: 60000
+          Delay: 60000,
         },
         Queue: {
           Enable: true,
           Delay: 30000,
-        }
-      }
+        },
+      },
     },
     Client: {
       selfDeaf: true,
-      serverDeaf: true
-    }
+      serverDeaf: true,
+    },
   },
   APIs: {
     SCAPI: {
@@ -51,7 +51,7 @@ export const Config: ConfigType = {
   Debug: {
     Client: true,
     DatabaseSave: true,
-    SlashCommands: true,
+    SlashCommands: false,
     Sharding: {
       enable: false,
       mode: "process",

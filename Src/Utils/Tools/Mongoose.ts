@@ -167,4 +167,44 @@ export default class Mongoose {
       this.client.logger.error(error);
     }
   }
+
+  async RemoveGuildFromProfile(guild: Discord.Guild, author: any) {
+    try {
+      const Profile = await this.FindUserProfile(author);
+
+      var GetGuilds = Profile.get("Guilds");
+      const AllGuilds = GetGuilds;
+      var Verify: boolean = false;
+      var XP: number = 0;
+      var Level: number = 1;
+
+      AllGuilds.forEach(async (guild: any) => {
+        if (guild.ID == guild.id) {
+          Verify = true;
+          XP = guild.XP;
+          Level = guild.Level;
+          return;
+        }
+      });
+
+      if (Verify) {
+        const exitGuild = {
+          ID: guild.id,
+          Name: guild.name,
+          XP,
+          Level,
+        };
+        AllGuilds.pop(exitGuild);
+        GetGuilds = AllGuilds;
+        await Profile.save();
+        this.client.logger.database(
+          `${author.tag} / ${author.id} | Guild: ${guild.name} / ${guild.id} | Guild Removed from Profile`
+        );
+      } else {
+        return;
+      }
+    } catch (error: any) {
+      this.client.logger.error(error);
+    }
+  }
 }

@@ -15,7 +15,7 @@ const GuildConfigSchema: IServer | Mongoose.Schema = new Mongoose.Schema({
     Default: Number,
     Muted: Number,
   },
-  Systens: {
+  Systems: {
     AntiSpam: Boolean,
     Logs: {
       DeletedMessages: Boolean,
