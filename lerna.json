@@ -1,0 +1,8 @@
+{
+  "packages": [
+    "Backend",
+    "Client",
+    "Frontend"
+  ],
+  "version": "1.0.0"
+}

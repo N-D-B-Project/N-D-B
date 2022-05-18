@@ -1,0 +1,50 @@
+type Query {
+  getUser: User
+  getGuilds: [Guild]
+  getMutualGuilds: [Guild]
+}
+
+type User {
+  userID: ID
+  username: String!
+  discriminator: String!
+  avatar: String
+  guilds: [Guild]
+}
+
+type Guild {
+  id: ID!
+  name: String!
+  icon: String
+  description: String
+  banner: String
+  owner_id: String
+  premium_tier: Int
+  roles: [Role]
+  emojis: [Emoji]
+  stickers: [Sticker]
+}
+
+type Role {
+  id: String!
+  name: String!
+  permission: String!
+  position: Int!
+  color: Int!
+  icon: String
+}
+
+type Emoji {
+  id: String!
+  name: String!
+  animation: Boolean!
+  available: Boolean!
+}
+
+type Sticker {
+  id: String!
+  name: String!
+  description: String
+  tags: String
+  available: Boolean!
+}

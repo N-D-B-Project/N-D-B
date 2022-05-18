@@ -15,16 +15,24 @@
 </div>
 
 <p align="center">
-  <a href="#Sobre">Sobre</a>
+  <a href="#🗞️ Noticia">Noticia</a>
   •
-  <a href="#Recursos">Recursos</a>
+  <a href="#❓ Sobre">Sobre</a>
   •
-  <a href="https://github.com/NedcloarBR/N-D-B/blob/master/Docs/INSTALLATION.md">Instalação</a>
+  <a href="#❗ Recursos">Recursos</a>
   •
-  <a href="#Licença">Licença</a>
+  <a href="📝 To-Do">To-Do</a>
   •
-  <a href="#Créditos">Créditos</a>
+  <a href="https://github.com/NedcloarBR/N-D-B/blob/master/Docs/INSTALLATION.md">Instalação (WIP .md)</a>
+  •
+  <a href="#📖 Licença">Licença</a>
+  •
+  <a href="#🗞️ Créditos">Créditos</a>
 </p>
+
+## 🗞️ Noticia
+
+18/05/2022 - O Repositório do N-D-B agora é Monorepo ou seja corresponde ao Bot, Backend e frontend do Dashboard que no momento estão fora de desenvolvimento mas já possui algo feito
 
 ## ❓ Sobre
 
@@ -36,20 +44,23 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 
 ## 📝 To-Do
 
-- [ ] Sistema de musica com [Lavalink](https://github.com/freyacodes/Lavalink) & [Erela.JS](https://github.com/MenuDocs/erela.js) + ErelaPlugins
 - [ ] Sistemas
   - [ ] Moderação
     - [ ] Manual
     - [ ] Automática
   - [ ] Economia
   - [ ] Tickets
-  - [ ] Reaction Role
+  - [ ] Musica com [Lavalink](https://github.com/freyacodes/Lavalink) & [Erela.JS](https://github.com/MenuDocs/erela.js) + ErelaPlugins
+  - [x] Reaction Role
 
 ## 📖 Licença
 
 Lançado sob a [GPL-3.0 License](https://github.com/NedcloarBR/N-D-B/blob/master/License) license.
 
-## 📜 Créditos
+## 🗞️ Créditos
 
-- **[Kevin Novak](https://github.com/KevinNovak)** - [SCApi](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template) (Modifiquei um pouco o template dele para se encaixar melhor ao N-D-B)
+- **OBS** Quase todos os repositórios que eu utilizar como referencia para a criação do N-D-B estarão citados abaixo e sempre irei fazer alterações no projeto original para se encaixar melhor ao sistema existente do N-D-B e também não ser totalmente uma "copia" deles
+
+- **[Kevin Novak](https://github.com/KevinNovak)** - [SCApi (Sharding/Clustering API)](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
+- **[peterhanania](https://github.com/peterhanania/)** - [Reaction Roles](https://github.com/peterhanania/reaction-roles)
 - Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/CONTRIBUTING.md).

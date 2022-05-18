@@ -1,0 +1,44 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "autoposter",
+    "canvacord",
+    "cooldown",
+    "creaction",
+    "createreaction",
+    "discordjs",
+    "Erela",
+    "Lavalink",
+    "Middlewares",
+    "msgint",
+    "ndcash",
+    "Nedcloar",
+    "Novak",
+    "nsfw",
+    "resetar",
+    "Resetar",
+    "respawn",
+    "RESTJSON",
+    "SCAPI",
+    "topgg",
+    "nestjs",
+    "resave",
+    "TYPEORM"
+  ],
+  "material-icon-theme.files.associations": {
+    "*.controller.ts": "nest-controller",
+    "*.module.ts": "nest-module",
+    "*.service.ts": "nest-service",
+    "*.middleware.ts": "nest-middleware",
+    "*.filter.ts": "nest-filter",
+    "*.pipe.ts": "nest-pipe",
+    "*.gateway.ts": "nest-gateway",
+    "*.decorator.ts": "nest-decorator",
+    "*.guard.ts": "nest-guard",
+    "*.revoler.ts": "graphql",
+    "*.input.ts": "graphql"
+  }
+}
