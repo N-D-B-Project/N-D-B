@@ -25,7 +25,7 @@ yarn.lock
 *.ignore
 **/Logs/
 .cache
-Docs/
+ignore/
 
 # misc
 .DS_Store

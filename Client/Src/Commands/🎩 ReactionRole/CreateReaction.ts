@@ -158,9 +158,9 @@ export default class Command extends BaseCommand {
     await MsgID.react(args[3]);
 
     let option = Number(args[4]);
-    if (!option) option = 1;
-    if (isNaN(option)) option = 1;
-    if (option > 6) option = 1;
+    // if (!option) option = 1;
+    if (!option || option > 6 || isNaN(option)) option = 1;
+    // if (option > 6) option = 1;
 
     const CREATE = await react.reactionCreate(
       "Message",

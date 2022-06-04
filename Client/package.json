@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/NedcloarBR/N-D-B",
   "engines": {
-    "node": "16.x"
+    "node": "17.7.2"
   },
   "packageManager": "yarn@3.1.1",
   "scripts": {
@@ -21,12 +21,11 @@
     "build": "babel Src --extensions \".js,.ts\" --out-dir Dist --copy-files --no-copy-ignored",
     "start": "NODE_ENV=Production isCompiled=true node Dist/Root.js",
     "start:shard": "NODE_ENV=Production isCompiled=true node Dist/Shard.js",
-    "start:dev": "NODE_ENV=Development isCompiled=false ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts"
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts NODE_ENV=Development isCompiled=false"
   },
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
     "@discordjs/rest": "^0.3.0",
-    "better-erela.js-apple": "^1.0.1",
     "canvacord": "^5.2.3",
     "canvas": "^2.9.1",
     "chalk": "4.1.2",
@@ -35,10 +34,6 @@
     "discord-api-types": "^0.29.0",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
-    "erela.js": "^2.3.3",
-    "erela.js-deezer": "^1.0.7",
-    "erela.js-facebook": "^1.0.4",
-    "erela.js-spotify": "^1.2.0",
     "express": "^4.17.3",
     "express-promise-router": "^4.1.1",
     "flat-cache": "^3.0.4",

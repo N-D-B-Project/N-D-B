@@ -1,5 +1,4 @@
 import * as Discord from "discord.js";
-import * as Erela from "erela.js";
 import { ClientOptions, Collections, Config } from "~/Config";
 import {
   EventHandler,
@@ -7,7 +6,6 @@ import {
   SlashHandler,
   LanguageHandler,
 } from "@Utils/Handlers";
-import ErelaClient from "./ErelaClient";
 import { Logger, Tools, Mongoose } from "@Utils/Tools";
 import StartApps from "~/APIs/Apps/StartApps";
 
@@ -18,7 +16,6 @@ export default class NDBClient extends Discord.Client {
   private EventHandler: EventHandler = new EventHandler(this);
   private CommandHandler: CommandHandler = new CommandHandler(this);
   private SlashHandler: SlashHandler = new SlashHandler(this);
-  public ErelaManager: ErelaClient | Erela.Manager = new ErelaClient(this);
   private readonly StartApps: StartApps = new StartApps(this);
   public readonly logger: Logger = new Logger();
   public readonly Tools: Tools = new Tools(this);
