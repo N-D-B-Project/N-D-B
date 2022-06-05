@@ -68,13 +68,13 @@ export default class EventHandler {
         if (!(event instanceof BaseEvent)) {
           throw new TypeError(`Event: ${name} não esta em Events`);
         }
-        this.client.Collections.events.set(event.options.name, event);
+        this.client.Collections.events.set(String(event.options.name), event);
 
         var HandlerObject = [
           ...new Set([
             { emitter: "client", value: this.client },
-            { emitter: "music", value: this.client.ErelaManager },
-            { emitter: "process", value: process }, 
+            // { emitter: "music", value: this.client.ErelaManager },
+            { emitter: "process", value: process },
           ]),
         ]
           .map((object) => {
