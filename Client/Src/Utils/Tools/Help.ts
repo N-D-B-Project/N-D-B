@@ -1,7 +1,15 @@
 import NDBClient from "@Client/NDBClient";
 import BaseCommand from "@Structures/BaseCommand";
 import { CommandTools, InteractionTools, MessageTools } from ".";
-import * as Discord from "discord.js";
+import {
+  CommandInteraction,
+  Message,
+  Collection,
+  TextChannel,
+  EmbedBuilder,
+  ActionRowBuilder,
+  SelectMenuBuilder,
+} from "discord.js";
 import * as Mongoose from "mongoose";
 
 export default class HelpCommandTools {
@@ -10,12 +18,12 @@ export default class HelpCommandTools {
   }
 
   async Run(
-    msgint: Discord.Message | Discord.CommandInteraction,
+    msgint: Message | CommandInteraction,
     type: "message" | "interaction",
     _Command: BaseCommand
   ) {
     var Tools: any;
-    var Collection: Discord.Collection<any, any>;
+    var Collection: Collection<any, any>;
     if (type === "message") {
       Tools = MessageTools;
       Collection = this.client.Collections.commands;
@@ -28,7 +36,7 @@ export default class HelpCommandTools {
       msgint.guild
     );
     const author = msgint.guild.members.cache.get(msgint.member.user.id);
-    const channel = msgint.channel as Discord.TextChannel;
+    const channel = msgint.channel as TextChannel;
     const Timer = 12 * 1000 * 1000;
 
     var categories = [
@@ -64,7 +72,7 @@ export default class HelpCommandTools {
       },
     ];
 
-    if (author.permissions.has("MANAGE_GUILD")) {
+    if (author.permissions.has("ManageGuild")) {
       categories.unshift({
         value: "settings",
         label: "Settings",
@@ -76,7 +84,7 @@ export default class HelpCommandTools {
         emoji: "⚙",
       });
     }
-    if (author.permissions.has("KICK_MEMBERS")) {
+    if (author.permissions.has("KickMembers")) {
       categories.unshift({
         value: "moderation",
         label: "Moderation",
@@ -113,11 +121,15 @@ export default class HelpCommandTools {
       });
     }
 
-    if(author.permissions.has("MANAGE_ROLES")) {
+    if (author.permissions.has("ManageRoles")) {
       categories.push({
         value: "reactionrole",
         label: "Roles",
-        description: await this.client.translate("🌐 Accessibility/help:Selections:Description", msgint, { Category: "🎩 Reaction Roles" }),
+        description: await this.client.translate(
+          "🌐 Accessibility/help:Selections:Description",
+          msgint,
+          { Category: "🎩 Reaction Roles" }
+        ),
         emoji: "🎩",
       });
     }
@@ -142,7 +154,7 @@ export default class HelpCommandTools {
       };
     });
 
-    const Embed = new Discord.MessageEmbed()
+    const Embed = new EmbedBuilder()
       .setColor("#00c26f")
       .setAuthor({
         name: await this.client.translate(
@@ -152,7 +164,7 @@ export default class HelpCommandTools {
             ARG: msgint.guild.name,
           }
         ),
-        iconURL: msgint.guild.iconURL({ dynamic: true }),
+        iconURL: msgint.guild.iconURL({ extension: "gif" }),
       })
       .setThumbnail(this.client.user.displayAvatarURL())
       .setFooter({
@@ -163,7 +175,7 @@ export default class HelpCommandTools {
             ARG: author.user.tag,
           }
         ),
-        iconURL: author.displayAvatarURL({ dynamic: true }),
+        iconURL: author.displayAvatarURL({ extension: "gif" }),
       })
       .setTimestamp();
 
@@ -222,7 +234,7 @@ export default class HelpCommandTools {
       Tools.reply(msgint, { embeds: [Embed] });
       return;
     } else {
-      const MenuEmbed = new Discord.MessageEmbed()
+      const MenuEmbed = new EmbedBuilder()
         .setTitle(
           await this.client.translate(
             "🌐 Accessibility/help:Menu2:Title",
@@ -232,13 +244,13 @@ export default class HelpCommandTools {
             }
           )
         )
-        .setThumbnail(msgint.guild.iconURL({ dynamic: true }))
+        .setThumbnail(msgint.guild.iconURL({ extension: "gif" }))
         .setAuthor({
           name: author.user.tag,
           iconURL: author.displayAvatarURL(),
         })
         .setColor("#00c26f")
-        .setURL("http://discord.gg/5CHARxbaRk")
+        .setURL("http://gg/5CHARxbaRk")
         .setDescription(
           await this.client.translate(
             "🌐 Accessibility/help:Menu2:Description",
@@ -250,8 +262,8 @@ export default class HelpCommandTools {
           iconURL: this.client.user.displayAvatarURL(),
         })
         .setTimestamp();
-      const CategoriesComponent = new Discord.MessageActionRow().addComponents(
-        new Discord.MessageSelectMenu()
+      const CategoriesComponent = new ActionRowBuilder().addComponents([
+        new SelectMenuBuilder()
           .setCustomId("HelpCategories")
           .setPlaceholder(
             await this.client.translate(
@@ -259,8 +271,9 @@ export default class HelpCommandTools {
               msgint
             )
           )
-          .addOptions(categories)
-      );
+          .addOptions(categories),
+      ]);
+
       const ME = await Tools.reply(msgint, {
         embeds: [MenuEmbed],
         components: [CategoriesComponent],
@@ -284,26 +297,28 @@ export default class HelpCommandTools {
             case String(object.value):
               ME.edit({
                 embeds: [
-                  new Discord.MessageEmbed()
+                  new EmbedBuilder()
                     .setAuthor({
                       name: author.user.tag,
                       iconURL: author.displayAvatarURL({
-                        dynamic: true,
+                        extension: "gif",
                       }),
                     })
                     .setTitle(object.category)
                     .setColor("#00c26f")
-                    .addField(
-                      await this.client.translate(
-                        "🌐 Accessibility/help:Menu2:Commands",
-                        msgint
-                      ),
-                      Collection.filter(
-                        (cmd) => cmd.options.category === object.category
-                      )
-                        .map((cmd) => `\`${cmd.name}\``)
-                        .join(" | ")
-                    )
+                    .addFields([
+                      {
+                        name: await this.client.translate(
+                          "🌐 Accessibility/help:Menu2:Commands",
+                          msgint
+                        ),
+                        value: Collection.filter(
+                          (cmd) => cmd.options.category === object.category
+                        )
+                          .map((cmd) => `\`${cmd.name}\``)
+                          .join(" | "),
+                      },
+                    ])
                     .setFooter({
                       text: this.client.user.tag,
                       iconURL: this.client.user.displayAvatarURL(),

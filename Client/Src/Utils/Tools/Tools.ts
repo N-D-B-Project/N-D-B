@@ -1,5 +1,5 @@
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
+import { CommandInteraction, GuildChannel, Message } from "discord.js";
 import util from "node:util";
 import ms from "parse-ms";
 
@@ -23,7 +23,7 @@ export default class Tools {
     }
   }
 
-  async Timer(type: string, number: number, translateInfo: Discord.Message | Discord.CommandInteraction | Discord.GuildChannel) {
+  async Timer(type: string, number: number, translateInfo: Message | CommandInteraction | GuildChannel) {
     var time = ms(number);
     const days = this.client.translate("Tools/Tools:Timer:Days", translateInfo),
     hours = await this.client.translate("Tools/Tools:Timer:Hours", translateInfo),

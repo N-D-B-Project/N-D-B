@@ -3,7 +3,7 @@ import BaseEvent from "@Structures/BaseEvent";
 import { EventOptions } from "~/Types";
 import { CommandTools } from "@Utils/Tools";
 import { ReactionRole } from "~/Packages";
-import * as Discord from "discord.js";
+import { Message } from "discord.js";
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -16,7 +16,7 @@ export default class MessageCreateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, message: Discord.Message) {
+  async run(client: NDBClient, message: Message) {
     const react: ReactionRole = new ReactionRole(client, "MessageEvent");
     if (message.author.bot) return;
 

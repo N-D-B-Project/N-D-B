@@ -3,8 +3,8 @@ import BaseEvent from "@Structures/BaseEvent";
 import BaseCommand from "@Structures/BaseCommand";
 import { EventOptions } from "~/Types";
 import { CommandTools } from "@Utils/Tools";
-import * as Discord from "discord.js";
-import * as Mongoose from "mongoose";
+import { Message } from "discord.js";
+import { Document } from "mongoose";
 
 export default class CommandEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -19,10 +19,10 @@ export default class CommandEvent extends BaseEvent {
 
   async run(
     client: NDBClient,
-    message: Discord.Message,
+    message: Message,
     Prefix: string,
-    UserProfile: Mongoose.Document,
-    GuildConfig: Mongoose.Document
+    UserProfile: Document,
+    GuildConfig: Document
   ) {
     const cmdTools = new CommandTools(client);
     const [cmd, ...args] = message.content

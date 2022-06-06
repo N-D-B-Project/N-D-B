@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
-import * as Discord from "discord.js";
+import { ContextMenuCommandInteraction } from "discord.js";
 
 export default class ContextMenuEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -14,5 +14,5 @@ export default class ContextMenuEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: Discord.ContextMenuInteraction) {}
+  async run(client: NDBClient, interaction: ContextMenuCommandInteraction) {}
 }

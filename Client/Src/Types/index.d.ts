@@ -27,11 +27,12 @@ declare global {
 export interface EventOptions {
   name:
     | keyof Discord.ClientEvents
+    | keyof Discord.ClientRestEvents //WTF???
     | keyof ProcessEvents
     | keyof EmitedEvents
     | keyof MusicEvents;
   type: "on" | "once";
-  emitter: "client" | "music" | "process";
+  emitter: "client" | "rest" | "music" | "process";
 }
 
 export interface CommandOptions {
@@ -42,8 +43,10 @@ export interface CommandOptions {
   usage: string;
   disable?: boolean;
   cooldown?: number;
-  userPerms?: Array<Discord.PermissionString>;
-  botPerms?: Array<Discord.PermissionString>;
+  permissions: {
+    user: Array<Discord.PermissionResolvable>;
+    bot: Array<Discord.PermissionResolvable>;
+  };
   minArgs?: number;
   maxArgs?: number;
   guildOnly?: boolean;

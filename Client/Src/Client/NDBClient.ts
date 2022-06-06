@@ -1,5 +1,13 @@
-import * as Discord from "discord.js";
-import { ClientOptions, Collections, Config } from "~/Config";
+import {
+  Client,
+  Message,
+  CommandInteraction,
+  GuildChannel,
+  PartialMessage,
+  ActivityType,
+  Presence,
+} from "discord.js";
+import { _ClientOptions, Collections, Config } from "~/Config";
 import {
   EventHandler,
   CommandHandler,
@@ -9,7 +17,7 @@ import {
 import { Logger, Tools, Mongoose } from "@Utils/Tools";
 import StartApps from "~/APIs/Apps/StartApps";
 
-export default class NDBClient extends Discord.Client {
+export default class NDBClient extends Client {
   public ReadyState: boolean = false;
   public Config: typeof Config = Config;
   public Collections: Collections = new Collections();
@@ -22,7 +30,7 @@ export default class NDBClient extends Discord.Client {
   public readonly Mongoose: Mongoose = new Mongoose(this);
 
   public constructor() {
-    super(ClientOptions);
+    super(_ClientOptions);
   }
 
   public async Start(): Promise<void> {
@@ -53,11 +61,7 @@ export default class NDBClient extends Discord.Client {
 
   public async translate(
     key: string,
-    info:
-      | Discord.Message
-      | Discord.CommandInteraction
-      | Discord.GuildChannel
-      | Discord.PartialMessage,
+    info: Message | CommandInteraction | GuildChannel | PartialMessage,
     args?: Record<string, unknown>
   ): Promise<any> {
     const find = await this.Mongoose.FindGuildConfig(info.guild);
@@ -69,14 +73,14 @@ export default class NDBClient extends Discord.Client {
   }
 
   public async setShardPresence(
-    type: Discord.ActivityType,
+    type: ActivityType,
     name: string,
     url: string
-  ): Promise<Discord.Presence> {
+  ): Promise<Presence> {
     return this.user?.setPresence({
       activities: [
         {
-          // TODO: Discord.js won't accept all ActivityType's here
+          // TODO: js won't accept all ActivityType's here
           // Need to find a solution to remove "any"
           type: type as any,
           name,

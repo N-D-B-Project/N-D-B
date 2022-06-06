@@ -1,22 +1,29 @@
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
+import {
+  CommandInteraction,
+  MessageComponentInteraction,
+  DiscordAPIError,
+  MessageOptions,
+  InteractionReplyOptions,
+  InteractionUpdateOptions,
+  Message,
+  EmbedBuilder,
+} from "discord.js";
 import { IGNORED_ERRORS, MessageTools } from ".";
 
 export default class InteractionTools {
   public static async deferReply(
-    interaction:
-      | Discord.CommandInteraction
-      | Discord.MessageComponentInteraction,
+    interaction: CommandInteraction | MessageComponentInteraction,
     ephemeral: boolean = false
-  ): Promise<void> {
+  ): Promise<unknown> {
     try {
       return interaction.deferReply({
         ephemeral,
       });
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -26,14 +33,14 @@ export default class InteractionTools {
   }
 
   public static async deferUpdate(
-    interaction: Discord.MessageComponentInteraction
-  ): Promise<void> {
+    interaction: MessageComponentInteraction
+  ): Promise<unknown> {
     try {
       return await interaction.deferUpdate();
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -47,31 +54,31 @@ export default class InteractionTools {
    */
 
   public static async reply(
-    interaction:
-      | Discord.CommandInteraction
-      | Discord.MessageComponentInteraction,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions,
+    interaction: CommandInteraction | MessageComponentInteraction,
+    content: string | EmbedBuilder | MessageOptions,
     ephemeral: boolean = false
-  ): Promise<Discord.Message> {
+  ): Promise<Message> {
     try {
-      let msgOptions = MessageTools.messageOptions(content);
+      let msgOptions = MessageTools.messageOptions(
+        content
+      ) as InteractionReplyOptions;
 
       if (interaction.deferred || interaction.replied) {
         return (await interaction.followUp({
           ...msgOptions,
           ephemeral,
-        })) as Discord.Message;
+        })) as Message;
       } else {
         return (await interaction.reply({
           ...msgOptions,
           ephemeral,
           fetchReply: true,
-        })) as Discord.Message;
+        })) as Message;
       }
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -85,20 +92,18 @@ export default class InteractionTools {
    */
 
   public static async editReply(
-    interaction:
-      | Discord.CommandInteraction
-      | Discord.MessageComponentInteraction,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Promise<Discord.Message> {
+    interaction: CommandInteraction | MessageComponentInteraction,
+    content: string | EmbedBuilder | MessageOptions
+  ): Promise<Message> {
     try {
       let msgOptions = MessageTools.messageOptions(content);
       return (await interaction.editReply({
         ...msgOptions,
-      })) as Discord.Message;
+      })) as Message;
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -108,19 +113,21 @@ export default class InteractionTools {
   }
 
   public static async update(
-    interaction: Discord.MessageComponentInteraction,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Promise<Discord.Message> {
+    interaction: MessageComponentInteraction,
+    content: string | EmbedBuilder | MessageOptions
+  ): Promise<Message> {
     try {
-      let msgOptions = MessageTools.messageOptions(content);
+      let msgOptions = MessageTools.messageOptions(
+        content
+      ) as InteractionUpdateOptions;
       return (await interaction.update({
         ...msgOptions,
         fetchReply: true,
-      })) as Discord.Message;
+      })) as Message;
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {

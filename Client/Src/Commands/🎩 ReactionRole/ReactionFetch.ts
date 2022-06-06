@@ -1,14 +1,23 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import {
-  MessageTools as Message,
-  InteractionTools as Interaction,
+  MessageTools as TMessage,
+  InteractionTools as TInteraction,
   Buttons,
 } from "@Utils/Tools";
 import { ReactionRole } from "~/Packages";
 import { Emojis } from "~/Config/Emojis";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
+import {
+  Message,
+  EmbedBuilder,
+  TextChannel,
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  Interaction,
+  MessageComponentInteraction,
+  ComponentType,
+} from "discord.js";
 
 export default class ReactionFetchCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -21,8 +30,10 @@ export default class ReactionFetchCommand extends BaseCommand {
       usage: "<Channel | All> (channel)",
       disable: false,
       cooldown: 0,
-      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS", "MANAGE_ROLES"],
-      botPerms: ["EMBED_LINKS", "ADD_REACTIONS"],
+      permissions: {
+        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+      },
       minArgs: 1,
       maxArgs: 2,
       guildOnly: false,
@@ -39,11 +50,9 @@ export default class ReactionFetchCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
+  async run(client: NDBClient, message: Message, args: Array<string>) {
     message.channel.send("Command not implemented yet.");
-    return;
-
-    const buttons = new Buttons(client);
+    // return;
 
     switch (args[0]) {
       case "Channel":
@@ -52,12 +61,12 @@ export default class ReactionFetchCommand extends BaseCommand {
           message.guild.channels.cache.get(args[1]) ||
           (message.guild.channels.cache.find(
             (ch) => ch.name === args[1]
-          ) as Discord.TextChannel);
-        Channel = Channel as Discord.TextChannel;
+          ) as TextChannel);
+        Channel = Channel as TextChannel;
         if (!Channel) {
-          Message.send(message.channel, {
+          TMessage.send(message.channel, {
             embeds: [
-              new Discord.MessageEmbed()
+              new EmbedBuilder()
                 .setAuthor({
                   name: message.author.id,
                   iconURL: message.author.displayAvatarURL(),
@@ -83,36 +92,36 @@ export default class ReactionFetchCommand extends BaseCommand {
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {}
 
   async Handler(
     client: NDBClient,
     type: "message" | "interaction",
     info: "Channel" | "All",
-    msgint: Discord.Message | Discord.CommandInteraction,
-    n: Discord.Message,
-    channel?: Discord.TextChannel
+    msgint: Message | CommandInteraction,
+    n: Message,
+    channel?: TextChannel
   ) {
+    const buttons = new Buttons(client);
     var CurrentPage = 1;
     const react: ReactionRole = new ReactionRole(client, "Fetch");
     switch (type) {
       case "message":
-        msgint = msgint as Discord.Message;
+        msgint = msgint as Message;
         break;
       case "interaction":
-        msgint = msgint as Discord.CommandInteraction;
+        msgint = msgint as CommandInteraction;
     }
     const time = 1000 * 60 * 5;
-    const filter = (i: Discord.Interaction) =>
-      i.user.id === msgint.member.user.id;
+    const filter = (i: Interaction) => i.user.id === msgint.member.user.id;
     const reactions = await react.reactionFetch(
       msgint.guild,
       channel.id,
       "Channel"
     );
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor({
         name: msgint.guild.name,
         iconURL: msgint.guild.iconURL(),
@@ -128,18 +137,18 @@ export default class ReactionFetchCommand extends BaseCommand {
         text: `${CurrentPage}/${reactions.length}`,
       });
 
-    const msg = await Message.send(msgint.channel, {
+    const msg = await TMessage.send(msgint.channel, {
       embeds: [embed],
-      components: [await buttons.Pages(message, CurrentPage, reactions.length)],
+      components: [await buttons.Pages(msgint, CurrentPage, reactions.length)],
     });
 
     const collector = msg.createMessageComponentCollector({
       filter,
       time,
-      componentType: "BUTTON",
+      componentType: ComponentType.Button,
     });
 
-    collector.on("collect", async (i: Discord.MessageComponentInteraction) => {
+    collector.on("collect", async (i: MessageComponentInteraction) => {
       if (!i) {
         return;
       }
@@ -155,7 +164,7 @@ export default class ReactionFetchCommand extends BaseCommand {
       }
 
       if (msg) {
-        await Message.edit(msg, {
+        await TMessage.edit(msg, {
           embeds: [
             embed
               .setDescription(
@@ -170,7 +179,7 @@ export default class ReactionFetchCommand extends BaseCommand {
               }),
           ],
           components: [
-            await buttons.Pages(message, CurrentPage, reactions.length),
+            await buttons.Pages(msgint, CurrentPage, reactions.length),
           ],
         });
       }

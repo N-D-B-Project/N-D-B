@@ -1,10 +1,10 @@
 import { ReactionRole as Schema } from "@Database/Schemas";
 import { Logger } from "~/Utils/Tools";
-import Mongoose from "mongoose";
-import * as Discord from "discord.js";
+import { Document } from "mongoose";
+import { Guild } from "discord.js";
 
 export default async function reactionEdit(
-  guild: Discord.Guild,
+  guild: Guild,
   channelId: string,
   messageId: string,
   roleId: string,
@@ -16,7 +16,7 @@ export default async function reactionEdit(
   if (!newOption) newOption = 1;
   const logger: Logger = new Logger();
 
-  const data: Mongoose.Document = await Schema.findOne({ ID: guild.id });
+  const data: Document = await Schema.findOne({ ID: guild.id });
   var GET = await data.get("Reactions");
   var OBJ;
 

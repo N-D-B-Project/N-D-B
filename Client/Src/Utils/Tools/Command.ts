@@ -1,8 +1,13 @@
 import NDBClient from "@Client/NDBClient";
 import BaseCommand from "@Structures/BaseCommand";
-import { InteractionTools, MessageTools } from ".";
-import * as Discord from "discord.js";
-import * as Mongoose from "mongoose";
+import { InteractionTools, MessageTools } from "./index";
+import {
+  CommandInteraction,
+  EmbedBuilder,
+  Message,
+  TextChannel,
+} from "discord.js";
+import { Document } from "mongoose";
 
 export default class CommandTools {
   public constructor(private client: NDBClient) {
@@ -38,25 +43,25 @@ export default class CommandTools {
   }
 
   public async runCheck(
-    msgint: Discord.Message | Discord.CommandInteraction,
+    msgint: Message | CommandInteraction,
     _Command: BaseCommand,
     type: "message" | "interaction",
-    UserProfile: Mongoose.Document,
+    UserProfile: Document,
     prefix?: string,
     args?: Array<string>
   ): Promise<boolean> {
     const Options = _Command.options;
-    const Channel = msgint.channel as Discord.TextChannel;
+    const Channel = msgint.channel as TextChannel;
     var NDCash = UserProfile.get("NDCash.NDCash");
     var Author: any;
     var Tools: any;
 
     if (type === "message") {
-      msgint = msgint as Discord.Message;
+      msgint = msgint as Message;
       Author = msgint.author;
       Tools = MessageTools;
     } else {
-      msgint = msgint as Discord.CommandInteraction;
+      msgint = msgint as CommandInteraction;
       Author = msgint.member;
       Tools = InteractionTools;
     }
@@ -65,7 +70,7 @@ export default class CommandTools {
       if (args.length < _Command.options.minArgs) {
         Tools.reply(
           msgint,
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: Author.tag,
               iconURL: Author.displayAvatarURL(),
@@ -83,7 +88,7 @@ export default class CommandTools {
                 msgint
               )
             )
-            .addFields(
+            .addFields([
               {
                 name: await this.client.translate(
                   "Tools/Command:Checker:NoMinArgs:Fields:1",
@@ -107,8 +112,8 @@ export default class CommandTools {
                     Usage: `${prefix}${_Command.name} ${_Command.options.usage}`,
                   }
                 ),
-              }
-            )
+              },
+            ])
             .setFooter({
               text: this.client.user.tag,
               iconURL: this.client.user.displayAvatarURL(),
@@ -120,7 +125,7 @@ export default class CommandTools {
       if (args.length > _Command.options.maxArgs) {
         Tools.reply(
           msgint,
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: Author.tag,
               iconURL: Author.displayAvatarURL(),
@@ -138,7 +143,7 @@ export default class CommandTools {
                 msgint
               )
             )
-            .addFields(
+            .addFields([
               {
                 name: await this.client.translate(
                   "Tools/Command:Checker:TooManyArgs:Fields:1",
@@ -162,8 +167,8 @@ export default class CommandTools {
                     Usage: `${prefix}${_Command.name} ${_Command.options.usage}`,
                   }
                 ),
-              }
-            )
+              },
+            ])
             .setFooter({
               text: this.client.user.tag,
               iconURL: this.client.user.displayAvatarURL(),

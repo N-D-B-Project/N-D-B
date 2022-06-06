@@ -1,4 +1,4 @@
-import * as Discord from "discord.js";
+import { ShardingManager, Shard } from "discord.js";
 import { Logger } from "@Utils/Tools";
 import { Config } from "../Config";
 import { JobService } from "@APIs/SCApi/Services";
@@ -7,7 +7,7 @@ export default class ShardingClient {
   private readonly logger: Logger = new Logger();
   private config: typeof Config = Config;
   constructor(
-    private ShardingManager: Discord.ShardingManager,
+    private ShardingManager: ShardingManager,
     private JobService: JobService
   ) {}
 
@@ -33,7 +33,7 @@ export default class ShardingClient {
     );
   }
 
-  private onShardCreate(shard: Discord.Shard): void {
+  private onShardCreate(shard: Shard): void {
     this.logger.info(`Launching Shard #${shard.id.toString()}`);
   }
 }

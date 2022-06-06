@@ -1,22 +1,34 @@
-import * as Discord from "discord.js";
 import NDBClient from "@Client/NDBClient";
 import { IGNORED_ERRORS } from ".";
+import {
+  User,
+  TextBasedChannel,
+  MessageOptions,
+  Message,
+  DiscordAPIError,
+  EmojiResolvable,
+  MessageReaction,
+  StartThreadOptions,
+  MessageEditOptions,
+  ThreadChannel,
+  EmbedBuilder,
+} from "discord.js";
 
 export default class MessageTools {
   public constructor(private client: NDBClient) {
     this.client = client;
   }
   public static async send(
-    target: Discord.User | Discord.TextBasedChannel,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Promise<Discord.Message> {
+    target: User | TextBasedChannel,
+    content: string | EmbedBuilder | MessageOptions
+  ): Promise<Message> {
     try {
       let msgOptions = this.messageOptions(content);
       return await target.send(msgOptions);
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -26,16 +38,16 @@ export default class MessageTools {
   }
 
   public static async reply(
-    message: Discord.Message,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Promise<Discord.Message> {
+    message: Message,
+    content: string | EmbedBuilder | MessageOptions
+  ): Promise<Message> {
     try {
       let msgOptions = this.messageOptions(content);
       return await message.reply(msgOptions);
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -45,16 +57,16 @@ export default class MessageTools {
   }
 
   public static async edit(
-    message: Discord.Message,
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Promise<Discord.Message> {
+    message: Message,
+    content: string | EmbedBuilder | MessageOptions
+  ): Promise<Message> {
     try {
-      let msgOptions = this.messageOptions(content);
+      let msgOptions = this.messageOptions(content) as MessageEditOptions;
       return await message.edit(msgOptions);
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -64,15 +76,15 @@ export default class MessageTools {
   }
 
   public static async react(
-    message: Discord.Message,
-    emoji: Discord.EmojiResolvable
-  ): Promise<Discord.MessageReaction> {
+    message: Message,
+    emoji: EmojiResolvable
+  ): Promise<MessageReaction> {
     try {
       return await message.react(emoji);
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -81,13 +93,13 @@ export default class MessageTools {
     }
   }
 
-  public static async pin(message: Discord.Message): Promise<Discord.Message> {
+  public static async pin(message: Message): Promise<Message> {
     try {
       return await message.pin();
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -96,15 +108,13 @@ export default class MessageTools {
     }
   }
 
-  public static async unpin(
-    message: Discord.Message
-  ): Promise<Discord.Message> {
+  public static async unpin(message: Message): Promise<Message> {
     try {
       return await message.unpin();
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -114,15 +124,15 @@ export default class MessageTools {
   }
 
   public static async startThread(
-    message: Discord.Message,
-    options: Discord.StartThreadOptions
-  ): Promise<Discord.ThreadChannel> {
+    message: Message,
+    options: StartThreadOptions
+  ): Promise<ThreadChannel> {
     try {
       return await message.startThread(options);
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -131,15 +141,13 @@ export default class MessageTools {
     }
   }
 
-  public static async delete(
-    message: Discord.Message
-  ): Promise<Discord.Message> {
+  public static async delete(message: Message): Promise<Message> {
     try {
       return await message.delete();
     } catch (error) {
       if (
-        error instanceof Discord.DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code)
+        error instanceof DiscordAPIError &&
+        IGNORED_ERRORS.includes(error.code as any)
       ) {
         return;
       } else {
@@ -149,12 +157,12 @@ export default class MessageTools {
   }
 
   public static messageOptions(
-    content: string | Discord.MessageEmbed | Discord.MessageOptions
-  ): Discord.MessageOptions {
-    let options: Discord.MessageOptions = {};
+    content: string | EmbedBuilder | MessageOptions
+  ): MessageOptions {
+    let options: MessageOptions = {};
     if (typeof content === "string") {
       options.content = content;
-    } else if (content instanceof Discord.MessageEmbed) {
+    } else if (content instanceof EmbedBuilder) {
       options.embeds = [content];
     } else {
       options = content;

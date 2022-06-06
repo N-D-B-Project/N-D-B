@@ -1,6 +1,6 @@
-import * as Mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IServer } from "~/Types";
-const GuildConfigSchema: IServer | Mongoose.Schema = new Mongoose.Schema({
+const GuildConfigSchema: Schema = new Schema<IServer>({
   ID: String,
   Name: String,
   Settings: {
@@ -24,5 +24,5 @@ const GuildConfigSchema: IServer | Mongoose.Schema = new Mongoose.Schema({
   },
 });
 
-const GuildConfig = Mongoose.model("GuildConfig", GuildConfigSchema);
+const GuildConfig = model("GuildConfig", GuildConfigSchema);
 export default GuildConfig;

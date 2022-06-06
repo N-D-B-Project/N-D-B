@@ -3,7 +3,7 @@ import BaseEvent from "@Structures/BaseEvent";
 import { EventOptions, ReactionsType } from "~/Types";
 import { MessageTools } from "~/Utils/Tools";
 import { ReactionRole as Schema } from "@Database/Schemas";
-import * as Discord from "discord.js";
+import { MessageReaction, User, EmbedBuilder } from "discord.js";
 
 export default class Event extends BaseEvent {
   constructor(client: NDBClient) {
@@ -16,11 +16,7 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(
-    client: NDBClient,
-    reaction: Discord.MessageReaction,
-    user: Discord.User
-  ) {
+  async run(client: NDBClient, reaction: MessageReaction, user: User) {
     if (user === client.user) return;
     const TIMER: number = 10 * 1000;
     const ReactionCooldown = new Set();
@@ -41,10 +37,10 @@ export default class Event extends BaseEvent {
 
       if (ClientCooldown.has(reaction.message.guildId)) return;
 
-      const CooldownEmbed = new Discord.MessageEmbed()
+      const CooldownEmbed = new EmbedBuilder()
         .setAuthor({
           name: user.username,
-          iconURL: user.displayAvatarURL({ dynamic: true, size: 512 }),
+          iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
         })
         .setTitle(
           await client.translate(
@@ -59,19 +55,21 @@ export default class Event extends BaseEvent {
             { GUILD: Guild.name, TIMER }
           )
         )
-        .addFields({
-          name: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:1",
-            reaction.message
-          ),
-          value: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:Content",
-            reaction.message,
-            {
-              URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
-            }
-          ),
-        })
+        .addFields([
+          {
+            name: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:1",
+              reaction.message
+            ),
+            value: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:Content",
+              reaction.message,
+              {
+                URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+              }
+            ),
+          },
+        ])
         .setFooter({
           text: await client.translate(
             "Events/ReactionRoleAdd:GlobalFooter",
@@ -81,10 +79,10 @@ export default class Event extends BaseEvent {
         })
         .setColor("#c20e00")
         .setTimestamp();
-      const AddEmbed = new Discord.MessageEmbed()
+      const AddEmbed = new EmbedBuilder()
         .setAuthor({
           name: user.username,
-          iconURL: user.displayAvatarURL({ dynamic: true, size: 512 }),
+          iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
         })
         .setTitle(
           await client.translate(
@@ -99,19 +97,21 @@ export default class Event extends BaseEvent {
             { ROLE: `<@&${Role}>`, GUILD: Guild.name }
           )
         )
-        .addFields({
-          name: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:1",
-            reaction.message
-          ),
-          value: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:Content",
-            reaction.message,
-            {
-              URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
-            }
-          ),
-        })
+        .addFields([
+          {
+            name: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:1",
+              reaction.message
+            ),
+            value: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:Content",
+              reaction.message,
+              {
+                URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+              }
+            ),
+          },
+        ])
         .setFooter({
           text: await client.translate(
             "Events/ReactionRoleAdd:GlobalFooter",
@@ -121,10 +121,10 @@ export default class Event extends BaseEvent {
         })
         .setColor("#00c26f")
         .setTimestamp();
-      const RemoveEmbed = new Discord.MessageEmbed()
+      const RemoveEmbed = new EmbedBuilder()
         .setAuthor({
           name: user.username,
-          iconURL: user.displayAvatarURL({ dynamic: true, size: 512 }),
+          iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
         })
         .setTitle(
           await client.translate(
@@ -140,19 +140,21 @@ export default class Event extends BaseEvent {
             { ROLE: `<@&${Role}>`, GUILD: Guild.name }
           )
         )
-        .addFields({
-          name: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:1",
-            reaction.message
-          ),
-          value: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:Content",
-            reaction.message,
-            {
-              URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
-            }
-          ),
-        })
+        .addFields([
+          {
+            name: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:1",
+              reaction.message
+            ),
+            value: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:Content",
+              reaction.message,
+              {
+                URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+              }
+            ),
+          },
+        ])
         .setFooter({
           text: await client.translate(
             "Events/ReactionRoleAdd:GlobalFooter",
@@ -162,10 +164,10 @@ export default class Event extends BaseEvent {
         })
         .setColor("#00c26f")
         .setTimestamp();
-      const ErrorEmbed = new Discord.MessageEmbed()
+      const ErrorEmbed = new EmbedBuilder()
         .setAuthor({
           name: user.username,
-          iconURL: user.displayAvatarURL({ dynamic: true, size: 512 }),
+          iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
         })
         .setTitle(
           await client.translate(
@@ -180,19 +182,21 @@ export default class Event extends BaseEvent {
             { ROLE: `<@&${Role}>`, GUILD: Guild.name }
           )
         )
-        .addFields({
-          name: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:1",
-            reaction.message
-          ),
-          value: await client.translate(
-            "Events/ReactionRoleAdd:GlobalField:Content",
-            reaction.message,
-            {
-              URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
-            }
-          ),
-        })
+        .addFields([
+          {
+            name: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:1",
+              reaction.message
+            ),
+            value: await client.translate(
+              "Events/ReactionRoleAdd:GlobalField:Content",
+              reaction.message,
+              {
+                URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+              }
+            ),
+          },
+        ])
         .setFooter({
           text: await client.translate(
             "Events/ReactionRoleAdd:GlobalFooter",

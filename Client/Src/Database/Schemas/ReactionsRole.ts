@@ -1,7 +1,7 @@
-import * as Mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import { IRR } from "~/Types";
 
-const ReactionRoleSchema: IRR | Mongoose.Schema = new Mongoose.Schema({
+const ReactionRoleSchema: Schema = new Schema<IRR>({
   ID: String,
   Name: String,
   DMInfoMSG: Boolean,
@@ -16,5 +16,5 @@ const ReactionRoleSchema: IRR | Mongoose.Schema = new Mongoose.Schema({
   ],
 });
 
-const ReactionRole = Mongoose.model("ReactionRole", ReactionRoleSchema);
+const ReactionRole = model("ReactionRole", ReactionRoleSchema);
 export default ReactionRole;

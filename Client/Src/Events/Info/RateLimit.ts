@@ -5,9 +5,9 @@ import BaseEvent from "@Structures/BaseEvent";
 export default class rateLimitEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
-      name: "rateLimit",
+      name: "rateLimited",
       type: "once",
-      emitter: "client",
+      emitter: "rest",
     };
 
     super(client, options);

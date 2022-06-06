@@ -1,14 +1,17 @@
 import { CommandOptions } from "~/Types";
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
-import { InteractionTools, MessageTools } from "../Tools";
+import {
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  Message,
+} from "discord.js";
 
 export default class BaseCommand {
   public name: string;
   constructor(
     private client: NDBClient,
     public options: CommandOptions,
-    public args: Array<string> | Discord.CommandInteractionOptionResolver
+    public args: Array<string> | CommandInteractionOptionResolver
   ) {
     this.name = options.name;
     this.client = client;
@@ -16,14 +19,14 @@ export default class BaseCommand {
     this.args = args;
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
+  async run(client: NDBClient, message: Message, args: Array<string>) {
     throw new Error(`Comando \`${this.name}\` Não proveu um método Run!`);
   }
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {
     throw new Error(`Comando \`${this.name}\` Não proveu um método Run!`);
   }

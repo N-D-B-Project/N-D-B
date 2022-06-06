@@ -49,19 +49,17 @@ export default async (): Promise<Map<string, TFunction>> => {
   }
 
   i18next.use(Backend);
-  await i18next.init(
-    {
-      compatibilityJSON: "v3",
-      backend: options,
-      debug: TF,
-      fallbackLng: "pt-BR",
-      initImmediate: false,
-      interpolation: { escapeValue: false },
-      load: "all",
-      ns: namespaces,
-      preload: languages,
-    }
-  );
+  await i18next.init({
+    compatibilityJSON: "v3",
+    backend: options,
+    debug: TF,
+    fallbackLng: "pt-BR",
+    initImmediate: false,
+    interpolation: { escapeValue: false },
+    load: "all",
+    ns: namespaces,
+    preload: languages,
+  });
 
   return new Map(languages.map((item) => [item, i18next.getFixedT(item)]));
 };

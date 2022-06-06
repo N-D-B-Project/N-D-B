@@ -1,12 +1,12 @@
 import { ReactionRole as Schema } from "@Database/Schemas";
-import { Logger } from "~/Utils/Tools";
-import Mongoose from "mongoose";
-import * as Discord from "discord.js";
+import { Logger, Mongoose } from "~/Utils/Tools";
+import { Document } from "mongoose";
+import { Guild } from "discord.js";
 
 const logger: Logger = new Logger();
 
-async function reactionFetch(guild: Discord.Guild, channel: string) {
-  const data: Mongoose.Document = await Schema.findOne({ ID: guild.id });
+async function reactionFetch(guild: Guild, channel: string) {
+  const data: Document = await Schema.findOne({ ID: guild.id });
   const GET: any = await data.get("Reactions");
 
   var RArray = [];
@@ -26,8 +26,8 @@ async function reactionFetch(guild: Discord.Guild, channel: string) {
   // });
 }
 
-async function reactionFetchAll(guild: Discord.Guild) {
-  const data: Mongoose.Document = await Schema.findOne({ ID: guild.id });
+async function reactionFetchAll(guild: Guild) {
+  const data: Document = await Schema.findOne({ ID: guild.id });
   const GET: any = await data.get("Reactions");
 
   return GET;

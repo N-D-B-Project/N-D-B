@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
-import * as Discord from "discord.js";
+import { SelectMenuInteraction } from "discord.js";
 
 export default class SelectMenuEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -14,7 +14,7 @@ export default class SelectMenuEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: Discord.SelectMenuInteraction) {
+  async run(client: NDBClient, interaction: SelectMenuInteraction) {
     await interaction.deferUpdate();
   }
 }

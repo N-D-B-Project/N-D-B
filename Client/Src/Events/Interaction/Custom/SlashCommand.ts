@@ -3,8 +3,11 @@ import { EventOptions } from "~/Types";
 import { CommandTools, InteractionTools } from "~/Utils/Tools";
 import BaseEvent from "@Structures/BaseEvent";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
-import * as Mongoose from "mongoose";
+import {
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+} from "discord.js";
+import { Document } from "mongoose";
 
 module.exports = class SlashCommandEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -19,8 +22,8 @@ module.exports = class SlashCommandEvent extends BaseEvent {
 
   async run(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    UserProfile: Mongoose.Document
+    interaction: CommandInteraction,
+    UserProfile: Document
   ) {
     const cmdTools = new CommandTools(client);
     const guild = client.guilds.cache.get(interaction.guildId);
@@ -47,7 +50,7 @@ module.exports = class SlashCommandEvent extends BaseEvent {
         await _Command.SlashRun(
           client,
           interaction,
-          interaction.options as Discord.CommandInteractionOptionResolver
+          interaction.options as CommandInteractionOptionResolver
         );
       }
     }

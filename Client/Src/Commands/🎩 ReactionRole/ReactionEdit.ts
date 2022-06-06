@@ -1,13 +1,19 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import {
-  MessageTools as Message,
-  InteractionTools as Interaction,
+  MessageTools as TMessage,
+  InteractionTools as TInteraction,
 } from "@Utils/Tools";
 import { Emojis } from "~/Config/Emojis";
 import ReactionRole from "~/Packages/ReactionRole";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
+import {
+  Message,
+  TextChannel,
+  EmbedBuilder,
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+} from "discord.js";
 
 export default class ReactionEditCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -20,8 +26,10 @@ export default class ReactionEditCommand extends BaseCommand {
         "<Channel> <MessageId> <Cargo> <NovoCargo> <Emoji> (opção)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)",
       disable: false,
       cooldown: 0,
-      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS", "MANAGE_ROLES"],
-      botPerms: ["EMBED_LINKS", "ADD_REACTIONS"],
+      permissions: {
+        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+      },
       minArgs: 6,
       maxArgs: 7,
       guildOnly: false,
@@ -38,19 +46,19 @@ export default class ReactionEditCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
+  async run(client: NDBClient, message: Message, args: Array<string>) {
     const react: ReactionRole = new ReactionRole(client, "Edit");
     var Channel =
       message.mentions.channels.first() ||
       message.guild.channels.cache.get(args[0]) ||
       (message.guild.channels.cache.find(
         (ch) => ch.name === args[0]
-      ) as Discord.TextChannel);
-    Channel = Channel as Discord.TextChannel;
+      ) as TextChannel);
+    Channel = Channel as TextChannel;
     if (!Channel) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -69,9 +77,9 @@ export default class ReactionEditCommand extends BaseCommand {
     }
 
     if (!args[1]) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -89,9 +97,9 @@ export default class ReactionEditCommand extends BaseCommand {
       return;
     }
     var MsgID = await Channel.messages.fetch(args[1]).catch(async () => {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -108,7 +116,7 @@ export default class ReactionEditCommand extends BaseCommand {
       });
       return;
     });
-    MsgID = MsgID as Discord.Message;
+    MsgID = MsgID as Message;
 
     var Role =
       message.mentions.roles.first() ||
@@ -119,9 +127,9 @@ export default class ReactionEditCommand extends BaseCommand {
       message.guild.roles.cache.get(args[3]) ||
       message.guild.roles.cache.find((rl) => rl.name === args[3]);
     if (!Role || Role.managed) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -139,9 +147,9 @@ export default class ReactionEditCommand extends BaseCommand {
       return;
     }
     if (!NewRole || NewRole.managed) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -160,9 +168,9 @@ export default class ReactionEditCommand extends BaseCommand {
     }
 
     if (!args[4] || (await this.isCustomEmoji(args[4]))) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -196,9 +204,9 @@ export default class ReactionEditCommand extends BaseCommand {
     );
 
     if (EDIT) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: await client.translate(
                 "🎩 ReactionRole/EditReaction:Embed:Author",
@@ -207,7 +215,7 @@ export default class ReactionEditCommand extends BaseCommand {
               iconURL: message.guild.iconURL(),
             })
             .setColor("#00c26f")
-            .addFields(
+            .addFields([
               {
                 name: await client.translate(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:1",
@@ -256,8 +264,8 @@ export default class ReactionEditCommand extends BaseCommand {
                   message
                 ),
                 value: `<@&${NewRole.id}>`,
-              }
-            ),
+              },
+            ]),
         ],
       });
     }
@@ -265,8 +273,8 @@ export default class ReactionEditCommand extends BaseCommand {
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {}
 
   async isCustomEmoji(emoji: string) {

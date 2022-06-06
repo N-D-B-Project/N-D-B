@@ -1,17 +1,17 @@
 import { ReactionRole as Schema } from "@Database/Schemas";
 import { Logger } from "~/Utils/Tools";
-import Mongoose from "mongoose";
-import * as Discord from "discord.js";
+import { Document } from "mongoose";
+import { Guild } from "discord.js";
 
 export default async function ReactionDelete(
-  guild: Discord.Guild,
+  guild: Guild,
   msgId: string,
   channelId: string,
   role: string,
   emoji: string
 ) {
   const logger: Logger = new Logger();
-  const data: Mongoose.Document = await Schema.findOne({
+  const data: Document = await Schema.findOne({
     ID: guild.id,
   });
   var GET = await data.get("Reactions");

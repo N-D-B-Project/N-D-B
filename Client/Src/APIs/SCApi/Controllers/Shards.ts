@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient.js";
 import { Logger } from "@Utils/Tools";
-import * as Discord from "discord.js";
-import * as Express from "express";
+import { ShardingManager } from "discord.js";
+import { Request, Response, Router } from "express";
 import router from "express-promise-router";
 import { MapClass } from "../Middlewares";
 import {
@@ -14,11 +14,11 @@ import { Controller } from "~/Types";
 
 export default class ShardsController implements Controller {
   public path = "/shards";
-  public router: Express.Router = router();
+  public router: Router = router();
   public authToken: string = process.env.SCApi_Secret;
   private Logger: Logger = new Logger();
 
-  public constructor(private shardManager: Discord.ShardingManager) {}
+  public constructor(private shardManager: ShardingManager) {}
 
   public register(): void {
     this.router.get("/", (req, res) => this.getShards(req, res));
@@ -29,10 +29,7 @@ export default class ShardsController implements Controller {
     );
   }
 
-  private async getShards(
-    req: Express.Request,
-    res: Express.Response
-  ): Promise<void> {
+  private async getShards(req: Request, res: Response): Promise<void> {
     var shardDatas = await Promise.all(
       this.shardManager.shards.map(async (shard) => {
         var shardInfo: ShardInfo = {
@@ -68,10 +65,7 @@ export default class ShardsController implements Controller {
     res.status(200).json(resBody);
   }
 
-  private async setShardPresences(
-    req: Express.Request,
-    res: Express.Response
-  ): Promise<void> {
+  private async setShardPresences(req: Request, res: Response): Promise<void> {
     let reqBody: SetShardPresencesRequest = res.locals.input;
 
     await this.shardManager.broadcastEval(

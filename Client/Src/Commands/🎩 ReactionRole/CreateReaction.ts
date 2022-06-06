@@ -2,12 +2,18 @@ import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import BaseCommand from "@Structures/BaseCommand";
 import {
-  MessageTools as Message,
-  InteractionTools as Interaction,
+  MessageTools as TMessage,
+  InteractionTools as TInteraction,
 } from "@Utils/Tools";
 import { Emojis } from "~/Config/Emojis";
 import ReactionRole from "~/Packages/ReactionRole";
-import * as Discord from "discord.js";
+import {
+  Message,
+  EmbedBuilder,
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  TextChannel,
+} from "discord.js";
 
 export default class Command extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -20,8 +26,10 @@ export default class Command extends BaseCommand {
         "<Canal> <MessageID> <Cargo> <Emoji> (opção)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)",
       disable: false,
       cooldown: 0,
-      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS", "MANAGE_ROLES"],
-      botPerms: ["EMBED_LINKS", "ADD_REACTIONS"],
+      permissions: {
+        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+      },
       minArgs: 4,
       maxArgs: 5,
       guildOnly: false,
@@ -38,19 +46,19 @@ export default class Command extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
+  async run(client: NDBClient, message: Message, args: Array<string>) {
     const react: ReactionRole = new ReactionRole(client, "Create");
     var Channel =
       message.mentions.channels.first() ||
       message.guild.channels.cache.get(args[0]) ||
       (message.guild.channels.cache.find(
         (ch) => ch.name === args[0]
-      ) as Discord.TextChannel);
-    Channel = Channel as Discord.TextChannel;
+      ) as TextChannel);
+    Channel = Channel as TextChannel;
     if (!Channel) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -69,9 +77,9 @@ export default class Command extends BaseCommand {
     }
 
     if (!args[1]) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -89,9 +97,9 @@ export default class Command extends BaseCommand {
       return;
     }
     var MsgID = await Channel.messages.fetch(args[1]).catch(async () => {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -108,16 +116,16 @@ export default class Command extends BaseCommand {
       });
       return;
     });
-    MsgID = MsgID as Discord.Message;
+    MsgID = MsgID as Message;
 
     var Role =
       message.mentions.roles.first() ||
       message.guild.roles.cache.get(args[2]) ||
       message.guild.roles.cache.find((rl) => rl.name === args[2]);
     if (!Role || Role.managed) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -136,9 +144,9 @@ export default class Command extends BaseCommand {
     }
 
     if (!args[3] || (await this.isCustomEmoji(args[3]))) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -173,9 +181,9 @@ export default class Command extends BaseCommand {
       option
     );
     if (CREATE) {
-      Message.send(message.channel, {
+      TMessage.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: await client.translate(
                 "🎩 ReactionRole/CreateReaction:Embed:Author",
@@ -184,7 +192,7 @@ export default class Command extends BaseCommand {
               iconURL: message.guild.iconURL(),
             })
             .setColor("#00c26f")
-            .addFields(
+            .addFields([
               {
                 name: await client.translate(
                   "🎩 ReactionRole/CreateReaction:Embed:Fields:1",
@@ -226,8 +234,8 @@ export default class Command extends BaseCommand {
                   message
                 ),
                 value: `<@&${Role.id}>`,
-              }
-            ),
+              },
+            ]),
         ],
       });
     }
@@ -235,8 +243,8 @@ export default class Command extends BaseCommand {
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {}
 
   async isCustomEmoji(emoji: string) {

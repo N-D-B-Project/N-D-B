@@ -1,77 +1,70 @@
-import * as Discord from "discord.js";
+import {
+  ClientOptions,
+  GatewayIntentBits,
+  Partials,
+  Options,
+  Collection,
+} from "discord.js";
 import { TFunction } from "i18next";
 import BaseEvent from "@Structures/BaseEvent";
 import BaseCommand from "@Structures/BaseCommand";
 import { ColorsType, EmojisType, URLListType } from "~/Types";
 
-export const ClientOptions: Discord.ClientOptions = {
-  messageCacheLifetime: 10000,
-  restTimeOffset: 0,
+export const _ClientOptions: ClientOptions = {
   shards: "auto",
-  restWsBridgeTimeout: 100,
   failIfNotExists: false,
   allowedMentions: {
     parse: ["roles", "users"],
     repliedUser: false,
   },
   partials: [
-    "CHANNEL",
-    "GUILD_MEMBER",
-    "GUILD_SCHEDULED_EVENT",
-    "MESSAGE",
-    "REACTION",
-    "USER",
+    Partials.Channel,
+    Partials.GuildMember,
+    Partials.GuildScheduledEvent,
+    Partials.Message,
+    Partials.Reaction,
+    Partials.ThreadMember,
+    Partials.User,
   ],
   intents: [
-    Discord.Intents.FLAGS.GUILDS,
-    Discord.Intents.FLAGS.GUILD_BANS,
-    Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
-    Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
-    Discord.Intents.FLAGS.GUILD_INVITES,
-    Discord.Intents.FLAGS.GUILD_MEMBERS,
-    Discord.Intents.FLAGS.GUILD_MESSAGES,
-    Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
-    Discord.Intents.FLAGS.GUILD_PRESENCES,
-    Discord.Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
-    Discord.Intents.FLAGS.GUILD_VOICE_STATES,
-    Discord.Intents.FLAGS.GUILD_WEBHOOKS,
+    GatewayIntentBits.DirectMessageReactions,
+    GatewayIntentBits.DirectMessageTyping,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.GuildBans,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildIntegrations,
+    GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildScheduledEvents,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildWebhooks,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.MessageContent,
   ],
-  makeCache: Discord.Options.cacheWithLimits({
-    ...Discord.Options.defaultMakeCacheSettings,
+  makeCache: Options.cacheWithLimits({
+    ...Options.DefaultMakeCacheSettings,
     MessageManager: {
       maxSize: 2,
-      sweepInterval: 60 * 60,
     },
     ThreadManager: {
       maxSize: 2,
-      sweepInterval: 60 * 60,
     },
     ThreadMemberManager: {
       maxSize: 2,
-      sweepInterval: 60 * 60,
     },
   }),
 };
 
 export class Collections {
   public constructor(
-    public commands: Discord.Collection<
-      string,
-      BaseCommand
-    > = new Discord.Collection(),
-    public aliases: Discord.Collection<
-      string,
-      string
-    > = new Discord.Collection(),
-    public SlashCommands: Discord.Collection<
-      string,
-      BaseCommand
-    > = new Discord.Collection(),
-    public events: Discord.Collection<
-      string,
-      BaseEvent
-    > = new Discord.Collection(),
+    public commands: Collection<string, BaseCommand> = new Collection(),
+    public aliases: Collection<string, string> = new Collection(),
+    public SlashCommands: Collection<string, BaseCommand> = new Collection(),
+    public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
     public languages: any = import("../Utils/Languages/language-meta.json"),
     public react: Map<any, any> = new Map()
@@ -84,7 +77,7 @@ export class Collections {
 }
 
 export const InviteURL: string =
-  "https://discord.com/api/oauth2/authorize?client_id=708822043420000366&permissions=8&scope=bot%20applications.commands";
+  "https://com/api/oauth2/authorize?client_id=708822043420000366&permissions=8&scope=bot%20applications.commands";
 
 export const Colors: ColorsType = {
   Client: {

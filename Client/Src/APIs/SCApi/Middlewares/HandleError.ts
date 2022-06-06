@@ -1,7 +1,7 @@
 import { Logger } from "@Utils/Tools";
-import * as Express from "express";
+import { ErrorRequestHandler } from "express";
 
-export default function (logger: Logger): Express.ErrorRequestHandler {
+export default function (logger: Logger): ErrorRequestHandler {
   return (err, req, res, next) => {
     logger.error(
       `Um erro ocorreu ao processar o ${req.method} requisitado por ${req.url}`,

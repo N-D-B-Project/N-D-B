@@ -2,7 +2,12 @@ import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import { HelpCommandTools, InteractionTools, MessageTools } from "@Utils/Tools";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
+import {
+  ApplicationCommandOptionType,
+  Message,
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+} from "discord.js";
 
 export default class HelpCommand extends BaseCommand {
   public constructor(client: NDBClient, ...args: any[]) {
@@ -12,8 +17,10 @@ export default class HelpCommand extends BaseCommand {
       description: "Mostra todos os comandos e como utilizar-los",
       category: "🌐 Accessibility",
       usage: "[Comando]",
-      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS"],
-      botPerms: ["EMBED_LINKS"],
+      permissions: {
+        user: ["SendMessages", "UseApplicationCommands"],
+        bot: ["EmbedLinks"],
+      },
       ownerOnly: false,
       SlashOptions: {
         name: "help",
@@ -23,7 +30,7 @@ export default class HelpCommand extends BaseCommand {
           {
             name: "command",
             description: "show the help of a command",
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
           },
         ],
       },
@@ -31,7 +38,7 @@ export default class HelpCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, [command]) {
+  async run(client: NDBClient, message: Message, [command]) {
     const cmd =
       client.Collections.commands.get(command) ||
       client.Collections.commands.get(client.Collections.aliases.get(command));
@@ -56,8 +63,8 @@ export default class HelpCommand extends BaseCommand {
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {
     const command = args.getString("command");
     const cmd = client.Collections.SlashCommands.get(String(command));

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import "reflect-metadata";
-import * as Discord from "discord.js";
+import { ShardingManager as ShardManager } from "discord.js";
 import AutoPoster from "topgg-autoposter";
 import ShardingClient from "@Client/ShardingClient";
 import util from "node:util";
@@ -70,7 +70,7 @@ async function Start(): Promise<void> {
     return;
   }
 
-  const ShardingConfig = new Discord.ShardingManager("Dist/Root.js", {
+  const ShardingConfig = new ShardManager("Dist/Root.js", {
     token: process.env.Token,
     mode: "worker",
     respawn: true,

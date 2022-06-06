@@ -1,5 +1,5 @@
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
+import { CommandInteraction, EmbedBuilder, Message } from "discord.js";
 import {
   MessageTools as MESSAGE,
   InteractionTools as INTERACTION,
@@ -9,7 +9,7 @@ import { ReactionRole as Schema } from "@Database/Schemas";
 
 async function MessageReactionCreate(
   client: NDBClient,
-  message: Discord.Message,
+  message: Message,
   channelId: string,
   guildId: string,
   msgId: string,
@@ -43,7 +43,7 @@ async function MessageReactionCreate(
     if (Verify) {
       MESSAGE.send(message.channel, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: message.author.id,
               iconURL: message.author.displayAvatarURL(),
@@ -83,7 +83,7 @@ async function MessageReactionCreate(
 
 async function InteractionReactionCreate(
   client: NDBClient,
-  interaction: Discord.CommandInteraction,
+  interaction: CommandInteraction,
   channelId: string,
   guildId: string,
   msgId: string,
@@ -117,7 +117,7 @@ async function InteractionReactionCreate(
     if (Verify) {
       INTERACTION.reply(interaction, {
         embeds: [
-          new Discord.MessageEmbed()
+          new EmbedBuilder()
             .setAuthor({
               name: interaction.user.id,
               iconURL: interaction.user.displayAvatarURL(),

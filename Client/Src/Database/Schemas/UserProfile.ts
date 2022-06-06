@@ -1,7 +1,7 @@
+import { Schema, model } from "mongoose";
 import { IUser } from "~/Types";
-import * as Mongoose from "mongoose";
 
-const UserProfileSchema: IUser | Mongoose.Schema = new Mongoose.Schema({
+const UserProfileSchema: Schema = new Schema<IUser>({
   ID: String,
   Username: String,
   NDCash: {
@@ -26,5 +26,5 @@ const UserProfileSchema: IUser | Mongoose.Schema = new Mongoose.Schema({
   ],
 });
 
-const UserProfile = Mongoose.model("UserProfile", UserProfileSchema);
+const UserProfile = model("UserProfile", UserProfileSchema);
 export default UserProfile;

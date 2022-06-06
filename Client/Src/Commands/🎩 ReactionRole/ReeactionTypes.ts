@@ -1,8 +1,12 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
-import { MessageTools, InteractionTools } from '@Utils/Tools';
+import { MessageTools, InteractionTools } from "@Utils/Tools";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
+import {
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  Message,
+} from "discord.js";
 
 export default class ReeactionTypesCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -14,8 +18,10 @@ export default class ReeactionTypesCommand extends BaseCommand {
       usage: "",
       disable: false,
       cooldown: 0,
-      userPerms: ["SEND_MESSAGES", "USE_APPLICATION_COMMANDS"],
-      botPerms: ["EMBED_LINKS"],
+      permissions: {
+        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+      },
       minArgs: 0,
       maxArgs: 0,
       guildOnly: false,
@@ -32,11 +38,11 @@ export default class ReeactionTypesCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
-    
-  }
+  async run(client: NDBClient, message: Message, args: Array<string>) {}
 
-  async SlashRun(client: NDBClient, interaction: Discord.CommandInteraction, args: Discord.CommandInteractionOptionResolver) {
-    
-  }
-};
+  async SlashRun(
+    client: NDBClient,
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
+  ) {}
+}

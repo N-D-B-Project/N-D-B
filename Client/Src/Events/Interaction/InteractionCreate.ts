@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import BaseEvent from "@Structures/BaseEvent";
-import * as Discord from "discord.js";
+import { Interaction } from "discord.js";
 
 export default class InteractionCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -14,7 +14,7 @@ export default class InteractionCreateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: Discord.Interaction) {
+  async run(client: NDBClient, interaction: Interaction) {
     const UserProfile = await client.Mongoose.FindUserProfile(
       interaction.member
     );
@@ -38,7 +38,7 @@ export default class InteractionCreateEvent extends BaseEvent {
       return;
     }
 
-    if (interaction.isContextMenu) {
+    if (interaction.isContextMenuCommand) {
       client.emit("ContextMenu", interaction);
       return;
     }

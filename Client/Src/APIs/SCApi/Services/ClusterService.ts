@@ -1,5 +1,4 @@
 import { URL } from "url";
-
 import { HttpService } from ".";
 import { GetShardsResponse, SetShardPresencesRequest } from "../Models/Shards";
 import { GetGuildsResponse } from "../Models/Guilds";

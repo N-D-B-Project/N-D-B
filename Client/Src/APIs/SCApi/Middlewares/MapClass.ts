@@ -1,15 +1,11 @@
 import { ClassConstructor, plainToInstance } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
-import * as Express from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 
 export default function MapClass(
   cls: ClassConstructor<object>
-): Express.RequestHandler {
-  return async (
-    req: Express.Request,
-    res: Express.Response,
-    next: Express.NextFunction
-  ) => {
+): RequestHandler {
+  return async (req: Request, res: Response, next: NextFunction) => {
     // Map to class
     let obj: object = plainToInstance(cls, req.body);
 

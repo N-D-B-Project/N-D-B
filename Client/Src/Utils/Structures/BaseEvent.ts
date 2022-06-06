@@ -12,7 +12,7 @@ export default class BaseEvent {
 
   async run(client: NDBClient, ...args: any[]) {
     throw new Error(
-      `Um método Run não foi implementado em: ${this.options.name}`
+      `Um método Run não foi implementado em: ${String(this.options.name)}`
     );
   }
 }

@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import { GuildConfig, UserProfile } from "@Database/Schemas";
-import mongoose from "mongoose";
-import * as Discord from "discord.js";
+import { connect, connection, Document } from "mongoose";
+import { Guild, Interaction, Message } from "discord.js";
 
 export default class Mongoose {
   public constructor(private client: NDBClient) {
@@ -15,29 +15,29 @@ export default class Mongoose {
       useUnifiedTopology: true,
     };
 
-    mongoose.connect(process.env.MongoURI, ConnectOptions);
+    connect(process.env.MongoURI, ConnectOptions);
 
-    mongoose.connection.on("connected", () => {
+    connection.on("connected", () => {
       this.client.logger.database("Client: MongoDB Conectado!");
     });
 
-    // mongoose.set("useFindAndModify", false);
+    // set("useFindAndModify", false);
 
-    mongoose.connection.on("err", (err) => {
+    connection.on("err", (err) => {
       this.client.logger.error(`Mongoose Connection error: ${err.stack}`);
     });
 
-    mongoose.connection.on("disconnected", () => {
+    connection.on("disconnected", () => {
       this.client.logger.error(`Mongoose Connection lost`);
     });
   }
 
-  async FindGuildConfig(guild: Discord.Guild) {
+  async FindGuildConfig(guild: Guild) {
     const guildConfig = await GuildConfig.findOne({ ID: guild.id });
     return guildConfig;
   }
 
-  async CreateGuildConfig(guild: Discord.Guild) {
+  async CreateGuildConfig(guild: Guild) {
     try {
       await new GuildConfig({
         ID: guild.id,
@@ -70,7 +70,7 @@ export default class Mongoose {
     }
   }
 
-  async DeleteGuildConfig(guild: Discord.Guild, method: string) {
+  async DeleteGuildConfig(guild: Guild, method: string) {
     if (!this.client.ReadyState) {
       return;
     } else {
@@ -82,7 +82,7 @@ export default class Mongoose {
     }
   }
 
-  async UpdateGuildConfig(oldGuild: Discord.Guild, newGuild: Discord.Guild) {
+  async UpdateGuildConfig(oldGuild: Guild, newGuild: Guild) {
     const guildConfig = await GuildConfig.findOne({ ID: oldGuild.id });
     guildConfig.$set({ ID: newGuild.id, Name: newGuild.name });
     guildConfig.save();
@@ -91,15 +91,12 @@ export default class Mongoose {
     );
   }
 
-  async FindUserProfile(target: any): Promise<mongoose.Document> {
+  async FindUserProfile(target: any): Promise<Document> {
     const FindUserProfile = await UserProfile.findOne({ ID: target.id });
     return FindUserProfile;
   }
 
-  async CreateUserProfile(
-    msgint: Discord.Message | Discord.Interaction,
-    author: any
-  ) {
+  async CreateUserProfile(msgint: Message | Interaction, author: any) {
     try {
       await new UserProfile({
         ID: author.id,
@@ -130,10 +127,7 @@ export default class Mongoose {
     }
   }
 
-  async AddGuildToProfile(
-    msgint: Discord.Message | Discord.Interaction,
-    author: any
-  ) {
+  async AddGuildToProfile(msgint: Message | Interaction, author: any) {
     try {
       const Profile = await this.FindUserProfile(author);
       var GetGuilds = Profile.get("Guilds");
@@ -168,7 +162,7 @@ export default class Mongoose {
     }
   }
 
-  async RemoveGuildFromProfile(guild: Discord.Guild, author: any) {
+  async RemoveGuildFromProfile(guild: Guild, author: any) {
     try {
       const Profile = await this.FindUserProfile(author);
 

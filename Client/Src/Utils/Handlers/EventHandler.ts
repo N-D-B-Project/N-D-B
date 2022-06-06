@@ -73,7 +73,7 @@ export default class EventHandler {
         var HandlerObject = [
           ...new Set([
             { emitter: "client", value: this.client },
-            // { emitter: "music", value: this.client.ErelaManager },
+            { emitter: "rest", value: this.client.rest },
             { emitter: "process", value: process },
           ]),
         ]

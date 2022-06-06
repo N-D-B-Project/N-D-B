@@ -14,8 +14,10 @@ export default class TestCommand extends BaseCommand {
       usage: "",
       disable: false,
       cooldown: 0,
-      userPerms: [""],
-      botPerms: [""],
+      permissions: {
+        user: [],
+        bot: [],
+      },
       guildOnly: false,
       ownerOnly: true,
       nsfw: false,
