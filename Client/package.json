@@ -21,7 +21,7 @@
     "build": "babel Src --extensions \".js,.ts\" --out-dir Dist --copy-files --no-copy-ignored",
     "start": "NODE_ENV=Production isCompiled=true node Dist/Root.js",
     "start:shard": "NODE_ENV=Production isCompiled=true node Dist/Shard.js",
-    "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts NODE_ENV=Development isCompiled=false",
+    "start:dev": "NODE_ENV=Development isCompiled=false ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts ",
     "start:dev:normal": "NODE_ENV=Production isCompiled=false ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --files Src/Root.ts "
   },
   "dependencies": {
