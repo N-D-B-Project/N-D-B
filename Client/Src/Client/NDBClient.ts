@@ -7,6 +7,7 @@ import {
   ActivityType,
   Presence,
 } from "discord.js";
+import ErelaManager from "./ErelaManager";
 import { _ClientOptions, Collections, Config } from "~/Config";
 import {
   EventHandler,
@@ -21,6 +22,7 @@ export default class NDBClient extends Client {
   public ReadyState: boolean = false;
   public Config: typeof Config = Config;
   public Collections: Collections = new Collections();
+  public ErelaManager: ErelaManager = new ErelaManager(this);
   private EventHandler: EventHandler = new EventHandler(this);
   private CommandHandler: CommandHandler = new CommandHandler(this);
   private SlashHandler: SlashHandler = new SlashHandler(this);

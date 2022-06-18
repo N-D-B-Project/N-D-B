@@ -1,6 +1,5 @@
 import { EventOptions } from "~/Types";
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
 
 export default class BaseEvent {
   public constructor(private client: NDBClient, public options: EventOptions) {

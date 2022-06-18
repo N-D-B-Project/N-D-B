@@ -8,8 +8,7 @@ declare module "discord.js" {
 import * as Erela from "erela.js";
 declare module "erela.js" {
   interface Player {
-
-    LastSong: Array<Erela.Track>
+    LastSong: Array<Erela.Track>;
     AddLastSong(track: Erela.Track);
 
     SongMessage: string;
@@ -19,7 +18,7 @@ declare module "erela.js" {
     SetPlayerMessage(message: Discord.Message);
 
     PlayerAuthor: string;
-    SetPlayerAuthor(message: Discord.Message);
+    SetPlayerAuthor(message: Discord.User);
 
     isSlash: boolean;
     SlashInteraction: Discord.CommandInteraction;

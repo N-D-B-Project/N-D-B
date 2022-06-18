@@ -74,6 +74,7 @@ export default class EventHandler {
           ...new Set([
             { emitter: "client", value: this.client },
             { emitter: "rest", value: this.client.rest },
+            { emitter: "lavalink", value: this.client.ErelaManager },
             { emitter: "process", value: process },
           ]),
         ]

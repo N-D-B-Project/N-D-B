@@ -1,0 +1,71 @@
+server: # REST and WS server
+  port: 2333
+  address: 0.0.0.0
+lavalink:
+  server:
+    password: "youshallnotpass" 
+    playerUpdateInterval: 1 # How frequently to send player updates to clients, in seconds
+    koe:
+      useEpoll: true
+      highPacketPriority: true
+      bufferDurationMs: 400
+      byteBufAllocator: "default"
+    sources:
+      youtube: true
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      mixer: true
+      http: true
+      local: true
+    lavaplayer:
+      nonAllocating: false # Whether to use the non-allocating frame buffer.
+      frameBufferDuration: 5000 # The frame buffer duration, in milliseconds
+      youtubePlaylistLoadLimit: 6 # Number of pages at 100 each
+      gc-warnings: true
+      youtubeSearchEnabled: true
+      soundcloudSearchEnabled: true
+    #ratelimit:
+      #ipBlocks: ["1.0.0.0/8", "..."] # list of ip blocks
+      #excludedIps: ["...", "..."] # ips which should be explicit excluded from usage by lavalink
+      #strategy: "RotateOnBan" # RotateOnBan | LoadBalance | NanoSwitch | RotatingNanoSwitch
+      #searchTriggersFail: true # Whether a search 429 should trigger marking the ip as failing
+      #retryLimit: -1 # -1 = use default lavaplayer value | 0 = infinity | >0 = retry will happen this numbers times
+  plugins:
+    - dependency: "com.dunctebot:skybot-lavalink-plugin:1.1.3"
+      repository: "https://jitpack.io"
+
+plugins:
+  dunctebot:
+    ttsLanguage: "en-US" # language of the TTS engine
+    sources:
+      # true = source enabled, false = source disabled
+      getyarn: true # www.getyarn.io
+      clypit: true # www.clyp.it
+      tts: true # tts:Words to speak
+      pornhub: true # should be self-explanatory
+      reddit: true # should be self-explanatory
+      ocremix: true # www.ocremix.org
+      
+
+metrics:
+  prometheus:
+    enabled: false
+    endpoint: /metrics
+
+sentry:
+  dsn: ""
+#  tags:
+#    some_key: some_value
+#    another_key: another_value
+
+logging:
+  file:
+    max-history: 30
+    max-size: 1GB
+  path: ./Logs/
+
+  level:
+    root: INFO
+    lavalink: INFO
