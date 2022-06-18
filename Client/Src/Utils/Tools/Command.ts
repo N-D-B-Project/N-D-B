@@ -227,6 +227,21 @@ export default class CommandTools {
       return true;
     }
 
+    const player = this.client.ErelaManager.players.get(msgint.guild.id);
+    // Check Message Channel for Music commands
+    if (player && _Command.options.category === "🎵 Music") {
+      const TextChannel = msgint.guild.channels.cache.get(
+        player.textChannel
+      ) as TextChannel;
+      if (msgint.channel.id != player.textChannel)
+        Tools.reply(
+          msgint,
+          await this.client.translate("Tools/ErelaTools:WrongChannel", msgint, {
+            CHANNEL: TextChannel.id,
+          })
+        );
+    }
+
     return true;
   }
 }

@@ -1,5 +1,5 @@
 import NDBClient from "@Client/NDBClient";
-import * as Discord from "discord.js";
+import { ClientEvents, ClientRestEvents } from "discord.js";
 import * as Express from "express";
 
 declare global {
@@ -26,8 +26,8 @@ declare global {
 
 export interface EventOptions {
   name:
-    | keyof Discord.ClientEvents
-    | keyof Discord.ClientRestEvents //WTF???
+    | keyof ClientEvents
+    | keyof ClientRestEvents //WTF???
     | keyof ProcessEvents
     | keyof EmitedEvents
     | keyof MusicEvents;
