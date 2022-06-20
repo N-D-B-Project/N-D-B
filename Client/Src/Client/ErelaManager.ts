@@ -8,7 +8,7 @@ import Apple from "better-erela.js-apple";
 import "@Structures/BasePlayer";
 
 export default class ErelaManager extends Erela.Manager {
-  constructor(private client: NDBClient) {
+  constructor(private readonly client: NDBClient) {
     super({
       nodes: [
         {
