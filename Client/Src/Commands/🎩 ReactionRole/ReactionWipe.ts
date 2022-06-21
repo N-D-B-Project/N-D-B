@@ -8,7 +8,6 @@ import {
 import { ReactionRole } from "~/Packages";
 import { ReactionRole as Schema } from "@Database/Schemas";
 import BaseCommand from "@Structures/BaseCommand";
-
 import { Document } from "mongoose";
 import {
   Message,
@@ -80,7 +79,7 @@ export default class ReactionWipeCommand extends BaseCommand {
           )
           .setColor("#00c26f"),
       ],
-      components: [await Buttons.Confirm(message)],
+      components: [(await Buttons.Confirm(message)) as any],
     });
 
     const REACTION = MSG.awaitMessageComponent({

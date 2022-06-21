@@ -6,7 +6,7 @@ import {
   Buttons,
 } from "@Utils/Tools";
 import { ReactionRole } from "~/Packages";
-import { Emojis } from "~/Config/Emojis";
+import { Emojis } from "~/Config/ClientUtils";
 import BaseCommand from "@Structures/BaseCommand";
 import {
   Message,
@@ -139,7 +139,9 @@ export default class ReactionFetchCommand extends BaseCommand {
 
     const msg = await TMessage.send(msgint.channel, {
       embeds: [embed],
-      components: [await buttons.Pages(msgint, CurrentPage, reactions.length)],
+      components: [
+        (await buttons.Pages(msgint, CurrentPage, reactions.length)) as any,
+      ],
     });
 
     const collector = msg.createMessageComponentCollector({
@@ -179,7 +181,7 @@ export default class ReactionFetchCommand extends BaseCommand {
               }),
           ],
           components: [
-            await buttons.Pages(msgint, CurrentPage, reactions.length),
+            (await buttons.Pages(msgint, CurrentPage, reactions.length)) as any,
           ],
         });
       }

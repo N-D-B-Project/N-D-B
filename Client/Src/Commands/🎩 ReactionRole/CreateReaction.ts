@@ -5,7 +5,7 @@ import {
   MessageTools as TMessage,
   InteractionTools as TInteraction,
 } from "@Utils/Tools";
-import { Emojis } from "~/Config/Emojis";
+import { Emojis } from "~/Config/ClientUtils";
 import ReactionRole from "~/Packages/ReactionRole";
 import {
   Message,

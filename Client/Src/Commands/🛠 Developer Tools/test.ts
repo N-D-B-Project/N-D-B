@@ -1,7 +1,11 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import BaseCommand from "@Structures/BaseCommand";
-import * as Discord from "discord.js";
+import {
+  CommandInteraction,
+  CommandInteractionOptionResolver,
+  Message,
+} from "discord.js";
 import { InteractionTools, MessageTools } from "@Utils/Tools";
 
 export default class TestCommand extends BaseCommand {
@@ -26,12 +30,13 @@ export default class TestCommand extends BaseCommand {
         name: "test",
         ephemeral: false,
         description: "Command to test things",
+        nameLocalizations: {},
       },
     };
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Discord.Message, args: Array<string>) {
+  async run(client: NDBClient, message: Message, args: Array<string>) {
     const msg = await MessageTools.send(message.channel, {
       content: await client.translate("🛠 Developer Tools/test:Test", message),
       embeds: [],
@@ -48,8 +53,8 @@ export default class TestCommand extends BaseCommand {
 
   async SlashRun(
     client: NDBClient,
-    interaction: Discord.CommandInteraction,
-    args: Discord.CommandInteractionOptionResolver
+    interaction: CommandInteraction,
+    args: CommandInteractionOptionResolver
   ) {
     InteractionTools.reply(
       interaction,

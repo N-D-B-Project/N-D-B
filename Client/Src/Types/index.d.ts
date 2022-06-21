@@ -1,6 +1,12 @@
 import NDBClient from "@Client/NDBClient";
-import { ClientEvents, ClientRestEvents } from "discord.js";
-import * as Express from "express";
+import {
+  ClientEvents,
+  type ClientRestEvents,
+  type PermissionResolvable,
+  type ApplicationCommandData,
+} from "discord.js";
+import { type Router } from "express";
+import { type } from "os";
 
 declare global {
   declare namespace NodeJS {
@@ -44,8 +50,8 @@ export interface CommandOptions {
   disable?: boolean;
   cooldown?: number;
   permissions: {
-    user: Array<Discord.PermissionResolvable>;
-    bot: Array<Discord.PermissionResolvable>;
+    user: Array<PermissionResolvable>;
+    bot: Array<PermissionResolvable>;
   };
   minArgs?: number;
   maxArgs?: number;
@@ -54,7 +60,7 @@ export interface CommandOptions {
   nsfw?: boolean;
   ndcash?: number;
   DM?: boolean;
-  SlashOptions?: Discord.ApplicationCommandData;
+  SlashOptions?: ApplicationCommandData;
 }
 
 export type ConfigType = {
@@ -222,7 +228,7 @@ export interface IRR {
 
 export interface Controller {
   path: string;
-  router: Express.Router;
+  router: Router;
   authToken?: string;
   register(): void;
 }
