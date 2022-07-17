@@ -15,7 +15,6 @@ function App() {
           <Route path="/" exact={true} component={HomePage} />
           <Route path="/dashboard" exact={true} />
         </Switch>
-
       </div>
     </ThemeProvider>
   );
