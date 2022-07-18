@@ -1,0 +1,33 @@
+{
+  "Help": {
+    "description": "Cria uma Reaction Role",
+    "Usage": "<Canal> <MessageID> <Cargo> <Emoji> (option)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)"
+  },
+  "Channel": {
+    "Invalid": "{{fail}} Canal invalido"
+  },
+  "ID": {
+    "Invalid": "${fail} Insira um ID de Mensagem",
+    "NotFound": "{{fail}} Mensagem não encontrada verifique se o ID é valido"
+  },
+  "Role": {
+    "Invalid": "{{fail}} Cargo Invalido ou é um cargo de integração"
+  },
+  "Emoji": {
+    "Invalid": "{{fail}} Emoji invalido ou é um emoji personalizado"
+  },
+  "UnableToCreate": "{{fail}} Não foi possível criar essa Reaction Role pois ela já existe",
+  "Embed": {
+    "Author": "Reaction Roles",
+    "Fields": {
+      "1": "Canal",
+      "2": "Emoji",
+      "3": "Tipo",
+      "4": "Mensagem",
+      "5": "Cargo",
+      "Content": {
+        "4": "[Clique aqui]({{MsgIdURL}})"
+      }
+    }
+  }
+}

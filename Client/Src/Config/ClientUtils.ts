@@ -47,7 +47,8 @@ export class Collections {
     public SlashCommands: Collection<string, BaseCommand> = new Collection(),
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
-    public languages: any = import("../Utils/Languages/language-meta.json")
+    public languages: any = import("../Utils/Languages/language-meta.json"),
+    public react: Map<any, any> = new Map()
   ) {
     this.commands = commands;
     this.aliases = aliases;

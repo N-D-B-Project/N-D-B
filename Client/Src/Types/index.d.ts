@@ -90,3 +90,20 @@ export interface EmitedEvents {
   ReactionRoleAdd;
   ReactionRoleRemove;
 }
+
+export interface ReactionsType {
+  message: string;
+  channel: string;
+  role: string;
+  emoji: string;
+  option: REACTION_OPTIONS;
+}
+
+enum REACTION_OPTIONS {
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+}
