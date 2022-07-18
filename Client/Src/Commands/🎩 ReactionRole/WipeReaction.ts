@@ -7,7 +7,7 @@ import {
 } from "@Utils/Tools";
 import { ReactionRole } from "~/Packages";
 import { ReactionRole as Schema } from "@Database/Schemas";
-import BaseCommand from "@Structures/BaseCommand";
+import { BaseCommand } from "@Utils/Structures";
 import { Document } from "mongoose";
 import {
   Message,
@@ -17,11 +17,11 @@ import {
   ComponentType,
 } from "discord.js";
 
-export default class ReactionWipeCommand extends BaseCommand {
+export default class WipeReactionCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
     const options: CommandOptions = {
-      name: "ReactionWipe:Embed",
-      aliases: ["RWipe", "reactionwipe:Embed"],
+      name: "WipeReaction",
+      aliases: ["RWipe", "WipeReaction", "ReactionWipe", "reactionwipe"],
       description: "Remove todas as Reaction Roles do servidor",
       category: "🎩 ReactionRole",
       usage: "",
@@ -67,13 +67,13 @@ export default class ReactionWipeCommand extends BaseCommand {
           })
           .setTitle(
             await client.translate(
-              "🎩 ReactionRole/ReactionWipe:Embed:Title",
+              "🎩 ReactionRole/WipeReaction:Embed:Title",
               message
             )
           )
           .setDescription(
             await client.translate(
-              "🎩 ReactionRole/ReactionWipe:Embed:DescriptionConfirm",
+              "🎩 ReactionRole/WipeReaction:Embed:DescriptionConfirm",
               message
             )
           )
@@ -103,13 +103,13 @@ export default class ReactionWipeCommand extends BaseCommand {
               })
               .setTitle(
                 await client.translate(
-                  "🎩 ReactionRole/ReactionWipe:Embed:Title",
+                  "🎩 ReactionRole/WipeReaction:Embed:Title",
                   message
                 )
               )
               .setDescription(
                 await client.translate(
-                  "🎩 ReactionRole/ReactionWipe:Embed:DescriptionSuccess",
+                  "🎩 ReactionRole/WipeReaction:Embed:DescriptionSuccess",
                   message,
                   { NUMBER: GET.length }
                 )
@@ -131,13 +131,13 @@ export default class ReactionWipeCommand extends BaseCommand {
               })
               .setTitle(
                 await client.translate(
-                  "🎩 ReactionRole/ReactionWipe:Embed:Title",
+                  "🎩 ReactionRole/WipeReaction:Embed:Title",
                   message
                 )
               )
               .setDescription(
                 await client.translate(
-                  "🎩 ReactionRole/ReactionWipe:Embed:DescriptionError",
+                  "🎩 ReactionRole/WipeReaction:Embed:DescriptionError",
                   message
                 )
               )
@@ -159,13 +159,13 @@ export default class ReactionWipeCommand extends BaseCommand {
             })
             .setTitle(
               await client.translate(
-                "🎩 ReactionRole/ReactionWipe:Embed:Title",
+                "🎩 ReactionRole/WipeReaction:Embed:Title",
                 message
               )
             )
             .setDescription(
               await client.translate(
-                "🎩 ReactionRole/ReactionWipe:Embed:DescriptionCancel",
+                "🎩 ReactionRole/WipeReaction:Embed:DescriptionCancel",
                 message
               )
             )

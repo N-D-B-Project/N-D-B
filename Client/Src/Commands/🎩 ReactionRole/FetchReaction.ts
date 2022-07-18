@@ -6,8 +6,8 @@ import {
   Buttons,
 } from "@Utils/Tools";
 import { ReactionRole } from "~/Packages";
-import { Emojis } from "~/Config/ClientUtils";
-import BaseCommand from "@Structures/BaseCommand";
+import { Emojis } from "~/Config/Config";
+import { BaseCommand } from "@Utils/Structures";
 import {
   Message,
   EmbedBuilder,

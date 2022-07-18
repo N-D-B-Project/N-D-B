@@ -4,6 +4,7 @@ import InteractionTools from "./Interaction";
 import MessageTools from "./Message";
 import CommandTools from "./Command";
 import Mongoose from "./Mongoose";
+import Buttons from "./Buttons";
 
 export {
   Logger,
@@ -12,4 +13,5 @@ export {
   MessageTools,
   CommandTools,
   Mongoose,
+  Buttons,
 };

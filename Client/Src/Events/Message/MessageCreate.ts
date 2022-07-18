@@ -3,6 +3,7 @@ import { BaseEvent } from "@Utils/Structures";
 import { EventOptions } from "~/Types";
 import { CommandTools } from "@Utils/Tools";
 import { Message } from "discord.js";
+import { ReactionRole } from "~/Packages";
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -16,6 +17,7 @@ export default class MessageCreateEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, message: Message) {
+    const react: ReactionRole = new ReactionRole(client, "MessageEvent");
     if (message.author.bot) return;
 
     const cmdTools = new CommandTools(client);
@@ -29,6 +31,12 @@ export default class MessageCreateEvent extends BaseEvent {
       await client.Mongoose.CreateUserProfile(message, message.author);
     }
     await client.Mongoose.AddGuildToProfile(message, message.author);
+
+    //@ ReactionRole
+    const ReactionConfig = await react.FindGuild(message.guildId);
+    if (!ReactionConfig) {
+      await react.PreCreate(message.guild);
+    }
 
     //! GuildConfigs
     const guildConfig = await client.Mongoose.FindGuildConfig(message.guild);

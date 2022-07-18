@@ -1,11 +1,12 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
 import { MessageTools, InteractionTools } from "@Utils/Tools";
-import BaseCommand from "@Structures/BaseCommand";
+import { BaseCommand } from "@Utils/Structures";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver,
   Message,
+  EmbedBuilder,
 } from "discord.js";
 
 export default class ReeactionTypesCommand extends BaseCommand {
@@ -38,7 +39,25 @@ export default class ReeactionTypesCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {}
+  async run(client: NDBClient, message: Message, args: Array<string>) {
+    const msg = await MessageTools.send(message.channel, {
+      embeds: [
+        new EmbedBuilder()
+          .setAuthor({
+            name: message.author.tag,
+            iconURL: message.author.displayAvatarURL(),
+          })
+          .setDescription(
+            await client.translate(
+              "🎩 ReactionRole/ReactionTypes:Types",
+              message
+            )
+          )
+          .setColor("#00c26f")
+          .setTimestamp(),
+      ],
+    });
+  }
 
   async SlashRun(
     client: NDBClient,

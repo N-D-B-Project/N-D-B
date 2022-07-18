@@ -44,13 +44,13 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         })
         .setTitle(
           await client.translate(
-            "Events/ReactionRoleAdd:Cooldown:Title",
+            "Events/ReactionRoleAdd-Remove:Cooldown:Title",
             reaction.message
           )
         )
         .setDescription(
           await client.translate(
-            "Events/ReactionRoleAdd:Cooldown:Description",
+            "Events/ReactionRoleAdd-Remove:Cooldown:Description",
             reaction.message,
             { GUILD: Guild.name, TIMER }
           )
@@ -58,11 +58,11 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         .addFields([
           {
             name: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:1",
+              "Events/ReactionRoleAdd-Remove:GlobalField:1",
               reaction.message
             ),
             value: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:Content",
+              "Events/ReactionRoleAdd-Remove:GlobalField:Content",
               reaction.message,
               {
                 URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -72,7 +72,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         ])
         .setFooter({
           text: await client.translate(
-            "Events/ReactionRoleAdd:GlobalFooter",
+            "Events/ReactionRoleAdd-Remove:GlobalFooter",
             reaction.message
           ),
           iconURL: client.user.displayAvatarURL(),
@@ -86,13 +86,13 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         })
         .setTitle(
           await client.translate(
-            "Events/ReactionRoleAdd:Add:Title",
+            "Events/ReactionRoleAdd-Remove:Add:Title",
             reaction.message
           )
         )
         .setDescription(
           await client.translate(
-            "Events/ReactionRoleAdd:Add:Description",
+            "Events/ReactionRoleAdd-Remove:Add:Description",
             reaction.message,
             { ROLE: Role.name, GUILD: Guild.name }
           )
@@ -100,11 +100,11 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         .addFields([
           {
             name: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:1",
+              "Events/ReactionRoleAdd-Remove:GlobalField:1",
               reaction.message
             ),
             value: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:Content",
+              "Events/ReactionRoleAdd-Remove:GlobalField:Content",
               reaction.message,
               {
                 URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -114,7 +114,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         ])
         .setFooter({
           text: await client.translate(
-            "Events/ReactionRoleAdd:GlobalFooter",
+            "Events/ReactionRoleAdd-Remove:GlobalFooter",
             reaction.message
           ),
           iconURL: client.user.displayAvatarURL(),
@@ -128,14 +128,14 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         })
         .setTitle(
           await client.translate(
-            "Events/ReactionRoleAdd:Remove:Title",
+            "Events/ReactionRoleAdd-Remove:Remove:Title",
             reaction.message,
             {}
           )
         )
         .setDescription(
           await client.translate(
-            "Events/ReactionRoleAdd:Remove:Description",
+            "Events/ReactionRoleAdd-Remove:Remove:Description",
             reaction.message,
             { ROLE: Role.name, GUILD: Guild.name }
           )
@@ -143,11 +143,11 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         .addFields([
           {
             name: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:1",
+              "Events/ReactionRoleAdd-Remove:GlobalField:1",
               reaction.message
             ),
             value: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:Content",
+              "Events/ReactionRoleAdd-Remove:GlobalField:Content",
               reaction.message,
               {
                 URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -157,7 +157,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         ])
         .setFooter({
           text: await client.translate(
-            "Events/ReactionRoleAdd:GlobalFooter",
+            "Events/ReactionRoleAdd-Remove:GlobalFooter",
             reaction.message
           ),
           iconURL: client.user.displayAvatarURL(),
@@ -171,13 +171,13 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         })
         .setTitle(
           await client.translate(
-            "Events/ReactionRoleAdd:Error:Title",
+            "Events/ReactionRoleAdd-Remove:Error:Title",
             reaction.message
           )
         )
         .setDescription(
           await client.translate(
-            "Events/ReactionRoleAdd:Error:Description",
+            "Events/ReactionRoleAdd-Remove:Error:Description",
             reaction.message,
             { ROLE: Role.name, GUILD: Guild.name }
           )
@@ -185,11 +185,11 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         .addFields([
           {
             name: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:1",
+              "Events/ReactionRoleAdd-Remove:GlobalField:1",
               reaction.message
             ),
             value: await client.translate(
-              "Events/ReactionRoleAdd:GlobalField:Content",
+              "Events/ReactionRoleAdd-Remove:GlobalField:Content",
               reaction.message,
               {
                 URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -199,7 +199,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
         ])
         .setFooter({
           text: await client.translate(
-            "Events/ReactionRoleAdd:GlobalFooter",
+            "Events/ReactionRoleAdd-Remove:GlobalFooter",
             reaction.message
           ),
           iconURL: client.user.displayAvatarURL(),
@@ -224,7 +224,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               (r) => r.name.toLowerCase() === Role.name.toLowerCase()
             )
           ) {
-            await Member.roles.add(Role).catch(() => {});
+            await Member.roles
+              .add(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:ADD:1",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
             if (CONFIG.get("DMInfoMSG") === true) {
               MessageTools.send(user, {
                 embeds: [AddEmbed],
@@ -254,7 +262,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               (r) => r.name.toLowerCase() === Role.name.toLowerCase()
             )
           ) {
-            await Member.roles.add(Role).catch(() => {});
+            await Member.roles
+              .add(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:ADD:2",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
             if (CONFIG.get("DMInfoMSG") === true) {
               MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
             }
@@ -280,7 +296,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               (r) => r.name.toLowerCase() === Role.name.toLowerCase()
             )
           ) {
-            await Member.roles.remove(Role).catch(() => {});
+            await Member.roles
+              .remove(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:REMOVE:3",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
             if (CONFIG.get("DMInfoMSG") === true) {
               MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                 () => {}
@@ -308,7 +332,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               (r) => r.name.toLowerCase() === Role.name.toLowerCase()
             )
           ) {
-            await Member.roles.remove(Role).catch(() => {});
+            await Member.roles
+              .remove(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:REMOVE:4",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
             ReactionCooldown.add(user.id);
             if (CONFIG.get("DMInfoMSG") === true) {
               MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
@@ -336,7 +368,13 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               (r) => r.name.toLowerCase() === Role.name.toLowerCase()
             )
           ) {
-            await Member.roles.remove(Role);
+            await Member.roles.remove(
+              Role,
+              await client.translate(
+                "Events/ReactionRoleAdd-Remove:Option:REMOVE:5",
+                reaction.message
+              )
+            );
             reaction.message.reactions.cache
               .find((r) => r.emoji.name == Emoji.name)
               .users.remove(user.id)
@@ -373,7 +411,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               .find((r) => r.emoji.name == Emoji.name)
               .users.remove(user.id)
               .catch(() => {});
-            await Member.roles.remove(Role).catch(() => {});
+            await Member.roles
+              .remove(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:REMOVE:6",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
 
             ReactionCooldown.add(user.id);
             setTimeout(() => {
@@ -390,7 +436,15 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               .find((r) => r.emoji.name == Emoji.name)
               .users.remove(user.id)
               .catch(() => {});
-            await Member.roles.add(Role).catch(() => {});
+            await Member.roles
+              .add(
+                Role,
+                await client.translate(
+                  "Events/ReactionRoleAdd-Remove:Option:ADD:6",
+                  reaction.message
+                )
+              )
+              .catch(() => {});
 
             if (CONFIG.get("DMInfoMSG") === true) {
               MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});

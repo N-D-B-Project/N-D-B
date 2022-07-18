@@ -6,7 +6,12 @@ import {
   PartialMessage,
 } from "discord.js";
 import { _ClientOptions, Collections } from "~/Config/ClientUtils";
-import { EventHandler, CommandHandler, SlashHandler } from "@Utils/Handlers";
+import {
+  EventHandler,
+  CommandHandler,
+  SlashHandler,
+  LanguageHandler,
+} from "@Utils/Handlers";
 import { Logger, Mongoose, Tools } from "@Utils/Tools";
 
 export default class NDBClient extends Client {
@@ -30,6 +35,10 @@ export default class NDBClient extends Client {
     this.once("ready", async () => {
       await this.SlashHandler.loadSlashCommands();
     });
+
+    this.Collections.translations = await LanguageHandler();
+    await this.Mongoose.start();
+
     var Token: string;
     switch (process.env.NODE_ENV) {
       case "Development":

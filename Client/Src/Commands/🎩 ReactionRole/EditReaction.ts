@@ -4,9 +4,9 @@ import {
   MessageTools as TMessage,
   InteractionTools as TInteraction,
 } from "@Utils/Tools";
-import { Emojis } from "~/Config/ClientUtils";
+import { Emojis } from "~/Config/Config";
 import ReactionRole from "~/Packages/ReactionRole";
-import BaseCommand from "@Structures/BaseCommand";
+import { BaseCommand } from "@Utils/Structures";
 import {
   Message,
   TextChannel,

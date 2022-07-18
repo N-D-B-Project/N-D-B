@@ -1,6 +1,6 @@
 import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
-import BaseEvent from "@Structures/BaseEvent";
+import { BaseEvent } from "@Utils/Structures";
 
 export default class uncaughtExceptionMonitorEvent extends BaseEvent {
   constructor(client: NDBClient) {
