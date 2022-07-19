@@ -20,7 +20,7 @@
     "prefix": "!Event",
     "body": [
       "import NDBClient from \"@Client/NDBClient\";",
-      "import BaseEvent from \"@Structures/BaseEvent\";",
+      "import { BaseEvent } from \"@Utils/Structures\";",
       "import { EventOptions } from \"~/Types\";",
       "import {  } from \"discord.js\";",
       "",
@@ -51,7 +51,7 @@
       "import NDBClient from \"@Client/NDBClient\";",
       "import { CommandOptions } from \"~/Types\";",
       "import { MessageTools, InteractionTools } from \"@Utils/Tools\";",
-      "import BaseCommand from \"@Structures/BaseCommand\";",
+      "import { BaseCommand } from \"@Utils/Structures\";",
       "import {",
       "  CommandInteraction,",
       "  CommandInteractionOptionResolver,",
