@@ -24,7 +24,7 @@ export default class Event extends BaseEvent {
     client.logger.command(`${client.Collections.commands.size} Commands`);
 
     const BotOwner = client.users.cache.get(Config.Owners[0]);
-    await MessageTools.send(BotOwner, {
+    const ReadyMSG = await MessageTools.send(BotOwner, {
       embeds: [
         new EmbedBuilder()
           .setTitle("Estou Online")
@@ -38,6 +38,8 @@ export default class Event extends BaseEvent {
           .setTimestamp(),
       ],
     });
+    await client.Tools.WAIT(5000);
+    ReadyMSG.delete();
 
     const FindNDC = await NDC.findOne({ Auth: process.env.AuthNDC });
     if (!FindNDC) {

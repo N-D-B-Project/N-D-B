@@ -32,7 +32,7 @@
     "discord.js": "^14.0.1",
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
-    "i18next": "^21.8.14",
+    "i18next": "20.6.1",
     "i18next-fs-backend": "^1.1.4",
     "moment": "^2.29.4",
     "mongoose": "^6.4.4",

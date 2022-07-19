@@ -39,10 +39,9 @@
       "@Database/*": ["./Src/Database/*"],
       "@Utils/*": ["./Src/Utils/*"],
       "@Languages/*": ["./Src/Utils/Languages/*"],
-      "@Packages/*": ["./Src/Packages/*"],
       "@APIs/*": ["./Src/APIs/*"]
     }
   },
-  "include": ["Src"],
+  "include": ["Src", "Src/Events/Process"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

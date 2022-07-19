@@ -3,38 +3,44 @@
     "Description": "Inicia a criação de uma Reaction Role",
     "Usage": " "
   },
+  "Global": {
+    "Footer": "{{NAME}} | 🎩 ReactionRole - {{CMD}}"
+  },
   "Cancel": {
     "1": {
-      "Description": "{{fail}} Reaction Builder Cancelado!"
+      "Description": "{{FAIL}} Reaction Builder Cancelado!"
     },
     "2": {
-      "Description": "{{fail}} Resposta Errada, Reaction Builder Cancelado"
+      "Description": "{{FAIL}} Resposta Errada, Reaction Builder Cancelado"
     },
     "Time": {
-      "Description": "{{fail}} Tempo Acabou, Reaction Builder Cancelado!"
+      "Description": "{{FAIL}} Tempo Acabou, Reaction Builder Cancelado!"
     }
   },
-  "Channel": "Por favor especifique o Canal! **[Canal / ID]**\n\n**Diga `X` para cancelar a operação**",
-  "ID": "Especifique o ID da Mensagem\n\nCertifique-se que a mensagem seja do canal: {{channelToSend}}\n\n**Diga `X` para cancelar a operação**",
+  "Channel": "Por favor especifique o Canal! **[Canal / ID]**\n\n**Diga `X_X` para cancelar a operação**",
+  "ID": "Especifique o ID da Mensagem\n\nCertifique-se que a mensagem seja do canal: {{channelToSend}}\n\n**Diga `X_X` para cancelar a operação**",
   "Role": {
-    "Specify": "Por favor especifique o Cargo! **[Cargo / ID]**\n\nO Cargo será dado a pessoa que reagir\n\n**Diga `X` para cancelar a operação**",
-    "Managed": "{{fail}} Não utilize Cargos de Integrações"
+    "Specify": "Por favor especifique o Cargo! **[Cargo / ID]**\n\nO Cargo será dado a pessoa que reagir\n\n**Diga `X_X` para cancelar a operação**",
+    "Managed": "{{FAIL}} Não utilize Cargos de Integrações"
   },
   "Emoji": {
-    "Specify": "Por favor defina um Emoji, Certifique-se de não ser um Emoji Customizado\n\nO Emoji será o emoji ao qual o usuário reagirá!\n\n**Diga `X` para X a operação**",
-    "Invalid": "{{fail}} Emoji invalido",
-    "Custom": "{{fail}} Não utilize Emojis customizados"
+    "Specify": "Por favor defina um Emoji\nO Emoji será o emoji ao qual o usuário reagirá!\n\n**Diga `X_X` para cancelar a operação**",
+    "Specify_OLD": "Por favor defina um Emoji, Certifique-se de não ser um Emoji Customizado\n\nO Emoji será o emoji ao qual o usuário reagirá!\n\n**Diga `X_X` para cancelar a operação**",
+    "Invalid": "{{FAIL}} Emoji invalido",
+
+    "COMMENT_Custom": "Aceitos agora",
+    "Custom": "{{FAIL}} Não utilize Emojis customizados"
   },
   "Chose": {
-    "Options": "__**Finalmente escolha :**__\n\n`1` - Reagir adiciona o Cargo, tirar a reação remove o Cargo \n`2`- Reagir adiciona o Cargo, tirar a reação não remove o Cargo \n`3` - Reagir removerá o Cargo do usuário, tirar a reação não a devolverá o Cargo ao usuário \n`4` - Reagir removerá o Cargo, tirar a reação adiciona o Cargo \n`5` - Mesmo conceito do número 3 porém remove a reação do usuário\n`6` - Reagir para receber o Cargo e reagir novamene para remover o Cargo",
-    "Invalid": "Escolha uma das seguintes opções: 1, 2, 3, 4 ou 5"
+    "Options": "__**Finalmente escolha :**__\n\n`1` - Reagir adiciona o Cargo, tirar a reação remove o Cargo \n`2`- Reagir adiciona o Cargo, tirar a reação não remove o Cargo \n`3` - Reagir removerá o Cargo do usuário, tirar a reação não a devolverá o Cargo ao usuário \n`4` - Reagir removerá o Cargo, tirar a reação adiciona o Cargo \n`5` - Mesmo conceito do número 3 porém remove a reação do usuário\n`6` - Reagir para receber o Cargo e reagir novamente para remover o Cargo\n\n**Diga `X_X` para cancelar a operação**",
+    "Invalid": "Escolha uma das seguintes opções: 1, 2, 3, 4, 5 ou 6"
   },
   "Config": {
-    "Finish": "Reaction Roles - Configuração concluída",
+    "Finish": "🎩 Reaction Roles - Configuração concluída",
     "Channel": "Canal",
+    "Role": "Cargo",
     "Emoji": "Emoji",
-    "Tipo": "Tipo",
-    "ID": "ID da Mensagem",
+    "Type": "Tipo",
     "Message": "Mensagem",
     "ClickHere": "[Clique Aqui]({{MsgIdURL}})"
   }

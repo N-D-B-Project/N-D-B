@@ -137,7 +137,6 @@ export default class Mongoose {
       AllGuilds.forEach(async (guild: any) => {
         if (guild.ID == msgint.guild.id) {
           Verify = true;
-          return;
         }
       });
 

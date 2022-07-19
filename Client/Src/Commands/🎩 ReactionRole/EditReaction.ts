@@ -167,7 +167,7 @@ export default class ReactionEditCommand extends BaseCommand {
       return;
     }
 
-    if (!args[4] || (await this.isCustomEmoji(args[4]))) {
+    if (!args[4]) {
       TMessage.send(message.channel, {
         embeds: [
           new EmbedBuilder()
@@ -276,8 +276,4 @@ export default class ReactionEditCommand extends BaseCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {}
-
-  async isCustomEmoji(emoji: string) {
-    return emoji.split(":").length == 1 ? false : true;
-  }
 }

@@ -143,7 +143,8 @@ export default class Command extends BaseCommand {
       return;
     }
 
-    if (!args[3] || (await this.isCustomEmoji(args[3]))) {
+    const Emoji = client.emojis.cache.get(args[3]);
+    if (!Emoji) {
       TMessage.send(message.channel, {
         embeds: [
           new EmbedBuilder()
@@ -177,7 +178,7 @@ export default class Command extends BaseCommand {
       message.guildId,
       args[1],
       Role.id,
-      args[3],
+      String(Emoji),
       option
     );
     if (CREATE) {
@@ -246,8 +247,4 @@ export default class Command extends BaseCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {}
-
-  async isCustomEmoji(emoji: string) {
-    return emoji.split(":").length == 1 ? false : true;
-  }
 }

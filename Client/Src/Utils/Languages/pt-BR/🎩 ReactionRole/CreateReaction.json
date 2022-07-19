@@ -14,7 +14,7 @@
     "Invalid": "{{fail}} Cargo Invalido ou é um cargo de integração"
   },
   "Emoji": {
-    "Invalid": "{{fail}} Emoji invalido ou é um emoji personalizado"
+    "Invalid": "{{fail}} Emoji invalido"
   },
   "UnableToCreate": "{{fail}} Não foi possível criar essa Reaction Role pois ela já existe",
   "Embed": {

@@ -148,7 +148,8 @@ export default class DeleteReactionCommand extends BaseCommand {
       return;
     }
 
-    if (!args[3] || (await this.isCustomEmoji(args[3]))) {
+    const Emoji = client.emojis.cache.get(args[3]);
+    if (!Emoji) {
       TMessage.send(message.channel, {
         embeds: [
           new EmbedBuilder()
@@ -174,7 +175,7 @@ export default class DeleteReactionCommand extends BaseCommand {
       MsgID.id,
       Channel.id,
       Role.id,
-      args[3]
+      String(Emoji)
     );
 
     if (REACT) {
