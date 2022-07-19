@@ -1,25 +1,25 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, SchemaTypes } from "mongoose";
 const GuildConfigSchema: Schema = new Schema({
-  ID: String,
-  Name: String,
+  ID: SchemaTypes.String,
+  Name: SchemaTypes.String,
   Settings: {
-    Prefix: String,
-    Language: String,
+    Prefix: SchemaTypes.String,
+    Language: SchemaTypes.String,
   },
   Channels: {
-    Logs: Number,
-    Flood: Number,
+    Logs: SchemaTypes.Number,
+    Flood: SchemaTypes.Number,
   },
   Roles: {
-    Default: Number,
-    Muted: Number,
+    Default: SchemaTypes.Number,
+    Muted: SchemaTypes.Number,
   },
   Systems: {
-    AntiSpam: Boolean,
+    AntiSpam: SchemaTypes.Boolean,
     Logs: {
-      DeletedMessages: Boolean,
+      DeletedMessages: SchemaTypes.Boolean,
     },
-    ReactionDM: Boolean,
+    ReactionDM: SchemaTypes.Boolean,
   },
 });
 

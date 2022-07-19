@@ -1,16 +1,16 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, SchemaTypes } from "mongoose";
 
 const ReactionRoleSchema: Schema = new Schema({
-  ID: String,
-  Name: String,
-  DMInfoMSG: Boolean,
+  ID: SchemaTypes.String,
+  Name: SchemaTypes.String,
+  DMInfoMSG: SchemaTypes.Boolean,
   Reactions: [
     {
-      message: String,
-      channel: String,
-      role: String,
-      emoji: String,
-      option: Number,
+      message: SchemaTypes.String,
+      channel: SchemaTypes.String,
+      role: SchemaTypes.String,
+      emoji: SchemaTypes.String,
+      option: SchemaTypes.Number,
     },
   ],
 });

@@ -71,7 +71,7 @@ export default class Mongoose {
   }
 
   async DeleteGuildConfig(guild: Guild, method: string) {
-    if (!this.client.ReadyState) {
+    if (!this.client.isReady) {
       return;
     } else {
       await GuildConfig.deleteOne({ ID: guild.id });

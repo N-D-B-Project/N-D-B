@@ -27,6 +27,7 @@ export default class Event extends BaseEvent {
     var GetReactions = CONFIG.get("Reactions");
     const Guild = client.guilds.cache.get(CONFIG.get("ID"));
     const Member = reaction.message.guild.members.cache.get(user.id);
+    if (!CONFIG) return;
 
     GetReactions.forEach(async (Data: ReactionsType) => {
       const Role = Guild.roles.cache.get(Data.role);
@@ -34,6 +35,8 @@ export default class Event extends BaseEvent {
       const Channel = Data.channel;
       const Emoji = Guild.emojis.cache.get(Data.emoji);
       const Option = Data.option;
+
+      if (reaction.emoji.name != Data.emoji) return;
 
       if (ClientCooldown.has(reaction.message.guildId)) return;
 
@@ -218,7 +221,7 @@ export default class Event extends BaseEvent {
               .remove(
                 Role,
                 await client.translate(
-                  "Events/ReactionRoleAdd-Remove:Option:REMOVE:1",
+                  "Events/ReactionRoleAdd-Remove:Options:REMOVE:1",
                   reaction.message
                 )
               )
@@ -260,7 +263,7 @@ export default class Event extends BaseEvent {
               .add(
                 Role,
                 await client.translate(
-                  "Events/ReactionRoleAdd-Remove:Option:ADD:4",
+                  "Events/ReactionRoleAdd-Remove:Options:ADD:4",
                   reaction.message
                 )
               )

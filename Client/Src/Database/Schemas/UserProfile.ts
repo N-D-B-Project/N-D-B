@@ -1,26 +1,26 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, SchemaTypes } from "mongoose";
 
 const UserProfileSchema: Schema = new Schema({
-  ID: String,
-  Username: String,
+  ID: SchemaTypes.String,
+  Username: SchemaTypes.String,
   NDCash: {
-    NDCash: Number,
-    Emprego: String,
-    Level: Number,
-    Worked: Number,
-    Propina: Number,
-    X2Time: Boolean,
-    Daily: Number,
+    NDCash: SchemaTypes.Number,
+    Emprego: SchemaTypes.String,
+    Level: SchemaTypes.Number,
+    Worked: SchemaTypes.Number,
+    Propina: SchemaTypes.Number,
+    X2Time: SchemaTypes.Boolean,
+    Daily: SchemaTypes.Number,
   },
   Bag: {
-    Gifts: Number,
+    Gifts: SchemaTypes.Number,
   },
   Guilds: [
     {
-      ID: String,
-      Name: String,
-      XP: Number,
-      Level: Number,
+      ID: SchemaTypes.String,
+      Name: SchemaTypes.String,
+      XP: SchemaTypes.Number,
+      Level: SchemaTypes.Number,
     },
   ],
 });

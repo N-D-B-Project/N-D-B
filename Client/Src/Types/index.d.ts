@@ -20,6 +20,7 @@ declare global {
       //@ Database
       MongoURI: string;
       MongoURILocalHost: string;
+      AuthNDC;
 
       //# APIs
       SCApi_Secret: string;
