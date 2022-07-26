@@ -89,7 +89,9 @@ export default class EventHandler {
                 Object(object.value)[event.options.type](
                   event.options.name,
                   (...args: any[]) => {
-                    event.run(this.client, ...args);
+                    if (event.options.enable) {
+                      event.run(this.client, ...args);
+                    }
                   }
                 );
                 break;

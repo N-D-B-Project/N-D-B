@@ -8,6 +8,7 @@ export default class uncaughtExceptionMonitorEvent extends BaseEvent {
       name: "uncaughtExceptionMonitor",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

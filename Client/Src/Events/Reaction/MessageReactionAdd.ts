@@ -9,6 +9,7 @@ export default class MessageReactionAddEvent extends BaseEvent {
       name: "messageReactionAdd",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

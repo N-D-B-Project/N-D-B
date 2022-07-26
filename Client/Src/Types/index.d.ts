@@ -39,6 +39,7 @@ export interface EventOptions {
     | keyof ProcessEvents;
   type: "on" | "once";
   emitter: "client" | "rest" | "process";
+  enable?: boolean;
 }
 
 export interface CommandOptions {

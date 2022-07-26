@@ -9,6 +9,7 @@ export default class rateLimitedEvent extends BaseEvent {
       name: "rateLimited",
       type: "once",
       emitter: "rest",
+      enable: true,
     };
 
     super(client, options);

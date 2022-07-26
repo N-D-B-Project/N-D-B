@@ -9,6 +9,7 @@ export default class ContextMenuEvent extends BaseEvent {
       name: "ContextMenu",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

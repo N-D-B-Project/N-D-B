@@ -10,6 +10,7 @@ export default class DMCommandEvent extends BaseEvent {
       name: "DMCommand",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

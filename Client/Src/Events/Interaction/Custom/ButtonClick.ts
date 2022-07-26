@@ -9,6 +9,7 @@ export default class ButtonClickEvent extends BaseEvent {
       name: "ButtonClick",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

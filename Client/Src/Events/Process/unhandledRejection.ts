@@ -8,6 +8,7 @@ export default class unhandledRejectionEvent extends BaseEvent {
       name: "unhandledRejection",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

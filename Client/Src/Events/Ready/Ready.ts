@@ -12,6 +12,7 @@ export default class Event extends BaseEvent {
       name: "ready",
       type: "once",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

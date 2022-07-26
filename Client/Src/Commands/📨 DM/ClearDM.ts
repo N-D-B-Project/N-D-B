@@ -7,6 +7,8 @@ import {
   CommandInteractionOptionResolver,
   EmbedBuilder,
   Message,
+  MessageReaction,
+  User,
 } from "discord.js";
 import MsgDMCommand from "../🛠️ Developer Tools/MsgDM";
 
@@ -52,46 +54,45 @@ export default class ClearDMCommand extends BaseCommand {
         }
       });
     });
-    await client.Tools.WAIT(10000);
-    // await MessageTools.send(message.channel, {
-    const Message = message.channel
-      .send({
-        embeds: [
-          new EmbedBuilder()
-            .setColor("#00c26f")
-            .setDescription(
-              await client.Translate.DM(
-                "📨 DM/ClearDM:Embed:Description",
-                message.author,
-                {
-                  VALUE: i,
-                }
-              )
+    await client.Tools.WAIT(5000);
+    const msg = await MessageTools.send(message.channel, {
+      embeds: [
+        new EmbedBuilder()
+          .setColor("#00c26f")
+          .setDescription(
+            await client.Translate.DM(
+              "📨 DM/ClearDM:Embed:Description",
+              message.author,
+              {
+                VALUE: i,
+              }
             )
-            .setFooter({
-              text: await client.Translate.DM(
-                "📨 DM/ClearDM:Embed:Footer",
-                message.author
-              ),
-            })
-            .setTimestamp(),
-        ],
-      })
-      .then(async (msg) => {
-        msg.react("🗑️");
-        const filter = (m) => m.author.id === message.author.id;
-        await msg
-          .awaitReactions({
-            filter,
-            max: 1,
-            time: 60000,
-            errors: ["time"],
+          )
+          .setFooter({
+            text: await client.Translate.DM(
+              "📨 DM/ClearDM:Embed:Footer",
+              message.author
+            ),
           })
-          .then(async (reaction) => {
-            if (reaction.first().emoji.name === "🗑️") {
-              msg.delete();
-            } else return;
-          });
+          .setTimestamp(),
+      ],
+    });
+
+    msg.react("🗑️");
+    const filter = (reaction: MessageReaction, user: User) => {
+      return user.id === message.author.id && reaction.emoji.name === "🗑️";
+    };
+    msg
+      .createReactionCollector({
+        filter,
+        max: 1,
+        time: 60000,
+      })
+      .on("collect", async (reaction: MessageReaction) => {
+        msg.delete();
+      })
+      .on("end", async () => {
+        return;
       });
   }
 

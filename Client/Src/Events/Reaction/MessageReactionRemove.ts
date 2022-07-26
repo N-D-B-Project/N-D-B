@@ -9,6 +9,7 @@ export default class MessageReactionRemoveEvent extends BaseEvent {
       name: "messageReactionRemove",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

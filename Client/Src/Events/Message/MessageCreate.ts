@@ -11,6 +11,7 @@ export default class MessageCreateEvent extends BaseEvent {
       name: "messageCreate",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

@@ -9,6 +9,7 @@ module.exports = class GuildUpdateEvent extends BaseEvent {
       name: "guildUpdate",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

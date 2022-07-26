@@ -9,6 +9,7 @@ export default class SelectMenuEvent extends BaseEvent {
       name: "SelectMenu",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

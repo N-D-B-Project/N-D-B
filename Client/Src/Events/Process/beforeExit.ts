@@ -8,6 +8,7 @@ export default class beforeExitEvent extends BaseEvent {
       name: "beforeExit",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

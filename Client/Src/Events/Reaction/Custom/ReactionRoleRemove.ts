@@ -11,6 +11,7 @@ export default class Event extends BaseEvent {
       name: "ReactionRoleRemove",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

@@ -9,6 +9,7 @@ module.exports = class GuildDeleteEvent extends BaseEvent {
       name: "guildDelete",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

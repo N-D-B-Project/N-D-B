@@ -8,6 +8,7 @@ export default class ErrorEvent extends BaseEvent {
       name: "error",
       type: "once",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

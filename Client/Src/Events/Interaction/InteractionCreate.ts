@@ -18,6 +18,7 @@ export default class InteractionCreateEvent extends BaseEvent {
       name: "interactionCreate",
       type: "once",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

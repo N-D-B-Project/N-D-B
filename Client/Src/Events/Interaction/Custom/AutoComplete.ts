@@ -9,6 +9,7 @@ export default class AutoCompleteEvent extends BaseEvent {
       name: "AutoComplete",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

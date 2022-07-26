@@ -11,6 +11,7 @@ export default class CommandEvent extends BaseEvent {
       name: "Command",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

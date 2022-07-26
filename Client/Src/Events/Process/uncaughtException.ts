@@ -8,6 +8,7 @@ export default class uncaughtExceptionEvent extends BaseEvent {
       name: "uncaughtException",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

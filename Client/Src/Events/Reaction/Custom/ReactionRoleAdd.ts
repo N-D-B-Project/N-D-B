@@ -11,6 +11,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
       name: "ReactionRoleAdd",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

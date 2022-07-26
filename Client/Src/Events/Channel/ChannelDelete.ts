@@ -9,6 +9,7 @@ module.exports = class channelDeleteEvent extends BaseEvent {
       name: "channelDelete",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

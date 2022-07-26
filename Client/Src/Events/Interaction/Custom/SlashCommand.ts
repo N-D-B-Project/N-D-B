@@ -14,6 +14,7 @@ module.exports = class SlashCommandEvent extends BaseEvent {
       name: "SlashCommand",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

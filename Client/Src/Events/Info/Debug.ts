@@ -9,6 +9,7 @@ export default class DebugEvent extends BaseEvent {
       name: "debug",
       type: "once",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

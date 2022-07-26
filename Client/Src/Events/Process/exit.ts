@@ -8,6 +8,7 @@ export default class ExitEvent extends BaseEvent {
       name: "exit",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

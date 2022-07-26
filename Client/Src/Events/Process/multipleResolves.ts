@@ -8,6 +8,7 @@ export default class multipleResolvesEvent extends BaseEvent {
       name: "multipleResolves",
       type: "on",
       emitter: "process",
+      enable: false,
     };
 
     super(client, options);

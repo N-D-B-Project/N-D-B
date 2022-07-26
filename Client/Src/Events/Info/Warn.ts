@@ -8,6 +8,7 @@ export default class WarnEvent extends BaseEvent {
       name: "warn",
       type: "once",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);
