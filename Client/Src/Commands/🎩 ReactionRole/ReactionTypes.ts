@@ -48,7 +48,7 @@ export default class ReeactionTypesCommand extends BaseCommand {
             iconURL: message.author.displayAvatarURL(),
           })
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "🎩 ReactionRole/ReactionTypes:Types",
               message
             )

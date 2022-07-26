@@ -70,7 +70,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:Channel:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -91,7 +91,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:ID:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -111,7 +111,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:ID:NotFound",
                 message,
                 { fail: Emojis.fail }
@@ -137,7 +137,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:Role:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -159,7 +159,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:Emoji:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -188,7 +188,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/DeleteReaction:Removed",
                 message,
                 { success: Emojis.success, URL: MsgID.url }
@@ -206,7 +206,7 @@ export default class DeleteReactionCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/DeleteReaction:UnableToDelete",
                 message,
                 { success: Emojis.success, URL: MsgID.url }

@@ -73,7 +73,7 @@ export default class ReactionFetchCommand extends BaseCommand {
                 })
                 .setColor("#c20e00")
                 .setDescription(
-                  await client.translate(
+                  await client.Translate.Guild(
                     "🎩 ReactionRole/CreateReaction:Channel:Invalid",
                     message,
                     { fail: Emojis.fail }

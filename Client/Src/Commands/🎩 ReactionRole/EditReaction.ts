@@ -65,7 +65,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:Channel:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -86,7 +86,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:ID:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -106,7 +106,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:ID:NotFound",
                 message,
                 { fail: Emojis.fail }
@@ -136,7 +136,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:Role:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -156,7 +156,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:Role:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -177,7 +177,7 @@ export default class ReactionEditCommand extends BaseCommand {
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:Emoji:Invalid",
                 message,
                 { fail: Emojis.fail }
@@ -208,7 +208,7 @@ export default class ReactionEditCommand extends BaseCommand {
         embeds: [
           new EmbedBuilder()
             .setAuthor({
-              name: await client.translate(
+              name: await client.Translate.Guild(
                 "🎩 ReactionRole/EditReaction:Embed:Author",
                 message
               ),
@@ -217,7 +217,7 @@ export default class ReactionEditCommand extends BaseCommand {
             .setColor("#00c26f")
             .addFields([
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:1",
                   message
                 ),
@@ -225,7 +225,7 @@ export default class ReactionEditCommand extends BaseCommand {
                 inline: true,
               },
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:2",
                   message
                 ),
@@ -233,7 +233,7 @@ export default class ReactionEditCommand extends BaseCommand {
                 inline: true,
               },
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:3",
                   message
                 ),
@@ -241,25 +241,25 @@ export default class ReactionEditCommand extends BaseCommand {
                 inline: true,
               },
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:4",
                   message
                 ),
-                value: await client.translate(
+                value: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:Content:4",
                   message,
                   { MsgIdURL: MsgID.url }
                 ),
               },
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:5",
                   message
                 ),
                 value: `<@&${Role.id}>`,
               },
               {
-                name: await client.translate(
+                name: await client.Translate.Guild(
                   "🎩 ReactionRole/EditReaction:Embed:Fields:6",
                   message
                 ),

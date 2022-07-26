@@ -66,13 +66,13 @@ export default class WipeReactionCommand extends BaseCommand {
             }),
           })
           .setTitle(
-            await client.translate(
+            await client.Translate.Guild(
               "🎩 ReactionRole/WipeReaction:Embed:Title",
               message
             )
           )
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "🎩 ReactionRole/WipeReaction:Embed:DescriptionConfirm",
               message
             )
@@ -102,13 +102,13 @@ export default class WipeReactionCommand extends BaseCommand {
                 }),
               })
               .setTitle(
-                await client.translate(
+                await client.Translate.Guild(
                   "🎩 ReactionRole/WipeReaction:Embed:Title",
                   message
                 )
               )
               .setDescription(
-                await client.translate(
+                await client.Translate.Guild(
                   "🎩 ReactionRole/WipeReaction:Embed:DescriptionSuccess",
                   message,
                   { NUMBER: GET.length }
@@ -130,13 +130,13 @@ export default class WipeReactionCommand extends BaseCommand {
                 }),
               })
               .setTitle(
-                await client.translate(
+                await client.Translate.Guild(
                   "🎩 ReactionRole/WipeReaction:Embed:Title",
                   message
                 )
               )
               .setDescription(
-                await client.translate(
+                await client.Translate.Guild(
                   "🎩 ReactionRole/WipeReaction:Embed:DescriptionError",
                   message
                 )
@@ -158,13 +158,13 @@ export default class WipeReactionCommand extends BaseCommand {
               }),
             })
             .setTitle(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/WipeReaction:Embed:Title",
                 message
               )
             )
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/WipeReaction:Embed:DescriptionCancel",
                 message
               )

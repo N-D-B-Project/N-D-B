@@ -58,7 +58,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
         }),
       })
       .setDescription(
-        await client.translate(
+        await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Cancel:1:Description",
           message,
           { FAIL: Emojis.fail }
@@ -66,7 +66,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
       )
       .setColor("#c20e00")
       .setFooter({
-        text: await client.translate(
+        text: await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Global:Footer",
           message,
           { NAME: client.user.username, CMD: this.options.name }
@@ -83,7 +83,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
         }),
       })
       .setDescription(
-        await client.translate(
+        await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Cancel:2:Description",
           message,
           { FAIL: Emojis.fail }
@@ -91,7 +91,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
       )
       .setColor("#c20e00")
       .setFooter({
-        text: await client.translate(
+        text: await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Global:Footer",
           message,
           { NAME: client.user.username, CMD: this.options.name }
@@ -108,7 +108,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
         }),
       })
       .setDescription(
-        await client.translate(
+        await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Cancel:Time:Description",
           message,
           { FAIL: Emojis.fail }
@@ -116,7 +116,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
       )
       .setColor("#c20e00")
       .setFooter({
-        text: await client.translate(
+        text: await client.Translate.Guild(
           "🎩 ReactionRole/ReactionBuilder:Global:Footer",
           message,
           { NAME: client.user.username, CMD: this.options.name }
@@ -128,7 +128,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
     const react = new ReactionRole(client, "ReactionBuilder");
     const filter = (m) => m.author.id === message.author.id;
     var MSG = await MessageTools.reply(message, {
-      content: await client.translate(
+      content: await client.Translate.Guild(
         "🎩 ReactionRole/ReactionBuilder:Channel",
         message
       ),
@@ -169,7 +169,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
         collected_channel.first().delete();
 
         await MessageTools.edit(MSG, {
-          content: await client.translate(
+          content: await client.Translate.Guild(
             "🎩 ReactionRole/ReactionBuilder:ID",
             message
           ),
@@ -211,7 +211,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
             collected_message.first().delete();
 
             await MessageTools.edit(MSG, {
-              content: await client.translate(
+              content: await client.Translate.Guild(
                 "🎩 ReactionRole/ReactionBuilder:Role:Specify",
                 message
               ),
@@ -252,7 +252,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                 }
                 if (role.managed) {
                   await MessageTools.edit(MSG, {
-                    content: await client.translate(
+                    content: await client.Translate.Guild(
                       "🎩 ReactionRole/ReactionBuilder:Role:Managed",
                       message
                     ),
@@ -266,7 +266,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                 collected_role.first().delete();
 
                 await MessageTools.edit(MSG, {
-                  content: await client.translate(
+                  content: await client.Translate.Guild(
                     "🎩 ReactionRole/ReactionBuilder:Emoji:Specify",
                     message
                   ),
@@ -285,7 +285,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
 
                     if (!collectedEmoji) {
                       await MessageTools.edit(MSG, {
-                        content: await client.translate(
+                        content: await client.Translate.Guild(
                           "🎩 ReactionRole/ReactionBuilder:Emoji:Invalid",
                           message,
                           { FAIL: Emojis.fail }
@@ -317,7 +317,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                     }
 
                     await MessageTools.edit(MSG, {
-                      content: await client.translate(
+                      content: await client.Translate.Guild(
                         "🎩 ReactionRole/ReactionBuilder:Chose:Options",
                         message
                       ),
@@ -344,7 +344,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                         }
                         if (!OptionArr.includes(option)) {
                           await MessageTools.edit(MSG, {
-                            content: await client.translate(
+                            content: await client.Translate.Guild(
                               "🎩 ReactionRole/ReactionBuilder:Chose:Invalid",
                               message
                             ),
@@ -360,7 +360,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                           embeds: [
                             new EmbedBuilder()
                               .setTitle(
-                                await client.translate(
+                                await client.Translate.Guild(
                                   "🎩 ReactionRole/ReactionBuilder:Config:Finish",
                                   message
                                 )
@@ -373,7 +373,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                               })
                               .addFields([
                                 {
-                                  name: await client.translate(
+                                  name: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:Channel",
                                     message
                                   ),
@@ -381,7 +381,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                                   inline: true,
                                 },
                                 {
-                                  name: await client.translate(
+                                  name: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:Emoji",
                                     message
                                   ),
@@ -389,7 +389,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                                   inline: true,
                                 },
                                 {
-                                  name: await client.translate(
+                                  name: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:Role",
                                     message
                                   ),
@@ -397,11 +397,11 @@ export default class ReactionBuilderCommand extends BaseCommand {
                                   inline: true,
                                 },
                                 {
-                                  name: await client.translate(
+                                  name: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:Message",
                                     message
                                   ),
-                                  value: await client.translate(
+                                  value: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:ClickHere",
                                     message,
                                     { MsgIdURL: messageID.url }
@@ -409,7 +409,7 @@ export default class ReactionBuilderCommand extends BaseCommand {
                                   inline: true,
                                 },
                                 {
-                                  name: await client.translate(
+                                  name: await client.Translate.Guild(
                                     "🎩 ReactionRole/ReactionBuilder:Config:Type",
                                     message
                                   ),
