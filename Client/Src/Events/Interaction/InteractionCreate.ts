@@ -9,6 +9,7 @@ import {
   ContextMenuCommandInteraction,
   SelectMenuInteraction,
   ModalSubmitInteraction,
+  User,
 } from "discord.js";
 import { InteractionType } from "discord-api-types/v10";
 
@@ -26,7 +27,7 @@ export default class InteractionCreateEvent extends BaseEvent {
 
   async run(client: NDBClient, interaction: Interaction) {
     const UserProfile = await client.Mongoose.FindUserProfile(
-      interaction.member
+      interaction.member.user as User
     );
     if (!UserProfile) {
       await client.Mongoose.CreateUserProfile(interaction, interaction.user);

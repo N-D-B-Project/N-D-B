@@ -7,6 +7,7 @@ import {
   EmbedBuilder,
   Message,
   TextChannel,
+  User,
 } from "discord.js";
 import { Document } from "mongoose";
 import { Config } from "~/Config/Config";
@@ -82,36 +83,36 @@ export default class CommandTools {
               iconURL: Author.displayAvatarURL(),
             })
             .setTitle(
-              await this.client.translate(
+              await this.client.Translate.Guild(
                 "Tools/Command:Checker:NoMinArgs:Title",
                 msgint
               )
             )
             .setColor("#c20e00")
             .setDescription(
-              await this.client.translate(
+              await this.client.Translate.Guild(
                 "Tools/Command:Checker:NoMinArgs:Description",
                 msgint
               )
             )
             .addFields([
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.Guild(
                   "Tools/Command:Checker:NoMinArgs:Fields:1",
                   msgint
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.Guild(
                   "Tools/Command:Checker:NoMinArgs:Fields:Content:1",
                   msgint,
                   { Args: _Command.options.minArgs }
                 ),
               },
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.Guild(
                   "Tools/Command:Checker:NoMinArgs:Fields:2",
                   msgint
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.Guild(
                   "Tools/Command:Checker:NoMinArgs:Fields:Content:2",
                   msgint,
                   {
@@ -137,36 +138,36 @@ export default class CommandTools {
               iconURL: Author.displayAvatarURL(),
             })
             .setTitle(
-              await this.client.translate(
+              await this.client.Translate.Guild(
                 "Tools/Command:Checker:TooManyArgs:Title",
                 msgint
               )
             )
             .setColor("#c20e00")
             .setDescription(
-              await this.client.translate(
+              await this.client.Translate.Guild(
                 "Tools/Command:Checker:TooManyArgs:Description",
                 msgint
               )
             )
             .addFields([
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.Guild(
                   "Tools/Command:Checker:TooManyArgs:Fields:1",
                   msgint
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.Guild(
                   "Tools/Command:Checker:TooManyArgs:Fields:Content:1",
                   msgint,
                   { Args: _Command.options.maxArgs }
                 ),
               },
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.Guild(
                   "Tools/Command:Checker:TooManyArgs:Fields:2",
                   msgint
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.Guild(
                   "Tools/Command:Checker:TooManyArgs:Fields:Content:2",
                   msgint,
                   {
@@ -186,7 +187,7 @@ export default class CommandTools {
     if (!msgint.guild && !Options.DM) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:DM", msgint)
+        await this.client.Translate.Guild("Tools/Command:Checker:DM", msgint)
       );
       return false;
     }
@@ -194,7 +195,10 @@ export default class CommandTools {
     if (Options.ownerOnly && !this.checkOwner(Author.id)) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:OwnerOnly", msgint)
+        await this.client.Translate.Guild(
+          "Tools/Command:Checker:OwnerOnly",
+          msgint
+        )
       );
       return false;
     }
@@ -202,28 +206,37 @@ export default class CommandTools {
     if (Options.guildOnly && !this.checkGuild(msgint.guild.id)) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:GuildOnly", msgint)
+        await this.client.Translate.Guild(
+          "Tools/Command:Checker:GuildOnly",
+          msgint
+        )
       );
       return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:NSFW", msgint)
+        await this.client.Translate.Guild("Tools/Command:Checker:NSFW", msgint)
       );
       return false;
     }
     if (Options.disable) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:Disable", msgint)
+        await this.client.Translate.Guild(
+          "Tools/Command:Checker:Disable",
+          msgint
+        )
       );
       return false;
     }
     if (Options.ndcash && !NDCash) {
       Tools.reply(
         msgint,
-        await this.client.translate("Tools/Command:Checker:NDCash", msgint)
+        await this.client.Translate.Guild(
+          "Tools/Command:Checker:NDCash",
+          msgint
+        )
       );
       return false;
     }
@@ -248,7 +261,7 @@ export default class CommandTools {
     } else Cooldown.Time = Date.now();
 
     if (Options.DM && msgint.channel.type === ChannelType.DM) {
-      await this.client.translate("Tools/Command:Checker:OnlyDM", msgint);
+      await this.client.Translate.Guild("Tools/Command:Checker:OnlyDM", msgint);
       return false;
     }
     return true;
@@ -290,38 +303,38 @@ export default class CommandTools {
               iconURL: Author.displayAvatarURL(),
             })
             .setTitle(
-              await this.client.translate(
+              await this.client.Translate.DM(
                 "Tools/Command:Checker:NoMinArgs:Title",
-                msgint
+                msgint.member.user as User
               )
             )
             .setColor("#c20e00")
             .setDescription(
-              await this.client.translate(
+              await this.client.Translate.DM(
                 "Tools/Command:Checker:NoMinArgs:Description",
-                msgint
+                msgint.member.user as User
               )
             )
             .addFields([
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.DM(
                   "Tools/Command:Checker:NoMinArgs:Fields:1",
-                  msgint
+                  msgint.member.user as User
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.DM(
                   "Tools/Command:Checker:NoMinArgs:Fields:Content:1",
-                  msgint,
+                  msgint.member.user as User,
                   { Args: _Command.options.minArgs }
                 ),
               },
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.DM(
                   "Tools/Command:Checker:NoMinArgs:Fields:2",
-                  msgint
+                  msgint.member.user as User
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.DM(
                   "Tools/Command:Checker:NoMinArgs:Fields:Content:2",
-                  msgint,
+                  msgint.member.user as User,
                   {
                     Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`,
                   }
@@ -345,38 +358,38 @@ export default class CommandTools {
               iconURL: Author.displayAvatarURL(),
             })
             .setTitle(
-              await this.client.translate(
+              await this.client.Translate.DM(
                 "Tools/Command:Checker:TooManyArgs:Title",
-                msgint
+                msgint.member.user as User
               )
             )
             .setColor("#c20e00")
             .setDescription(
-              await this.client.translate(
+              await this.client.Translate.DM(
                 "Tools/Command:Checker:TooManyArgs:Description",
-                msgint
+                msgint.member.user as User
               )
             )
             .addFields([
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.DM(
                   "Tools/Command:Checker:TooManyArgs:Fields:1",
-                  msgint
+                  msgint.member.user as User
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.DM(
                   "Tools/Command:Checker:TooManyArgs:Fields:Content:1",
-                  msgint,
+                  msgint.member.user as User,
                   { Args: _Command.options.maxArgs }
                 ),
               },
               {
-                name: await this.client.translate(
+                name: await this.client.Translate.DM(
                   "Tools/Command:Checker:TooManyArgs:Fields:2",
-                  msgint
+                  msgint.member.user as User
                 ),
-                value: await this.client.translate(
+                value: await this.client.Translate.DM(
                   "Tools/Command:Checker:TooManyArgs:Fields:Content:2",
-                  msgint,
+                  msgint.member.user as User,
                   {
                     Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`,
                   }
@@ -393,38 +406,53 @@ export default class CommandTools {
     }
     if (!msgint.guild && !Options.DM) {
       Tools.reply(
-        msgint,
-        await this.client.translate("Tools/Command:Checker:DM", msgint)
+        msgint.member.user as User,
+        await this.client.Translate.DM(
+          "Tools/Command:Checker:DM",
+          msgint.member.user as User
+        )
       );
       return false;
     }
 
     if (Options.ownerOnly && !this.checkOwner(Author.id)) {
       Tools.reply(
-        msgint,
-        await this.client.translate("Tools/Command:Checker:OwnerOnly", msgint)
+        msgint.member.user as User,
+        await this.client.Translate.DM(
+          "Tools/Command:Checker:OwnerOnly",
+          msgint.member.user as User
+        )
       );
       return false;
     }
 
     if (Options.guildOnly && !this.checkGuild(msgint.guild.id)) {
       Tools.reply(
-        msgint,
-        await this.client.translate("Tools/Command:Checker:GuildOnly", msgint)
+        msgint.member.user as User,
+        await this.client.Translate.DM(
+          "Tools/Command:Checker:GuildOnly",
+          msgint.member.user as User
+        )
       );
       return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
       Tools.reply(
-        msgint,
-        await this.client.translate("Tools/Command:Checker:NSFW", msgint)
+        msgint.member.user as User,
+        await this.client.Translate.DM(
+          "Tools/Command:Checker:NSFW",
+          msgint.member.user as User
+        )
       );
       return false;
     }
     if (Options.disable) {
       Tools.reply(
-        msgint,
-        await this.client.translate("Tools/Command:Checker:Disable", msgint)
+        msgint.member.user as User,
+        await this.client.Translate.DM(
+          "Tools/Command:Checker:Disable",
+          msgint.member.user as User
+        )
       );
       return false;
     }

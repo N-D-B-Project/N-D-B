@@ -52,13 +52,13 @@ export default class Event extends BaseEvent {
             iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
           })
           .setTitle(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Cooldown:Title",
               reaction.message
             )
           )
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Cooldown:Description",
               reaction.message,
               { GUILD: Guild.name, TIMER }
@@ -66,11 +66,11 @@ export default class Event extends BaseEvent {
           )
           .addFields([
             {
-              name: await client.translate(
+              name: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:1",
                 reaction.message
               ),
-              value: await client.translate(
+              value: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:Content",
                 reaction.message,
                 {
@@ -80,7 +80,7 @@ export default class Event extends BaseEvent {
             },
           ])
           .setFooter({
-            text: await client.translate(
+            text: await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:GlobalFooter",
               reaction.message
             ),
@@ -94,13 +94,13 @@ export default class Event extends BaseEvent {
             iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
           })
           .setTitle(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Add:Title",
               reaction.message
             )
           )
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Add:Description",
               reaction.message,
               { ROLE: `<@&${Role}>`, GUILD: Guild.name }
@@ -108,11 +108,11 @@ export default class Event extends BaseEvent {
           )
           .addFields([
             {
-              name: await client.translate(
+              name: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove-Remove:GlobalField:1",
                 reaction.message
               ),
-              value: await client.translate(
+              value: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:Content",
                 reaction.message,
                 {
@@ -122,7 +122,7 @@ export default class Event extends BaseEvent {
             },
           ])
           .setFooter({
-            text: await client.translate(
+            text: await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:GlobalFooter",
               reaction.message
             ),
@@ -136,14 +136,14 @@ export default class Event extends BaseEvent {
             iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
           })
           .setTitle(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Remove:Title",
               reaction.message,
               {}
             )
           )
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Remove:Description",
               reaction.message,
               { ROLE: `<@&${Role}>`, GUILD: Guild.name }
@@ -151,11 +151,11 @@ export default class Event extends BaseEvent {
           )
           .addFields([
             {
-              name: await client.translate(
+              name: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:1",
                 reaction.message
               ),
-              value: await client.translate(
+              value: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:Content",
                 reaction.message,
                 {
@@ -165,7 +165,7 @@ export default class Event extends BaseEvent {
             },
           ])
           .setFooter({
-            text: await client.translate(
+            text: await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:GlobalFooter",
               reaction.message
             ),
@@ -179,13 +179,13 @@ export default class Event extends BaseEvent {
             iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
           })
           .setTitle(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Error:Title",
               reaction.message
             )
           )
           .setDescription(
-            await client.translate(
+            await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Error:Description",
               reaction.message,
               { ROLE: `<@&${Role}>`, GUILD: Guild.name }
@@ -193,11 +193,11 @@ export default class Event extends BaseEvent {
           )
           .addFields([
             {
-              name: await client.translate(
+              name: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:1",
                 reaction.message
               ),
-              value: await client.translate(
+              value: await client.Translate.Guild(
                 "Events/ReactionRoleAdd-Remove:GlobalField:Content",
                 reaction.message,
                 {
@@ -207,7 +207,7 @@ export default class Event extends BaseEvent {
             },
           ])
           .setFooter({
-            text: await client.translate(
+            text: await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:GlobalFooter",
               reaction.message
             ),
@@ -226,7 +226,7 @@ export default class Event extends BaseEvent {
               await Member.roles
                 .remove(
                   Role,
-                  await client.translate(
+                  await client.Translate.Guild(
                     "Events/ReactionRoleAdd-Remove:Options:REMOVE:1",
                     reaction.message
                   )
@@ -268,7 +268,7 @@ export default class Event extends BaseEvent {
               await Member.roles
                 .add(
                   Role,
-                  await client.translate(
+                  await client.Translate.Guild(
                     "Events/ReactionRoleAdd-Remove:Options:ADD:4",
                     reaction.message
                   )
