@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { BaseEvent } from "@Utils/Structures";
 import { EventOptions } from "~/Types";
 import { CommandTools } from "@Utils/Tools";
-import { Message } from "discord.js";
+import { Message, ChannelType } from "discord.js";
 import { ReactionRole } from "~/Packages";
 
 export default class MessageCreateEvent extends BaseEvent {
@@ -40,11 +40,10 @@ export default class MessageCreateEvent extends BaseEvent {
 
     //! GuildConfigs
     const guildConfig = await client.Mongoose.FindGuildConfig(message.guild);
-    if (!guildConfig) {
+    if (!guildConfig && message.channel.type !== ChannelType.DM) {
       await client.Mongoose.CreateGuildConfig(message.guild);
-    } else {
+    } else if (guildConfig && message.channel.type !== ChannelType.DM) {
       //@ Prefix
-
       const mentionRegex = RegExp(`<@!${client.user.id}>$`);
       const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
       const GetPrefix = guildConfig.get("Settings.Prefix");
@@ -67,11 +66,16 @@ export default class MessageCreateEvent extends BaseEvent {
         );
         return;
       }
-    }
 
-    //$ Commands
-    if (message.content.startsWith(Prefix)) {
-      client.emit("Command", message, Prefix, UserProfile, guildConfig);
+      //$ Commands
+      if (message.content.startsWith(Prefix)) {
+        client.emit("Command", message, Prefix, UserProfile);
+      }
+    } else if (
+      message.content.startsWith("&") &&
+      message.channel.type === ChannelType.DM
+    ) {
+      client.emit("DMCommand", message, "&");
     }
   }
 }

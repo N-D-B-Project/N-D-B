@@ -2,6 +2,14 @@ import { promises as fs } from "fs";
 import * as path from "path";
 import i18next, { TFunction } from "i18next";
 import Backend from "i18next-fs-backend";
+import NDBClient from "~/Client/NDBClient";
+import {
+  Message,
+  CommandInteraction,
+  GuildChannel,
+  PartialMessage,
+  User,
+} from "discord.js";
 
 async function walkDirectory(
   dir: string,
@@ -63,3 +71,31 @@ export default async (): Promise<Map<string, TFunction>> => {
 
   return new Map(languages.map((item) => [item, i18next.getFixedT(item)]));
 };
+
+export class Translate {
+  public constructor(private client: NDBClient) {
+    this.client = client;
+  }
+
+  async Guild(
+    key: string,
+    info: Message | CommandInteraction | GuildChannel | PartialMessage,
+    args?: Record<string, unknown>
+  ) {
+    const find = await this.client.Mongoose.FindGuildConfig(info.guild);
+    var locale = find.get("Settings.Language");
+    if (!locale) locale = "pt-BR";
+    const language = this.client.Collections.translations.get(locale);
+    if (!language) throw "Linguagem invalida || Key não encontrada";
+    return language(key, args);
+  }
+
+  async DM(key: string, user: User, args?: Record<string, unknown>) {
+    const find = await this.client.Mongoose.FindUserProfile(user);
+    var locale = find.get("Settings.Language");
+    if (!locale) locale = "pt-BR";
+    const language = this.client.Collections.translations.get(locale);
+    if (!language) throw "Linguagem invalida || Key não encontrada";
+    return language(key, args);
+  }
+}

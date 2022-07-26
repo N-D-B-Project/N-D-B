@@ -1,7 +1,7 @@
 import NDBClient from "@Client/NDBClient";
 import { GuildConfig, UserProfile } from "@Database/Schemas";
 import { connect, connection, Document } from "mongoose";
-import { Guild, Interaction, Message } from "discord.js";
+import { ChannelType, Guild, Interaction, Message, User } from "discord.js";
 
 export default class Mongoose {
   public constructor(private client: NDBClient) {
@@ -33,6 +33,7 @@ export default class Mongoose {
   }
 
   async FindGuildConfig(guild: Guild) {
+    if (!guild) return;
     const guildConfig = await GuildConfig.findOne({ ID: guild.id });
     return guildConfig;
   }
@@ -91,16 +92,20 @@ export default class Mongoose {
     );
   }
 
-  async FindUserProfile(target: any): Promise<Document> {
-    const FindUserProfile = await UserProfile.findOne({ ID: target.id });
+  async FindUserProfile(user: User): Promise<Document> {
+    const FindUserProfile = await UserProfile.findOne({ ID: user.id });
     return FindUserProfile;
   }
 
-  async CreateUserProfile(msgint: Message | Interaction, author: any) {
+  async CreateUserProfile(msgint: Message | Interaction, user: User) {
     try {
       await new UserProfile({
-        ID: author.id,
-        Username: author.tag,
+        ID: user.id,
+        Username: user.tag,
+        Settings: {
+          Prefix: "&",
+          Language: "pt-BR",
+        },
         NDCash: {
           NDCash: 0,
           Emprego: "Desempregado",
@@ -120,16 +125,17 @@ export default class Mongoose {
         ],
       }).save();
       this.client.logger.database(
-        `${author.tag} / ${author.id} | Perfil Criado na Database`
+        `${user.tag} / ${user.id} | Perfil Criado na Database`
       );
     } catch (error: any) {
       this.client.logger.error(error);
     }
   }
 
-  async AddGuildToProfile(msgint: Message | Interaction, author: any) {
+  async AddGuildToProfile(msgint: Message | Interaction, user: User) {
     try {
-      const Profile = await this.FindUserProfile(author);
+      if (msgint.channel.type === ChannelType.DM) return;
+      const Profile = await this.FindUserProfile(user);
       var GetGuilds = Profile.get("Guilds");
       const AllGuilds = GetGuilds;
       var Verify: boolean = false;
@@ -153,7 +159,7 @@ export default class Mongoose {
         GetGuilds = AllGuilds;
         await Profile.save();
         this.client.logger.database(
-          `${author.tag} / ${author.id} | Guild: ${msgint.guild.name} / ${msgint.guild.id} | Guild Added to Profile`
+          `${user.tag} / ${user.id} | Guild: ${msgint.guild.name} / ${msgint.guild.id} | Guild Added to Profile`
         );
       }
     } catch (error: any) {
@@ -161,9 +167,9 @@ export default class Mongoose {
     }
   }
 
-  async RemoveGuildFromProfile(guild: Guild, author: any) {
+  async RemoveGuildFromProfile(guild: Guild, user: User) {
     try {
-      const Profile = await this.FindUserProfile(author);
+      const Profile = await this.FindUserProfile(user);
 
       var GetGuilds = Profile.get("Guilds");
       const AllGuilds = GetGuilds;
@@ -191,7 +197,7 @@ export default class Mongoose {
         GetGuilds = AllGuilds;
         await Profile.save();
         this.client.logger.database(
-          `${author.tag} / ${author.id} | Guild: ${guild.name} / ${guild.id} | Guild Removed from Profile`
+          `${user.tag} / ${user.id} | Guild: ${guild.name} / ${guild.id} | Guild Removed from Profile`
         );
       } else {
         return;

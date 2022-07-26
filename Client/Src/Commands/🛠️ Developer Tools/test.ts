@@ -17,7 +17,7 @@ export default class TestCommand extends BaseCommand {
       category: "🛠 Developer Tools",
       usage: "",
       disable: false,
-      cooldown: 0,
+      cooldown: 1000,
       permissions: {
         user: [],
         bot: [],
@@ -38,7 +38,10 @@ export default class TestCommand extends BaseCommand {
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
     const msg = await MessageTools.send(message.channel, {
-      content: await client.translate("🛠 Developer Tools/test:Test", message),
+      content: await client.Translate.Guild(
+        "🛠 Developer Tools/test:Test",
+        message
+      ),
       embeds: [],
       components: [],
     });
@@ -47,7 +50,7 @@ export default class TestCommand extends BaseCommand {
 
     MessageTools.edit(
       msg,
-      await client.translate("🛠 Developer Tools/test:Tested", message)
+      await client.Translate.Guild("🛠 Developer Tools/test:Tested", message)
     );
   }
 
@@ -59,7 +62,7 @@ export default class TestCommand extends BaseCommand {
     InteractionTools.reply(
       interaction,
       {
-        content: await client.translate(
+        content: await client.Translate.Guild(
           "🛠 Developer Tools/test:Test",
           interaction
         ),
@@ -73,7 +76,7 @@ export default class TestCommand extends BaseCommand {
 
     InteractionTools.editReply(
       interaction,
-      await client.translate("🛠 Developer Tools/test:Tested", interaction)
+      await client.Translate.Guild("🛠 Developer Tools/test:Tested", interaction)
     );
   }
 }

@@ -2,6 +2,7 @@ import { ClientOptions, Partials, Options, Collection } from "discord.js";
 import { GatewayIntentBits } from "discord-api-types/v10";
 import { TFunction } from "i18next";
 import { BaseEvent, BaseCommand } from "@Utils/Structures";
+import { Cooldown } from "~/Types";
 
 export const _ClientOptions: ClientOptions = {
   shards: "auto",
@@ -48,7 +49,8 @@ export class Collections {
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
     public languages: any = import("../Utils/Languages/language-meta.json"),
-    public react: Map<any, any> = new Map()
+    public react: Map<any, any> = new Map(),
+    public Cooldown: Cooldown[] = []
   ) {
     this.commands = commands;
     this.aliases = aliases;

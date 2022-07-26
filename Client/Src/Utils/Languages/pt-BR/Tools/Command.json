@@ -1,6 +1,7 @@
 {
   "Checker": {
-    "DM": "Comando não pode ser executado em mensagens privadas.",
+    "DM": "Este Comando não pode ser executado em mensagens privadas(DMs).",
+    "OnlyDM": "Este Comando só pode ser executado em mensagens privadas(DMs).",
     "OwnerOnly": "Somente os Criadores do Bot podem usar este comando.",
     "GuildOnly": "Este Comando só pode ser executado em outro Servidor (NedcloarBR Community).",
     "NSFW": "Este Comando só pode ser executado em um Servidor NSFW",

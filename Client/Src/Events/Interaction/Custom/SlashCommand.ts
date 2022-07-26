@@ -35,7 +35,7 @@ module.exports = class SlashCommandEvent extends BaseEvent {
       const Checker = await cmdTools.runCheck(
         interaction,
         _Command,
-        "message",
+        "interaction",
         UserProfile
       );
 

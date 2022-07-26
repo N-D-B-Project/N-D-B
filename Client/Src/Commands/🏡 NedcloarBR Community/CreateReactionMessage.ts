@@ -16,7 +16,7 @@ export default class CRMCommand extends BaseCommand {
       name: "CRM",
       aliases: ["CRM"],
       description: "CRM",
-      category: "🛠️ Developer Tools",
+      category: "🏡 NedcloarBR Community",
       usage: "",
       disable: false,
       cooldown: 0,

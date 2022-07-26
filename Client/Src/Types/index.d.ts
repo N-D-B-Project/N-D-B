@@ -4,6 +4,8 @@ import {
   ClientEvents,
   type PermissionResolvable,
   type ApplicationCommandData,
+  User,
+  Guild,
 } from "discord.js";
 
 declare global {
@@ -68,6 +70,12 @@ export enum CommandType {
   MODAL = "Modal",
 }
 
+export interface Cooldown {
+  userId: User["id"];
+  guildId: Guild["id"];
+  Time: number;
+}
+
 export interface ProcessEvents {
   beforeExit;
   exit;
@@ -80,6 +88,7 @@ export interface ProcessEvents {
 
 export interface EmitedEvents {
   Command;
+  DMCommand;
   React;
   GuildOnly;
   AutoComplete;

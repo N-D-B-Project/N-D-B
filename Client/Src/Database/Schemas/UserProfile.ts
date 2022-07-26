@@ -3,6 +3,10 @@ import { Schema, model, SchemaTypes } from "mongoose";
 const UserProfileSchema: Schema = new Schema({
   ID: SchemaTypes.String,
   Username: SchemaTypes.String,
+  Settings: {
+    Prefix: SchemaTypes.String,
+    Language: SchemaTypes.String,
+  },
   NDCash: {
     NDCash: SchemaTypes.Number,
     Emprego: SchemaTypes.String,

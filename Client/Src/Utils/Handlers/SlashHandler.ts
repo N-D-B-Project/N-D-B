@@ -77,7 +77,8 @@ export default class SlashHandler {
               );
               // const slashcommand = await this.client.application?.commands //! Global
               const slashcommand = await this.client.guilds.cache
-                .get(Config.TestGuilds.ID[0])
+                // .get(Config.TestGuilds.ID[0])
+                .get("679066351456878633")
                 ?.commands.create(command.options.SlashOptions)
                 .then((res) => {
                   if (Config.Debug.SlashCommands) {
