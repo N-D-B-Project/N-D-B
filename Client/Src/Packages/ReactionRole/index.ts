@@ -1,7 +1,6 @@
 import NDBClient from "@Client/NDBClient";
-import { connect, connection, Document } from "mongoose";
+import { connect, connection } from "mongoose";
 import { CommandInteraction, Guild, Message } from "discord.js";
-import { ReactionRole as Schema } from "@Database/Schemas";
 import {
   MessageReactionCreate,
   InteractionReactionCreate,
@@ -42,27 +41,6 @@ export default class ReactionRole {
     connection.on("disconnected", () => {
       this.client.logger.error(`Mongoose Connection lost`);
     });
-  }
-
-  async FindGuild(guildId: string): Promise<Document> {
-    const GuildRR = await Schema.findOne({ ID: guildId });
-    return await GuildRR;
-  }
-
-  async PreCreate(guild: Guild) {
-    try {
-      await new Schema({
-        ID: guild.id,
-        Name: guild.name,
-        DMInfoMSG: false,
-        // Reactions: [{}],
-      }).save();
-      this.client.logger.database(
-        `ReactionRole ${this.Command}: Guild ${guild.name} Config pre criada!`
-      );
-    } catch (error: any) {
-      this.client.logger.error(error);
-    }
   }
 
   async reactionCreate(

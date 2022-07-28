@@ -1,4 +1,4 @@
-import { ReactionRole as Schema } from "@Database/Schemas";
+import { GuildConfig as Schema } from "@Database/Schemas";
 import { Logger, Mongoose } from "~/Utils/Tools";
 import { Document } from "mongoose";
 import { Guild } from "discord.js";
@@ -7,7 +7,7 @@ const logger: Logger = new Logger();
 
 async function reactionFetch(guild: Guild, channel: string) {
   const data: Document = await Schema.findOne({ ID: guild.id });
-  const GET: any = await data.get("Reactions");
+  const GET: any = await data.get("ReactionRole");
 
   var RArray = [];
   var OBJ: {};
@@ -28,7 +28,7 @@ async function reactionFetch(guild: Guild, channel: string) {
 
 async function reactionFetchAll(guild: Guild) {
   const data: Document = await Schema.findOne({ ID: guild.id });
-  const GET: any = await data.get("Reactions");
+  const GET: any = await data.get("ReactionRole");
 
   return GET;
 }

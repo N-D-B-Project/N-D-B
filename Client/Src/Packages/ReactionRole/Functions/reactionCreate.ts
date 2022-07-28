@@ -5,7 +5,7 @@ import {
   InteractionTools as INTERACTION,
 } from "~/Utils/Tools";
 import { Emojis } from "~/Config/Config";
-import { ReactionRole as Schema } from "@Database/Schemas";
+import { GuildConfig as Schema } from "@Database/Schemas";
 
 async function MessageReactionCreate(
   client: NDBClient,
@@ -24,7 +24,7 @@ async function MessageReactionCreate(
       ID: guildId,
     });
 
-    var GetReactions = CONFIG.get("Reactions");
+    var GetReactions = CONFIG.get("ReactionRole");
     const AllReactions = GetReactions;
     var Verify: boolean = false;
 
@@ -50,7 +50,7 @@ async function MessageReactionCreate(
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:UnableToCreate",
                 message,
                 { fail: Emojis.fail }
@@ -124,7 +124,7 @@ async function InteractionReactionCreate(
             })
             .setColor("#c20e00")
             .setDescription(
-              await client.translate(
+              await client.Translate.Guild(
                 "🎩 ReactionRole/CreateReaction:UnableToCreate",
                 interaction,
                 { fail: Emojis.fail }

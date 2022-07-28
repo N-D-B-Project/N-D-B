@@ -2,7 +2,7 @@ import NDBClient from "@Client/NDBClient";
 import { BaseEvent } from "@Utils/Structures";
 import { EventOptions, ReactionsType } from "~/Types";
 import { MessageTools } from "~/Utils/Tools";
-import { ReactionRole as Schema } from "@Database/Schemas";
+import { GuildConfig as Schema } from "@Database/Schemas";
 import { EmbedBuilder, MessageReaction, User } from "discord.js";
 
 export default class ReactionRoleAddEvent extends BaseEvent {
@@ -26,7 +26,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
     const CONFIG = await Schema.findOne({
       ID: reaction.message.guildId,
     });
-    var GetReactions = CONFIG.get("Reactions");
+    var GetReactions = CONFIG.get("ReactionRoles");
     const Guild = client.guilds.cache.get(CONFIG.get("ID"));
     const Member = reaction.message.guild.members.cache.get(user.id);
     if (!CONFIG) return;

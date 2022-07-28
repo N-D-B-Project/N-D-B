@@ -47,6 +47,7 @@ export default class Mongoose {
           Prefix: "&",
           Language: "pt-BR",
         },
+        ReactionRoles: [],
         Channels: {
           LogChannel: null,
           FloodChannel: null,
@@ -56,11 +57,11 @@ export default class Mongoose {
           Muted: null,
         },
         Systems: {
-          AntiSpam: false,
+          AntiSpam: null,
           Logs: {
-            DeletedMessages: false,
+            DeletedMessages: null,
+            ReactionDM: null,
           },
-          ReactionDM: false,
         },
       }).save();
       this.client.logger.database(

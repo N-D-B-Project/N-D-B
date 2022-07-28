@@ -14,6 +14,15 @@ const GuildConfigSchema: Schema = new Schema({
     Default: SchemaTypes.Number,
     Muted: SchemaTypes.Number,
   },
+  ReactionRole: [
+    {
+      message: SchemaTypes.String,
+      channel: SchemaTypes.String,
+      role: SchemaTypes.String,
+      emoji: SchemaTypes.String,
+      option: SchemaTypes.Number,
+    },
+  ],
   Systems: {
     AntiSpam: SchemaTypes.Boolean,
     Logs: {

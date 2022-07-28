@@ -1,4 +1,4 @@
-import { ReactionRole as Schema } from "@Database/Schemas";
+import { GuildConfig as Schema } from "@Database/Schemas";
 import { Logger } from "~/Utils/Tools";
 import { Document } from "mongoose";
 import { Guild } from "discord.js";
@@ -14,7 +14,7 @@ export default async function ReactionDelete(
   const data: Document = await Schema.findOne({
     ID: guild.id,
   });
-  var GET = await data.get("Reactions");
+  var GET = await data.get("ReactionRoles");
 
   try {
     if (GET.length <= 0) {

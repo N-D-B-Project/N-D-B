@@ -33,12 +33,6 @@ export default class MessageCreateEvent extends BaseEvent {
     }
     await client.Mongoose.AddGuildToProfile(message, message.author);
 
-    //@ ReactionRole
-    const ReactionConfig = await react.FindGuild(message.guildId);
-    if (!ReactionConfig) {
-      await react.PreCreate(message.guild);
-    }
-
     //! GuildConfigs
     const guildConfig = await client.Mongoose.FindGuildConfig(message.guild);
     if (!guildConfig && message.channel.type !== ChannelType.DM) {
