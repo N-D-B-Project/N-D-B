@@ -3,13 +3,12 @@ import { EventOptions } from "~/Types";
 import { BaseEvent } from "@Utils/Structures";
 import {
   Interaction,
-  CommandInteraction,
   AutocompleteInteraction,
   ButtonInteraction,
   ContextMenuCommandInteraction,
   SelectMenuInteraction,
   ModalSubmitInteraction,
-  User,
+  ChatInputCommandInteraction,
 } from "discord.js";
 import { InteractionType } from "discord-api-types/v10";
 
@@ -17,7 +16,7 @@ export default class InteractionCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "interactionCreate",
-      type: "once",
+      type: "on",
       emitter: "client",
       enable: true,
     };
@@ -26,25 +25,8 @@ export default class InteractionCreateEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, interaction: Interaction) {
-    const UserProfile = await client.Mongoose.FindUserProfile(
-      interaction.member.user as User
-    );
-    if (!UserProfile) {
-      await client.Mongoose.CreateUserProfile(interaction, interaction.user);
-    }
-    await client.Mongoose.AddGuildToProfile(interaction, interaction.user);
-
     if (interaction.type === InteractionType.ApplicationCommand) {
-      client.emit(
-        "SlashCommand",
-        interaction as CommandInteraction,
-        UserProfile
-      );
-      return;
-    }
-
-    if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
-      client.emit("AutoComplete", interaction as AutocompleteInteraction);
+      client.emit("SlashCommand", interaction as ChatInputCommandInteraction);
       return;
     }
 
@@ -66,6 +48,11 @@ export default class InteractionCreateEvent extends BaseEvent {
         client.emit("SelectMenu", interaction as SelectMenuInteraction);
         return;
       }
+    }
+
+    if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
+      client.emit("AutoComplete", interaction as AutocompleteInteraction);
+      return;
     }
 
     if (interaction.type === InteractionType.ModalSubmit) {

@@ -15,5 +15,14 @@ export default class AutoCompleteEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: AutocompleteInteraction) {}
+  async run(client: NDBClient, interaction: AutocompleteInteraction) {
+    if (interaction.commandName === "reactionrole") {
+      const optionFocus = interaction.options.getFocused();
+      const choices = ["all", "channel"];
+      const filter = choices.filter((choice) => choice.startsWith(optionFocus));
+      await interaction.respond(
+        filter.map((choice) => ({ name: choice, value: choice }))
+      );
+    }
+  }
 }

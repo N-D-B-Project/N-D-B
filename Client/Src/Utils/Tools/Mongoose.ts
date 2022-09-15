@@ -18,7 +18,7 @@ export default class Mongoose {
     connect(process.env.MongoURI, ConnectOptions);
 
     connection.on("connected", () => {
-      this.client.logger.database("Client: MongoDB Conectado!");
+      this.client.logger.database("MongoDB Connected!");
     });
 
     // set("useFindAndModify", false);

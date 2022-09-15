@@ -215,16 +215,6 @@ export default class ReactionRoleAddEvent extends BaseEvent {
           .setColor("#c20e00")
           .setTimestamp();
 
-        if (ReactionCooldown.has(user.id)) {
-          MessageTools.send(user, {
-            embeds: [CooldownEmbed],
-          }).catch(() => {});
-          ClientCooldown.add(reaction.message.guildId);
-          setTimeout(() => {
-            ClientCooldown.delete(reaction.message.guildId);
-          }, TIMER);
-        }
-
         if (Option === 1) {
           try {
             if (
@@ -279,7 +269,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
               ReactionCooldown.add(user.id);
@@ -313,7 +303,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -350,7 +340,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 )
                 .catch(() => {});
               ReactionCooldown.add(user.id);
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -388,7 +378,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 .users.remove(user.id)
                 .catch(() => {});
 
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -454,7 +444,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 )
                 .catch(() => {});
 
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
               ReactionCooldown.add(user.id);

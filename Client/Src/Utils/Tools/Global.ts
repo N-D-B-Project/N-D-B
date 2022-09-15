@@ -8,4 +8,5 @@ export const IGNORED_ERRORS = [
   RESTJSONErrorCodes.UnknownInteraction,
   RESTJSONErrorCodes.CannotSendMessagesToThisUser, // User blocked bot or DM disabled
   RESTJSONErrorCodes.ReactionWasBlocked, // User blocked bot or DM disabled
+  RESTJSONErrorCodes.MaximumActiveThreads,
 ];

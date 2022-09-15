@@ -27,6 +27,9 @@ declare global {
       //# APIs
       SCApi_Secret: string;
       TopGG_Token: string;
+
+      //% Run Args
+      isCompiled: string;
     }
   }
 }
@@ -61,7 +64,36 @@ export interface CommandOptions {
   nsfw?: boolean;
   ndcash?: number;
   DM?: boolean;
-  SlashOptions?: ApplicationCommandData;
+}
+
+export interface SlashCommandOptions {
+  data: ApplicationCommandData;
+  category: string;
+  permissions: {
+    user: Array<PermissionResolvable>;
+    bot: Array<PermissionResolvable>;
+  };
+  guildOnly?: boolean;
+  ownerOnly?: boolean;
+  disable?: boolean;
+  cooldown?: number;
+  nsfw?: boolean;
+  ndcash?: number;
+}
+
+export interface SubCommandOptions {
+  name: string;
+  category: string;
+  permissions: {
+    user: Array<PermissionResolvable>;
+    bot: Array<PermissionResolvable>;
+  };
+  guildOnly?: boolean;
+  ownerOnly?: boolean;
+  disable?: boolean;
+  cooldown?: number;
+  nsfw?: boolean;
+  ndcash?: number;
 }
 
 export enum CommandType {
@@ -69,12 +101,6 @@ export enum CommandType {
   MESSAGE = "Message",
   CONTEXT = "Context",
   MODAL = "Modal",
-}
-
-export interface Cooldown {
-  userId: User["id"];
-  guildId: Guild["id"];
-  Time: number;
 }
 
 export interface ProcessEvents {

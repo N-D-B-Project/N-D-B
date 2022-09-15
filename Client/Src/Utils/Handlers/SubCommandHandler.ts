@@ -1,9 +1,10 @@
 import NDBClient from "@Client/NDBClient";
-import { BaseCommand } from "@Utils/Structures";
+import { BaseSubCommand } from "@Utils/Structures";
 import { HandlerTools } from ".";
 import { parse } from "path";
 import { readdirSync } from "fs";
-export default class CommandHandler {
+
+export default class SlashHandler {
   public constructor(private client: NDBClient) {
     this.client = client;
   }
@@ -11,18 +12,18 @@ export default class CommandHandler {
   public async load() {
     const Tools = new HandlerTools();
     try {
-      readdirSync(`${Tools.directory}Commands/Message/`).forEach(
+      readdirSync(`${Tools.directory}Commands/Sub/`).forEach(
         async (dir: string) => {
           var commandDir: string[];
           switch (process.env.isCompiled) {
             case "true":
               commandDir = readdirSync(
-                `${Tools.directory}Commands/Message/${dir}`
+                `${Tools.directory}Commands/Sub/${dir}`
               ).filter((file) => file.endsWith(".js"));
               break;
             case "false":
               commandDir = readdirSync(
-                `${Tools.directory}Commands/Message/${dir}`
+                `${Tools.directory}Commands/Sub/${dir}`
               ).filter((file) => file.endsWith(".ts"));
               break;
           }
@@ -30,7 +31,7 @@ export default class CommandHandler {
             delete require.cache[commandFile];
             const { name } = parse(commandFile);
             const File = Tools.findClass(
-              require(`${Tools.directory}Commands/Message/${dir}/${commandFile}`)
+              require(`${Tools.directory}Commands/Sub/${dir}/${commandFile}`)
             );
             if (!File) {
               throw new TypeError(
@@ -38,23 +39,18 @@ export default class CommandHandler {
               );
             }
             const command = new File(this.client, name.toLowerCase());
-            if (!(command instanceof BaseCommand)) {
+            if (!(command instanceof BaseSubCommand)) {
               throw new TypeError(`Comando: \`${name}\` Não está em Commands`);
             }
-            this.client.Collections.commands.set(command.options.name, command);
-            if (command.options.aliases.length) {
-              for (const alias of command.options.aliases) {
-                this.client.Collections.aliases.set(
-                  alias,
-                  command.options.name
-                );
-              }
-            }
+            this.client.Collections.SubCommands.set(
+              command.options.name + command.options.category,
+              command
+            );
           }
         }
       );
     } catch (error) {
-      this.client.logger.error("CommandHandler ", error);
+      this.client.logger.error("SubCommandHandler ", error);
     }
   }
 }

@@ -1,11 +1,21 @@
 import { ClientOptions, Partials, Options, Collection } from "discord.js";
-import { GatewayIntentBits } from "discord-api-types/v10";
+import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10";
 import { TFunction } from "i18next";
-import { BaseEvent, BaseCommand } from "@Utils/Structures";
-import { Cooldown } from "~/Types";
+import {
+  BaseEvent,
+  BaseCommand,
+  BaseSlashCommand,
+  BaseSubCommand,
+} from "@Utils/Structures";
 
 export const _ClientOptions: ClientOptions = {
   shards: "auto",
+  rest: {
+    version: GatewayVersion,
+    offset: 0,
+    api: "https://discord.com/api/",
+    cdn: "https://cdn.discordapp.com",
+  },
   failIfNotExists: true,
   allowedMentions: {
     parse: ["roles", "users"],
@@ -45,16 +55,14 @@ export class Collections {
   public constructor(
     public commands: Collection<string, BaseCommand> = new Collection(),
     public aliases: Collection<string, string> = new Collection(),
-    public SlashCommands: Collection<string, BaseCommand> = new Collection(),
+    public SlashCommands: Collection<
+      string,
+      BaseSlashCommand
+    > = new Collection(),
+    public SubCommands: Collection<string, BaseSubCommand> = new Collection(),
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
     public languages: any = import("../Utils/Languages/language-meta.json"),
-    public react: Map<any, any> = new Map(),
-    public Cooldown: Cooldown[] = []
-  ) {
-    this.commands = commands;
-    this.aliases = aliases;
-    this.SlashCommands = SlashCommands;
-    this.events = events;
-  }
+    public react: Map<any, any> = new Map()
+  ) {}
 }

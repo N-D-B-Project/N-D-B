@@ -9,7 +9,11 @@ import {
   GuildChannel,
   PartialMessage,
   User,
+  LocalizationMap,
 } from "discord.js";
+import { promisify } from "node:util";
+import glob from "glob";
+const globProm = promisify(glob);
 
 async function walkDirectory(
   dir: string,

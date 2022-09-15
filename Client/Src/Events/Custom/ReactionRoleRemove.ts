@@ -237,7 +237,7 @@ export default class Event extends BaseEvent {
                 ReactionCooldown.delete(user.id);
               }, 2000);
 
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 if (ClientCooldown.has(reaction.message.guildId)) return;
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
@@ -274,7 +274,7 @@ export default class Event extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
               ReactionCooldown.add(user.id);

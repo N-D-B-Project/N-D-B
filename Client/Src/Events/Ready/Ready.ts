@@ -20,27 +20,37 @@ export default class Event extends BaseEvent {
 
   async run(client: NDBClient) {
     //* Logs
-    client.logger.ready(`${client.user.tag} Está Online!`);
+    await client.Tools.WAIT(2000);
     client.logger.event(`${client.Collections.events.size} Events`);
-    client.logger.command(`${client.Collections.commands.size} Commands`);
+    client.logger.command(
+      `${client.Collections.commands.size} Message Commands`
+    );
+    client.logger.command(
+      `${client.Collections.SlashCommands.size} (/) Slash Commands`
+    );
+    client.logger.command(
+      `${client.Collections.SubCommands.size} (/) Sub Slash Commands`
+    );
 
-    const BotOwner = client.users.cache.get(Config.Owners[0]);
-    const ReadyMSG = await MessageTools.send(BotOwner, {
-      embeds: [
-        new EmbedBuilder()
-          .setTitle("Estou Online")
-          .addFields([
-            {
-              name: "Online em",
-              value: String(client.readyAt),
-            },
-          ])
-          .setColor("#00c26f")
-          .setTimestamp(),
-      ],
-    });
+    const ReadyMSG = await MessageTools.send(
+      client.users.cache.get(Config.Owners[0]),
+      {
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Estou Online")
+            .addFields([
+              {
+                name: "Online em",
+                value: String(client.readyAt),
+              },
+            ])
+            .setColor("#00c26f")
+            .setTimestamp(),
+        ],
+      }
+    );
     await client.Tools.WAIT(5000);
-    ReadyMSG.delete();
+    MessageTools.delete(ReadyMSG);
 
     const FindNDC = await NDC.findOne({ Auth: process.env.AuthNDC });
     if (!FindNDC) {

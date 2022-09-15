@@ -1,9 +1,9 @@
 import NDBClient from "@Client/NDBClient";
 import { EventOptions } from "~/Types";
 import { BaseEvent } from "@Utils/Structures";
-import { ChannelType, GuildChannel, TextChannel } from "discord.js";
+import { GuildChannel, TextChannel } from "discord.js";
 
-module.exports = class channelDeleteEvent extends BaseEvent {
+export default class channelDeleteEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
       name: "channelDelete",
@@ -16,4 +16,4 @@ module.exports = class channelDeleteEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, channel: GuildChannel) {}
-};
+}

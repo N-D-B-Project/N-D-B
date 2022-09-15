@@ -28,7 +28,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -47,7 +47,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -66,7 +66,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -84,7 +84,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -99,7 +99,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -114,7 +114,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -132,7 +132,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {
@@ -147,7 +147,7 @@ export default class MessageTools {
     } catch (error) {
       if (
         error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as any)
+        IGNORED_ERRORS.includes(error.code as number)
       ) {
         return;
       } else {

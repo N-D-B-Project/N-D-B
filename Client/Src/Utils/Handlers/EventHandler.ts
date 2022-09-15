@@ -1,103 +1,79 @@
 import NDBClient from "@Client/NDBClient";
 import { BaseEvent } from "@Utils/Structures";
+import { HandlerTools } from ".";
 import path from "path";
-import { promisify } from "node:util";
-import glob from "glob";
-const globProm = promisify(glob);
+import fs from "fs";
 
 export default class EventHandler {
   public constructor(private client: NDBClient) {
     this.client = client;
   }
 
-  private isClass(input: any) {
-    return (
-      typeof input === "function" &&
-      typeof input.prototype === "object" &&
-      input.toString().substring(0, 5) === "class"
-    );
-  }
-
-  private findClass(module: any) {
-    if (module.__esModule) {
-      const def = Reflect.get(module, "default");
-      if (this.isClass(def)) {
-        return def;
-      }
-
-      let _class = null;
-      for (const prop of Object.keys(module)) {
-        const ref = Reflect.get(module, prop);
-        if (this.isClass(ref)) {
-          _class = ref;
-          break;
+  public async load() {
+    const Tools = new HandlerTools();
+    try {
+      fs.readdirSync(`${Tools.directory}Events/`).forEach((dir: string) => {
+        var eventDir: string[];
+        switch (process.env.isCompiled) {
+          case "true":
+            eventDir = fs
+              .readdirSync(`${Tools.directory}Events/${dir}`)
+              .filter((file) => file.endsWith(".js"));
+            break;
+          case "false":
+            eventDir = fs
+              .readdirSync(`${Tools.directory}Events/${dir}`)
+              .filter((file) => file.endsWith(".ts"));
+            break;
         }
-      }
 
-      return _class;
-    }
-
-    return this.isClass(module) ? module : null;
-  }
-
-  private get directory() {
-    return `${path.dirname(require.main.filename)}${path.sep}`;
-  }
-
-  public async loadEvents() {
-    var FilePath: string;
-    switch (process.env.isCompiled) {
-      case "false":
-        FilePath = `Events/**/*.ts`;
-        break;
-      case "true":
-        FilePath = `Events/**/*.js`;
-        break;
-    }
-    return globProm(`${this.directory}${FilePath}`).then((events: any) => {
-      for (const eventFile of events) {
-        delete require.cache[eventFile];
-        const { name } = path.parse(eventFile);
-        const File = this.findClass(require(eventFile));
-        if (!File) {
-          throw new TypeError(
-            `Event: ${name} não exportou uma Class || não é um Evento do Discord.JS`
+        for (const eventFile of eventDir) {
+          delete require.cache[eventFile];
+          const { name } = path.parse(eventFile);
+          const File = Tools.findClass(
+            require(`${Tools.directory}Events/${dir}/${eventFile}`)
           );
-        }
-        const event = new File(this.client, name);
-        if (!(event instanceof BaseEvent)) {
-          throw new TypeError(`Event: ${name} não esta em Events`);
-        }
-        this.client.Collections.events.set(String(event.options.name), event);
+          if (!File) {
+            throw new TypeError(`Event: ${name} não exportou uma Class`);
+          }
+          const event = new File(this.client, name);
 
-        var HandlerObject = [
-          ...new Set([
-            { emitter: "client", value: this.client },
-            { emitter: "rest", value: this.client.rest },
-            { emitter: "process", value: process },
-          ]),
-        ]
-          .map((object) => {
-            return {
-              emitter: object.emitter,
-              value: object.value,
-            };
-          })
-          .map(async (object) => {
-            switch (event.options.emitter) {
-              case String(object.emitter):
-                Object(object.value)[event.options.type](
-                  event.options.name,
-                  (...args: any[]) => {
-                    if (event.options.enable) {
-                      event.run(this.client, ...args);
+          if (!(event instanceof BaseEvent)) {
+            throw new TypeError(`Event: ${name} não esta em Events`);
+          }
+          this.client.Collections.events.set(String(event.options.name), event);
+
+          var HandlerObject = [
+            ...new Set([
+              { emitter: "client", value: this.client },
+              { emitter: "rest", value: this.client.rest },
+              { emitter: "process", value: process },
+            ]),
+          ]
+            .map((object) => {
+              return {
+                emitter: object.emitter,
+                value: object.value,
+              };
+            })
+            .map(async (object) => {
+              switch (event.options.emitter) {
+                case String(object.emitter):
+                  Object(object.value)[event.options.type](
+                    event.options.name,
+                    (...args: any[]) => {
+                      if (event.options.enable) {
+                        event.run(this.client, ...args);
+                      }
                     }
-                  }
-                );
-                break;
-            }
-          });
-      }
-    });
+                  );
+                  break;
+              }
+            });
+        }
+      });
+    } catch (error) {
+      this.client.logger.error("EventHandler ", error);
+    }
   }
 }
