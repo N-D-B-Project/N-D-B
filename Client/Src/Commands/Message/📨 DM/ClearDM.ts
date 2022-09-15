@@ -1,16 +1,8 @@
 import NDBClient from "@Client/NDBClient";
 import { CommandOptions } from "~/Types";
-import { MessageTools, InteractionTools } from "@Utils/Tools";
+import { MessageTools } from "@Utils/Tools";
 import { BaseCommand } from "@Utils/Structures";
-import {
-  CommandInteraction,
-  CommandInteractionOptionResolver,
-  EmbedBuilder,
-  Message,
-  MessageReaction,
-  User,
-} from "discord.js";
-import MsgDMCommand from "../🛠️ Developer Tools/MsgDM";
+import { EmbedBuilder, Message, MessageReaction, User } from "discord.js";
 
 export default class ClearDMCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -33,11 +25,6 @@ export default class ClearDMCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: true,
-      // SlashOptions: {
-      //   name: "",
-      //   ephemeral: true,
-      //   description: "",
-      // },
     };
     super(client, options, args);
   }
@@ -95,10 +82,4 @@ export default class ClearDMCommand extends BaseCommand {
         return;
       });
   }
-
-  async SlashRun(
-    client: NDBClient,
-    interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
-  ) {}
 }

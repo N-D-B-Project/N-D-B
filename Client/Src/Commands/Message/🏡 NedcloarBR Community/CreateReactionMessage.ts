@@ -31,11 +31,6 @@ export default class CRMCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: false,
-      // SlashOptions: {
-      //   name: "",
-      //   ephemeral: true,
-      //   description: "",
-      // },
     };
     super(client, options, args);
   }
@@ -65,12 +60,6 @@ export default class CRMCommand extends BaseCommand {
       FindNDC.save();
     }
   }
-
-  async SlashRun(
-    client: NDBClient,
-    interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
-  ) {}
 
   async ReactFunction(client: NDBClient, msg: Message) {
     msg.react("<:youtube:730741995416453150>");

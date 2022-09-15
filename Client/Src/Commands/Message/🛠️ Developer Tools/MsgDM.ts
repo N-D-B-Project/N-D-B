@@ -29,11 +29,6 @@ export default class MsgDMCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: true,
-      // SlashOptions: {
-      //   name: "",
-      //   ephemeral: true,
-      //   description: "",
-      // },
     };
     super(client, options, args);
   }
@@ -45,10 +40,4 @@ export default class MsgDMCommand extends BaseCommand {
     MessageTools.send(message.channel, { content: "Message 4" });
     MessageTools.send(message.channel, { content: "Message 5" });
   }
-
-  async SlashRun(
-    client: NDBClient,
-    interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
-  ) {}
 }
