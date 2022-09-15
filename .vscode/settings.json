@@ -3,6 +3,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "editor.fontFamily": "FiraCode NF",
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/node_modules": true
+  },
   "cSpell.words": [
     "autoposter",
     "Awkword",
@@ -45,12 +50,14 @@
     "pornhub",
     "prometheus",
     "ratelimit",
+    "reactionrole",
     "reddit",
     "resave",
     "resetar",
     "Resetar",
     "respawn",
     "RESTJSON",
+    "rlist",
     "SCAPI",
     "skybot",
     "soundcloud",
@@ -74,6 +81,18 @@
     "*.decorator.ts": "nest-decorator",
     "*.guard.ts": "nest-guard",
     "*.revoler.ts": "graphql",
-    "*.input.ts": "graphql"
+    "*.input.ts": "graphql",
+
+    "*.controller.js": "nest-controller",
+    "*.module.js": "nest-module",
+    "*.service.js": "nest-service",
+    "*.middleware.js": "nest-middleware",
+    "*.filter.js": "nest-filter",
+    "*.pipe.js": "nest-pipe",
+    "*.gateway.js": "nest-gateway",
+    "*.decorator.js": "nest-decorator",
+    "*.guard.js": "nest-guard",
+    "*.revoler.js": "graphql",
+    "*.input.js": "graphql"
   }
 }

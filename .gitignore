@@ -27,6 +27,7 @@ Config.ts
 **/Logs/
 .cache
 ignore/
+Backup/
 
 # misc
 .DS_Store
