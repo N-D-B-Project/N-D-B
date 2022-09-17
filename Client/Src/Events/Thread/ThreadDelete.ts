@@ -9,6 +9,7 @@ export default class Event extends BaseEvent {
       name: "threadDelete",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);

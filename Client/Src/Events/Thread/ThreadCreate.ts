@@ -9,6 +9,7 @@ export default class ThreadCreateEvent extends BaseEvent {
       name: "threadCreate",
       type: "on",
       emitter: "client",
+      enable: true,
     };
 
     super(client, options);
