@@ -2,10 +2,20 @@ import NDBClient from "@Client/NDBClient";
 import { RestEvents } from "@discordjs/rest";
 import {
   ClientEvents,
-  type PermissionResolvable,
-  type ApplicationCommandData,
+  PermissionResolvable,
+  ApplicationCommandData,
   User,
   Guild,
+  Message,
+  AutocompleteInteraction,
+  ButtonInteraction,
+  ContextMenuCommandInteraction,
+  SelectMenuInteraction,
+  ModalSubmitInteraction,
+  CommandInteraction,
+  MessageReaction,
+  PartialMessageReaction,
+  PartialUser,
 } from "discord.js";
 
 declare global {
@@ -114,33 +124,20 @@ export interface ProcessEvents {
 }
 
 export interface EmitedEvents {
-  Command;
-  DMCommand;
-  React;
-  GuildOnly;
-  AutoComplete;
-  ButtonClick;
-  ContextMenu;
-  SelectMenu;
-  ModalSubmit;
-  SlashCommand;
-  ReactionRoleAdd;
-  ReactionRoleRemove;
-}
-
-export interface ReactionsType {
-  message: string;
-  channel: string;
-  role: string;
-  emoji: string;
-  option: REACTION_OPTIONS;
-}
-
-enum REACTION_OPTIONS {
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
+  Command: [message: Message];
+  DMCommand: [message: Message];
+  AutoComplete: [interaction: AutocompleteInteraction];
+  ButtonClick: [interaction: ButtonInteraction];
+  ContextMenu: [interaction: ContextMenuCommandInteraction];
+  SelectMenu: [interaction: SelectMenuInteraction];
+  ModalSubmit: [interaction: ModalSubmitInteraction];
+  SlashCommand: [interaction: CommandInteraction];
+  ReactionRoleAdd: [
+    reaction: MessageReaction | PartialMessageReaction,
+    user: User | PartialUser
+  ];
+  ReactionRoleRemove: [
+    reaction: MessageReaction | PartialMessageReaction,
+    user: User | PartialUser
+  ];
 }
