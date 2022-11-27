@@ -1,8 +1,15 @@
 {
   "name": "root",
+  "packageManager": "yarn@3.2.1",
   "private": true,
-  "devDependencies": {
-    "lerna": "^4.0.0"
+  "workspaces": {
+    "packages": [
+      "Packages/*"
+    ]
   },
-  "packageManager": "yarn@3.2.1"
+  "author": {
+    "name": "Miguel Alexandre Uhlein <NedcloarBR>",
+    "email": "nedcloar1@hotmail.com",
+    "url": "https://github.com/NedcloarBR/"
+  }
 }

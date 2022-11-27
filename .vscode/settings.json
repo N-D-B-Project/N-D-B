@@ -4,10 +4,37 @@
     "source.fixAll.eslint": true
   },
   "editor.fontFamily": "FiraCode NF",
+  "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "files.exclude": {
-    "**/node_modules": true
+    "**/node_modules": false
   },
+  "material-icon-theme.files.associations": {
+    "*.controller.ts": "nest-controller",
+    "*.module.ts": "nest-module",
+    "*.service.ts": "nest-service",
+    "*.middleware.ts": "nest-middleware",
+    "*.filter.ts": "nest-filter",
+    "*.pipe.ts": "nest-pipe",
+    "*.gateway.ts": "nest-gateway",
+    "*.decorator.ts": "nest-decorator",
+    "*.guard.ts": "nest-guard",
+    "*.revoler.ts": "graphql",
+    "*.input.ts": "graphql",
+
+    "*.controller.js": "nest-controller",
+    "*.module.js": "nest-module",
+    "*.service.js": "nest-service",
+    "*.middleware.js": "nest-middleware",
+    "*.filter.js": "nest-filter",
+    "*.pipe.js": "nest-pipe",
+    "*.gateway.js": "nest-gateway",
+    "*.decorator.js": "nest-decorator",
+    "*.guard.js": "nest-guard",
+    "*.revoler.js": "graphql",
+    "*.input.js": "graphql"
+  },
+
   "cSpell.words": [
     "autoposter",
     "Awkword",
@@ -65,34 +92,10 @@
     "spotify",
     "topgg",
     "TYPEORM",
+    "Uhlein",
     "vimeo",
     "youshallnotpass",
     "youtube",
     "Youtube"
-  ],
-  "material-icon-theme.files.associations": {
-    "*.controller.ts": "nest-controller",
-    "*.module.ts": "nest-module",
-    "*.service.ts": "nest-service",
-    "*.middleware.ts": "nest-middleware",
-    "*.filter.ts": "nest-filter",
-    "*.pipe.ts": "nest-pipe",
-    "*.gateway.ts": "nest-gateway",
-    "*.decorator.ts": "nest-decorator",
-    "*.guard.ts": "nest-guard",
-    "*.revoler.ts": "graphql",
-    "*.input.ts": "graphql",
-
-    "*.controller.js": "nest-controller",
-    "*.module.js": "nest-module",
-    "*.service.js": "nest-service",
-    "*.middleware.js": "nest-middleware",
-    "*.filter.js": "nest-filter",
-    "*.pipe.js": "nest-pipe",
-    "*.gateway.js": "nest-gateway",
-    "*.decorator.js": "nest-decorator",
-    "*.guard.js": "nest-guard",
-    "*.revoler.js": "graphql",
-    "*.input.js": "graphql"
-  }
+  ]
 }
