@@ -1,6 +1,6 @@
 {
-  "name": "root",
-  "packageManager": "yarn@3.2.1",
+  "name": "@n-d-b/n-d-b",
+  "packageManager": "yarn@3.3.0",
   "private": true,
   "workspaces": {
     "packages": [
@@ -11,5 +11,17 @@
     "name": "Miguel Alexandre Uhlein <NedcloarBR>",
     "email": "nedcloar1@hotmail.com",
     "url": "https://github.com/NedcloarBR/"
+  },
+  "scripts": {
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "commitizen": "^4.2.6",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "typescript": "^4.9.4"
   }
 }

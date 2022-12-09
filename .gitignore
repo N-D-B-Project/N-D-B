@@ -7,14 +7,10 @@ node_modules/
 .pnp.js
 
 # Yarn Berry
-.yarn/
-.yarn/plugins/
 .yarn/cache/
-.yarn/unpluged/
+.yarn/unplugged/
 .yarn/build-state.yml
 .yarn/install-state.gz
-.yarn/plugins/
-.yarn/releases/
 .pnp.js
 yarn.lock
 
