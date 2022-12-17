@@ -1,76 +1,62 @@
-import NDBClient from "@Client/NDBClient";
-import { IGNORED_ERRORS } from ".";
 import {
-  User,
-  TextBasedChannel,
-  MessageOptions,
-  Message,
-  DiscordAPIError,
+  BaseMessageOptions,
+  EmbedBuilder,
   EmojiResolvable,
+  Message,
+  MessageEditOptions,
   MessageReaction,
   StartThreadOptions,
-  MessageEditOptions,
+  TextBasedChannel,
   ThreadChannel,
-  EmbedBuilder,
-} from "discord.js";
+  User
+} from "discord.js"
+import { CheckError, messageOptions } from "."
 
 export default class MessageTools {
-  public constructor(private client: NDBClient) {
-    this.client = client;
-  }
   public static async send(
     target: User | TextBasedChannel,
-    content: string | EmbedBuilder | MessageOptions
+    content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = this.messageOptions(content);
-      return await target.send(msgOptions);
+      let msgOptions = messageOptions(content)
+      return await target.send(msgOptions)
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async reply(
     message: Message,
-    content: string | EmbedBuilder | MessageOptions
+    content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = this.messageOptions(content);
-      return await message.reply(msgOptions);
+      let msgOptions = messageOptions(content)
+      return await message.reply(msgOptions)
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async edit(
     message: Message,
-    content: string | EmbedBuilder | MessageOptions
+    content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = this.messageOptions(content) as MessageEditOptions;
-      return await message.edit(msgOptions);
+      let msgOptions = messageOptions(content) as MessageEditOptions
+      return await message.edit(msgOptions)
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
@@ -80,45 +66,36 @@ export default class MessageTools {
     emoji: EmojiResolvable
   ): Promise<MessageReaction> {
     try {
-      return await message.react(emoji);
+      return await message.react(emoji)
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async pin(message: Message): Promise<Message> {
     try {
-      return await message.pin();
+      return await message.pin()
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async unpin(message: Message): Promise<Message> {
     try {
-      return await message.unpin();
+      return await message.unpin()
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
@@ -128,45 +105,25 @@ export default class MessageTools {
     options: StartThreadOptions
   ): Promise<ThreadChannel> {
     try {
-      return await message.startThread(options);
+      return await message.startThread(options)
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async delete(message: Message): Promise<Message> {
     try {
-      return await message.delete();
+      return await message.delete()
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
-  }
-
-  public static messageOptions(
-    content: string | EmbedBuilder | MessageOptions
-  ): MessageOptions {
-    let options: MessageOptions = {};
-    if (typeof content === "string") {
-      options.content = content;
-    } else if (content instanceof EmbedBuilder) {
-      options.embeds = [content];
-    } else {
-      options = content;
-    }
-    return options;
   }
 }

@@ -1,115 +1,86 @@
-import NDBClient from "@Client/NDBClient";
-import { BaseSlashCommand } from "@Utils/Structures";
-import { InteractionTools } from "../index";
-import { CommandInteraction, TextChannel } from "discord.js";
-import { Document } from "mongoose";
-import { Config } from "~/Config/Config";
+import NDBClient from "@Client/NDBClient"
+import { BaseSlashCommand } from "@Utils/Structures"
+import { CommandInteraction, TextChannel } from "discord.js"
+import { InteractionTools, Tools } from "../index"
 
-export default class SlashTools {
+export default class SlashChecker {
   public constructor(private client: NDBClient) {
-    this.client = client;
-  }
-
-  public checkOwner(target: string) {
-    return Config.Owners.includes(target);
-  }
-
-  public checkGuild(target: string) {
-    return Config.ServerOnly.ID.includes(target);
-  }
-
-  public capitalize(string: string) {
-    return string
-      .split(" ")
-      .map((str) => str.slice(0, 1).toUpperCase() + str.slice(1))
-      .join(" ");
-  }
-
-  public removeDuplicates(arr) {
-    return [...new Set(arr)];
-  }
-
-  public resolveCommand(nameOrAlias: string) {
-    return (
-      this.client.Collections.commands.get(nameOrAlias) ??
-      this.client.Collections.commands.get(
-        this.client.Collections.aliases.get(nameOrAlias)!
-      )
-    );
+    this.client = client
   }
 
   public async runCheck(
     interaction: CommandInteraction,
-    _Command: BaseSlashCommand,
-    UserProfile: Document
+    _Command: BaseSlashCommand
   ): Promise<boolean> {
-    const Options = _Command.options;
-    const Channel = interaction.channel as TextChannel;
-    var NDCash = UserProfile.get("NDCash.NDCash");
+    const Options = _Command.options
+    const Channel = interaction.channel as TextChannel
+    const tools = new Tools(this.client)
 
-    if (Options.ownerOnly && !this.checkOwner(interaction.user.id)) {
-      console.log("Owner");
+    if (Options.ownerOnly && !tools.checkOwner(interaction.user.id)) {
+      console.log("Owner")
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:OwnerOnly",
           interaction
         )
-      );
-      return false;
+      )
+      return false
     }
 
-    if (Options.guildOnly && !this.checkGuild(interaction.guild.id)) {
-      console.log("Guild");
+    if (
+      Options.deployMode === "Guild" &&
+      !tools.checkGuild(interaction.guild.id)
+    ) {
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:GuildOnly",
           interaction
         )
-      );
-      return false;
+      )
+      return false
     }
     if (Options.nsfw && !Channel.nsfw) {
-      console.log("NSFW");
+      console.log("NSFW")
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:NSFW",
           interaction
         )
-      );
-      return false;
+      )
+      return false
     }
     if (Options.disable) {
-      console.log("Disable");
+      console.log("Disable")
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:Disable",
           interaction
         )
-      );
-      return false;
+      )
+      return false
     }
-    if (Options.ndcash && !NDCash) {
-      console.log("NDCash");
-      InteractionTools.reply(
-        interaction,
-        await this.client.Translate.Guild(
-          "Tools/Command:Checker:NDCash",
-          interaction
-        )
-      );
-      return false;
-    }
-    if (Options.ndcash && NDCash) {
-      console.log("NDCash_2");
-      NDCash -= Options.ndcash;
-      UserProfile.save();
-      return true;
-    }
+    // if (Options.ndcash && !NDCash) {
+    //   console.log("NDCash");
+    //   InteractionTools.reply(
+    //     interaction,
+    //     await this.client.Translate.Guild(
+    //       "Tools/Command:Checker:NDCash",
+    //       interaction
+    //     )
+    //   );
+    //   return false;
+    // }
+    // if (Options.ndcash && NDCash) {
+    //   console.log("NDCash_2");
+    //   NDCash -= Options.ndcash;
+    //   UserProfile.save();
+    //   return true;
+    // }
 
-    return true;
+    return true
   }
 }

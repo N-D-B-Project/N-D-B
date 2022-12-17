@@ -1,23 +1,21 @@
-import Logger from "./Logger";
-import Tools from "./Tools";
-import InteractionTools from "./Interaction";
-import MessageTools from "./Message";
-import CommandTools from "./Command/Message";
-import SlashTools from "./Command/Slash";
-import SubTools from "./Command/Sub";
-import Database from "./Database";
-import Buttons from "./Buttons";
-import { IGNORED_ERRORS } from "./Global";
+import Buttons from "./Buttons"
+import LegacyTools from "./Command/Legacy"
+import SlashTools from "./Command/Slash"
+import SubTools from "./Command/Sub"
+import { IGNORED_ERRORS } from "./Global"
+import InteractionTools from "./Interaction"
+import Logger from "./Logger"
+import MessageTools from "./Message"
+import Tools from "./Tools"
 
 export {
   Logger,
   Tools,
   InteractionTools,
   MessageTools,
-  CommandTools,
+  LegacyTools,
   SlashTools,
   SubTools,
-  Database,
   Buttons,
-  IGNORED_ERRORS,
-};
+  IGNORED_ERRORS
+}

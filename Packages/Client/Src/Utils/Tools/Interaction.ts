@@ -1,15 +1,13 @@
-import NDBClient from "@Client/NDBClient";
 import {
+  BaseMessageOptions,
   CommandInteraction,
-  MessageComponentInteraction,
-  DiscordAPIError,
-  MessageOptions,
+  EmbedBuilder,
   InteractionReplyOptions,
   InteractionUpdateOptions,
   Message,
-  EmbedBuilder,
-} from "discord.js";
-import { IGNORED_ERRORS, MessageTools } from ".";
+  MessageComponentInteraction
+} from "discord.js"
+import { CheckError, messageOptions } from "."
 
 export default class InteractionTools {
   public static async deferReply(
@@ -18,16 +16,13 @@ export default class InteractionTools {
   ): Promise<unknown> {
     try {
       return interaction.deferReply({
-        ephemeral,
-      });
+        ephemeral
+      })
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
@@ -36,15 +31,12 @@ export default class InteractionTools {
     interaction: MessageComponentInteraction
   ): Promise<unknown> {
     try {
-      return await interaction.deferUpdate();
+      return await interaction.deferUpdate()
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
@@ -55,34 +47,29 @@ export default class InteractionTools {
 
   public static async reply(
     interaction: CommandInteraction | MessageComponentInteraction,
-    content: string | EmbedBuilder | MessageOptions,
+    content: string | EmbedBuilder | BaseMessageOptions,
     ephemeral: boolean = false
   ): Promise<Message> {
     try {
-      let msgOptions = MessageTools.messageOptions(
-        content
-      ) as InteractionReplyOptions;
+      let msgOptions = messageOptions(content) as InteractionReplyOptions
 
       if (interaction.deferred || interaction.replied) {
         return (await interaction.followUp({
           ...msgOptions,
-          ephemeral,
-        })) as Message;
+          ephemeral
+        })) as Message
       } else {
         return (await interaction.reply({
           ...msgOptions,
           ephemeral,
-          fetchReply: true,
-        })) as Message;
+          fetchReply: true
+        })) as Message
       }
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
@@ -93,45 +80,37 @@ export default class InteractionTools {
 
   public static async editReply(
     interaction: CommandInteraction | MessageComponentInteraction,
-    content: string | EmbedBuilder | MessageOptions
+    content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = MessageTools.messageOptions(content);
+      let msgOptions = messageOptions(content)
       return (await interaction.editReply({
-        ...msgOptions,
-      })) as Message;
+        ...msgOptions
+      })) as Message
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
 
   public static async update(
     interaction: MessageComponentInteraction,
-    content: string | EmbedBuilder | MessageOptions
+    content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = MessageTools.messageOptions(
-        content
-      ) as InteractionUpdateOptions;
+      let msgOptions = messageOptions(content) as InteractionUpdateOptions
       return (await interaction.update({
         ...msgOptions,
-        fetchReply: true,
-      })) as Message;
+        fetchReply: true
+      })) as Message
     } catch (error) {
-      if (
-        error instanceof DiscordAPIError &&
-        IGNORED_ERRORS.includes(error.code as number)
-      ) {
-        return;
+      if (await CheckError(error)) {
+        return
       } else {
-        throw error;
+        throw error
       }
     }
   }
