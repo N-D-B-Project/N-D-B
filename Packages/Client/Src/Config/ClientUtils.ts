@@ -1,12 +1,12 @@
-import { ClientOptions, Partials, Options, Collection } from "discord.js";
-import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10";
-import { TFunction } from "i18next";
 import {
-  BaseEvent,
   BaseCommand,
+  BaseEvent,
   BaseSlashCommand,
-  BaseSubCommand,
-} from "@Utils/Structures";
+  BaseSubCommand
+} from "@Utils/Structures"
+import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10"
+import { ClientOptions, Collection, Partials } from "discord.js"
+import { TFunction } from "i18next"
 
 export const _ClientOptions: ClientOptions = {
   shards: "auto",
@@ -14,12 +14,12 @@ export const _ClientOptions: ClientOptions = {
     version: GatewayVersion,
     offset: 0,
     api: "https://discord.com/api/",
-    cdn: "https://cdn.discordapp.com",
+    cdn: "https://cdn.discordapp.com"
   },
   failIfNotExists: true,
   allowedMentions: {
     parse: ["roles", "users"],
-    repliedUser: false,
+    repliedUser: false
   },
   partials: [
     Partials.Channel,
@@ -28,7 +28,7 @@ export const _ClientOptions: ClientOptions = {
     Partials.Message,
     Partials.Reaction,
     Partials.ThreadMember,
-    Partials.User,
+    Partials.User
   ],
   intents: [
     GatewayIntentBits.DirectMessageReactions,
@@ -47,9 +47,9 @@ export const _ClientOptions: ClientOptions = {
     GatewayIntentBits.GuildVoiceStates,
     GatewayIntentBits.GuildWebhooks,
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.MessageContent,
-  ],
-};
+    GatewayIntentBits.MessageContent
+  ]
+}
 
 export class Collections {
   public constructor(

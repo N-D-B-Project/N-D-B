@@ -1,32 +1,32 @@
-import NDBClient from "@Client/NDBClient";
-import { SlashCommandOptions } from "~/Types";
-import { BaseSlashCommand } from "@Utils/Structures";
+import NDBClient from "@Client/NDBClient"
+import { BaseSlashCommand } from "@Utils/Structures"
+import { InteractionTools } from "@Utils/Tools"
 import {
   CommandInteraction,
-  CommandInteractionOptionResolver,
-} from "discord.js";
-import { InteractionTools } from "@Utils/Tools";
+  CommandInteractionOptionResolver
+} from "discord.js"
+import { SlashCommandOptions } from "~/Types"
 
 export default class TestCommand extends BaseSlashCommand {
   constructor(client: NDBClient, ...args: any) {
     const options: SlashCommandOptions = {
       data: {
         name: "test",
-        description: "test",
+        description: "test"
       },
       category: "🛠 Developer Tools",
       disable: false,
       cooldown: 1000,
       permissions: {
         user: ["SendMessages"],
-        bot: ["SendMessages"],
+        bot: ["SendMessages"]
       },
-      guildOnly: false,
+      deployMode: "Test",
       ownerOnly: true,
       nsfw: false,
-      ndcash: 0,
-    };
-    super(client, options, args);
+      ndcash: 0
+    }
+    super(client, options, args)
   }
 
   async run(
@@ -40,14 +40,14 @@ export default class TestCommand extends BaseSlashCommand {
         interaction
       ),
       embeds: [],
-      components: [],
-    });
+      components: []
+    })
 
-    await client.Tools.WAIT(1000);
+    await client.Tools.WAIT(1000)
 
     InteractionTools.editReply(
       interaction,
       await client.Translate.Guild("🛠 Developer Tools/test:Tested", interaction)
-    );
+    )
   }
 }

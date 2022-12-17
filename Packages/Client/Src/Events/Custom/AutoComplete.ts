@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient";
-import { EventOptions } from "~/Types";
-import { BaseEvent } from "@Utils/Structures";
-import { AutocompleteInteraction } from "discord.js";
+import NDBClient from "@Client/NDBClient"
+import { BaseEvent } from "@Utils/Structures"
+import { AutocompleteInteraction } from "discord.js"
+import { EventOptions } from "~/Types"
 
 export default class AutoCompleteEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,20 +9,20 @@ export default class AutoCompleteEvent extends BaseEvent {
       name: "AutoComplete",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, interaction: AutocompleteInteraction) {
     if (interaction.commandName === "reactionrole") {
-      const optionFocus = interaction.options.getFocused();
-      const choices = ["all", "channel"];
-      const filter = choices.filter((choice) => choice.startsWith(optionFocus));
+      const optionFocus = interaction.options.getFocused()
+      const choices = ["all", "channel"]
+      const filter = choices.filter(choice => choice.startsWith(optionFocus))
       await interaction.respond(
-        filter.map((choice) => ({ name: choice, value: choice }))
-      );
+        filter.map(choice => ({ name: choice, value: choice }))
+      )
     }
   }
 }

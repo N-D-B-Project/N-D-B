@@ -1,7 +1,8 @@
-import NDBClient from "@Client/NDBClient";
-import { BaseEvent } from "@Utils/Structures";
-import { Guild } from "discord.js";
-import { EventOptions } from "~/Types";
+import NDBClient from "@Client/NDBClient"
+import { BaseEvent } from "@Utils/Structures"
+import { Guild } from "discord.js"
+import { EventOptions } from "~/Types"
+import { GuildRepository } from "~/Database/Repositories"
 
 module.exports = class GuildCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,13 +10,14 @@ module.exports = class GuildCreateEvent extends BaseEvent {
       name: "guildCreate",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, guild: Guild) {
-    await client.Mongoose.CreateGuildConfig(guild);
+    const guildRepository = new GuildRepository(client)
+    await guildRepository.create(guild)
   }
-};
+}

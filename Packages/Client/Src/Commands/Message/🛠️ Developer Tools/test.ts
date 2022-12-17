@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient";
-import { CommandOptions } from "~/Types";
-import { BaseCommand } from "@Utils/Structures";
-import { EmbedBuilder, Message } from "discord.js";
-import { MessageTools } from "@Utils/Tools";
+import NDBClient from "@Client/NDBClient"
+import { BaseCommand } from "@Utils/Structures"
+import { MessageTools } from "@Utils/Tools"
+import { EmbedBuilder, Message } from "discord.js"
+import { CommandOptions } from "~/Types"
 
 export default class TestCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -16,14 +16,14 @@ export default class TestCommand extends BaseCommand {
       cooldown: 1000,
       permissions: {
         user: [],
-        bot: [],
+        bot: []
       },
       guildOnly: false,
       ownerOnly: true,
       nsfw: false,
-      ndcash: 0,
-    };
-    super(client, options, args);
+      ndcash: 0
+    }
+    super(client, options, args)
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
@@ -33,15 +33,15 @@ export default class TestCommand extends BaseCommand {
         message
       ),
       embeds: [],
-      components: [],
-    });
+      components: []
+    })
 
-    await client.Tools.WAIT(1500);
+    await client.Tools.WAIT(1500)
 
     MessageTools.edit(
       msg,
       await client.Translate.Guild("🛠 Developer Tools/test:Tested", message)
-    );
+    )
 
     const TestEmbeds: Array<EmbedBuilder> = [
       new EmbedBuilder()
@@ -73,9 +73,9 @@ export default class TestCommand extends BaseCommand {
           await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
         )
         .setColor("Random")
-        .setFooter({ text: "5" }),
-    ];
+        .setFooter({ text: "5" })
+    ]
 
-    await client.Tools.Paginator(message, "Message", TestEmbeds);
+    await client.Tools.Paginator(message, "Message", TestEmbeds)
   }
 }

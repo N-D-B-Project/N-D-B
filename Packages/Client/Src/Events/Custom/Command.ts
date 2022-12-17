@@ -1,9 +1,8 @@
-import NDBClient from "@Client/NDBClient";
-import { BaseEvent, BaseCommand } from "@Utils/Structures";
-import { EventOptions } from "~/Types";
-import { CommandTools } from "@Utils/Tools";
-import { Message } from "discord.js";
-import { Document } from "mongoose";
+import NDBClient from "@Client/NDBClient"
+import { BaseCommand, BaseEvent } from "@Utils/Structures"
+import { CommandTools } from "@Utils/Tools"
+import { Message } from "discord.js"
+import { EventOptions } from "~/Types"
 
 export default class CommandEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -11,37 +10,32 @@ export default class CommandEvent extends BaseEvent {
       name: "Command",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
-  async run(
-    client: NDBClient,
-    message: Message,
-    Prefix: string,
-    UserProfile: Document
-  ) {
-    if (message.channel.isDMBased()) return;
-    const cmdTools = new CommandTools(client);
+  async run(client: NDBClient, message: Message, Prefix: string) {
+    if (message.channel.isDMBased()) return
+    const cmdTools = new CommandTools(client)
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
-      .split(/ +/g);
-    const _Command: BaseCommand = cmdTools.resolveCommand(cmd);
+      .split(/ +/g)
+    const _Command: BaseCommand = cmdTools.resolveCommand(cmd)
 
     if (_Command) {
       const Checker = await cmdTools.runCheck(
         message,
         _Command,
-        UserProfile,
+        // UserConfig,
         Prefix,
         args
-      );
+      )
 
       if (Checker) {
-        _Command.run(client, message, args);
+        _Command.run(client, message, args)
       }
     }
   }

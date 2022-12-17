@@ -29,6 +29,7 @@
     "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "strict": true,
+    "strictFunctionTypes": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
     "baseUrl": ".",

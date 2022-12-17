@@ -1,0 +1,147 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String        @id
+  Username  String
+  Settings  UserSettings?
+  // NDCash    UserNDCash?
+  // Bag       UserBag?
+  // Guilds    UserGuilds[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
+
+  @@map("User")
+}
+
+model UserSettings {
+  id        String   @id @default(uuid())
+  Prefix    String   @default("&") @db.VarChar(4)
+  Language  String   @default("en-US")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+// enum NDCashJobs {
+//   Jobless
+// }
+
+// model UserNDCash {
+//   id         String     @id @default(uuid())
+//   NDCash     Int        @default(0)
+//   Job        NDCashJobs @default(Jobless)
+//   Level      Int        @default(1)
+//   Worked     Int        @default(0)
+//   DirtyMoney Int        @default(0)
+//   DoubleTime Boolean    @default(false)
+//   Daily      DateTime   @default(now())
+//   createdAt  DateTime   @default(now())
+//   updatedAt  DateTime   @default(now())
+//   user       User       @relation(fields: [userId], references: [id])
+//   userId     String     @unique
+// }
+
+// model UserBag {
+//   id        String         @id @default(uuid())
+//   Gifts     UserBagGifts[]
+//   createdAt DateTime       @default(now())
+//   updatedAt DateTime       @default(now())
+//   user      User           @relation(fields: [userId], references: [id])
+//   userId    String         @unique
+// }
+
+// enum GiftsRarity {
+//   Commun
+//   Uncommun
+//   Rare
+//   Epic
+//   Legendary
+// }
+
+// model UserBagGifts {
+//   id        String      @id @default(uuid())
+//   Amount    Int         @default(0)
+//   Rarity    GiftsRarity
+//   createdAt DateTime    @default(now())
+//   updatedAt DateTime    @default(now())
+//   userBag   UserBag?    @relation(fields: [BagId], references: [id])
+//   BagId     String      @unique
+// }
+
+// model UserGuilds {
+//   id        String
+//   Level     Int      @default(1)
+//   XP        Int      @default(0)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   userId    String   @unique
+// }
+
+model Guild {
+  id        String         @id
+  Name      String
+  Settings  GuildSettings?
+  // GuildChannels      GuildChannels?
+  // GuildRoles         GuildRoles?
+  // GuildReactionRoles GuildReactionRoles[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+
+  @@map("Guild")
+}
+
+model GuildSettings {
+  id                  String   @id @default(uuid())
+  Prefix              String   @default("&") @db.VarChar(4)
+  Language            String   @default("en-US")
+  AntiSpam            Boolean  @default(false)
+  DeletedMessagesLogs Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now())
+  guild               Guild    @relation(fields: [guildId], references: [id])
+  guildId             String   @unique
+}
+
+// model GuildChannels {
+//   id        String   @id @default(uuid())
+//   Logs      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   guild     Guild    @relation(fields: [guildId], references: [id])
+//   guildId   String   @unique
+// }
+
+// model GuildRoles {
+//   id        String   @id @default(uuid())
+//   Default   String
+//   Muted     String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   guild     Guild    @relation(fields: [guildId], references: [id])
+//   guildId   String   @unique
+// }
+
+// model GuildReactionRoles {
+//   id        String   @id @default(uuid())
+//   Message   String
+//   Channel   String
+//   Role      String
+//   Emoji     String
+//   Option    Int
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   guild     Guild    @relation(fields: [guildId], references: [id])
+//   guildId   String   @unique
+// }

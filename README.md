@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="20" src="https://github.com/NedcloarBR/N-D-B/blob/master/Client/Src/Assets/Images/Logos/Logo.png?raw=true"> N-D-B
+  <img width="20" src="https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/Src/Common/Assets/Images/Logos/Logo.png?raw=true"> N-D-B
   <br>
 </h1>
 
