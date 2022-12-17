@@ -50,8 +50,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Automática
   - [ ] Economia
   - [ ] Tickets
-  - [x] Musica com [Lavalink](https://github.com/freyacodes/Lavalink) & [Erela.JS](https://github.com/MenuDocs/erela.js) + ErelaPlugins
-  - [x] Reaction Role
+  - [ ] ReactionRoles
+  - [ ] Music
 
 ## 📖 Licença
 

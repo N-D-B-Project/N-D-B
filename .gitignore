@@ -7,12 +7,11 @@ node_modules/
 .pnp.js
 
 # Yarn Berry
-.yarn/cache/
-.yarn/unplugged/
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.js
-yarn.lock
+**/.yarn/cache/
+**/.yarn/unplugged/
+**/.yarn/build-state.yml
+**/.yarn/install-state.gz
+**/.pnp.js
 
 # Config Files
 *.env
@@ -24,6 +23,7 @@ Config.ts
 .cache
 ignore/
 Backup/
+.docker/database/
 
 # misc
 .DS_Store

@@ -7,7 +7,7 @@
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "files.exclude": {
-    "**/node_modules": false
+    "**/node_modules": true
   },
   "material-icon-theme.files.associations": {
     "*.controller.ts": "nest-controller",
