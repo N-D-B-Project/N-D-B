@@ -1,11 +1,11 @@
 [
   {
     "name": "pt-BR",
-    "nativeName": "Português",
+    "nativeName": "Português Brasileiro",
     "moment": "pt-br",
     "defaultMomentFormat": "LL",
     "default": true,
-    "aliases": ["Portuguese", "pt-BR", "pt-br", "br"]
+    "aliases": ["Brazilian Portuguese", "pt-BR", "pt-br", "br"]
   },
   {
     "name": "en-US",

@@ -1,0 +1,7 @@
+{
+  "Pagination": {
+    "Embed": {
+      "Footer": "Page {{Current}} / {{Total}}"
+    }
+  }
+}

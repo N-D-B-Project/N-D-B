@@ -4,7 +4,7 @@
     "OnlyDM": "Este Comando só pode ser executado em mensagens privadas(DMs).",
     "OwnerOnly": "Somente os Criadores do Bot podem usar este comando.",
     "GuildOnly": "Este Comando só pode ser executado em outro Servidor (NedcloarBR Community).",
-    "NSFW": "Este Comando só pode ser executado em um Servidor NSFW",
+    "NSFW": "Este Comando só pode ser executado em um Canal NSFW",
     "Disable": "Este Comando está desabilitado",
     "NDCash": "Você não tem NDCash suficiente para executar este comando.",
     "NoMinArgs": {
