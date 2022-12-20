@@ -1678,6 +1678,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@commitlint/config-angular-type-enum@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@commitlint/config-angular-type-enum@npm:17.0.0"
+  checksum: f5ef60302a3fb6fd181406d19f307c02e92df70cfc2ead33ec54def1b07298417d51a16b44513403bab7bfd68a08f3c5bf82064b3074e43b9c1b8b25f973a656
+  languageName: node
+  linkType: hard
+
+"@commitlint/config-angular@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "@commitlint/config-angular@npm:17.3.0"
+  dependencies:
+    "@commitlint/config-angular-type-enum": ^17.0.0
+  checksum: 5c44fe377a47566583edb182eac047a4626b7e4e6253cbc75252d150727041a38b0a1abe8ec8cf7ab79f0ab1ae16a572ec659c3b73a948f4422d520106c6fd1d
+  languageName: node
+  linkType: hard
+
 "@commitlint/config-conventional@npm:^17.3.0":
   version: 17.3.0
   resolution: "@commitlint/config-conventional@npm:17.3.0"
@@ -2884,6 +2900,7 @@ __metadata:
   resolution: "@n-d-b/n-d-b@workspace:."
   dependencies:
     "@commitlint/cli": ^17.3.0
+    "@commitlint/config-angular": ^17.3.0
     "@commitlint/config-conventional": ^17.3.0
     commitizen: ^4.2.6
     cross-env: ^7.0.3
