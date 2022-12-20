@@ -1,12 +1,8 @@
-import NDBClient from "@Client/NDBClient";
-import { CommandOptions } from "~/Types";
-import { MessageTools, InteractionTools } from "@Utils/Tools";
-import { BaseCommand } from "@Utils/Structures";
-import {
-  CommandInteraction,
-  CommandInteractionOptionResolver,
-  Message,
-} from "discord.js";
+import NDBClient from "@/Client/NDBClient"
+import { BaseCommand } from "@/Utils/Structures"
+import { MessageTools } from "@/Utils/Tools"
+import { CommandOptions } from "@n-d-b/types"
+import { Message } from "discord.js"
 
 export default class MsgDMCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -20,7 +16,7 @@ export default class MsgDMCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         bot: ["SendMessages"],
-        user: ["SendMessages"],
+        user: ["SendMessages"]
       },
       minArgs: 0,
       maxArgs: 0,
@@ -28,16 +24,16 @@ export default class MsgDMCommand extends BaseCommand {
       ownerOnly: true,
       nsfw: false,
       ndcash: 0,
-      DM: true,
-    };
-    super(client, options, args);
+      DM: true
+    }
+    super(client, options, args)
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    MessageTools.send(message.channel, { content: "Message 1" });
-    MessageTools.send(message.channel, { content: "Message 2" });
-    MessageTools.send(message.channel, { content: "Message 3" });
-    MessageTools.send(message.channel, { content: "Message 4" });
-    MessageTools.send(message.channel, { content: "Message 5" });
+    MessageTools.send(message.channel, { content: "Message 1" })
+    MessageTools.send(message.channel, { content: "Message 2" })
+    MessageTools.send(message.channel, { content: "Message 3" })
+    MessageTools.send(message.channel, { content: "Message 4" })
+    MessageTools.send(message.channel, { content: "Message 5" })
   }
 }

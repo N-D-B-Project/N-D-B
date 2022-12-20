@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient";
-import { CommandOptions } from "~/Types";
-import { MessageTools } from "@Utils/Tools";
-import { BaseCommand } from "@Utils/Structures";
-import { EmbedBuilder, Message, MessageReaction, User } from "discord.js";
+import NDBClient from "@/Client/NDBClient"
+import { BaseCommand } from "@/Utils/Structures"
+import { MessageTools } from "@/Utils/Tools"
+import { CommandOptions } from "@n-d-b/types"
+import { EmbedBuilder, Message, MessageReaction, User } from "discord.js"
 
 export default class ClearDMCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -16,7 +16,7 @@ export default class ClearDMCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         bot: ["SendMessages"],
-        user: ["SendMessages"],
+        user: ["SendMessages"]
       },
       minArgs: 0,
       maxArgs: 0,
@@ -24,24 +24,24 @@ export default class ClearDMCommand extends BaseCommand {
       ownerOnly: false,
       nsfw: false,
       ndcash: 0,
-      DM: true,
-    };
-    super(client, options, args);
+      DM: true
+    }
+    super(client, options, args)
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    var i: number = 0;
-    await client.Tools.WAIT(1000);
-    await message.channel.messages.fetch().then(async (msgs) => {
-      msgs.forEach(async (msg) => {
-        await client.Tools.WAIT(1000);
+    var i: number = 0
+    await client.Tools.WAIT(1000)
+    await message.channel.messages.fetch().then(async msgs => {
+      msgs.forEach(async msg => {
+        await client.Tools.WAIT(1000)
         if (msg.deletable) {
-          msg.delete();
-          i++;
+          msg.delete()
+          i++
         }
-      });
-    });
-    await client.Tools.WAIT(5000);
+      })
+    })
+    await client.Tools.WAIT(5000)
     const msg = await MessageTools.send(message.channel, {
       embeds: [
         new EmbedBuilder()
@@ -51,7 +51,7 @@ export default class ClearDMCommand extends BaseCommand {
               "📨 DM/ClearDM:Embed:Description",
               message.author,
               {
-                VALUE: i,
+                VALUE: i
               }
             )
           )
@@ -59,27 +59,27 @@ export default class ClearDMCommand extends BaseCommand {
             text: await client.Translate.DM(
               "📨 DM/ClearDM:Embed:Footer",
               message.author
-            ),
+            )
           })
-          .setTimestamp(),
-      ],
-    });
+          .setTimestamp()
+      ]
+    })
 
-    msg.react("🗑️");
+    msg.react("🗑️")
     const filter = (reaction: MessageReaction, user: User) => {
-      return user.id === message.author.id && reaction.emoji.name === "🗑️";
-    };
+      return user.id === message.author.id && reaction.emoji.name === "🗑️"
+    }
     msg
       .createReactionCollector({
         filter,
         max: 1,
-        time: 60000,
+        time: 60000
       })
       .on("collect", async (reaction: MessageReaction) => {
-        msg.delete();
+        msg.delete()
       })
       .on("end", async () => {
-        return;
-      });
+        return
+      })
   }
 }

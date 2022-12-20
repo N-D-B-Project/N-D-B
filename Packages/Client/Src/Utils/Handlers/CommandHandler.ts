@@ -1,5 +1,5 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseCommand } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { BaseCommand } from "@/Utils/Structures"
 import { readdirSync } from "fs"
 import { parse } from "path"
 import { HandlerTools } from "."

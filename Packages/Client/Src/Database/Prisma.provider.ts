@@ -1,5 +1,5 @@
+import { Logger } from "@/Utils/Tools"
 import { PrismaClient } from "@prisma/client"
-import { Logger } from "~/Utils/Tools"
 
 export default class PrismaProvider extends PrismaClient {
   private isConnected: boolean = false

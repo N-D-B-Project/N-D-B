@@ -1,5 +1,5 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseCommand } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { BaseCommand } from "@/Utils/Structures"
 import {
   ChannelType,
   EmbedBuilder,

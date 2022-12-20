@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseEvent } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { GuildRepository } from "@/Database/Repositories"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
 import { Guild } from "discord.js"
-import { GuildRepository } from "~/Database/Repositories"
-import { EventOptions } from "~/Types"
 
 module.exports = class GuildUpdateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -17,7 +17,7 @@ module.exports = class GuildUpdateEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, oldGuild: Guild, newGuild: Guild) {
-    const guildRepository = new GuildRepository(client)
+    const guildRepository = new GuildRepository()
     await guildRepository.update(oldGuild, newGuild)
   }
 }

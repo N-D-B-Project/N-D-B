@@ -1,5 +1,6 @@
-import { RestEvents } from "@discordjs/rest"
-import {
+import type { RestEvents } from "@discordjs/rest"
+import type {
+  AnySelectMenuInteraction,
   ApplicationCommandData,
   AutocompleteInteraction,
   ButtonInteraction,
@@ -12,46 +13,8 @@ import {
   PartialMessageReaction,
   PartialUser,
   PermissionResolvable,
-  SelectMenuInteraction,
   User
 } from "discord.js"
-
-declare global {
-  declare namespace NodeJS {
-    interface ProcessEnv {
-      //! Discord API
-      Token: string
-      DevToken: string
-      Secret: string
-      ID: string
-      Name: string
-      Icon: string
-
-      //@ Database
-      MongoURI: string
-      MongoURILocalHost: string
-      AuthNDC
-
-      //# APIs
-      SCApi_Secret: string
-      TopGG_Token: string
-
-      //% Run Args
-      isCompiled: string
-    }
-  }
-}
-
-export interface EventOptions {
-  name:
-    | keyof ClientEvents
-    | keyof RestEvents
-    | keyof EmitedEvents
-    | keyof ProcessEvents
-  type: "on" | "once"
-  emitter: "client" | "rest" | "process"
-  enable?: boolean
-}
 
 export interface CommandOptions {
   name: string
@@ -111,6 +74,17 @@ export enum eCommandType {
   MODAL = "Modal"
 }
 
+export interface EventOptions {
+  name:
+    | keyof ClientEvents
+    | keyof RestEvents
+    | keyof EmitedEvents
+    | keyof ProcessEvents
+  type: "on" | "once"
+  emitter: "client" | "rest" | "process"
+  enable?: boolean
+}
+
 export interface ProcessEvents {
   beforeExit
   exit
@@ -127,7 +101,7 @@ export interface EmitedEvents {
   AutoComplete: [interaction: AutocompleteInteraction]
   ButtonClick: [interaction: ButtonInteraction]
   ContextMenu: [interaction: ContextMenuCommandInteraction]
-  SelectMenu: [interaction: SelectMenuInteraction]
+  SelectMenu: [interaction: AnySelectMenuInteraction]
   ModalSubmit: [interaction: ModalSubmitInteraction]
   SlashCommand: [interaction: CommandInteraction]
   ReactionRoleAdd: [

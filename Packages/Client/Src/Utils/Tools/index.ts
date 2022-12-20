@@ -2,10 +2,11 @@ import Buttons from "./Buttons"
 import LegacyTools from "./Command/Legacy"
 import SlashTools from "./Command/Slash"
 import SubTools from "./Command/Sub"
-import { IGNORED_ERRORS } from "./Global"
+import { CheckError, IGNORED_ERRORS, messageOptions } from "./Global"
 import InteractionTools from "./Interaction"
 import Logger from "./Logger"
 import MessageTools from "./Message"
+import Paginator from "./Paginator"
 import Tools from "./Tools"
 
 export {
@@ -17,5 +18,8 @@ export {
   SlashTools,
   SubTools,
   Buttons,
-  IGNORED_ERRORS
+  IGNORED_ERRORS,
+  CheckError,
+  messageOptions,
+  Paginator
 }

@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseSlashCommand } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { Config } from "@/Config/Config"
+import { BaseSlashCommand } from "@/Utils/Structures"
 import { readdirSync } from "fs"
 import { parse } from "path"
-import { Config } from "~/Config/Config"
 import { HandlerTools } from "."
 
 export default class SlashHandler {

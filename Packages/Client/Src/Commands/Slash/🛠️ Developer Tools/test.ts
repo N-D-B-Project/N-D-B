@@ -1,11 +1,11 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseSlashCommand } from "@Utils/Structures"
-import { InteractionTools } from "@Utils/Tools"
+import NDBClient from "@/Client/NDBClient"
+import { BaseSlashCommand } from "@/Utils/Structures"
+import { InteractionTools } from "@/Utils/Tools"
+import { SlashCommandOptions } from "@n-d-b/types"
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
 } from "discord.js"
-import { SlashCommandOptions } from "~/Types"
 
 export default class TestCommand extends BaseSlashCommand {
   constructor(client: NDBClient, ...args: any) {

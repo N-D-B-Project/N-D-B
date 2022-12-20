@@ -1,7 +1,7 @@
-import { HandlerClass, LanguageHandler, Translate } from "@Utils/Handlers"
-import { Logger, Tools } from "@Utils/Tools"
+import { Collections, _ClientOptions } from "@/Config/ClientUtils"
+import { HandlerClass, LanguageHandler, Translate } from "@/Utils//Handlers"
+import { Logger, Tools } from "@/Utils/Tools"
 import { Client } from "discord.js"
-import { Collections, _ClientOptions } from "~/Config/ClientUtils"
 export default class NDBClient extends Client {
   public Collections: Collections = new Collections()
   public Tools: Tools = new Tools(this)

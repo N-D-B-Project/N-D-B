@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient";
-import { EventOptions } from "~/Types";
-import { BaseEvent } from "@Utils/Structures";
-import { GuildChannel, TextChannel } from "discord.js";
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
+import { GuildChannel } from "discord.js"
 
 export default class channelDeleteEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,10 +9,10 @@ export default class channelDeleteEvent extends BaseEvent {
       name: "channelDelete",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, channel: GuildChannel) {}

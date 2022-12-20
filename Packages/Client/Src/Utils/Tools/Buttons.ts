@@ -1,15 +1,15 @@
-import NDBClient from "@Client/NDBClient";
+import NDBClient from "@/Client/NDBClient"
 import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   CommandInteraction,
-  Message,
-} from "discord.js";
+  Message
+} from "discord.js"
 
 export default class Buttons {
   public constructor(private client: NDBClient) {
-    this.client = client;
+    this.client = client
   }
 
   async Confirm(
@@ -35,7 +35,7 @@ export default class Buttons {
           )
         )
         .setEmoji("719710607405875321")
-        .setStyle(ButtonStyle.Success),
-    ]);
+        .setStyle(ButtonStyle.Success)
+    ])
   }
 }

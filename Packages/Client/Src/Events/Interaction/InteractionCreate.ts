@@ -1,5 +1,6 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseEvent } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
 import { InteractionType } from "discord-api-types/v10"
 import {
   AnySelectMenuInteraction,
@@ -10,7 +11,6 @@ import {
   Interaction,
   ModalSubmitInteraction
 } from "discord.js"
-import { EventOptions } from "~/Types"
 
 export default class InteractionCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {

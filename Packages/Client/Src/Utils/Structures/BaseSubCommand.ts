@@ -1,9 +1,9 @@
-import { SubCommandOptions } from "~/Types";
-import NDBClient from "@Client/NDBClient";
+import NDBClient from "@/Client/NDBClient"
+import { SubCommandOptions } from "@n-d-b/types"
 import {
   CommandInteraction,
-  CommandInteractionOptionResolver,
-} from "discord.js";
+  CommandInteractionOptionResolver
+} from "discord.js"
 
 export default class BaseSubCommand {
   constructor(
@@ -11,9 +11,9 @@ export default class BaseSubCommand {
     public options: SubCommandOptions,
     public args: CommandInteractionOptionResolver
   ) {
-    this.client = client;
-    this.options = options;
-    this.args = args;
+    this.client = client
+    this.options = options
+    this.args = args
   }
 
   async run(
@@ -23,6 +23,6 @@ export default class BaseSubCommand {
   ) {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`
-    );
+    )
   }
 }

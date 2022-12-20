@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient";
-import { EventOptions } from "~/Types";
-import { BaseEvent } from "@Utils/Structures";
-import { Config } from "~/Config/Config";
+import NDBClient from "@/Client/NDBClient"
+import { Config } from "@/Config/Config"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
 
 export default class rateLimitedEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,14 +9,14 @@ export default class rateLimitedEvent extends BaseEvent {
       name: "rateLimited",
       type: "once",
       emitter: "rest",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, { route, timeout }) {
     if (Config.Debug.Client === true)
-      client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`);
+      client.logger.error(`Rate limit: ${route} (Cooldown: ${timeout}ms)`)
   }
 }

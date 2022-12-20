@@ -1,3 +1,4 @@
+import NDBClient from "@/Client/NDBClient"
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -11,7 +12,6 @@ import {
   InteractionCollector,
   Message
 } from "discord.js"
-import NDBClient from "~/Client/NDBClient"
 import { InteractionTools, MessageTools } from "./"
 
 export default async function Paginator(

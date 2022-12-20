@@ -2893,6 +2893,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@n-d-b/types@workspace:Packages/@Types":
+  version: 0.0.0-use.local
+  resolution: "@n-d-b/types@workspace:Packages/@Types"
+  languageName: unknown
+  linkType: soft
+
 "@nestjs/cli@npm:^9.0.0":
   version: 9.1.5
   resolution: "@nestjs/cli@npm:9.1.5"

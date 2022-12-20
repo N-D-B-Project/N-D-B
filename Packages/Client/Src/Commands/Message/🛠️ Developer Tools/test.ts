@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseCommand } from "@Utils/Structures"
-import { MessageTools } from "@Utils/Tools"
+import NDBClient from "@/Client/NDBClient"
+import { BaseCommand } from "@/Utils/Structures"
+import { MessageTools, Paginator } from "@/Utils/Tools"
+import { CommandOptions } from "@n-d-b/types"
 import { EmbedBuilder, Message } from "discord.js"
-import { CommandOptions } from "~/Types"
 
 export default class TestCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: any[]) {
@@ -76,6 +76,6 @@ export default class TestCommand extends BaseCommand {
         .setFooter({ text: "5" })
     ]
 
-    await client.Tools.Paginator(message, "Message", TestEmbeds)
+    await Paginator(client, message, "Message", TestEmbeds)
   }
 }

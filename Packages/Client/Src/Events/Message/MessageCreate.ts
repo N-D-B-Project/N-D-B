@@ -1,8 +1,8 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseEvent } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { GuildRepository } from "@/Database/Repositories"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
 import { ChannelType, Message } from "discord.js"
-import { GuildRepository } from "~/Database/Repositories"
-import { EventOptions } from "~/Types"
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {

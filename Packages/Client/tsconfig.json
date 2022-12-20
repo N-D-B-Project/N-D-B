@@ -18,7 +18,7 @@
     "rootDir": "./Src",
     "removeComments": true,
     "declaration": false,
-    "typeRoots": ["./node_modules/@types", "./Src/Types/"],
+    "typeRoots": ["./node_modules/@types", "./node_modules/@n-d-b/types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -34,13 +34,7 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./Src/*"],
-      "@Client/*": ["./Src/Client/*"],
-      "@Handlers/*": ["./Src/Utils/Handlers/*"],
-      "@Database/*": ["./Src/Database/*"],
-      "@Utils/*": ["./Src/Utils/*"],
-      "@Languages/*": ["./Src/Utils/Languages/*"],
-      "@APIs/*": ["./Src/APIs/*"]
+      "@/*": ["./Src/*"]
     }
   },
   "include": ["Src", "Src/Events/Process"],

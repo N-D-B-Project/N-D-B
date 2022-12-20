@@ -1,3 +1,5 @@
+import NDBClient from "@/Client/NDBClient"
+import { GuildRepository, UserRepository } from "@/Database/Repositories"
 import {
   CommandInteraction,
   GuildChannel,
@@ -9,8 +11,6 @@ import { promises as fs } from "fs"
 import i18next, { TFunction } from "i18next"
 import Backend from "i18next-fs-backend"
 import * as path from "path"
-import NDBClient from "~/Client/NDBClient"
-import { GuildRepository, UserRepository } from "~/Database/Repositories"
 const guildRepository = new GuildRepository()
 const userRepository = new UserRepository()
 

@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseEvent } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
 import { AutocompleteInteraction } from "discord.js"
-import { EventOptions } from "~/Types"
 
 export default class AutoCompleteEvent extends BaseEvent {
   constructor(client: NDBClient) {

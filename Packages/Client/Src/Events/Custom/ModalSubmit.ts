@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient";
-import { BaseEvent } from "@Utils/Structures";
-import { EventOptions } from "~/Types";
-import { ModalSubmitInteraction } from "discord.js";
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
+import { ModalSubmitInteraction } from "discord.js"
 
 export default class Event extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,10 +9,10 @@ export default class Event extends BaseEvent {
       name: "ModalSubmit",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, interaction: ModalSubmitInteraction) {}

@@ -1,0 +1,11 @@
+{
+  "name": "@n-d-b/types",
+  "version": "1.0.0",
+  "main": "index.d.ts",
+  "packageManager": "yarn@3.2.3",
+  "Dependencies": {
+    "@discordjs/rest": "^1.5.0",
+    "discord-api-types": "^0.37.23",
+    "discord.js": "^14.7.1"
+  }
+}

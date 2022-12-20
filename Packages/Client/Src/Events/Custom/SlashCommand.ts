@@ -1,11 +1,11 @@
-import NDBClient from "@Client/NDBClient"
-import { BaseEvent, BaseSlashCommand } from "@Utils/Structures"
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent, BaseSlashCommand } from "@/Utils/Structures"
+import { SlashTools } from "@/Utils/Tools"
+import { EventOptions } from "@n-d-b/types"
 import {
   ChatInputCommandInteraction,
   CommandInteractionOptionResolver
 } from "discord.js"
-import { EventOptions } from "~/Types"
-import { SlashTools } from "~/Utils/Tools"
 
 export default class SlashCommandEvent extends BaseEvent {
   constructor(client: NDBClient) {

@@ -1,7 +1,7 @@
-import NDBClient from "@Client/NDBClient";
-import { BaseEvent } from "@Utils/Structures";
-import { EventOptions } from "~/Types";
-import { ThreadChannel } from "discord.js";
+import NDBClient from "@/Client/NDBClient"
+import { BaseEvent } from "@/Utils/Structures"
+import { EventOptions } from "@n-d-b/types"
+import { ThreadChannel } from "discord.js"
 
 export default class ThreadCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,15 +9,15 @@ export default class ThreadCreateEvent extends BaseEvent {
       name: "threadCreate",
       type: "on",
       emitter: "client",
-      enable: true,
-    };
+      enable: true
+    }
 
-    super(client, options);
+    super(client, options)
   }
 
   async run(client: NDBClient, thread: ThreadChannel, newlyCreated: boolean) {
     if (thread.joinable && newlyCreated) {
-      await thread.join();
+      await thread.join()
     }
   }
 }
