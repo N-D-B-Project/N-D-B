@@ -1,7 +1,7 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { BaseEvent, BaseSlashCommand } from "@/Utils/Structures"
 import { SlashTools } from "@/Utils/Tools"
-import { EventOptions } from "@n-d-b/types"
 import {
   ChatInputCommandInteraction,
   CommandInteractionOptionResolver

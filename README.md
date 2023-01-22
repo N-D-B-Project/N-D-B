@@ -52,6 +52,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] Tickets
   - [ ] ReactionRoles
   - [ ] Music
+  - [ ] Fix some Legacy Commands not being handled
 
 ## 📖 Licença
 

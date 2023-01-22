@@ -1,8 +1,8 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { Config } from "@/Config/Config"
 import { BaseEvent } from "@/Utils/Structures"
 import { MessageTools } from "@/Utils/Tools"
-import { EventOptions } from "@n-d-b/types"
 import { EmbedBuilder } from "discord.js"
 
 export default class Event extends BaseEvent {

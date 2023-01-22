@@ -1,6 +1,6 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { BaseEvent } from "@/Utils/Structures"
-import { EventOptions } from "@n-d-b/types"
 import { InteractionType } from "discord-api-types/v10"
 import {
   AnySelectMenuInteraction,

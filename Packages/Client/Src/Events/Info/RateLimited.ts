@@ -1,7 +1,7 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { Config } from "@/Config/Config"
 import { BaseEvent } from "@/Utils/Structures"
-import { EventOptions } from "@n-d-b/types"
 
 export default class rateLimitedEvent extends BaseEvent {
   constructor(client: NDBClient) {

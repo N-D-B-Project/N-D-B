@@ -9,6 +9,12 @@
   "files.exclude": {
     "**/node_modules": true
   },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.yarn": true,
+    "**/.github": true,
+    "**/Backup": true
+  },
   "material-icon-theme.files.associations": {
     "*.controller.ts": "nest-controller",
     "*.module.ts": "nest-module",

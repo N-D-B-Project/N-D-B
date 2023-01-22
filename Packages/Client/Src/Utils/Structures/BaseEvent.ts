@@ -1,5 +1,5 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
-import { EventOptions } from "@n-d-b/types"
 
 export default class BaseEvent {
   public constructor(private client: NDBClient, public options: EventOptions) {

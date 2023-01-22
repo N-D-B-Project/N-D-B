@@ -1,5 +1,5 @@
 import { Collections, _ClientOptions } from "@/Config/ClientUtils"
-import { HandlerClass, LanguageHandler, Translate } from "@/Utils//Handlers"
+import { LanguageHandler, LoadHandlers, Translate } from "@/Utils/Handlers"
 import { Logger, Tools } from "@/Utils/Tools"
 import { Client } from "discord.js"
 export default class NDBClient extends Client {
@@ -7,7 +7,7 @@ export default class NDBClient extends Client {
   public Tools: Tools = new Tools(this)
   public Translate: Translate = new Translate(this)
 
-  private readonly HandlerClass = new HandlerClass(this)
+  public readonly LoadHandlers = new LoadHandlers(this)
   public readonly logger: Logger = new Logger()
 
   public constructor() {
@@ -16,7 +16,7 @@ export default class NDBClient extends Client {
 
   public async Start(): Promise<void> {
     this.Collections.translations = await LanguageHandler()
-    await this.HandlerClass.Load()
+    await this.LoadHandlers.Load()
 
     var Token: string
     switch (process.env.NODE_ENV) {

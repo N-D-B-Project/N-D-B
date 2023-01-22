@@ -5,3 +5,4 @@ export {
   SlashCommandOptions,
   SubCommandOptions
 } from "./client"
+export { JobDaily, Jobs, WorkedBonus } from "./ndcash"

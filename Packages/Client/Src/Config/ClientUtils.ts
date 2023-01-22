@@ -3,7 +3,7 @@ import {
   BaseEvent,
   BaseSlashCommand,
   BaseSubCommand
-} from "@Utils/Structures"
+} from "@/Utils/Structures"
 import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10"
 import { ClientOptions, Collection, Partials } from "discord.js"
 import { TFunction } from "i18next"

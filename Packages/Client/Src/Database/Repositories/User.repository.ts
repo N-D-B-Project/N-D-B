@@ -10,7 +10,8 @@ export default class UserRepository {
     const User = await this.prisma.user.findUnique({
       where: { id: user.id },
       include: {
-        Settings: true
+        Settings: true,
+        NDCash: true
       }
     })
     return User

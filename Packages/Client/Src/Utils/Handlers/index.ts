@@ -1,19 +1,18 @@
-import HandlerTools from "./HandlerTools";
-import EventHandler from "./EventHandler";
-import CommandHandler from "./CommandHandler";
-import SlashHandler from "./SlashHandler";
-import SubCommandHandler from "./SubCommandHandler";
-import LanguageHandler from "./LanguageHandler";
-import { Translate } from "./LanguageHandler";
-import HandlerClass from "./HandlerClass";
+import BaseHandler from "./BaseHandler"
+import CommandHandler from "./CommandHandler"
+import EventHandler from "./EventHandler"
+import LanguageHandler, { Translate } from "./LanguageHandler"
+import LoadHandlers from "./LoadHandlers"
+import SlashHandler from "./SlashHandler"
+import SubHandler from "./SubHandler"
 
 export {
-  HandlerTools,
+  BaseHandler,
   EventHandler,
   CommandHandler,
   SlashHandler,
-  SubCommandHandler,
+  SubHandler,
   LanguageHandler,
   Translate,
-  HandlerClass,
-};
+  LoadHandlers
+}

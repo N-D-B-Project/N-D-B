@@ -1,7 +1,7 @@
+import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { GuildRepository } from "@/Database/Repositories"
 import { BaseEvent } from "@/Utils/Structures"
-import { EventOptions } from "@n-d-b/types"
 import { Guild } from "discord.js"
 
 module.exports = class GuildCreateEvent extends BaseEvent {

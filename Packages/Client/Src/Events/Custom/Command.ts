@@ -1,7 +1,7 @@
 import NDBClient from "@/Client/NDBClient"
+import { EventOptions } from "@/Types"
 import { BaseCommand, BaseEvent } from "@/Utils/Structures"
 import { LegacyTools } from "@/Utils/Tools"
-import { EventOptions } from "@n-d-b/types"
 import { Message } from "discord.js"
 
 export default class CommandEvent extends BaseEvent {

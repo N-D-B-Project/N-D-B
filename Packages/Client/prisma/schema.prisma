@@ -14,7 +14,7 @@ model User {
   id        String        @id
   Username  String
   Settings  UserSettings?
-  // NDCash    UserNDCash?
+  NDCash    NDCash?
   // Bag       UserBag?
   // Guilds    UserGuilds[]
   createdAt DateTime      @default(now())
@@ -33,24 +33,24 @@ model UserSettings {
   updatedAt DateTime @default(now())
 }
 
-// enum NDCashJobs {
-//   Jobless
-// }
+enum NDCashJobs {
+  Jobless
+}
 
-// model UserNDCash {
-//   id         String     @id @default(uuid())
-//   NDCash     Int        @default(0)
-//   Job        NDCashJobs @default(Jobless)
-//   Level      Int        @default(1)
-//   Worked     Int        @default(0)
-//   DirtyMoney Int        @default(0)
-//   DoubleTime Boolean    @default(false)
-//   Daily      DateTime   @default(now())
-//   createdAt  DateTime   @default(now())
-//   updatedAt  DateTime   @default(now())
-//   user       User       @relation(fields: [userId], references: [id])
-//   userId     String     @unique
-// }
+model NDCash {
+  id         String     @id @default(uuid())
+  NDCash     Int        @default(0)
+  Job        NDCashJobs @default(Jobless)
+  Level      Int        @default(1)
+  Worked     Int        @default(0)
+  DirtyMoney Int        @default(0)
+  DoubleTime Boolean    @default(false)
+  Daily      DateTime   @default(now())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now())
+  user       User       @relation(fields: [userId], references: [id])
+  userId     String     @unique
+}
 
 // model UserBag {
 //   id        String         @id @default(uuid())

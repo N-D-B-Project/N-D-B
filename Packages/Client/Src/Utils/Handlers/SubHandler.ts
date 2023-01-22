@@ -1,18 +1,18 @@
 import NDBClient from "@/Client/NDBClient"
 import { parse } from "path"
-import { BaseCommand } from "../Structures"
+import { BaseSubCommand } from "../Structures"
 import BaseHandler from "./BaseHandler"
 
-export default class CommandHandler {
+export default class SubHandler {
   public constructor(private client: NDBClient) {
     this.client = client
   }
 
   async load() {
-    this.client.Collections.commands.clear()
+    this.client.Collections.SubCommands.clear()
     const baseHandler = new BaseHandler(this.client)
 
-    const commandFiles = await baseHandler.getFiles("Commands/Message")
+    const commandFiles = await baseHandler.getFiles("Commands/Sub")
     commandFiles.forEach(async commandFile => {
       const { name } = parse(commandFile)
       const File = await baseHandler.findClass(require(commandFile))
@@ -20,16 +20,14 @@ export default class CommandHandler {
         throw new TypeError(`Comando: ${name} não exportou uma Class`)
       }
 
-      const command = new File(this.client, name)
-      if (!(command instanceof BaseCommand)) {
+      const command = new File(this.client, name.toLowerCase())
+      if (!(command instanceof BaseSubCommand)) {
         throw new TypeError(`Comando: ${name} não esta em Commands/Message`)
       }
-      this.client.Collections.commands.set(command.options.name, command)
-      if (command.options.aliases) {
-        for (const alias of command.options.aliases) {
-          this.client.Collections.aliases.set(alias, command.options.name)
-        }
-      }
+      this.client.Collections.SubCommands.set(
+        command.options.name + command.options.category,
+        command
+      )
     })
   }
 }

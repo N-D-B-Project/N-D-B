@@ -1,5 +1,5 @@
+import { SubCommandOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
-import { SubCommandOptions } from "@n-d-b/types"
 import {
   CommandInteraction,
   CommandInteractionOptionResolver

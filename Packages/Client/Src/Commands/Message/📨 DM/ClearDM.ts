@@ -1,7 +1,7 @@
+import { CommandOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { BaseCommand } from "@/Utils/Structures"
 import { MessageTools } from "@/Utils/Tools"
-import { CommandOptions } from "@n-d-b/types"
 import { EmbedBuilder, Message, MessageReaction, User } from "discord.js"
 
 export default class ClearDMCommand extends BaseCommand {

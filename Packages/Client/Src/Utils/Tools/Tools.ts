@@ -46,6 +46,13 @@ export default class Tools {
     return [...new Set(arr)]
   }
 
+  public formatArray(array: Array<any>) {
+    return new Intl.ListFormat("pt-BR", {
+      style: "short",
+      type: "conjunction"
+    }).format(array)
+  }
+
   public resolveCommand(nameOrAlias: string) {
     return (
       this.client.Collections.commands.get(nameOrAlias) ??
