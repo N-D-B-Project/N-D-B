@@ -2816,10 +2816,11 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@discordjs/opus": ^0.9.0
     "@discordjs/rest": ^1.5.0
-    "@prisma/client": ^4.7.1
+    "@prisma/client": latest
     "@types/babel__core": ^7.1.20
     "@types/babel__preset-env": ^7.9.2
     "@types/eslint": ^8.4.10
+    "@types/glob": ^8
     "@types/i18next-fs-backend": ^1.1.2
     "@types/node": ^18.11.16
     "@types/node-fetch": ^2.6.2
@@ -2828,6 +2829,8 @@ __metadata:
     "@typescript-eslint/parser": ^5.46.1
     babel-plugin-module-resolver: ^4.1.0
     chalk: =4.1.2
+    class-transformer: ^0.5.1
+    class-validator: ^0.14.0
     discord-api-types: ^0.37.23
     discord.js: ^14.7.1
     dotenv: ^16.0.3
@@ -2836,13 +2839,14 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-import: ^2.26.0
     eslint-plugin-prettier: ^4.2.1
+    glob: ^8.1.0
     i18next: =20.6.1
     i18next-fs-backend: ^1.1.5
     moment: ^2.29.4
     node-fetch: =2.6.7
     parse-ms: =2.1.0
     prettier: ^2.8.1
-    prisma: ^4.7.1
+    prisma: ^4.8.0
     ts-node: ^10.9.1
     ts-node-dev: ^2.0.0
     tsconfig-paths: ^4.1.1
@@ -2907,12 +2911,6 @@ __metadata:
     husky: ^8.0.2
     lint-staged: ^13.1.0
     typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
-
-"@n-d-b/types@workspace:Packages/@Types":
-  version: 0.0.0-use.local
-  resolution: "@n-d-b/types@workspace:Packages/@Types"
   languageName: unknown
   linkType: soft
 
@@ -3180,31 +3178,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^4.7.1":
-  version: 4.7.1
-  resolution: "@prisma/client@npm:4.7.1"
+"@prisma/client@npm:latest":
+  version: 4.10.1
+  resolution: "@prisma/client@npm:4.10.1"
   dependencies:
-    "@prisma/engines-version": 4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c
+    "@prisma/engines-version": 4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 01ce4c7382d80a1cca256e532a773d982ada9b7f64acd6bb590415634d04305413cee700048287dbf94f09ccf31e19db03a4a6501bfd0a01509f80498ee58121
+  checksum: f335dfc7dc5017d6f0f4171f3727ef2d3297495640f5063528e3643c2959c492a640a452880e04691674a7f258a8c552c7de45fb4c86270055d363e0fce18a6d
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c":
-  version: 4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c
-  resolution: "@prisma/engines-version@npm:4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c"
-  checksum: 66221f1805ce700a4f9f0b6751a291d7114afff9d8b61fd03beb9bbe8b45b037fc67ee0425f45bbad57b7bf95cf649a490d5caaf75a4f3a7e17b3187ea8a6a15
+"@prisma/engines-version@npm:4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19":
+  version: 4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19
+  resolution: "@prisma/engines-version@npm:4.10.1-2.aead147aa326ccb985dcfed5b065b4fdabd44b19"
+  checksum: 6433a58c3d1c6016af64771c9fc8798d0c82eee0a8abc3dd43dfc6b019d9686b428592093dd1dec892598e37bbb3a5946d9d1a6cdecf5487ba78b1906af417d4
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:4.7.1":
-  version: 4.7.1
-  resolution: "@prisma/engines@npm:4.7.1"
-  checksum: 1660f1d5a6188a9cb9aa5186111910f37b1bc02f09be10336a41e0ec61a18a4193e0ff424077dafb1bf1392a435fc89cec47526a58784a7bdc6c8278adf147a4
+"@prisma/engines@npm:4.10.1":
+  version: 4.10.1
+  resolution: "@prisma/engines@npm:4.10.1"
+  checksum: 359e32db3155640315661055d8e6430d60c10ff057b5d4c070164587d872ab6d4c292cee5ac35d364c1a2f6da0265fa847023c5cc1a4bf3c067fbecbbb638273
   languageName: node
   linkType: hard
 
@@ -3766,6 +3764,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/glob@npm:^8":
+  version: 8.0.1
+  resolution: "@types/glob@npm:8.0.1"
+  dependencies:
+    "@types/minimatch": ^5.1.2
+    "@types/node": "*"
+  checksum: 98f3d0403c09638348a2f3b30aac2a3d6bdc306bce3ceb868f4794fef4f02727ccdf0dab0c7b7d65fd38a1afa1e48f02de56d29d2babe94ee9b204ca54acb31f
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.2, @types/graceful-fs@npm:^4.1.3":
   version: 4.1.5
   resolution: "@types/graceful-fs@npm:4.1.5"
@@ -3880,6 +3888,13 @@ __metadata:
   version: 3.0.1
   resolution: "@types/mime@npm:3.0.1"
   checksum: 4040fac73fd0cea2460e29b348c1a6173da747f3a87da0dbce80dd7a9355a3d0e51d6d9a401654f3e5550620e3718b5a899b2ec1debf18424e298a2c605346e7
+  languageName: node
+  linkType: hard
+
+"@types/minimatch@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "@types/minimatch@npm:5.1.2"
+  checksum: 0391a282860c7cb6fe262c12b99564732401bdaa5e395bee9ca323c312c1a0f45efbf34dce974682036e857db59a5c9b1da522f3d6055aeead7097264c8705a8
   languageName: node
   linkType: hard
 
@@ -4140,6 +4155,13 @@ __metadata:
   version: 2.0.2
   resolution: "@types/trusted-types@npm:2.0.2"
   checksum: 3371eef5f1c50e1c3c07a127c1207b262ba65b83dd167a1c460fc1b135a3fb0c97b9f508efebd383f239cc5dd5b7169093686a692a501fde9c3f7208657d9b0d
+  languageName: node
+  linkType: hard
+
+"@types/validator@npm:^13.7.10":
+  version: 13.7.12
+  resolution: "@types/validator@npm:13.7.12"
+  checksum: 98fc9cb0e0af31a8cf7f3234dbd8391a937b1596cdfea16f21f4228f46d70eea2ebc1128ff6c4041ec7db2d94f093eeb441e66ce1eb9902157b6c44d01066fe2
   languageName: node
   linkType: hard
 
@@ -5762,6 +5784,24 @@ __metadata:
   version: 1.2.2
   resolution: "cjs-module-lexer@npm:1.2.2"
   checksum: 977f3f042bd4f08e368c890d91eecfbc4f91da0bc009a3c557bc4dfbf32022ad1141244ac1178d44de70fc9f3dea7add7cd9a658a34b9fae98a55d8f92331ce5
+  languageName: node
+  linkType: hard
+
+"class-transformer@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "class-transformer@npm:0.5.1"
+  checksum: f191c8b4cc4239990f5efdd790cabdd852c243ed66248e39f6616a349c910c6eed2d9fd1fbf7ee6ea89f69b4f1d0b493b27347fe0cd0ae26b47c3745a805b6d3
+  languageName: node
+  linkType: hard
+
+"class-validator@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "class-validator@npm:0.14.0"
+  dependencies:
+    "@types/validator": ^13.7.10
+    libphonenumber-js: ^1.10.14
+    validator: ^13.7.0
+  checksum: f62e4a0ad24cee68f4b2bc70d32b96de90cb598f96bde362b4dbf4234151af8eb6ae225458312a38fc49fa3959844cf61c60e731a8205e9a570454cff8de2710
   languageName: node
   linkType: hard
 
@@ -8758,6 +8798,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "glob@npm:8.1.0"
+  dependencies:
+    fs.realpath: ^1.0.0
+    inflight: ^1.0.4
+    inherits: 2
+    minimatch: ^5.0.1
+    once: ^1.3.0
+  checksum: 92fbea3221a7d12075f26f0227abac435de868dd0736a17170663783296d0dd8d3d532a5672b4488a439bf5d7fb85cdd07c11185d6cd39184f0385cbdfb86a47
+  languageName: node
+  linkType: hard
+
 "global-dirs@npm:^0.1.1":
   version: 0.1.1
   resolution: "global-dirs@npm:0.1.1"
@@ -11267,6 +11320,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.10.14":
+  version: 1.10.20
+  resolution: "libphonenumber-js@npm:1.10.20"
+  checksum: 9a5a544ad982351ee77579e4f3d6d72039bbd3de930f5f94af3dcb2ae089e77555e197e8db8314f796bdb6fc2d23fa30b187280e559f673134e61f06abdbe166
+  languageName: node
+  linkType: hard
+
 "lilconfig@npm:2.0.6, lilconfig@npm:^2.0.3, lilconfig@npm:^2.0.5, lilconfig@npm:^2.0.6":
   version: 2.0.6
   resolution: "lilconfig@npm:2.0.6"
@@ -13751,15 +13811,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prisma@npm:^4.7.1":
-  version: 4.7.1
-  resolution: "prisma@npm:4.7.1"
+"prisma@npm:^4.8.0":
+  version: 4.10.1
+  resolution: "prisma@npm:4.10.1"
   dependencies:
-    "@prisma/engines": 4.7.1
+    "@prisma/engines": 4.10.1
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: eb7046a5928f33e484bb2a100f49b613a37bdd83d72aa7e87a4edb38a235b7c44bb9c89bc9116af60950554da06d6ef7c581dd0c637ba2798810485d04da29d4
+  checksum: e4078909ad07bcfbe19e10aa0822dca47622b099b4ad6f48da743d47a658e25662de757b5b0e3bbfcd04c0b346dfcfe4d1fa6f0486312dfd8b193b32795ed5ce
   languageName: node
   linkType: hard
 
@@ -16323,11 +16383,11 @@ __metadata:
   linkType: hard
 
 "undici@npm:^5.13.0":
-  version: 5.14.0
-  resolution: "undici@npm:5.14.0"
+  version: 5.19.1
+  resolution: "undici@npm:5.19.1"
   dependencies:
     busboy: ^1.6.0
-  checksum: 7a076e44d84b25844b4eb657034437b8b9bb91f17d347de474fdea1d4263ce7ae9406db79cd30de5642519277b4893f43073258bcc8fed420b295da3fdd11b26
+  checksum: 57ee94ee74d944faa41dbcb2faf4e0c90069708d3aaae860185884e51376b5d457728352a8396d69a3c9cb752b62ff99a19a664c5aacb7ee61cc488af499a01c
   languageName: node
   linkType: hard
 
@@ -16553,6 +16613,13 @@ __metadata:
     spdx-correct: ^3.0.0
     spdx-expression-parse: ^3.0.0
   checksum: 35703ac889d419cf2aceef63daeadbe4e77227c39ab6287eeb6c1b36a746b364f50ba22e88591f5d017bc54685d8137bc2d328d0a896e4d3fd22093c0f32a9ad
+  languageName: node
+  linkType: hard
+
+"validator@npm:^13.7.0":
+  version: 13.9.0
+  resolution: "validator@npm:13.9.0"
+  checksum: e2c936f041f61faa42bafd17c6faddf939498666cd82e88d733621c286893730b008959f4cb12ab3e236148a4f3805c30b85e3dcf5e0efd8b0cbcd36c02bfc0c
   languageName: node
   linkType: hard
 
