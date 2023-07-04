@@ -1,3 +1,2 @@
-import Config from "@n-d-b/eslint";
-
-export default Config
+const config = require("@n-d-b/eslint")
+module.exports = config

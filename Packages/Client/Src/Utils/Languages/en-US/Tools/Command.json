@@ -12,7 +12,7 @@
       "Description": "Insufficient arguments",
       "Fields": {
         "1": "Minimum arguments required",
-        "2": "",
+        "2": "Correct way to use the command",
         "Content": {
           "1": "{{Args}}",
           "2": "Required Argument: <>\nOptional Argument: ()\n{{Usage}}"

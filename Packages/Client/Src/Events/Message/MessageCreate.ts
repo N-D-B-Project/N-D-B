@@ -1,8 +1,9 @@
-import { EventOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
 import { GuildRepository } from "@/Database/Repositories"
+import { EventOptions } from "@/Types"
 import { BaseEvent } from "@/Utils/Structures"
-import { ChannelType, Message } from "discord.js"
+import { MessageTools } from "@/Utils/Tools"
+import { ChannelType, EmbedBuilder, Message } from "discord.js"
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -21,9 +22,47 @@ export default class MessageCreateEvent extends BaseEvent {
     const guildRepository = new GuildRepository()
 
     // GuildConfig
-    const guildConfig = await guildRepository.get(message.guild)
+    var guildConfig = await guildRepository.get(message.guild)
     if (!guildConfig && message.channel.type !== ChannelType.DM) {
-      await guildRepository.create(message.guild)
+      const createdGuildConfig = await guildRepository.create(message.guild)
+      if (createdGuildConfig)
+        var guildConfig = await guildRepository.get(message.guild)
+      client.logger.database(
+        `${message.guild.name} Configuration Created on Database\n` /*, guildConfig*/
+      )
+      MessageTools.send(message.channel, {
+        embeds: [
+          new EmbedBuilder()
+            .setAuthor({
+              name: message.guild.name,
+              iconURL: message.guild.iconURL()
+            })
+            .setTitle(
+              await client.Translate.Guild(
+                "Events/MessageCreate:ConfigurationCreated:Title",
+                message
+              )
+            )
+            .setDescription(
+              (await client.Translate.Guild(
+                "Events/MessageCreate:ConfigurationCreated:Description",
+                message
+              )) + `\`\`\`JSON\n${JSON.stringify(guildConfig, null, 3)}\`\`\``
+            )
+
+            .setColor("#00c26f")
+            .setTimestamp()
+        ]
+      })
+      message.reply(
+        `${
+          message.guild.name
+        } Configuration Created on Database\n\`\`\`JSON\n${JSON.stringify(
+          guildConfig,
+          null,
+          3
+        )}\`\`\``
+      )
     } else if (guildConfig && message.channel.type !== ChannelType.DM) {
       const mentionRegex = RegExp(`<@!${client.user.id}>$`)
       const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `)

@@ -2,7 +2,7 @@ import NDBClient from "@/Client/NDBClient"
 import { EventOptions } from "@/Types"
 import { BaseCommand, BaseEvent } from "@/Utils/Structures"
 import { LegacyTools } from "@/Utils/Tools"
-import { Message } from "discord.js"
+import { ChannelType, Message } from "discord.js"
 
 export default class CommandEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -17,14 +17,13 @@ export default class CommandEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, message: Message, Prefix: string) {
-    if (message.channel.isDMBased()) return
+    if (message.channel.type === ChannelType.DM) return
     const cmdTools = new LegacyTools(client)
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
       .split(/ +/g)
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd)
-
     if (_Command) {
       const Checker = await cmdTools.runCheck(
         message,
@@ -33,7 +32,6 @@ export default class CommandEvent extends BaseEvent {
         Prefix,
         args
       )
-
       if (Checker) {
         _Command.run(client, message, args)
       }

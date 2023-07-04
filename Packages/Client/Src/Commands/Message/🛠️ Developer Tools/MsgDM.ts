@@ -1,5 +1,5 @@
-import { CommandOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
+import { CommandOptions } from "@/Types"
 import { BaseCommand } from "@/Utils/Structures"
 import { MessageTools } from "@/Utils/Tools"
 import { Message } from "discord.js"
@@ -30,10 +30,10 @@ export default class MsgDMCommand extends BaseCommand {
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    MessageTools.send(message.channel, { content: "Message 1" })
-    MessageTools.send(message.channel, { content: "Message 2" })
-    MessageTools.send(message.channel, { content: "Message 3" })
-    MessageTools.send(message.channel, { content: "Message 4" })
-    MessageTools.send(message.channel, { content: "Message 5" })
+    MessageTools.send(message.author, { content: "Message 1" })
+    MessageTools.send(message.author, { content: "Message 2" })
+    MessageTools.send(message.author, { content: "Message 3" })
+    MessageTools.send(message.author, { content: "Message 4" })
+    MessageTools.send(message.author, { content: "Message 5" })
   }
 }

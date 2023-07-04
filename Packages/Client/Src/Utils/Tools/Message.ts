@@ -7,6 +7,7 @@ import {
   MessageReaction,
   StartThreadOptions,
   TextBasedChannel,
+  TextChannel,
   ThreadChannel,
   User
 } from "discord.js"
@@ -118,6 +119,18 @@ export default class MessageTools {
   public static async delete(message: Message): Promise<Message> {
     try {
       return await message.delete()
+    } catch (error) {
+      if (await CheckError(error)) {
+        return
+      } else {
+        throw error
+      }
+    }
+  }
+
+  public static async get(channel: TextChannel, id: string): Promise<Message> {
+    try {
+      return channel.messages.cache.get(id)
     } catch (error) {
       if (await CheckError(error)) {
         return

@@ -1,7 +1,7 @@
 {
   "name": "@n-d-b/eslint",
   "version": "1.0.0",
-  "main": ".eslintrc.json",
+  "main": ".eslintrc.js",
   "packageManager": "yarn@3.2.3",
   "devDependencies": {
     "@types/eslint": "^8",

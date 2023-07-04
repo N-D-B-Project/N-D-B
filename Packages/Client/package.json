@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
-    "@discordjs/rest": "^1.5.0",
-    "@prisma/client": "latest",
+    "@discordjs/rest": "^1.7.0",
+    "@prisma/client": "^4.12.0",
     "chalk": "=4.1.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "discord-api-types": "^0.37.23",
-    "discord.js": "^14.7.1",
+    "discord-api-types": "^0.37.37",
+    "discord.js": "^14.11.0",
     "dotenv": "^16.0.3",
     "glob": "^8.1.0",
     "i18next": "=20.6.1",
@@ -54,7 +54,7 @@
     "@types/eslint": "^8.4.10",
     "@types/glob": "^8",
     "@types/i18next-fs-backend": "^1.1.2",
-    "@types/node": "^18.11.16",
+    "@types/node": "^18.15.11",
     "@types/node-fetch": "^2.6.2",
     "@types/prettier": "^2.7.1",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
@@ -66,10 +66,10 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.1",
-    "prisma": "^4.8.0",
+    "prisma": "^4.12.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "tsconfig-paths": "^4.1.1",
-    "typescript": "^4.9.4"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^4.9.5"
   }
 }

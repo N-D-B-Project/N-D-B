@@ -1,5 +1,5 @@
-import { CommandOptions } from "@/Types"
 import NDBClient from "@/Client/NDBClient"
+import { CommandOptions } from "@/Types"
 import { BaseCommand } from "@/Utils/Structures"
 import { MessageTools, Paginator } from "@/Utils/Tools"
 import { EmbedBuilder, Message } from "discord.js"
@@ -18,6 +18,7 @@ export default class TestCommand extends BaseCommand {
         user: [],
         bot: []
       },
+      minArgs: 2,
       guildOnly: false,
       ownerOnly: true,
       nsfw: false,

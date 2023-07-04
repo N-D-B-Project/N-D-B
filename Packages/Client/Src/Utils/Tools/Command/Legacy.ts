@@ -1,13 +1,8 @@
 import NDBClient from "@/Client/NDBClient"
 import { BaseCommand } from "@/Utils/Structures"
-import {
-  ChannelType,
-  EmbedBuilder,
-  Message,
-  TextChannel,
-  User
-} from "discord.js"
+import { ChannelType, Message, TextChannel, User } from "discord.js"
 import { MessageTools, Tools } from "../"
+import CheckerEmbeds from "./Embeds"
 
 export default class LegacyChecker {
   public constructor(private client: NDBClient) {
@@ -23,114 +18,15 @@ export default class LegacyChecker {
     const Options = _Command.options
     const Channel = message.channel as TextChannel
     const tools = new Tools(this.client)
+    const embeds = new CheckerEmbeds(this.client, _Command, "Guild", prefix)
 
     if (args.length < _Command.options.minArgs) {
-      MessageTools.reply(
-        message,
-        new EmbedBuilder()
-          .setAuthor({
-            name: message.author.tag,
-            iconURL: message.author.displayAvatarURL()
-          })
-          .setTitle(
-            await this.client.Translate.Guild(
-              "Tools/Command:Checker:NoMinArgs:Title",
-              message
-            )
-          )
-          .setColor("#c20e00")
-          .setDescription(
-            await this.client.Translate.Guild(
-              "Tools/Command:Checker:NoMinArgs:Description",
-              message
-            )
-          )
-          .addFields([
-            {
-              name: await this.client.Translate.Guild(
-                "Tools/Command:Checker:NoMinArgs:Fields:1",
-                message
-              ),
-              value: await this.client.Translate.Guild(
-                "Tools/Command:Checker:NoMinArgs:Fields:Content:1",
-                message,
-                { Args: _Command.options.minArgs }
-              )
-            },
-            {
-              name: await this.client.Translate.Guild(
-                "Tools/Command:Checker:NoMinArgs:Fields:2",
-                message
-              ),
-              value: await this.client.Translate.Guild(
-                "Tools/Command:Checker:NoMinArgs:Fields:Content:2",
-                message,
-                {
-                  Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`
-                }
-              )
-            }
-          ])
-          .setFooter({
-            text: this.client.user.tag,
-            iconURL: this.client.user.displayAvatarURL()
-          })
-      )
+      MessageTools.reply(message, await embeds.minArgs(message))
       return false
     }
 
     if (args.length > _Command.options.maxArgs) {
-      MessageTools.reply(
-        message,
-        new EmbedBuilder()
-          .setAuthor({
-            name: message.author.tag,
-            iconURL: message.author.displayAvatarURL()
-          })
-          .setTitle(
-            await this.client.Translate.Guild(
-              "Tools/Command:Checker:TooManyArgs:Title",
-              message
-            )
-          )
-          .setColor("#c20e00")
-          .setDescription(
-            await this.client.Translate.Guild(
-              "Tools/Command:Checker:TooManyArgs:Description",
-              message
-            )
-          )
-          .addFields([
-            {
-              name: await this.client.Translate.Guild(
-                "Tools/Command:Checker:TooManyArgs:Fields:1",
-                message
-              ),
-              value: await this.client.Translate.Guild(
-                "Tools/Command:Checker:TooManyArgs:Fields:Content:1",
-                message,
-                { Args: _Command.options.maxArgs }
-              )
-            },
-            {
-              name: await this.client.Translate.Guild(
-                "Tools/Command:Checker:TooManyArgs:Fields:2",
-                message
-              ),
-              value: await this.client.Translate.Guild(
-                "Tools/Command:Checker:TooManyArgs:Fields:Content:2",
-                message,
-                {
-                  Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`
-                }
-              )
-            }
-          ])
-          .setFooter({
-            text: this.client.user.tag,
-            iconURL: this.client.user.displayAvatarURL()
-          })
-      )
+      MessageTools.reply(message, await embeds.maxArgs(message))
       return false
     }
     if (!message.guild && !Options.DM) {
@@ -211,114 +107,15 @@ export default class LegacyChecker {
     const Options = _Command.options
     const Channel = message.channel as TextChannel
     const tools = new Tools(this.client)
+    const embeds = new CheckerEmbeds(this.client, _Command, "DM", prefix)
 
     if (args.length < _Command.options.minArgs) {
-      MessageTools.reply(
-        message,
-        new EmbedBuilder()
-          .setAuthor({
-            name: message.author.tag,
-            iconURL: message.author.displayAvatarURL()
-          })
-          .setTitle(
-            await this.client.Translate.DM(
-              "Tools/Command:Checker:NoMinArgs:Title",
-              message.member.user as User
-            )
-          )
-          .setColor("#c20e00")
-          .setDescription(
-            await this.client.Translate.DM(
-              "Tools/Command:Checker:NoMinArgs:Description",
-              message.member.user as User
-            )
-          )
-          .addFields([
-            {
-              name: await this.client.Translate.DM(
-                "Tools/Command:Checker:NoMinArgs:Fields:1",
-                message.member.user as User
-              ),
-              value: await this.client.Translate.DM(
-                "Tools/Command:Checker:NoMinArgs:Fields:Content:1",
-                message.member.user as User,
-                { Args: _Command.options.minArgs }
-              )
-            },
-            {
-              name: await this.client.Translate.DM(
-                "Tools/Command:Checker:NoMinArgs:Fields:2",
-                message.member.user as User
-              ),
-              value: await this.client.Translate.DM(
-                "Tools/Command:Checker:NoMinArgs:Fields:Content:2",
-                message.member.user as User,
-                {
-                  Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`
-                }
-              )
-            }
-          ])
-          .setFooter({
-            text: this.client.user.tag,
-            iconURL: this.client.user.displayAvatarURL()
-          })
-      )
+      MessageTools.reply(message, await embeds.minArgs(message))
       return false
     }
 
     if (args.length > _Command.options.maxArgs) {
-      MessageTools.reply(
-        message,
-        new EmbedBuilder()
-          .setAuthor({
-            name: message.author.tag,
-            iconURL: message.author.displayAvatarURL()
-          })
-          .setTitle(
-            await this.client.Translate.DM(
-              "Tools/Command:Checker:TooManyArgs:Title",
-              message.member.user as User
-            )
-          )
-          .setColor("#c20e00")
-          .setDescription(
-            await this.client.Translate.DM(
-              "Tools/Command:Checker:TooManyArgs:Description",
-              message.member.user as User
-            )
-          )
-          .addFields([
-            {
-              name: await this.client.Translate.DM(
-                "Tools/Command:Checker:TooManyArgs:Fields:1",
-                message.member.user as User
-              ),
-              value: await this.client.Translate.DM(
-                "Tools/Command:Checker:TooManyArgs:Fields:Content:1",
-                message.member.user as User,
-                { Args: _Command.options.maxArgs }
-              )
-            },
-            {
-              name: await this.client.Translate.DM(
-                "Tools/Command:Checker:TooManyArgs:Fields:2",
-                message.member.user as User
-              ),
-              value: await this.client.Translate.DM(
-                "Tools/Command:Checker:TooManyArgs:Fields:Content:2",
-                message.member.user as User,
-                {
-                  Usage: `${prefix}${_Command.options.name} ${_Command.options.usage}`
-                }
-              )
-            }
-          ])
-          .setFooter({
-            text: this.client.user.tag,
-            iconURL: this.client.user.displayAvatarURL()
-          })
-      )
+      MessageTools.reply(message, await embeds.maxArgs(message))
       return false
     }
 
