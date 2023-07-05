@@ -48,22 +48,22 @@ export default class InteractionTools {
   public static async reply(
     interaction: CommandInteraction | MessageComponentInteraction,
     content: string | EmbedBuilder | BaseMessageOptions,
-    ephemeral: boolean = false
+    ephemeral: boolean
   ): Promise<Message> {
     try {
       let msgOptions = messageOptions(content) as InteractionReplyOptions
 
       if (interaction.deferred || interaction.replied) {
-        return (await interaction.followUp({
+        return await interaction.followUp({
           ...msgOptions,
           ephemeral
-        })) as Message
+        })
       } else {
-        return (await interaction.reply({
+        return await interaction.reply({
           ...msgOptions,
           ephemeral,
           fetchReply: true
-        })) as Message
+        })
       }
     } catch (error) {
       if (await CheckError(error)) {

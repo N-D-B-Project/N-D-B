@@ -50,9 +50,10 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Automática
   - [ ] Economia
   - [ ] Tickets
-  - [ ] ReactionRoles
+  - [x] ReactionRoles
+    - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
   - [ ] Music
-  - [ ] Fix some Legacy Commands not being handled
+  - [x] Fix some Legacy Commands not being handled
 
 ## 📖 Licença
 

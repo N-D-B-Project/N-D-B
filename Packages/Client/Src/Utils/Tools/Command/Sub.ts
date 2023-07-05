@@ -22,7 +22,8 @@ export default class SubChecker {
         await this.client.Translate.Guild(
           "Tools/Command:Checker:OwnerOnly",
           interaction
-        )
+        ),
+        true
       )
       return false
     }
@@ -36,7 +37,8 @@ export default class SubChecker {
         await this.client.Translate.Guild(
           "Tools/Command:Checker:GuildOnly",
           interaction
-        )
+        ),
+        true
       )
       return false
     }
@@ -46,7 +48,8 @@ export default class SubChecker {
         await this.client.Translate.Guild(
           "Tools/Command:Checker:NSFW",
           interaction
-        )
+        ),
+        true
       )
       return false
     }
@@ -56,7 +59,8 @@ export default class SubChecker {
         await this.client.Translate.Guild(
           "Tools/Command:Checker:Disable",
           interaction
-        )
+        ),
+        true
       )
       return false
     }

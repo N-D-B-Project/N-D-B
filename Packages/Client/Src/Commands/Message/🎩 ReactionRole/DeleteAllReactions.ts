@@ -20,7 +20,7 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
       disable: false,
       cooldown: 0,
       permissions: {
-        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        user: ["SendMessages", "AddReactions", "ManageRoles"],
         bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
       },
       minArgs: 0,

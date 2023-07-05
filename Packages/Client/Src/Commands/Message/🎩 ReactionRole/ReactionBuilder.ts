@@ -14,7 +14,7 @@ export default class ReactionRoleBuilderCommand extends BaseCommand {
       disable: true,
       cooldown: 0,
       permissions: {
-        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        user: ["SendMessages", "AddReactions", "ManageRoles"],
         bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
       },
       minArgs: 0,

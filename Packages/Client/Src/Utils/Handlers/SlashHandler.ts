@@ -39,7 +39,7 @@ export default class SlashHandler {
               ?.commands.create(command.options.data)
               .then(res => {
                 this.client.logger.command(
-                  `(/) Slash Commands Registered [Guild]`
+                  `(/) Slash Commands Registered [Guild], ${res.name}`
                 )
                 return res
               })
@@ -52,7 +52,7 @@ export default class SlashHandler {
               ?.commands.create(command.options.data)
               .then(res => {
                 this.client.logger.command(
-                  `(/) Slash Commands Registered [Test]`
+                  `(/) Slash Commands Registered [Test], ${res.name}`
                 )
                 return res
               })
@@ -64,7 +64,7 @@ export default class SlashHandler {
               .create(command.options.data)
               .then(res => {
                 this.client.logger.command(
-                  `(/) Slash Commands Registered [Global]`
+                  `(/) Slash Commands Registered [Global], ${res.name}`
                 )
                 return res
               })

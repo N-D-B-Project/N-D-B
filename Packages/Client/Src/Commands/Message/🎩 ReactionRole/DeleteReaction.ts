@@ -32,7 +32,7 @@ export default class DeleteReactionCommand extends BaseCommand {
       disable: false,
       cooldown: 0,
       permissions: {
-        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        user: ["SendMessages", "AddReactions", "ManageRoles"],
         bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
       },
       minArgs: 4,
@@ -106,7 +106,7 @@ export default class DeleteReactionCommand extends BaseCommand {
       Emoji
     })
 
-    if (REACT) {
+    if (REACT.status === "Deleted") {
       MessageTools.send(
         message.channel,
         await ReactionRoleRemovedEmbed(

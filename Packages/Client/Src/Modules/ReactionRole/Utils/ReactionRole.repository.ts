@@ -1,11 +1,11 @@
 import { Guild, TextChannel } from "discord.js"
 import PrismaProvider from "../../../Database/Prisma.provider"
-import { iReaction, REACTION_OPTIONS } from "../Types"
+import { REACTION_OPTIONS, iReaction } from "../Types"
 
 export default class ReactionRoleRepository {
   public constructor(
     private readonly prisma: PrismaProvider = new PrismaProvider()
-  ) { }
+  ) {}
 
   public async getAll(guild: Guild) {
     return await this.prisma.guildReactionRoles.findMany({
@@ -120,8 +120,10 @@ export default class ReactionRoleRepository {
 
   public async deleteMany(
     guild: Guild
-  ): Promise<{ status: "UnableToDelete" | "Deleted", count: number }> {
-    const count = await this.prisma.guildReactionRoles.count({ where: { guildId: guild.id } })
+  ): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
+    const count = await this.prisma.guildReactionRoles.count({
+      where: { guildId: guild.id }
+    })
     await this.prisma.guildReactionRoles
       .deleteMany({
         where: {
@@ -139,7 +141,10 @@ export default class ReactionRoleRepository {
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction,
     newOption: REACTION_OPTIONS
-  ): Promise<{ status: "UnableToUpdate" | "Updated", oldOption?: REACTION_OPTIONS }> {
+  ): Promise<{
+    status: "UnableToUpdate" | "Updated"
+    oldOption?: REACTION_OPTIONS
+  }> {
     var data: iReaction = {
       Channel,
       Message,

@@ -33,7 +33,7 @@ export default class CreateReactionCommand extends BaseCommand {
       disable: false,
       cooldown: 0,
       permissions: {
-        user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
+        user: ["SendMessages", "AddReactions", "ManageRoles"],
         bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
       },
       minArgs: 4,
@@ -106,8 +106,8 @@ export default class CreateReactionCommand extends BaseCommand {
       Channel: Channel.id,
       Message: (MsgID as Message).id,
       Role: Role.id,
-      Option: option,
-      Emoji: args[3].toString()
+      Emoji: args[3].toString(),
+      Option: option
     }
     const Created = await reaction.Create(message.guild, data)
 
