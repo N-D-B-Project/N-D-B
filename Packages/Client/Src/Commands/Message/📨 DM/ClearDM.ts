@@ -1,5 +1,5 @@
+import NDBClient from "@/Core/NDBClient"
 import { CommandOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { BaseCommand } from "@/Utils/Structures"
 import { MessageTools } from "@/Utils/Tools"
 import { EmbedBuilder, Message, MessageReaction, User } from "discord.js"

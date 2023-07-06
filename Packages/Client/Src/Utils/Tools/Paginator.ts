@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import {
   ActionRowBuilder,
   ButtonBuilder,

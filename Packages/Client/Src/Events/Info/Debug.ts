@@ -1,6 +1,6 @@
-import { EventOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { Config } from "@/Config/Config"
+import NDBClient from "@/Core/NDBClient"
+import { EventOptions } from "@/Types"
 import { BaseEvent } from "@/Utils/Structures"
 
 export default class DebugEvent extends BaseEvent {
@@ -16,6 +16,6 @@ export default class DebugEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, info: any) {
-    if (Config.Debug.Client === true) client.logger.debug(info)
+    if (Config.Debug.Client === true) client.logger.debug(`Client: ${info}`)
   }
 }

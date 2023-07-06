@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { CommandOptions } from "@/Types"
 import { BaseCommand } from "@/Utils/Structures"
 import { MessageTools } from "@/Utils/Tools"

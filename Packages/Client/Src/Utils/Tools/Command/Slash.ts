@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { BaseSlashCommand } from "@/Utils/Structures"
 import { CommandInteraction, TextChannel } from "discord.js"
 import { InteractionTools, Tools } from "../index"

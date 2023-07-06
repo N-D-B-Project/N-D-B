@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { GuildRepository, UserRepository } from "@/Database/Repositories"
 import {
   CommandInteraction,

@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { glob } from "glob"
 import { dirname, sep } from "path"
 import { promisify } from "util"

@@ -1,5 +1,5 @@
+import NDBClient from "@/Core/NDBClient"
 import { CommandOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { Message } from "discord.js"
 
 export default class BaseCommand {

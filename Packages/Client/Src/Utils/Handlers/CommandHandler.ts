@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { parse } from "path"
 import { BaseCommand } from "../Structures"
 import BaseHandler from "./BaseHandler"

@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { EventOptions } from "@/Types"
 import { BaseEvent } from "@/Utils/Structures"
 

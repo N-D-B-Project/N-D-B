@@ -1,5 +1,5 @@
-import NDBClient from "@/Client/NDBClient"
 import { Config } from "@/Config/Config"
+import NDBClient from "@/Core/NDBClient"
 import { parse } from "path"
 import { BaseSlashCommand } from "../Structures"
 import BaseHandler from "./BaseHandler"

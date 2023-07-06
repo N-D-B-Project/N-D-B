@@ -1,6 +1,6 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { Guild, TextChannel } from "discord.js"
-import { iReaction, REACTION_OPTIONS } from "./Types"
+import { REACTION_OPTIONS, iReaction } from "./Types"
 import ReactionRoleRepository from "./Utils/ReactionRole.repository"
 
 export default class ReactionRole {
@@ -8,7 +8,7 @@ export default class ReactionRole {
     private client: NDBClient,
     public readonly Command: string,
     private readonly prisma: ReactionRoleRepository = new ReactionRoleRepository()
-  ) { }
+  ) {}
 
   public async getAll(guild: Guild) {
     return await this.prisma.getAll(guild)
@@ -56,7 +56,9 @@ export default class ReactionRole {
     })
   }
 
-  public async DeleteAll(guild: Guild): Promise<{ status: "UnableToDelete" | "Deleted", count: number }> {
+  public async DeleteAll(
+    guild: Guild
+  ): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
     return await this.prisma.deleteMany(guild)
   }
 
@@ -64,14 +66,19 @@ export default class ReactionRole {
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction,
     newOption: REACTION_OPTIONS
-  ): Promise<{ status: "UnableToUpdate" | "Updated", oldOption?: REACTION_OPTIONS }> {
-    return await this.prisma.update(guild, {
-      Channel,
-      Message,
-      Role,
-      Emoji,
-      Option
-    },
+  ): Promise<{
+    status: "UnableToUpdate" | "Updated"
+    oldOption?: REACTION_OPTIONS
+  }> {
+    return await this.prisma.update(
+      guild,
+      {
+        Channel,
+        Message,
+        Role,
+        Emoji,
+        Option
+      },
       newOption
     )
   }

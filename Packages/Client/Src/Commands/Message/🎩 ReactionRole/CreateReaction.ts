@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import ReactionRole from "@/Modules/ReactionRole"
 import { iReaction } from "@/Modules/ReactionRole/Types"
 import {

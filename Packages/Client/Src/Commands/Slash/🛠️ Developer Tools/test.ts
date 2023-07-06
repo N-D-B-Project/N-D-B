@@ -1,5 +1,5 @@
+import NDBClient from "@/Core/NDBClient"
 import { SlashCommandOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { BaseSlashCommand } from "@/Utils/Structures"
 import { InteractionTools } from "@/Utils/Tools"
 import {

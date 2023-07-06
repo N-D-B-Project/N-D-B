@@ -1,5 +1,5 @@
+import NDBClient from "@/Core/NDBClient"
 import { EventOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { BaseEvent } from "@/Utils/Structures"
 
 export default class uncaughtExceptionEvent extends BaseEvent {

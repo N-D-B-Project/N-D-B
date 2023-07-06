@@ -1,5 +1,5 @@
+import NDBClient from "@/Core/NDBClient"
 import { EventOptions } from "@/Types"
-import NDBClient from "@/Client/NDBClient"
 import { BaseCommand, BaseEvent } from "@/Utils/Structures"
 import { LegacyTools } from "@/Utils/Tools"
 import { Message } from "discord.js"

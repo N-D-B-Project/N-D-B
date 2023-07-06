@@ -15,6 +15,7 @@ import type {
   PermissionResolvable,
   User
 } from "discord.js"
+import { MoonlinkEvents } from "moonlink.js"
 
 export interface CommandOptions {
   name: string
@@ -80,9 +81,10 @@ export interface EventOptions {
     | keyof RestEvents
     | keyof EmitedEvents
     | keyof ProcessEvents
+    | keyof MoonlinkEvents
   type: "on" | "once"
-  emitter: "client" | "rest" | "process"
-  enable?: boolean
+  emitter: "client" | "rest" | "process" | "music"
+  enable: boolean
 }
 
 export interface ProcessEvents {

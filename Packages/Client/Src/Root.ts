@@ -1,6 +1,6 @@
 import "dotenv/config"
 
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 
 async function start(): Promise<void> {
   const client = new NDBClient()

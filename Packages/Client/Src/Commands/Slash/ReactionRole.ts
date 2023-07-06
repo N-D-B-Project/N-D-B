@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { SlashCommandOptions } from "@/Types"
 import { Localization } from "@/Utils/Languages/Localization/ReactionRole"
 import { BaseSlashCommand, BaseSubCommand } from "@/Utils/Structures"

@@ -1,5 +1,5 @@
-import NDBClient from "@/Client/NDBClient"
 import { Emojis } from "@/Config/Config"
+import NDBClient from "@/Core/NDBClient"
 import { MessageTools } from "@/Utils/Tools"
 import {
   CommandInteraction,

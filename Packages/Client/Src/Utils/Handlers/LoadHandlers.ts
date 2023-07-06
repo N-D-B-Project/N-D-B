@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { CommandHandler, EventHandler, SlashHandler, SubHandler } from "./index"
 
 export default class LoadHandlers {

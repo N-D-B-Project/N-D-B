@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { SubCommandOptions } from "@/Types"
 import { BaseSubCommand } from "@/Utils/Structures"
 import { InteractionTools } from "@/Utils/Tools"

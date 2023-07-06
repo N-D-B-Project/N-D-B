@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { parse } from "path"
 import { BaseEvent } from "../Structures"
 import BaseHandler from "./BaseHandler"
@@ -26,33 +26,47 @@ export default class EventHandler {
       }
       this.client.Collections.events.set(String(event.options.name), event)
 
-      var HandlerObject = [
-        ...new Set([
-          { emitter: "client", value: this.client },
-          { emitter: "rest", value: this.client.rest },
-          { emitter: "process", value: process }
-        ])
+      const HandlerList = [
+        { emitter: "client", value: this.client },
+        { emitter: "rest", value: this.client.rest },
+        { emitter: "process", value: process }
       ]
-        .map(object => {
-          return {
-            emitter: object.emitter,
-            value: object.value
-          }
-        })
-        .map(async object => {
-          switch (event.options.emitter) {
-            case String(object.emitter):
-              Object(object.value)[event.options.type](
-                event.options.name,
-                (...args: any[]) => {
-                  if (event.options.enable) {
-                    event.run(this.client, ...args)
-                  }
+
+      for (const Prop of HandlerList) {
+        switch (event.options.emitter) {
+          case String(Prop.emitter):
+            Object(Prop.value)[event.options.type](
+              event.options.name,
+              (...args: any[]) => {
+                if (event.options.enable) {
+                  event.run(this.client, ...args)
                 }
-              )
-              break
-          }
-        })
+              }
+            )
+        }
+      }
+
+      // var HandlerObject = [...new Set([])]
+      //   .map(object => {
+      //     return {
+      //       emitter: object.emitter,
+      //       value: object.value
+      //     }
+      //   })
+      //   .map(async object => {
+      //     switch (event.options.emitter) {
+      //       case String(object.emitter):
+      //         Object(object.value)[event.options.type](
+      //           event.options.name,
+      //           (...args: any[]) => {
+      //             if (event.options.enable) {
+      //               event.run(this.client, ...args)
+      //             }
+      //           }
+      //         )
+      //         break
+      //     }
+      //   })
     })
   }
 }

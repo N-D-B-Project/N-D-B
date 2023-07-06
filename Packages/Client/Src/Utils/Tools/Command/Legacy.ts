@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { BaseCommand } from "@/Utils/Structures"
 import { ChannelType, Message, TextChannel, User } from "discord.js"
 import { MessageTools, Tools } from "../"

@@ -1,4 +1,4 @@
-import NDBClient from "@/Client/NDBClient"
+import NDBClient from "@/Core/NDBClient"
 import { CommandOptions } from "@/Types"
 import { CommandHandler, EventHandler, SubHandler } from "@/Utils/Handlers"
 import SlashHandler from "@/Utils/Handlers/SlashHandler"

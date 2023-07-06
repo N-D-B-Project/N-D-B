@@ -1,5 +1,5 @@
-import NDBClient from "@/Client/NDBClient"
 import { Config } from "@/Config/Config"
+import NDBClient from "@/Core/NDBClient"
 import util from "node:util"
 
 export default class Tools {
