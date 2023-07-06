@@ -1,4 +1,11 @@
 {
+  "ts-node": {
+    "transpileOnly": false,
+    "logError": true,
+    "ignore": ["(?:^|/)node_modules/"],
+    "files": true,
+    "skipIgnore": true
+  },
   "compilerOptions": {
     "target": "ESNEXT",
     "module": "commonjs",
