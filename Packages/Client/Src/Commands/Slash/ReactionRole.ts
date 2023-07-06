@@ -239,36 +239,23 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {
-    var SubList = [
-      ...new Set([
-        { prop: "create" },
-        { prop: "delete" },
-        { prop: "edit" },
-        { prop: "fetch" },
-        { prop: "types" },
-        { prop: "delete_all" }
-      ])
+    const cmdTools = new SubTools(client)
+    const SubList = [
+      { prop: "create" },
+      { prop: "delete" },
+      { prop: "edit" },
+      { prop: "fetch" },
+      { prop: "types" },
+      { prop: "delete_all" }
     ]
-      .map(object => {
-        return {
-          prop: object.prop
-        }
-      })
-      .map(async object => {
-        const cmdTools = new SubTools(client)
-        var Prop: string
-
-        if (args.getSubcommand() === object.prop) {
-          Prop = object.prop
-        }
-
+    for (const Command of SubList) {
+      if (args.getSubcommand() === Command.prop) {
         const _SubCommand: BaseSubCommand = client.Collections.SubCommands.get(
-          `${Prop}${this.options.category}`
+          `${Command.prop}${this.options.category}`
         )
 
         if (_SubCommand) {
           const Checker = await cmdTools.runCheck(interaction, _SubCommand)
-
           if (Checker) {
             await interaction.deferReply().catch(e => {})
 
@@ -284,6 +271,7 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
               })
           }
         }
-      })
+      }
+    }
   }
 }

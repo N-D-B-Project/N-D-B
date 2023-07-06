@@ -53,7 +53,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [x] ReactionRoles
     - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
   - [ ] Music
-  - [x] Fix some Legacy Commands not being handled
+  - [ ] Sharding
+  - [ ] Top.gg Autopost
 
 ## 📖 Licença
 
