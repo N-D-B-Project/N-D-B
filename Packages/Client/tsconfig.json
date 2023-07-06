@@ -1,6 +1,6 @@
 {
   "ts-node": {
-    "transpileOnly": false,
+    "transpileOnly": true,
     "logError": true,
     "ignore": ["(?:^|/)node_modules/"],
     "files": true,
