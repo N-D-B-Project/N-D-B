@@ -23,7 +23,7 @@
   •
   <a href="📝 To-Do">To-Do</a>
   •
-  <a href="https://github.com/NedcloarBR/N-D-B/blob/master/Docs/INSTALLATION.md">Instalação (WIP .md)</a>
+  <a href="https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Configuration.md">Instalação</a>
   •
   <a href="#📖 Licença">Licença</a>
   •
@@ -66,5 +66,4 @@ Lançado sob a [GPL-3.0 License](https://github.com/NedcloarBR/N-D-B/blob/master
 
 - **[Kevin Novak](https://github.com/KevinNovak)** - [SCApi (Sharding/Clustering API)](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
 - **[peterhanania](https://github.com/peterhanania/)** - [Reaction Roles](https://github.com/peterhanania/reaction-roles)
-- **[duncte123#1245](https://github.com/duncte123)** - [Lavalink Plugin](https://github.com/DuncteBot/skybot-lavalink-plugin/) (TTS, reddit etc).
 - Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/CONTRIBUTING.md).
