@@ -1,8 +1,6 @@
 import NDBClient from "@/Core/NDBClient"
-import { glob } from "glob"
+import { globSync } from "glob"
 import { dirname, sep } from "path"
-import { promisify } from "util"
-const globProm = promisify(glob)
 
 export default class BaseHandler {
   public constructor(private client: NDBClient) {
@@ -48,7 +46,7 @@ export default class BaseHandler {
     if (process.env.isCompiled === "true")
       baseDir = `${this.directory}${handler}/**/*.js`
     else baseDir = `${this.directory}${handler}/**/*.ts`
-    const Files = await globProm(baseDir)
+    const Files = globSync(baseDir)
     Files.forEach(file => delete require.cache[require.resolve(file)])
     return Files
   }
