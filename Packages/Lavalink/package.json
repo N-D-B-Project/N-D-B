@@ -1,0 +1,9 @@
+{
+  "name": "@n-d-b/lavalink",
+  "version": "1.0.0",
+  "description": "Lavalink server",
+  "main": "bootstrap.js",
+  "scripts": {
+    "start": "node ."
+  }
+}

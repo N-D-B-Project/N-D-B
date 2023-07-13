@@ -29,7 +29,8 @@ export default class EventHandler {
       const HandlerList = [
         { emitter: "client", value: this.client },
         { emitter: "rest", value: this.client.rest },
-        { emitter: "process", value: process }
+        { emitter: "process", value: process },
+        { emitter: "music", value: this.client.ErelaManager }
       ]
 
       for (const Prop of HandlerList) {

@@ -16,6 +16,7 @@ node_modules/
 # Config Files
 *.env
 Config.ts
+application.yml
 
 # Other files
 *.ignore

@@ -11,6 +11,7 @@ import { promises as fs } from "fs"
 import i18next, { TFunction } from "i18next"
 import Backend from "i18next-fs-backend"
 import * as path from "path"
+import { Logger } from "../Tools"
 const guildRepository = new GuildRepository()
 const userRepository = new UserRepository()
 
@@ -71,7 +72,11 @@ export default async (): Promise<Map<string, TFunction>> => {
     ns: namespaces,
     preload: languages
   })
-
+  new Logger().info(
+    `${
+      languages.length
+    } linguagens foram carregadas com sucesso! (${languages.join(" | ")})`
+  )
   return new Map(languages.map(item => [item, i18next.getFixedT(item)]))
 }
 

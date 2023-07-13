@@ -3,5 +3,5 @@
   "restartable": "rs",
   "ignore": ["(?:^|/)node_modules/", ".git", "**/Backup/"],
   "ext": "ts,json",
-  "exec": "NODE_ENV=Development isCompiled=false ts-node -r tsconfig-paths/register Src/Root.ts"
+  "exec": "NODE_ENV=Development isCompiled=false ts-node -r tsconfig-paths/register Src/Root.ts --trace-deprecation"
 }

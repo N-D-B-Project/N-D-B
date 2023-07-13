@@ -15,15 +15,7 @@
       "module-resolver",
       {
         "alias": {
-          "~": "./Src",
-          "@Client": "./Src/Client",
-          "@Structures": "./Src/Utils/Structures",
-          "@Handlers": "./Src/Utils/Handlers",
-          "@Database": "./Src/Database",
-          "@Utils": "./Src/Utils",
-          "@Languages": "./Src/Utils/Languages",
-          "@Packages": "./Src/Packages",
-          "@APIs": "./Src/APIs"
+          "@/": "./Src"
         }
       }
     ],

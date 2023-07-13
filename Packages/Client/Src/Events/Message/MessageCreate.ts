@@ -20,7 +20,6 @@ export default class MessageCreateEvent extends BaseEvent {
   async run(client: NDBClient, message: Message) {
     if (message.author.bot) return
     const guildRepository = new GuildRepository()
-
     // GuildConfig
     var guildConfig = await guildRepository.get(message.guild)
     if (!guildConfig && message.channel.type !== ChannelType.DM) {

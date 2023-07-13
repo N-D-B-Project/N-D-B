@@ -1,8 +1,9 @@
 export {
   CommandOptions,
-  eCommandType,
   EventOptions,
   SlashCommandOptions,
-  SubCommandOptions
+  SubCommandOptions,
+  SwitchCommand,
+  eCommandType
 } from "./client"
 export { JobDaily, Jobs, WorkedBonus } from "./ndcash"

@@ -18,6 +18,10 @@ export default class Event extends BaseEvent {
   }
 
   async run(client: NDBClient) {
+    if (Config.Music.Lavalink) {
+      client.ErelaManager.load()
+    }
+
     //* Logs
     await client.Tools.WAIT(2000)
     client.logger.event(`${client.Collections.events.size} Events`)
