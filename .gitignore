@@ -25,6 +25,7 @@ application.yml
 ignore/
 Backup/
 .docker/database/
+*.ignore
 
 # misc
 .DS_Store
