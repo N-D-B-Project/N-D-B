@@ -12,9 +12,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
-    sourceType: "module",
-    project: "tsconfig.json",
-    tsconfigRootDir: __dirname
+    sourceType: "module"
   },
   plugins: ["@typescript-eslint", "prettier", "react"],
   ignorePatterns: [".eslintrc.js"],
@@ -73,4 +71,4 @@ module.exports = {
     "spaced-comment": "off",
     yoda: "error"
   }
-}
+};

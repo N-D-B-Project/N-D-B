@@ -28,7 +28,7 @@
     "indent": ["off", "tab"],
     "linebreak-style": ["error", "unix"],
     "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["off", "always-multiline"],
     "comma-spacing": "error",
     "comma-style": "error",
     "curly": ["error", "multi-line", "consistent"],
