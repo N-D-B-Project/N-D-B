@@ -16,13 +16,12 @@ export default class Music {
     isSlash: boolean
   ): Promise<EmbedBuilder | Message> {
     try {
-      if (!isSlash)
-        return await play._Legacy(MsgInt as Message, args as Array<string>);
-      else
-        return await play._Slash(
+      if (!isSlash) {return await play._Legacy(MsgInt as Message, args as Array<string>);} else {
+return await play._Slash(
           MsgInt as CommandInteraction,
           args as CommandInteractionOptionResolver
         );
+}
     } catch (error) {
       console.error(error);
     }

@@ -89,7 +89,7 @@ export default class MusicEmbeds {
     track?: Track
   ): Promise<EmbedBuilder> {
     const Checker = await MusicTools.Checker(args, isSlash);
-    let baseEmbed = await this.createBaseEmbed(msgint, "Error");
+    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
     switch (loadType) {
       case "Fail":
         baseEmbed
