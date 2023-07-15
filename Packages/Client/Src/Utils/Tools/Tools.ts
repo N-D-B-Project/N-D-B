@@ -1,12 +1,12 @@
-import { Config } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
-import { CommandInteraction, GuildChannel, Message } from "discord.js"
-import util from "node:util"
-import ms from "parse-ms"
+import { Config } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
+import { CommandInteraction, GuildChannel, Message } from "discord.js";
+import util from "node:util";
+import ms from "parse-ms";
 
 export default class Tools {
   public constructor(private client: NDBClient) {
-    this.client = client
+    this.client = client;
   }
 
   static getMomentFormat(
@@ -15,12 +15,12 @@ export default class Tools {
   ): string {
     switch (mode) {
       case "calendar":
-        if (lang === "pt-BR") return "DD/MM/YYYY | LTS"
-        else return "DD-MM-YYYY LTS"
+        if (lang === "pt-BR") return "DD/MM/YYYY | LTS";
+        else return "DD-MM-YYYY LTS";
 
       case "time":
-        if (lang === "pt-BR") return "L"
-        else return "DD-MM-YYYY LTS"
+        if (lang === "pt-BR") return "L";
+        else return "DD-MM-YYYY LTS";
     }
   }
 
@@ -29,7 +29,7 @@ export default class Tools {
     number: number,
     translateInfo: Message | CommandInteraction | GuildChannel
   ) {
-    var time = ms(number)
+    var time = ms(number);
     const days = this.client.Translate.Guild(
         "Tools/Tools:Timer:Days",
         translateInfo
@@ -45,7 +45,7 @@ export default class Tools {
       seconds = await this.client.Translate.Guild(
         "Tools/Tools:Timer:Seconds",
         translateInfo
-      )
+      );
     switch (type) {
       case "normal":
         return ` ${
@@ -62,7 +62,7 @@ export default class Tools {
               ? time.seconds
               : `0${time.seconds}`
             : ""
-        }`
+        }`;
       case "details":
         return ` 
         ${days}${
@@ -85,39 +85,39 @@ export default class Tools {
               : `0${time.seconds}`
             : ""
         }
-        `
+        `;
     }
   }
 
-  async WAIT(ms: number): Promise<void> {
-    const wait = util.promisify(setTimeout)
-    return wait(ms)
+  async WAIT(time: number): Promise<void> {
+    const wait = util.promisify(setTimeout);
+    return wait(time);
   }
 
   public checkOwner(target: string) {
-    return Config.Owners.includes(target)
+    return Config.Owners.includes(target);
   }
 
   public checkGuild(target: string) {
-    return Config.NDCommunity.ID === target || Config.TestGuild.ID === target
+    return Config.NDCommunity.ID === target || Config.TestGuild.ID === target;
   }
 
   public capitalize(string: string) {
     return string
       .split(" ")
       .map(str => str.slice(0, 1).toUpperCase() + str.slice(1))
-      .join(" ")
+      .join(" ");
   }
 
   public removeDuplicates(arr) {
-    return [...new Set(arr)]
+    return [...new Set(arr)];
   }
 
-  public formatArray(array: Array<any>) {
+  public formatArray(array: Array<string>) {
     return new Intl.ListFormat("pt-BR", {
       style: "short",
       type: "conjunction"
-    }).format(array)
+    }).format(array);
   }
 
   public resolveCommand(nameOrAlias: string) {
@@ -126,21 +126,21 @@ export default class Tools {
       this.client.Collections.commands.get(
         this.client.Collections.aliases.get(nameOrAlias)!
       )
-    )
+    );
   }
 
   isValidURL(string: string) {
-    const args = string.split(" ")
-    let url
+    const args = string.split(" ");
+    let url;
     for (const arg of args) {
       try {
-        url = new URL(arg)
-        url = url.protocol === "http:" || url.protocol === "https:"
-        break
+        url = new URL(arg);
+        url = url.protocol === "http:" || url.protocol === "https:";
+        break;
       } catch (_) {
-        url = false
+        url = false;
       }
     }
-    return url
+    return url;
   }
 }

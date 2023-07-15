@@ -1,5 +1,7 @@
-import { User } from "discord.js"
-import PrismaProvider from "../Prisma.provider"
+/* eslint-disable no-empty-function */
+
+import { User } from "discord.js";
+import PrismaProvider from "../Prisma.provider";
 
 export default class UserRepository {
   public constructor(
@@ -7,14 +9,13 @@ export default class UserRepository {
   ) {}
 
   public async get(user: User) {
-    const User = await this.prisma.user.findUnique({
+    return await this.prisma.user.findUnique({
       where: { id: user.id },
       include: {
         Settings: true,
         NDCash: true
       }
-    })
-    return User
+    });
   }
 
   public async create(user: User) {
@@ -23,7 +24,7 @@ export default class UserRepository {
         id: user.id,
         Username: user.username
       }
-    })
+    });
   }
 
   public async update(user: User) {
@@ -32,12 +33,12 @@ export default class UserRepository {
       data: {
         Username: user.username
       }
-    })
+    });
   }
 
   public async remove(user: User) {
     return await this.prisma.user.delete({
       where: { id: user.id }
-    })
+    });
   }
 }

@@ -1,9 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import ReactionRole from "@/Modules/ReactionRole"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { MessageTools } from "@/Utils/Tools"
-import { EmbedBuilder, MessageReaction, User } from "discord.js"
+/* eslint-disable no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import NDBClient from "@/Core/NDBClient";
+import ReactionRole from "@/Modules/ReactionRole";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { EmbedBuilder, MessageReaction, User } from "discord.js";
 
 export default class ReactionRoleAddEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -12,36 +15,36 @@ export default class ReactionRoleAddEvent extends BaseEvent {
       type: "on",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, reaction: MessageReaction, user: User) {
-    if (user === client.user) return
-    const react = new ReactionRole(client, "ReactionRoleAddEvent")
-    const TIMER: number = 10 * 1000
-    const ReactionCooldown = new Set()
-    const ClientCooldown = new Set()
-    const data = await react.getAll(reaction.message.guild)
-    const Guild = reaction.message.guild
-    const Member = Guild.members.cache.get(user.id)
+    if (user === client.user) return;
+    const react = new ReactionRole(client, "ReactionRoleAddEvent");
+    const TIMER: number = 10 * 1000;
+    const ReactionCooldown = new Set();
+    const ClientCooldown = new Set();
+    const data = await react.getAll(reaction.message.guild);
+    const Guild = reaction.message.guild;
+    const Member = Guild.members.cache.get(user.id);
 
-    if (!data) return
+    if (!data) return;
 
     data.forEach(async Data => {
-      const SplitEmoji = Data.Emoji.replace("<:", "").replace(">", "")
+      const SplitEmoji = Data.Emoji.replace("<:", "").replace(">", "");
 
       if (
         reaction.emoji.identifier === SplitEmoji &&
         reaction.message.id === Data.Message
       ) {
-        const Role = Guild.roles.cache.get(Data.Role)
-        const Message = Data.Message
-        const Channel = Data.Channel
-        const Emoji = Guild.emojis.cache.get(Data.Emoji)
-        const Option = Data.Option
-        if (ClientCooldown.has(reaction.message.guildId)) return
+        const Role = Guild.roles.cache.get(Data.Role);
+        const Message = Data.Message;
+        const Channel = Data.Channel;
+        const Emoji = Guild.emojis.cache.get(Data.Emoji);
+        const Option = Data.Option;
+        if (ClientCooldown.has(reaction.message.guildId)) return;
 
         const CooldownEmbed = new EmbedBuilder()
           .setAuthor({
@@ -84,7 +87,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
             iconURL: client.user.displayAvatarURL()
           })
           .setColor("#c20e00")
-          .setTimestamp()
+          .setTimestamp();
         const AddEmbed = new EmbedBuilder()
           .setAuthor({
             name: user.username,
@@ -126,7 +129,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
             iconURL: client.user.displayAvatarURL()
           })
           .setColor("#00c26f")
-          .setTimestamp()
+          .setTimestamp();
         const RemoveEmbed = new EmbedBuilder()
           .setAuthor({
             name: user.username,
@@ -169,7 +172,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
             iconURL: client.user.displayAvatarURL()
           })
           .setColor("#00c26f")
-          .setTimestamp()
+          .setTimestamp();
         const ErrorEmbed = new EmbedBuilder()
           .setAuthor({
             name: user.username,
@@ -211,7 +214,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
             iconURL: client.user.displayAvatarURL()
           })
           .setColor("#c20e00")
-          .setTimestamp()
+          .setTimestamp();
 
         if (Option === 1) {
           try {
@@ -228,26 +231,26 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
+                .catch(() => {});
               if (CONFIG.get("DMInfoMSG") === true) {
                 MessageTools.send(user, {
                   embeds: [AddEmbed]
-                }).catch(() => {})
+                }).catch(() => {});
               }
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (error) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, TIMER)
+              ClientCooldown.delete(reaction.message.guildId);
+            }, TIMER);
             MessageTools.send(user, {
               embeds: [ErrorEmbed]
-            })
-            return
+            });
+            return;
           }
         }
 
@@ -266,22 +269,22 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
+                .catch(() => {});
               if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
-                MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {})
+                MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (err) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, TIMER)
-            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {})
-            return
+              ClientCooldown.delete(reaction.message.guildId);
+            }, TIMER);
+            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {});
+            return;
           }
         }
 
@@ -300,24 +303,24 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
+                .catch(() => {});
               if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
-                )
+                );
               }
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (err) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, TIMER)
-            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {})
-            return
+              ClientCooldown.delete(reaction.message.guildId);
+            }, TIMER);
+            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {});
+            return;
           }
         }
 
@@ -336,24 +339,24 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
-              ReactionCooldown.add(user.id)
+                .catch(() => {});
+              ReactionCooldown.add(user.id);
               if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
-                )
+                );
               }
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (err) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, TIMER)
-            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {})
-            return
+              ClientCooldown.delete(reaction.message.guildId);
+            }, TIMER);
+            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {});
+            return;
           }
         }
 
@@ -370,29 +373,29 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   "Events/ReactionRoleAdd-Remove:Options:REMOVE:5",
                   reaction.message
                 )
-              )
+              );
               reaction.message.reactions.cache
                 .find(r => r.emoji.name == Emoji.name)
                 .users.remove(user.id)
-                .catch(() => {})
+                .catch(() => {});
 
               if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
-                )
+                );
               }
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (err) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, TIMER)
-            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {})
-            return
+              ClientCooldown.delete(reaction.message.guildId);
+            }, TIMER);
+            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {});
+            return;
           }
         }
 
@@ -406,7 +409,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               reaction.message.reactions.cache
                 .find(r => r.emoji.name == Emoji.name)
                 .users.remove(user.id)
-                .catch(() => {})
+                .catch(() => {});
               await Member.roles
                 .remove(
                   Role,
@@ -415,14 +418,14 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
+                .catch(() => {});
 
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
 
-              return
+              return;
             } else if (
               !Member.roles.cache.find(
                 r => r.name.toLowerCase() === Role.name.toLowerCase()
@@ -431,7 +434,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
               reaction.message.reactions.cache
                 .find(r => r.emoji.name == Emoji.name)
                 .users.remove(user.id)
-                .catch(() => {})
+                .catch(() => {});
               await Member.roles
                 .add(
                   Role,
@@ -440,26 +443,26 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                     reaction.message
                   )
                 )
-                .catch(() => {})
+                .catch(() => {});
 
               if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
-                MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {})
+                MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
-              ReactionCooldown.add(user.id)
+              ReactionCooldown.add(user.id);
               setTimeout(() => {
-                ReactionCooldown.delete(user.id)
-              }, TIMER)
+                ReactionCooldown.delete(user.id);
+              }, TIMER);
             }
           } catch (err) {
-            ClientCooldown.add(reaction.message.guildId)
+            ClientCooldown.add(reaction.message.guildId);
             setTimeout(() => {
-              ClientCooldown.delete(reaction.message.guildId)
-            }, 6000)
-            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {})
-            return
+              ClientCooldown.delete(reaction.message.guildId);
+            }, 6000);
+            MessageTools.send(user, { embeds: [ErrorEmbed] }).catch(() => {});
+            return;
           }
         }
       }
-    })
+    });
   }
 }

@@ -1,6 +1,7 @@
-import NDBClient from "@/Core/NDBClient"
-import { BaseCommand } from "@/Utils/Structures"
-import { EmbedBuilder, Message, PartialMessage } from "discord.js"
+/* eslint-disable no-empty-function */
+import NDBClient from "@/Core/NDBClient";
+import { BaseCommand } from "@/Utils/Structures";
+import { EmbedBuilder, Message, PartialMessage } from "discord.js";
 
 export default class CheckerEmbeds {
   public constructor(
@@ -14,13 +15,14 @@ export default class CheckerEmbeds {
     message: Message | PartialMessage,
     _Command: BaseCommand = this._Command as BaseCommand
   ): Promise<EmbedBuilder> {
-    var Function = async (arg: string, arg2?: {}) => {
-      return await this.client.Translate.Guild(arg, message, arg2)
-    }
-    if (this.mode === "DM")
+    var Function = async (arg: string, arg2?: Record<string, unknown>) => {
+      return await this.client.Translate.Guild(arg, message, arg2);
+    };
+    if (this.mode === "DM") {
       Function = async (arg, arg2) => {
-        return await this.client.Translate.DM(arg, message.author, arg2)
-      }
+        return await this.client.Translate.DM(arg, message.author, arg2);
+      };
+    }
     return new EmbedBuilder()
       .setAuthor({
         name: message.author.tag,
@@ -52,20 +54,21 @@ export default class CheckerEmbeds {
       .setFooter({
         text: this.client.user.tag,
         iconURL: this.client.user.displayAvatarURL()
-      })
+      });
   }
 
   public async maxArgs(
     message: Message | PartialMessage,
     _Command: BaseCommand = this._Command as BaseCommand
   ): Promise<EmbedBuilder> {
-    var Function = async (arg: string, arg2?: {}) => {
-      return await this.client.Translate.Guild(arg, message, arg2)
-    }
-    if (this.mode === "DM")
+    var Function = async (arg: string, arg2?: Record<string, unknown>) => {
+      return await this.client.Translate.Guild(arg, message, arg2);
+    };
+    if (this.mode === "DM") {
       Function = async (arg, arg2) => {
-        return await this.client.Translate.DM(arg, message.author, arg2)
-      }
+        return await this.client.Translate.DM(arg, message.author, arg2);
+      };
+    }
     return new EmbedBuilder()
       .setAuthor({
         name: message.author.tag,
@@ -97,6 +100,6 @@ export default class CheckerEmbeds {
       .setFooter({
         text: this.client.user.tag,
         iconURL: this.client.user.displayAvatarURL()
-      })
+      });
   }
 }

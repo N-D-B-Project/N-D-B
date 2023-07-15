@@ -1,12 +1,13 @@
+/* eslint-disable no-empty-function */
 import {
   BaseCommand,
   BaseEvent,
   BaseSlashCommand,
   BaseSubCommand
-} from "@/Utils/Structures"
-import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10"
-import { ClientOptions, Collection, Partials } from "discord.js"
-import { TFunction } from "i18next"
+} from "@/Utils/Structures";
+import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10";
+import { ClientOptions, Collection, Partials } from "discord.js";
+import { TFunction } from "i18next";
 
 export const _ClientOptions: ClientOptions = {
   shards: "auto",
@@ -51,7 +52,7 @@ export const _ClientOptions: ClientOptions = {
     GatewayIntentBits.AutoModerationConfiguration,
     GatewayIntentBits.AutoModerationExecution
   ]
-}
+};
 
 export class Collections {
   public constructor(
@@ -64,7 +65,6 @@ export class Collections {
     public SubCommands: Collection<string, BaseSubCommand> = new Collection(),
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
-    public languages: any = import("../Utils/Languages/language-meta.json"),
-    public react: Map<any, any> = new Map()
+    public languages = import("../Utils/Languages/language-meta.json")
   ) {}
 }

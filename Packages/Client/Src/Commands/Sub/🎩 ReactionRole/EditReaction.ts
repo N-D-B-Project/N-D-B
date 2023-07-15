@@ -1,19 +1,16 @@
-import NDBClient from "@Client/NDBClient";
-import { SubCommandOptions } from "~/Types";
-import { InteractionTools } from "@Utils/Tools";
-import { Emojis } from "~/Config/Config";
-import ReactionRole from "~/Packages/ReactionRole";
-import { BaseSubCommand } from "@Utils/Structures";
+/* eslint-disable no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import NDBClient from "@/Core/NDBClient";
+import { SubCommandOptions } from "@/Types";
+import { BaseSubCommand } from "@/Utils/Structures";
 import {
-  Message,
-  TextChannel,
-  EmbedBuilder,
   CommandInteraction,
-  CommandInteractionOptionResolver,
+  CommandInteractionOptionResolver
 } from "discord.js";
 
 export default class ReactionEditCommand extends BaseSubCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "edit",
       category: "🎩 ReactionRole",
@@ -21,12 +18,12 @@ export default class ReactionEditCommand extends BaseSubCommand {
       cooldown: 0,
       permissions: {
         user: ["SendMessages", "UseApplicationCommands", "ManageRoles"],
-        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
       },
-      guildOnly: false,
+      deployMode: "Test",
       ownerOnly: false,
       nsfw: false,
-      ndcash: 0,
+      ndcash: 0
     };
     super(client, options, args);
   }

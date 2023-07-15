@@ -1,8 +1,8 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseCommand, BaseEvent } from "@/Utils/Structures"
-import { LegacyTools } from "@/Utils/Tools"
-import { ChannelType, Message } from "discord.js"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseCommand, BaseEvent } from "@/Utils/Structures";
+import { LegacyTools } from "@/Utils/Tools";
+import { ChannelType, Message } from "discord.js";
 
 export default class CommandEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -11,19 +11,19 @@ export default class CommandEvent extends BaseEvent {
       type: "on",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, message: Message, Prefix: string) {
-    if (message.channel.type === ChannelType.DM) return
-    const cmdTools = new LegacyTools(client)
+    if (message.channel.type === ChannelType.DM) return;
+    const cmdTools = new LegacyTools(client);
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
-      .split(/ +/g)
-    const _Command: BaseCommand = client.Tools.resolveCommand(cmd)
+      .split(/ +/g);
+    const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
       const Checker = await cmdTools.runCheck(
         message,
@@ -31,9 +31,9 @@ export default class CommandEvent extends BaseEvent {
         // UserConfig,
         Prefix,
         args
-      )
+      );
       if (Checker) {
-        _Command.run(client, message, args)
+        _Command.run(client, message, args);
       }
     }
   }

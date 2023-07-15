@@ -36,7 +36,7 @@ export interface ErelaEvents {
 }
 
 declare module "erela.js" {
-  export interface Player {
+  export class Player {
     private _lastSong: Array<Track>;
     private _songMessage: string;
     private _playerMessage: string;

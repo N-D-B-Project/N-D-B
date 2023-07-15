@@ -1,20 +1,20 @@
-import NDBClient from "@/Core/NDBClient"
-import { BaseSubCommand } from "@/Utils/Structures"
-import { CommandInteraction, TextChannel } from "discord.js"
-import { InteractionTools, Tools } from "../index"
+import NDBClient from "@/Core/NDBClient";
+import { BaseSubCommand } from "@/Utils/Structures";
+import { CommandInteraction, TextChannel } from "discord.js";
+import { InteractionTools, Tools } from "../index";
 
 export default class SubChecker {
   public constructor(private client: NDBClient) {
-    this.client = client
+    this.client = client;
   }
 
   public async runCheck(
     interaction: CommandInteraction,
     _Command: BaseSubCommand
   ): Promise<boolean> {
-    const Options = _Command.options
-    const Channel = interaction.channel as TextChannel
-    const tools = new Tools(this.client)
+    const Options = _Command.options;
+    const Channel = interaction.channel as TextChannel;
+    const tools = new Tools(this.client);
 
     if (Options.ownerOnly && !tools.checkOwner(interaction.user.id)) {
       InteractionTools.reply(
@@ -24,8 +24,8 @@ export default class SubChecker {
           interaction
         ),
         true
-      )
-      return false
+      );
+      return false;
     }
 
     if (
@@ -39,8 +39,8 @@ export default class SubChecker {
           interaction
         ),
         true
-      )
-      return false
+      );
+      return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
       InteractionTools.reply(
@@ -50,8 +50,8 @@ export default class SubChecker {
           interaction
         ),
         true
-      )
-      return false
+      );
+      return false;
     }
     if (Options.disable) {
       InteractionTools.reply(
@@ -61,8 +61,8 @@ export default class SubChecker {
           interaction
         ),
         true
-      )
-      return false
+      );
+      return false;
     }
     // if (Options.ndcash && !NDCash) {
     //   InteractionTools.reply(
@@ -80,6 +80,6 @@ export default class SubChecker {
     //   return true;
     // }
 
-    return true
+    return true;
   }
 }

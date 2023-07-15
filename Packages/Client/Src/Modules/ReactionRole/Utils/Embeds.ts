@@ -1,14 +1,16 @@
-import { Emojis } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
-import { MessageTools } from "@/Utils/Tools"
+/* eslint-disable no-shadow */
+
+import { Emojis } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
+import { MessageTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   EmbedBuilder,
   Message,
   TextChannel,
   User
-} from "discord.js"
-import { REACTION_OPTIONS, iReaction } from "./../Types/index.d"
+} from "discord.js";
+import { REACTION_OPTIONS, iReaction } from "./../Types/index.d";
 
 export async function InvalidChannelEmbed(
   client: NDBClient,
@@ -25,9 +27,9 @@ export async function InvalidChannelEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:Channel:Invalid",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function InvalidIDEmbed(
@@ -45,9 +47,9 @@ export async function InvalidIDEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:ID:Invalid",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function MessageNotFoundEmbed(
@@ -65,9 +67,9 @@ export async function MessageNotFoundEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:ID:NotFound",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function InvalidRoleEmbed(
@@ -85,9 +87,9 @@ export async function InvalidRoleEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:Role:Invalid",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function InvalidEmojiEmbed(
@@ -105,9 +107,9 @@ export async function InvalidEmojiEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:Emoji:Invalid",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function ReactionRoleCreatedEmbed(
@@ -174,7 +176,7 @@ export async function ReactionRoleCreatedEmbed(
         ),
         value: `<@&${Role}>`
       }
-    ])
+    ]);
 }
 
 export async function ReactionRoleRemovedEmbed(
@@ -195,7 +197,7 @@ export async function ReactionRoleRemovedEmbed(
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )
-    )
+    );
 }
 
 export async function ReactionRoleUpdatedEmbed(
@@ -275,7 +277,7 @@ export async function ReactionRoleUpdatedEmbed(
         "🎩 ReactionRole/UpdateReaction:Embed:Footer",
         info
       )
-    })
+    });
 }
 
 export async function ReactionRoleDeleteAllEmbed(
@@ -285,24 +287,24 @@ export async function ReactionRoleDeleteAllEmbed(
   status: "Confirm" | "Cancel" | "Success",
   ReactionCount: number | null
 ): Promise<EmbedBuilder> {
-  var description: string
-  var color
+  var description: string;
+  var color;
   switch (status) {
     case "Confirm":
       description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Confirm"
-      color = "#00c26f"
-      break
+        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Confirm";
+      color = "#00c26f";
+      break;
     case "Cancel":
       description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Cancel"
-      color = "#c20e00"
-      break
+        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Cancel";
+      color = "#c20e00";
+      break;
     case "Success":
       description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Success"
-      color = "#00c26f"
-      break
+        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Success";
+      color = "#00c26f";
+      break;
   }
   return new EmbedBuilder()
     .setTitle(
@@ -318,7 +320,7 @@ export async function ReactionRoleDeleteAllEmbed(
     .setDescription(
       await client.Translate.Guild(description, info, { NUMBER: ReactionCount })
     )
-    .setColor(color)
+    .setColor(color);
 }
 
 //TODO: Fazer esse Embed ser mais bonito
@@ -337,9 +339,9 @@ export async function UnableToCreateReactionRoleEmbed(
       await client.Translate.Guild(
         "🎩 ReactionRole/CreateReaction:UnableToCreate",
         info,
-        { fail: Emojis.deny }
+        { fail: Emojis.fail }
       )
-    )
+    );
 }
 
 export async function UnableToDeleteReactionRoleEmbed(
@@ -360,7 +362,7 @@ export async function UnableToDeleteReactionRoleEmbed(
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )
-    )
+    );
 }
 
 export async function UnableToUpdateReactionRoleEmbed(
@@ -381,5 +383,5 @@ export async function UnableToUpdateReactionRoleEmbed(
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )
-    )
+    );
 }

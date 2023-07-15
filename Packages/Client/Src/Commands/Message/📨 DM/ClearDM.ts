@@ -1,11 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import { CommandOptions } from "@/Types"
-import { BaseCommand } from "@/Utils/Structures"
-import { MessageTools } from "@/Utils/Tools"
-import { EmbedBuilder, Message, MessageReaction, User } from "discord.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { CommandOptions } from "@/Types";
+import { BaseCommand } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { EmbedBuilder, Message, MessageReaction, User } from "discord.js";
 
 export default class ClearDMCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: any[]) {
+  constructor(client: NDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "ClearDM",
       aliases: ["cleardm", "dmclear"],
@@ -25,23 +26,23 @@ export default class ClearDMCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: true
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    var i: number = 0
-    await client.Tools.WAIT(1000)
+    var i: number = 0;
+    await client.Tools.WAIT(1000);
     await message.channel.messages.fetch().then(async msgs => {
       msgs.forEach(async msg => {
-        await client.Tools.WAIT(1000)
+        await client.Tools.WAIT(1000);
         if (msg.deletable) {
-          msg.delete()
-          i++
+          msg.delete();
+          i++;
         }
-      })
-    })
-    await client.Tools.WAIT(5000)
+      });
+    });
+    await client.Tools.WAIT(5000);
     const msg = await MessageTools.send(message.channel, {
       embeds: [
         new EmbedBuilder()
@@ -63,12 +64,12 @@ export default class ClearDMCommand extends BaseCommand {
           })
           .setTimestamp()
       ]
-    })
+    });
 
-    msg.react("🗑️")
+    msg.react("🗑️");
     const filter = (reaction: MessageReaction, user: User) => {
-      return user.id === message.author.id && reaction.emoji.name === "🗑️"
-    }
+      return user.id === message.author.id && reaction.emoji.name === "🗑️";
+    };
     msg
       .createReactionCollector({
         filter,
@@ -76,10 +77,10 @@ export default class ClearDMCommand extends BaseCommand {
         time: 60000
       })
       .on("collect", async (reaction: MessageReaction) => {
-        msg.delete()
+        msg.delete();
       })
       .on("end", async () => {
-        return
-      })
+        return;
+      });
   }
 }

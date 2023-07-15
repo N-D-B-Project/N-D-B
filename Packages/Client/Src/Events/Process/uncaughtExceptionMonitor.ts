@@ -1,6 +1,7 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
 export default class uncaughtExceptionMonitorEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,12 +10,12 @@ export default class uncaughtExceptionMonitorEvent extends BaseEvent {
       type: "on",
       emitter: "process",
       enable: false
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, error: Error, origin) {
-    client.logger.process("Uncaught Exception Monitor")
+    client.logger.process("Uncaught Exception Monitor");
   }
 }

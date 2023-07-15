@@ -1,16 +1,16 @@
-import NDBClient from "@/Core/NDBClient"
-import { SlashCommandOptions } from "@/Types"
-import { Localization } from "@/Utils/Languages/Localization/ReactionRole"
-import { BaseSlashCommand, BaseSubCommand } from "@/Utils/Structures"
-import { SubTools } from "@/Utils/Tools"
-import { ApplicationCommandOptionType } from "discord-api-types/v10"
+import NDBClient from "@/Core/NDBClient";
+import { SlashCommandOptions } from "@/Types";
+import { Localization } from "@/Utils/Languages/Localization/ReactionRole";
+import { BaseSlashCommand, BaseSubCommand } from "@/Utils/Structures";
+import { SubTools } from "@/Utils/Tools";
+import { ApplicationCommandOptionType } from "discord-api-types/v10";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "reactionrole",
@@ -230,8 +230,8 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
       disable: false,
       cooldown: 0,
       ndcash: 0
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(
@@ -239,7 +239,7 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {
-    const cmdTools = new SubTools(client)
+    const cmdTools = new SubTools(client);
     const SubList = [
       { prop: "create" },
       { prop: "delete" },
@@ -247,17 +247,17 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
       { prop: "fetch" },
       { prop: "types" },
       { prop: "delete_all" }
-    ]
+    ];
     for (const Command of SubList) {
       if (args.getSubcommand() === Command.prop) {
         const _SubCommand: BaseSubCommand = client.Collections.SubCommands.get(
           `${Command.prop}${this.options.category}`
-        )
+        );
 
         if (_SubCommand) {
-          const Checker = await cmdTools.runCheck(interaction, _SubCommand)
+          const Checker = await cmdTools.runCheck(interaction, _SubCommand);
           if (Checker) {
-            await interaction.deferReply().catch(e => {})
+            await interaction.deferReply().catch(e => console.error(e));
 
             _SubCommand
               .run(
@@ -266,9 +266,9 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
                 interaction.options as CommandInteractionOptionResolver
               )
               .catch(async (error: Error) => {
-                client.logger.error(error.stack)
-                return
-              })
+                client.logger.error(error.stack);
+                return;
+              });
           }
         }
       }

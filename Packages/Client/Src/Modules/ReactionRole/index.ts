@@ -1,7 +1,9 @@
-import NDBClient from "@/Core/NDBClient"
-import { Guild, TextChannel } from "discord.js"
-import { REACTION_OPTIONS, iReaction } from "./Types"
-import ReactionRoleRepository from "./Utils/ReactionRole.repository"
+/* eslint-disable no-empty-function */
+
+import NDBClient from "@/Core/NDBClient";
+import { Guild, TextChannel } from "discord.js";
+import { REACTION_OPTIONS, iReaction } from "./Types";
+import ReactionRoleRepository from "./Utils/ReactionRole.repository";
 
 export default class ReactionRole {
   public constructor(
@@ -11,11 +13,11 @@ export default class ReactionRole {
   ) {}
 
   public async getAll(guild: Guild) {
-    return await this.prisma.getAll(guild)
+    return await this.prisma.getAll(guild);
   }
 
   public async getInChannel(guild: Guild, channel: TextChannel) {
-    return await this.prisma.getInChannel(guild, channel)
+    return await this.prisma.getInChannel(guild, channel);
   }
 
   public async getOne(
@@ -28,7 +30,7 @@ export default class ReactionRole {
       Role,
       Emoji,
       Option
-    })
+    });
   }
 
   public async Create(
@@ -41,7 +43,7 @@ export default class ReactionRole {
       Role,
       Emoji,
       Option
-    })
+    });
   }
 
   public async Delete(
@@ -53,13 +55,13 @@ export default class ReactionRole {
       Message,
       Role,
       Emoji
-    })
+    });
   }
 
   public async DeleteAll(
     guild: Guild
   ): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
-    return await this.prisma.deleteMany(guild)
+    return await this.prisma.deleteMany(guild);
   }
 
   public async Update(
@@ -67,8 +69,8 @@ export default class ReactionRole {
     { Channel, Message, Role, Emoji, Option }: iReaction,
     newOption: REACTION_OPTIONS
   ): Promise<{
-    status: "UnableToUpdate" | "Updated"
-    oldOption?: REACTION_OPTIONS
+    status: "UnableToUpdate" | "Updated";
+    oldOption?: REACTION_OPTIONS;
   }> {
     return await this.prisma.update(
       guild,
@@ -80,6 +82,6 @@ export default class ReactionRole {
         Option
       },
       newOption
-    )
+    );
   }
 }

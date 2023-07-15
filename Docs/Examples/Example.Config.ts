@@ -1,14 +1,14 @@
 export const Config = {
   NDCommunity: {
-    ID: ""
+    ID: "",
   },
   TestGuild: {
-    ID: ""
+    ID: "",
   },
   Owners: [""],
   Debug: {
     Client: true,
-    Lavalink: true
+    Lavalink: true,
   },
   Music: {
     Lavalink: true,
@@ -16,23 +16,23 @@ export const Config = {
       AutoLeaveEmpty: {
         Channel: {
           Enable: true,
-          Delay: 60000
+          Delay: 60000,
         },
         Queue: {
           Enable: true,
-          Delay: 30000
-        }
-      }
+          Delay: 30000,
+        },
+      },
     },
     Client: {
       selfDeaf: true,
-      serverDeaf: true
-    }
+      serverDeaf: true,
+    },
   },
   Client: {
-    ID: ""
-  }
-}
+    ID: "",
+  },
+};
 
 export const Emojis = {
   fail: "",
@@ -48,9 +48,9 @@ export const Emojis = {
     SoundCloud: "",
     Deezer: "",
     Facebook: "",
-    Apple: ""
-  }
-}
+    Apple: "",
+  },
+};
 
 export const URLList = {
   Music: {
@@ -60,6 +60,6 @@ export const URLList = {
     Spotify: "https://open.spotify.com",
     Deezer: "https://www.deezer",
     Facebook: "https://facebook.com",
-    Apple: "https://music.apple.com/"
-  }
-}
+    Apple: "https://music.apple.com/",
+  },
+};

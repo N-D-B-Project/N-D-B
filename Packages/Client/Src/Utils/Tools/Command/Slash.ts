@@ -1,31 +1,32 @@
-import NDBClient from "@/Core/NDBClient"
-import { BaseSlashCommand } from "@/Utils/Structures"
-import { CommandInteraction, TextChannel } from "discord.js"
-import { InteractionTools, Tools } from "../index"
+import NDBClient from "@/Core/NDBClient";
+import { BaseSlashCommand } from "@/Utils/Structures";
+import { CommandInteraction, TextChannel } from "discord.js";
+import { InteractionTools, Tools } from "../index";
 
 export default class SlashChecker {
   public constructor(private client: NDBClient) {
-    this.client = client
+    this.client = client;
   }
 
   public async runCheck(
     interaction: CommandInteraction,
     _Command: BaseSlashCommand
   ): Promise<boolean> {
-    const Options = _Command.options
-    const Channel = interaction.channel as TextChannel
-    const tools = new Tools(this.client)
+    const Options = _Command.options;
+    const Channel = interaction.channel as TextChannel;
+    const tools = new Tools(this.client);
 
     if (Options.ownerOnly && !tools.checkOwner(interaction.user.id)) {
-      console.log("Owner")
+      console.log("Owner");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:OwnerOnly",
           interaction
-        )
-      )
-      return false
+        ),
+        false
+      );
+      return false;
     }
 
     if (
@@ -37,31 +38,34 @@ export default class SlashChecker {
         await this.client.Translate.Guild(
           "Tools/Command:Checker:GuildOnly",
           interaction
-        )
-      )
-      return false
+        ),
+        false
+      );
+      return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
-      console.log("NSFW")
+      console.log("NSFW");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:NSFW",
           interaction
-        )
-      )
-      return false
+        ),
+        false
+      );
+      return false;
     }
     if (Options.disable) {
-      console.log("Disable")
+      console.log("Disable");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
           "Tools/Command:Checker:Disable",
           interaction
-        )
-      )
-      return false
+        ),
+        false
+      );
+      return false;
     }
     // if (Options.ndcash && !NDCash) {
     //   console.log("NDCash");
@@ -81,6 +85,6 @@ export default class SlashChecker {
     //   return true;
     // }
 
-    return true
+    return true;
   }
 }

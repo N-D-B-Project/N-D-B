@@ -52,9 +52,11 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] Tickets
   - [x] ReactionRoles
     - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
+    - [ ] Update ReactionRoleAdd/Remove Events
   - [ ] Music
   - [ ] Sharding
   - [ ] Top.gg Autopost
+  - [ ] Fix/Remove ESLint disable comment rules
 
 ## 📖 Licença
 

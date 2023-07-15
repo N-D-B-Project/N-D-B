@@ -1,10 +1,11 @@
-import NDBClient from "@/Core/NDBClient"
-import { CommandOptions } from "@/Types"
-import { BaseCommand } from "@/Utils/Structures"
-import { EmbedBuilder, Message } from "discord.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { CommandOptions } from "@/Types";
+import { BaseCommand } from "@/Utils/Structures";
+import { EmbedBuilder, Message } from "discord.js";
 
 export default class ReactionRoleBuilderCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: any[]) {
+  constructor(client: NDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "reactionbuilder",
       aliases: [""],
@@ -24,8 +25,8 @@ export default class ReactionRoleBuilderCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: false
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
@@ -34,18 +35,18 @@ export default class ReactionRoleBuilderCommand extends BaseCommand {
         name: message.author.tag,
         iconURL: message.author.displayAvatarURL()
       })
-      .setColor("#c20e00")
+      .setColor("#c20e00");
     const cancelEmbed2 = new EmbedBuilder()
       .setAuthor({
         name: message.author.tag,
         iconURL: message.author.displayAvatarURL()
       })
-      .setColor("#c20e00")
+      .setColor("#c20e00");
     const timeEmbed = new EmbedBuilder()
       .setAuthor({
         name: message.author.tag,
         iconURL: message.author.displayAvatarURL()
       })
-      .setColor("#c20e00")
+      .setColor("#c20e00");
   }
 }

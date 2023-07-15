@@ -1,14 +1,15 @@
-import NDBClient from "@/Core/NDBClient"
-import { SlashCommandOptions } from "@/Types"
-import { BaseSlashCommand } from "@/Utils/Structures"
-import { InteractionTools } from "@/Utils/Tools"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { SlashCommandOptions } from "@/Types";
+import { BaseSlashCommand } from "@/Utils/Structures";
+import { InteractionTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class Command extends BaseSlashCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "helloworld",
@@ -20,8 +21,8 @@ export default class Command extends BaseSlashCommand {
         bot: ["SendMessages"]
       },
       deployMode: "Global"
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(
@@ -33,6 +34,6 @@ export default class Command extends BaseSlashCommand {
       interaction,
       { content: "Hello World! I'm N-D-B a simple Discord Bot" },
       true
-    )
+    );
   }
 }

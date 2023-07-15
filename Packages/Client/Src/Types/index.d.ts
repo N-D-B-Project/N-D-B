@@ -5,5 +5,5 @@ export {
   SubCommandOptions,
   SwitchCommand,
   eCommandType
-} from "./client"
-export { JobDaily, Jobs, WorkedBonus } from "./ndcash"
+} from "./client";
+export { JobDaily, Jobs, WorkedBonus } from "./ndcash";

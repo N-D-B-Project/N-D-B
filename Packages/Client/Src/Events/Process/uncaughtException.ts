@@ -1,6 +1,6 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
 export default class uncaughtExceptionEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,15 +9,15 @@ export default class uncaughtExceptionEvent extends BaseEvent {
       type: "on",
       emitter: "process",
       enable: false
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, error: Error, origin) {
     client.logger.process(
       "Uncaught Exception",
       `Exception in ${origin}: ${error.stack ? error.stack : error}`
-    )
+    );
   }
 }

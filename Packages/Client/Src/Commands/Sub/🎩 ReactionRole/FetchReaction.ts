@@ -1,13 +1,16 @@
-import NDBClient from "@/Core/NDBClient"
-import { SubCommandOptions } from "@/Types"
-import { BaseSubCommand } from "@/Utils/Structures"
+/* eslint-disable no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import NDBClient from "@/Core/NDBClient";
+import { SubCommandOptions } from "@/Types";
+import { BaseSubCommand } from "@/Utils/Structures";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class ReactionFetchCommand extends BaseSubCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "fetch",
       category: "🎩 ReactionRole",
@@ -21,8 +24,8 @@ export default class ReactionFetchCommand extends BaseSubCommand {
       ownerOnly: false,
       nsfw: false,
       ndcash: 0
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(

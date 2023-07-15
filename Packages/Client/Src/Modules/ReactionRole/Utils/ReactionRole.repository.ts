@@ -1,6 +1,7 @@
-import { Guild, TextChannel } from "discord.js"
-import PrismaProvider from "../../../Database/Prisma.provider"
-import { REACTION_OPTIONS, iReaction } from "../Types"
+/* eslint-disable no-empty-function */
+import { Guild, TextChannel } from "discord.js";
+import PrismaProvider from "../../../Database/Prisma.provider";
+import { REACTION_OPTIONS, iReaction } from "../Types";
 
 export default class ReactionRoleRepository {
   public constructor(
@@ -10,35 +11,35 @@ export default class ReactionRoleRepository {
   public async getAll(guild: Guild) {
     return await this.prisma.guildReactionRoles.findMany({
       where: { guildId: guild.id }
-    })
+    });
   }
 
   public async getOne(
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction
   ) {
-    var data = await this.getAll(guild)
+    var data = await this.getAll(guild);
     return data.filter(async reaction => {
       reaction.Channel === Channel &&
         reaction.Message === Message &&
         reaction.Role === Role &&
         reaction.Emoji === Emoji &&
-        reaction.Option === Option
-    })
+        reaction.Option === Option;
+    });
   }
 
   public async getInChannel(guild: Guild, channel: TextChannel) {
-    var data = await this.getAll(guild)
-    return data.filter(async reaction => reaction.Channel === channel.id)
+    var data = await this.getAll(guild);
+    return data.filter(async reaction => reaction.Channel === channel.id);
   }
 
   private async checkIfExists(
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction
   ): Promise<boolean> {
-    const Guild = await this.getAll(guild)
-    var Verify = false
-    Guild.forEach(async reaction => {
+    const GetGuild = await this.getAll(guild);
+    var Verify = false;
+    GetGuild.forEach(async reaction => {
       if (
         reaction.Channel === Channel &&
         reaction.Message === Message &&
@@ -46,11 +47,11 @@ export default class ReactionRoleRepository {
         reaction.Emoji === Emoji &&
         reaction.Option === Option
       ) {
-        Verify = true
+        Verify = true;
       }
-    })
+    });
 
-    return Verify
+    return Verify;
   }
 
   public async create(
@@ -63,11 +64,11 @@ export default class ReactionRoleRepository {
       Role,
       Emoji,
       Option
-    }
+    };
 
-    const Check = await this.checkIfExists(guild, data)
+    const Check = await this.checkIfExists(guild, data);
 
-    if (Check) return { status: "UnableToCreate" }
+    if (Check) return { status: "UnableToCreate" };
     await this.prisma.guildReactionRoles
       .create({
         data: {
@@ -90,12 +91,12 @@ export default class ReactionRoleRepository {
         }
       })
       .catch(err => {
-        if (err) return { status: "UnableToCreate" }
-      })
+        if (err) return { status: "UnableToCreate" };
+      });
 
     return {
       status: "Created"
-    }
+    };
   }
 
   public async delete(
@@ -113,9 +114,9 @@ export default class ReactionRoleRepository {
         }
       })
       .catch(err => {
-        if (err) return { status: "UnableToDelete" }
-      })
-    return { status: "Deleted" }
+        if (err) return { status: "UnableToDelete" };
+      });
+    return { status: "Deleted" };
   }
 
   public async deleteMany(
@@ -123,7 +124,7 @@ export default class ReactionRoleRepository {
   ): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
     const count = await this.prisma.guildReactionRoles.count({
       where: { guildId: guild.id }
-    })
+    });
     await this.prisma.guildReactionRoles
       .deleteMany({
         where: {
@@ -131,10 +132,10 @@ export default class ReactionRoleRepository {
         }
       })
       .catch(err => {
-        if (err) return { status: "UnableToDelete" }
-      })
+        if (err) return { status: "UnableToDelete" };
+      });
 
-    return { status: "Deleted", count }
+    return { status: "Deleted", count };
   }
 
   public async update(
@@ -142,8 +143,8 @@ export default class ReactionRoleRepository {
     { Channel, Message, Role, Emoji, Option }: iReaction,
     newOption: REACTION_OPTIONS
   ): Promise<{
-    status: "UnableToUpdate" | "Updated"
-    oldOption?: REACTION_OPTIONS
+    status: "UnableToUpdate" | "Updated";
+    oldOption?: REACTION_OPTIONS;
   }> {
     var data: iReaction = {
       Channel,
@@ -151,12 +152,12 @@ export default class ReactionRoleRepository {
       Role,
       Emoji,
       Option
-    }
+    };
 
-    const Check = await this.checkIfExists(guild, data)
-    if (!Check) return { status: "UnableToUpdate" }
+    const Check = await this.checkIfExists(guild, data);
+    if (!Check) return { status: "UnableToUpdate" };
 
-    data.Option = newOption
+    data.Option = newOption;
     await this.prisma.guildReactionRoles.updateMany({
       where: {
         id: guild.id,
@@ -167,8 +168,8 @@ export default class ReactionRoleRepository {
         Option
       },
       data
-    })
+    });
 
-    return { status: "Updated", oldOption: Option }
+    return { status: "Updated", oldOption: Option };
   }
 }

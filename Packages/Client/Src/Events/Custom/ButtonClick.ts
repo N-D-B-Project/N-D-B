@@ -1,7 +1,7 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { ButtonInteraction } from "discord.js"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { ButtonInteraction } from "discord.js";
 
 export default class ButtonClickEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -10,12 +10,12 @@ export default class ButtonClickEvent extends BaseEvent {
       type: "on",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, interaction: ButtonInteraction) {
-    await interaction.update({ fetchReply: true })
+    await interaction.update({ fetchReply: true });
   }
 }

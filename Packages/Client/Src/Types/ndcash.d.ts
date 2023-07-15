@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+
 export enum Jobs {
   "Jobless" = "Jobless"
 }

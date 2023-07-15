@@ -1,11 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import { CommandOptions } from "@/Types"
-import { BaseCommand } from "@/Utils/Structures"
-import { MessageTools, Paginator } from "@/Utils/Tools"
-import { EmbedBuilder, Message } from "discord.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { CommandOptions } from "@/Types";
+import { BaseCommand } from "@/Utils/Structures";
+import { MessageTools, Paginator } from "@/Utils/Tools";
+import { EmbedBuilder, Message } from "discord.js";
 
 export default class TestCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: any[]) {
+  constructor(client: NDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "test",
       aliases: ["t"],
@@ -23,8 +24,8 @@ export default class TestCommand extends BaseCommand {
       ownerOnly: true,
       nsfw: false,
       ndcash: 0
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
@@ -35,14 +36,14 @@ export default class TestCommand extends BaseCommand {
       ),
       embeds: [],
       components: []
-    })
+    });
 
-    await client.Tools.WAIT(1500)
+    await client.Tools.WAIT(1500);
 
     MessageTools.edit(
       msg,
       await client.Translate.Guild("🛠 Developer Tools/test:Tested", message)
-    )
+    );
 
     const TestEmbeds: Array<EmbedBuilder> = [
       new EmbedBuilder()
@@ -75,8 +76,8 @@ export default class TestCommand extends BaseCommand {
         )
         .setColor("Random")
         .setFooter({ text: "5" })
-    ]
+    ];
 
-    await Paginator(client, message, "Message", TestEmbeds)
+    await Paginator(client, message, "Message", TestEmbeds);
   }
 }

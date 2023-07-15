@@ -1,14 +1,16 @@
-import NDBClient from "@/Core/NDBClient"
-import { SubCommandOptions } from "@/Types"
-import { BaseSubCommand } from "@/Utils/Structures"
-import { InteractionTools } from "@/Utils/Tools"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import NDBClient from "@/Core/NDBClient";
+import { SubCommandOptions } from "@/Types";
+import { BaseSubCommand } from "@/Utils/Structures";
+import { InteractionTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class ReactionTypesCommand extends BaseSubCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "types",
       category: "🎩 ReactionRole",
@@ -22,8 +24,8 @@ export default class ReactionTypesCommand extends BaseSubCommand {
       ownerOnly: false,
       nsfw: false,
       ndcash: 0
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(
@@ -38,6 +40,6 @@ export default class ReactionTypesCommand extends BaseSubCommand {
         interaction
       ),
       false
-    )
+    );
   }
 }

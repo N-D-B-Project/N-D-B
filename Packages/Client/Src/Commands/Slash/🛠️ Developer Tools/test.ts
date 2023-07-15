@@ -1,14 +1,15 @@
-import NDBClient from "@/Core/NDBClient"
-import { SlashCommandOptions } from "@/Types"
-import { BaseSlashCommand } from "@/Utils/Structures"
-import { InteractionTools } from "@/Utils/Tools"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { SlashCommandOptions } from "@/Types";
+import { BaseSlashCommand } from "@/Utils/Structures";
+import { InteractionTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class TestCommand extends BaseSlashCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "test",
@@ -25,8 +26,8 @@ export default class TestCommand extends BaseSlashCommand {
       ownerOnly: true,
       nsfw: false,
       ndcash: 0
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(
@@ -34,20 +35,27 @@ export default class TestCommand extends BaseSlashCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {
-    await InteractionTools.reply(interaction, {
-      content: await client.Translate.Guild(
-        "🛠 Developer Tools/test:Test",
-        interaction
-      ),
-      embeds: [],
-      components: []
-    })
+    await InteractionTools.reply(
+      interaction,
+      {
+        content: await client.Translate.Guild(
+          "🛠 Developer Tools/test:Test",
+          interaction
+        ),
+        embeds: [],
+        components: []
+      },
+      false
+    );
 
-    await client.Tools.WAIT(1000)
+    await client.Tools.WAIT(1000);
 
     InteractionTools.editReply(
       interaction,
-      await client.Translate.Guild("🛠 Developer Tools/test:Tested", interaction)
-    )
+      await client.Translate.Guild(
+        "🛠 Developer Tools/test:Tested",
+        interaction
+      )
+    );
   }
 }

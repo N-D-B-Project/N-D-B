@@ -1,12 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import { BaseCommand } from "@/Utils/Structures"
-import { ChannelType, Message, TextChannel, User } from "discord.js"
-import { MessageTools, Tools } from "../"
-import CheckerEmbeds from "./Embeds"
+import NDBClient from "@/Core/NDBClient";
+import { BaseCommand } from "@/Utils/Structures";
+import { ChannelType, Message, TextChannel, User } from "discord.js";
+import { MessageTools, Tools } from "../";
+import CheckerEmbeds from "./Embeds";
 
 export default class LegacyChecker {
   public constructor(private client: NDBClient) {
-    this.client = client
+    this.client = client;
   }
 
   public async runCheck(
@@ -15,26 +15,26 @@ export default class LegacyChecker {
     prefix?: string,
     args?: Array<string>
   ): Promise<boolean> {
-    const Options = _Command.options
-    const Channel = message.channel as TextChannel
-    const tools = new Tools(this.client)
-    const embeds = new CheckerEmbeds(this.client, _Command, "Guild", prefix)
+    const Options = _Command.options;
+    const Channel = message.channel as TextChannel;
+    const tools = new Tools(this.client);
+    const embeds = new CheckerEmbeds(this.client, _Command, "Guild", prefix);
 
     if (args.length < _Command.options.minArgs) {
-      MessageTools.reply(message, await embeds.minArgs(message))
-      return false
+      MessageTools.reply(message, await embeds.minArgs(message));
+      return false;
     }
 
     if (args.length > _Command.options.maxArgs) {
-      MessageTools.reply(message, await embeds.maxArgs(message))
-      return false
+      MessageTools.reply(message, await embeds.maxArgs(message));
+      return false;
     }
     if (!message.guild && !Options.DM) {
       MessageTools.reply(
         message,
         await this.client.Translate.Guild("Tools/Command:Checker:DM", message)
-      )
-      return false
+      );
+      return false;
     }
 
     if (Options.ownerOnly && !tools.checkOwner(message.author.id)) {
@@ -44,8 +44,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:OwnerOnly",
           message
         )
-      )
-      return false
+      );
+      return false;
     }
 
     if (Options.guildOnly && !tools.checkGuild(message.guild.id)) {
@@ -55,15 +55,15 @@ export default class LegacyChecker {
           "Tools/Command:Checker:GuildOnly",
           message
         )
-      )
-      return false
+      );
+      return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
       MessageTools.reply(
         message,
         await this.client.Translate.Guild("Tools/Command:Checker:NSFW", message)
-      )
-      return false
+      );
+      return false;
     }
     if (Options.disable) {
       MessageTools.reply(
@@ -72,8 +72,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:Disable",
           message
         )
-      )
-      return false
+      );
+      return false;
     }
     // if (Options.ndcash && !NDCash) {
     //   MessageTools.reply(
@@ -92,10 +92,13 @@ export default class LegacyChecker {
     // }
 
     if (Options.DM && message.channel.type === ChannelType.DM) {
-      await this.client.Translate.Guild("Tools/Command:Checker:OnlyDM", message)
-      return false
+      await this.client.Translate.Guild(
+        "Tools/Command:Checker:OnlyDM",
+        message
+      );
+      return false;
     }
-    return true
+    return true;
   }
 
   public async runCheckDM(
@@ -104,19 +107,19 @@ export default class LegacyChecker {
     prefix?: string,
     args?: Array<string>
   ): Promise<boolean> {
-    const Options = _Command.options
-    const Channel = message.channel as TextChannel
-    const tools = new Tools(this.client)
-    const embeds = new CheckerEmbeds(this.client, _Command, "DM", prefix)
+    const Options = _Command.options;
+    const Channel = message.channel as TextChannel;
+    const tools = new Tools(this.client);
+    const embeds = new CheckerEmbeds(this.client, _Command, "DM", prefix);
 
     if (args.length < _Command.options.minArgs) {
-      MessageTools.reply(message, await embeds.minArgs(message))
-      return false
+      MessageTools.reply(message, await embeds.minArgs(message));
+      return false;
     }
 
     if (args.length > _Command.options.maxArgs) {
-      MessageTools.reply(message, await embeds.maxArgs(message))
-      return false
+      MessageTools.reply(message, await embeds.maxArgs(message));
+      return false;
     }
 
     if (!message.guild && !Options.DM) {
@@ -126,8 +129,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:DM",
           message.member.user as User
         )
-      )
-      return false
+      );
+      return false;
     }
 
     if (Options.ownerOnly && !tools.checkOwner(message.author.id)) {
@@ -137,8 +140,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:OwnerOnly",
           message.member.user as User
         )
-      )
-      return false
+      );
+      return false;
     }
 
     if (Options.guildOnly && !tools.checkGuild(message.guild.id)) {
@@ -148,8 +151,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:GuildOnly",
           message.member.user as User
         )
-      )
-      return false
+      );
+      return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
       MessageTools.reply(
@@ -158,8 +161,8 @@ export default class LegacyChecker {
           "Tools/Command:Checker:NSFW",
           message.member.user as User
         )
-      )
-      return false
+      );
+      return false;
     }
     if (Options.disable) {
       MessageTools.reply(
@@ -168,14 +171,14 @@ export default class LegacyChecker {
           "Tools/Command:Checker:Disable",
           message.member.user as User
         )
-      )
-      return false
+      );
+      return false;
     }
 
     if (Options.DM && message.channel.type === ChannelType.DM) {
-      return true
+      return true;
     }
 
-    return true
+    return true;
   }
 }

@@ -1,6 +1,6 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
 export default class ErrorEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -9,12 +9,12 @@ export default class ErrorEvent extends BaseEvent {
       type: "once",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, error: Error) {
-    client.logger.error("Client encontrou um erro: " + error)
+    client.logger.error("Client encontrou um erro: " + error);
   }
 }

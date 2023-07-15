@@ -1,7 +1,7 @@
-import { Config } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+import { Config } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
 export default class DebugEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -10,12 +10,12 @@ export default class DebugEvent extends BaseEvent {
       type: "once",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
-  async run(client: NDBClient, info: any) {
-    if (Config.Debug.Client === true) client.logger.debug(`Client: ${info}`)
+  async run(client: NDBClient, info: string) {
+    if (Config.Debug.Client === true) client.logger.debug(`Client: ${info}`);
   }
 }

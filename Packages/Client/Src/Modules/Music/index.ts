@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-function */
+
 import NDBClient from "@/Core/NDBClient";
 import { SwitchCommand } from "@/Types";
 import {
@@ -9,20 +11,21 @@ import {
 import play from "./Utils/Play";
 
 export default class Music {
-  public constructor(client: NDBClient) {}
+  public constructor(private client: NDBClient) {}
 
   public async Play(
     { MsgInt, args }: SwitchCommand,
     isSlash: boolean
   ): Promise<EmbedBuilder | Message> {
     try {
-      if (!isSlash)
+      if (!isSlash) {
         return await play._Legacy(MsgInt as Message, args as Array<string>);
-      else
+      } else {
         return await play._Slash(
           MsgInt as CommandInteraction,
           args as CommandInteractionOptionResolver
         );
+      }
     } catch (error) {
       console.error(error);
     }

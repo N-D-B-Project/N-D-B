@@ -1,20 +1,22 @@
-import NDBClient from "@/Core/NDBClient"
-import ReactionRole from "@/Modules/ReactionRole"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import ReactionRole from "@/Modules/ReactionRole";
 import {
   ReactionRoleDeleteAllEmbed,
   UnableToDeleteReactionRoleEmbed
-} from "@/Modules/ReactionRole/Utils/Embeds"
-import { SubCommandOptions } from "@/Types"
-import { BaseSubCommand } from "@/Utils/Structures"
-import { Buttons, InteractionTools } from "@/Utils/Tools"
+} from "@/Modules/ReactionRole/Utils/Embeds";
+import { SubCommandOptions } from "@/Types";
+import { mixedComponentType } from "@/Types/extends";
+import { BaseSubCommand } from "@/Utils/Structures";
+import { Buttons, InteractionTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver,
   ComponentType
-} from "discord.js"
+} from "discord.js";
 
 export default class DeleteAllReactionsCommand extends BaseSubCommand {
-  constructor(client: NDBClient, ...args: any) {
+  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "delete_all",
       category: "🎩 ReactionRole",
@@ -33,8 +35,8 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
       nsfw: false,
       ndcash: 0,
       deployMode: "Test"
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(
@@ -42,8 +44,8 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {
-    const reaction = new ReactionRole(client, "DeleteAll")
-    const button = await new Buttons(client).Confirm(interaction)
+    const reaction = new ReactionRole(client, "DeleteAll");
+    const button = await new Buttons(client).Confirm(interaction);
     const confirm = await InteractionTools.reply(
       interaction,
       {
@@ -56,19 +58,19 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
             null
           )
         ],
-        components: [button as any]
+        components: [button as mixedComponentType]
       },
       false
-    )
+    );
     confirm
       .createMessageComponentCollector({
         componentType: ComponentType.Button,
         time: 10 * 1000
       })
       .on("collect", async collector => {
-        if (collector.user.id !== interaction.user.id) return
+        if (collector.user.id !== interaction.user.id) return;
         if (collector.customId === "YES") {
-          const { count, status } = await reaction.DeleteAll(interaction.guild)
+          const { count, status } = await reaction.DeleteAll(interaction.guild);
 
           if (status === "Deleted") {
             InteractionTools.editReply(interaction, {
@@ -82,7 +84,7 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
                 )
               ],
               components: []
-            })
+            });
           } else if (status === "UnableToDelete") {
             InteractionTools.editReply(interaction, {
               embeds: [
@@ -94,7 +96,7 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
                 )
               ],
               components: []
-            })
+            });
           }
         } else if (collector.customId === "NO") {
           InteractionTools.editReply(interaction, {
@@ -108,11 +110,11 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
               )
             ],
             components: []
-          })
+          });
         }
       })
       .on("end", async () => {
-        return
-      })
+        return;
+      });
   }
 }

@@ -6,8 +6,8 @@ import {
   InteractionUpdateOptions,
   Message,
   MessageComponentInteraction
-} from "discord.js"
-import { CheckError, messageOptions } from "."
+} from "discord.js";
+import { CheckError, messageOptions } from ".";
 
 export default class InteractionTools {
   public static async deferReply(
@@ -17,12 +17,12 @@ export default class InteractionTools {
     try {
       return interaction.deferReply({
         ephemeral
-      })
+      });
     } catch (error) {
       if (await CheckError(error)) {
-        return
+        return;
       } else {
-        throw error
+        throw error;
       }
     }
   }
@@ -31,12 +31,12 @@ export default class InteractionTools {
     interaction: MessageComponentInteraction
   ): Promise<unknown> {
     try {
-      return await interaction.deferUpdate()
+      return await interaction.deferUpdate();
     } catch (error) {
       if (await CheckError(error)) {
-        return
+        return;
       } else {
-        throw error
+        throw error;
       }
     }
   }
@@ -51,25 +51,25 @@ export default class InteractionTools {
     ephemeral: boolean
   ): Promise<Message> {
     try {
-      let msgOptions = messageOptions(content) as InteractionReplyOptions
+      const msgOptions = messageOptions(content) as InteractionReplyOptions;
 
       if (interaction.deferred || interaction.replied) {
         return await interaction.followUp({
           ...msgOptions,
           ephemeral
-        })
+        });
       } else {
         return await interaction.reply({
           ...msgOptions,
           ephemeral,
           fetchReply: true
-        })
+        });
       }
     } catch (error) {
       if (await CheckError(error)) {
-        return
+        return;
       } else {
-        throw error
+        throw error;
       }
     }
   }
@@ -83,15 +83,15 @@ export default class InteractionTools {
     content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = messageOptions(content)
+      const msgOptions = messageOptions(content);
       return (await interaction.editReply({
         ...msgOptions
-      })) as Message
+      })) as Message;
     } catch (error) {
       if (await CheckError(error)) {
-        return
+        return;
       } else {
-        throw error
+        throw error;
       }
     }
   }
@@ -101,16 +101,16 @@ export default class InteractionTools {
     content: string | EmbedBuilder | BaseMessageOptions
   ): Promise<Message> {
     try {
-      let msgOptions = messageOptions(content) as InteractionUpdateOptions
+      const msgOptions = messageOptions(content) as InteractionUpdateOptions;
       return (await interaction.update({
         ...msgOptions,
         fetchReply: true
-      })) as Message
+      })) as Message;
     } catch (error) {
       if (await CheckError(error)) {
-        return
+        return;
       } else {
-        throw error
+        throw error;
       }
     }
   }

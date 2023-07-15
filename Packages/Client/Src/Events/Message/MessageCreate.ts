@@ -1,9 +1,9 @@
-import NDBClient from "@/Core/NDBClient"
-import { GuildRepository } from "@/Database/Repositories"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { MessageTools } from "@/Utils/Tools"
-import { ChannelType, EmbedBuilder, Message } from "discord.js"
+import NDBClient from "@/Core/NDBClient";
+import { GuildRepository } from "@/Database/Repositories";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { ChannelType, EmbedBuilder, Message } from "discord.js";
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -12,23 +12,24 @@ export default class MessageCreateEvent extends BaseEvent {
       type: "on",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, message: Message) {
-    if (message.author.bot) return
-    const guildRepository = new GuildRepository()
+    if (message.author.bot) return;
+    const guildRepository = new GuildRepository();
     // GuildConfig
-    var guildConfig = await guildRepository.get(message.guild)
+    var guildConfig = await guildRepository.get(message.guild);
     if (!guildConfig && message.channel.type !== ChannelType.DM) {
-      const createdGuildConfig = await guildRepository.create(message.guild)
-      if (createdGuildConfig)
-        var guildConfig = await guildRepository.get(message.guild)
+      const createdGuildConfig = await guildRepository.create(message.guild);
+      if (createdGuildConfig) {
+        var guildConfig = await guildRepository.get(message.guild);
+      }
       client.logger.database(
-        `${message.guild.name} Configuration Created on Database\n` /*, guildConfig*/
-      )
+        `${message.guild.name} Configuration Created on Database\n`
+      );
       MessageTools.send(message.channel, {
         embeds: [
           new EmbedBuilder()
@@ -52,7 +53,7 @@ export default class MessageCreateEvent extends BaseEvent {
             .setColor("#00c26f")
             .setTimestamp()
         ]
-      })
+      });
       message.reply(
         `${
           message.guild.name
@@ -61,18 +62,18 @@ export default class MessageCreateEvent extends BaseEvent {
           null,
           3
         )}\`\`\``
-      )
+      );
     } else if (guildConfig && message.channel.type !== ChannelType.DM) {
-      const mentionRegex = RegExp(`<@!${client.user.id}>$`)
-      const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `)
+      const mentionRegex = RegExp(`<@!${client.user.id}>$`);
+      const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
       var Prefix = message.content.match(mentionRegexPrefix)
         ? message.content.match(mentionRegexPrefix)[0]
-        : guildConfig.Settings.Prefix
+        : guildConfig.Settings.Prefix;
 
-      if (message.content == Prefix) return
+      if (message.content == Prefix) return;
 
-      if (!message.content.startsWith(Prefix)) return
+      if (!message.content.startsWith(Prefix)) return;
 
       //TODO Doesn't working...
       if (message.content.match(mentionRegex)) {
@@ -85,16 +86,16 @@ export default class MessageCreateEvent extends BaseEvent {
               PREFIX: Prefix
             }
           )
-        )
-        return
+        );
+        return;
       }
 
       // Commands
       if (message.content.startsWith(Prefix)) {
-        client.emit("Command", message, Prefix)
+        client.emit("Command", message, Prefix);
       }
     } else if (message.channel.type === ChannelType.DM) {
-      client.emit("DMCommand", message, "&")
+      client.emit("DMCommand", message, "&");
     }
   }
 }

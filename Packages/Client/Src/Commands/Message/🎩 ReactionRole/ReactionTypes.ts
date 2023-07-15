@@ -1,11 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import { CommandOptions } from "@/Types"
-import { BaseCommand } from "@/Utils/Structures"
-import { MessageTools } from "@/Utils/Tools"
-import { Message } from "discord.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { CommandOptions } from "@/Types";
+import { BaseCommand } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { Message } from "discord.js";
 
 export default class ReactionTypesCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: any[]) {
+  constructor(client: NDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "ReactionTypes",
       aliases: ["RTypes"],
@@ -25,8 +26,8 @@ export default class ReactionTypesCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: false
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(client: NDBClient, message: Message, args: string[]) {
@@ -36,6 +37,6 @@ export default class ReactionTypesCommand extends BaseCommand {
         "🎩 ReactionRole/ReactionTypes:Types",
         message
       )
-    )
+    );
   }
 }
