@@ -2,7 +2,7 @@ import { Logger } from "@/Utils/Tools";
 import { PrismaClient } from "@prisma/client";
 
 export default class PrismaProvider extends PrismaClient {
-  private isConnected: boolean = false;
+  private isConnected = false;
   private logger: Logger = new Logger();
   constructor() {
     super();
