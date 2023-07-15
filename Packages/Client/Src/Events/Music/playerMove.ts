@@ -1,9 +1,10 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
 
-import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js"
-import { Player } from "erela.js"
+import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
+import { Player } from "erela.js";
 
 export default class playerMoveEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -12,9 +13,9 @@ export default class playerMoveEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -24,12 +25,12 @@ export default class playerMoveEvent extends BaseEvent {
     newChannel: string
   ) {
     if (!newChannel) {
-      var TextChannel = client.channels.cache.get(
+      var textChannel = client.channels.cache.get(
         player.textChannel
-      ) as TextChannel
-      var VoiceChannel = client.channels.cache.get(
+      ) as TextChannel;
+      var voiceChannel = client.channels.cache.get(
         player.voiceChannel
-      ) as VoiceChannel
+      ) as VoiceChannel;
 
       const KickEmbed = new EmbedBuilder()
         .setAuthor({
@@ -40,45 +41,45 @@ export default class playerMoveEvent extends BaseEvent {
         .setTitle(
           await client.Translate.Guild(
             "Events/PlayerEvents:playerMove:KickEmbed:Title",
-            TextChannel
+            textChannel
           )
         )
         .setDescription(
           await client.Translate.Guild(
             "Events/PlayerEvents:playerMove:KickEmbed:Description",
-            TextChannel,
-            { CHANNEL: VoiceChannel.name }
+            textChannel,
+            { CHANNEL: voiceChannel.name }
           )
         )
         .setFooter({
           text: await client.Translate.Guild(
             "Events/PlayerEvents:playerMove:KickEmbed:Footer",
-            TextChannel
+            textChannel
           )
         })
-        .setTimestamp()
-      TextChannel.send({ embeds: [KickEmbed] })
+        .setTimestamp();
+      MessageTools.send(textChannel, { embeds: [KickEmbed] });
       try {
-        TextChannel.messages.fetch(player.get("MESSAGE")).then(msg => {
+        textChannel.messages.fetch(player.get("MESSAGE")).then(msg => {
           if (msg && msg.deletable) {
             setTimeout(() => {
-              msg.delete()
-            }, 2000)
+              msg.delete();
+            }, 2000);
           }
-        })
+        });
       } catch (error) {
-        client.logger.warn(String(error))
+        client.logger.warn(String(error));
       }
-      player.destroy()
+      player.destroy();
     } else {
-      player.voiceChannel = newChannel
-      if (player.paused) return
+      player.voiceChannel = newChannel;
+      if (player.paused) return;
       setTimeout(() => {
-        player.pause(true)
+        player.pause(true);
         setTimeout(() => {
-          player.pause(false)
-        }, client.ws.ping * 2)
-      }, client.ws.ping * 2)
+          player.pause(false);
+        }, client.ws.ping * 2);
+      }, client.ws.ping * 2);
     }
   }
 }

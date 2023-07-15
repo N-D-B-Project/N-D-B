@@ -1,46 +1,64 @@
-import { CommandInteraction, Message, User } from "discord.js"
-import { Structure, Track } from "erela.js"
+import { CommandInteraction } from "discord.js";
+import { Structure, Track } from "erela.js";
 
 export default Structure.extend(
   "Player",
   Player =>
     class BasePlayer extends Player {
-      public LastSong: Array<Track> = []
-      public SongMessage: string
-      public PlayerMessage: string
-      public PlayerAuthor: string
-      public isSlash: boolean
-      public SlashInteraction: CommandInteraction
+      private _lastSong: Array<Track> = [];
+      private _songMessage: string;
+      private _playerMessage: string;
+      private _playerAuthor: string;
+      private _isSlash: boolean;
+      private _interaction?: CommandInteraction;
 
       constructor(args) {
-        super(args)
+        super(args);
       }
 
-      AddLastSong(track: Track) {
-        this.LastSong.push(track)
-        return this
+      public get lastSong(): Array<Track> {
+        return this._lastSong;
       }
 
-      SetCurrentSongMessage(message: Message) {
-        this.SongMessage = message.id
-        return this
+      public set lastSong(value: Track) {
+        this._lastSong.push(value);
       }
 
-      SetPlayerMessage(message: Message) {
-        this.PlayerMessage = message.id
-        return this
+      public get songMessage(): string {
+        return this._songMessage;
       }
 
-      SetPlayerAuthor(user: User) {
-        this.PlayerAuthor = user.id
-
-        return this
+      public set songMessage(messageId: string) {
+        this._songMessage = messageId;
       }
 
-      SetIsSlash(isSlash: boolean, interaction?: CommandInteraction) {
-        this.isSlash = isSlash
-        this.SlashInteraction = interaction
-        return this
+      public get playerMessage(): string {
+        return this._playerMessage;
+      }
+      public set playerMessage(messageId: string) {
+        this._playerMessage = messageId;
+      }
+
+      public get playerAuthor(): string {
+        return this._playerAuthor;
+      }
+
+      public set playerAuthor(authorId) {
+        this._playerAuthor = authorId;
+      }
+
+      public get slash(): {
+        isSlash: boolean;
+        interaction: CommandInteraction;
+      } {
+        return {
+          isSlash: this._isSlash,
+          interaction: this._interaction
+        };
+      }
+      public set slash({ isSlash, interaction }) {
+        this._isSlash = isSlash;
+        this._interaction = interaction;
       }
     }
-)
+);

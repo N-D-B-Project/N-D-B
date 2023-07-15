@@ -1,12 +1,12 @@
-import NDBClient from "@/Core/NDBClient"
-import Music from "@/Modules/Music"
-import { CommandOptions } from "@/Types"
-import { BaseCommand } from "@/Utils/Structures"
-import { MessageTools } from "@/Utils/Tools"
-import { Message } from "discord.js"
+import NDBClient from "@/Core/NDBClient";
+import Music from "@/Modules/Music";
+import { CommandOptions } from "@/Types";
+import { BaseCommand } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { Message } from "discord.js";
 
 export default class PlayCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: any[]) {
+  constructor(client: NDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "Play",
       aliases: ["play", "p", "P"],
@@ -26,13 +26,13 @@ export default class PlayCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       DM: false
-    }
-    super(client, options, args)
+    };
+    super(client, options, args);
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    const music = new Music(client)
-    const play = await music.Play({ MsgInt: message, args }, false)
-    MessageTools.reply(message, play)
+    const music = new Music(client);
+    const play = await music.Play({ MsgInt: message, args }, false);
+    MessageTools.reply(message, play);
   }
 }

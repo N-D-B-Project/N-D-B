@@ -1,14 +1,14 @@
-import { Config, Emojis, URLList } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
+import { Config, Emojis, URLList } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
 import {
   CommandInteractionOptionResolver,
   GuildMember,
   VoiceChannel
-} from "discord.js"
+} from "discord.js";
 
 export default class MusicTools {
   public static async getPlayer(client: NDBClient, guildId: string) {
-    return client.ErelaManager.players.get(guildId)
+    return client.ErelaManager.players.get(guildId);
   }
 
   public static async createPlayer(
@@ -23,21 +23,21 @@ export default class MusicTools {
       selfDeafen: Config.Music.Client.selfDeaf,
       region: voiceChannel.rtcRegion || undefined,
       instaUpdateFiltersFix: false
-    })
+    });
   }
 
   public static hasVoice(member: GuildMember): boolean {
-    return !!member.voice.channel
+    return !!member.voice.channel;
   }
 
   public static async Checker(
     args: Array<string> | CommandInteractionOptionResolver,
     isSlash: boolean
   ) {
-    const URLs = URLList.Music
-    const MusicEmojis = Emojis.Music
-    var Emoji: string
-    var Name: string
+    const URLs = URLList.Music;
+    const MusicEmojis = Emojis.Music;
+    var Emoji: string;
+    var Name: string;
 
     const Props = [
       { URL: URLs.Youtube, Name: "Youtube", Emoji: MusicEmojis.Youtube },
@@ -51,22 +51,22 @@ export default class MusicTools {
       { URL: URLs.Deezer, Name: "Deezer", Emoji: MusicEmojis.Deezer },
       { URL: URLs.Facebook, Name: "Facebook", Emoji: MusicEmojis.Facebook },
       { URL: URLs.Apple, Name: "Apple Music", Emoji: MusicEmojis.Apple }
-    ]
+    ];
 
     for (const value of Props) {
       const Query = isSlash
         ? ((args as CommandInteractionOptionResolver).get("query")
             .value as string)
-        : (args as Array<string>).join(" ")
+        : (args as Array<string>).join(" ");
       if (Query.includes(value.URL)) {
-        Emoji = value.Emoji
-        Name = value.Name
-        break
+        Emoji = value.Emoji;
+        Name = value.Name;
+        break;
       } else {
-        Emoji = MusicEmojis.Youtube
-        Name = "Youtube"
+        Emoji = MusicEmojis.Youtube;
+        Name = "Youtube";
       }
     }
-    return { Emoji, Name }
+    return { Emoji, Name };
   }
 }

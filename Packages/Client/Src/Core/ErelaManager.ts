@@ -1,7 +1,7 @@
-import { Manager } from "erela.js"
-import NDBClient from "./NDBClient"
+import { Manager } from "erela.js";
+import NDBClient from "./NDBClient";
 
-import "@/Utils/Structures/BasePlayer"
+import "@/Utils/Structures/BasePlayer";
 export default class ErelaManager extends Manager {
   constructor(private readonly client: NDBClient) {
     super({
@@ -38,26 +38,26 @@ export default class ErelaManager extends Manager {
       send(id, payload) {
         return client.ws.shards
           .get(client.guilds.cache.get(id)!.shardId)!
-          .send(payload)
+          .send(payload);
       }
-    })
+    });
 
     client.on("raw", data => {
       switch (data.t) {
         case "VOICE_SERVER_UPDATE":
         case "VOICE_STATE_UPDATE":
-          this.updateVoiceState(data.d)
-          break
+          this.updateVoiceState(data.d);
+          break;
       }
-    })
+    });
 
-    this.setMaxListeners(16)
+    this.setMaxListeners(16);
   }
 
   public load(): void {
     this.init(this.client.user.id, {
       clientName: `${this.client.user.username} - ErelaJS-Manager`,
       clientId: this.client.user.id
-    })
+    });
   }
 }

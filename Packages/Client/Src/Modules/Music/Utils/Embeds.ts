@@ -1,4 +1,4 @@
-import NDBClient from "@/Core/NDBClient"
+import NDBClient from "@/Core/NDBClient";
 import {
   ColorResolvable,
   CommandInteraction,
@@ -6,9 +6,9 @@ import {
   EmbedBuilder,
   Message,
   User
-} from "discord.js"
-import { Track } from "erela.js"
-import MusicTools from "./Tools"
+} from "discord.js";
+import { Track } from "erela.js";
+import MusicTools from "./Tools";
 
 export default class MusicEmbeds {
   public constructor(private readonly client: NDBClient) {}
@@ -17,22 +17,22 @@ export default class MusicEmbeds {
     msgint: Message | CommandInteraction,
     color: "Error" | "Success"
   ): Promise<EmbedBuilder> {
-    const user = msgint.member.user as User
-    if (color === "Error") var hex = "#c20e00"
-    else hex = "#00c26f"
+    const user = msgint.member.user as User;
+    if (color === "Error") var hex = "#c20e00";
+    else hex = "#00c26f";
     return new EmbedBuilder()
       .setAuthor({
         name: user.username,
         iconURL: user.displayAvatarURL()
       })
       .setTimestamp()
-      .setColor(hex as ColorResolvable)
+      .setColor(hex as ColorResolvable);
   }
 
   public async NoChannelEmbed(
     msgint: Message | CommandInteraction
   ): Promise<EmbedBuilder> {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error")
+    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
@@ -52,13 +52,13 @@ export default class MusicEmbeds {
           msgint
         ),
         iconURL: this.client.user.displayAvatarURL()
-      })
+      });
   }
 
   public async NoArgsEmbed(
     msgint: Message | CommandInteraction
   ): Promise<EmbedBuilder> {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error")
+    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
@@ -78,7 +78,7 @@ export default class MusicEmbeds {
           msgint
         ),
         iconURL: this.client.user.displayAvatarURL()
-      })
+      });
   }
 
   public async LoadTypeEmbeds(
@@ -88,8 +88,8 @@ export default class MusicEmbeds {
     isSlash?: boolean,
     track?: Track
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.Checker(args, isSlash)
-    let baseEmbed = await this.createBaseEmbed(msgint, "Error")
+    const Checker = await MusicTools.Checker(args, isSlash);
+    let baseEmbed = await this.createBaseEmbed(msgint, "Error");
     switch (loadType) {
       case "Fail":
         baseEmbed
@@ -111,9 +111,9 @@ export default class MusicEmbeds {
               msgint
             ),
             iconURL: this.client.user.displayAvatarURL()
-          })
+          });
 
-        break
+        break;
       case "NoMatches":
         baseEmbed
           .setTitle(
@@ -134,15 +134,15 @@ export default class MusicEmbeds {
               msgint
             ),
             iconURL: this.client.user.displayAvatarURL()
-          })
+          });
 
-        break
+        break;
       case "Success":
         const Timer = await this.client.Tools.Timer(
           "normal",
           track.duration,
           msgint
-        )
+        );
         baseEmbed
           .setColor("#00c26f")
           .setTitle(
@@ -197,12 +197,12 @@ export default class MusicEmbeds {
               msgint
             ),
             iconURL: this.client.user.displayAvatarURL()
-          })
+          });
 
-        break
+        break;
     }
 
-    return baseEmbed
+    return baseEmbed;
   }
 
   public async PlaylistEmbed(
@@ -212,6 +212,6 @@ export default class MusicEmbeds {
     isSlash?: boolean,
     track?: Track
   ): Promise<EmbedBuilder> {
-    return
+    return;
   }
 }

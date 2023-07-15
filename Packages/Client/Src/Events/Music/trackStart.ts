@@ -1,14 +1,16 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
 import {
   EmbedBuilder,
   GuildChannel,
   GuildMember,
   Message,
   TextChannel
-} from "discord.js"
-import { Player, Track, TrackStartEvent } from "erela.js"
+} from "discord.js";
+import { Player, Track, TrackStartEvent } from "erela.js";
 
 export default class trackStartEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -17,9 +19,9 @@ export default class trackStartEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -28,22 +30,22 @@ export default class trackStartEvent extends BaseEvent {
     track: Track,
     payload: TrackStartEvent
   ) {
-    var TextChannel = client.channels.cache.get(
+    var textChannel = client.channels.cache.get(
       player.textChannel
-    ) as TextChannel
+    ) as TextChannel;
 
     const Requester = (
       (await (
         await client.guilds.fetch(player.guild)
       ).members.fetch(track.requester as string)) as GuildMember
-    ).user
+    ).user;
 
     const Timer = await client.Tools.Timer(
       "normal",
       track.duration,
-      TextChannel as GuildChannel
-    )
-    await client.Tools.WAIT(500)
+      textChannel as GuildChannel
+    );
+    await client.Tools.WAIT(500);
 
     const embed = new EmbedBuilder()
       .setAuthor({
@@ -54,18 +56,18 @@ export default class trackStartEvent extends BaseEvent {
       .setTitle(
         await client.Translate.Guild(
           "Events/PlayerEvents:trackStart:Embed:Title",
-          TextChannel
+          textChannel
         )
       )
       .addFields([
         {
           name: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:1",
-            TextChannel
+            textChannel
           ),
           value: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:Content:1",
-            TextChannel,
+            textChannel,
             { TITLE: track.title, URI: track.uri }
           ),
           inline: true
@@ -73,11 +75,11 @@ export default class trackStartEvent extends BaseEvent {
         {
           name: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:2",
-            TextChannel
+            textChannel
           ),
           value: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:Content:2",
-            TextChannel,
+            textChannel,
             { AUTHOR: track.author }
           ),
           inline: true
@@ -85,16 +87,16 @@ export default class trackStartEvent extends BaseEvent {
         {
           name: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:3",
-            TextChannel
+            textChannel
           ),
           value: track.isStream
             ? await client.Translate.Guild(
                 "Events/PlayerEvents:trackStart:Embed:Fields:Content:3²",
-                TextChannel
+                textChannel
               )
             : await client.Translate.Guild(
                 "Events/PlayerEvents:trackStart:Embed:Fields:Content:3",
-                TextChannel,
+                textChannel,
                 { TIMER: Timer }
               ),
           inline: true
@@ -104,24 +106,28 @@ export default class trackStartEvent extends BaseEvent {
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackStart:Embed:Footer",
-          TextChannel,
+          textChannel,
           { REQUESTER: Requester.username }
         ),
         iconURL: Requester.displayAvatarURL()
       })
-      .setTimestamp()
-    TextChannel.send({ embeds: [embed] }).then(msg => {
+      .setTimestamp();
+    MessageTools.send(textChannel, { embeds: [embed] }).then(msg => {
       try {
-        const CURRENT_SONG_MSG = TextChannel.messages.cache.get(
-          player.SongMessage
-        ) as Message
+        const CURRENT_SONG_MSG = textChannel.messages.cache.get(
+          player.songMessage
+        ) as Message;
         if (CURRENT_SONG_MSG && msg.id !== CURRENT_SONG_MSG.id) {
           CURRENT_SONG_MSG.delete().catch((error: Error) => {
-            client.logger.warn('Não consegui deletar a "CURRENT_SONG_MSG"')
-          })
+            client.logger.warn(
+              // eslint-disable-next-line quotes
+              'Não consegui deletar a "CURRENT_SONG_MSG"',
+              error
+            );
+          });
         }
       } catch {}
-      player.SetCurrentSongMessage(msg)
-    })
+      player.songMessage = msg.id;
+    });
   }
 }

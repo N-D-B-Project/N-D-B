@@ -1,59 +1,70 @@
 import {
   CommandInteraction,
   Guild,
-  Message,
   TextChannel,
-  User,
   VoiceChannel
-} from "discord.js"
-import { Track } from "erela.js"
+} from "discord.js";
+import { Track } from "erela.js";
 
 export interface playerInfo {
-  guild: Guild
-  voiceChannel: VoiceChannel
-  textChannel: TextChannel
-  selfMute: boolean
-  selfDeafen: boolean
-  region: string
-  instaUpdateFiltersFix: boolean
+  guild: Guild;
+  voiceChannel: VoiceChannel;
+  textChannel: TextChannel;
+  selfMute: boolean;
+  selfDeafen: boolean;
+  region: string;
+  instaUpdateFiltersFix: boolean;
 }
 
 export interface ErelaEvents {
-  nodeCreate
-  nodeCreate
-  nodeConnect
-  nodeReconnect
-  nodeDisconnect
-  nodeError
-  nodeRaw
-  playerCreate
-  playerDestroy
-  queueEnd
-  playerMove
-  playerDisconnect
-  trackStart
-  trackEnd
-  trackStuck
-  trackError
-  socketClosed
+  nodeCreate;
+  nodeConnect;
+  nodeReconnect;
+  nodeDisconnect;
+  nodeError;
+  nodeRaw;
+  playerCreate;
+  playerDestroy;
+  queueEnd;
+  playerMove;
+  playerDisconnect;
+  trackStart;
+  trackEnd;
+  trackStuck;
+  trackError;
+  socketClosed;
 }
 
 declare module "erela.js" {
-  interface Player {
-    LastSong: Array<Track>
-    AddLastSong(track: Track)
+  export interface Player {
+    private _lastSong: Array<Track>;
+    private _songMessage: string;
+    private _playerMessage: string;
+    private _playerAuthor: string;
+    private _slash: {
+      isSlash: boolean;
+      interaction?: CommandInteraction;
+    };
 
-    SongMessage: string
-    SetCurrentSongMessage(message: Message)
+    get lastSong(): Array<Track>;
+    set lastSong(value: Track): void;
 
-    PlayerMessage: string
-    SetPlayerMessage(message: Message)
+    get songMessage(): string;
+    set songMessage(messageId: string): void;
 
-    PlayerAuthor: string
-    SetPlayerAuthor(user: User)
+    get playerMessage(): string;
+    set playerMessage(messageId: string): void;
 
-    isSlash: boolean
-    SlashInteraction: CommandInteraction
-    SetIsSlash(isSlash: boolean, interaction?: CommandInteraction)
+    get playerAuthor(): string;
+    set playerAuthor(authorId: string): void;
+
+    get slash(): {
+      isSlash: boolean;
+      interaction: CommandInteraction;
+    };
+    set slash(value: {
+      isSlash: boolean;
+      interaction?: CommandInteraction;
+    }): void;
   }
 }

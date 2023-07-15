@@ -1,7 +1,7 @@
-import { Config } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+import { Config } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
 import {
   ChannelType,
@@ -9,7 +9,7 @@ import {
   TextChannel,
   VoiceChannel,
   VoiceState
-} from "discord.js"
+} from "discord.js";
 
 module.exports = class VoiceStateUpdateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -18,13 +18,13 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
       type: "on",
       emitter: "client",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, oldState: VoiceState, newState: VoiceState) {
-    var player = client.ErelaManager.players.get(newState.guild.id)
+    var player = client.ErelaManager.players.get(newState.guild.id);
 
     // Auto set Client as Speaker in Stage Channels
     if (
@@ -39,7 +39,7 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
             .permissionsFor(newState.guild.members.me)
             .has("Speak"))
       ) {
-        newState.guild.members.me.voice.setSuppressed(false)
+        newState.guild.members.me.voice.setSuppressed(false);
       }
     }
 
@@ -81,18 +81,21 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
           ) {
             setTimeout(async () => {
               try {
-                var voiceChannel: any
+                var voiceChannel: VoiceChannel;
                 voiceChannel = newState.guild.channels.cache.get(
                   player.voiceChannel
-                ) as VoiceChannel
-                if (voiceChannel)
-                  voiceChannel = (await voiceChannel.fetch()) as VoiceChannel
-                if (!voiceChannel)
-                  voiceChannel =
-                    (await newState.guild.channels
-                      .fetch(player.voiceChannel)
-                      .catch(() => {})) || false
-                if (!voiceChannel) return player.destroy()
+                ) as VoiceChannel;
+                if (voiceChannel) {
+                  voiceChannel = (await voiceChannel.fetch()) as VoiceChannel;
+                }
+                if (!voiceChannel) {
+                  voiceChannel = (await newState.guild.channels
+                    .fetch(player.voiceChannel)
+                    .catch(error => {
+                      client.logger.error(error);
+                    })) as VoiceChannel;
+                }
+                if (!voiceChannel) return player.destroy();
                 if (
                   !voiceChannel.members ||
                   voiceChannel.members.size == 0 ||
@@ -103,12 +106,12 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
                       !member.voice.selfDeaf
                   ).size < 1
                 ) {
-                  player.destroy()
+                  player.destroy();
                 }
               } catch (error) {
-                client.logger.error(String(error))
+                client.logger.error(String(error));
               }
-            }, Config.Music.Player.AutoLeaveEmpty.Channel.Delay || 60000)
+            }, Config.Music.Player.AutoLeaveEmpty.Channel.Delay || 60000);
           }
         }
       }
@@ -127,7 +130,7 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
             .permissionsFor(newState.guild.members.me)
             .has("DeafenMembers"))
       ) {
-        newState.setDeaf(true)
+        newState.setDeaf(true);
       }
     }
 
@@ -144,10 +147,10 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
             .permissionsFor(newState.guild.members.me)
             .has("DeafenMembers"))
       ) {
-        newState.setDeaf(true)
+        newState.setDeaf(true);
         var textChannel = newState.guild.channels.cache.get(
           player.textChannel
-        ) as TextChannel
+        ) as TextChannel;
 
         textChannel.send({
           embeds: [
@@ -171,8 +174,8 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
                 )
               })
           ]
-        })
+        });
       }
     }
   }
-}
+};

@@ -1,7 +1,7 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { Node } from "erela.js"
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { Node } from "erela.js";
 
 export default class nodeDisconnectEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -10,14 +10,14 @@ export default class nodeDisconnectEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(client: NDBClient, node: Node, { code, reason }) {
     client.logger.music(
-      `Lavalink Node: ${node.options.identifier} Desconectado`
-    )
+      `Lavalink Node: ${node.options.identifier} Desconectado com\n Motivo: ${reason}\n código: ${code}`
+    );
   }
 }

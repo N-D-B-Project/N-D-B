@@ -1,7 +1,8 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { Player, Track, TrackEndEvent } from "erela.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { Player, Track, TrackEndEvent } from "erela.js";
 
 export default class trackEndEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -10,9 +11,9 @@ export default class trackEndEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -21,6 +22,6 @@ export default class trackEndEvent extends BaseEvent {
     track: Track,
     payload: TrackEndEvent
   ) {
-    player.AddLastSong(track)
+    player.lastSong = track;
   }
 }

@@ -1,11 +1,13 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
 
-import { EmbedBuilder, TextChannel } from "discord.js"
+import { EmbedBuilder, TextChannel } from "discord.js";
 
-import { Emojis } from "@/Config/Config"
-import { Player, Track, TrackStuckEvent } from "erela.js"
+import { Emojis } from "@/Config/Config";
+import { MessageTools } from "@/Utils/Tools";
+import { Player, Track, TrackStuckEvent } from "erela.js";
 
 export default class trackStuckEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -14,9 +16,9 @@ export default class trackStuckEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -25,10 +27,10 @@ export default class trackStuckEvent extends BaseEvent {
     track: Track,
     payload: TrackStuckEvent
   ) {
-    player.stop()
-    var TextChannel = client.channels.cache.get(
+    player.stop();
+    var textChannel = client.channels.cache.get(
       player.textChannel
-    ) as TextChannel
+    ) as TextChannel;
 
     const embed = new EmbedBuilder()
       .setAuthor({
@@ -39,14 +41,14 @@ export default class trackStuckEvent extends BaseEvent {
       .setTitle(
         await client.Translate.Guild(
           "Events/PlayerEvents:trackStuck:Embed:Title",
-          TextChannel,
+          textChannel,
           { EMOJI: Emojis.fail }
         )
       )
       .setDescription(
         await client.Translate.Guild(
           "Events/PlayerEvents:trackStuck:Embed:Description",
-          TextChannel,
+          textChannel,
           { TITLE: track.title, URI: track.uri }
         )
       )
@@ -54,10 +56,10 @@ export default class trackStuckEvent extends BaseEvent {
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackStuck:Embed:Footer",
-          TextChannel
+          textChannel
         )
       })
-      .setTimestamp()
-    TextChannel.send({ embeds: [embed] })
+      .setTimestamp();
+    MessageTools.send(textChannel, { embeds: [embed] });
   }
 }

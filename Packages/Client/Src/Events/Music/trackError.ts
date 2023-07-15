@@ -1,9 +1,11 @@
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
 
-import { EmbedBuilder, TextChannel } from "discord.js"
-import { Player, Track, TrackExceptionEvent } from "erela.js"
+import { EmbedBuilder, TextChannel } from "discord.js";
+import { Player, Track, TrackExceptionEvent } from "erela.js";
 
 export default class trackErrorEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -12,9 +14,9 @@ export default class trackErrorEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -23,11 +25,11 @@ export default class trackErrorEvent extends BaseEvent {
     track: Track,
     payload: TrackExceptionEvent
   ) {
-    player.stop()
+    player.stop();
 
-    var TextChannel = client.channels.cache.get(
+    var textChannel = client.channels.cache.get(
       player.textChannel
-    ) as TextChannel
+    ) as TextChannel;
 
     const embed = new EmbedBuilder()
       .setAuthor({
@@ -38,13 +40,13 @@ export default class trackErrorEvent extends BaseEvent {
       .setTitle(
         await client.Translate.Guild(
           "Events/PlayerEvents:trackError:Embed:Title",
-          TextChannel
+          textChannel
         )
       )
       .setDescription(
         await client.Translate.Guild(
           "Events/PlayerEvents:playerMove:Embed:Description",
-          TextChannel,
+          textChannel,
           { TITLE: track.title, URI: track.uri }
         )
       )
@@ -52,12 +54,12 @@ export default class trackErrorEvent extends BaseEvent {
         {
           name: await client.Translate.Guild(
             "Events/PlayerEvents:trackError:Embed:Fields:1",
-            TextChannel
+            textChannel
           ),
           value: await client.Translate.Guild(
             "Events/PlayerEvents:trackError:Embed:Fields:Content:1",
-            TextChannel,
-            { PAYLOAD: `payload.op` }
+            textChannel,
+            { PAYLOAD: payload.op }
           )
         }
       ])
@@ -65,10 +67,10 @@ export default class trackErrorEvent extends BaseEvent {
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackError:Embed:Footer",
-          TextChannel
+          textChannel
         )
       })
-      .setTimestamp()
-    TextChannel.send({ embeds: [embed] })
+      .setTimestamp();
+    MessageTools.send(textChannel, { embeds: [embed] });
   }
 }

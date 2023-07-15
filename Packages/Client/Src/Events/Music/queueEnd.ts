@@ -1,10 +1,12 @@
-import { Config } from "@/Config/Config"
-import NDBClient from "@/Core/NDBClient"
-import { EventOptions } from "@/Types"
-import { BaseEvent } from "@/Utils/Structures"
-import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js"
-import { Player, Track, TrackEndEvent } from "erela.js"
-import ms from "parse-ms"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Config } from "@/Config/Config";
+import NDBClient from "@/Core/NDBClient";
+import { EventOptions } from "@/Types";
+import { BaseEvent } from "@/Utils/Structures";
+import { MessageTools } from "@/Utils/Tools";
+import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
+import { Player, Track, TrackEndEvent } from "erela.js";
+import ms from "parse-ms";
 
 export default class queueEndEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -13,9 +15,9 @@ export default class queueEndEvent extends BaseEvent {
       type: "on",
       emitter: "music",
       enable: true
-    }
+    };
 
-    super(client, options)
+    super(client, options);
   }
 
   async run(
@@ -24,18 +26,18 @@ export default class queueEndEvent extends BaseEvent {
     track: Track,
     payload: TrackEndEvent
   ) {
-    var TextChannel = client.channels.cache.get(
+    var textChannel = client.channels.cache.get(
       player.textChannel
-    ) as TextChannel
-    var VoiceChannel = client.channels.cache.get(
+    ) as TextChannel;
+    var voiceChannel = client.channels.cache.get(
       player.voiceChannel
-    ) as VoiceChannel
+    ) as VoiceChannel;
     if (Config.Music.Player.AutoLeaveEmpty.Queue.Enable) {
       setTimeout(async () => {
         try {
-          player = client.ErelaManager.players.get(player.guild)
+          player = client.ErelaManager.players.get(player.guild);
           if (!player.queue && player.queue.current) {
-            const Timer = ms(Config.Music.Player.AutoLeaveEmpty.Queue.Delay)
+            const Timer = ms(Config.Music.Player.AutoLeaveEmpty.Queue.Delay);
             const embed = new EmbedBuilder()
               .setAuthor({
                 name: client.user.tag,
@@ -45,45 +47,46 @@ export default class queueEndEvent extends BaseEvent {
               .setTitle(
                 await client.Translate.Guild(
                   "Events/PlayerEvents:playerMove:queueEnd:Title",
-                  TextChannel
+                  textChannel
                 )
               )
               .setDescription(
                 await client.Translate.Guild(
                   "Events/PlayerEvents:playerMove:queueEnd:Description",
-                  TextChannel,
-                  { CHANNEL: VoiceChannel.name, Timer: Timer }
+                  textChannel,
+                  { CHANNEL: voiceChannel.name, Timer: Timer }
                 )
               )
               .setFooter({
                 text: await client.Translate.Guild(
                   "Events/PlayerEvents:playerMove:queueEnd:Footer",
-                  TextChannel,
+                  textChannel,
                   { TIMER: Timer }
                 )
               })
-              .setTimestamp()
-            const Message = await TextChannel.send({ embeds: [embed] })
+              .setTimestamp();
+            const Message = await MessageTools.send(textChannel, {
+              embeds: [embed]
+            });
 
-            const DeleteMessage = TextChannel.messages
-              .fetch(Message.id)
-              .then(msg => {
-                if (msg && msg.deletable) {
-                  setTimeout(async () => {
-                    msg.delete().catch((error: Error) => {
-                      client.logger.warn(
-                        'Não consegui deletar o "Player_MESSAGE"'
-                      )
-                    })
-                  }, 4000)
-                }
-              })
-            player.destroy()
+            textChannel.messages.fetch(Message.id).then(msg => {
+              if (msg && msg.deletable) {
+                setTimeout(async () => {
+                  msg.delete().catch((error: Error) => {
+                    client.logger.warn(
+                      // eslint-disable-next-line quotes
+                      'Não consegui deletar o "Player_MESSAGE"'
+                    );
+                  });
+                }, 4000);
+              }
+            });
+            player.destroy();
           }
         } catch (error) {
-          client.logger.error("Queue End Error: ", String(error))
+          client.logger.error("Queue End Error: ", String(error));
         }
-      }, Config.Music.Player.AutoLeaveEmpty.Queue.Delay)
+      }, Config.Music.Player.AutoLeaveEmpty.Queue.Delay);
     }
   }
 }
