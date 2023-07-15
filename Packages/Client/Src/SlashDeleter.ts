@@ -1,9 +1,11 @@
-import "dotenv/config"
+/* eslint-disable no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import "dotenv/config";
 
-import { REST, Routes } from "discord.js"
-import { Config } from "./Config/Config"
+import { REST, Routes } from "discord.js";
+import { Config } from "./Config/Config";
 
-const rest = new REST({ version: "10" }).setToken(process.env.Token)
+const rest = new REST({ version: "10" }).setToken(process.env.Token);
 
 enum DeleteModeOptions {
   Test = "Test",
@@ -16,8 +18,8 @@ enum DeleteCommandType {
   Only = "Only"
 }
 
-var deleteMode = "Guild"
-var deleteCommand = DeleteCommandType.All
+var deleteMode = "Guild";
+var deleteCommand = DeleteCommandType.All;
 
 if (deleteMode === "Test") {
   if (deleteCommand === DeleteCommandType.All) {
@@ -27,9 +29,9 @@ if (deleteMode === "Test") {
         { body: [] }
       )
       .then(() => console.log("Successfully deleted all guild commands."))
-      .catch(console.error)
+      .catch(console.error);
   } else if (deleteCommand === DeleteCommandType.Only) {
-    const CommandID = ""
+    const CommandID = "";
     rest
       .delete(
         Routes.applicationGuildCommand(
@@ -39,7 +41,7 @@ if (deleteMode === "Test") {
         )
       )
       .then(() => console.log("Successfully deleted guild command"))
-      .catch(console.error)
+      .catch(console.error);
   }
 }
 
@@ -54,9 +56,9 @@ if (deleteMode === "Guild") {
         { body: [] }
       )
       .then(() => console.log("Successfully deleted all guild commands."))
-      .catch(console.error)
+      .catch(console.error);
   } else if (deleteCommand === DeleteCommandType.Only) {
-    const CommandID = ""
+    const CommandID = "";
     rest
       .delete(
         Routes.applicationGuildCommand(
@@ -66,7 +68,7 @@ if (deleteMode === "Guild") {
         )
       )
       .then(() => console.log("Successfully deleted guild command"))
-      .catch(console.error)
+      .catch(console.error);
   }
 }
 
@@ -75,12 +77,12 @@ if (deleteMode === "Global") {
     rest
       .put(Routes.applicationCommands(Config.Client.ID), { body: [] })
       .then(() => console.log("Successfully deleted all application commands."))
-      .catch(console.error)
+      .catch(console.error);
   } else if (deleteCommand === DeleteCommandType.Only) {
-    const CommandID = ""
+    const CommandID = "";
     rest
       .delete(Routes.applicationCommand(Config.Client.ID, CommandID))
       .then(() => console.log("Successfully deleted application command"))
-      .catch(console.error)
+      .catch(console.error);
   }
 }

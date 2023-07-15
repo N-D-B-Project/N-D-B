@@ -1,6 +1,6 @@
-import BaseEvent from "./BaseEvent";
 import BaseCommand from "./BaseCommand";
+import BaseEvent from "./BaseEvent";
 import BaseSlashCommand from "./BaseSlashCommand";
 import BaseSubCommand from "./BaseSubCommand";
 
-export { BaseEvent, BaseCommand, BaseSlashCommand, BaseSubCommand };
+export { BaseCommand, BaseEvent, BaseSlashCommand, BaseSubCommand };

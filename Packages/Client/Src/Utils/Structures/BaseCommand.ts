@@ -1,6 +1,7 @@
-import NDBClient from "@/Core/NDBClient"
-import { CommandOptions } from "@/Types"
-import { Message } from "discord.js"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { CommandOptions } from "@/Types";
+import { Message } from "discord.js";
 
 export default class BaseCommand {
   constructor(
@@ -8,14 +9,14 @@ export default class BaseCommand {
     public options: CommandOptions,
     public args: Array<string>
   ) {
-    this.client = client
-    this.options = options
-    this.args = args
+    this.client = client;
+    this.options = options;
+    this.args = args;
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`
-    )
+    );
   }
 }

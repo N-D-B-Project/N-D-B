@@ -1,9 +1,10 @@
-import NDBClient from "@/Core/NDBClient"
-import { SlashCommandOptions } from "@/Types"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import NDBClient from "@/Core/NDBClient";
+import { SlashCommandOptions } from "@/Types";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
-} from "discord.js"
+} from "discord.js";
 
 export default class BaseSlashCommand {
   constructor(
@@ -11,9 +12,9 @@ export default class BaseSlashCommand {
     public options: SlashCommandOptions,
     public args: CommandInteractionOptionResolver
   ) {
-    this.client = client
-    this.options = options
-    this.args = args
+    this.client = client;
+    this.options = options;
+    this.args = args;
   }
 
   async run(
@@ -23,6 +24,6 @@ export default class BaseSlashCommand {
   ) {
     throw new Error(
       `Comando \`${this.options.data.name}\` Não proveu um método Run!`
-    )
+    );
   }
 }

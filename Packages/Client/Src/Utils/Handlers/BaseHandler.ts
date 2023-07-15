@@ -1,53 +1,55 @@
-import NDBClient from "@/Core/NDBClient"
-import { globSync } from "glob"
-import { dirname, sep } from "path"
+import NDBClient from "@/Core/NDBClient";
+import { globSync } from "glob";
+import { dirname, sep } from "path";
 
 export default class BaseHandler {
   public constructor(private client: NDBClient) {
-    this.client = client
+    this.client = client;
   }
 
-  public isClass(input: any) {
+  public isClass(input) {
     return (
       typeof input === "function" &&
       typeof input.prototype === "object" &&
       input.toString().substring(0, 5) === "class"
-    )
+    );
   }
 
-  public findClass(module: any) {
+  public findClass(module) {
     if (module.__esModule) {
-      const def = Reflect.get(module, "default")
+      const def = Reflect.get(module, "default");
       if (this.isClass(def)) {
-        return def
+        return def;
       }
 
-      let _class = null
+      let _class = null;
       for (const prop of Object.keys(module)) {
-        const ref = Reflect.get(module, prop)
+        const ref = Reflect.get(module, prop);
         if (this.isClass(ref)) {
-          _class = ref
-          break
+          _class = ref;
+          break;
         }
       }
 
-      return _class
+      return _class;
     }
 
-    return this.isClass(module) ? module : null
+    return this.isClass(module) ? module : null;
   }
 
   public get directory() {
-    return `${dirname(require.main.filename)}${sep}`
+    return `${dirname(require.main.filename)}${sep}`;
   }
 
   public async getFiles(handler: string): Promise<Array<string>> {
-    var baseDir: string
-    if (process.env.isCompiled === "true")
-      baseDir = `${this.directory}${handler}/**/*.js`
-    else baseDir = `${this.directory}${handler}/**/*.ts`
-    const Files = globSync(baseDir)
-    Files.forEach(file => delete require.cache[require.resolve(file)])
-    return Files
+    var baseDir: string;
+    if (process.env.isCompiled === "true") {
+      baseDir = `${this.directory}${handler}/**/*.js`;
+    } else {
+      baseDir = `${this.directory}${handler}/**/*.ts`;
+    }
+    const Files = globSync(baseDir);
+    Files.forEach(file => delete require.cache[require.resolve(file)]);
+    return Files;
   }
 }
