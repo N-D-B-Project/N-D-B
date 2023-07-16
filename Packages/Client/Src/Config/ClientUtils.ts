@@ -65,6 +65,6 @@ export class Collections {
     public SubCommands: Collection<string, BaseSubCommand> = new Collection(),
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
-    public languages = import("../Utils/Languages/language-meta.json")
+    public languages = import("../Utils/Languages/i18next/language-meta.json")
   ) {}
 }

@@ -31,7 +31,7 @@ export default class TestCommand extends BaseCommand {
   async run(client: NDBClient, message: Message, args: Array<string>) {
     const msg = await MessageTools.send(message.channel, {
       content: await client.Translate.Guild(
-        "🛠 Developer Tools/test:Test",
+        "DeveloperTools/test:Test",
         message
       ),
       embeds: [],
@@ -42,37 +42,37 @@ export default class TestCommand extends BaseCommand {
 
     MessageTools.edit(
       msg,
-      await client.Translate.Guild("🛠 Developer Tools/test:Tested", message)
+      await client.Translate.Guild("DeveloperTools/test:Tested", message)
     );
 
     const TestEmbeds: Array<EmbedBuilder> = [
       new EmbedBuilder()
         .setDescription(
-          await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
+          await client.Translate.Guild("DeveloperTools/test:Embed", message)
         )
         .setColor("Random")
         .setFooter({ text: "1" }),
       new EmbedBuilder()
         .setDescription(
-          await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
+          await client.Translate.Guild("DeveloperTools/test:Embed", message)
         )
         .setColor("Random")
         .setFooter({ text: "2" }),
       new EmbedBuilder()
         .setDescription(
-          await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
+          await client.Translate.Guild("DeveloperTools/test:Embed", message)
         )
         .setColor("Random")
         .setFooter({ text: "3" }),
       new EmbedBuilder()
         .setDescription(
-          await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
+          await client.Translate.Guild("DeveloperTools/test:Embed", message)
         )
         .setColor("Random")
         .setFooter({ text: "4" }),
       new EmbedBuilder()
         .setDescription(
-          await client.Translate.Guild("🛠 Developer Tools/test:Embed", message)
+          await client.Translate.Guild("DeveloperTools/test:Embed", message)
         )
         .setColor("Random")
         .setFooter({ text: "5" })

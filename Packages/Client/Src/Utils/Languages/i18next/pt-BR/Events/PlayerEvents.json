@@ -6,12 +6,12 @@
       "Footer": "N-D-B Music Player"
     }
   },
-  
+
   "playerMove": {
     "KickEmbed": {
       "Title": "<:NotixDeny:719560576015138830> Fila de músicas acabou!",
       "Description": "Eu sai do canal: `{{CHANNEL}}`",
-      "Footer": "N-D-B Music Player" 
+      "Footer": "N-D-B Music Player"
     }
   },
 

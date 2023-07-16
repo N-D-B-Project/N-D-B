@@ -39,9 +39,6 @@ export default class SlashHandler {
               .get(Config.NDCommunity.ID)
               ?.commands.create(command.options.data)
               .then(res => {
-                this.client.logger.command(
-                  `(/) Slash Commands Registered [Guild], ${res.name}`
-                );
                 return res;
               });
           }
@@ -52,9 +49,6 @@ export default class SlashHandler {
               .get(Config.TestGuild.ID)
               ?.commands.create(command.options.data)
               .then(res => {
-                this.client.logger.command(
-                  `(/) Slash Commands Registered [Test], ${res.name}`
-                );
                 return res;
               });
           }
@@ -64,9 +58,6 @@ export default class SlashHandler {
             await this.client.application?.commands
               .create(command.options.data)
               .then(res => {
-                this.client.logger.command(
-                  `(/) Slash Commands Registered [Global], ${res.name}`
-                );
                 return res;
               });
           }

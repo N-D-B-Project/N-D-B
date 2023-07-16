@@ -1,0 +1,60 @@
+{
+  "loadType": {
+    "LOAD_FAILED": {
+      "Embed": {
+        "Title": "<:NotixDeny:719560576015138830>ERR0R",
+        "Description": "Ocorreu um erro ao procurara música",
+        "Footer": "N-D-B Music Player"
+      }
+    },
+    "NO_MATCHES": {
+      "Embed": {
+        "Title": "<:NotixDeny:719560576015138830>ERR0R",
+        "Description": "Não encontrei nenhuma música com os parâmetros de busca",
+        "Footer": "N-D-B Music Player"
+      }
+    },
+    "SUCCESS": {
+      "COMMENT": "SEARCH_RESULT && TRACK_LOADED",
+      "Embed": {
+        "PlaylistTitle": "<:NotixAllow:719560623960096789> Playlist adicionada na fila",
+        "Title": "<:NotixAllow:719560623960096789> Música adicionada na fila",
+        "Footer": "N-D-B Music Player",
+        "Fields": {
+          "1": "{{EMOJI}} {{NAME}}",
+          "2": ":crown: Autor",
+          "3": "⏲️ Tempo",
+          "Content": {
+            "1": "[{{TITLE}}]({{URI}})",
+            "2": "{{AUTHOR}}",
+            "3": "{{TIMER}}"
+          }
+        }
+      }
+    }
+  },
+
+  "NoPlayerEmbed": {
+    "Title": "N-D-B Music Player",
+    "Fields": {
+      "1": "<:NotixDeny:719560576015138830> Player não iniciado em",
+      "Content": {
+        "1": "{{GuildName}}"
+      }
+    }
+  },
+
+  "NoChannelEmbed": {
+    "Title": "<:NotixDeny:719560576015138830> ERR0R",
+    "Description": "Você não está em um canal de voz",
+    "Footer": "N-D-B Music Player"
+  },
+
+  "NoArgsEmbed": {
+    "Title": "<:NotixDeny:719560576015138830>  ERR0R",
+    "Description": "Você precisa prover o nomeou URL da musica",
+    "Footer": "N-D-B Music Player"
+  },
+
+  "WrongChannel": "Este comando só pode ser utilizado em: <#{{CHANNEL}}>"
+}

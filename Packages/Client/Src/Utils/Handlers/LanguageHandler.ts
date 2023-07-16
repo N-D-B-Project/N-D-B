@@ -12,6 +12,7 @@ import i18next, { TFunction } from "i18next";
 import Backend from "i18next-fs-backend";
 import * as path from "path";
 import { Logger } from "../Tools";
+
 const guildRepository = new GuildRepository();
 const userRepository = new UserRepository();
 
@@ -45,13 +46,8 @@ async function walkDirectory(
 }
 
 export default async (): Promise<Map<string, TFunction>> => {
-  const options = {
-    jsonIndent: 2,
-    loadPath: path.resolve(__dirname, "../Languages/{{lng}}/{{ns}}.json")
-  };
-
   const { namespaces, languages } = await walkDirectory(
-    path.resolve(__dirname, "../Languages/")
+    path.resolve(__dirname, "../Languages/i18next/")
   );
 
   if (process.env.Debug === "True") {
@@ -60,23 +56,33 @@ export default async (): Promise<Map<string, TFunction>> => {
     var TF = false;
   }
 
-  i18next.use(Backend);
-  await i18next.init({
-    compatibilityJSON: "v3",
-    backend: options,
-    debug: TF,
-    fallbackLng: "pt-BR",
-    initImmediate: false,
-    interpolation: { escapeValue: false },
-    load: "all",
-    ns: namespaces,
-    preload: languages
-  });
-  new Logger().info(
-    `${
-      languages.length
-    } linguagens foram carregadas com sucesso! (${languages.join(" | ")})`
+  await i18next.use(Backend).init(
+    {
+      initImmediate: false,
+      interpolation: { escapeValue: false },
+      load: "all",
+      compatibilityJSON: "v4",
+      debug: TF,
+      fallbackLng: "pt-BR",
+      backend: {
+        jsonIndent: 2,
+        loadPath: path.resolve(
+          __dirname,
+          "../Languages/i18next/{{lng}}/{{ns}}.json"
+        )
+      },
+      ns: namespaces,
+      preload: languages
+    },
+    async () => {
+      new Logger().info(
+        `${
+          languages.length
+        } linguagens foram carregadas com sucesso! (${languages.join(" | ")})`
+      );
+    }
   );
+
   return new Map(languages.map(item => [item, i18next.getFixedT(item)]));
 };
 
