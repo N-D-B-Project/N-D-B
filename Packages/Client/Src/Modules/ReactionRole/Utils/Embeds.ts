@@ -25,7 +25,7 @@ export async function InvalidChannelEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:Channel:Invalid",
+        "ReactionRole/CreateReaction:Channel:Invalid",
         info,
         { fail: Emojis.fail }
       )
@@ -45,7 +45,7 @@ export async function InvalidIDEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:ID:Invalid",
+        "ReactionRole/CreateReaction:ID:Invalid",
         info,
         { fail: Emojis.fail }
       )
@@ -65,7 +65,7 @@ export async function MessageNotFoundEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:ID:NotFound",
+        "ReactionRole/CreateReaction:ID:NotFound",
         info,
         { fail: Emojis.fail }
       )
@@ -85,7 +85,7 @@ export async function InvalidRoleEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:Role:Invalid",
+        "ReactionRole/CreateReaction:Role:Invalid",
         info,
         { fail: Emojis.fail }
       )
@@ -105,7 +105,7 @@ export async function InvalidEmojiEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:Emoji:Invalid",
+        "ReactionRole/CreateReaction:Emoji:Invalid",
         info,
         { fail: Emojis.fail }
       )
@@ -120,7 +120,7 @@ export async function ReactionRoleCreatedEmbed(
   return new EmbedBuilder()
     .setAuthor({
       name: await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:Embed:Author",
+        "ReactionRole/CreateReaction:Embed:Author",
         info
       ),
       iconURL: info.guild.iconURL()
@@ -129,7 +129,7 @@ export async function ReactionRoleCreatedEmbed(
     .addFields([
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:1",
+          "ReactionRole/CreateReaction:Embed:Fields:1",
           info
         ),
         value: `<#${Channel}>`,
@@ -137,7 +137,7 @@ export async function ReactionRoleCreatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:2",
+          "ReactionRole/CreateReaction:Embed:Fields:2",
           info
         ),
         value: Emoji,
@@ -145,7 +145,7 @@ export async function ReactionRoleCreatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:3",
+          "ReactionRole/CreateReaction:Embed:Fields:3",
           info
         ),
         value: String(Option),
@@ -153,11 +153,11 @@ export async function ReactionRoleCreatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:4",
+          "ReactionRole/CreateReaction:Embed:Fields:4",
           info
         ),
         value: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:Content:4",
+          "ReactionRole/CreateReaction:Embed:Fields:Content:4",
           info,
           {
             MsgIdURL: await (
@@ -171,7 +171,7 @@ export async function ReactionRoleCreatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/CreateReaction:Embed:Fields:5",
+          "ReactionRole/CreateReaction:Embed:Fields:5",
           info
         ),
         value: `<@&${Role}>`
@@ -193,7 +193,7 @@ export async function ReactionRoleRemovedEmbed(
     .setColor("#00c26f")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/DeleteReaction:Removed",
+        "ReactionRole/DeleteReaction:Removed",
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )
@@ -215,14 +215,14 @@ export async function ReactionRoleUpdatedEmbed(
     .setColor("#00c26f")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/UpdateReaction:Embed:Description",
+        "ReactionRole/UpdateReaction:Embed:Description",
         info
       )
     )
     .addFields(
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:1",
+          "ReactionRole/UpdateReaction:Embed:Fields:1",
           info
         ),
         value: `<#${Channel}>`,
@@ -230,7 +230,7 @@ export async function ReactionRoleUpdatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:2",
+          "ReactionRole/UpdateReaction:Embed:Fields:2",
           info
         ),
         value: Emoji,
@@ -238,11 +238,11 @@ export async function ReactionRoleUpdatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:3",
+          "ReactionRole/UpdateReaction:Embed:Fields:3",
           info
         ),
         value: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:Content:3",
+          "ReactionRole/UpdateReaction:Embed:Fields:Content:3",
           info,
           {
             MsgIdURL: (
@@ -256,7 +256,7 @@ export async function ReactionRoleUpdatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:4",
+          "ReactionRole/UpdateReaction:Embed:Fields:4",
           info
         ),
         value: `<@${Role}>`,
@@ -264,7 +264,7 @@ export async function ReactionRoleUpdatedEmbed(
       },
       {
         name: await client.Translate.Guild(
-          "🎩 ReactionRole/UpdateReaction:Embed:Fields:5",
+          "ReactionRole/UpdateReaction:Embed:Fields:5",
           info
         ),
         value: newOption.toString(),
@@ -274,7 +274,7 @@ export async function ReactionRoleUpdatedEmbed(
 
     .setFooter({
       text: await client.Translate.Guild(
-        "🎩 ReactionRole/UpdateReaction:Embed:Footer",
+        "ReactionRole/UpdateReaction:Embed:Footer",
         info
       )
     });
@@ -291,25 +291,22 @@ export async function ReactionRoleDeleteAllEmbed(
   var color;
   switch (status) {
     case "Confirm":
-      description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Confirm";
+      description = "ReactionRole/DeleteAllReactions:Embed:Description:Confirm";
       color = "#00c26f";
       break;
     case "Cancel":
-      description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Cancel";
+      description = "ReactionRole/DeleteAllReactions:Embed:Description:Cancel";
       color = "#c20e00";
       break;
     case "Success":
-      description =
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Description:Success";
+      description = "ReactionRole/DeleteAllReactions:Embed:Description:Success";
       color = "#00c26f";
       break;
   }
   return new EmbedBuilder()
     .setTitle(
       await client.Translate.Guild(
-        "🎩 ReactionRole/DeleteAllReactions:Embed:Title",
+        "ReactionRole/DeleteAllReactions:Embed:Title",
         info
       )
     )
@@ -337,7 +334,7 @@ export async function UnableToCreateReactionRoleEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/CreateReaction:UnableToCreate",
+        "ReactionRole/CreateReaction:UnableToCreate",
         info,
         { fail: Emojis.fail }
       )
@@ -358,7 +355,7 @@ export async function UnableToDeleteReactionRoleEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/DeleteReaction:UnableToDelete",
+        "ReactionRole/DeleteReaction:UnableToDelete",
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )
@@ -379,7 +376,7 @@ export async function UnableToUpdateReactionRoleEmbed(
     .setColor("#c20e00")
     .setDescription(
       await client.Translate.Guild(
-        "🎩 ReactionRole/UpdateReaction:UnableToUpdate",
+        "ReactionRole/UpdateReaction:UnableToUpdate",
         info,
         { success: Emojis.accept, URL: MsgID.url }
       )

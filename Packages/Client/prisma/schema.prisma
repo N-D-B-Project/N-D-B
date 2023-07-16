@@ -104,15 +104,15 @@ model Guild {
 }
 
 model GuildSettings {
-  id        String   @id @default(uuid())
-  Prefix    String   @default("&") @db.VarChar(4)
-  Language  String   @default("en-US")
-  AntiSpam  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-
-  guild   Guild  @relation(fields: [guildId], references: [id])
-  guildId String @unique
+  id         String   @id @default(uuid())
+  Prefix     String   @default("&") @db.VarChar(4)
+  Language   String   @default("en-US")
+  AntiSpam   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  ReactionDM Boolean  @default(true)
+  guild      Guild    @relation(fields: [guildId], references: [id])
+  guildId    String   @unique
 }
 
 model GuildReactionRoles {

@@ -54,15 +54,6 @@ export default class MessageCreateEvent extends BaseEvent {
             .setTimestamp()
         ]
       });
-      message.reply(
-        `${
-          message.guild.name
-        } Configuration Created on Database\n\`\`\`JSON\n${JSON.stringify(
-          guildConfig,
-          null,
-          3
-        )}\`\`\``
-      );
     } else if (guildConfig && message.channel.type !== ChannelType.DM) {
       const mentionRegex = RegExp(`<@!${client.user.id}>$`);
       const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);

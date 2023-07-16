@@ -36,7 +36,7 @@ export default class ReactionTypesCommand extends BaseSubCommand {
     InteractionTools.reply(
       interaction,
       await client.Translate.Guild(
-        "🎩 ReactionRole/ReactionTypes:Types",
+        "ReactionRole/ReactionTypes:Types",
         interaction
       ),
       false

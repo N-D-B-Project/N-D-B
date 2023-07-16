@@ -33,10 +33,7 @@ export default class ReactionTypesCommand extends BaseCommand {
   async run(client: NDBClient, message: Message, args: string[]) {
     await MessageTools.send(
       message.channel,
-      await client.Translate.Guild(
-        "🎩 ReactionRole/ReactionTypes:Types",
-        message
-      )
+      await client.Translate.Guild("ReactionRole/ReactionTypes:Types", message)
     );
   }
 }

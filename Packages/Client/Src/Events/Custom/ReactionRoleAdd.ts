@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import NDBClient from "@/Core/NDBClient";
+import { GuildRepository } from "@/Database/Repositories";
 import ReactionRole from "@/Modules/ReactionRole";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
@@ -27,6 +28,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
     const ReactionCooldown = new Set();
     const ClientCooldown = new Set();
     const data = await react.getAll(reaction.message.guild);
+    const GuildData = await new GuildRepository().get(reaction.message.guild);
     const Guild = reaction.message.guild;
     const Member = Guild.members.cache.get(user.id);
 
@@ -232,7 +234,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("DMInfoMSG") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, {
                   embeds: [AddEmbed]
                 }).catch(() => {});
@@ -270,7 +272,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
               ReactionCooldown.add(user.id);
@@ -304,7 +306,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                   )
                 )
                 .catch(() => {});
-              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -341,7 +343,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 )
                 .catch(() => {});
               ReactionCooldown.add(user.id);
-              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -379,7 +381,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 .users.remove(user.id)
                 .catch(() => {});
 
-              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
                   () => {}
                 );
@@ -445,7 +447,7 @@ export default class ReactionRoleAddEvent extends BaseEvent {
                 )
                 .catch(() => {});
 
-              if (CONFIG.get("Systems:Logs:ReactionDM") === true) {
+              if (GuildData.Settings.ReactionDM) {
                 MessageTools.send(user, { embeds: [AddEmbed] }).catch(() => {});
               }
               ReactionCooldown.add(user.id);
