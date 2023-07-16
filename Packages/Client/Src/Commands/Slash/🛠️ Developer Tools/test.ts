@@ -39,7 +39,7 @@ export default class TestCommand extends BaseSlashCommand {
       interaction,
       {
         content: await client.Translate.Guild(
-          "🛠 Developer Tools/test:Test",
+          "DeveloperTools/test:Test",
           interaction
         ),
         embeds: [],
@@ -52,10 +52,7 @@ export default class TestCommand extends BaseSlashCommand {
 
     InteractionTools.editReply(
       interaction,
-      await client.Translate.Guild(
-        "🛠 Developer Tools/test:Tested",
-        interaction
-      )
+      await client.Translate.Guild("DeveloperTools/test:Tested", interaction)
     );
   }
 }

@@ -49,7 +49,7 @@ export default class ClearDMCommand extends BaseCommand {
           .setColor("#00c26f")
           .setDescription(
             await client.Translate.DM(
-              "📨 DM/ClearDM:Embed:Description",
+              "DM/ClearDM:Embed:Description",
               message.author,
               {
                 VALUE: i
@@ -58,7 +58,7 @@ export default class ClearDMCommand extends BaseCommand {
           )
           .setFooter({
             text: await client.Translate.DM(
-              "📨 DM/ClearDM:Embed:Footer",
+              "DM/ClearDM:Embed:Footer",
               message.author
             )
           })
