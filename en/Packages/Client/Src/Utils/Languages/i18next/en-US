@@ -1,7 +1,6 @@
 {
   "/": "/",
-  "Embed": {
-    "Description": "{{VALUE}} deleted messages",
-    "Footer": "Click 🗑️ to delete this message"
-  }
+  "Test": "Testing...",
+  "Tested": "Tested! .",
+  "Embed": "This is a Test embed! {{Num}}"
 }
