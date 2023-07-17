@@ -1,4 +1,6 @@
 {
+  "/": "/",
+
   "playerCreate": {
     "Embed": {
       "Title": "Player Criado!",

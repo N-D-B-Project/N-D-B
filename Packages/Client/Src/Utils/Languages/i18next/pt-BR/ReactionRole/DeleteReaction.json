@@ -1,4 +1,6 @@
 {
+  "/": "/",
+
   "Help": {
     "Description": "Remove uma Reaction Role",
     "Usage": "<Canal> <MessageID> <Cargo> <Emoji>"
