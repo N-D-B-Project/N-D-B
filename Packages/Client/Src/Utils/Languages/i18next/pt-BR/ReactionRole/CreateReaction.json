@@ -1,4 +1,5 @@
 {
+  "/": "/",
   "Help": {
     "description": "Cria uma Reaction Role",
     "Usage": "<Canal> <MessageID> <Cargo> <Emoji> (option)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)"
