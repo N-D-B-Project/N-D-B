@@ -9,6 +9,6 @@ files:
   [
     {
       "source": "Packages/Client/Src/Utils/Languages/i18next/en-US/",
-      "translation": "Packages/Client/Src/Utils/Languages/i18next/"
+      "translation": "Packages/Client/Src/Utils/Languages/i18next/%locale%/"
     }
   ]
