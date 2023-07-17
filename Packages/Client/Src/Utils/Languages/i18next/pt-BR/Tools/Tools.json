@@ -1,6 +1,4 @@
 {
-  "/": "/",
-
   "Pagination": {
     "Embed": {
       "Footer": "Página {{Current}} / {{Total}}"

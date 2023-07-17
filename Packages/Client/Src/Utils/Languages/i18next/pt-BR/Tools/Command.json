@@ -1,6 +1,4 @@
 {
-  "/": "/",
-
   "Checker": {
     "DM": "Este Comando não pode ser executado em mensagens privadas(DMs).",
     "OnlyDM": "Este Comando só pode ser executado em mensagens privadas(DMs).",
