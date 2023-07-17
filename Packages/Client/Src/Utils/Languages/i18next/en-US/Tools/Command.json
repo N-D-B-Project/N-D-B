@@ -1,5 +1,5 @@
 {
-  "/": "/1",
+  "/": "/",
   "Checker": {
     "DM": "This Command cannot be executed in private messages (DMs).",
     "OnlyDM": "This command can only be executed on private messages (DMs).",
