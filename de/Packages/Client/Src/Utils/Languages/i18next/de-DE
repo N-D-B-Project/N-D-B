@@ -1,6 +1,7 @@
 {
   "/": "/",
-  "Test": "Testing...",
-  "Tested": "Tested! .",
-  "Embed": "This is a Test embed! {{Num}}"
+  "ConfigurationCreated": {
+    "Title": "💾 Database",
+    "Description": "⚙️ Configuration Created"
+  }
 }
