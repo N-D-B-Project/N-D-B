@@ -17,11 +17,12 @@
   // }
 
   "Event": {
+    "scope": "typescript",
     "prefix": "!Event",
     "body": [
-      "import NDBClient from \"@Client/NDBClient\";",
-      "import { BaseEvent } from \"@Utils/Structures\";",
-      "import { EventOptions } from \"~/Types\";",
+      "import NDBClient from \"@/Core/NDBClient\";",
+      "import { BaseEvent } from \"@/Utils/Structures\";",
+      "import { EventOptions } from \"@/Types\";",
       "import {  } from \"discord.js\";",
       "",
       "export default class Event extends BaseEvent {",
@@ -30,6 +31,7 @@
       "      name: \"\",",
       "      type: \"\",",
       "      emitter: \"\",",
+      "      enable: true",
       "    };",
       "",
       "    super(client, options);",
@@ -41,16 +43,16 @@
       "};",
       ""
     ],
-    "description": "Event"
+    "description": "Didcord Event"
   },
 
-  "Command": {
-    "scope": "javascript,typescript",
-    "prefix": "!Command",
+  "LagacyCommand": {
+    "scope": "typescript",
+    "prefix": "!LegacyCommand",
     "body": [
-      "import NDBClient from \"@Client/NDBClient\";",
-      "import { CommandOptions } from \"~/Types\";",
-      "import { MessageTools, InteractionTools } from \"@Utils/Tools\";",
+      "import NDBClient from \"@/Core/NDBClient\";",
+      "import { EventOptions } from \"@/Types\";",
+      "import { MessageTools } from \"@/Utils/Tools\";",
       "import { BaseCommand } from \"@Utils/Structures\";",
       "import {",
       "  CommandInteraction,",
@@ -79,11 +81,6 @@
       "      nsfw: false,",
       "      ndcash: 0,",
       "      DM: false,",
-      "      SlashOptions: {",
-      "        name: \"\",",
-      "        ephemeral: true,",
-      "        description: \"\",",
-      "      },",
       "    };",
       "    super(client, options, args);",
       "  }",
@@ -98,6 +95,90 @@
       "}",
       ""
     ],
-    "description": "Discord Command"
+    "description": "Discord Legacy Command"
+  },
+
+  "SlashCommand": {
+    "scope": "typescript",
+    "prefix": "!SlashCommand",
+    "body": [
+      "import NDBClient from \"@/Core/NDBClient\";",
+      "import { SlashCommandOptions } from \"@/Types\";",
+      "import { InteractionTools } from \"@/Utils/Tools\";",
+      "import { BaseCommand } from \"@Utils/Structures\";",
+      "import {",
+      "  CommandInteraction,",
+      "  CommandInteractionOptionResolver,",
+      "} from \"discord.js\";",
+      "",
+      "export default class Command extends BaseSlashCommand {",
+      "  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {",
+      "    const options: SlashCommandOptions = {",
+      "      data: {",
+      "        name: \"\"",
+      "        description: \"\"",
+      "      }",
+      "      category: \"\"",
+      "      disable: false,",
+      "      cooldown: 0,",
+      "      permissions: {",
+      "        bot: [\"\"],",
+      "        user: [\"\"],",
+      "      },",
+      "      ownerOnly: false,",
+      "      nsfw: false,",
+      "      ndcash: 0,",
+      "      deployMode: \"Test\"",
+      "    };",
+      "    super(client, options, args);",
+      "  }",
+      "",
+      "  async run(client: NDBClient, interaction: CommandInteraction, args: CommandInteractionOptionResolver) {}",
+      "}",
+      ""
+    ],
+    "description": "Discord Slash Command"
+  },
+
+  "SubSlashCommand": {
+    "scope": "typescript",
+    "prefix": "!SubSlashCommand",
+    "body": [
+      "import NDBClient from \"@/Core/NDBClient\";",
+      "import { SubCommandOptions } from \"@/Types\";",
+      "import { InteractionTools } from \"@/Utils/Tools\";",
+      "import { BaseSubCommand } from \"@Utils/Structures\";",
+      "import {",
+      "  CommandInteraction,",
+      "  CommandInteractionOptionResolver,",
+      "} from \"discord.js\";",
+      "",
+      "export default class Command extends BaseSubCommand {",
+      "  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {",
+      "    const options: SubCommandOptions = {",
+      "      data: {",
+      "        name: \"\"",
+      "        description: \"\"",
+      "      }",
+      "      category: \"\"",
+      "      disable: false,",
+      "      cooldown: 0,",
+      "      permissions: {",
+      "        bot: [\"\"],",
+      "        user: [\"\"],",
+      "      },",
+      "      ownerOnly: false,",
+      "      nsfw: false,",
+      "      ndcash: 0,",
+      "      deployMode: \"Test\"",
+      "    };",
+      "    super(client, options, args);",
+      "  }",
+      "",
+      "  async run(client: NDBClient, interaction: CommandInteraction, args: CommandInteractionOptionResolver) {}",
+      "}",
+      ""
+    ],
+    "description": "Discord Slash Command"
   }
 }
