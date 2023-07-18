@@ -58,6 +58,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] Sharding
   - [ ] Top.gg Autopost
   - [ ] Fix/Remove ESLint disable comment rules
+  - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
+    - [x] Partial
 
 ## 📖 Licença
 

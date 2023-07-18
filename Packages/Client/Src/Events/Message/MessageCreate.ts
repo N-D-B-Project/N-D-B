@@ -19,6 +19,12 @@ export default class MessageCreateEvent extends BaseEvent {
 
   async run(client: NDBClient, message: Message) {
     if (message.author.bot) return;
+
+    const emojis = message.content.match(/(?<=:)([^:\s]+)(?=:)/g);
+    if (emojis) {
+      client.emit("NotQuiteNitro", message, emojis);
+    }
+
     const guildRepository = new GuildRepository();
     // GuildConfig
     var guildConfig = await guildRepository.get(message.guild);

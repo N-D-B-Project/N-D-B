@@ -101,6 +101,7 @@ export interface ProcessEvents {
 export interface EmitedEvents {
   Command: [message: Message];
   DMCommand: [message: Message];
+  NotQuiteNitro: [message: Message, emojis: RegExpMatchArray];
   AutoComplete: [interaction: AutocompleteInteraction];
   ButtonClick: [interaction: ButtonInteraction];
   ContextMenu: [interaction: ContextMenuCommandInteraction];
