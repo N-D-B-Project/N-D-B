@@ -189,7 +189,7 @@ export default class Play {
     const URL = isSlash
       ? (args as CommandInteractionOptionResolver).getString("query")
       : (args as Array<string>).join(" ");
-    let isValidURL: boolean = false;
+    let isValidURL = false;
     for (const regex of Object.values(LavalinkManager.SourceLinksRegexes)) {
       if (regex.test(URL)) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

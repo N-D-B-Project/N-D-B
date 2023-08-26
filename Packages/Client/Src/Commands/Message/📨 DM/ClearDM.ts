@@ -31,7 +31,7 @@ export default class ClearDMCommand extends BaseCommand {
   }
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
-    let i: number = 0;
+    let i = 0;
     await client.Tools.WAIT(1000);
     await message.channel.messages.fetch().then(async msgs => {
       msgs.forEach(async msg => {

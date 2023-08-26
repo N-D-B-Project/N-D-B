@@ -22,12 +22,12 @@ export default async function Paginator(
   msgint: Message | Interaction,
   type: "Message" | "Interaction" | "DM",
   embeds: Array<EmbedBuilder>,
-  time: number = 60000
+  time = 60000
 ): Promise<void> {
   letCurrentPage: typeof msgint;
   letCollector: InteractionCollector<ButtonInteraction>;
   let filter: CollectorFilter<any[]>;
-  let index: number = 0;
+  let index = 0;
   const Embed = embeds[index];
   const PreviousButton = new ButtonBuilder()
     .setCustomId("PREVIOUS")
