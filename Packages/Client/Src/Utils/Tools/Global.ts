@@ -30,7 +30,7 @@ export async function CheckError(error): Promise<boolean> {
 export function messageOptions(
   content: string | EmbedBuilder | BaseMessageOptions
 ): BaseMessageOptions {
-  var options: BaseMessageOptions | MessageEditOptions =
+  const options: BaseMessageOptions | MessageEditOptions =
     typeof content === "string"
       ? { content }
       : content instanceof EmbedBuilder

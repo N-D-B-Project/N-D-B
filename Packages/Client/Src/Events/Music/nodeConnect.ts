@@ -1,21 +1,21 @@
 import NDBClient from "@/Core/NDBClient";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
-import { Node } from "erela.js";
+import { LavalinkNode } from "lavalink-client";
 
 export default class nodeConnectEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
-      name: "nodeConnect",
+      name: "connect",
       type: "on",
-      emitter: "music",
+      emitter: "music-node",
       enable: true
     };
 
     super(client, options);
   }
 
-  async run(client: NDBClient, node: Node) {
+  async run(client: NDBClient, node: LavalinkNode) {
     client.logger.music(`Lavalink Node: ${node.options.host} Conectado!`);
   }
 }

@@ -4,9 +4,7 @@ import PrismaProvider from "../../../Database/Prisma.provider";
 import { REACTION_OPTIONS, iReaction } from "../Types";
 
 export default class ReactionRoleRepository {
-  public constructor(
-    private readonly prisma: PrismaProvider = new PrismaProvider()
-  ) {}
+  public constructor(private readonly prisma: PrismaProvider) {}
 
   public async getAll(guild: Guild) {
     return await this.prisma.guildReactionRoles.findMany({
@@ -18,7 +16,7 @@ export default class ReactionRoleRepository {
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction
   ) {
-    var data = await this.getAll(guild);
+    const data = await this.getAll(guild);
     return data.filter(async reaction => {
       reaction.Channel === Channel &&
         reaction.Message === Message &&
@@ -29,7 +27,7 @@ export default class ReactionRoleRepository {
   }
 
   public async getInChannel(guild: Guild, channel: TextChannel) {
-    var data = await this.getAll(guild);
+    const data = await this.getAll(guild);
     return data.filter(async reaction => reaction.Channel === channel.id);
   }
 
@@ -38,7 +36,7 @@ export default class ReactionRoleRepository {
     { Channel, Message, Role, Emoji, Option }: iReaction
   ): Promise<boolean> {
     const GetGuild = await this.getAll(guild);
-    var Verify = false;
+    let Verify = false;
     GetGuild.forEach(async reaction => {
       if (
         reaction.Channel === Channel &&
@@ -58,7 +56,7 @@ export default class ReactionRoleRepository {
     guild: Guild,
     { Channel, Message, Role, Emoji, Option }: iReaction
   ): Promise<{ status: "UnableToCreate" | "Created" }> {
-    var data: iReaction = {
+    const data: iReaction = {
       Channel,
       Message,
       Role,
@@ -146,7 +144,7 @@ export default class ReactionRoleRepository {
     status: "UnableToUpdate" | "Updated";
     oldOption?: REACTION_OPTIONS;
   }> {
-    var data: iReaction = {
+    const data: iReaction = {
       Channel,
       Message,
       Role,

@@ -15,7 +15,7 @@ export default class CheckerEmbeds {
     message: Message | PartialMessage,
     _Command: BaseCommand = this._Command as BaseCommand
   ): Promise<EmbedBuilder> {
-    var Function = async (arg: string, arg2?: Record<string, unknown>) => {
+    letFunction = async (arg: string, arg2?: Record<string, unknown>) => {
       return await this.client.Translate.Guild(arg, message, arg2);
     };
     if (this.mode === "DM") {
@@ -61,7 +61,7 @@ export default class CheckerEmbeds {
     message: Message | PartialMessage,
     _Command: BaseCommand = this._Command as BaseCommand
   ): Promise<EmbedBuilder> {
-    var Function = async (arg: string, arg2?: Record<string, unknown>) => {
+    letFunction = async (arg: string, arg2?: Record<string, unknown>) => {
       return await this.client.Translate.Guild(arg, message, arg2);
     };
     if (this.mode === "DM") {

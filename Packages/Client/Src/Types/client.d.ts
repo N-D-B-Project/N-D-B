@@ -1,5 +1,8 @@
 /* eslint-disable no-shadow */
-import { ErelaEvents } from "@/Modules/Music/Types";
+import {
+  LavalinkManagerEvents,
+  NodeManagerEvents
+} from "@/Modules/Music/Types";
 import type { RestEvents } from "@discordjs/rest";
 import type {
   AnySelectMenuInteraction,
@@ -82,9 +85,10 @@ export interface EventOptions {
     | keyof RestEvents
     | keyof EmitedEvents
     | keyof ProcessEvents
-    | keyof ErelaEvents;
+    | keyof NodeManagerEvents
+    | keyof LavalinkManagerEvents;
   type: "on" | "once";
-  emitter: "client" | "rest" | "process" | "music";
+  emitter: "client" | "rest" | "process" | "music" | "music-node";
   enable: boolean;
 }
 
@@ -99,7 +103,7 @@ export interface ProcessEvents {
 }
 
 export interface EmitedEvents {
-  Command: [message: Message];
+  Command: [message: Message, Prefix: string, Premium: boolean];
   DMCommand: [message: Message];
   NotQuiteNitro: [message: Message, emojis: RegExpMatchArray];
   AutoComplete: [interaction: AutocompleteInteraction];
@@ -120,5 +124,5 @@ export interface EmitedEvents {
 
 export interface SwitchCommand {
   MsgInt: Message | CommandInteraction;
-  args: Array<string> | CommandInteractionOptionResolver;
+  args?: Array<string> | CommandInteractionOptionResolver;
 }

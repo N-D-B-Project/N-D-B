@@ -80,6 +80,23 @@ export default class SubChecker {
     //   return true;
     // }
 
+    // const player = await MusicTools.getPlayer(this.client, interaction.guildId);
+    // if (interaction.channelId !== player.textChannelId) {
+    //   const voiceChannel = await interaction.guild.channels.fetch(
+    //     player.voiceChannelId
+    //   );
+
+    //   await this.client.Translate.Guild(
+    //     "Tools/Music:WrongChannel",
+    //     interaction,
+    //     {
+    //       TextChannel: player.textChannelId,
+    //       VoiceChannel: voiceChannel.name
+    //     }
+    //   );
+    //   return false;
+    // }
+
     return true;
   }
 }

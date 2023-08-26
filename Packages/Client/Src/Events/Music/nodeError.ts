@@ -1,23 +1,23 @@
 import NDBClient from "@/Core/NDBClient";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
-import { Node } from "erela.js";
+import { LavalinkNode } from "lavalink-client";
 
 export default class nodeErrorEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
-      name: "nodeError",
+      name: "error",
       type: "on",
-      emitter: "music",
+      emitter: "music-node",
       enable: true
     };
 
     super(client, options);
   }
 
-  async run(client: NDBClient, node: Node, error: Error) {
+  async run(client: NDBClient, node: LavalinkNode, error: Error) {
     client.logger.music(
-      `Lavalink Node Error: ${node.options.identifier} | ${error.message}`
+      `Lavalink Node Error: ${node.options.id} | ${error.message}`
     );
   }
 }

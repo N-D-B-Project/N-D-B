@@ -29,7 +29,7 @@ export default class Tools {
     number: number,
     translateInfo: Message | CommandInteraction | GuildChannel
   ) {
-    var time = ms(number);
+    const time = ms(number);
     const days = this.client.Translate.Guild(
         "Tools/Tools:Timer:Days",
         translateInfo

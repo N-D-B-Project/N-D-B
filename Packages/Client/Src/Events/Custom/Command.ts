@@ -16,7 +16,12 @@ export default class CommandEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, message: Message, Prefix: string) {
+  async run(
+    client: NDBClient,
+    message: Message,
+    Prefix: string,
+    Premium: boolean
+  ) {
     if (message.channel.type === ChannelType.DM) return;
     const cmdTools = new LegacyTools(client);
     const [cmd, ...args] = message.content
@@ -33,7 +38,7 @@ export default class CommandEvent extends BaseEvent {
         args
       );
       if (Checker) {
-        _Command.run(client, message, args);
+        _Command.run(client, message, args, Premium);
       }
     }
   }

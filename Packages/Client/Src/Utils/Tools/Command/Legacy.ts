@@ -29,6 +29,7 @@ export default class LegacyChecker {
       MessageTools.reply(message, await embeds.maxArgs(message));
       return false;
     }
+
     if (!message.guild && !Options.DM) {
       MessageTools.reply(
         message,
@@ -58,6 +59,7 @@ export default class LegacyChecker {
       );
       return false;
     }
+
     if (Options.nsfw && !Channel.nsfw) {
       MessageTools.reply(
         message,
@@ -65,6 +67,7 @@ export default class LegacyChecker {
       );
       return false;
     }
+
     if (Options.disable) {
       MessageTools.reply(
         message,
@@ -98,6 +101,22 @@ export default class LegacyChecker {
       );
       return false;
     }
+
+    // const player = await MusicTools.getPlayer(this.client, message.guildId);
+    // if (player && Options.category === "🎵 Music") {
+    //   if (message.channelId !== player.textChannelId) {
+    //     const voiceChannel = await message.guild.channels.fetch(
+    //       player.voiceChannelId
+    //     );
+
+    //     await this.client.Translate.Guild("Tools/Music:WrongChannel", message, {
+    //       TextChannel: player.textChannelId,
+    //       VoiceChannel: voiceChannel.name
+    //     });
+    //     return false;
+    //   }
+    // }
+
     return true;
   }
 

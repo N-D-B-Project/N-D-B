@@ -5,7 +5,7 @@ import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
-import { Player, Track, TrackEndEvent } from "erela.js";
+import { Player, Track, TrackEndEvent } from "lavalink-client";
 import ms from "parse-ms";
 
 export default class queueEndEvent extends BaseEvent {
@@ -26,16 +26,16 @@ export default class queueEndEvent extends BaseEvent {
     track: Track,
     payload: TrackEndEvent
   ) {
-    var textChannel = client.channels.cache.get(
-      player.textChannel
+    const textChannel = client.channels.cache.get(
+      player.textChannelId
     ) as TextChannel;
-    var voiceChannel = client.channels.cache.get(
-      player.voiceChannel
+    const voiceChannel = client.channels.cache.get(
+      player.voiceChannelId
     ) as VoiceChannel;
     if (Config.Music.Player.AutoLeaveEmpty.Queue.Enable) {
       setTimeout(async () => {
         try {
-          player = client.ErelaManager.players.get(player.guild);
+          // player = client.LavalinkManager.players.get(player.guildId);
           if (!player.queue && player.queue.current) {
             const Timer = ms(Config.Music.Player.AutoLeaveEmpty.Queue.Delay);
             const embed = new EmbedBuilder()

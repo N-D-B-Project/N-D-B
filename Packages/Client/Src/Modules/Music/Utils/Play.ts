@@ -10,43 +10,47 @@ import {
   User,
   VoiceChannel
 } from "discord.js";
-import { Player, SearchResult } from "erela.js";
+import { LavalinkManager, Player, SearchResult } from "lavalink-client";
 import MusicEmbeds from "./Embeds";
 import MusicTools from "./Tools";
 
 export default class Play {
   public static async _Legacy(
     message: Message,
-    args: Array<string>
+    args: Array<string>,
+    isPremium: boolean
   ): Promise<EmbedBuilder | Message> {
+    const client = message.client as NDBClient;
     const Embeds = new MusicEmbeds(message.client as NDBClient);
     const Search = args.join(" ");
-    var res: SearchResult;
-    if (!MusicTools.hasVoice(message.member)) {
-      return MessageTools.reply(message, await Embeds.NoChannelEmbed(message));
+    let res: SearchResult;
+
+    if (!(await MusicTools.hasVoice({ MsgInt: message }, false))) {
+      return;
+    }
+
+    let player = await MusicTools.getPlayer(client, message.guildId, isPremium);
+
+    if (!player) {
+      player = await MusicTools.createPlayer(
+        client,
+        message.member.voice.channel as VoiceChannel,
+        message.channelId,
+        isPremium
+      );
+    }
+    if (!player.connected) {
+      player.slash = { isSlash: false };
+      player.playerAuthor = message.author.id;
+      await player.connect();
+    }
+
+    if (!(await MusicTools.sameVoice(player, { MsgInt: message }, false))) {
+      return;
     }
 
     if (!Search) {
-      return MessageTools.reply(message, await Embeds.NoArgsEmbed(message));
-    }
-
-    var player = await MusicTools.getPlayer(
-      message.client as NDBClient,
-      message.guildId
-    );
-    if (!player) {
-      player = await MusicTools.createPlayer(
-        message.client as NDBClient,
-        message.member.voice.channel as VoiceChannel,
-        message.channelId
-      );
-    }
-
-    if (player.state !== "CONNECTED") {
-      player.slash = { isSlash: false };
-      player.playerAuthor = message.author.id;
-      player.connect();
-      player.stop();
+      return MessageTools.reply(message, await Embeds.NoArgs(message));
     }
 
     if ((message.client as NDBClient).Tools.isValidURL(Search)) {
@@ -65,44 +69,48 @@ export default class Play {
 
   public static async _Slash(
     interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
+    args: CommandInteractionOptionResolver,
+    isPremium: boolean
   ): Promise<EmbedBuilder | Message> {
     const Embeds = new MusicEmbeds(interaction.client as NDBClient);
     const Search = args.getString("query");
-    var res: SearchResult;
-    if (!MusicTools.hasVoice(interaction.member as GuildMember)) {
-      return InteractionTools.reply(
-        interaction,
-        await Embeds.NoChannelEmbed(interaction),
-        false
-      );
+    let res: SearchResult;
+
+    let player = await MusicTools.getPlayer(
+      interaction.client as NDBClient,
+      interaction.guildId,
+      isPremium
+    );
+
+    if (!(await MusicTools.hasVoice({ MsgInt: interaction }, true))) {
+      return;
+    }
+
+    if (!(await MusicTools.sameVoice(player, { MsgInt: interaction }, true))) {
+      return;
     }
 
     if (!Search) {
       return InteractionTools.reply(
         interaction,
-        await Embeds.NoArgsEmbed(interaction),
+        await Embeds.NoArgs(interaction),
         false
       );
     }
 
-    var player = await MusicTools.getPlayer(
-      interaction.client as NDBClient,
-      interaction.guildId
-    );
     if (!player) {
       player = await MusicTools.createPlayer(
         interaction.client as NDBClient,
         (interaction.member as GuildMember).voice.channel as VoiceChannel,
-        interaction.channelId
+        interaction.channelId,
+        isPremium
       );
     }
 
-    if (player.state !== "CONNECTED") {
+    if (!player.connected) {
       player.slash = { isSlash: true, interaction };
       player.playerAuthor = interaction.member.user.id;
-      player.connect();
-      player.stop();
+      await player.connect();
     }
 
     if ((interaction.client as NDBClient).Tools.isValidURL(Search)) {
@@ -131,45 +139,39 @@ export default class Play {
     isSlash: boolean
   ) {
     const Embeds = new MusicEmbeds(MsgInt.client as NDBClient);
-    var Embed: EmbedBuilder;
-    // var status: boolean = false
+    let Embed: EmbedBuilder;
     switch (res.loadType) {
       case "error":
         if (!player.queue.current) player.destroy();
-        Embed = await Embeds.LoadTypeEmbeds(MsgInt, "Fail");
+        Embed = await Embeds.LoadType(MsgInt, "Fail");
         break;
       case "empty":
         if (!player.queue.current) player.destroy();
-        Embed = await Embeds.LoadTypeEmbeds(MsgInt, "NoMatches");
+        Embed = await Embeds.LoadType(MsgInt, "NoMatches");
         break;
       case "search":
       case "track":
-        if (player.state !== "CONNECTED") {
+        if (!player.connected) {
           player.playerMessage = (MsgInt as Message).id;
           player.playerAuthor = (MsgInt.member.user as User).id;
-          player.connect();
+          await player.connect();
         }
         if (!player.playing) {
-          player.queue.add(res.tracks[0]);
-          player.play();
-          if (!player.paused && !player.playing) player.pause(false);
-        } else {
-          player.queue.add(res.tracks[0]);
+          await player.queue.add(res.tracks[0]);
+          await player.play({ paused: false });
+          if (!player.paused && !player.playing) await player.resume();
         }
-        Embed = await Embeds.LoadTypeEmbeds(
+
+        Embed = await Embeds.LoadType(
           MsgInt,
           "Success",
           args,
           isSlash,
           res.tracks[0]
         );
-        // for some reason lavalink sometimes returns status 2 times with this part of code prevents Embed from being sent 2 times
-        // if (!status) return
-        // status = true
-        // end of the duplication sent prevention code
         break;
       case "playlist":
-        await this.Playlist(res, player, { MsgInt, args }, isSlash);
+        Embed = await this.Playlist(res, player, { MsgInt, args }, isSlash);
         break;
     }
 
@@ -181,13 +183,30 @@ export default class Play {
     player: Player,
     { MsgInt, args }: SwitchCommand,
     isSlash: boolean
-  ) {
+  ): Promise<EmbedBuilder> {
+    const Embeds = new MusicEmbeds(MsgInt.client as NDBClient);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const URL = await (MsgInt.client as NDBClient).Tools.isValidURL(
-      isSlash
-        ? (args as CommandInteractionOptionResolver).getString("query")
-        : (args as Array<string>).join(" ")
-    );
-    player.queue.add(res.tracks);
+    const URL = isSlash
+      ? (args as CommandInteractionOptionResolver).getString("query")
+      : (args as Array<string>).join(" ");
+    let isValidURL: boolean = false;
+    for (const regex of Object.values(LavalinkManager.SourceLinksRegexes)) {
+      if (regex.test(URL)) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        isValidURL = true;
+        break;
+      }
+    }
+
+    if (isValidURL) {
+      if (!player.playing) {
+        await player.queue.add(res.tracks);
+        await player.play({ paused: false });
+      }
+      if (!player.paused && !player.playing) {
+        await player.play({ paused: false });
+      }
+      return await Embeds.Playlist(MsgInt, args, isSlash, res, URL);
+    }
   }
 }

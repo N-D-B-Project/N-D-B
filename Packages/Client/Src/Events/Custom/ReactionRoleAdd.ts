@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import NDBClient from "@/Core/NDBClient";
-import { GuildRepository } from "@/Database/Repositories";
 import ReactionRole from "@/Modules/ReactionRole";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
@@ -28,7 +27,9 @@ export default class ReactionRoleAddEvent extends BaseEvent {
     const ReactionCooldown = new Set();
     const ClientCooldown = new Set();
     const data = await react.getAll(reaction.message.guild);
-    const GuildData = await new GuildRepository().get(reaction.message.guild);
+    const GuildData = await client.database.GuildRepo.get(
+      reaction.message.guildId
+    );
     const Guild = reaction.message.guild;
     const Member = Guild.members.cache.get(user.id);
 

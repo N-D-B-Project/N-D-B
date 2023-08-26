@@ -1,5 +1,4 @@
 import NDBClient from "@/Core/NDBClient";
-import { GuildRepository } from "@/Database/Repositories";
 import MusicTools from "@/Modules/Music/Utils/Tools";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
@@ -18,12 +17,14 @@ module.exports = class GuildDeleteEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, guild: Guild) {
-    const guildRepository = new GuildRepository();
-    await guildRepository.delete(guild);
+    const guildData = await client.database.GuildRepo.get(guild.id);
+    const { Premium } = guildData.Settings;
 
-    const Player = await MusicTools.getPlayer(client, guild.id);
-    if (Player.guild === guild.id) {
+    const Player = await MusicTools.getPlayer(client, guild.id, Premium);
+    if (Player.guildId === guild.id) {
       Player.destroy();
     }
+
+    await client.database.GuildRepo.delete(guild);
   }
 };

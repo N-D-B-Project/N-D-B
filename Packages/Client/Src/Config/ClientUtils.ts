@@ -6,7 +6,7 @@ import {
   BaseSubCommand
 } from "@/Utils/Structures";
 import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10";
-import { ClientOptions, Collection, Partials } from "discord.js";
+import { ClientOptions, Collection, Options, Partials } from "discord.js";
 import { TFunction } from "i18next";
 
 export const _ClientOptions: ClientOptions = {
@@ -22,6 +22,7 @@ export const _ClientOptions: ClientOptions = {
     parse: ["roles", "users"],
     repliedUser: false
   },
+  makeCache: Options.cacheEverything(),
   partials: [
     Partials.Channel,
     Partials.GuildMember,

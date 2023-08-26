@@ -4,7 +4,7 @@ import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 
 import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
-import { Player } from "erela.js";
+import { Player } from "lavalink-client";
 
 export default class playerMoveEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -25,11 +25,11 @@ export default class playerMoveEvent extends BaseEvent {
     newChannel: string
   ) {
     if (!newChannel) {
-      var textChannel = client.channels.cache.get(
-        player.textChannel
+      const textChannel = client.channels.cache.get(
+        player.textChannelId
       ) as TextChannel;
-      var voiceChannel = client.channels.cache.get(
-        player.voiceChannel
+      const voiceChannel = client.channels.cache.get(
+        player.voiceChannelId
       ) as VoiceChannel;
 
       const KickEmbed = new EmbedBuilder()
@@ -72,12 +72,12 @@ export default class playerMoveEvent extends BaseEvent {
       }
       player.destroy();
     } else {
-      player.voiceChannel = newChannel;
+      player.voiceChannelId = newChannel;
       if (player.paused) return;
       setTimeout(() => {
-        player.pause(true);
+        player.pause();
         setTimeout(() => {
-          player.pause(false);
+          player.resume();
         }, client.ws.ping * 2);
       }, client.ws.ping * 2);
     }

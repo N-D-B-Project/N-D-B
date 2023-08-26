@@ -19,7 +19,7 @@ enum DeleteCommandType {
 }
 
 var deleteMode = "Guild";
-var deleteCommand = DeleteCommandType.All;
+const deleteCommand = DeleteCommandType.All;
 
 if (deleteMode === "Test") {
   if (deleteCommand === DeleteCommandType.All) {

@@ -15,8 +15,7 @@ export default class EventHandler {
     const eventFiles = await baseHandler.getFiles("Events");
     eventFiles.forEach(async eventFile => {
       const { name } = parse(eventFile);
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const File = await baseHandler.findClass(require(eventFile));
+      const File = await baseHandler.findClass(await import(eventFile));
       if (!File) {
         throw new TypeError(`Event: ${name} não exportou uma Class`);
       }
@@ -31,7 +30,22 @@ export default class EventHandler {
         { emitter: "client", value: this.client },
         { emitter: "rest", value: this.client.rest },
         { emitter: "process", value: process },
-        { emitter: "music", value: this.client.ErelaManager }
+        {
+          emitter: "music",
+          value: this.client.MusicManager.common
+        },
+        {
+          emitter: "music-node",
+          value: this.client.MusicManager.common.nodeManager
+        },
+        {
+          emitter: "music",
+          value: this.client.MusicManager.premium
+        },
+        {
+          emitter: "music-node",
+          value: this.client.MusicManager.premium.nodeManager
+        }
       ];
 
       for (const Prop of HandlerList) {
@@ -48,7 +62,7 @@ export default class EventHandler {
         }
       }
 
-      // var HandlerObject = [...new Set([])]
+      // letHandlerObject = [...new Set([])]
       //   .map(object => {
       //     return {
       //       emitter: object.emitter,

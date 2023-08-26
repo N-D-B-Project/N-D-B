@@ -17,7 +17,6 @@ export default class SlashChecker {
     const tools = new Tools(this.client);
 
     if (Options.ownerOnly && !tools.checkOwner(interaction.user.id)) {
-      console.log("Owner");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
@@ -44,7 +43,6 @@ export default class SlashChecker {
       return false;
     }
     if (Options.nsfw && !Channel.nsfw) {
-      console.log("NSFW");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
@@ -56,7 +54,6 @@ export default class SlashChecker {
       return false;
     }
     if (Options.disable) {
-      console.log("Disable");
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
@@ -68,7 +65,6 @@ export default class SlashChecker {
       return false;
     }
     // if (Options.ndcash && !NDCash) {
-    //   console.log("NDCash");
     //   InteractionTools.reply(
     //     interaction,
     //     await this.client.Translate.Guild(
@@ -79,10 +75,26 @@ export default class SlashChecker {
     //   return false;
     // }
     // if (Options.ndcash && NDCash) {
-    //   console.log("NDCash_2");
     //   NDCash -= Options.ndcash;
     //   UserProfile.save();
     //   return true;
+    // }
+
+    // const player = await MusicTools.getPlayer(this.client, interaction.guildId);
+    // if (interaction.channelId !== player.textChannelId) {
+    //   const voiceChannel = await interaction.guild.channels.fetch(
+    //     player.voiceChannelId
+    //   );
+
+    //   await this.client.Translate.Guild(
+    //     "Tools/Music:WrongChannel",
+    //     interaction,
+    //     {
+    //       TextChannel: player.textChannelId,
+    //       VoiceChannel: voiceChannel.name
+    //     }
+    //   );
+    //   return false;
     // }
 
     return true;

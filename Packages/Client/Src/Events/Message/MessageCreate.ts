@@ -1,5 +1,4 @@
 import NDBClient from "@/Core/NDBClient";
-import { GuildRepository } from "@/Database/Repositories";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
@@ -19,19 +18,19 @@ export default class MessageCreateEvent extends BaseEvent {
 
   async run(client: NDBClient, message: Message) {
     if (message.author.bot) return;
-
     const emojis = message.content.match(/(?<=:)([^:\s]+)(?=:)/g);
     if (emojis) {
       client.emit("NotQuiteNitro", message, emojis);
     }
 
-    const guildRepository = new GuildRepository();
+    const guildRepository = client.database.GuildRepo;
+
     // GuildConfig
-    var guildConfig = await guildRepository.get(message.guild);
+    let guildConfig = await guildRepository.get(message.guildId);
     if (!guildConfig && message.channel.type !== ChannelType.DM) {
       const createdGuildConfig = await guildRepository.create(message.guild);
       if (createdGuildConfig) {
-        var guildConfig = await guildRepository.get(message.guild);
+        guildConfig = await guildRepository.get(message.guildId);
       }
       client.logger.database(
         `${message.guild.name} Configuration Created on Database\n`
@@ -61,15 +60,15 @@ export default class MessageCreateEvent extends BaseEvent {
         ]
       });
     } else if (guildConfig && message.channel.type !== ChannelType.DM) {
+      const { Prefix: dbPrefix, Premium } = guildConfig.Settings;
       const mentionRegex = RegExp(`<@!${client.user.id}>$`);
       const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
-      var Prefix = message.content.match(mentionRegexPrefix)
+      const Prefix = message.content.match(mentionRegexPrefix)
         ? message.content.match(mentionRegexPrefix)[0]
-        : guildConfig.Settings.Prefix;
+        : dbPrefix;
 
       if (message.content == Prefix) return;
-
       if (!message.content.startsWith(Prefix)) return;
 
       //TODO Doesn't working...
@@ -86,10 +85,9 @@ export default class MessageCreateEvent extends BaseEvent {
         );
         return;
       }
-
       // Commands
       if (message.content.startsWith(Prefix)) {
-        client.emit("Command", message, Prefix);
+        client.emit("Command", message, Prefix, Premium);
       }
     } else if (message.channel.type === ChannelType.DM) {
       client.emit("DMCommand", message, "&");

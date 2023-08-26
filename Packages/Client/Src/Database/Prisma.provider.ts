@@ -1,10 +1,19 @@
-import { Logger } from "@/Utils/Tools";
+import NDBClient from "@/Core/NDBClient";
+import ReactionRoleRepository from "@/Modules/ReactionRole/Utils/ReactionRole.repository";
 import { PrismaClient } from "@prisma/client";
+import {
+  GuildRepository,
+  NDCashRepository,
+  UserRepository
+} from "./Repositories";
 
 export default class PrismaProvider extends PrismaClient {
   private isConnected: boolean = false;
-  private logger: Logger = new Logger();
-  constructor() {
+  public GuildRepo = new GuildRepository(this);
+  public UserRepo = new UserRepository(this);
+  public NDCashRepo = new NDCashRepository(this);
+  public ReactionRoleRepo = new ReactionRoleRepository(this);
+  constructor(private readonly client: NDBClient) {
     super();
   }
 
@@ -20,19 +29,21 @@ export default class PrismaProvider extends PrismaClient {
     try {
       await this.$connect();
       this.setStatus(true);
-      this.logger.database("PostgreSQL connected via Prisma");
+      this.client.logger.database("PostgreSQL connected via Prisma");
     } catch (error) {
-      this.logger.error(String(error));
+      this.client.logger.error(String(error));
     }
   }
 
-  async Disconnect(): Promise<void> {
+  async Disconnect(reason: string): Promise<void> {
     try {
       await this.$disconnect();
       this.setStatus(false);
-      this.logger.database("PostgreSQL disconnected via Prisma");
+      this.client.logger.database(
+        `PostgreSQL disconnected via Prisma, Reason: ${reason}`
+      );
     } catch (error) {
-      this.logger.error(String(error));
+      this.client.logger.error(String(error));
     }
   }
 }

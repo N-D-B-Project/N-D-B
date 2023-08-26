@@ -1,5 +1,4 @@
 import NDBClient from "@/Core/NDBClient";
-import { GuildRepository, UserRepository } from "@/Database/Repositories";
 import {
   CommandInteraction,
   GuildChannel,
@@ -12,9 +11,6 @@ import i18next, { TFunction } from "i18next";
 import Backend from "i18next-fs-backend";
 import * as path from "path";
 import { Logger } from "../Tools";
-
-const guildRepository = new GuildRepository();
-const userRepository = new UserRepository();
 
 async function walkDirectory(
   dir: string,
@@ -50,10 +46,11 @@ export default async (): Promise<Map<string, TFunction>> => {
     path.resolve(__dirname, "../Languages/i18next/")
   );
 
+  let TF: boolean;
   if (process.env.Debug === "True") {
-    var TF = true;
+    TF = true;
   } else if (process.env.Debug === "False") {
-    var TF = false;
+    TF = false;
   }
 
   await i18next.use(Backend).init(
@@ -87,17 +84,16 @@ export default async (): Promise<Map<string, TFunction>> => {
 };
 
 export class Translate {
-  public constructor(private client: NDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(private readonly client: NDBClient) {}
 
   async Guild(
     key: string,
     info: Message | CommandInteraction | GuildChannel | PartialMessage,
     args?: Record<string, unknown>
   ) {
-    const find = await guildRepository.get(info.guild);
-    var locale = find.Settings.Language;
+    const find = await this.client.database.GuildRepo.get(info.guildId);
+    let locale = find.Settings.Language;
     if (!locale) locale = "pt-BR";
     const language = this.client.Collections.translations.get(locale);
     if (!language) throw "Linguagem invalida || Key não encontrada";
@@ -105,8 +101,8 @@ export class Translate {
   }
 
   async DM(key: string, user: User, args?: Record<string, unknown>) {
-    const find = await userRepository.get(user);
-    var locale = find.Settings.Language;
+    const find = await this.client.database.UserRepo.get(user.id);
+    let locale = find.Settings.Language;
     if (!locale) locale = "pt-BR";
     const language = this.client.Collections.translations.get(locale);
     if (!language) throw "Linguagem invalida || Key não encontrada";

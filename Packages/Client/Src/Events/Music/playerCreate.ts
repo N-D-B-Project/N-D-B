@@ -1,10 +1,10 @@
-import { Config } from "@/Config/Config";
+import { Config, Emojis } from "@/Config/Config";
 import NDBClient from "@/Core/NDBClient";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, Guild, TextChannel, VoiceChannel } from "discord.js";
-import { Player } from "erela.js";
+import { Player } from "lavalink-client";
 export default class playerCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
     const options: EventOptions = {
@@ -18,17 +18,16 @@ export default class playerCreateEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, player: Player) {
-    const guild = (await client.guilds.fetch(player.guild)) as Guild;
+    const guild = (await client.guilds.fetch(player.guildId)) as Guild;
     client.logger.info(
       `Player iniciando no servidor: ${guild.name}(${guild.id})`
     );
-    var textChannel = client.channels.cache.get(
-      player.textChannel
+    const textChannel = client.channels.cache.get(
+      player.textChannelId
     ) as TextChannel;
-    var voiceChannel = client.channels.cache.get(
-      player.voiceChannel
+    const voiceChannel = client.channels.cache.get(
+      player.voiceChannelId
     ) as VoiceChannel;
-    player.setVolume(50);
     const embed = new EmbedBuilder()
       .setAuthor({
         name: guild.name,
@@ -45,7 +44,11 @@ export default class playerCreateEvent extends BaseEvent {
         await client.Translate.Guild(
           "Events/PlayerEvents:playerCreate:Embed:Description",
           textChannel,
-          { TEXT: textChannel.id, VOICE: voiceChannel.name }
+          {
+            TEXT: textChannel.id,
+            VOICE: voiceChannel.name,
+            isPremium: player.isPremium ? Emojis.accept : Emojis.fail
+          }
         )
       )
       .setFooter({
@@ -76,7 +79,7 @@ export default class playerCreateEvent extends BaseEvent {
     });
 
     if (Config.Music.Client.serverDeaf) {
-      for (var i = 0; i <= 5; i++) {
+      for (let i = 0; i <= 5; i++) {
         await new Promise(res => {
           setTimeout(() => {
             res(2);

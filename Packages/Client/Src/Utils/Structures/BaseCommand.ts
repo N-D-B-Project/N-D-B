@@ -14,7 +14,12 @@ export default class BaseCommand {
     this.args = args;
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(
+    client: NDBClient,
+    message: Message,
+    args: Array<string>,
+    premium?: boolean
+  ) {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`
     );

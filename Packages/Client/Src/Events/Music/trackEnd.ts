@@ -2,7 +2,7 @@
 import NDBClient from "@/Core/NDBClient";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
-import { Player, Track, TrackEndEvent } from "erela.js";
+import { Player, Track, TrackEndEvent } from "lavalink-client";
 
 export default class trackEndEvent extends BaseEvent {
   constructor(client: NDBClient) {

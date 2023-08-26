@@ -24,7 +24,12 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, oldState: VoiceState, newState: VoiceState) {
-    var player = client.ErelaManager.players.get(newState.guild.id);
+    const guildRepository = client.database.GuildRepo;
+    const { Premium } = (await guildRepository.get(oldState.guild.id)).Settings;
+
+    const player = Premium
+      ? client.MusicManager.premium.players.get(newState.guild.id)
+      : client.MusicManager.common.players.get(newState.guild.id);
 
     // Auto set Client as Speaker in Stage Channels
     if (
@@ -45,7 +50,7 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
 
     // Auto Leave Client from Channels if is EMPTY or Everyone is MUTED
     if (oldState && (!newState.channelId || newState.channelId)) {
-      if (player && oldState.channelId == player.voiceChannel) {
+      if (player && oldState.channelId == player.voiceChannelId) {
         if (
           !(
             (!oldState.streaming && newState.streaming) ||
@@ -81,16 +86,16 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
           ) {
             setTimeout(async () => {
               try {
-                var voiceChannel: VoiceChannel;
+                let voiceChannel: VoiceChannel;
                 voiceChannel = newState.guild.channels.cache.get(
-                  player.voiceChannel
+                  player.voiceChannelId
                 ) as VoiceChannel;
                 if (voiceChannel) {
                   voiceChannel = (await voiceChannel.fetch()) as VoiceChannel;
                 }
                 if (!voiceChannel) {
                   voiceChannel = (await newState.guild.channels
-                    .fetch(player.voiceChannel)
+                    .fetch(player.voiceChannelId)
                     .catch(error => {
                       client.logger.error(error);
                     })) as VoiceChannel;
@@ -148,8 +153,8 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
             .has("DeafenMembers"))
       ) {
         newState.setDeaf(true);
-        var textChannel = newState.guild.channels.cache.get(
-          player.textChannel
+        const textChannel = newState.guild.channels.cache.get(
+          player.textChannelId
         ) as TextChannel;
 
         textChannel.send({

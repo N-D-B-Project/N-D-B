@@ -7,7 +7,7 @@ import { EmbedBuilder, TextChannel } from "discord.js";
 
 import { Emojis } from "@/Config/Config";
 import { MessageTools } from "@/Utils/Tools";
-import { Player, Track, TrackStuckEvent } from "erela.js";
+import { Player, Track, TrackStuckEvent } from "lavalink-client";
 
 export default class trackStuckEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -27,9 +27,9 @@ export default class trackStuckEvent extends BaseEvent {
     track: Track,
     payload: TrackStuckEvent
   ) {
-    player.stop();
-    var textChannel = client.channels.cache.get(
-      player.textChannel
+    console.log("trackStuck");
+    const textChannel = client.channels.cache.get(
+      player.textChannelId
     ) as TextChannel;
 
     const embed = new EmbedBuilder()
@@ -49,10 +49,10 @@ export default class trackStuckEvent extends BaseEvent {
         await client.Translate.Guild(
           "Events/PlayerEvents:trackStuck:Embed:Description",
           textChannel,
-          { TITLE: track.title, URI: track.uri }
+          { TITLE: track.info.title, URI: track.info.uri }
         )
       )
-      .setThumbnail(track.artworkUrl)
+      .setThumbnail(track.info.artworkUrl)
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackStuck:Embed:Footer",

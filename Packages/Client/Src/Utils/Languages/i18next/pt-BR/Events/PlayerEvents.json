@@ -3,7 +3,7 @@
   "playerCreate": {
     "Embed": {
       "Title": "Player Criado!",
-      "Description": "<:NotixAllow:719560623960096789> **Entrei no Canal:** `{{VOICE}}`\n**Comando vinculados ao Canal: **<#{{TEXT}}>",
+      "Description": "<:NotixAllow:719560623960096789> **Entrei no Canal:** `{{VOICE}}`\n**Comando vinculados ao Canal: **<#{{TEXT}}>\n Premium: {{isPremium}}",
       "Footer": "N-D-B Music Player"
     }
   },

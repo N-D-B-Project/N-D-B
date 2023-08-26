@@ -11,24 +11,23 @@ enum Status {
 }
 
 export default class GuildRepository {
-  public constructor(
-    private readonly prisma: PrismaProvider = new PrismaProvider()
-  ) {}
+  public constructor(private readonly prisma: PrismaProvider) {}
 
-  public async get(guild: Guild) {
-    return await this.prisma.guild.findUnique({
-      where: { id: guild.id },
+  public async get(guildId: string) {
+    const find = await this.prisma.guild.findUnique({
+      where: { id: guildId },
       include: {
         Settings: true
       }
     });
+    return find;
   }
 
   public async create(
     guild: Guild
   ): Promise<{ callback: void | DBGuild; status: Status }> {
-    const Guild = await this.get(guild);
-    var status = Status.Created;
+    const Guild = await this.get(guild.id);
+    let status = Status.Created;
     const callback = await this.prisma.guild
       .create({
         data: {
@@ -63,9 +62,47 @@ export default class GuildRepository {
     });
   }
 
+  // public async updateDatabase(
+  //   guildId: string,
+  //   { Guild, Settings }: newDatabase
+  // ) {
+  //   await this.prisma.guild.update({
+  //     where: { id: guildId },
+  //     data: {
+  //       Name: Guild.name,
+  //       databaseVersion: Guild.databaseVersion,
+  //       updatedAt: new Date()
+  //     }
+  //   });
+  //   await this.prisma.guildSettings.update({
+  //     where: { id: guildId },
+  //     data: {
+  //       Prefix: Settings.Prefix,
+  //       Language: Settings.Language,
+  //       AntiSpam: Settings.AntiSpam,
+  //       ReactionDM: Settings.ReactionDM,
+  //       Premium: Settings.Premium
+  //     }
+  //   });
+  // }
+
   public async delete(guild: Guild) {
     return await this.prisma.guild.delete({
       where: { id: guild.id }
     });
   }
 }
+
+// interface newDatabase {
+//   Guild: {
+//     name: string;
+//     databaseVersion: string;
+//   };
+//   Settings: {
+//     Prefix: string;
+//     Language: string;
+//     AntiSpam: boolean;
+//     ReactionDM: boolean;
+//     Premium: boolean;
+//   };
+// }

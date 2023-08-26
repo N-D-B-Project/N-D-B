@@ -16,9 +16,9 @@ export default class NotQuiteNitroEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, message: Message, emojis: RegExpMatchArray) {
-    var replyContent = message.content;
+    let replyContent = message.content;
     emojis.forEach(async _emoji => {
-      var emoji = client.emojis.cache.find(e => e.name === _emoji);
+      const emoji = client.emojis.cache.find(e => e.name === _emoji);
       if (!emoji) return;
       if (new RegExp(emoji.toString(), "g").test(replyContent)) {
         replyContent = message.content.replace(
@@ -32,7 +32,7 @@ export default class NotQuiteNitroEvent extends BaseEvent {
         );
       }
 
-      var webhook = (
+      const webhook = (
         await (message.channel as TextChannel).fetchWebhooks()
       ).find(w => w.name === "N-D-B_NQN");
       if (!webhook) {

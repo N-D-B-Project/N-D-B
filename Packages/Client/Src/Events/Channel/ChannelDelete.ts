@@ -18,16 +18,18 @@ export default class channelDeleteEvent extends BaseEvent {
   }
 
   async run(client: NDBClient, channel: GuildChannel) {
-    const Player = await MusicTools.getPlayer(client, channel.guildId);
+    const guildData = await client.database.GuildRepo.get(channel.guildId);
+    const { Premium } = guildData.Settings;
+    const Player = await MusicTools.getPlayer(client, channel.guildId, Premium);
     if (
       channel.type === ChannelType.GuildVoice &&
       Player &&
-      Player.voiceChannel === channel.id &&
+      Player.voiceChannelId === channel.id &&
       channel.members.has(client.user.id)
     ) {
       Player.destroy();
       const textChannel = (await channel.guild.channels.fetch(
-        Player.textChannel
+        Player.textChannelId
       )) as TextChannel;
       MessageTools.send(textChannel, {
         content: await client.Translate.Guild(

@@ -287,8 +287,8 @@ export async function ReactionRoleDeleteAllEmbed(
   status: "Confirm" | "Cancel" | "Success",
   ReactionCount: number | null
 ): Promise<EmbedBuilder> {
-  var description: string;
-  var color;
+  let description: string;
+  let color;
   switch (status) {
     case "Confirm":
       description = "ReactionRole/DeleteAllReactions:Embed:Description:Confirm";

@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id        String        @id
-  Username  String
-  Settings  UserSettings?
-  NDCash    NDCash?
+  id              String        @id
+  Username        String
+  Settings        UserSettings?
+  NDCash          NDCash?
   // Bag       UserBag?
   // Guilds    UserGuilds[]
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @default(now())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now())
+  databaseVersion String        @default("Music")
 
   @@map("User")
 }
@@ -99,6 +100,7 @@ model Guild {
   GuildReactionRoles GuildReactionRoles[]
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @default(now())
+  databaseVersion    String               @default("Music")
 
   @@map("Guild")
 }
@@ -111,6 +113,7 @@ model GuildSettings {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
   ReactionDM Boolean  @default(true)
+  Premium    Boolean  @default(false)
   guild      Guild    @relation(fields: [guildId], references: [id])
   guildId    String   @unique
 }

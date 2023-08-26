@@ -44,7 +44,7 @@ export default class CreateReactionSubCommand extends BaseSubCommand {
     const Message = args.getString("message");
     const Role = args.getRole("role").id;
     const Emoji = args.getString("emoji");
-    var Option = args.getNumber("option");
+    let Option = args.getNumber("option");
     if (!Option || Option > 6 || isNaN(Option)) Option = 1;
     const data: iReaction = {
       Channel,

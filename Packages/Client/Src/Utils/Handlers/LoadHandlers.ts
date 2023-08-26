@@ -12,7 +12,7 @@ export default class LoadHandlers {
     this.client = client;
   }
 
-  async Load() {
+  async load() {
     await new EventHandler(this.client).load();
     await new CommandHandler(this.client).load();
     const _SlashHandler = new SlashHandler(this.client);

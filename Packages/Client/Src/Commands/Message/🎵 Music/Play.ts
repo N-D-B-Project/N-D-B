@@ -30,9 +30,14 @@ export default class PlayCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(
+    client: NDBClient,
+    message: Message,
+    args: Array<string>,
+    premium: boolean
+  ) {
     const music = new Music(client);
-    const play = await music.Play({ MsgInt: message, args }, false);
+    const play = await music.Play({ MsgInt: message, args }, false, premium);
     MessageTools.reply(message, play);
   }
 }

@@ -10,7 +10,7 @@ import {
   Message,
   TextChannel
 } from "discord.js";
-import { Player, Track, TrackStartEvent } from "erela.js";
+import { Player, Track, TrackStartEvent } from "lavalink-client";
 
 export default class trackStartEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -30,19 +30,19 @@ export default class trackStartEvent extends BaseEvent {
     track: Track,
     payload: TrackStartEvent
   ) {
-    var textChannel = client.channels.cache.get(
-      player.textChannel
+    const textChannel = client.channels.cache.get(
+      player.textChannelId
     ) as TextChannel;
 
     const Requester = (
       (await (
-        await client.guilds.fetch(player.guild)
+        await client.guilds.fetch(player.guildId)
       ).members.fetch(track.requester as string)) as GuildMember
     ).user;
 
     const Timer = await client.Tools.Timer(
       "normal",
-      track.duration,
+      track.info.duration,
       textChannel as GuildChannel
     );
     await client.Tools.WAIT(500);
@@ -68,7 +68,7 @@ export default class trackStartEvent extends BaseEvent {
           value: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:Content:1",
             textChannel,
-            { TITLE: track.title, URI: track.uri }
+            { TITLE: track.info.title, URI: track.info.uri }
           ),
           inline: true
         },
@@ -80,7 +80,7 @@ export default class trackStartEvent extends BaseEvent {
           value: await client.Translate.Guild(
             "Events/PlayerEvents:trackStart:Embed:Fields:Content:2",
             textChannel,
-            { AUTHOR: track.author }
+            { AUTHOR: track.info.author }
           ),
           inline: true
         },
@@ -89,7 +89,7 @@ export default class trackStartEvent extends BaseEvent {
             "Events/PlayerEvents:trackStart:Embed:Fields:3",
             textChannel
           ),
-          value: track.isStream
+          value: track.info.isStream
             ? await client.Translate.Guild(
                 "Events/PlayerEvents:trackStart:Embed:Fields:Content:3²",
                 textChannel
@@ -102,7 +102,7 @@ export default class trackStartEvent extends BaseEvent {
           inline: true
         }
       ])
-      .setThumbnail(track.artworkUrl)
+      .setThumbnail(track.info.artworkUrl)
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackStart:Embed:Footer",

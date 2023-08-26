@@ -2,8 +2,7 @@
 import NDBClient from "@/Core/NDBClient";
 import { CommandOptions } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
-import { MessageTools, Paginator } from "@/Utils/Tools";
-import { EmbedBuilder, Message } from "discord.js";
+import { Message } from "discord.js";
 
 export default class TestCommand extends BaseCommand {
   constructor(client: NDBClient, ...args: string[]) {
@@ -19,7 +18,7 @@ export default class TestCommand extends BaseCommand {
         user: [],
         bot: []
       },
-      minArgs: 2,
+      minArgs: 0,
       guildOnly: false,
       ownerOnly: true,
       nsfw: false,
@@ -28,56 +27,36 @@ export default class TestCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
-    const msg = await MessageTools.send(message.channel, {
-      content: await client.Translate.Guild(
-        "DeveloperTools/test:Test",
-        message
-      ),
-      embeds: [],
-      components: []
-    });
+  async run(
+    client: NDBClient,
+    message: Message,
+    args: Array<string>,
+    premium: boolean
+  ) {
+    console.log("running test command");
+    // const player =
+    //   (await MusicTools.getPlayer(client, message.guildId, premium)) ||
+    //   (await MusicTools.createPlayer(
+    //     client,
+    //     message.member.voice.channel as VoiceChannel,
+    //     message.channelId,
+    //     premium
+    //   ));
 
-    await client.Tools.WAIT(1500);
+    // await player.connect();
+    // const res = await player.search(
+    //   {
+    //     query: "Star Walkin'",
+    //     source: "spotify"
+    //   },
+    //   client.user
+    // );
 
-    MessageTools.edit(
-      msg,
-      await client.Translate.Guild("DeveloperTools/test:Tested", message)
-    );
+    // player.queue.add(res.tracks[0]);
 
-    const TestEmbeds: Array<EmbedBuilder> = [
-      new EmbedBuilder()
-        .setDescription(
-          await client.Translate.Guild("DeveloperTools/test:Embed", message)
-        )
-        .setColor("Random")
-        .setFooter({ text: "1" }),
-      new EmbedBuilder()
-        .setDescription(
-          await client.Translate.Guild("DeveloperTools/test:Embed", message)
-        )
-        .setColor("Random")
-        .setFooter({ text: "2" }),
-      new EmbedBuilder()
-        .setDescription(
-          await client.Translate.Guild("DeveloperTools/test:Embed", message)
-        )
-        .setColor("Random")
-        .setFooter({ text: "3" }),
-      new EmbedBuilder()
-        .setDescription(
-          await client.Translate.Guild("DeveloperTools/test:Embed", message)
-        )
-        .setColor("Random")
-        .setFooter({ text: "4" }),
-      new EmbedBuilder()
-        .setDescription(
-          await client.Translate.Guild("DeveloperTools/test:Embed", message)
-        )
-        .setColor("Random")
-        .setFooter({ text: "5" })
-    ];
-
-    await Paginator(client, message, "Message", TestEmbeds);
+    // await player.play({
+    //   paused: false,
+    //   volume: 50
+    // });
   }
 }

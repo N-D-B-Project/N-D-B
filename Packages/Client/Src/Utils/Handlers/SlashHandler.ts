@@ -16,8 +16,7 @@ export default class SlashHandler {
     const commandFiles = await baseHandler.getFiles("Commands/Slash");
     commandFiles.forEach(async commandFile => {
       const { name } = parse(commandFile);
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const File = await baseHandler.findClass(require(commandFile));
+      const File = await baseHandler.findClass(await import(commandFile));
       if (!File) {
         throw new TypeError(`Comando: ${name} não exportou uma Class`);
       }

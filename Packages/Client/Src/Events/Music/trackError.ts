@@ -5,7 +5,7 @@ import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 
 import { EmbedBuilder, TextChannel } from "discord.js";
-import { Player, Track, TrackExceptionEvent } from "erela.js";
+import { Player, Track, TrackExceptionEvent } from "lavalink-client";
 
 export default class trackErrorEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -25,10 +25,9 @@ export default class trackErrorEvent extends BaseEvent {
     track: Track,
     payload: TrackExceptionEvent
   ) {
-    player.stop();
-
-    var textChannel = client.channels.cache.get(
-      player.textChannel
+    console.log("trackError");
+    const textChannel = client.channels.cache.get(
+      player.textChannelId
     ) as TextChannel;
 
     const embed = new EmbedBuilder()
@@ -47,7 +46,7 @@ export default class trackErrorEvent extends BaseEvent {
         await client.Translate.Guild(
           "Events/PlayerEvents:playerMove:Embed:Description",
           textChannel,
-          { TITLE: track.title, URI: track.uri }
+          { TITLE: track.info.title, URI: track.info.uri }
         )
       )
       .addFields([
@@ -63,7 +62,7 @@ export default class trackErrorEvent extends BaseEvent {
           )
         }
       ])
-      .setThumbnail(track.artworkUrl)
+      .setThumbnail(track.info.artworkUrl)
       .setFooter({
         text: await client.Translate.Guild(
           "Events/PlayerEvents:trackError:Embed:Footer",

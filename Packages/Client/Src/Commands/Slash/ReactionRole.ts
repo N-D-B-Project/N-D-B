@@ -257,8 +257,6 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
         if (_SubCommand) {
           const Checker = await cmdTools.runCheck(interaction, _SubCommand);
           if (Checker) {
-            // await interaction.deferReply().catch(e => console.error(e));
-
             _SubCommand
               .run(
                 client,

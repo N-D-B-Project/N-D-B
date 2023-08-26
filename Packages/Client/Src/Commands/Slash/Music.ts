@@ -37,6 +37,14 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
                 required: true
               }
             ]
+          },
+          {
+            name: "now_playing",
+            nameLocalizations: Localization.options.nowplaying.name,
+            description: "Show the current playing song and more info",
+            descriptionLocalizations:
+              Localization.options.nowplaying.description,
+            type: ApplicationCommandOptionType.Subcommand
           }
         ]
       },
@@ -60,7 +68,7 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
     args: CommandInteractionOptionResolver
   ) {
     const cmdTools = new SubTools(client);
-    const SubList = [{ prop: "play" }];
+    const SubList = [{ prop: "play" }, { prop: "now_playing" }];
     for (const Command of SubList) {
       if (args.getSubcommand() === Command.prop) {
         const _SubCommand: BaseSubCommand = client.Collections.SubCommands.get(
@@ -70,8 +78,6 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
         if (_SubCommand) {
           const Checker = await cmdTools.runCheck(interaction, _SubCommand);
           if (Checker) {
-            await interaction.deferReply();
-
             _SubCommand
               .run(
                 client,

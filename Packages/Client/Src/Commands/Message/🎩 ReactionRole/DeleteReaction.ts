@@ -48,7 +48,7 @@ export default class DeleteReactionCommand extends BaseCommand {
 
   async run(client: NDBClient, message: Message, args: Array<string>) {
     const react: ReactionRole = new ReactionRole(client, "Delete");
-    var Channel =
+    let Channel =
       message.mentions.channels.first() ||
       message.guild.channels.cache.get(args[0]) ||
       (message.guild.channels.cache.find(
@@ -70,7 +70,7 @@ export default class DeleteReactionCommand extends BaseCommand {
       );
       return;
     }
-    var MsgID = await Channel.messages.fetch(args[1]).catch(async () => {
+    const MsgID = await Channel.messages.fetch(args[1]).catch(async () => {
       MessageTools.send(
         message.channel,
         await MessageNotFoundEmbed(client, message, message.author)
@@ -78,7 +78,7 @@ export default class DeleteReactionCommand extends BaseCommand {
       return;
     });
 
-    var Role =
+    const Role =
       message.mentions.roles.first() ||
       message.guild.roles.cache.get(args[2]) ||
       message.guild.roles.cache.find(rl => rl.name === args[2]);

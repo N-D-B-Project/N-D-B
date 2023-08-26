@@ -23,6 +23,14 @@ export const Localization = {
           }
         }
       }
+    },
+    nowplaying: {
+      name: {
+        "pt-BR": "tocando_agora"
+      },
+      description: {
+        "pt-BR": "Mostra qual musica está tocando e mais informações"
+      }
     }
   }
 };

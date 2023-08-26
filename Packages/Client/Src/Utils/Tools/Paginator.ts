@@ -24,10 +24,10 @@ export default async function Paginator(
   embeds: Array<EmbedBuilder>,
   time: number = 60000
 ): Promise<void> {
-  var CurrentPage: typeof msgint;
-  var Collector: InteractionCollector<ButtonInteraction>;
-  var filter: CollectorFilter<any[]>;
-  var index: number = 0;
+  letCurrentPage: typeof msgint;
+  letCollector: InteractionCollector<ButtonInteraction>;
+  let filter: CollectorFilter<any[]>;
+  let index: number = 0;
   const Embed = embeds[index];
   const PreviousButton = new ButtonBuilder()
     .setCustomId("PREVIOUS")

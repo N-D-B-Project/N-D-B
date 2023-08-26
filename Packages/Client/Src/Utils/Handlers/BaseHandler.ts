@@ -42,7 +42,7 @@ export default class BaseHandler {
   }
 
   public async getFiles(handler: string): Promise<Array<string>> {
-    var baseDir: string;
+    let baseDir: string;
     if (process.env.isCompiled === "true") {
       baseDir = `${this.directory}${handler}/**/*.js`;
     } else {

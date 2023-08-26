@@ -57,5 +57,40 @@
     "Footer": "N-D-B Music Player"
   },
 
-  "WrongChannel": "Este comando só pode ser utilizado em: <#{{CHANNEL}}>"
+  "NowPlayingEmbed": {
+    "Paused": "{{Emoji}} Pausado",
+    "Playing": "{{Emoji}} Tocando",
+    "ActiveBass": "{{Emoji}} Ativado",
+    "NoBass": "{{Emoji}} Desativado",
+    "MusicLoop": "{{Emoji}} Musica",
+    "QueueLoop": "{{Emoji}} Fila",
+    "NoLoop": "{{Emoji}} Desativado",
+    "Title": "Tocando Agora",
+    "Fields": {
+      "1": ":crown: Autor",
+      "2": "🎤 Tocando",
+      "3": "📢 BassBoost",
+      "4": "🔁 Loop",
+      "5": "🔊 Volume",
+      "6": "⏳ Duração",
+      "Content": {
+        "1": "{{Author}}",
+        "2": "{{IsPlaying}}",
+        "3": "{{IsBassBoosted}}",
+        "4": "{{IsLoop}}",
+        "5": "{{Volume}}%",
+        "6": "{{Duration}}"
+      }
+    }
+  },
+
+  "WrongChannel": "Este comando só pode ser utilizado em: <#{{TextChannel}}> ou você não está no mesmo canal de voz: `{{VoiceChannel}}`.",
+
+  "Volume": {
+    "NotValid": "O volume deve ser um numero entre 0 e 100.",
+    "Defined": "Volume do Player definido em: `{{volume}}.`"
+  },
+
+  "Stop": "Player parado com sucesso! a fila de musicas foi excluída.",
+  "Leave": "Sai do canal de voz: `{{VoiceChannel}}`, fila de musicas foi excluída."
 }
