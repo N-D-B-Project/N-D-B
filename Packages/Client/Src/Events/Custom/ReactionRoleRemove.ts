@@ -5,7 +5,7 @@ import ReactionRole from "@/Modules/ReactionRole";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
-import { EmbedBuilder, MessageReaction, User } from "discord.js";
+import { EmbedBuilder, MessageReaction, User, roleMention } from "discord.js";
 
 export default class Event extends BaseEvent {
   constructor(client: NDBClient) {
@@ -105,7 +105,7 @@ export default class Event extends BaseEvent {
             await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Add:Description",
               reaction.message,
-              { ROLE: `<@&${Role}>`, GUILD: Guild.name }
+              { ROLE: roleMention(Role.id), GUILD: Guild.name }
             )
           )
           .addFields([
@@ -148,7 +148,7 @@ export default class Event extends BaseEvent {
             await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Remove:Description",
               reaction.message,
-              { ROLE: `<@&${Role}>`, GUILD: Guild.name }
+              { ROLE: roleMention(Role.id), GUILD: Guild.name }
             )
           )
           .addFields([
@@ -190,7 +190,7 @@ export default class Event extends BaseEvent {
             await client.Translate.Guild(
               "Events/ReactionRoleAdd-Remove:Error:Description",
               reaction.message,
-              { ROLE: `<@&${Role}>`, GUILD: Guild.name }
+              { ROLE: roleMention(Role.id), GUILD: Guild.name }
             )
           )
           .addFields([

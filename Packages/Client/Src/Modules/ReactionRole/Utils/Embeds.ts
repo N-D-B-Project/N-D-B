@@ -8,7 +8,9 @@ import {
   EmbedBuilder,
   Message,
   TextChannel,
-  User
+  User,
+  channelMention,
+  roleMention
 } from "discord.js";
 import { REACTION_OPTIONS, iReaction } from "./../Types/index.d";
 
@@ -132,7 +134,7 @@ export async function ReactionRoleCreatedEmbed(
           "ReactionRole/CreateReaction:Embed:Fields:1",
           info
         ),
-        value: `<#${Channel}>`,
+        value: channelMention(Channel),
         inline: true
       },
       {
@@ -174,7 +176,7 @@ export async function ReactionRoleCreatedEmbed(
           "ReactionRole/CreateReaction:Embed:Fields:5",
           info
         ),
-        value: `<@&${Role}>`
+        value: roleMention(Role)
       }
     ]);
 }
@@ -225,7 +227,7 @@ export async function ReactionRoleUpdatedEmbed(
           "ReactionRole/UpdateReaction:Embed:Fields:1",
           info
         ),
-        value: `<#${Channel}>`,
+        value: channelMention(Channel),
         inline: true
       },
       {
@@ -259,7 +261,7 @@ export async function ReactionRoleUpdatedEmbed(
           "ReactionRole/UpdateReaction:Embed:Fields:4",
           info
         ),
-        value: `<@${Role}>`,
+        value: roleMention(Role),
         inline: true
       },
       {

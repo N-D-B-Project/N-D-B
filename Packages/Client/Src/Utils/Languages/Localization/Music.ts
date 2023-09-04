@@ -31,6 +31,14 @@ export const Localization = {
       description: {
         "pt-BR": "Mostra qual musica está tocando e mais informações"
       }
+    },
+    join: {
+      name: {
+        "pt-BR": "entrar"
+      },
+      description: {
+        "pt-BR": "Faz o bot entrar no seu canal de voz e cria um player"
+      }
     }
   }
 };

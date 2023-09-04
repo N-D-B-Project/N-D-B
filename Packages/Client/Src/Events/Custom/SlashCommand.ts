@@ -24,6 +24,9 @@ export default class SlashCommandEvent extends BaseEvent {
 
   async run(client: NDBClient, interaction: ChatInputCommandInteraction) {
     const cmdTools = new SlashTools(client);
+    const { Premium } = (
+      await client.database.GuildRepo.get(interaction.guildId)
+    ).Settings;
 
     const _Command: BaseSlashCommand = client.Collections.SlashCommands.get(
       interaction.commandName
@@ -39,7 +42,8 @@ export default class SlashCommandEvent extends BaseEvent {
           .run(
             client,
             interaction,
-            interaction.options as CommandInteractionOptionResolver
+            interaction.options as CommandInteractionOptionResolver,
+            Premium
           )
           .catch(async (error: Error) => {
             client.logger.error(error.stack);

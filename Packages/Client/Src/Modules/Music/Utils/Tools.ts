@@ -7,9 +7,10 @@ import {
   CommandInteractionOptionResolver,
   GuildMember,
   Message,
-  VoiceChannel
+  VoiceChannel,
+  channelMention
 } from "discord.js";
-import { Player, PlayerOptions } from "lavalink-client";
+import { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
 import ms from "parse-ms";
 import MusicEmbeds from "./Embeds";
@@ -42,7 +43,7 @@ export default class MusicTools {
       voiceChannelId: voiceChannel.id,
       selfDeaf: Config.Music.Client.selfDeaf,
       instaUpdateFiltersFix: false,
-      volume: 50
+      volume: Config.Music.Volumes.Player
       // vcRegion: voiceChannel.rtcRegion!
     };
     let player: Player;
@@ -94,8 +95,8 @@ export default class MusicTools {
         InteractionTools.reply(
           MsgInt,
           await client.Translate.Guild("Tools/Music:WrongChannel", MsgInt, {
-            TextChannel: player.textChannelId,
-            VoiceChannel: voiceChannel.name
+            TextChannel: channelMention(player.textChannelId),
+            VoiceChannel: channelMention(voiceChannel.id)
           }),
           false
         );
@@ -104,8 +105,8 @@ export default class MusicTools {
         MessageTools.reply(
           MsgInt,
           await client.Translate.Guild("Tools/Music:WrongChannel", MsgInt, {
-            TextChannel: player.textChannelId,
-            VoiceChannel: voiceChannel.name
+            TextChannel: channelMention(player.textChannelId),
+            VoiceChannel: channelMention(voiceChannel.id)
           })
         );
       }
@@ -163,8 +164,9 @@ export default class MusicTools {
   }
 
   public static async URLChecker(
-    args: Array<string> | CommandInteractionOptionResolver,
-    isSlash: boolean
+    isCommand: boolean,
+    args?: string | Array<string> | CommandInteractionOptionResolver,
+    isSlash?: boolean
   ) {
     const URLs = URLList.Music;
     const MusicEmojis = Emojis.Music;
@@ -184,19 +186,28 @@ export default class MusicTools {
       { URL: URLs.Facebook, Name: "Facebook", Emoji: MusicEmojis.Facebook },
       { URL: URLs.Apple, Name: "Apple Music", Emoji: MusicEmojis.Apple }
     ];
-
-    for (const value of Props) {
-      const Query = isSlash
-        ? ((args as CommandInteractionOptionResolver).get("query")
-            .value as string)
-        : (args as Array<string>).join(" ");
-      if (Query.includes(value.URL)) {
-        Emoji = value.Emoji;
-        Name = value.Name;
-        break;
-      } else {
-        Emoji = MusicEmojis.Youtube;
-        Name = "Youtube";
+    if (isCommand) {
+      for (const value of Props) {
+        const Query = isSlash
+          ? ((args as CommandInteractionOptionResolver).get("query")
+              .value as string)
+          : (args as Array<string>).join(" ");
+        if (Query.includes(value.URL)) {
+          Emoji = value.Emoji;
+          Name = value.Name;
+          break;
+        } else {
+          Emoji = MusicEmojis.Youtube;
+          Name = "Youtube";
+        }
+      }
+    } else {
+      for (const value of Props) {
+        if ((args as string).includes(value.URL)) {
+          Emoji = value.Emoji;
+          Name = value.Name;
+          break;
+        }
       }
     }
     return { Emoji, Name };
@@ -257,5 +268,30 @@ export default class MusicTools {
     );
     progressBar[calcul] = "🔘";
     return D1 + progressBar.join("") + D2;
+  }
+
+  public static formatSourceName(sourceName: SourceNames): string {
+    switch (sourceName) {
+      case "youtube":
+        return "Youtube";
+      case "youtubemusic":
+        return "Youtube Music";
+      case "soundcloud":
+        return "SoundCloud";
+      case "bandcamp":
+        return "Bandcamp";
+      case "twitch":
+        return "Twitch";
+      case "deezer":
+        return "Deezer";
+      case "spotify":
+        return "Spotify";
+      case "applemusic":
+        return "Apple Music";
+      case "yandexmusic":
+        return "Yandex Music";
+      case "flowery-tts":
+        return "Flowery TTS";
+    }
   }
 }

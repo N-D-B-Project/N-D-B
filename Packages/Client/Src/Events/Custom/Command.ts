@@ -30,13 +30,7 @@ export default class CommandEvent extends BaseEvent {
       .split(/ +/g);
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
-      const Checker = await cmdTools.runCheck(
-        message,
-        _Command,
-        // UserConfig,
-        Prefix,
-        args
-      );
+      const Checker = await cmdTools.runCheck(message, _Command, Prefix, args);
       if (Checker) {
         _Command.run(client, message, args, Premium);
       }

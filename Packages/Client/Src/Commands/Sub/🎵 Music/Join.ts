@@ -2,22 +2,21 @@ import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
 import { SubCommandOptions } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
-import { InteractionTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
 } from "discord.js";
 
-export default class Command extends BaseSubCommand {
+export default class JoinCommand extends BaseSubCommand {
   constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
-      name: "now_playing",
+      name: "join",
       category: "🎵 Music",
       disable: false,
       cooldown: 0,
       permissions: {
-        bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
-        user: ["Connect", "SendMessages"]
+        bot: ["SendMessages"],
+        user: ["SendMessages"]
       },
       ownerOnly: false,
       nsfw: false,
@@ -31,14 +30,8 @@ export default class Command extends BaseSubCommand {
     client: NDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver,
-    premium?: boolean
+    premium: boolean
   ) {
-    const music = new Music(client);
-    const nowplaying = await music.NowPlaying(
-      { MsgInt: interaction },
-      true,
-      premium
-    );
-    await InteractionTools.reply(interaction, nowplaying, false);
+    await new Music(client).Join({ MsgInt: interaction }, false, premium);
   }
 }

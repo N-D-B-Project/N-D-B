@@ -24,8 +24,8 @@ export default async function Paginator(
   embeds: Array<EmbedBuilder>,
   time: number = 60000
 ): Promise<void> {
-  letCurrentPage: typeof msgint;
-  letCollector: InteractionCollector<ButtonInteraction>;
+  let CurrentPage: typeof msgint;
+  let Collector: InteractionCollector<ButtonInteraction>;
   let filter: CollectorFilter<any[]>;
   let index: number = 0;
   const Embed = embeds[index];

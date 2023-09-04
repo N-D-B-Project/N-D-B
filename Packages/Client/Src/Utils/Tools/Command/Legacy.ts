@@ -110,8 +110,8 @@ export default class LegacyChecker {
     //     );
 
     //     await this.client.Translate.Guild("Tools/Music:WrongChannel", message, {
-    //       TextChannel: player.textChannelId,
-    //       VoiceChannel: voiceChannel.name
+    //       TextChannel: channelMention(player.textChannelId),
+    //       VoiceChannel: channelMention(voiceChannel)
     //     });
     //     return false;
     //   }

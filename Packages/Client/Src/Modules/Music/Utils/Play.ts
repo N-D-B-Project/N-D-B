@@ -160,6 +160,8 @@ export default class Play {
           await player.queue.add(res.tracks[0]);
           await player.play({ paused: false });
           if (!player.paused && !player.playing) await player.resume();
+        } else {
+          await player.queue.add(res.tracks[0]);
         }
 
         Embed = await Embeds.LoadType(
@@ -202,6 +204,8 @@ export default class Play {
       if (!player.playing) {
         await player.queue.add(res.tracks);
         await player.play({ paused: false });
+      } else {
+        await player.queue.add(res.tracks[0]);
       }
       if (!player.paused && !player.playing) {
         await player.play({ paused: false });

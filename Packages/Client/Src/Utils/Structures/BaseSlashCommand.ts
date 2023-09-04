@@ -20,7 +20,8 @@ export default class BaseSlashCommand {
   async run(
     client: NDBClient,
     interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
+    args: CommandInteractionOptionResolver,
+    premium?: boolean
   ) {
     throw new Error(
       `Comando \`${this.options.data.name}\` Não proveu um método Run!`

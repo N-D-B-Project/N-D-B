@@ -54,7 +54,7 @@ class BaseLavalinkManager extends Manager {
         applyVolumeAsFilter: false,
         clientBasedPositionUpdateInterval: 100,
         defaultSearchPlatform: "ytmsearch",
-        volumeDecrementer: 0.75,
+        volumeDecrementer: Config.Music.Volumes.Lavalink,
         useUnresolvedData: true,
         onDisconnect: {
           autoReconnect: false,

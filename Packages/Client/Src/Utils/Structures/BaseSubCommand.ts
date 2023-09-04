@@ -20,7 +20,8 @@ export default class BaseSubCommand {
   async run(
     client: NDBClient,
     interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
+    args: CommandInteractionOptionResolver,
+    premium?: boolean
   ) {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`

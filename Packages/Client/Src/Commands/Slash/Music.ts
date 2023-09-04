@@ -45,6 +45,14 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
             descriptionLocalizations:
               Localization.options.nowplaying.description,
             type: ApplicationCommandOptionType.Subcommand
+          },
+          {
+            name: "join",
+            nameLocalizations: Localization.options.join.name,
+            description:
+              "The bot enter in you voice channel and initialize an player",
+            descriptionLocalizations: Localization.options.join.description,
+            type: ApplicationCommandOptionType.Subcommand
           }
         ]
       },
@@ -67,6 +75,9 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {
+    const { Premium } = (
+      await client.database.GuildRepo.get(interaction.guildId)
+    ).Settings;
     const cmdTools = new SubTools(client);
     const SubList = [{ prop: "play" }, { prop: "now_playing" }];
     for (const Command of SubList) {
@@ -82,7 +93,8 @@ export default class MusicCategoryCommand extends BaseSlashCommand {
               .run(
                 client,
                 interaction,
-                interaction.options as CommandInteractionOptionResolver
+                interaction.options as CommandInteractionOptionResolver,
+                Premium
               )
               .catch(async (error: Error) => {
                 client.logger.error(error.stack);

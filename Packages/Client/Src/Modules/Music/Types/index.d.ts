@@ -18,16 +18,17 @@ export interface playerInfo {
   instaUpdateFiltersFix: boolean;
 }
 
-export enum CommandList {
-  skip,
-  stop,
-  leave,
-  pause,
-  resume,
-  shuffle,
-  unshuffle,
-  loop,
-  volume
+export enum MultiCommandList {
+  "skip",
+  "stop",
+  "leave",
+  "pause",
+  "resume",
+  "shuffle",
+  "unshuffle",
+  "loop",
+  "volume",
+  "join"
 }
 
 declare module "lavalink-client" {

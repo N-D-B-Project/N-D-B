@@ -2,8 +2,18 @@
   "/": "/",
   "playerCreate": {
     "Embed": {
-      "Title": "Player Criado!",
-      "Description": "<:NotixAllow:719560623960096789> **Entrei no Canal:** `{{VOICE}}`\n**Comando vinculados ao Canal: **<#{{TEXT}}>\n Premium: {{isPremium}}",
+      "Title": "<:NotixAllow:719560623960096789> Player Criado!",
+      "Fields": {
+        "1": "**Comando vinculados ao Canal**",
+        "2": "**Premium Player**",
+        "3": "**Entrei no Canal de Voz**",
+
+        "Content": {
+          "1": "> {{TEXT}}",
+          "2": "> {{isPremium}}",
+          "3": "> {{VOICE}}"
+        }
+      },
       "Footer": "N-D-B Music Player"
     }
   },
@@ -18,14 +28,14 @@
 
   "trackStart": {
     "Embed": {
-      "Title": "<:NotixAllow:719560623960096789> Musica inciada",
+      "Title": "<:NotixAllow:719560623960096789> Musica inciada - {{TITLE}}",
       "Footer": "Música adicionada por: {{REQUESTER}} | N-D-B Music Player",
       "Fields": {
-        "1": "🎵 Musica",
+        "1": "{{EMOJI}} Link",
         "2": ":crown: Autor",
         "3": "⏲️ Tempo",
         "Content": {
-          "1": "[{{TITLE}}]({{URI}})",
+          "1": "[{{Platform}} - Clique aqui]({{URI}})",
           "2": "{{AUTHOR}}",
           "3": "{{TIMER}}",
           "3²": "Live Stream"

@@ -90,8 +90,8 @@ export default class SubChecker {
     //     "Tools/Music:WrongChannel",
     //     interaction,
     //     {
-    //       TextChannel: player.textChannelId,
-    //       VoiceChannel: voiceChannel.name
+    //       TextChannel: channelMention(player.textChannelId),
+    //       VoiceChannel: channelMention(voiceChannel)
     //     }
     //   );
     //   return false;

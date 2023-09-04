@@ -2,7 +2,7 @@ import NDBClient from "@/Core/NDBClient";
 import { EventOptions } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
-import { ChannelType, EmbedBuilder, Message } from "discord.js";
+import { ChannelType, EmbedBuilder, Message, codeBlock } from "discord.js";
 
 export default class MessageCreateEvent extends BaseEvent {
   constructor(client: NDBClient) {
@@ -52,7 +52,7 @@ export default class MessageCreateEvent extends BaseEvent {
               (await client.Translate.Guild(
                 "Events/MessageCreate:ConfigurationCreated:Description",
                 message
-              )) + `\`\`\`JSON\n${JSON.stringify(guildConfig, null, 3)}\`\`\``
+              )) + codeBlock("JSON", JSON.stringify(guildConfig, null, 3))
             )
 
             .setColor("#00c26f")

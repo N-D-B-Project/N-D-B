@@ -84,13 +84,21 @@
     }
   },
 
-  "WrongChannel": "Este comando só pode ser utilizado em: <#{{TextChannel}}> ou você não está no mesmo canal de voz: `{{VoiceChannel}}`.",
+  "WrongChannel": "Este comando só pode ser utilizado em: {{TextChannel}} ou você não está no mesmo canal de voz: {{VoiceChannel}}.",
 
   "Volume": {
-    "NotValid": "O volume deve ser um numero entre 0 e 100.",
+    "NotValid": "O volume deve ser um número entre 0 e 100.",
     "Defined": "Volume do Player definido em: `{{volume}}.`"
   },
-
-  "Stop": "Player parado com sucesso! a fila de musicas foi excluída.",
-  "Leave": "Sai do canal de voz: `{{VoiceChannel}}`, fila de musicas foi excluída."
+  "Skip": {
+    "Current": "Música atual pulada.",
+    "Amount": "{{SkipAmount}} Músicas foram puladas."
+  },
+  "Stop": "Player parado com sucesso! a fila de músicas foi excluída.",
+  "Leave": "Sai do canal de voz: `{{VoiceChannel}}`, fila de músicas foi excluída.",
+  "Pause": "O Player foi pausado!",
+  "Resume": "O Player foi resumido!",
+  "Shuffle": "Fila de músicas embaralhada com sucesso!",
+  "Unshuffle": "A fila de músicas voltou ao normal.",
+  "Loop": ""
 }

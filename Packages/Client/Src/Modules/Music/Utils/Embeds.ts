@@ -116,7 +116,7 @@ export default class MusicEmbeds {
     isSlash?: boolean,
     track?: Track
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.URLChecker(args, isSlash);
+    const Checker = await MusicTools.URLChecker(true, args, isSlash);
     const baseEmbed = await this.createBaseEmbed(msgint, "Error");
     switch (loadType) {
       case "Fail":
@@ -240,7 +240,7 @@ export default class MusicEmbeds {
     res: SearchResult,
     url: string
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.URLChecker(args, isSlash);
+    const Checker = await MusicTools.URLChecker(true, args, isSlash);
     const Timer = await this.client.Tools.Timer(
       "normal",
       res.playlist.duration,
