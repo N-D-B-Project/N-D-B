@@ -15,11 +15,11 @@ import NDBClient from "./NDBClient";
 export default class MusicManager {
   public common: commonManager;
   public premium: premiumManager;
-  private RedisClient: RedisClient;
+  private redis: RedisClient;
   constructor(private readonly client: NDBClient) {
     this.common = new commonManager(client);
-    this.premium = new premiumManager(client, this.RedisClient);
-    this.RedisClient = new RedisClient(client);
+    this.redis = new RedisClient(client);
+    this.premium = new premiumManager(client, this.redis);
   }
 
   public async load() {
@@ -105,9 +105,9 @@ class premiumManager extends BaseLavalinkManager {
     super(client, {
       clientOptions: { username: "N-D-B | Music Player - Premium" },
       queueOptions: {
-        maxPreviousTracks: 10
-        // queueStore: new QueueStore(client, redis),
-        // queueChangesWatcher: new QueueWatcher(client)
+        maxPreviousTracks: 10,
+        queueStore: new QueueStore(redis),
+        queueChangesWatcher: new QueueWatcher(client)
       },
       debugOptions: {
         noAudio: false
@@ -123,38 +123,29 @@ class RedisClient extends Redis {
       host: process.env.RedisHost
     });
   }
-
-  public async load() {
-    try {
-      await this.connect();
-      this.DClient.logger.database("Redis Client Connected");
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
 
 class QueueStore implements QueueStoreManager {
-  constructor(
-    private readonly client: NDBClient,
-    private redis: RedisClient
-  ) {}
+  constructor(private redis: RedisClient) {}
 
   public async get(guildId) {
     return await this.redis.get(this.id(guildId));
   }
 
-  async set(guildId, stringifiedQueueData) {
+  public async set(guildId, stringifiedQueueData) {
     // await this.delete(guildId); // redis requires you to delete it first;
     return await this.redis.set(this.id(guildId), stringifiedQueueData);
   }
-  async delete(guildId) {
+
+  public async delete(guildId) {
     return await this.redis.del(this.id(guildId));
   }
-  async parse(stringifiedQueueData): Promise<Partial<StoredQueue>> {
+
+  public async parse(stringifiedQueueData): Promise<Partial<StoredQueue>> {
     return JSON.parse(stringifiedQueueData);
   }
-  async stringify(parsedQueueData) {
+
+  public async stringify(parsedQueueData) {
     return JSON.stringify(parsedQueueData);
   }
 
@@ -166,27 +157,33 @@ class QueueStore implements QueueStoreManager {
 class QueueWatcher implements QueueChangesWatcher {
   constructor(private readonly client: NDBClient) {}
   shuffled(guildId, oldStoredQueue, newStoredQueue) {
-    this.client.logger.info(
-      `${
-        this.client.guilds.cache.get(guildId)?.name || guildId
-      }: Queue got shuffled`
-    );
+    if (Config.Debug.PremiumMusicPlayer) {
+      this.client.logger.info(
+        `${
+          this.client.guilds.cache.get(guildId)?.name || guildId
+        }: Queue got shuffled`
+      );
+    }
   }
 
   tracksAdd(guildId, tracks, position, oldStoredQueue, newStoredQueue) {
-    this.client.logger.info(
-      `${this.client.guilds.cache.get(guildId)?.name || guildId}: ${
-        tracks.length
-      } Tracks got added into the Queue at position #${position}`
-    );
+    if (Config.Debug.PremiumMusicPlayer) {
+      this.client.logger.info(
+        `${this.client.guilds.cache.get(guildId)?.name || guildId}: ${
+          tracks.length
+        } Tracks got added into the Queue at position #${position}`
+      );
+    }
   }
 
   tracksRemoved(guildId, tracks, position, oldStoredQueue, newStoredQueue) {
-    this.client.logger.info(
-      `${this.client.guilds.cache.get(guildId)?.name || guildId}: ${
-        tracks.length
-      } Tracks got removed from the Queue at position #${position}`
-    );
+    if (Config.Debug.PremiumMusicPlayer) {
+      this.client.logger.info(
+        `${this.client.guilds.cache.get(guildId)?.name || guildId}: ${
+          tracks.length
+        } Tracks got removed from the Queue at position #${position}`
+      );
+    }
   }
 }
 

@@ -95,19 +95,19 @@ export default class playerCreateEvent extends BaseEvent {
       await MessageTools.send(textChannel, { embeds: [embed] })
     ).id;
 
-    // textChannel.messages.fetch(player.playerMessage).then(msg => {
-    //   if (msg && msg.deletable) {
-    //     setTimeout(async () => {
-    //       msg.delete().catch((error: Error) => {
-    //         client.logger.warn(
-    //           // eslint-disable-next-line quotes
-    //           'Não consegui deletar o "Player_MESSAGE"',
-    //           error
-    //         );
-    //       });
-    //     }, 10 * 1000);
-    //   }
-    // });
+    textChannel.messages.fetch(player.playerMessage).then(msg => {
+      if (msg && msg.deletable) {
+        setTimeout(async () => {
+          msg.delete().catch((error: Error) => {
+            client.logger.warn(
+              // eslint-disable-next-line quotes
+              'Não consegui deletar o "Player_MESSAGE"',
+              error
+            );
+          });
+        }, 10 * 1000);
+      }
+    });
 
     if (Config.Music.Client.serverDeaf) {
       for (let i = 0; i <= 5; i++) {

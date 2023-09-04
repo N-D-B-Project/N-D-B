@@ -12025,12 +12025,12 @@ __metadata:
   linkType: hard
 
 "lavalink-client@https://github.com/Tomato6966/lavalink-client.git":
-  version: 1.1.10
-  resolution: "lavalink-client@https://github.com/Tomato6966/lavalink-client.git#commit=dd2b854cf81ce1b9a5aecb1d076d2a94c6a8d535"
+  version: 1.1.12
+  resolution: "lavalink-client@https://github.com/Tomato6966/lavalink-client.git#commit=d4561eef8b9a86e65ebdb84eb32348196c704c71"
   dependencies:
     undici: ^5.23.0
     ws: ^8.13.0
-  checksum: ee43938ff50b211417c27744dd34c3180249ec41dcd68a0971515052c57d86b1afcd77eb739dd5022f81fdd4d8887658e6397021a4e3f943c87b7d263a597663
+  checksum: c65284482c07504106fbd77430008648f653398c4ab089e7ebe09989238b2d211d56216804bfd524cbb847bbc22350bdd5d8c92148158f4e2a75e08c62693cad
   languageName: node
   linkType: hard
 
