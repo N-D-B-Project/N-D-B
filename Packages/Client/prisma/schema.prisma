@@ -20,6 +20,7 @@ model User {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now())
   databaseVersion String        @default("Music")
+  APIUser         APIUser?
 
   @@map("User")
 }
@@ -161,3 +162,19 @@ model GuildReactionRoles {
 //   guild     Guild    @relation(fields: [guildId], references: [id])
 //   guildId   String   @unique
 // }
+
+model APIUser {
+  id           String @id @default(uuid())
+  email        String
+  accessToken  String
+  refreshToken String
+  user         User   @relation(fields: [userId], references: [id])
+  userId       String @unique
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+}

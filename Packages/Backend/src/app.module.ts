@@ -1,10 +1,15 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-
+import { PassportModule } from "@nestjs/passport";
+import { AuthModule, DiscordModule, GuildsModule, UserModule } from "./Modules";
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    PassportModule.register({ session: true }),
+    AuthModule,
+    UserModule,
+    GuildsModule,
+    DiscordModule
+  ],
+  controllers: [],
+  providers: []
 })
 export class AppModule {}
