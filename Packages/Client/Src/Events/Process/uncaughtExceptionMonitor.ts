@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class uncaughtExceptionMonitorEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "uncaughtExceptionMonitor",
       type: "on",
@@ -15,7 +14,7 @@ export default class uncaughtExceptionMonitorEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, error: Error, origin) {
+  async run(client: INDBClient, error: Error, origin) {
     client.logger.process("Uncaught Exception Monitor");
   }
 }

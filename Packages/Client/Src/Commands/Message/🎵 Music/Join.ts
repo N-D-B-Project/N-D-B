@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { Message } from "discord.js";
 
 export default class JoinCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "join",
       aliases: ["Join"],
@@ -28,7 +27,7 @@ export default class JoinCommand extends BaseCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     message: Message,
     args: Array<string>,
     premium: boolean

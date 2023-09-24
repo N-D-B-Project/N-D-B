@@ -1,4 +1,4 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import {
   CommandInteraction,
   GuildChannel,
@@ -85,7 +85,7 @@ export default async (): Promise<Map<string, TFunction>> => {
 
 export class Translate {
   // eslint-disable-next-line no-empty-function
-  public constructor(private readonly client: NDBClient) {}
+  public constructor(private readonly client: INDBClient) {}
 
   async Guild(
     key: string,

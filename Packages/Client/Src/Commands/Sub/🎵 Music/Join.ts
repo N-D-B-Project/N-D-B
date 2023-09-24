@@ -1,4 +1,3 @@
-import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
 import { SubCommandOptions } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
@@ -8,7 +7,7 @@ import {
 } from "discord.js";
 
 export default class JoinCommand extends BaseSubCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "join",
       category: "🎵 Music",
@@ -27,7 +26,7 @@ export default class JoinCommand extends BaseSubCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver,
     premium: boolean

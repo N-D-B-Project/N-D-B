@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
 import MusicTools from "@/Modules/Music/Utils/Tools";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import {
@@ -14,7 +13,7 @@ import {
 import { Player, Track, TrackStartEvent } from "lavalink-client";
 
 export default class trackStartEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "trackStart",
       type: "on",
@@ -26,7 +25,7 @@ export default class trackStartEvent extends BaseEvent {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     player: Player,
     track: Track,
     payload: TrackStartEvent

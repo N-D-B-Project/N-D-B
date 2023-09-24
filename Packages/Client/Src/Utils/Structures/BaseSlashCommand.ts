@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { SlashCommandOptions } from "@/Types";
+import { INDBClient, SlashCommandOptions } from "@/Types";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver
@@ -8,7 +7,7 @@ import {
 
 export default class BaseSlashCommand {
   constructor(
-    private client: NDBClient,
+    private client: INDBClient,
     public options: SlashCommandOptions,
     public args: CommandInteractionOptionResolver
   ) {
@@ -18,7 +17,7 @@ export default class BaseSlashCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver,
     premium?: boolean

@@ -1,16 +1,16 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { parse } from "path";
 import { BaseSubCommand } from "../Structures";
 import BaseHandler from "./BaseHandler";
 
 export default class SubHandler {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 
   async load() {
     this.client.Collections.SubCommands.clear();
-    const baseHandler = new BaseHandler(this.client);
+    const baseHandler = new BaseHandler();
 
     const commandFiles = await baseHandler.getFiles("Commands/Sub");
     commandFiles.forEach(async commandFile => {

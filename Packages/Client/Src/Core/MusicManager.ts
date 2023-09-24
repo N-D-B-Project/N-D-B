@@ -1,6 +1,7 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Config } from "@/Config/Config";
+import { INDBClient } from "@/Types";
 import "@/Utils/Structures/BasePlayer";
 import { Redis } from "ioredis";
 import {
@@ -10,13 +11,12 @@ import {
   QueueStoreManager,
   StoredQueue
 } from "lavalink-client";
-import NDBClient from "./NDBClient";
 
 export default class MusicManager {
   public common: commonManager;
   public premium: premiumManager;
   private redis: RedisClient;
-  constructor(private readonly client: NDBClient) {
+  constructor(private readonly client: INDBClient) {
     this.common = new commonManager(client);
     this.redis = new RedisClient(client);
     this.premium = new premiumManager(client, this.redis);
@@ -30,7 +30,7 @@ export default class MusicManager {
 
 class BaseLavalinkManager extends Manager {
   constructor(
-    private readonly client: NDBClient,
+    private readonly client: INDBClient,
     { clientOptions, queueOptions, debugOptions }: options
   ) {
     super({
@@ -92,7 +92,7 @@ class BaseLavalinkManager extends Manager {
 }
 
 class commonManager extends BaseLavalinkManager {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     super(client, {
       clientOptions: { username: "N-D-B | Music Player - Common" },
       queueOptions: { maxPreviousTracks: 1 }
@@ -101,7 +101,7 @@ class commonManager extends BaseLavalinkManager {
 }
 
 class premiumManager extends BaseLavalinkManager {
-  constructor(client: NDBClient, redis: RedisClient) {
+  constructor(client: INDBClient, redis: RedisClient) {
     super(client, {
       clientOptions: { username: "N-D-B | Music Player - Premium" },
       queueOptions: {
@@ -117,7 +117,7 @@ class premiumManager extends BaseLavalinkManager {
 }
 
 class RedisClient extends Redis {
-  constructor(private readonly DClient: NDBClient) {
+  constructor(private readonly DClient: INDBClient) {
     super({
       port: process.env.RedisPort as unknown as number,
       host: process.env.RedisHost
@@ -155,7 +155,7 @@ class QueueStore implements QueueStoreManager {
 }
 
 class QueueWatcher implements QueueChangesWatcher {
-  constructor(private readonly client: NDBClient) {}
+  constructor(private readonly client: INDBClient) {}
   shuffled(guildId, oldStoredQueue, newStoredQueue) {
     if (Config.Debug.PremiumMusicPlayer) {
       this.client.logger.info(

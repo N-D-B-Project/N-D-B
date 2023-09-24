@@ -1,11 +1,9 @@
-import NDBClient from "@/Core/NDBClient";
 import { globSync } from "glob";
 import { dirname, sep } from "path";
 
 export default class BaseHandler {
-  public constructor(private client: NDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor() {}
 
   public isClass(input) {
     return (

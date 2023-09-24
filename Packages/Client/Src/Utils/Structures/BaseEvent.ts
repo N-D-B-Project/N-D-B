@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 
 export default class BaseEvent {
   public constructor(
-    private client: NDBClient,
+    private client: INDBClient,
     public options: EventOptions
   ) {
     this.client = client;
@@ -13,7 +12,7 @@ export default class BaseEvent {
     this.options.emitter = options.emitter;
   }
 
-  async run(client: NDBClient, ...args: unknown[]) {
+  async run(client: INDBClient, ...args: unknown[]) {
     throw new Error(
       `Um método Run não foi implementado em: ${String(this.options.name)}`
     );

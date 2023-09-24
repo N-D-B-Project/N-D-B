@@ -1,12 +1,12 @@
 /* eslint-disable no-empty-function */
 
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { Guild, TextChannel } from "discord.js";
 import { REACTION_OPTIONS, iReaction } from "./Types";
 
 export default class ReactionRole {
   public constructor(
-    private readonly client: NDBClient,
+    private readonly client: INDBClient,
     public readonly Command: string
   ) {}
 

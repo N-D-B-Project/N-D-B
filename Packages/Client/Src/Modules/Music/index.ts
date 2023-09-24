@@ -1,7 +1,6 @@
 /* eslint-disable no-empty-function */
 
-import NDBClient from "@/Core/NDBClient";
-import { SwitchCommand } from "@/Types";
+import { INDBClient, SwitchCommand } from "@/Types";
 import {
   CommandInteraction,
   CommandInteractionOptionResolver,
@@ -13,7 +12,7 @@ import nowPlaying from "./Utils/NowPlaying";
 import play from "./Utils/Play";
 
 export default class Music {
-  public constructor(private client: NDBClient) {}
+  public constructor(private client: INDBClient) {}
 
   public async Play(
     { MsgInt, args }: SwitchCommand,

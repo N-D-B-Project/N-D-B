@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import { LegacyTools } from "@/Utils/Tools";
 import { Message } from "discord.js";
 
 export default class DMCommandEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "DMCommand",
       type: "on",
@@ -16,7 +15,7 @@ export default class DMCommandEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, message: Message, Prefix: string) {
+  async run(client: INDBClient, message: Message, Prefix: string) {
     const cmdTools = new LegacyTools(client);
     const [cmd, ...args] = message.content
       .slice(Prefix.length)

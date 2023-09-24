@@ -1,12 +1,11 @@
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { CommandHandler, EventHandler, SubHandler } from "@/Utils/Handlers";
 import SlashHandler from "@/Utils/Handlers/SlashHandler";
 import { BaseCommand } from "@/Utils/Structures";
 import { Message } from "discord.js";
 
 export default class TestCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "reload",
       aliases: ["reiniciar"],
@@ -27,7 +26,7 @@ export default class TestCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     switch (args[0]) {
       case "events":
         client.removeAllListeners();

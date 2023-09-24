@@ -1,4 +1,3 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import { iReaction } from "@/Modules/ReactionRole/Types";
 import {
@@ -9,13 +8,13 @@ import {
   MessageNotFoundEmbed,
   ReactionRoleUpdatedEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { Message, TextChannel } from "discord.js";
 
 export default class UpdateReactionCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "UpdateReaction",
       aliases: ["REdit", "reactionedit", "RUpdate"],
@@ -40,7 +39,7 @@ export default class UpdateReactionCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     const reaction = new ReactionRole(client, "Update");
     let Channel =
       message.mentions.channels.first() ||

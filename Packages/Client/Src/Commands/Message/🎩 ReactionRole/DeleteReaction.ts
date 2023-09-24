@@ -1,4 +1,3 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import {
   InvalidChannelEmbed,
@@ -15,7 +14,7 @@ import { MessageTools } from "@/Utils/Tools";
 import { Message, TextChannel } from "discord.js";
 
 export default class DeleteReactionCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "DeleteReaction",
       aliases: [
@@ -46,7 +45,7 @@ export default class DeleteReactionCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     const react: ReactionRole = new ReactionRole(client, "Delete");
     let Channel =
       message.mentions.channels.first() ||

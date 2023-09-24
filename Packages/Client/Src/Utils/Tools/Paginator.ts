@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-shadow */
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -18,7 +18,7 @@ import {
 import { InteractionTools, MessageTools } from "./";
 
 export default async function Paginator(
-  client: NDBClient,
+  client: INDBClient,
   msgint: Message | Interaction,
   type: "Message" | "Interaction" | "DM",
   embeds: Array<EmbedBuilder>,

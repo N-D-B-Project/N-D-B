@@ -1,12 +1,11 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { Player, WebSocketClosedEvent } from "lavalink-client";
 
 export default class socketClosedEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "playerSocketClosed",
       type: "on",
@@ -17,5 +16,9 @@ export default class socketClosedEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, player: Player, payload: WebSocketClosedEvent) {}
+  async run(
+    client: INDBClient,
+    player: Player,
+    payload: WebSocketClosedEvent
+  ) {}
 }

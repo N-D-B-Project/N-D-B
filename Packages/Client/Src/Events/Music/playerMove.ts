@@ -1,5 +1,4 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 
@@ -7,7 +6,7 @@ import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
 import { Player } from "lavalink-client";
 
 export default class playerMoveEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "playerMove",
       type: "on",
@@ -19,7 +18,7 @@ export default class playerMoveEvent extends BaseEvent {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     player: Player,
     oldChannel: string,
     newChannel: string

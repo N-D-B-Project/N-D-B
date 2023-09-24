@@ -1,12 +1,11 @@
-import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { Message } from "discord.js";
 
 export default class NowPlayingCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "NowPlaying",
       aliases: ["nowplaying", "np", "NP"],
@@ -32,7 +31,7 @@ export default class NowPlayingCommand extends BaseCommand {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async run(
-    client: NDBClient,
+    client: INDBClient,
     message: Message,
     args: Array<string>,
     premium: boolean

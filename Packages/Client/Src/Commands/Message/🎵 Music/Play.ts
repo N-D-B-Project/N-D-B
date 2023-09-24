@@ -1,12 +1,11 @@
-import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { Message } from "discord.js";
 
 export default class PlayCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "Play",
       aliases: ["play", "p", "P"],
@@ -31,7 +30,7 @@ export default class PlayCommand extends BaseCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     message: Message,
     args: Array<string>,
     premium: boolean

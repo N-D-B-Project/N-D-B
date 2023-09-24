@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { SlashCommandOptions } from "@/Types";
+import { INDBClient, SlashCommandOptions } from "@/Types";
 import { BaseSlashCommand } from "@/Utils/Structures";
 import { InteractionTools } from "@/Utils/Tools";
 import {
@@ -9,7 +8,7 @@ import {
 } from "discord.js";
 
 export default class TestCommand extends BaseSlashCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "test",
@@ -31,7 +30,7 @@ export default class TestCommand extends BaseSlashCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

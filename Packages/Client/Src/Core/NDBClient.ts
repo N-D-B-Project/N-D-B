@@ -12,7 +12,7 @@ export default class NDBClient extends Client {
   public Translate: Translate = new Translate(this);
   public MusicManager: MusicManager = new MusicManager(this);
 
-  public readonly LoadHandlers = new LoadHandlers(this);
+  private readonly LoadHandlers = new LoadHandlers(this);
   public readonly logger: Logger = new Logger();
 
   public constructor() {

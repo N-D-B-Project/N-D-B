@@ -1,11 +1,11 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { ChannelType, Message, TextChannel, User } from "discord.js";
 import { MessageTools, Tools } from "../";
 import CheckerEmbeds from "./Embeds";
 
 export default class LegacyChecker {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 

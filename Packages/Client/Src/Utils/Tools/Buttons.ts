@@ -1,4 +1,4 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -8,7 +8,7 @@ import {
 } from "discord.js";
 
 export default class Buttons {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 

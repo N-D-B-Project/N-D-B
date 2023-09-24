@@ -1,12 +1,11 @@
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { ActivityType, EmbedBuilder, PresenceData } from "discord.js";
 
 export default class Event extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "ready",
       type: "once",
@@ -17,7 +16,7 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient) {
+  async run(client: INDBClient) {
     if (Config.Music.Lavalink) {
       await client.MusicManager.load();
     }

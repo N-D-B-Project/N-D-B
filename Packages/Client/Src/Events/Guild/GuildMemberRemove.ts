@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
 import MusicTools from "@/Modules/Music/Utils/Tools";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { GuildMember } from "discord.js";
 
 export default class Event extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "guildMemberRemove",
       type: "on",
@@ -16,7 +15,7 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, member: GuildMember) {
+  async run(client: INDBClient, member: GuildMember) {
     if (member.id === client.user.id) {
       const guildData = await client.database.GuildRepo.get(member.guild.id);
       const { Premium } = guildData.Settings;

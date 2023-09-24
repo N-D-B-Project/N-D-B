@@ -1,9 +1,8 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class Event extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "raw",
       type: "on",
@@ -14,7 +13,7 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, data) {
+  async run(client: INDBClient, data) {
     client.MusicManager.common.sendRawData(data);
     client.MusicManager.premium.sendRawData(data);
   }

@@ -1,13 +1,12 @@
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { CommandInteraction, GuildChannel, Message } from "discord.js";
 import util from "node:util";
 import ms from "parse-ms";
 
 export default class Tools {
-  public constructor(private client: NDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(private client: INDBClient) {}
 
   static getMomentFormat(
     mode: "time" | "calendar" = "calendar",

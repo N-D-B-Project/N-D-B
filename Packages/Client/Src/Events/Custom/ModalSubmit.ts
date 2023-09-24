@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty-function */
 
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { ModalSubmitInteraction } from "discord.js";
 
 export default class Event extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "ModalSubmit",
       type: "on",
@@ -18,5 +17,5 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: ModalSubmitInteraction) {}
+  async run(client: INDBClient, interaction: ModalSubmitInteraction) {}
 }

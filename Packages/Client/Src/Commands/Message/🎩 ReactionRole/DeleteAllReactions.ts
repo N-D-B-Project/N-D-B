@@ -1,17 +1,16 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import {
   ReactionRoleDeleteAllEmbed,
   UnableToDeleteReactionRoleEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { mixedComponentType } from "@/Types/extends";
 import { BaseCommand } from "@/Utils/Structures";
 import { Buttons, MessageTools } from "@/Utils/Tools";
 import { ComponentType, Message } from "discord.js";
 
 export default class DeleteAllReactionsCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "DeleteAllReactions",
       aliases: [""],
@@ -36,7 +35,7 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     const reaction = new ReactionRole(client, "DeleteAll");
     const button = await new Buttons(client).Confirm(message);
     const confirm = await MessageTools.send(message.channel, {

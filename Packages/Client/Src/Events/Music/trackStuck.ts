@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 import { EmbedBuilder, TextChannel } from "discord.js";
@@ -10,7 +9,7 @@ import { MessageTools } from "@/Utils/Tools";
 import { Player, Track, TrackStuckEvent } from "lavalink-client";
 
 export default class trackStuckEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "trackStuck",
       type: "on",
@@ -22,7 +21,7 @@ export default class trackStuckEvent extends BaseEvent {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     player: Player,
     track: Track,
     payload: TrackStuckEvent

@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { EmbedBuilder, Message } from "discord.js";
 
 export default class ReactionRoleBuilderCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "reactionbuilder",
       aliases: [""],
@@ -29,7 +28,7 @@ export default class ReactionRoleBuilderCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     const cancelEmbed = new EmbedBuilder()
       .setAuthor({
         name: message.author.tag,

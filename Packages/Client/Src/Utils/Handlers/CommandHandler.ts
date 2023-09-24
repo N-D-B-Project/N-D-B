@@ -1,16 +1,15 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { parse } from "path";
 import { BaseCommand } from "../Structures";
 import BaseHandler from "./BaseHandler";
 
 export default class CommandHandler {
-  public constructor(private client: NDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(private client: INDBClient) {}
 
   async load() {
     this.client.Collections.commands.clear();
-    const baseHandler = new BaseHandler(this.client);
+    const baseHandler = new BaseHandler();
 
     const commandFiles = await baseHandler.getFiles("Commands/Message");
     commandFiles.forEach(async commandFile => {

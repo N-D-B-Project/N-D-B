@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
@@ -9,7 +8,7 @@ import { Player, Track, TrackEndEvent } from "lavalink-client";
 import ms from "parse-ms";
 
 export default class queueEndEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "queueEnd",
       type: "on",
@@ -21,7 +20,7 @@ export default class queueEndEvent extends BaseEvent {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     player: Player,
     track: Track,
     payload: TrackEndEvent

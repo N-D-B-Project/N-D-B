@@ -1,8 +1,7 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import NDBClient from "@/Core/NDBClient";
-import { SubCommandOptions } from "@/Types";
+import { INDBClient, SubCommandOptions } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
 import {
   CommandInteraction,
@@ -10,7 +9,7 @@ import {
 } from "discord.js";
 
 export default class ReactionEditCommand extends BaseSubCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "edit",
       category: "🎩 ReactionRole",
@@ -29,7 +28,7 @@ export default class ReactionEditCommand extends BaseSubCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {}

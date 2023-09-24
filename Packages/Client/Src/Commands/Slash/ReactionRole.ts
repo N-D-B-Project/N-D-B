@@ -1,5 +1,4 @@
-import NDBClient from "@/Core/NDBClient";
-import { SlashCommandOptions } from "@/Types";
+import { INDBClient, SlashCommandOptions } from "@/Types";
 import { Localization } from "@/Utils/Languages/Localization/ReactionRole";
 import { BaseSlashCommand, BaseSubCommand } from "@/Utils/Structures";
 import { SubTools } from "@/Utils/Tools";
@@ -10,7 +9,7 @@ import {
 } from "discord.js";
 
 export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "reactionrole",
@@ -235,7 +234,7 @@ export default class ReactionRoleCategoryCommand extends BaseSlashCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

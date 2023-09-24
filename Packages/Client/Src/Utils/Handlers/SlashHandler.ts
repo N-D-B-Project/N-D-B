@@ -1,17 +1,17 @@
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { parse } from "path";
 import { BaseSlashCommand } from "../Structures";
 import BaseHandler from "./BaseHandler";
 
 export default class SlashHandler {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 
   async load() {
     this.client.Collections.SlashCommands.clear();
-    const baseHandler = new BaseHandler(this.client);
+    const baseHandler = new BaseHandler();
 
     const commandFiles = await baseHandler.getFiles("Commands/Slash");
     commandFiles.forEach(async commandFile => {

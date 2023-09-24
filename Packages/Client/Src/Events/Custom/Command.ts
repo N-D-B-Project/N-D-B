@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import { LegacyTools } from "@/Utils/Tools";
 import { ChannelType, Message } from "discord.js";
 
 export default class CommandEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "Command",
       type: "on",
@@ -17,7 +16,7 @@ export default class CommandEvent extends BaseEvent {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     message: Message,
     Prefix: string,
     Premium: boolean

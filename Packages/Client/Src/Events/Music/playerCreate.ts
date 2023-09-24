@@ -1,6 +1,5 @@
 import { Config, Emojis } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import {
@@ -12,7 +11,7 @@ import {
 } from "discord.js";
 import { Player } from "lavalink-client";
 export default class playerCreateEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "playerCreate",
       type: "on",
@@ -23,7 +22,7 @@ export default class playerCreateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, player: Player) {
+  async run(client: INDBClient, player: Player) {
     const guild = (await client.guilds.fetch(player.guildId)) as Guild;
     client.logger.info(
       `Player iniciando no servidor: ${guild.name}(${guild.id})`

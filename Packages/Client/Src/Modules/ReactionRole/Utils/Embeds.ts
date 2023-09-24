@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 
 import { Emojis } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { MessageTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
@@ -15,7 +15,7 @@ import {
 import { REACTION_OPTIONS, iReaction } from "./../Types/index.d";
 
 export async function InvalidChannelEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -35,7 +35,7 @@ export async function InvalidChannelEmbed(
 }
 
 export async function InvalidIDEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -55,7 +55,7 @@ export async function InvalidIDEmbed(
 }
 
 export async function MessageNotFoundEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -75,7 +75,7 @@ export async function MessageNotFoundEmbed(
 }
 
 export async function InvalidRoleEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -95,7 +95,7 @@ export async function InvalidRoleEmbed(
 }
 
 export async function InvalidEmojiEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -115,7 +115,7 @@ export async function InvalidEmojiEmbed(
 }
 
 export async function ReactionRoleCreatedEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   { Channel, Message, Role, Emoji, Option }: iReaction
 ): Promise<EmbedBuilder> {
@@ -182,7 +182,7 @@ export async function ReactionRoleCreatedEmbed(
 }
 
 export async function ReactionRoleRemovedEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User,
   MsgID: Message
@@ -203,7 +203,7 @@ export async function ReactionRoleRemovedEmbed(
 }
 
 export async function ReactionRoleUpdatedEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User,
   { Channel, Message, Role, Emoji }: iReaction,
@@ -283,7 +283,7 @@ export async function ReactionRoleUpdatedEmbed(
 }
 
 export async function ReactionRoleDeleteAllEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User,
   status: "Confirm" | "Cancel" | "Success",
@@ -324,7 +324,7 @@ export async function ReactionRoleDeleteAllEmbed(
 
 //TODO: Fazer esse Embed ser mais bonito
 export async function UnableToCreateReactionRoleEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User
 ): Promise<EmbedBuilder> {
@@ -344,7 +344,7 @@ export async function UnableToCreateReactionRoleEmbed(
 }
 
 export async function UnableToDeleteReactionRoleEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User,
   MsgID: Message
@@ -365,7 +365,7 @@ export async function UnableToDeleteReactionRoleEmbed(
 }
 
 export async function UnableToUpdateReactionRoleEmbed(
-  client: NDBClient,
+  client: INDBClient,
   info: Message | CommandInteraction,
   author: User,
   MsgID: Message

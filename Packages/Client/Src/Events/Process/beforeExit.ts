@@ -1,9 +1,8 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class beforeExitEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "beforeExit",
       type: "on",
@@ -14,7 +13,7 @@ export default class beforeExitEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, code) {
+  async run(client: INDBClient, code) {
     client.logger.process("Before Exit", `Code: ${code}`);
   }
 }

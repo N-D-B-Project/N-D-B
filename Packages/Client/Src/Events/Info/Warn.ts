@@ -1,9 +1,8 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class WarnEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "warn",
       type: "once",
@@ -14,7 +13,7 @@ export default class WarnEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, info) {
+  async run(client: INDBClient, info) {
     client.logger.warn(info);
   }
 }

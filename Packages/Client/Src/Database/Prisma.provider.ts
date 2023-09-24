@@ -1,5 +1,5 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRoleRepository from "@/Modules/ReactionRole/Utils/ReactionRole.repository";
+import { INDBClient } from "@/Types";
 import { PrismaClient } from "@prisma/client";
 import {
   GuildRepository,
@@ -13,7 +13,7 @@ export default class PrismaProvider extends PrismaClient {
   public UserRepo = new UserRepository(this);
   public NDCashRepo = new NDCashRepository(this);
   public ReactionRoleRepo = new ReactionRoleRepository(this);
-  constructor(private readonly client: NDBClient) {
+  constructor(private readonly client: INDBClient) {
     super();
   }
 

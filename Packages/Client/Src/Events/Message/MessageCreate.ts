@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { ChannelType, EmbedBuilder, Message, codeBlock } from "discord.js";
 
 export default class MessageCreateEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "messageCreate",
       type: "on",
@@ -16,7 +15,7 @@ export default class MessageCreateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, message: Message) {
+  async run(client: INDBClient, message: Message) {
     if (message.author.bot) return;
     const emojis = message.content.match(/(?<=:)([^:\s]+)(?=:)/g);
     if (emojis) {

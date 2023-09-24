@@ -1,10 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
 import { CommandInteraction, TextChannel } from "discord.js";
 import { InteractionTools, Tools } from "../index";
 
 export default class SubChecker {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 

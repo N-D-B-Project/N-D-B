@@ -1,4 +1,3 @@
-import NDBClient from "@/Core/NDBClient";
 import Music from "@/Modules/Music";
 import { SubCommandOptions } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
@@ -9,7 +8,7 @@ import {
 } from "discord.js";
 
 export default class PlaySubCommand extends BaseSubCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "play",
       category: "🎵 Music",
@@ -28,7 +27,7 @@ export default class PlaySubCommand extends BaseSubCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

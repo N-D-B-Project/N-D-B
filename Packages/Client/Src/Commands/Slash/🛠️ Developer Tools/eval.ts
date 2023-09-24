@@ -1,6 +1,5 @@
 import { EvalBadKeys } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { SlashCommandOptions } from "@/Types";
+import { INDBClient, SlashCommandOptions } from "@/Types";
 import { BaseSlashCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import {
@@ -13,7 +12,7 @@ import {
 import { inspect } from "util";
 
 export default class EvalCommand extends BaseSlashCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SlashCommandOptions = {
       data: {
         name: "eval",
@@ -43,7 +42,7 @@ export default class EvalCommand extends BaseSlashCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

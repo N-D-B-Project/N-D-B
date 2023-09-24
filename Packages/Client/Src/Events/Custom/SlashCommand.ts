@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty-function */
 
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent, BaseSlashCommand } from "@/Utils/Structures";
 import { SlashTools } from "@/Utils/Tools";
 import {
@@ -11,7 +10,7 @@ import {
 } from "discord.js";
 
 export default class SlashCommandEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "SlashCommand",
       type: "on",
@@ -22,7 +21,7 @@ export default class SlashCommandEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: ChatInputCommandInteraction) {
+  async run(client: INDBClient, interaction: ChatInputCommandInteraction) {
     const cmdTools = new SlashTools(client);
     const { Premium } = (
       await client.database.GuildRepo.get(interaction.guildId)

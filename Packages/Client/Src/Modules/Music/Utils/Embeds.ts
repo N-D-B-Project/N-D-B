@@ -3,6 +3,7 @@
 
 import { Emojis } from "@/Config/Config";
 import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import {
   ColorResolvable,
   CommandInteraction,
@@ -15,7 +16,7 @@ import { SearchResult, Track } from "lavalink-client";
 import MusicTools from "./Tools";
 
 export default class MusicEmbeds {
-  public constructor(private readonly client: NDBClient) {}
+  public constructor(private readonly client: INDBClient) {}
 
   private async createBaseEmbed(
     msgint: Message | CommandInteraction,

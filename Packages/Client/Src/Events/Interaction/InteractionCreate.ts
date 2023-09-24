@@ -1,5 +1,4 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { InteractionType } from "discord-api-types/v10";
 import {
@@ -13,7 +12,7 @@ import {
 } from "discord.js";
 
 export default class InteractionCreateEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "interactionCreate",
       type: "on",
@@ -24,7 +23,7 @@ export default class InteractionCreateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: Interaction) {
+  async run(client: INDBClient, interaction: Interaction) {
     if (interaction.type === InteractionType.ApplicationCommand) {
       client.emit("SlashCommand", interaction as ChatInputCommandInteraction);
       return;

@@ -1,12 +1,11 @@
-import NDBClient from "@/Core/NDBClient";
 import MusicTools from "@/Modules/Music/Utils/Tools";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { ChannelType, GuildChannel, TextChannel } from "discord.js";
 
 export default class channelDeleteEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "channelDelete",
       type: "on",
@@ -17,7 +16,7 @@ export default class channelDeleteEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, channel: GuildChannel) {
+  async run(client: INDBClient, channel: GuildChannel) {
     const guildData = await client.database.GuildRepo.get(channel.guildId);
     const { Premium } = guildData.Settings;
     const Player = await MusicTools.getPlayer(client, channel.guildId, Premium);

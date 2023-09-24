@@ -1,9 +1,8 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class unhandledRejectionEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "unhandledRejection",
       type: "on",
@@ -14,7 +13,7 @@ export default class unhandledRejectionEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, reason: Error, promise) {
+  async run(client: INDBClient, reason: Error, promise) {
     client.logger.process(
       "Unhandled Rejection",
       `Reason in: ${promise} Error: ${

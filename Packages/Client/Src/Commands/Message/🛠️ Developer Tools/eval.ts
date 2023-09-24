@@ -1,13 +1,12 @@
 import { EvalBadKeys } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, Message, codeBlock } from "discord.js";
 import { inspect } from "util";
 
 export default class EvalCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "eval",
       aliases: [""],
@@ -31,7 +30,7 @@ export default class EvalCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     if (message.deletable) message.delete();
     try {
       if (

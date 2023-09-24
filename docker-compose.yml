@@ -9,7 +9,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - .docker/database/development:/var/lib/postgresql/data
+      - .docker/database/postgres/development:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+  redis_ndbase:
+    build: .docker/Redis
+    container_name: redis_ndbase
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - .docker/database/redis/development:/usr/local/etc/redis

@@ -1,6 +1,6 @@
 import { Config, Emojis, URLList } from "@/Config/Config";
 import NDBClient from "@/Core/NDBClient";
-import { SwitchCommand } from "@/Types";
+import { INDBClient, SwitchCommand } from "@/Types";
 import { InteractionTools, MessageTools } from "@/Utils/Tools";
 import {
   CommandInteraction,
@@ -17,7 +17,7 @@ import MusicEmbeds from "./Embeds";
 
 export default class MusicTools {
   public static async getPlayer(
-    client: NDBClient,
+    client: INDBClient,
     guildId: string,
     isPremium: boolean
   ) {
@@ -32,7 +32,7 @@ export default class MusicTools {
   }
 
   public static async createPlayer(
-    client: NDBClient,
+    client: INDBClient,
     voiceChannel: VoiceChannel,
     textChannelId: string,
     isPremium: boolean
@@ -117,7 +117,7 @@ export default class MusicTools {
 
   public static async HasPlayer(
     player: Player,
-    client: NDBClient,
+    client: INDBClient,
     { MsgInt }: SwitchCommand,
     isSlash: boolean
   ) {

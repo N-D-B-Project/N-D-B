@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, Message, MessageReaction, User } from "discord.js";
 
 export default class ClearDMCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "ClearDM",
       aliases: ["cleardm", "dmclear"],
@@ -30,7 +29,7 @@ export default class ClearDMCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     let i: number = 0;
     await client.Tools.WAIT(1000);
     await message.channel.messages.fetch().then(async msgs => {

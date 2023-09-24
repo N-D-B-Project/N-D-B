@@ -1,11 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import { iReaction } from "@/Modules/ReactionRole/Types";
 import {
   ReactionRoleRemovedEmbed,
   UnableToDeleteReactionRoleEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
-import { SubCommandOptions } from "@/Types";
+import { INDBClient, SubCommandOptions } from "@/Types";
 import { BaseSubCommand } from "@/Utils/Structures";
 import { InteractionTools } from "@/Utils/Tools";
 import {
@@ -15,7 +14,7 @@ import {
 } from "discord.js";
 
 export default class DeleteReactionCommand extends BaseSubCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "delete",
       category: "🎩 ReactionRole",
@@ -34,7 +33,7 @@ export default class DeleteReactionCommand extends BaseSubCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

@@ -1,4 +1,3 @@
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import { iReaction } from "@/Modules/ReactionRole/Types";
 import {
@@ -10,13 +9,13 @@ import {
   ReactionRoleCreatedEmbed,
   UnableToCreateReactionRoleEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { Message, TextChannel } from "discord.js";
 
 export default class CreateReactionCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "CreateReaction",
       aliases: [
@@ -46,7 +45,7 @@ export default class CreateReactionCommand extends BaseCommand {
     };
     super(client, options, args);
   }
-  async run(client: NDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, message: Message, args: Array<string>) {
     const reaction = new ReactionRole(client, "Create");
     let Channel =
       message.mentions.channels.first() ||

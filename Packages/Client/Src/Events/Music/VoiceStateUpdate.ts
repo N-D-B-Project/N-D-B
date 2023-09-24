@@ -1,6 +1,5 @@
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 import {
@@ -12,7 +11,7 @@ import {
 } from "discord.js";
 
 module.exports = class VoiceStateUpdateEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "voiceStateUpdate",
       type: "on",
@@ -23,7 +22,7 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, oldState: VoiceState, newState: VoiceState) {
+  async run(client: INDBClient, oldState: VoiceState, newState: VoiceState) {
     const guildRepository = client.database.GuildRepo;
     const { Premium } = (await guildRepository.get(oldState.guild.id)).Settings;
 

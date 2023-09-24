@@ -1,11 +1,11 @@
 /* eslint-disable no-empty-function */
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { EmbedBuilder, Message, PartialMessage } from "discord.js";
 
 export default class CheckerEmbeds {
   public constructor(
-    private client: NDBClient,
+    private client: INDBClient,
     private _Command: BaseCommand,
     private mode: "Guild" | "DM",
     private prefix?: string

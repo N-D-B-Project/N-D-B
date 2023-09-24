@@ -1,14 +1,13 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { EmbedBuilder, MessageReaction, User, roleMention } from "discord.js";
 
 export default class Event extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "ReactionRoleRemove",
       type: "on",
@@ -19,7 +18,7 @@ export default class Event extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, reaction: MessageReaction, user: User) {
+  async run(client: INDBClient, reaction: MessageReaction, user: User) {
     if (user === client.user) return;
     const react = new ReactionRole(client, "ReactionRoleAddEvent");
     const TIMER: number = 10 * 1000;

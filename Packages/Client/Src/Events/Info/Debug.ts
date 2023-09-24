@@ -1,10 +1,9 @@
 import { Config } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 
 export default class DebugEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "debug",
       type: "once",
@@ -15,7 +14,7 @@ export default class DebugEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, info: string) {
+  async run(client: INDBClient, info: string) {
     if (Config.Debug.Client === true) client.logger.debug(`Client: ${info}`);
   }
 }

@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import { Message } from "discord.js";
 
 export default class ReactionTypesCommand extends BaseCommand {
-  constructor(client: NDBClient, ...args: string[]) {
+  constructor(client: INDBClient, ...args: string[]) {
     const options: CommandOptions = {
       name: "ReactionTypes",
       aliases: ["RTypes"],
@@ -30,7 +29,7 @@ export default class ReactionTypesCommand extends BaseCommand {
     super(client, options, args);
   }
 
-  async run(client: NDBClient, message: Message, args: string[]) {
+  async run(client: INDBClient, message: Message, args: string[]) {
     await MessageTools.send(
       message.channel,
       await client.Translate.Guild("ReactionRole/ReactionTypes:Types", message)

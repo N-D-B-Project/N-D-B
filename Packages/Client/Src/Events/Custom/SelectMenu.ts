@@ -1,10 +1,9 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { AnySelectMenuInteraction } from "discord.js";
 
 export default class SelectMenuEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "SelectMenu",
       type: "on",
@@ -15,7 +14,7 @@ export default class SelectMenuEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, interaction: AnySelectMenuInteraction) {
+  async run(client: INDBClient, interaction: AnySelectMenuInteraction) {
     await interaction.deferUpdate();
   }
 }

@@ -1,10 +1,9 @@
-import NDBClient from "@/Core/NDBClient";
-import { EventOptions } from "@/Types";
+import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { Message, TextChannel } from "discord.js";
 
 export default class NotQuiteNitroEvent extends BaseEvent {
-  constructor(client: NDBClient) {
+  constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "NotQuiteNitro",
       type: "on",
@@ -15,7 +14,7 @@ export default class NotQuiteNitroEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: NDBClient, message: Message, emojis: RegExpMatchArray) {
+  async run(client: INDBClient, message: Message, emojis: RegExpMatchArray) {
     let replyContent = message.content;
     emojis.forEach(async _emoji => {
       const emoji = client.emojis.cache.find(e => e.name === _emoji);

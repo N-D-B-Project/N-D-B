@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
 import ReactionRole from "@/Modules/ReactionRole";
 import {
   ReactionRoleDeleteAllEmbed,
   UnableToDeleteReactionRoleEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
-import { SubCommandOptions } from "@/Types";
+import { INDBClient, SubCommandOptions } from "@/Types";
 import { mixedComponentType } from "@/Types/extends";
 import { BaseSubCommand } from "@/Utils/Structures";
 import { Buttons, InteractionTools } from "@/Utils/Tools";
@@ -16,7 +15,7 @@ import {
 } from "discord.js";
 
 export default class DeleteAllReactionsCommand extends BaseSubCommand {
-  constructor(client: NDBClient, args: CommandInteractionOptionResolver) {
+  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
     const options: SubCommandOptions = {
       name: "delete_all",
       category: "🎩 ReactionRole",
@@ -40,7 +39,7 @@ export default class DeleteAllReactionsCommand extends BaseSubCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver
   ) {

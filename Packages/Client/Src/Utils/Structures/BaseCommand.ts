@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
-import { CommandOptions } from "@/Types";
+import { CommandOptions, INDBClient } from "@/Types";
 import { Message } from "discord.js";
 
 export default class BaseCommand {
   constructor(
-    private client: NDBClient,
+    private client: INDBClient,
     public options: CommandOptions,
     public args: Array<string>
   ) {
@@ -15,7 +14,7 @@ export default class BaseCommand {
   }
 
   async run(
-    client: NDBClient,
+    client: INDBClient,
     message: Message,
     args: Array<string>,
     premium?: boolean

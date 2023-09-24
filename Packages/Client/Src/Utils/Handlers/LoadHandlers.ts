@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import {
   CommandHandler,
   EventHandler,
@@ -8,7 +8,7 @@ import {
 } from "./index";
 
 export default class LoadHandlers {
-  public constructor(public client: NDBClient) {
+  public constructor(public client: INDBClient) {
     this.client = client;
   }
 

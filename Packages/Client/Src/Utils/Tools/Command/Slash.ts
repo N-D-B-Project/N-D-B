@@ -1,10 +1,10 @@
-import NDBClient from "@/Core/NDBClient";
+import { INDBClient } from "@/Types";
 import { BaseSlashCommand } from "@/Utils/Structures";
 import { CommandInteraction, TextChannel } from "discord.js";
 import { InteractionTools, Tools } from "../index";
 
 export default class SlashChecker {
-  public constructor(private client: NDBClient) {
+  public constructor(private client: INDBClient) {
     this.client = client;
   }
 
