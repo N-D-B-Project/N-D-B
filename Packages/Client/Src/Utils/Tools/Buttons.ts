@@ -8,9 +8,7 @@ import {
 } from "discord.js";
 
 export default class Buttons {
-  public constructor(private client: INDBClient) {
-    this.client = client;
-  }
+  public constructor(private client: INDBClient) {}
 
   async Confirm(
     msgint: Message | CommandInteraction

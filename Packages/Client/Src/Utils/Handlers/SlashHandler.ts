@@ -5,9 +5,8 @@ import { BaseSlashCommand } from "../Structures";
 import BaseHandler from "./BaseHandler";
 
 export default class SlashHandler {
-  public constructor(private client: INDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(private client: INDBClient) {}
 
   async load() {
     this.client.Collections.SlashCommands.clear();

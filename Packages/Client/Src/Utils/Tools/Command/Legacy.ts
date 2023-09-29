@@ -5,9 +5,7 @@ import { MessageTools, Tools } from "../";
 import CheckerEmbeds from "./Embeds";
 
 export default class LegacyChecker {
-  public constructor(private client: INDBClient) {
-    this.client = client;
-  }
+  public constructor(private client: INDBClient) {}
 
   public async runCheck(
     message: Message,

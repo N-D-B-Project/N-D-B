@@ -8,9 +8,8 @@ import {
 } from "./index";
 
 export default class LoadHandlers {
-  public constructor(public client: INDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(public client: INDBClient) {}
 
   async load() {
     await new EventHandler(this.client).load();

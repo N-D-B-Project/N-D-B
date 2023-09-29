@@ -4,9 +4,7 @@ import { CommandInteraction, TextChannel } from "discord.js";
 import { InteractionTools, Tools } from "../index";
 
 export default class SlashChecker {
-  public constructor(private client: INDBClient) {
-    this.client = client;
-  }
+  public constructor(private client: INDBClient) {}
 
   public async runCheck(
     interaction: CommandInteraction,

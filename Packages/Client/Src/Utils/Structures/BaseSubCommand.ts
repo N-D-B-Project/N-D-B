@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { INDBClient, SubCommandOptions } from "@/Types";
 import {
@@ -6,22 +7,18 @@ import {
 } from "discord.js";
 
 export default class BaseSubCommand {
-  constructor(
-    private client: INDBClient,
+  public constructor(
+    protected client: INDBClient,
     public options: SubCommandOptions,
     public args: CommandInteractionOptionResolver
-  ) {
-    this.client = client;
-    this.options = options;
-    this.args = args;
-  }
+  ) {}
 
   async run(
     client: INDBClient,
     interaction: CommandInteraction,
     args: CommandInteractionOptionResolver,
     premium?: boolean
-  ) {
+  ): Promise<void> {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`
     );

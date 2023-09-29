@@ -4,9 +4,8 @@ import { BaseSubCommand } from "../Structures";
 import BaseHandler from "./BaseHandler";
 
 export default class SubHandler {
-  public constructor(private client: INDBClient) {
-    this.client = client;
-  }
+  // eslint-disable-next-line no-empty-function
+  public constructor(private client: INDBClient) {}
 
   async load() {
     this.client.Collections.SubCommands.clear();
