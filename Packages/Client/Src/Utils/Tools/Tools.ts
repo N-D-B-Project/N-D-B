@@ -121,8 +121,8 @@ export default class Tools {
 
   public resolveCommand(nameOrAlias: string) {
     return (
-      this.client.Collections.commands.get(nameOrAlias) ??
-      this.client.Collections.commands.get(
+      this.client.Collections.Commands.get(nameOrAlias) ??
+      this.client.Collections.Commands.get(
         this.client.Collections.aliases.get(nameOrAlias)!
       )
     );

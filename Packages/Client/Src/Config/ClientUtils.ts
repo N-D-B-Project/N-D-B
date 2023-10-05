@@ -1,10 +1,5 @@
 /* eslint-disable no-empty-function */
-import {
-  BaseCommand,
-  BaseEvent,
-  BaseSlashCommand,
-  BaseSubCommand
-} from "@/Utils/Structures";
+import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import { GatewayIntentBits, GatewayVersion } from "discord-api-types/v10";
 import { ClientOptions, Collection, Options, Partials } from "discord.js";
 import { TFunction } from "i18next";
@@ -57,13 +52,10 @@ export const _ClientOptions: ClientOptions = {
 
 export class Collections {
   public constructor(
-    public commands: Collection<string, BaseCommand> = new Collection(),
+    public Commands: Collection<string, BaseCommand> = new Collection(),
     public aliases: Collection<string, string> = new Collection(),
-    public SlashCommands: Collection<
-      string,
-      BaseSlashCommand
-    > = new Collection(),
-    public SubCommands: Collection<string, BaseSubCommand> = new Collection(),
+    public SlashCommands: Collection<string, BaseCommand> = new Collection(),
+    public SubCommands: Collection<string, BaseCommand> = new Collection(),
     public events: Collection<string, BaseEvent> = new Collection(),
     public translations: Map<string, TFunction> = new Map(),
     public languages = import("../Utils/Languages/i18next/language-meta.json")

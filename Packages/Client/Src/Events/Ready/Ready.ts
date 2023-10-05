@@ -25,7 +25,7 @@ export default class Event extends BaseEvent {
     await client.Tools.WAIT(2000);
     client.logger.event(`${client.Collections.events.size} Events`);
     client.logger.command(
-      `${client.Collections.commands.size} Message Commands`
+      `${client.Collections.Commands.size} Message Commands`
     );
     client.logger.command(
       `${client.Collections.SlashCommands.size} (/) Slash Commands`

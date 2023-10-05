@@ -26,7 +26,7 @@ export default async function Paginator(
 ): Promise<void> {
   let CurrentPage: typeof msgint;
   let Collector: InteractionCollector<ButtonInteraction>;
-  let filter: CollectorFilter<any[]>;
+  let filter: CollectorFilter<Array<string>>;
   let index: number = 0;
   const Embed = embeds[index];
   const PreviousButton = new ButtonBuilder()

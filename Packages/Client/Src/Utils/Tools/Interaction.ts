@@ -1,3 +1,4 @@
+import { Content } from "@/Types/client";
 import {
   BaseMessageOptions,
   CommandInteraction,
@@ -47,7 +48,7 @@ export default class InteractionTools {
 
   public static async reply(
     interaction: CommandInteraction | MessageComponentInteraction,
-    content: string | EmbedBuilder | BaseMessageOptions,
+    content: Content,
     ephemeral: boolean
   ): Promise<Message> {
     try {

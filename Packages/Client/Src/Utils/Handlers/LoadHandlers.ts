@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { INDBClient } from "@/Types";
-import {
-  CommandHandler,
-  EventHandler,
-  SlashHandler,
-  SubHandler
-} from "./index";
+import { CommandHandler, EventHandler } from "./index";
 
 export default class LoadHandlers {
   // eslint-disable-next-line no-empty-function
@@ -13,11 +8,9 @@ export default class LoadHandlers {
 
   async load() {
     await new EventHandler(this.client).load();
-    await new CommandHandler(this.client).load();
-    const _SlashHandler = new SlashHandler(this.client);
-    await new SubHandler(this.client).load();
+    const _CommandHandler = new CommandHandler(this.client);
     this.client.once("ready", async () => {
-      await _SlashHandler.load();
+      await _CommandHandler.load();
     });
   }
 }

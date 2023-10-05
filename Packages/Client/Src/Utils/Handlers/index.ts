@@ -3,8 +3,6 @@ import CommandHandler from "./CommandHandler";
 import EventHandler from "./EventHandler";
 import LanguageHandler, { Translate } from "./LanguageHandler";
 import LoadHandlers from "./LoadHandlers";
-import SlashHandler from "./SlashHandler";
-import SubHandler from "./SubHandler";
 
 export {
   BaseHandler,
@@ -12,7 +10,5 @@ export {
   EventHandler,
   LanguageHandler,
   LoadHandlers,
-  SlashHandler,
-  SubHandler,
   Translate
 };

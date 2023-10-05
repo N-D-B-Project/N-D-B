@@ -3,6 +3,7 @@
 
 import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent, BaseSlashCommand } from "@/Utils/Structures";
+import Context from "@/Utils/Structures/Context";
 import { SlashTools } from "@/Utils/Tools";
 import {
   ChatInputCommandInteraction,
@@ -30,6 +31,10 @@ export default class SlashCommandEvent extends BaseEvent {
     const _Command: BaseSlashCommand = client.Collections.SlashCommands.get(
       interaction.commandName
     ) as BaseSlashCommand;
+    const context = new Context(
+      interaction,
+      interaction.options as CommandInteractionOptionResolver
+    );
 
     if (_Command) {
       const Checker = await cmdTools.runCheck(interaction, _Command);
@@ -37,17 +42,10 @@ export default class SlashCommandEvent extends BaseEvent {
       if (Checker) {
         await interaction.deferReply().catch(e => {});
 
-        _Command
-          .run(
-            client,
-            interaction,
-            interaction.options as CommandInteractionOptionResolver,
-            Premium
-          )
-          .catch(async (error: Error) => {
-            client.logger.error(error.stack);
-            return;
-          });
+        _Command.run(client, context, Premium).catch(async (error: Error) => {
+          client.logger.error(error.stack);
+          return;
+        });
       }
     }
   }

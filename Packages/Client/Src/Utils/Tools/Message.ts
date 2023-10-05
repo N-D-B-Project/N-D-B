@@ -1,6 +1,5 @@
+import { Content } from "@/Types/client";
 import {
-  BaseMessageOptions,
-  EmbedBuilder,
   EmojiResolvable,
   Message,
   MessageEditOptions,
@@ -16,7 +15,7 @@ import { CheckError, messageOptions } from ".";
 export default class MessageTools {
   public static async send(
     target: User | TextBasedChannel,
-    content: string | EmbedBuilder | BaseMessageOptions
+    content: Content
   ): Promise<Message> {
     try {
       const msgOptions = messageOptions(content);
@@ -32,7 +31,7 @@ export default class MessageTools {
 
   public static async reply(
     message: Message,
-    content: string | EmbedBuilder | BaseMessageOptions
+    content: Content
   ): Promise<Message> {
     try {
       const msgOptions = messageOptions(content);
@@ -48,7 +47,7 @@ export default class MessageTools {
 
   public static async edit(
     message: Message,
-    content: string | EmbedBuilder | BaseMessageOptions
+    content: Content
   ): Promise<Message> {
     try {
       const msgOptions = messageOptions(content) as MessageEditOptions;

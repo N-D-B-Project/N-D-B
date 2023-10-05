@@ -1,6 +1,5 @@
 import BaseCommand from "./BaseCommand";
 import BaseEvent from "./BaseEvent";
-import BaseSlashCommand from "./BaseSlashCommand";
-import BaseSubCommand from "./BaseSubCommand";
+import Context from "./Context";
 
-export { BaseCommand, BaseEvent, BaseSlashCommand, BaseSubCommand };
+export { BaseCommand, BaseEvent, Context };

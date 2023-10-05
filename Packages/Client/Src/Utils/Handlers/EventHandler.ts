@@ -73,7 +73,7 @@ export default class EventHandler {
       //       case String(object.emitter):
       //         Object(object.value)[event.options.type](
       //           event.options.name,
-      //           (...args: any[]) => {
+      //           (...args: Array<string>) => {
       //             if (event.options.enable) {
       //               event.run(this.client, ...args)
       //             }

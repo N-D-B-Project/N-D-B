@@ -8,10 +8,12 @@ import type {
   AnySelectMenuInteraction,
   ApplicationCommandData,
   AutocompleteInteraction,
+  BaseMessageOptions,
   ButtonInteraction,
   ClientEvents,
   CommandInteraction,
   ContextMenuCommandInteraction,
+  EmbedBuilder,
   Message,
   MessageReaction,
   ModalSubmitInteraction,
@@ -27,50 +29,27 @@ export interface CommandOptions {
   description: string;
   category: string;
   usage: string;
-  disable?: boolean;
-  cooldown?: number;
   permissions: {
     user: Array<PermissionResolvable>;
     bot: Array<PermissionResolvable>;
+    guildOnly?: boolean;
+    ownerOnly?: boolean;
   };
+  disable?: boolean;
+  cooldown?: number;
   minArgs?: number;
   maxArgs?: number;
-  guildOnly?: boolean;
-  ownerOnly?: boolean;
   nsfw?: boolean;
   ndcash?: number;
   DM?: boolean;
+  slash?: {
+    data: ApplicationCommandData;
+    deployMode: "Test" | "Guild" | "Global";
+    type: "Main" | "Sub" | "Group";
+  };
 }
 
-export interface SlashCommandOptions {
-  data: ApplicationCommandData;
-  category: string;
-  permissions: {
-    user: Array<PermissionResolvable>;
-    bot: Array<PermissionResolvable>;
-  };
-  deployMode: "Test" | "Guild" | "Global";
-  ownerOnly?: boolean;
-  disable?: boolean;
-  cooldown?: number;
-  nsfw?: boolean;
-  ndcash?: number;
-}
-
-export interface SubCommandOptions {
-  name: string;
-  category: string;
-  permissions: {
-    user: Array<PermissionResolvable>;
-    bot: Array<PermissionResolvable>;
-  };
-  deployMode: "Test" | "Guild" | "Global";
-  ownerOnly?: boolean;
-  disable?: boolean;
-  cooldown?: number;
-  nsfw?: boolean;
-  ndcash?: number;
-}
+export type Content = string | EmbedBuilder | BaseMessageOptions;
 
 export enum eCommandType {
   INTERACTION = "Interaction",
@@ -126,3 +105,8 @@ export interface SwitchCommand {
   MsgInt: Message | CommandInteraction;
   args?: Array<string> | CommandInteractionOptionResolver;
 }
+
+export declare const Colors: {
+  NDBGreen: 0x00c26f;
+  NDBRed: 0xc20e00;
+};
