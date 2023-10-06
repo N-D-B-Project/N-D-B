@@ -4,7 +4,7 @@
 import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
-import { SlashTools } from "@/Utils/Tools";
+import { CommandChecker } from "@/Utils/Tools";
 import {
   ChatInputCommandInteraction,
   CommandInteractionOptionResolver
@@ -26,11 +26,10 @@ export default class SlashCommandEvent extends BaseEvent {
     client: INDBClient,
     interaction: ChatInputCommandInteraction
   ) {
-    const cmdTools = new SlashTools(client);
+    const cmdTools = new CommandChecker(client);
     const { Premium } = (
       await client.database.GuildRepo.get(interaction.guildId)
     ).Settings;
-
     const _Command: BaseCommand = client.Collections.SlashCommands.get(
       interaction.commandName
     ) as BaseCommand;
@@ -38,10 +37,8 @@ export default class SlashCommandEvent extends BaseEvent {
       interaction,
       interaction.options as CommandInteractionOptionResolver
     );
-
     if (_Command) {
-      const Checker = await cmdTools.runCheck(interaction, _Command);
-
+      const Checker = await cmdTools.runCheck(context, _Command);
       if (Checker) {
         await interaction.deferReply().catch(e => {});
 

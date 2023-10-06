@@ -25,37 +25,41 @@ export default class InteractionCreateEvent extends BaseEvent {
 
   async run(client: INDBClient, interaction: Interaction) {
     if (interaction.type === InteractionType.ApplicationCommand) {
-      client.emit("SlashCommand", interaction as ChatInputCommandInteraction);
-      return;
+      return client.emit(
+        "SlashCommand",
+        interaction as ChatInputCommandInteraction
+      );
     }
 
     if (interaction.type === InteractionType.MessageComponent) {
       if (interaction.isButton()) {
-        client.emit("ButtonClick", interaction as ButtonInteraction);
-        return;
+        return client.emit("ButtonClick", interaction as ButtonInteraction);
       }
 
       if (interaction.isContextMenuCommand()) {
-        client.emit(
+        return client.emit(
           "ContextMenu",
           interaction as ContextMenuCommandInteraction
         );
-        return;
       }
 
       if (interaction.isAnySelectMenu()) {
-        client.emit("SelectMenu", interaction as AnySelectMenuInteraction);
-        return;
+        return client.emit(
+          "SelectMenu",
+          interaction as AnySelectMenuInteraction
+        );
       }
     }
 
     if (interaction.type === InteractionType.ApplicationCommandAutocomplete) {
-      client.emit("AutoComplete", interaction as AutocompleteInteraction);
-      return;
+      return client.emit(
+        "AutoComplete",
+        interaction as AutocompleteInteraction
+      );
     }
 
     if (interaction.type === InteractionType.ModalSubmit) {
-      client.emit("ModalSubmit", interaction as ModalSubmitInteraction);
+      return client.emit("ModalSubmit", interaction as ModalSubmitInteraction);
     }
   }
 }

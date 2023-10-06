@@ -8,7 +8,7 @@ export default class BaseEvent {
     public options: EventOptions
   ) {}
 
-  async run(client: INDBClient, ...args: unknown[]) {
+  async run(client: INDBClient, ...args: unknown[]): Promise<void | boolean> {
     throw new Error(
       `Um método Run não foi implementado em: ${this.options.name}`
     );

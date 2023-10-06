@@ -44,7 +44,8 @@ export default class EvalCommand extends BaseCommand {
           content: "BAD_KEY DETECTED ABORTING EVALUATION"
         });
       }
-      var evalCode = inspect(await eval(args), {
+      const willEvaluated = "obj." + args;
+      var evalCode = inspect(await eval(willEvaluated.replace("obj.", "")), {
         depth: 0
       }).substring(0, 950);
       return context.send({

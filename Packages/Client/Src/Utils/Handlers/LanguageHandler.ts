@@ -10,6 +10,7 @@ import { promises as fs } from "fs";
 import i18next, { TFunction } from "i18next";
 import Backend from "i18next-fs-backend";
 import * as path from "path";
+import { Context } from "../Structures";
 import { Logger } from "../Tools";
 
 async function walkDirectory(
@@ -89,10 +90,15 @@ export class Translate {
 
   async Guild(
     key: string,
-    info: Message | CommandInteraction | GuildChannel | PartialMessage,
+    info:
+      | Message
+      | CommandInteraction
+      | GuildChannel
+      | PartialMessage
+      | Context,
     args?: Record<string, unknown>
   ) {
-    const find = await this.client.database.GuildRepo.get(info.guildId);
+    const find = await this.client.database.GuildRepo.get(info.guild.id);
     let locale = find.Settings.Language;
     if (!locale) locale = "pt-BR";
     const language = this.client.Collections.translations.get(locale);

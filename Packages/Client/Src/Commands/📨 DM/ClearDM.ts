@@ -35,7 +35,7 @@ export default class ClearDMCommand extends BaseCommand {
   public async run(client: INDBClient, context: Context) {
     let i: number = 0;
     await client.Tools.WAIT(1000);
-    await context.channel.messages.fetch().then(async msgs => {
+    await context.author.dmChannel.messages.fetch().then(async msgs => {
       msgs.forEach(async msg => {
         await client.Tools.WAIT(1000);
         if (msg.deletable) {

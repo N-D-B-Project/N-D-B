@@ -1,7 +1,7 @@
 import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
-import { LegacyTools } from "@/Utils/Tools";
+import { CommandChecker } from "@/Utils/Tools";
 import { ChannelType, Message } from "discord.js";
 
 export default class CommandEvent extends BaseEvent {
@@ -23,7 +23,7 @@ export default class CommandEvent extends BaseEvent {
     Premium: boolean
   ) {
     if (message.channel.type === ChannelType.DM) return;
-    const cmdTools = new LegacyTools(client);
+    const cmdTools = new CommandChecker(client);
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
@@ -31,7 +31,7 @@ export default class CommandEvent extends BaseEvent {
     const context = new Context(message, args as Array<string>);
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
-      const Checker = await cmdTools.runCheck(message, _Command, Prefix, args);
+      const Checker = await cmdTools.runCheck(context, _Command, Prefix, args);
       if (Checker) {
         _Command.run(client, context, Premium);
       }

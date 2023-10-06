@@ -48,31 +48,29 @@ export default class CommandHandler {
           if (CommandOptions.slash.deployMode === "Guild") {
             await this.client.guilds.cache
               .get(Config.NDCommunity.ID)
-              ?.commands.set([]);
-            // ?.commands.create(SlashData.data)
-            // .then(res => {
-            //   return res;
-            // });
+              ?.commands.create(SlashData.data)
+              .then(res => {
+                return res;
+              });
           }
 
           // InDevCommands
           if (CommandOptions.slash.deployMode === "Test") {
             await this.client.guilds.cache
               .get(Config.TestGuild.ID)
-              ?.commands.set([]);
-            // .create(SlashData.data)
-            // .then(res => {
-            //   return res;
-            // });
+              ?.commands.create(SlashData.data)
+              .then(res => {
+                return res;
+              });
           }
 
           // Global
           if (SlashData.deployMode === "Global") {
-            await this.client.application?.commands.set([]);
-            // .create(SlashData.data)
-            // .then(res => {
-            //   return res;
-            // });
+            await this.client.application?.commands
+              .create(SlashData.data)
+              .then(res => {
+                return res;
+              });
           }
         } catch (e) {
           console.log(e);
@@ -81,10 +79,7 @@ export default class CommandHandler {
 
       // Slash Sub Commands
       if (SlashData.type === "Sub") {
-        this.client.Collections.SubCommands.set(
-          CommandOptions.name + CommandOptions.category,
-          command
-        );
+        this.client.Collections.SubCommands.set(CommandOptions.name, command);
       }
     });
   }

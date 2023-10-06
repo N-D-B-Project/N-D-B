@@ -18,7 +18,7 @@ Please [read the FAQ](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/FAQ.m
 
 ### 3. Do you have a question?
 
-Enter in the [Discord Support Server](http://discord.gg/5CHARxbaRk) go to the [#Support](https://discord.com/channels/679066351456878633/1128728836247388190) Channel and create an post with your question!
+Enter in the [Discord Support Server](https://discord.gg/5CHARxbaRk) go to the [#Support](https://discord.com/channels/679066351456878633/1128728836247388190) Channel and create an post with your question!
 
 ### 4. Did you find a bug?
 

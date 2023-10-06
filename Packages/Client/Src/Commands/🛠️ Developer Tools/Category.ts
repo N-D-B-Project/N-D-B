@@ -1,6 +1,6 @@
 import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand, Context } from "@/Utils/Structures";
-import { SubTools } from "@/Utils/Tools";
+import { CommandChecker } from "@/Utils/Tools";
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType
@@ -90,7 +90,7 @@ export default class DeveloperToolsCategoryCommand extends BaseCommand {
 
   async run(client: INDBClient, context: Context) {
     const SubList = [{ prop: "eval" }, { prop: "reload" }, { prop: "test" }];
-    const cmdTools = new SubTools(client);
-    await cmdTools.runSubCommand(context, SubList, this.options);
+    const cmdTools = new CommandChecker(client);
+    await cmdTools.runSubCommand(context, SubList);
   }
 }

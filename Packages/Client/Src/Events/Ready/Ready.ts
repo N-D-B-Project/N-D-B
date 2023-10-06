@@ -20,7 +20,6 @@ export default class Event extends BaseEvent {
     if (Config.Music.Lavalink) {
       await client.MusicManager.load();
     }
-
     //* Logs
     await client.Tools.WAIT(2000);
     client.logger.event(`${client.Collections.events.size} Events`);
@@ -58,7 +57,7 @@ export default class Event extends BaseEvent {
           type: ActivityType.Custom,
           name: "WorkingAt",
           state: `${""}N-D-B | 🎵 Music Player - 🚧 WIP`,
-          url: "http://discord.gg/5CHARxbaRk"
+          url: "https://discord.gg/5CHARxbaRk"
         },
         {
           type: ActivityType.Watching,
@@ -67,7 +66,7 @@ export default class Event extends BaseEvent {
         {
           type: ActivityType.Streaming,
           name: "Watch my Creator Streams on Twitch!",
-          url: "http://Twitch.TV/NedcloarBR"
+          url: "https://Twitch.TV/NedcloarBR"
         },
         {
           type: ActivityType.Custom,
@@ -95,7 +94,6 @@ export default class Event extends BaseEvent {
     //     g => `Users: ${g.members.cache.size} - Name: ${g.name}`
     //   )
     // );
-
     await client.Tools.WAIT(5000);
     MessageTools.delete(ReadyMSG);
   }
