@@ -26,10 +26,12 @@ export default class CommandHandler {
       if (!(command instanceof BaseCommand)) {
         throw new TypeError(`Comando: ${name} não esta em Commands`);
       }
-      this.client.Collections.Commands.set(CommandOptions.name, command);
-      if (CommandOptions.aliases) {
-        for (const alias of CommandOptions.aliases) {
-          this.client.Collections.aliases.set(alias, CommandOptions.name);
+      if (CommandOptions.name !== "_Category") {
+        this.client.Collections.Commands.set(CommandOptions.name, command);
+        if (CommandOptions.aliases) {
+          for (const alias of CommandOptions.aliases) {
+            this.client.Collections.aliases.set(alias, CommandOptions.name);
+          }
         }
       }
 
@@ -46,29 +48,31 @@ export default class CommandHandler {
           if (CommandOptions.slash.deployMode === "Guild") {
             await this.client.guilds.cache
               .get(Config.NDCommunity.ID)
-              ?.commands.create(SlashData.data)
-              .then(res => {
-                return res;
-              });
+              ?.commands.set([]);
+            // ?.commands.create(SlashData.data)
+            // .then(res => {
+            //   return res;
+            // });
           }
 
           // InDevCommands
           if (CommandOptions.slash.deployMode === "Test") {
             await this.client.guilds.cache
               .get(Config.TestGuild.ID)
-              ?.commands.create(SlashData.data)
-              .then(res => {
-                return res;
-              });
+              ?.commands.set([]);
+            // .create(SlashData.data)
+            // .then(res => {
+            //   return res;
+            // });
           }
 
           // Global
           if (SlashData.deployMode === "Global") {
-            await this.client.application?.commands
-              .create(SlashData.data)
-              .then(res => {
-                return res;
-              });
+            await this.client.application?.commands.set([]);
+            // .create(SlashData.data)
+            // .then(res => {
+            //   return res;
+            // });
           }
         } catch (e) {
           console.log(e);

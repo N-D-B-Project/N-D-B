@@ -1,5 +1,5 @@
 import { INDBClient } from "@/Types";
-import { BaseSlashCommand } from "@/Utils/Structures";
+import { BaseCommand } from "@/Utils/Structures";
 import { CommandInteraction, TextChannel } from "discord.js";
 import { InteractionTools, Tools } from "../index";
 
@@ -8,13 +8,16 @@ export default class SlashChecker {
 
   public async runCheck(
     interaction: CommandInteraction,
-    _Command: BaseSlashCommand
+    _Command: BaseCommand
   ): Promise<boolean> {
     const Options = _Command.options;
     const Channel = interaction.channel as TextChannel;
     const tools = new Tools(this.client);
 
-    if (Options.ownerOnly && !tools.checkOwner(interaction.user.id)) {
+    if (
+      Options.permissions.ownerOnly &&
+      !tools.checkOwner(interaction.user.id)
+    ) {
       InteractionTools.reply(
         interaction,
         await this.client.Translate.Guild(
@@ -27,7 +30,7 @@ export default class SlashChecker {
     }
 
     if (
-      Options.deployMode === "Guild" &&
+      Options.slash.deployMode === "Guild" &&
       !tools.checkGuild(interaction.guild.id)
     ) {
       InteractionTools.reply(

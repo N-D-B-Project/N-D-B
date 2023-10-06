@@ -1,6 +1,7 @@
 import { Content } from "@/Types/client";
 import {
   CommandInteraction,
+  CommandInteractionOption,
   CommandInteractionOptionResolver,
   DMChannel,
   EmojiResolvable,
@@ -31,7 +32,11 @@ export default class Context {
 
   public constructor(
     public context: Message | CommandInteraction,
-    public args: Array<string> | CommandInteractionOptionResolver
+    public args:
+      | Array<string>
+      | CommandInteractionOptionResolver
+      | Array<CommandInteractionOption>,
+    public isSubSlash?: boolean
   ) {
     this.isSlash = context instanceof CommandInteraction;
     this.configureContext();
@@ -53,7 +58,11 @@ export default class Context {
 
   public getArg(name: string, position: number) {
     return this.isSlash
-      ? (this.args as CommandInteractionOptionResolver).get(name)
+      ? this.isSubSlash
+        ? (this.args as Array<CommandInteractionOption>).find(
+            arg => arg.name === name
+          ).value
+        : (this.args as CommandInteractionOptionResolver).get(name)
       : (this.args as Array<string>)[position];
   }
 
@@ -102,5 +111,12 @@ export default class Context {
 
   public async getContent() {
     return this.args.toString().toLowerCase();
+  }
+
+  public async getInteractionArgs() {
+    if (this.isSlash) {
+      return this.args as CommandInteractionOptionResolver;
+    }
+    throw new Error("Don't use this in Message Context");
   }
 }

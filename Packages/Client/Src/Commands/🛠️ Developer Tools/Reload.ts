@@ -1,10 +1,6 @@
 import { CommandOptions, INDBClient } from "@/Types";
 import { CommandHandler, EventHandler } from "@/Utils/Handlers";
 import { BaseCommand, Context } from "@/Utils/Structures";
-import {
-  ApplicationCommandOptionType,
-  ApplicationCommandType
-} from "discord.js";
 
 export default class TestCommand extends BaseCommand {
   constructor(client: INDBClient) {
@@ -25,34 +21,7 @@ export default class TestCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       slash: {
-        data: {
-          name: "reload",
-          description: "Reload the client events | commands | all",
-          type: ApplicationCommandType.ChatInput,
-          options: [
-            {
-              name: "type",
-              description: "Choose what will be reloaded",
-              type: ApplicationCommandOptionType.String,
-              choices: [
-                {
-                  name: "events",
-                  value: "events"
-                },
-                {
-                  name: "commands",
-                  value: "commands"
-                },
-                {
-                  name: "all",
-                  value: "all"
-                }
-              ]
-            }
-          ]
-        },
-        deployMode: "Global",
-        type: "Main"
+        type: "Sub"
       }
     };
     super(client, options);

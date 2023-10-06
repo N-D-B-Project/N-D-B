@@ -2,7 +2,7 @@
 /* eslint-disable no-empty-function */
 
 import { EventOptions, INDBClient } from "@/Types";
-import { BaseEvent, BaseSlashCommand } from "@/Utils/Structures";
+import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
 import { SlashTools } from "@/Utils/Tools";
 import {
@@ -11,7 +11,7 @@ import {
 } from "discord.js";
 
 export default class SlashCommandEvent extends BaseEvent {
-  constructor(client: INDBClient) {
+  public constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "SlashCommand",
       type: "on",
@@ -22,15 +22,18 @@ export default class SlashCommandEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(client: INDBClient, interaction: ChatInputCommandInteraction) {
+  public async run(
+    client: INDBClient,
+    interaction: ChatInputCommandInteraction
+  ) {
     const cmdTools = new SlashTools(client);
     const { Premium } = (
       await client.database.GuildRepo.get(interaction.guildId)
     ).Settings;
 
-    const _Command: BaseSlashCommand = client.Collections.SlashCommands.get(
+    const _Command: BaseCommand = client.Collections.SlashCommands.get(
       interaction.commandName
-    ) as BaseSlashCommand;
+    ) as BaseCommand;
     const context = new Context(
       interaction,
       interaction.options as CommandInteractionOptionResolver

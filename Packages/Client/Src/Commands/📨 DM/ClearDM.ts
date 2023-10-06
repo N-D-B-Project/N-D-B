@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommandOptions, INDBClient } from "@/Types";
-import { BaseCommand } from "@/Utils/Structures";
+import { BaseCommand, Context } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
-import { EmbedBuilder, Message, MessageReaction, User } from "discord.js";
+import { EmbedBuilder, MessageReaction, User } from "discord.js";
 
 export default class ClearDMCommand extends BaseCommand {
-  constructor(client: INDBClient, ...args: string[]) {
+  public constructor(protected client: INDBClient) {
     const options: CommandOptions = {
-      name: "ClearDM",
-      aliases: ["cleardm", "dmclear"],
+      name: "clear_dm",
+      aliases: ["cleardm", "dmclear", "ClearDM"],
       description: "Limpa as mensagens do Bot de sua DM",
       category: "📨 DM",
       usage: "",
@@ -16,23 +16,26 @@ export default class ClearDMCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         bot: ["SendMessages"],
-        user: ["SendMessages"]
+        user: ["SendMessages"],
+        guildOnly: false,
+        ownerOnly: false
       },
       minArgs: 0,
       maxArgs: 0,
-      guildOnly: false,
-      ownerOnly: false,
       nsfw: false,
       ndcash: 0,
-      DM: true
+      DM: true,
+      slash: {
+        type: "Sub"
+      }
     };
-    super(client, options, args);
+    super(client, options);
   }
 
-  async run(client: INDBClient, message: Message, args: Array<string>) {
+  public async run(client: INDBClient, context: Context) {
     let i: number = 0;
     await client.Tools.WAIT(1000);
-    await message.channel.messages.fetch().then(async msgs => {
+    await context.channel.messages.fetch().then(async msgs => {
       msgs.forEach(async msg => {
         await client.Tools.WAIT(1000);
         if (msg.deletable) {
@@ -42,14 +45,14 @@ export default class ClearDMCommand extends BaseCommand {
       });
     });
     await client.Tools.WAIT(5000);
-    const msg = await MessageTools.send(message.channel, {
+    const msg = await MessageTools.send(context.channel, {
       embeds: [
         new EmbedBuilder()
           .setColor("#00c26f")
           .setDescription(
             await client.Translate.DM(
               "DM/ClearDM:Embed:Description",
-              message.author,
+              context.author,
               {
                 VALUE: i
               }
@@ -58,7 +61,7 @@ export default class ClearDMCommand extends BaseCommand {
           .setFooter({
             text: await client.Translate.DM(
               "DM/ClearDM:Embed:Footer",
-              message.author
+              context.author
             )
           })
           .setTimestamp()
@@ -67,7 +70,7 @@ export default class ClearDMCommand extends BaseCommand {
 
     msg.react("🗑️");
     const filter = (reaction: MessageReaction, user: User) => {
-      return user.id === message.author.id && reaction.emoji.name === "🗑️";
+      return user.id === context.author.id && reaction.emoji.name === "🗑️";
     };
     msg
       .createReactionCollector({
@@ -77,9 +80,6 @@ export default class ClearDMCommand extends BaseCommand {
       })
       .on("collect", async (reaction: MessageReaction) => {
         msg.delete();
-      })
-      .on("end", async () => {
-        return;
       });
   }
 }

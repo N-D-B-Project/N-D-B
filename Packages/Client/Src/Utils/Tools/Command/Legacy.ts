@@ -36,7 +36,7 @@ export default class LegacyChecker {
       return false;
     }
 
-    if (Options.ownerOnly && !tools.checkOwner(message.author.id)) {
+    if (Options.permissions.ownerOnly && !tools.checkOwner(message.author.id)) {
       MessageTools.reply(
         message,
         await this.client.Translate.Guild(
@@ -47,7 +47,7 @@ export default class LegacyChecker {
       return false;
     }
 
-    if (Options.guildOnly && !tools.checkGuild(message.guild.id)) {
+    if (Options.permissions.guildOnly && !tools.checkGuild(message.guild.id)) {
       MessageTools.reply(
         message,
         await this.client.Translate.Guild(
@@ -150,7 +150,7 @@ export default class LegacyChecker {
       return false;
     }
 
-    if (Options.ownerOnly && !tools.checkOwner(message.author.id)) {
+    if (Options.permissions.ownerOnly && !tools.checkOwner(message.author.id)) {
       MessageTools.reply(
         message,
         await this.client.Translate.DM(
@@ -161,7 +161,7 @@ export default class LegacyChecker {
       return false;
     }
 
-    if (Options.guildOnly && !tools.checkGuild(message.guild.id)) {
+    if (Options.permissions.guildOnly && !tools.checkGuild(message.guild.id)) {
       MessageTools.reply(
         message,
         await this.client.Translate.DM(

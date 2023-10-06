@@ -1,38 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { INDBClient, SlashCommandOptions } from "@/Types";
-import { BaseSlashCommand } from "@/Utils/Structures";
-import { InteractionTools } from "@/Utils/Tools";
-import {
-  CommandInteraction,
-  CommandInteractionOptionResolver
-} from "discord.js";
+import { CommandOptions, INDBClient } from "@/Types";
+import { BaseCommand, Context } from "@/Utils/Structures";
 
-export default class Command extends BaseSlashCommand {
-  constructor(client: INDBClient, args: CommandInteractionOptionResolver) {
-    const options: SlashCommandOptions = {
-      data: {
-        name: "helloworld",
-        description: "A Simple Hello"
-      },
-      category: "Any",
+export default class Command extends BaseCommand {
+  public constructor(client: INDBClient) {
+    const options: CommandOptions = {
+      name: "_Category",
+      aliases: [],
+      description: "",
+      usage: "",
+      category: "(/) Slash",
       permissions: {
         user: ["SendMessages"],
         bot: ["SendMessages"]
       },
-      deployMode: "Global"
+      slash: {
+        data: {
+          name: "helloworld",
+          description: "A Simple Hello"
+        },
+        deployMode: "Global",
+        type: "Main"
+      }
     };
-    super(client, options, args);
+    super(client, options);
   }
 
-  async run(
-    client: INDBClient,
-    interaction: CommandInteraction,
-    args: CommandInteractionOptionResolver
-  ) {
-    InteractionTools.reply(
-      interaction,
-      { content: "Hello World! I'm N-D-B a simple Discord Bot" },
-      true
-    );
+  public async run(client: INDBClient, context: Context) {
+    context.reply({ content: "Hello World! I'm N-D-B a simple Discord Bot" });
   }
 }

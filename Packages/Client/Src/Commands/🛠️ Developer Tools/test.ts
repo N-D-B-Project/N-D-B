@@ -2,7 +2,6 @@
 import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
-import { ApplicationCommandOptionType } from "discord.js";
 
 export default class TestCommand extends BaseCommand {
   constructor(client: INDBClient) {
@@ -24,19 +23,7 @@ export default class TestCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       slash: {
-        data: {
-          name: "test",
-          description: "test",
-          options: [
-            {
-              name: "test",
-              type: ApplicationCommandOptionType.String,
-              description: "test"
-            }
-          ]
-        },
-        deployMode: "Test",
-        type: "Main"
+        type: "Sub"
       }
     };
     super(client, options);

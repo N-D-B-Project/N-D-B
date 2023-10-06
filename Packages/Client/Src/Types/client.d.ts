@@ -43,8 +43,8 @@ export interface CommandOptions {
   ndcash?: number;
   DM?: boolean;
   slash?: {
-    data: ApplicationCommandData;
-    deployMode: "Test" | "Guild" | "Global";
+    data?: ApplicationCommandData;
+    deployMode?: "Test" | "Guild" | "Global";
     type: "Main" | "Sub" | "Group";
   };
 }
@@ -99,11 +99,6 @@ export interface EmitedEvents {
     reaction: MessageReaction | PartialMessageReaction,
     user: User | PartialUser
   ];
-}
-
-export interface SwitchCommand {
-  MsgInt: Message | CommandInteraction;
-  args?: Array<string> | CommandInteractionOptionResolver;
 }
 
 export declare const Colors: {

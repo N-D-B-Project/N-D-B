@@ -1,11 +1,7 @@
 import { EvalBadKeys } from "@/Config/Config";
 import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand, Context } from "@/Utils/Structures";
-import {
-  ApplicationCommandOptionType,
-  EmbedBuilder,
-  codeBlock
-} from "discord.js";
+import { EmbedBuilder, codeBlock } from "discord.js";
 import { inspect } from "util";
 
 export default class EvalCommand extends BaseCommand {
@@ -13,7 +9,8 @@ export default class EvalCommand extends BaseCommand {
     const options: CommandOptions = {
       name: "eval",
       aliases: [""],
-      description: "eval",
+      description:
+        "Evaluate some codes to test it without restart the bot every time",
       category: "🛠️ Developer Tools",
       usage: "<code>",
       disable: false,
@@ -30,20 +27,7 @@ export default class EvalCommand extends BaseCommand {
       ndcash: 0,
       DM: false,
       slash: {
-        data: {
-          name: "eval",
-          description:
-            "Evaluate some codes to test it without restart the bot every time",
-          options: [
-            {
-              name: "code",
-              description: "Code to begin evaluated",
-              type: ApplicationCommandOptionType.String
-            }
-          ]
-        },
-        deployMode: "Global",
-        type: "Main"
+        type: "Sub"
       }
     };
     super(client, options);
@@ -52,8 +36,9 @@ export default class EvalCommand extends BaseCommand {
   async run(client: INDBClient, context: Context) {
     await context.delete();
     const content = await context.getContent();
-    const args = context.args.toString();
+    const args = context.getArg("code", 0).toString();
     try {
+      // console.log(args);
       if (EvalBadKeys.some(key => content.includes(key))) {
         return await context.send({
           content: "BAD_KEY DETECTED ABORTING EVALUATION"

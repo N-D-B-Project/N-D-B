@@ -5,14 +5,7 @@ import { Translate } from "@/Utils/Handlers";
 import { Tools } from "@/Utils/Tools";
 import { Client } from "discord.js";
 
-export {
-  CommandOptions,
-  EventOptions,
-  SlashCommandOptions,
-  SubCommandOptions,
-  SwitchCommand,
-  eCommandType
-} from "./client";
+export { CommandOptions, EventOptions, eCommandType } from "./client";
 export { JobDaily, Jobs, WorkedBonus } from "./ndcash";
 
 export interface INDBClient extends Client {
