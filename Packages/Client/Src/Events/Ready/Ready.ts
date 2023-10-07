@@ -80,6 +80,7 @@ export default class Event extends BaseEvent {
     function setPresence() {
       const activity =
         presences.activities[
+          // NOSONAR: SonarCloud will ignore this line in Code Analysis
           Math.floor(Math.random() * presences.activities.length)
         ];
       client.user.setPresence({
