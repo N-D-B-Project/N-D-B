@@ -35,7 +35,8 @@ export default class SlashCommandEvent extends BaseEvent {
     ) as BaseCommand;
     const context = new Context(
       interaction,
-      interaction.options as CommandInteractionOptionResolver
+      interaction.options as CommandInteractionOptionResolver,
+      {}
     );
     if (_Command) {
       const Checker = await cmdTools.runCheck(context, _Command);

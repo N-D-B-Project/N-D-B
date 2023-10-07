@@ -21,15 +21,10 @@ export default class DMCommandEvent extends BaseEvent {
       .slice(Prefix.length)
       .trim()
       .split(/ +/g);
-    const context = new Context(message, args as Array<string>);
+    const context = new Context(message, args as Array<string>, {});
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
-      const Checker = await cmdTools.runCheckDM(
-        context,
-        _Command,
-        Prefix,
-        args
-      );
+      const Checker = await cmdTools.runCheck(context, _Command, Prefix, args);
       if (Checker) {
         _Command.run(client, context);
       }

@@ -91,6 +91,6 @@ export default class DeveloperToolsCategoryCommand extends BaseCommand {
   async run(client: INDBClient, context: Context) {
     const SubList = [{ prop: "eval" }, { prop: "reload" }, { prop: "test" }];
     const cmdTools = new CommandChecker(client);
-    await cmdTools.runSubCommand(context, SubList);
+    await cmdTools.runSubCommand(context, SubList, false);
   }
 }

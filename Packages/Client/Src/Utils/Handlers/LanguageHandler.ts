@@ -114,4 +114,18 @@ export class Translate {
     if (!language) throw "Linguagem invalida || Key não encontrada";
     return language(key, args);
   }
+
+  public async TFunction(
+    context: Context,
+    key: string,
+    args?: Record<string, unknown>
+  ) {
+    if (context.isDM || (context.isSub && context.isDM)) {
+      return await this.DM(key, context.author, args);
+    }
+    if (context.isSlash) {
+      return await this.Guild(key, context.interaction, args);
+    }
+    return await this.Guild(key, context.message, args);
+  }
 }

@@ -14,6 +14,11 @@ import {
 } from "discord.js";
 import { InteractionTools, MessageTools } from "../Tools";
 
+interface SwitchContext {
+  isSub?: boolean;
+  isDM?: boolean;
+}
+
 export default class Context {
   public id: string;
   public isSlash: boolean;
@@ -28,7 +33,9 @@ export default class Context {
   public guild: Guild;
   public createdAt: Date;
   public createdTimestamp: number;
-  private msg;
+  private msg: Message;
+  public isSub: boolean;
+  public isDM: boolean;
 
   public constructor(
     public context: Message | CommandInteraction,
@@ -36,13 +43,13 @@ export default class Context {
       | Array<string>
       | CommandInteractionOptionResolver
       | Array<CommandInteractionOption>,
-    public isSubSlash?: boolean
+    { isSub, isDM }: SwitchContext
   ) {
     this.isSlash = context instanceof CommandInteraction;
-    this.configureContext();
+    this.configureContext(isSub, isDM);
   }
 
-  private configureContext() {
+  private configureContext(isSub, isDM) {
     this.id = this.context.id;
     this.message = this.isSlash ? null : (this.context as Message);
     this.interaction = this.isSlash
@@ -54,11 +61,13 @@ export default class Context {
     this.guild = this.context.guild;
     this.createdAt = this.context.createdAt;
     this.createdTimestamp = this.context.createdTimestamp;
+    this.isSub = isSub;
+    this.isDM = isDM;
   }
 
   public getArg(name: string, position: number) {
     return this.isSlash
-      ? this.isSubSlash
+      ? this.isSub
         ? (this.args as Array<CommandInteractionOption>).find(
             arg => arg.name === name
           ).value

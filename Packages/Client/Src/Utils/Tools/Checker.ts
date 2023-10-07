@@ -1,4 +1,5 @@
 import { INDBClient } from "@/Types";
+import { Content } from "@/Types/client";
 import { BaseCommand, Context } from "@/Utils/Structures";
 import { ChannelType, TextChannel } from "discord.js";
 import { Tools } from ".";
@@ -7,9 +8,7 @@ import CheckerEmbeds from "./Embeds";
 export default class CommandChecker {
   // eslint-disable-next-line no-empty-function
   public constructor(private client: INDBClient) {}
-  public test() {
-    return "Works";
-  }
+
   public async runCheck(
     context: Context,
     _Command: BaseCommand,
@@ -19,38 +18,36 @@ export default class CommandChecker {
     const Options = _Command.options;
     const Channel = context.channel as TextChannel;
     const tools = new Tools(this.client);
-    const embeds = new CheckerEmbeds(
-      this.client,
-      context,
-      _Command,
-      "Guild",
-      prefix
-    );
-
+    const embeds = new CheckerEmbeds(this.client, context, _Command, prefix);
     if (!context.isSlash) {
       if (args.length < _Command.options.minArgs) {
-        context.reply(await embeds.minArgs());
+        this.SendFunction(context, await embeds.minArgs());
         return false;
       }
 
       if (args.length > _Command.options.maxArgs) {
-        context.reply(await embeds.maxArgs());
+        this.SendFunction(context, await embeds.maxArgs());
         return false;
       }
     }
 
     if (!context.guild && !Options.DM) {
-      context.reply(
-        await this.client.Translate.Guild("Tools/Command:Checker:DM", context)
+      this.SendFunction(
+        context,
+        await this.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:DM"
+        )
       );
       return false;
     }
 
     if (Options.permissions.ownerOnly && !tools.checkOwner(context.author.id)) {
-      context.reply(
-        await this.client.Translate.Guild(
-          "Tools/Command:Checker:OwnerOnly",
-          context
+      this.SendFunction(
+        context,
+        await this.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:OwnerOnly"
         )
       );
       return false;
@@ -60,36 +57,42 @@ export default class CommandChecker {
       (Options.permissions.guildOnly || Options.slash.deployMode === "Guild") &&
       !tools.checkGuild(context.guild.id)
     ) {
-      context.reply(
-        await this.client.Translate.Guild(
-          "Tools/Command:Checker:GuildOnly",
-          context
+      this.SendFunction(
+        context,
+        await this.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:GuildOnly"
         )
       );
       return false;
     }
 
     if (Options.nsfw && !Channel.nsfw) {
-      context.reply(
-        await this.client.Translate.Guild("Tools/Command:Checker:NSFW", context)
+      this.SendFunction(
+        context,
+        await this.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:NSFW"
+        )
       );
       return false;
     }
 
     if (Options.disable) {
-      context.reply(
-        await this.client.Translate.Guild(
-          "Tools/Command:Checker:Disable",
-          context
+      this.SendFunction(
+        context,
+        await this.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:Disable"
         )
       );
       return false;
     }
     // if (Options.ndcash && !NDCash) {
-    //   context.reply(
+    //   this.SendFunction(context,
     //
-    //     await this.client.Translate.Guild(
-    //       "Tools/Command:Checker:NDCash",
+    //     await this.client.Translate.TFunction(
+    //       context, "Tools/Command:Checker:NDCash",
     //
     //     )
     //   )
@@ -102,9 +105,9 @@ export default class CommandChecker {
     // }
 
     if (Options.DM && context.channel.type === ChannelType.DM) {
-      await this.client.Translate.Guild(
-        "Tools/Command:Checker:OnlyDM",
-        context
+      await this.client.Translate.TFunction(
+        context,
+        "Tools/Command:Checker:OnlyDM"
       );
       return false;
     }
@@ -116,7 +119,7 @@ export default class CommandChecker {
     //       player.voiceChannelId
     //     );
 
-    //     await this.client.Translate.Guild("Tools/Music:WrongChannel",  {
+    //     await this.client.Translate.TFunction(context, "Tools/Music:WrongChannel",  {
     //       TextChannel: channelMention(player.textChannelId),
     //       VoiceChannel: channelMention(voiceChannel)
     //     });
@@ -127,89 +130,11 @@ export default class CommandChecker {
     return true;
   }
 
-  public async runCheckDM(
+  public async runSubCommand(
     context: Context,
-    _Command: BaseCommand,
-    prefix?: string,
-    args?: Array<string>
-  ): Promise<boolean> {
-    const Options = _Command.options;
-    const Channel = context.channel as TextChannel;
-    const tools = new Tools(this.client);
-    const embeds = new CheckerEmbeds(
-      this.client,
-      context,
-      _Command,
-      "DM",
-      prefix
-    );
-
-    if (args.length < _Command.options.minArgs) {
-      context.sendToUserDM(await embeds.minArgs());
-      return false;
-    }
-
-    if (args.length > _Command.options.maxArgs) {
-      context.reply(await embeds.maxArgs());
-      return false;
-    }
-
-    if (!context.guild && !Options.DM) {
-      context.sendToUserDM(
-        await this.client.Translate.DM(
-          "Tools/Command:Checker:DM",
-          context.author
-        )
-      );
-      return false;
-    }
-
-    if (Options.permissions.ownerOnly && !tools.checkOwner(context.author.id)) {
-      context.reply(
-        await this.client.Translate.DM(
-          "Tools/Command:Checker:OwnerOnly",
-          context.author
-        )
-      );
-      return false;
-    }
-
-    if (Options.permissions.guildOnly && !tools.checkGuild(context.guild.id)) {
-      context.reply(
-        await this.client.Translate.DM(
-          "Tools/Command:Checker:GuildOnly",
-          context.author
-        )
-      );
-      return false;
-    }
-    if (Options.nsfw && !Channel.nsfw) {
-      context.reply(
-        await this.client.Translate.DM(
-          "Tools/Command:Checker:NSFW",
-          context.author
-        )
-      );
-      return false;
-    }
-    if (Options.disable) {
-      context.reply(
-        await this.client.Translate.DM(
-          "Tools/Command:Checker:Disable",
-          context.author
-        )
-      );
-      return false;
-    }
-
-    if (Options.DM && context.channel.type === ChannelType.DM) {
-      return true;
-    }
-
-    return true;
-  }
-
-  async runSubCommand(context: Context, SubList: Array<{ prop: string }>) {
+    SubList: Array<{ prop: string }>,
+    isDM: boolean
+  ) {
     const args = await context.getInteractionArgs();
     for (const Command of SubList) {
       if (args.getSubcommand() === Command.prop) {
@@ -221,7 +146,7 @@ export default class CommandChecker {
             const newContext = new Context(
               context.interaction,
               args.data[0].options,
-              true
+              { isSub: true, isDM }
             );
             _SubCommand
               .run(this.client, newContext)
@@ -233,5 +158,12 @@ export default class CommandChecker {
         }
       }
     }
+  }
+
+  private async SendFunction(context: Context, content: Content) {
+    if (context.isDM) {
+      return context.sendToUserDM(content);
+    }
+    return context.reply(content);
   }
 }
