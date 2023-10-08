@@ -65,14 +65,20 @@ export default class Context {
     this.isDM = isDM;
   }
 
+  private getGuild() {
+    return this.context.client.guilds.fetch(this.guild.id);
+  }
+
   public getArg(name: string, position: number) {
-    return this.isSlash
-      ? this.isSub
-        ? (this.args as Array<CommandInteractionOption>).find(
-            arg => arg.name === name
-          ).value
-        : (this.args as CommandInteractionOptionResolver).get(name)
-      : (this.args as Array<string>)[position];
+    return (
+      this.isSlash
+        ? this.isSub
+          ? (this.args as Array<CommandInteractionOption>).find(
+              arg => arg.name === name
+            ).value
+          : (this.args as CommandInteractionOptionResolver).get(name)
+        : (this.args as Array<string>)[position]
+    ) as string;
   }
 
   public async send(content: Content) {
@@ -127,5 +133,29 @@ export default class Context {
       return this.args as CommandInteractionOptionResolver;
     }
     throw new Error("Don't use this in Message Context");
+  }
+
+  public async getChannel(name: string, position: number) {
+    const arg = this.getArg(name, position);
+    if (this.isSlash) {
+      return await (await this.getGuild()).channels.fetch(arg.toString());
+    }
+    return await (
+      await this.getGuild()
+    ).channels.fetch(arg.replace("<#", "").replace(">", ""));
+  }
+
+  public async getUser(name: string, position: number) {
+    const arg = this.getArg(name, position);
+    return this.context.client.users.fetch(arg.toString());
+  }
+  public async getRole(name: string, position: number) {
+    const arg = this.getArg(name, position);
+    if (this.isSlash) {
+      return (await this.getGuild()).roles.fetch(arg);
+    }
+    return (await this.getGuild()).roles.fetch(
+      arg.replace("<@&", "").replace(">", "")
+    );
   }
 }

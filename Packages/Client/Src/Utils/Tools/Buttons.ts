@@ -1,25 +1,18 @@
 import { INDBClient } from "@/Types";
-import {
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  CommandInteraction,
-  Message
-} from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+import { Context } from "../Structures";
 
 export default class Buttons {
   public constructor(private client: INDBClient) {}
 
-  async Confirm(
-    msgint: Message | CommandInteraction
-  ): Promise<ActionRowBuilder> {
+  async Confirm(context: Context): Promise<ActionRowBuilder> {
     return new ActionRowBuilder().addComponents([
       new ButtonBuilder()
         .setCustomId("YES")
         .setLabel(
           await this.client.Translate.Guild(
             "Tools/Buttons:Labels:Confirm:YES",
-            msgint
+            context
           )
         )
         .setEmoji("719710630881525881")
@@ -29,11 +22,11 @@ export default class Buttons {
         .setLabel(
           await this.client.Translate.Guild(
             "Tools/Buttons:Labels:Confirm:NO",
-            msgint
+            context
           )
         )
         .setEmoji("719710607405875321")
-        .setStyle(ButtonStyle.Success)
+        .setStyle(ButtonStyle.Danger)
     ]);
   }
 }

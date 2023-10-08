@@ -46,6 +46,7 @@ export interface CommandOptions {
     data?: ApplicationCommandData;
     deployMode?: "Test" | "Guild" | "Global";
     type: "Main" | "Sub" | "Group";
+    name?: string;
   };
 }
 

@@ -79,7 +79,7 @@ export default class CommandHandler {
 
       // Slash Sub Commands
       if (SlashData.type === "Sub") {
-        this.client.Collections.SubCommands.set(CommandOptions.name, command);
+        this.client.Collections.SubCommands.set(SlashData.name, command);
       }
     });
   }

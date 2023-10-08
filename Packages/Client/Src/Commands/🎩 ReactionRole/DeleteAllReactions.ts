@@ -1,16 +1,16 @@
 import ReactionRole from "@/Modules/ReactionRole";
 import {
   ReactionRoleDeleteAllEmbed,
-  UnableToDeleteReactionRoleEmbed
+  UnableToDeleteAllReactionRoleEmbed
 } from "@/Modules/ReactionRole/Utils/Embeds";
 import { CommandOptions, INDBClient } from "@/Types";
 import { mixedComponentType } from "@/Types/extends";
-import { BaseCommand } from "@/Utils/Structures";
-import { Buttons, MessageTools } from "@/Utils/Tools";
-import { ComponentType, Message } from "discord.js";
+import { BaseCommand, Context } from "@/Utils/Structures";
+import { Buttons } from "@/Utils/Tools";
+import { ComponentType } from "discord.js";
 
 export default class DeleteAllReactionsCommand extends BaseCommand {
-  constructor(client: INDBClient, ...args: string[]) {
+  constructor(client: INDBClient) {
     const options: CommandOptions = {
       name: "DeleteAllReactions",
       aliases: [""],
@@ -21,52 +21,50 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         user: ["SendMessages", "AddReactions", "ManageRoles"],
-        bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+        guildOnly: false,
+        ownerOnly: false
       },
       minArgs: 0,
       maxArgs: 0,
-      guildOnly: false,
-      ownerOnly: false,
       nsfw: false,
       ndcash: 0,
-      DM: false
+      DM: false,
+      slash: {
+        type: "Sub",
+        name: "delete_all"
+      }
     };
-    super(client, options, args);
+    super(client, options);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async run(client: INDBClient, message: Message, args: Array<string>) {
+  async run(client: INDBClient, context: Context) {
     const reaction = new ReactionRole(client, "DeleteAll");
-    const button = await new Buttons(client).Confirm(message);
-    const confirm = await MessageTools.send(message.channel, {
+    const button = await new Buttons(client).Confirm(context);
+    const confirm = await context.send({
       embeds: [
-        await ReactionRoleDeleteAllEmbed(
-          client,
-          message,
-          message.author,
-          "Confirm",
-          null
-        )
+        await ReactionRoleDeleteAllEmbed(client, context, "Confirm", null)
       ],
       components: [button as mixedComponentType]
     });
+
     confirm
       .createMessageComponentCollector({
         componentType: ComponentType.Button,
         time: 10 * 1000
       })
       .on("collect", async collector => {
-        if (collector.user.id !== message.author.id) return;
+        if (collector.user.id !== context.author.id) return;
         if (collector.customId === "YES") {
-          const { count, status } = await reaction.DeleteAll(message.guild);
+          const { count, status } = await reaction.DeleteAll(context.guild);
 
           if (status === "Deleted") {
-            MessageTools.edit(confirm, {
+            context.edit({
               embeds: [
                 await ReactionRoleDeleteAllEmbed(
                   client,
-                  message,
-                  message.author,
+                  context,
                   "Success",
                   count
                 )
@@ -74,35 +72,21 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
               components: []
             });
           } else if (status === "UnableToDelete") {
-            MessageTools.edit(confirm, {
+            context.edit({
               embeds: [
-                await UnableToDeleteReactionRoleEmbed(
-                  client,
-                  message,
-                  message.author,
-                  message
-                )
+                await UnableToDeleteAllReactionRoleEmbed(client, context)
               ],
               components: []
             });
           }
         } else if (collector.customId === "NO") {
-          MessageTools.edit(confirm, {
+          context.edit({
             embeds: [
-              await ReactionRoleDeleteAllEmbed(
-                client,
-                message,
-                message.author,
-                "Cancel",
-                null
-              )
+              await ReactionRoleDeleteAllEmbed(client, context, "Cancel", null)
             ],
             components: []
           });
         }
-      })
-      .on("end", async () => {
-        return;
       });
   }
 }

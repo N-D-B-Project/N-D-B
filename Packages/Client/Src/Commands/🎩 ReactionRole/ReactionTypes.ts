@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CommandOptions, INDBClient } from "@/Types";
-import { BaseCommand } from "@/Utils/Structures";
-import { MessageTools } from "@/Utils/Tools";
-import { Message } from "discord.js";
+import { BaseCommand, Context } from "@/Utils/Structures";
 
 export default class ReactionTypesCommand extends BaseCommand {
   constructor(client: INDBClient, ...args: string[]) {
@@ -16,23 +14,26 @@ export default class ReactionTypesCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         user: ["SendMessages", "AddReactions", "ManageRoles"],
-        bot: ["EmbedLinks", "AddReactions", "ManageRoles"]
+        bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+        guildOnly: false,
+        ownerOnly: false
       },
       minArgs: 0,
       maxArgs: 0,
-      guildOnly: false,
-      ownerOnly: false,
       nsfw: false,
       ndcash: 0,
-      DM: false
+      DM: false,
+      slash: {
+        type: "Sub",
+        name: "types"
+      }
     };
-    super(client, options, args);
+    super(client, options);
   }
 
-  async run(client: INDBClient, message: Message, args: string[]) {
-    await MessageTools.send(
-      message.channel,
-      await client.Translate.Guild("ReactionRole/ReactionTypes:Types", message)
+  async run(client: INDBClient, context: Context) {
+    await context.send(
+      await client.Translate.Guild("ReactionRole/ReactionTypes:Types", context)
     );
   }
 }
