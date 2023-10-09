@@ -10,11 +10,7 @@ export default class BaseCommand {
     public options: CommandOptions
   ) {}
 
-  async run(
-    client: INDBClient,
-    context: Context,
-    premium?: boolean
-  ): Promise<void | Message | Interaction> {
+  async run(context: Context): Promise<void | Message | Interaction> {
     throw new Error(
       `Comando \`${this.options.name}\` Não proveu um método Run!`
     );

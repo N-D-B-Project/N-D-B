@@ -3,6 +3,7 @@ import { INDBClient } from "@/Types";
 import { CommandInteraction, GuildChannel, Message } from "discord.js";
 import util from "node:util";
 import ms from "parse-ms";
+import { Context } from "../Structures";
 
 export default class Tools {
   // eslint-disable-next-line no-empty-function
@@ -26,7 +27,7 @@ export default class Tools {
   async Timer(
     type: "normal" | "details",
     number: number,
-    translateInfo: Message | CommandInteraction | GuildChannel
+    translateInfo: Message | CommandInteraction | GuildChannel | Context
   ) {
     const time = ms(number);
     const days = this.client.Translate.Guild(

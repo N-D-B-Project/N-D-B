@@ -29,7 +29,7 @@ export default class TestCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context, premium: boolean) {
+  async run(context: Context) {
     console.log(`TestCommand: ${context.getArg("test", 0)}`);
   }
 }

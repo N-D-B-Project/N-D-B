@@ -59,7 +59,7 @@ export default class MessageCreateEvent extends BaseEvent {
         ]
       });
     } else if (guildConfig && message.channel.type !== ChannelType.DM) {
-      const { Prefix: dbPrefix, Premium } = guildConfig.Settings;
+      const { Prefix: dbPrefix } = guildConfig.Settings;
       const mentionRegex = RegExp(`<@!${client.user.id}>$`);
       const mentionRegexPrefix = RegExp(`^<@!${client.user.id}> `);
 
@@ -86,7 +86,7 @@ export default class MessageCreateEvent extends BaseEvent {
       }
       // Commands
       if (message.content.startsWith(Prefix)) {
-        client.emit("Command", message, Prefix, Premium);
+        client.emit("Command", message, Prefix);
       }
     } else if (message.channel.type === ChannelType.DM) {
       client.emit("DMCommand", message, "&");

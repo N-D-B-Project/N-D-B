@@ -32,10 +32,10 @@ export default class ClearDMCommand extends BaseCommand {
     super(client, options);
   }
 
-  public async run(client: INDBClient, context: Context) {
+  public async run({ client, channel, author }: Context) {
     let i: number = 0;
     await client.Tools.WAIT(1000);
-    await context.author.dmChannel.messages.fetch().then(async msgs => {
+    await author.dmChannel.messages.fetch().then(async msgs => {
       msgs.forEach(async msg => {
         await client.Tools.WAIT(1000);
         if (msg.deletable) {
@@ -45,24 +45,17 @@ export default class ClearDMCommand extends BaseCommand {
       });
     });
     await client.Tools.WAIT(5000);
-    const msg = await MessageTools.send(context.channel, {
+    const msg = await MessageTools.send(channel, {
       embeds: [
         new EmbedBuilder()
           .setColor("#00c26f")
           .setDescription(
-            await client.Translate.DM(
-              "DM/ClearDM:Embed:Description",
-              context.author,
-              {
-                VALUE: i
-              }
-            )
+            await client.Translate.DM("DM/ClearDM:Embed:Description", author, {
+              VALUE: i
+            })
           )
           .setFooter({
-            text: await client.Translate.DM(
-              "DM/ClearDM:Embed:Footer",
-              context.author
-            )
+            text: await client.Translate.DM("DM/ClearDM:Embed:Footer", author)
           })
           .setTimestamp()
       ]
@@ -70,7 +63,7 @@ export default class ClearDMCommand extends BaseCommand {
 
     msg.react("🗑️");
     const filter = (reaction: MessageReaction, user: User) => {
-      return user.id === context.author.id && reaction.emoji.name === "🗑️";
+      return user.id === author.id && reaction.emoji.name === "🗑️";
     };
     msg
       .createReactionCollector({

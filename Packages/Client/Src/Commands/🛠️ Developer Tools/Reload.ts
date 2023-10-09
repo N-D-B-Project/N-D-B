@@ -27,8 +27,8 @@ export default class TestCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
-    switch (context.getArg("reload", 0)) {
+  async run({ client, getArg }: Context) {
+    switch (getArg("reload", 0)) {
       case "events":
         client.removeAllListeners();
         await new EventHandler(client).load();

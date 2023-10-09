@@ -81,7 +81,7 @@
       "    super(client, options);",
       "  }",
       "",
-      "  public async run(client: INDBClient, context: Context) {}",
+      "  public async run(context: Context) {}",
       "}",
       ""
     ],

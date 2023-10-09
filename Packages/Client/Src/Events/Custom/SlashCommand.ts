@@ -27,13 +27,11 @@ export default class SlashCommandEvent extends BaseEvent {
     interaction: ChatInputCommandInteraction
   ) {
     const cmdTools = new CommandChecker(client);
-    const { Premium } = (
-      await client.database.GuildRepo.get(interaction.guildId)
-    ).Settings;
     const _Command: BaseCommand = client.Collections.SlashCommands.get(
       interaction.commandName
     ) as BaseCommand;
     const context = new Context(
+      client,
       interaction,
       interaction.options as CommandInteractionOptionResolver,
       {}
@@ -43,7 +41,7 @@ export default class SlashCommandEvent extends BaseEvent {
       if (Checker) {
         await interaction.deferReply().catch(e => {});
 
-        _Command.run(client, context, Premium).catch(async (error: Error) => {
+        _Command.run(context).catch(async (error: Error) => {
           client.logger.error(error.stack);
           return;
         });

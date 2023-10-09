@@ -43,9 +43,9 @@ export default class DMCategoryCommand extends BaseCommand {
     super(client, options);
   }
 
-  public async run(client: INDBClient, context: Context) {
+  public async run(context: Context) {
     const SubList = [{ prop: "clear_dm" }];
-    const cmdTools = new CommandChecker(client);
+    const cmdTools = new CommandChecker();
     await cmdTools.runSubCommand(context, SubList, true);
   }
 }

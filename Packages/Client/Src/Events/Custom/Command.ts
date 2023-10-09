@@ -16,24 +16,19 @@ export default class CommandEvent extends BaseEvent {
     super(client, options);
   }
 
-  async run(
-    client: INDBClient,
-    message: Message,
-    Prefix: string,
-    Premium: boolean
-  ) {
+  async run(client: INDBClient, message: Message, Prefix: string) {
     if (message.channel.type === ChannelType.DM) return;
     const cmdTools = new CommandChecker(client);
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
       .split(/ +/g);
-    const context = new Context(message, args as Array<string>, {});
+    const context = new Context(client, message, args as Array<string>, {});
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
       const Checker = await cmdTools.runCheck(context, _Command, Prefix, args);
       if (Checker) {
-        _Command.run(client, context, Premium);
+        _Command.run(context);
       }
     }
   }

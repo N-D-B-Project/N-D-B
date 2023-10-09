@@ -1,4 +1,3 @@
-import { INDBClient } from "@/Types";
 import { Content } from "@/Types/client";
 import { BaseCommand, Context } from "@/Utils/Structures";
 import { ChannelType, TextChannel } from "discord.js";
@@ -7,7 +6,7 @@ import CheckerEmbeds from "./Embeds";
 
 export default class CommandChecker {
   // eslint-disable-next-line no-empty-function
-  public constructor(private client: INDBClient) {}
+  public constructor() {}
 
   public async runCheck(
     context: Context,
@@ -17,8 +16,8 @@ export default class CommandChecker {
   ): Promise<boolean> {
     const Options = _Command.options;
     const Channel = context.channel as TextChannel;
-    const tools = new Tools(this.client);
-    const embeds = new CheckerEmbeds(this.client, context, _Command, prefix);
+    const tools = new Tools(context.client);
+    const embeds = new CheckerEmbeds(context.client, context, _Command, prefix);
     if (!context.isSlash) {
       if (args.length < _Command.options.minArgs) {
         this.SendFunction(context, await embeds.minArgs());
@@ -34,7 +33,7 @@ export default class CommandChecker {
     if (!context.guild && !Options.DM) {
       this.SendFunction(
         context,
-        await this.client.Translate.TFunction(
+        await context.client.Translate.TFunction(
           context,
           "Tools/Command:Checker:DM"
         )
@@ -45,7 +44,7 @@ export default class CommandChecker {
     if (Options.permissions.ownerOnly && !tools.checkOwner(context.author.id)) {
       this.SendFunction(
         context,
-        await this.client.Translate.TFunction(
+        await context.client.Translate.TFunction(
           context,
           "Tools/Command:Checker:OwnerOnly"
         )
@@ -59,7 +58,7 @@ export default class CommandChecker {
     ) {
       this.SendFunction(
         context,
-        await this.client.Translate.TFunction(
+        await context.client.Translate.TFunction(
           context,
           "Tools/Command:Checker:GuildOnly"
         )
@@ -70,7 +69,7 @@ export default class CommandChecker {
     if (Options.nsfw && !Channel.nsfw) {
       this.SendFunction(
         context,
-        await this.client.Translate.TFunction(
+        await context.client.Translate.TFunction(
           context,
           "Tools/Command:Checker:NSFW"
         )
@@ -81,7 +80,7 @@ export default class CommandChecker {
     if (Options.disable) {
       this.SendFunction(
         context,
-        await this.client.Translate.TFunction(
+        await context.client.Translate.TFunction(
           context,
           "Tools/Command:Checker:Disable"
         )
@@ -91,7 +90,7 @@ export default class CommandChecker {
     // if (Options.ndcash && !NDCash) {
     //   this.SendFunction(context,
     //
-    //     await this.client.Translate.TFunction(
+    //     await context.client.Translate.TFunction(
     //       context, "Tools/Command:Checker:NDCash",
     //
     //     )
@@ -105,21 +104,21 @@ export default class CommandChecker {
     // }
 
     if (Options.DM && context.channel.type === ChannelType.DM) {
-      await this.client.Translate.TFunction(
+      await context.client.Translate.TFunction(
         context,
         "Tools/Command:Checker:OnlyDM"
       );
       return false;
     }
 
-    // const player = await MusicTools.getPlayer(this.client, .guildId);
+    // const player = await MusicTools.getPlayer(context.client, .guildId);
     // if (player && Options.category === "🎵 Music") {
     //   if (.channelId !== player.textChannelId) {
     //     const voiceChannel = await .guild.channels.fetch(
     //       player.voiceChannelId
     //     );
 
-    //     await this.client.Translate.TFunction(context, "Tools/Music:WrongChannel",  {
+    //     await context.client.Translate.TFunction(context, "Tools/Music:WrongChannel",  {
     //       TextChannel: channelMention(player.textChannelId),
     //       VoiceChannel: channelMention(voiceChannel)
     //     });
@@ -139,21 +138,20 @@ export default class CommandChecker {
     for (const Command of SubList) {
       if (args.getSubcommand() === Command.prop) {
         const _SubCommand: BaseCommand =
-          this.client.Collections.SubCommands.get(Command.prop);
+          context.client.Collections.SubCommands.get(Command.prop);
         if (_SubCommand) {
           const Checker = await this.runCheck(context, _SubCommand);
           if (Checker) {
             const newContext = new Context(
+              context.client,
               context.interaction,
               args.data[0].options,
               { isSub: true, isDM }
             );
-            _SubCommand
-              .run(this.client, newContext)
-              .catch(async (error: Error) => {
-                this.client.logger.error(error.stack);
-                return;
-              });
+            _SubCommand.run(newContext).catch(async (error: Error) => {
+              context.client.logger.error(error.stack);
+              return;
+            });
           }
         }
       }

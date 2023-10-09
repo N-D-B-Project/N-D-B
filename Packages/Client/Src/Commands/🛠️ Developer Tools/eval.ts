@@ -33,7 +33,7 @@ export default class EvalCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
+  async run(context: Context) {
     await context.delete();
     const content = await context.getContent();
     const args = context.getArg("code", 0).toString();

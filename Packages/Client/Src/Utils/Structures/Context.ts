@@ -1,3 +1,4 @@
+import { INDBClient } from "@/Types";
 import { Content } from "@/Types/client";
 import {
   CommandInteraction,
@@ -33,12 +34,14 @@ export default class Context {
   public guild: Guild;
   public createdAt: Date;
   public createdTimestamp: number;
+  public isPremium: boolean;
   private msg: Message;
   public isSub: boolean;
   public isDM: boolean;
 
   public constructor(
-    public context: Message | CommandInteraction,
+    public client: INDBClient,
+    private context: Message | CommandInteraction,
     public args:
       | Array<string>
       | CommandInteractionOptionResolver
@@ -49,7 +52,7 @@ export default class Context {
     this.configureContext(isSub, isDM);
   }
 
-  private configureContext(isSub, isDM) {
+  private async configureContext(isSub, isDM) {
     this.id = this.context.id;
     this.message = this.isSlash ? null : (this.context as Message);
     this.interaction = this.isSlash
@@ -61,6 +64,9 @@ export default class Context {
     this.guild = this.context.guild;
     this.createdAt = this.context.createdAt;
     this.createdTimestamp = this.context.createdTimestamp;
+    this.isPremium = (
+      await this.client.database.GuildRepo.get(this.guild.id)
+    ).Settings.Premium;
     this.isSub = isSub;
     this.isDM = isDM;
   }
