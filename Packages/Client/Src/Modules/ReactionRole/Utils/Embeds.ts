@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 
 import { Emojis } from "@/Config/Config";
-import { INDBClient } from "@/Types";
 import { Context } from "@/Utils/Structures";
 import { MessageTools } from "@/Utils/Tools";
 import {
@@ -14,7 +13,6 @@ import {
 import { REACTION_OPTIONS, iReaction } from "./../Types/index.d";
 
 export async function InvalidChannelEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -24,7 +22,7 @@ export async function InvalidChannelEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:Channel:Invalid",
         context,
         { fail: Emojis.fail }
@@ -32,10 +30,7 @@ export async function InvalidChannelEmbed(
     );
 }
 
-export async function InvalidIDEmbed(
-  client: INDBClient,
-  context: Context
-): Promise<EmbedBuilder> {
+export async function InvalidIDEmbed(context: Context): Promise<EmbedBuilder> {
   return new EmbedBuilder()
     .setAuthor({
       name: context.author.id,
@@ -43,7 +38,7 @@ export async function InvalidIDEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:ID:Invalid",
         context,
         { fail: Emojis.fail }
@@ -52,7 +47,6 @@ export async function InvalidIDEmbed(
 }
 
 export async function MessageNotFoundEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -62,7 +56,7 @@ export async function MessageNotFoundEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:ID:NotFound",
         context,
         { fail: Emojis.fail }
@@ -71,7 +65,6 @@ export async function MessageNotFoundEmbed(
 }
 
 export async function InvalidRoleEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -81,7 +74,7 @@ export async function InvalidRoleEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:Role:Invalid",
         context,
         { fail: Emojis.fail }
@@ -90,7 +83,6 @@ export async function InvalidRoleEmbed(
 }
 
 export async function InvalidEmojiEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -100,7 +92,7 @@ export async function InvalidEmojiEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:Emoji:Invalid",
         context,
         { fail: Emojis.fail }
@@ -109,13 +101,12 @@ export async function InvalidEmojiEmbed(
 }
 
 export async function ReactionRoleCreatedEmbed(
-  client: INDBClient,
   context: Context,
   { Channel, Message, Role, Emoji, Option }: iReaction
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
     .setAuthor({
-      name: await client.Translate.Guild(
+      name: await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:Embed:Author",
         context
       ),
@@ -124,7 +115,7 @@ export async function ReactionRoleCreatedEmbed(
     .setColor("#00c26f")
     .addFields([
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:1",
           context
         ),
@@ -132,7 +123,7 @@ export async function ReactionRoleCreatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:2",
           context
         ),
@@ -140,7 +131,7 @@ export async function ReactionRoleCreatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:3",
           context
         ),
@@ -148,11 +139,11 @@ export async function ReactionRoleCreatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:4",
           context
         ),
-        value: await client.Translate.Guild(
+        value: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:Content:4",
           context,
           {
@@ -166,7 +157,7 @@ export async function ReactionRoleCreatedEmbed(
         )
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/CreateReaction:Embed:Fields:5",
           context
         ),
@@ -176,7 +167,6 @@ export async function ReactionRoleCreatedEmbed(
 }
 
 export async function ReactionRoleRemovedEmbed(
-  client: INDBClient,
   context: Context,
   MsgID: Message
 ): Promise<EmbedBuilder> {
@@ -187,7 +177,7 @@ export async function ReactionRoleRemovedEmbed(
     })
     .setColor("#00c26f")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/DeleteReaction:Removed",
         context,
         { success: Emojis.accept, URL: MsgID.url }
@@ -196,7 +186,6 @@ export async function ReactionRoleRemovedEmbed(
 }
 
 export async function ReactionRoleUpdatedEmbed(
-  client: INDBClient,
   context: Context,
   { Channel, Message, Role, Emoji }: iReaction,
   newOption: REACTION_OPTIONS
@@ -208,14 +197,14 @@ export async function ReactionRoleUpdatedEmbed(
     })
     .setColor("#00c26f")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/UpdateReaction:Embed:Description",
         context
       )
     )
     .addFields(
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:1",
           context
         ),
@@ -223,7 +212,7 @@ export async function ReactionRoleUpdatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:2",
           context
         ),
@@ -231,11 +220,11 @@ export async function ReactionRoleUpdatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:3",
           context
         ),
-        value: await client.Translate.Guild(
+        value: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:Content:3",
           context,
           {
@@ -249,7 +238,7 @@ export async function ReactionRoleUpdatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:4",
           context
         ),
@@ -257,7 +246,7 @@ export async function ReactionRoleUpdatedEmbed(
         inline: true
       },
       {
-        name: await client.Translate.Guild(
+        name: await context.client.Translate.Guild(
           "ReactionRole/UpdateReaction:Embed:Fields:5",
           context
         ),
@@ -267,7 +256,7 @@ export async function ReactionRoleUpdatedEmbed(
     )
 
     .setFooter({
-      text: await client.Translate.Guild(
+      text: await context.client.Translate.Guild(
         "ReactionRole/UpdateReaction:Embed:Footer",
         context
       )
@@ -275,7 +264,6 @@ export async function ReactionRoleUpdatedEmbed(
 }
 
 export async function ReactionRoleDeleteAllEmbed(
-  client: INDBClient,
   context: Context,
   status: "Confirm" | "Cancel" | "Success",
   ReactionCount: number | null
@@ -298,7 +286,7 @@ export async function ReactionRoleDeleteAllEmbed(
   }
   return new EmbedBuilder()
     .setTitle(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/DeleteAllReactions:Embed:Title",
         context
       )
@@ -308,7 +296,7 @@ export async function ReactionRoleDeleteAllEmbed(
       iconURL: context.author.displayAvatarURL()
     })
     .setDescription(
-      await client.Translate.Guild(description, context, {
+      await context.client.Translate.Guild(description, context, {
         NUMBER: ReactionCount
       })
     )
@@ -317,7 +305,6 @@ export async function ReactionRoleDeleteAllEmbed(
 
 //TODO: Fazer esse Embed ser mais bonito
 export async function UnableToCreateReactionRoleEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -327,7 +314,7 @@ export async function UnableToCreateReactionRoleEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/CreateReaction:UnableToCreate",
         context,
         { fail: Emojis.fail }
@@ -336,7 +323,6 @@ export async function UnableToCreateReactionRoleEmbed(
 }
 
 export async function UnableToDeleteReactionRoleEmbed(
-  client: INDBClient,
   context: Context,
   MsgID: Message
 ): Promise<EmbedBuilder> {
@@ -347,7 +333,7 @@ export async function UnableToDeleteReactionRoleEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/DeleteReaction:UnableToDelete",
         context,
         { success: Emojis.accept, URL: MsgID.url }
@@ -356,7 +342,6 @@ export async function UnableToDeleteReactionRoleEmbed(
 }
 
 export async function UnableToDeleteAllReactionRoleEmbed(
-  client: INDBClient,
   context: Context
 ): Promise<EmbedBuilder> {
   return new EmbedBuilder()
@@ -366,7 +351,7 @@ export async function UnableToDeleteAllReactionRoleEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/DeleteAllReaction:UnableToDelete",
         context
       )
@@ -374,7 +359,6 @@ export async function UnableToDeleteAllReactionRoleEmbed(
 }
 
 export async function UnableToUpdateReactionRoleEmbed(
-  client: INDBClient,
   context: Context,
   MsgID: Message
 ): Promise<EmbedBuilder> {
@@ -385,7 +369,7 @@ export async function UnableToUpdateReactionRoleEmbed(
     })
     .setColor("#c20e00")
     .setDescription(
-      await client.Translate.Guild(
+      await context.client.Translate.Guild(
         "ReactionRole/UpdateReaction:UnableToUpdate",
         context,
         { success: Emojis.accept, URL: MsgID.url }

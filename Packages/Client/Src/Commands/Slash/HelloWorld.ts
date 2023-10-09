@@ -26,7 +26,7 @@ export default class Command extends BaseCommand {
     super(client, options);
   }
 
-  public async run(client: INDBClient, context: Context) {
+  public async run(context: Context) {
     context.reply({ content: "Hello World! I'm N-D-B a simple Discord Bot" });
   }
 }

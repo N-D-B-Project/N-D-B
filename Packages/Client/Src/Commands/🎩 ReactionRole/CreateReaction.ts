@@ -49,8 +49,8 @@ export default class CreateReactionCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
-    const reaction = new ReactionRole(client, "Create");
+  async run(context: Context) {
+    const reaction = new ReactionRole(context.client, "Create");
     const Channel = (await context.getChannel("channel", 0)) as TextChannel;
     const MessageID = context.getArg("message", 1) as string;
     var Message = (await Channel.messages.fetch(MessageID)) as DMessage;
@@ -61,24 +61,24 @@ export default class CreateReactionCommand extends BaseCommand {
 
     if (!context.isSlash) {
       if (!Channel) {
-        return await context.send(await InvalidChannelEmbed(client, context));
+        return await context.send(await InvalidChannelEmbed(context));
       }
 
       if (!MessageID) {
-        return await context.send(await InvalidIDEmbed(client, context));
+        return await context.send(await InvalidIDEmbed(context));
       }
 
       if (!Role || Role.managed) {
-        return await context.send(await InvalidRoleEmbed(client, context));
+        return await context.send(await InvalidRoleEmbed(context));
       }
 
       if (!Emoji) {
-        return await context.send(await InvalidEmojiEmbed(client, context));
+        return await context.send(await InvalidEmojiEmbed(context));
       }
     }
 
     if (!Message) {
-      return await context.reply(await MessageNotFoundEmbed(client, context));
+      return await context.reply(await MessageNotFoundEmbed(context));
     }
 
     const data: iReaction = {
@@ -92,13 +92,9 @@ export default class CreateReactionCommand extends BaseCommand {
 
     if (Created.status === "Created") {
       await context.react(Message, Emoji);
-      return await context.send(
-        await ReactionRoleCreatedEmbed(client, context, data)
-      );
+      return await context.send(await ReactionRoleCreatedEmbed(context, data));
     } else if (Created.status === "UnableToCreate") {
-      return await context.send(
-        await UnableToCreateReactionRoleEmbed(client, context)
-      );
+      return await context.send(await UnableToCreateReactionRoleEmbed(context));
     }
   }
 }

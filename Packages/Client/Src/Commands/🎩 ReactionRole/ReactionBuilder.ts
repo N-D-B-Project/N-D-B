@@ -28,7 +28,7 @@ export default class ReactionRoleBuilderCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
+  async run(context: Context) {
     const cancelEmbed = new EmbedBuilder()
       .setAuthor({
         name: context.author.tag,

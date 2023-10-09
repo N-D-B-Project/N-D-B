@@ -31,9 +31,12 @@ export default class ReactionTypesCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
+  async run(context: Context) {
     await context.send(
-      await client.Translate.Guild("ReactionRole/ReactionTypes:Types", context)
+      await context.client.Translate.Guild(
+        "ReactionRole/ReactionTypes:Types",
+        context
+      )
     );
   }
 }

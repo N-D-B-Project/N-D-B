@@ -48,8 +48,8 @@ export default class DeleteReactionCommand extends BaseCommand {
     super(client, options);
   }
 
-  async run(client: INDBClient, context: Context) {
-    const reaction = new ReactionRole(client, "Delete");
+  async run(context: Context) {
+    const reaction = new ReactionRole(context.client, "Delete");
     const Channel = (await context.getChannel("channel", 0)) as TextChannel;
     const MessageID = context.getArg("message", 1) as string;
     var Message = (await Channel.messages.fetch(MessageID)) as DMessage;
@@ -58,24 +58,24 @@ export default class DeleteReactionCommand extends BaseCommand {
 
     if (!context.isSlash) {
       if (!Channel) {
-        return await context.send(await InvalidChannelEmbed(client, context));
+        return await context.send(await InvalidChannelEmbed(context));
       }
 
       if (!MessageID) {
-        return await context.send(await InvalidIDEmbed(client, context));
+        return await context.send(await InvalidIDEmbed(context));
       }
 
       if (!Role || Role.managed) {
-        return await context.send(await InvalidRoleEmbed(client, context));
+        return await context.send(await InvalidRoleEmbed(context));
       }
 
       if (!Emoji) {
-        return await context.send(await InvalidEmojiEmbed(client, context));
+        return await context.send(await InvalidEmojiEmbed(context));
       }
     }
 
     if (!Message) {
-      return await context.reply(await MessageNotFoundEmbed(client, context));
+      return await context.reply(await MessageNotFoundEmbed(context));
     }
 
     const REACT = await reaction.Delete(context.guild, {
@@ -86,14 +86,10 @@ export default class DeleteReactionCommand extends BaseCommand {
     });
 
     if (REACT.status === "Deleted") {
-      await context.send(
-        await ReactionRoleRemovedEmbed(client, context, Message)
-      );
+      await context.send(await ReactionRoleRemovedEmbed(context, Message));
       await Message.reactions.cache.get(Emoji).remove();
     } else {
-      context.send(
-        await UnableToDeleteReactionRoleEmbed(client, context, Message)
-      );
+      context.send(await UnableToDeleteReactionRoleEmbed(context, Message));
     }
   }
 }

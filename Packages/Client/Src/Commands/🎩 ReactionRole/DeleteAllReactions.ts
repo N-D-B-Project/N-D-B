@@ -39,13 +39,11 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async run(client: INDBClient, context: Context) {
-    const reaction = new ReactionRole(client, "DeleteAll");
-    const button = await new Buttons(client).Confirm(context);
+  async run(context: Context) {
+    const reaction = new ReactionRole(context.client, "DeleteAll");
+    const button = await new Buttons(context.client).Confirm(context);
     const confirm = await context.send({
-      embeds: [
-        await ReactionRoleDeleteAllEmbed(client, context, "Confirm", null)
-      ],
+      embeds: [await ReactionRoleDeleteAllEmbed(context, "Confirm", null)],
       components: [button as mixedComponentType]
     });
 
@@ -62,28 +60,19 @@ export default class DeleteAllReactionsCommand extends BaseCommand {
           if (status === "Deleted") {
             context.edit({
               embeds: [
-                await ReactionRoleDeleteAllEmbed(
-                  client,
-                  context,
-                  "Success",
-                  count
-                )
+                await ReactionRoleDeleteAllEmbed(context, "Success", count)
               ],
               components: []
             });
           } else if (status === "UnableToDelete") {
             context.edit({
-              embeds: [
-                await UnableToDeleteAllReactionRoleEmbed(client, context)
-              ],
+              embeds: [await UnableToDeleteAllReactionRoleEmbed(context)],
               components: []
             });
           }
         } else if (collector.customId === "NO") {
           context.edit({
-            embeds: [
-              await ReactionRoleDeleteAllEmbed(client, context, "Cancel", null)
-            ],
+            embeds: [await ReactionRoleDeleteAllEmbed(context, "Cancel", null)],
             components: []
           });
         }
