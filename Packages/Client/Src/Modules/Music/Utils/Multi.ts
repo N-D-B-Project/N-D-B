@@ -1,80 +1,21 @@
 /* eslint-disable no-shadow */
 
-import NDBClient from "@/Core/NDBClient";
-import { SwitchCommand } from "@/Types";
-import {
-  CommandInteraction,
-  CommandInteractionOptionResolver,
-  Message
-} from "discord.js";
+import { Context } from "@/Utils/Structures";
 import { MultiCommandList } from "../Types";
 import MusicTools from "./Tools";
 
 export default class Multi {
-  public static async _Legacy(
-    message: Message,
-    command: MultiCommandList,
-    isPremium: boolean,
-    args?: Array<string>
-  ) {
-    return await this.Switch(
-      command,
-      { MsgInt: message, args },
-      false,
-      isPremium
-    );
-  }
-
-  public static async _Slash(
-    interaction: CommandInteraction,
-    command: MultiCommandList,
-    isPremium: boolean,
-    args?: CommandInteractionOptionResolver
-  ) {
-    const client = interaction.client as NDBClient;
-    const player = await MusicTools.getPlayer(
-      client,
-      interaction.guildId,
-      isPremium
-    );
-    if (!(await MusicTools.Checkers(player, { MsgInt: interaction }, true))) {
-      return;
-    }
-
-    return (
-      await this.Switch(
-        command,
-        { MsgInt: interaction, args },
-        false,
-        isPremium
-      ),
-      false
-    );
-  }
-
-  private static async Switch(
-    command: MultiCommandList,
-    { MsgInt, args }: SwitchCommand,
-    isSlash: boolean,
-    isPremium: boolean
+  public static async run(
+    context: Context,
+    command: MultiCommandList
   ): Promise<string> {
-    const client = MsgInt.client as NDBClient;
-    const player = await MusicTools.getPlayer(
-      client,
-      MsgInt.guildId,
-      isPremium
-    );
+    const player = await MusicTools.getPlayer(context);
     const VoiceChannel = (
-      await MsgInt.guild.channels.fetch(player.voiceChannelId)
+      await context.guild.channels.fetch(player.voiceChannelId)
     ).name;
     switch (command) {
       case MultiCommandList.skip:
-        const skipAmount =
-          Number(
-            isSlash
-              ? (args as CommandInteractionOptionResolver).get("skip_amount")
-              : (args as Array<string>)[0]
-          ) || 0;
+        const skipAmount = Number(context.getArg("skip_amount", 0)) || 0;
         var SkipSTR = "";
         if (skipAmount === 0) {
           SkipSTR = "Tools/Music:Skip:Current";
@@ -82,16 +23,25 @@ export default class Multi {
           SkipSTR = "Tools/Music:Skip:Amount";
         }
         player.skip(skipAmount);
-        return await client.Translate.Guild(SkipSTR, MsgInt, { skipAmount });
+        return await context.client.Translate.Guild(SkipSTR, context, {
+          skipAmount
+        });
       case MultiCommandList.stop:
         player.destroy();
-        return await client.Translate.Guild("Tools/Music:Stop", MsgInt);
+        return await context.client.Translate.Guild(
+          "Tools/Music:Stop",
+          context
+        );
 
       case MultiCommandList.leave:
         player.disconnect();
-        return await client.Translate.Guild("Tools/Music:Leave", MsgInt, {
-          VoiceChannel
-        });
+        return await context.client.Translate.Guild(
+          "Tools/Music:Leave",
+          context,
+          {
+            VoiceChannel
+          }
+        );
 
       case MultiCommandList.pause:
         player.pause();
@@ -119,22 +69,18 @@ export default class Multi {
         return;
 
       case MultiCommandList.volume:
-        const volume = Number(
-          isSlash
-            ? (args as CommandInteractionOptionResolver).get("volume")
-            : (args as Array<string>)[0]
-        );
+        const volume = Number(context.getArg("volume", 0));
         if (!volume || volume < 1 || volume > 100) {
-          return await client.Translate.Guild(
+          return await context.client.Translate.Guild(
             "Tools/Music:Volume:NotValid",
-            MsgInt
+            context
           );
         }
 
         player.setVolume(volume);
-        return await client.Translate.Guild(
+        return await context.client.Translate.Guild(
           "Tools/Music:Volume:Defined",
-          MsgInt,
+          context,
           {
             volume
           }

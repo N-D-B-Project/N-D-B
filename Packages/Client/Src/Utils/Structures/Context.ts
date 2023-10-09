@@ -75,16 +75,19 @@ export default class Context {
     return this.context.client.guilds.fetch(this.guild.id);
   }
 
+  /**
+   * @description Use position `-1` to get `Args.join(" ");`
+   */
   public getArg(name: string, position: number) {
-    return (
-      this.isSlash
-        ? this.isSub
-          ? (this.args as Array<CommandInteractionOption>).find(
-              arg => arg.name === name
-            ).value
-          : (this.args as CommandInteractionOptionResolver).get(name)
-        : (this.args as Array<string>)[position]
-    ) as string;
+    return position === -1
+      ? (this.args as Array<string>).join(" ")
+      : ((this.isSlash
+          ? this.isSub
+            ? (this.args as Array<CommandInteractionOption>).find(
+                arg => arg.name === name
+              ).value
+            : (this.args as CommandInteractionOptionResolver).get(name)
+          : (this.args as Array<string>)[position]) as string);
   }
 
   public async send(content: Content) {
@@ -155,6 +158,7 @@ export default class Context {
     const arg = this.getArg(name, position);
     return this.context.client.users.fetch(arg.toString());
   }
+
   public async getRole(name: string, position: number) {
     const arg = this.getArg(name, position);
     if (this.isSlash) {
@@ -163,5 +167,9 @@ export default class Context {
     return (await this.getGuild()).roles.fetch(
       arg.replace("<@&", "").replace(">", "")
     );
+  }
+
+  public async getMember() {
+    return await this.guild.members.fetch(this.author.id);
   }
 }

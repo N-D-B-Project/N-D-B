@@ -2,16 +2,9 @@
 /* eslint-disable no-empty-function */
 
 import { Emojis } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
 import { INDBClient } from "@/Types";
-import {
-  ColorResolvable,
-  CommandInteraction,
-  CommandInteractionOptionResolver,
-  EmbedBuilder,
-  Message,
-  User
-} from "discord.js";
+import { Context } from "@/Utils/Structures";
+import { ColorResolvable, EmbedBuilder } from "discord.js";
 import { SearchResult, Track } from "lavalink-client";
 import MusicTools from "./Tools";
 
@@ -19,125 +12,122 @@ export default class MusicEmbeds {
   public constructor(private readonly client: INDBClient) {}
 
   private async createBaseEmbed(
-    msgint: Message | CommandInteraction,
+    context: Context,
     color: "Error" | "Success"
   ): Promise<EmbedBuilder> {
-    const user = msgint.member.user as User;
     if (color === "Error") var hex = "#c20e00";
     else hex = "#00c26f";
     return new EmbedBuilder()
       .setAuthor({
-        name: user.username,
-        iconURL: user.displayAvatarURL()
+        name: context.author.username,
+        iconURL: context.author.displayAvatarURL()
       })
       .setTimestamp()
       .setColor(hex as ColorResolvable);
   }
 
-  public async NoPlayer(msgint: Message | CommandInteraction) {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
+  public async NoPlayer(context: Context) {
+    const baseEmbed = await this.createBaseEmbed(context, "Error");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
           "Tools/Music:NoPlayerEmbed:Title",
-          msgint
+          context
         )
       )
       .addFields([
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NoPlayerEmbed:Fields:1",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NoPlayerEmbed:Fields:Content:1",
-            msgint,
-            { GuildName: msgint.guild.name }
+            context,
+            { GuildName: context.guild.name }
           )
         }
       ]);
   }
 
-  public async NoChannel(
-    msgint: Message | CommandInteraction
-  ): Promise<EmbedBuilder> {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
+  public async NoChannel(context: Context): Promise<EmbedBuilder> {
+    const baseEmbed = await this.createBaseEmbed(context, "Error");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
           "Tools/Music:NoChannelEmbed:Title",
-          msgint
+          context
         )
       )
       .setDescription(
         await this.client.Translate.Guild(
           "Tools/Music:NoChannelEmbed:Description",
-          msgint
+          context
         )
       )
       .setFooter({
         text: await this.client.Translate.Guild(
           "Tools/Music:NoChannelEmbed:Footer",
-          msgint
+          context
         ),
         iconURL: this.client.user.displayAvatarURL()
       });
   }
 
-  public async NoArgs(
-    msgint: Message | CommandInteraction
-  ): Promise<EmbedBuilder> {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
+  public async NoArgs(context: Context): Promise<EmbedBuilder> {
+    const baseEmbed = await this.createBaseEmbed(context, "Error");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
           "Tools/Music:NoArgsEmbed:Title",
-          msgint
+          context
         )
       )
       .setDescription(
         await this.client.Translate.Guild(
           "Tools/Music:NoArgsEmbed:Description",
-          msgint
+          context
         )
       )
       .setFooter({
         text: await this.client.Translate.Guild(
           "Tools/Music:NoArgsEmbed:Footer",
-          msgint
+          context
         ),
         iconURL: this.client.user.displayAvatarURL()
       });
   }
 
   public async LoadType(
-    msgint: Message | CommandInteraction,
+    context: Context,
     loadType: string,
-    args?: Array<string> | CommandInteractionOptionResolver,
-    isSlash?: boolean,
     track?: Track
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.URLChecker(true, args, isSlash);
-    const baseEmbed = await this.createBaseEmbed(msgint, "Error");
+    const Checker = await MusicTools.URLChecker(
+      true,
+      context.getArg("query", -1),
+      context.isSlash
+    );
+    const baseEmbed = await this.createBaseEmbed(context, "Error");
     switch (loadType) {
       case "Fail":
         baseEmbed
           .setTitle(
             await this.client.Translate.Guild(
               "Tools/Music:loadType:LOAD_FAILED:Embed:Title",
-              msgint
+              context
             )
           )
           .setDescription(
             await this.client.Translate.Guild(
               "Tools/Music:loadType:LOAD_FAILED:Embed:Description",
-              msgint
+              context
             )
           )
           .setFooter({
             text: await this.client.Translate.Guild(
               "Tools/Music:loadType:LOAD_FAILED:Embed:Footer",
-              msgint
+              context
             ),
             iconURL: this.client.user.displayAvatarURL()
           });
@@ -148,19 +138,19 @@ export default class MusicEmbeds {
           .setTitle(
             await this.client.Translate.Guild(
               "Tools/Music:loadType:NO_MATCHES:Embed:Title",
-              msgint
+              context
             )
           )
           .setDescription(
             await this.client.Translate.Guild(
               "Tools/Music:loadType:NO_MATCHES:Embed:Description",
-              msgint
+              context
             )
           )
           .setFooter({
             text: await this.client.Translate.Guild(
               "Tools/Music:loadType:NO_MATCHES:Embed:Footer",
-              msgint
+              context
             ),
             iconURL: this.client.user.displayAvatarURL()
           });
@@ -170,26 +160,26 @@ export default class MusicEmbeds {
         const Timer = await this.client.Tools.Timer(
           "normal",
           track.info.duration,
-          msgint
+          context
         );
         baseEmbed
           .setColor("#00c26f")
           .setTitle(
             await this.client.Translate.Guild(
               "Tools/Music:loadType:SUCCESS:Embed:Title",
-              msgint
+              context
             )
           )
           .addFields([
             {
               name: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:1",
-                msgint,
+                context,
                 { EMOJI: Checker.Emoji, NAME: Checker.Name }
               ),
               value: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1",
-                msgint,
+                context,
                 { TITLE: track.info.title, URI: track.info.uri }
               ),
               inline: true
@@ -197,11 +187,11 @@ export default class MusicEmbeds {
             {
               name: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:2",
-                msgint
+                context
               ),
               value: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2",
-                msgint,
+                context,
                 { AUTHOR: track.info.author }
               ),
               inline: true
@@ -209,11 +199,11 @@ export default class MusicEmbeds {
             {
               name: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:3",
-                msgint
+                context
               ),
               value: await this.client.Translate.Guild(
                 "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3",
-                msgint,
+                context,
                 { TIMER: Timer }
               ),
               inline: true
@@ -223,7 +213,7 @@ export default class MusicEmbeds {
           .setFooter({
             text: await this.client.Translate.Guild(
               "Tools/Music:loadType:SUCCESS:Embed:Footer",
-              msgint
+              context
             ),
             iconURL: this.client.user.displayAvatarURL()
           });
@@ -235,24 +225,25 @@ export default class MusicEmbeds {
   }
 
   public async Playlist(
-    msgint: Message | CommandInteraction,
-    args: Array<string> | CommandInteractionOptionResolver,
-    isSlash: boolean,
+    context: Context,
     res: SearchResult,
     url: string
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.URLChecker(true, args, isSlash);
+    const Checker = await MusicTools.URLChecker(
+      true,
+      context.getArg("query", -1)
+    );
     const Timer = await this.client.Tools.Timer(
       "normal",
       res.playlist.duration,
-      msgint
+      context
     );
-    const baseEmbed = await this.createBaseEmbed(msgint, "Success");
+    const baseEmbed = await this.createBaseEmbed(context, "Success");
     return baseEmbed
       .setTitle(
         await this.client.Translate.Guild(
           "Tools/Music:loadType:SUCCESS:Embed:PlaylistTitle",
-          msgint
+          context
         )
       )
       .setThumbnail(res.playlist.thumbnail)
@@ -260,12 +251,12 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:1",
-            msgint,
+            context,
             { EMOJI: Checker.Emoji, NAME: Checker.Name }
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1",
-            msgint,
+            context,
             // eslint-disable-next-line no-inline-comments
             { TITLE: res.playlist.name, URI: url /* res.playlist.uri */ }
           ),
@@ -274,11 +265,11 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:2",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2",
-            msgint,
+            context,
             // eslint-disable-next-line no-inline-comments
             { AUTHOR: res.tracks[0].info.author /* res.playlist.author */ }
           ),
@@ -287,11 +278,11 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:3",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3",
-            msgint,
+            context,
             { TIMER: Timer }
           ),
           inline: true
@@ -300,42 +291,35 @@ export default class MusicEmbeds {
       .setFooter({
         text: await this.client.Translate.Guild(
           "Tools/Music:loadType:SUCCESS:Embed:Footer",
-          msgint
+          context
         ),
         iconURL: this.client.user.displayAvatarURL()
       });
   }
 
-  public async NowPlaying(
-    msgint: Message | CommandInteraction,
-    isPremium: boolean
-  ): Promise<EmbedBuilder> {
-    const baseEmbed = await this.createBaseEmbed(msgint, "Success");
-    const player = await MusicTools.getPlayer(
-      msgint.client as NDBClient,
-      msgint.guildId,
-      isPremium
-    );
+  public async NowPlaying(context: Context): Promise<EmbedBuilder> {
+    const baseEmbed = await this.createBaseEmbed(context, "Success");
+    const player = await MusicTools.getPlayer(context);
     const music = player.queue.current;
     let IsLoop: string;
     switch (player.repeatMode) {
       case "off":
         IsLoop = await this.client.Translate.Guild(
           "Tools/Music:NowPlayingEmbed:NoLoop",
-          msgint,
+          context,
           { Emoji: Emojis.fail }
         );
         break;
       case "queue":
         IsLoop = await this.client.Translate.Guild(
           "Tools/Music:NowPlayingEmbed:QueueLoop",
-          msgint,
+          context,
           { Emoji: Emojis.success }
         );
       case "track":
         IsLoop = await this.client.Translate.Guild(
           "Tools/Music:NowPlayingEmbed:MusicLoop",
-          msgint,
+          context,
           { Emoji: Emojis.success }
         );
     }
@@ -344,7 +328,7 @@ export default class MusicEmbeds {
       .setTitle(
         await this.client.Translate.Guild(
           "Tools/Music:NowPlayingEmbed:Title",
-          msgint
+          context
         )
       )
       .setDescription(`[${music.info.title}](${music.info.uri})`)
@@ -352,11 +336,11 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:1",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:1",
-            msgint,
+            context,
             { Author: music.info.author }
           ),
           inline: true
@@ -364,21 +348,21 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:2",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:2",
-            msgint,
+            context,
             {
               IsPlaying: player.playing
                 ? await this.client.Translate.Guild(
                     "Tools/Music:NowPlayingEmbed:Playing",
-                    msgint,
+                    context,
                     { Emoji: Emojis.success }
                   )
                 : await this.client.Translate.Guild(
                     "Tools/Music:NowPlayingEmbed:Paused",
-                    msgint,
+                    context,
                     { Emoji: Emojis.fail }
                   )
             }
@@ -388,21 +372,21 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:3",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:3",
-            msgint,
+            context,
             {
               IsBassBoosted: player.filterManager.equalizerBands
                 ? await this.client.Translate.Guild(
                     "Tools/Music:NowPlayingEmbed:ActiveBass",
-                    msgint,
+                    context,
                     { Emoji: Emojis.success }
                   )
                 : await this.client.Translate.Guild(
                     "Tools/Music:NowPlayingEmbed:NoBass",
-                    msgint,
+                    context,
                     { Emoji: Emojis.fail }
                   )
             }
@@ -412,11 +396,11 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:4",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:4",
-            msgint,
+            context,
             {
               IsLoop
             }
@@ -426,11 +410,11 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:5",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:5",
-            msgint,
+            context,
             { Volume: player.volume }
           ),
           inline: true
@@ -438,19 +422,19 @@ export default class MusicEmbeds {
         {
           name: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:6",
-            msgint
+            context
           ),
           value: await this.client.Translate.Guild(
             "Tools/Music:NowPlayingEmbed:Fields:Content:6",
-            msgint,
+            context,
             { Duration: await MusicTools.ProgressBar(player) }
           ),
           inline: false
         }
       ])
       .setFooter({
-        text: msgint.guild.name,
-        iconURL: msgint.guild.iconURL()
+        text: context.guild.name,
+        iconURL: context.guild.iconURL()
       });
   }
 }

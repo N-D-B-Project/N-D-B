@@ -1,10 +1,9 @@
 import Music from "@/Modules/Music";
 import { CommandOptions, INDBClient } from "@/Types";
-import { BaseCommand } from "@/Utils/Structures";
-import { Message } from "discord.js";
+import { BaseCommand, Context } from "@/Utils/Structures";
 
 export default class JoinCommand extends BaseCommand {
-  constructor(client: INDBClient, ...args: string[]) {
+  constructor(client: INDBClient) {
     const options: CommandOptions = {
       name: "join",
       aliases: ["Join"],
@@ -15,23 +14,18 @@ export default class JoinCommand extends BaseCommand {
       cooldown: 0,
       permissions: {
         bot: ["SendMessages"],
-        user: ["SendMessages"]
+        user: ["SendMessages"],
+        guildOnly: false,
+        ownerOnly: false
       },
-      guildOnly: false,
-      ownerOnly: false,
       nsfw: false,
       ndcash: 0,
       DM: false
     };
-    super(client, options, args);
+    super(client, options);
   }
 
-  async run(
-    client: INDBClient,
-    message: Message,
-    args: Array<string>,
-    premium: boolean
-  ) {
-    await new Music(client).Join({ MsgInt: message }, false, premium);
+  async run(context: Context) {
+    await new Music(context.client).Join(context);
   }
 }

@@ -18,7 +18,7 @@ export default class CommandEvent extends BaseEvent {
 
   async run(client: INDBClient, message: Message, Prefix: string) {
     if (message.channel.type === ChannelType.DM) return;
-    const cmdTools = new CommandChecker(client);
+    const cmdTools = new CommandChecker();
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()

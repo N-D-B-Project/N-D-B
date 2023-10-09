@@ -1,12 +1,7 @@
 import { Config, Emojis, URLList } from "@/Config/Config";
-import NDBClient from "@/Core/NDBClient";
-import { INDBClient, SwitchCommand } from "@/Types";
-import { InteractionTools, MessageTools } from "@/Utils/Tools";
+import { Context } from "@/Utils/Structures";
 import {
-  CommandInteraction,
   CommandInteractionOptionResolver,
-  GuildMember,
-  Message,
   VoiceChannel,
   channelMention
 } from "discord.js";
@@ -16,26 +11,18 @@ import ms from "parse-ms";
 import MusicEmbeds from "./Embeds";
 
 export default class MusicTools {
-  public static async getPlayer(
-    client: INDBClient,
-    guildId: string,
-    isPremium: boolean
-  ) {
-    let player: Player;
+  public static async getPlayer({ client, guild, isPremium }: Context) {
     if (isPremium) {
-      player = client.MusicManager.premium.getPlayer(guildId);
-    } else if (isPremium === false) {
-      player = client.MusicManager.common.getPlayer(guildId);
+      return client.MusicManager.premium.getPlayer(guild.id);
     }
 
-    return player;
+    return client.MusicManager.common.getPlayer(guild.id);
   }
 
   public static async createPlayer(
-    client: INDBClient,
+    context: Context,
     voiceChannel: VoiceChannel,
-    textChannelId: string,
-    isPremium: boolean
+    textChannelId: string
   ) {
     const createOptions: PlayerOptions = {
       guildId: voiceChannel.guildId,
@@ -47,116 +34,67 @@ export default class MusicTools {
       // vcRegion: voiceChannel.rtcRegion!
     };
     let player: Player;
-    if (isPremium) {
-      player = client.MusicManager.premium.createPlayer(createOptions);
+    if (context.isPremium) {
+      player = context.client.MusicManager.premium.createPlayer(createOptions);
       player.isPremium = true;
     } else {
-      player = client.MusicManager.common.createPlayer(createOptions);
+      player = context.client.MusicManager.common.createPlayer(createOptions);
       player.isPremium = false;
     }
 
     return player;
   }
 
-  public static async hasVoice(
-    { MsgInt }: SwitchCommand,
-    isSlash: boolean
-  ): Promise<boolean> {
-    const Embeds = new MusicEmbeds(MsgInt.client as NDBClient);
-    if (!(MsgInt.member as GuildMember).voice.channel) {
-      if (isSlash) {
-        MsgInt = MsgInt as CommandInteraction;
-        InteractionTools.reply(MsgInt, await Embeds.NoChannel(MsgInt), false);
-      } else {
-        MsgInt = MsgInt as Message;
-        MessageTools.reply(MsgInt, await Embeds.NoChannel(MsgInt));
-      }
+  public static async hasVoice(context: Context): Promise<boolean> {
+    const Embeds = new MusicEmbeds(context.client);
+    if (!(await context.getMember()).voice.channel) {
+      context.reply(await Embeds.NoChannel(context));
+
       return false;
     }
     return true;
   }
 
-  public static async sameVoice(
-    player: Player,
-    { MsgInt }: SwitchCommand,
-    isSlash: boolean
-  ) {
-    const client = MsgInt.client as NDBClient;
-    const voiceChannel = await MsgInt.guild.channels.fetch(
+  public static async sameVoice(player: Player, context: Context) {
+    const voiceChannel = await context.guild.channels.fetch(
       player.voiceChannelId
     );
 
-    if (
-      (MsgInt.member as GuildMember).voice.channelId !== player.voiceChannelId
-    ) {
-      if (isSlash) {
-        MsgInt = MsgInt as CommandInteraction;
-
-        InteractionTools.reply(
-          MsgInt,
-          await client.Translate.Guild("Tools/Music:WrongChannel", MsgInt, {
+    if ((await context.getMember()).voice.channelId !== player.voiceChannelId) {
+      context.reply(
+        await context.client.Translate.Guild(
+          "Tools/Music:WrongChannel",
+          context,
+          {
             TextChannel: channelMention(player.textChannelId),
             VoiceChannel: channelMention(voiceChannel.id)
-          }),
-          false
-        );
-      } else {
-        MsgInt = MsgInt as Message;
-        MessageTools.reply(
-          MsgInt,
-          await client.Translate.Guild("Tools/Music:WrongChannel", MsgInt, {
-            TextChannel: channelMention(player.textChannelId),
-            VoiceChannel: channelMention(voiceChannel.id)
-          })
-        );
-      }
+          }
+        )
+      );
       return false;
     }
     return true;
   }
 
-  public static async HasPlayer(
-    player: Player,
-    client: INDBClient,
-    { MsgInt }: SwitchCommand,
-    isSlash: boolean
-  ) {
+  public static async HasPlayer(player: Player, context: Context) {
     if (!player) {
-      const embed = await new MusicEmbeds(client).NoPlayer(MsgInt);
-      if (isSlash) {
-        InteractionTools.reply(MsgInt as CommandInteraction, embed, false);
-        return false;
-      } else {
-        MessageTools.reply(MsgInt as Message, embed);
-        return false;
-      }
+      const embed = await new MusicEmbeds(context.client).NoPlayer(context);
+      context.reply(embed);
+      return false;
     }
     return true;
   }
 
-  public static async Checkers(
-    player: Player,
-    { MsgInt }: SwitchCommand,
-    isSlash: boolean
-  ) {
-    if (
-      !(await MusicTools.HasPlayer(
-        player,
-        MsgInt.client as NDBClient,
-        {
-          MsgInt
-        },
-        isSlash
-      ))
-    ) {
+  public static async Checkers(player: Player, context: Context) {
+    if (!(await MusicTools.HasPlayer(player, context))) {
       return false;
     }
 
-    if (!(await MusicTools.hasVoice({ MsgInt }, isSlash))) {
+    if (!(await MusicTools.hasVoice(context))) {
       return false;
     }
 
-    if (!(await MusicTools.sameVoice(player, { MsgInt }, isSlash))) {
+    if (!(await MusicTools.sameVoice(player, context))) {
       return false;
     }
 

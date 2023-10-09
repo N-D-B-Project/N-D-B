@@ -4,7 +4,6 @@
 import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
-import { CommandChecker } from "@/Utils/Tools";
 import {
   ChatInputCommandInteraction,
   CommandInteractionOptionResolver
@@ -26,7 +25,7 @@ export default class SlashCommandEvent extends BaseEvent {
     client: INDBClient,
     interaction: ChatInputCommandInteraction
   ) {
-    const cmdTools = new CommandChecker(client);
+    const cmdTools = new commandchecker();
     const _Command: BaseCommand = client.Collections.SlashCommands.get(
       interaction.commandName
     ) as BaseCommand;

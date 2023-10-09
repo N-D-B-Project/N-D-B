@@ -2443,6 +2443,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@fastify/busboy@npm:2.0.0"
+  checksum: 41879937ce1dee6421ef9cd4da53239830617e1f0bb7a0e843940772cd72827205d05e518af6adabe6e1ea19301285fff432b9d11bad01a531e698bea95c781b
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.10":
   version: 0.11.10
   resolution: "@humanwhocodes/config-array@npm:0.11.10"
@@ -12397,12 +12404,12 @@ __metadata:
   linkType: hard
 
 "lavalink-client@https://github.com/Tomato6966/lavalink-client.git":
-  version: 1.1.12
-  resolution: "lavalink-client@https://github.com/Tomato6966/lavalink-client.git#commit=d4561eef8b9a86e65ebdb84eb32348196c704c71"
+  version: 1.1.21
+  resolution: "lavalink-client@https://github.com/Tomato6966/lavalink-client.git#commit=c8b173233def737b62fad73b07a963269594ad5c"
   dependencies:
     undici: ^5.23.0
     ws: ^8.13.0
-  checksum: c65284482c07504106fbd77430008648f653398c4ab089e7ebe09989238b2d211d56216804bfd524cbb847bbc22350bdd5d8c92148158f4e2a75e08c62693cad
+  checksum: 33059ecf60d975111d990b12b4c2dbbc4d8456db68d97d09bff886a8e248007d32edeb512e1730ecea2b165d977d7876aa560a09e92e1bb449421003eb9faf93
   languageName: node
   linkType: hard
 
@@ -17970,11 +17977,11 @@ __metadata:
   linkType: hard
 
 "undici@npm:^5.23.0":
-  version: 5.23.0
-  resolution: "undici@npm:5.23.0"
+  version: 5.25.4
+  resolution: "undici@npm:5.25.4"
   dependencies:
-    busboy: ^1.6.0
-  checksum: 906ca4fb1d47163d2cee2ecbbc664a1d92508a2cdf1558146621109f525c983a83597910b36e6ba468240e95259be5939cea6babc99fc0c36360b16630f66784
+    "@fastify/busboy": ^2.0.0
+  checksum: 654da161687de893127a685be61a19cb5bae42f4595c316ebf633929d871ac3bcd33edcb74156cea90655dfcd100bfe9b53a4f4749d52fc6ad2232f49a6ca8ab
   languageName: node
   linkType: hard
 
