@@ -1,5 +1,6 @@
 import { EventOptions, INDBClient } from "@/Types";
 import { BaseCommand, BaseEvent, Context } from "@/Utils/Structures";
+import { CommandChecker } from "@/Utils/Tools";
 import { Message } from "discord.js";
 
 export default class DMCommandEvent extends BaseEvent {
@@ -15,12 +16,12 @@ export default class DMCommandEvent extends BaseEvent {
   }
 
   public async run(client: INDBClient, message: Message, Prefix: string) {
-    const cmdTools = new commandchecker();
+    const cmdTools = new CommandChecker();
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
       .split(/ +/g);
-    const context = new Context(client, message, args as Array<string>, {});
+    const context = new Context(client, message, args as Array<string>, "DM");
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
       const Checker = await cmdTools.runCheck(context, _Command, Prefix, args);

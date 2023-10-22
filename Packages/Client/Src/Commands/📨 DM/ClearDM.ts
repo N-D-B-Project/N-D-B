@@ -26,7 +26,8 @@ export default class ClearDMCommand extends BaseCommand {
       ndcash: 0,
       DM: true,
       slash: {
-        type: "Sub"
+        type: "Sub",
+        name: "clear_dm"
       }
     };
     super(client, options);

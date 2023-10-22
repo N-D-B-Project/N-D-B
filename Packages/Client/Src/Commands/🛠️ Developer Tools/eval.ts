@@ -27,7 +27,8 @@ export default class EvalCommand extends BaseCommand {
       ndcash: 0,
       DM: false,
       slash: {
-        type: "Sub"
+        type: "Sub",
+        name: "eval"
       }
     };
     super(client, options);

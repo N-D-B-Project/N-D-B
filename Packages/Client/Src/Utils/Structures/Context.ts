@@ -15,10 +15,7 @@ import {
 } from "discord.js";
 import { InteractionTools, MessageTools } from "../Tools";
 
-interface SwitchContext {
-  isSub?: boolean;
-  isDM?: boolean;
-}
+type IAdditional = "Sub" | "DM" | "Both" | "None";
 
 export default class Context {
   public id: string;
@@ -46,13 +43,13 @@ export default class Context {
       | Array<string>
       | CommandInteractionOptionResolver
       | Array<CommandInteractionOption>,
-    { isSub, isDM }: SwitchContext
+    Additional: IAdditional
   ) {
     this.isSlash = context instanceof CommandInteraction;
-    this.configureContext(isSub, isDM);
+    this.configureContext(Additional);
   }
 
-  private async configureContext(isSub, isDM) {
+  private async configureContext(Additional: IAdditional) {
     this.id = this.context.id;
     this.message = this.isSlash ? null : (this.context as Message);
     this.interaction = this.isSlash
@@ -67,8 +64,12 @@ export default class Context {
     this.isPremium = (
       await this.client.database.GuildRepo.get(this.guild.id)
     ).Settings.Premium;
-    this.isSub = isSub;
-    this.isDM = isDM;
+    if (Additional === "Both") {
+      this.isSub = true;
+      this.isDM = true;
+    }
+    this.isSub = Additional === "Sub";
+    this.isSub = Additional === "DM";
   }
 
   private getGuild() {

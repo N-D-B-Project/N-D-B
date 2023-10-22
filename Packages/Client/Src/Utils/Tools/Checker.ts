@@ -17,7 +17,7 @@ export default class CommandChecker {
     const Options = _Command.options;
     const Channel = context.channel as TextChannel;
     const tools = new Tools(context.client);
-    const embeds = new CheckerEmbeds(context.client, context, _Command, prefix);
+    const embeds = new CheckerEmbeds(context, _Command, prefix);
     if (!context.isSlash) {
       if (args.length < _Command.options.minArgs) {
         this.SendFunction(context, await embeds.minArgs());
@@ -40,6 +40,44 @@ export default class CommandChecker {
       );
       return false;
     }
+
+    // if (Options.permissions.bot) {
+    //   if (!context.guild.members.me.permissions.has(Options.permissions.bot)) {
+    //     this.SendFunction(
+    //       context,
+    //       await context.client.Translate.TFunction(
+    //         context,
+    //         "Tools/Commands:Permission:Bot",
+    //         {
+    //           PERMS: context.client.Tools.formatArray(
+    //             Options.permissions.bot as Array<string>
+    //           )
+    //         }
+    //       )
+    //     );
+    //   }
+    // }
+
+    // if (Options.permissions.user) {
+    //   if (
+    //     !(await context.guild.members.fetch(context.author.id)).permissions.has(
+    //       Options.permissions.user
+    //     )
+    //   ) {
+    //     this.SendFunction(
+    //       context,
+    //       await context.client.Translate.TFunction(
+    //         context,
+    //         "Tools/Commands:Permission:User",
+    //         {
+    //           PERMS: context.client.Tools.formatArray(
+    //             Options.permissions.user as Array<string>
+    //           )
+    //         }
+    //       )
+    //     );
+    //   }
+    // }
 
     if (Options.permissions.ownerOnly && !tools.checkOwner(context.author.id)) {
       this.SendFunction(
@@ -134,11 +172,14 @@ export default class CommandChecker {
     SubList: Array<{ prop: string }>,
     isDM: boolean
   ) {
+    const Additional = isDM ? "Both" : "Sub";
     const args = await context.getInteractionArgs();
     for (const Command of SubList) {
       if (args.getSubcommand() === Command.prop) {
+        console.log(context.client.Collections.SubCommands.keys());
         const _SubCommand: BaseCommand =
-          context.client.Collections.SubCommands.get(Command.prop);
+          context.client.Collections.SubCommands.get(args.getSubcommand());
+        console.log(_SubCommand);
         if (_SubCommand) {
           const Checker = await this.runCheck(context, _SubCommand);
           if (Checker) {
@@ -146,7 +187,7 @@ export default class CommandChecker {
               context.client,
               context.interaction,
               args.data[0].options,
-              { isSub: true, isDM }
+              Additional
             );
             _SubCommand.run(newContext).catch(async (error: Error) => {
               context.client.logger.error(error.stack);

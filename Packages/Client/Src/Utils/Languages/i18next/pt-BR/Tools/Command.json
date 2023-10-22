@@ -32,6 +32,10 @@
         }
       }
     },
+    "Permissions": {
+      "Bot": "Eu não tenho as seguintes permissões para executar esse comando: {{PERMS}}",
+      "User": "Você não tem as permissões: {{PERMS}} para executar esse comando"
+    },
     "ReactionRole": "Antes de executar este comando utilize o comando {{PREFIX}}ReactionTypes para ver os tipos de reações que você pode usar!"
   }
 }

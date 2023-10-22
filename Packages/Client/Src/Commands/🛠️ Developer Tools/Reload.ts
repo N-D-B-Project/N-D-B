@@ -21,7 +21,8 @@ export default class TestCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       slash: {
-        type: "Sub"
+        type: "Sub",
+        name: "reaload"
       }
     };
     super(client, options);

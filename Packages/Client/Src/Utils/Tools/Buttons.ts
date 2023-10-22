@@ -3,6 +3,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 import { Context } from "../Structures";
 
 export default class Buttons {
+  // eslint-disable-next-line no-empty-function
   public constructor(private client: INDBClient) {}
 
   async Confirm(context: Context): Promise<ActionRowBuilder> {

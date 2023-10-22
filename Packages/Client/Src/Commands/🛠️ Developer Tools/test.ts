@@ -2,6 +2,8 @@
 import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand } from "@/Utils/Structures";
 import Context from "@/Utils/Structures/Context";
+import { Paginator } from "@/Utils/Tools";
+import { EmbedBuilder } from "discord.js";
 
 export default class TestCommand extends BaseCommand {
   constructor(client: INDBClient) {
@@ -23,13 +25,19 @@ export default class TestCommand extends BaseCommand {
       nsfw: false,
       ndcash: 0,
       slash: {
-        type: "Sub"
+        type: "Sub",
+        name: "test"
       }
     };
     super(client, options);
   }
 
   async run(context: Context) {
-    console.log(`TestCommand: ${context.getArg("test", 0)}`);
+    console.log(context);
+    const embeds = [];
+    for (let i = 0; i < 10; i++) {
+      embeds.push(new EmbedBuilder().setDescription(`Embed: ${i + 1}`));
+    }
+    return await Paginator(context, embeds);
   }
 }

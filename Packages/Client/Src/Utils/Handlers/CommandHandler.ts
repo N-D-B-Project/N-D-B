@@ -79,6 +79,7 @@ export default class CommandHandler {
 
       // Slash Sub Commands
       if (SlashData.type === "Sub") {
+        if (!SlashData.name) throw new Error("SubCommand don't have a name");
         this.client.Collections.SubCommands.set(SlashData.name, command);
       }
     });
