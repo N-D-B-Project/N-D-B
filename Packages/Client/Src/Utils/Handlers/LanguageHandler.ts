@@ -42,7 +42,7 @@ async function walkDirectory(
   return { namespaces: [...new Set(namespaces)], languages };
 }
 
-export default async (): Promise<Map<string, TFunction>> => {
+export default async (logger: Logger): Promise<Map<string, TFunction>> => {
   const { namespaces, languages } = await walkDirectory(
     path.resolve(__dirname, "../Languages/i18next/")
   );
@@ -73,7 +73,7 @@ export default async (): Promise<Map<string, TFunction>> => {
       preload: languages
     },
     async () => {
-      new Logger().info(
+      logger.info(
         `${
           languages.length
         } linguagens foram carregadas com sucesso! (${languages.join(" | ")})`

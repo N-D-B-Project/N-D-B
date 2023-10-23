@@ -20,7 +20,7 @@ export default class NDBClient extends Client {
   }
 
   public async Start(): Promise<void> {
-    this.Collections.translations = await LanguageHandler();
+    this.Collections.translations = await LanguageHandler(this.logger);
     await this.LoadHandlers.load();
     this.database.Connect();
     let Token: string;

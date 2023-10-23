@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { INDBClient } from "@/Types";
 import { CommandHandler, EventHandler } from "./index";
 
 export default class LoadHandlers {
-  // eslint-disable-next-line no-empty-function
   public constructor(public client: INDBClient) {}
 
   async load() {
