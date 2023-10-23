@@ -1,10 +1,7 @@
 import { Config, Emojis, URLList } from "@/Config/Config";
+import { INDBClient } from "@/Types";
 import { Context } from "@/Utils/Structures";
-import {
-  CommandInteractionOptionResolver,
-  VoiceChannel,
-  channelMention
-} from "discord.js";
+import { VoiceChannel, channelMention } from "discord.js";
 import { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
 import ms from "parse-ms";
@@ -17,6 +14,18 @@ export default class MusicTools {
     }
 
     return client.MusicManager.common.getPlayer(guild.id);
+  }
+
+  public static async getPlayerEvent(
+    client: INDBClient,
+    guildId: string,
+    isPremium: boolean
+  ) {
+    if (isPremium) {
+      return client.MusicManager.premium.getPlayer(guildId);
+    }
+
+    return client.MusicManager.common.getPlayer(guildId);
   }
 
   public static async createPlayer(
@@ -55,7 +64,8 @@ export default class MusicTools {
     return true;
   }
 
-  public static async sameVoice(player: Player, context: Context) {
+  public static async sameVoice(context: Context) {
+    const player = await this.getPlayer(context);
     const voiceChannel = await context.guild.channels.fetch(
       player.voiceChannelId
     );
@@ -76,7 +86,8 @@ export default class MusicTools {
     return true;
   }
 
-  public static async HasPlayer(player: Player, context: Context) {
+  public static async HasPlayer(context: Context) {
+    const player = await this.getPlayer(context);
     if (!player) {
       const embed = await new MusicEmbeds(context.client).NoPlayer(context);
       context.reply(embed);
@@ -85,8 +96,8 @@ export default class MusicTools {
     return true;
   }
 
-  public static async Checkers(player: Player, context: Context) {
-    if (!(await MusicTools.HasPlayer(player, context))) {
+  public static async Checkers(context: Context) {
+    if (!(await MusicTools.HasPlayer(context))) {
       return false;
     }
 
@@ -94,7 +105,7 @@ export default class MusicTools {
       return false;
     }
 
-    if (!(await MusicTools.sameVoice(player, context))) {
+    if (!(await MusicTools.sameVoice(context))) {
       return false;
     }
 
@@ -103,8 +114,7 @@ export default class MusicTools {
 
   public static async URLChecker(
     isCommand: boolean,
-    args?: string | Array<string> | CommandInteractionOptionResolver,
-    isSlash?: boolean
+    context: Context | string
   ) {
     const URLs = URLList.Music;
     const MusicEmojis = Emojis.Music;
@@ -124,12 +134,10 @@ export default class MusicTools {
       { URL: URLs.Facebook, Name: "Facebook", Emoji: MusicEmojis.Facebook },
       { URL: URLs.Apple, Name: "Apple Music", Emoji: MusicEmojis.Apple }
     ];
-    if (isCommand) {
-      for (const value of Props) {
-        const Query = isSlash
-          ? ((args as CommandInteractionOptionResolver).get("query")
-              .value as string)
-          : (args as Array<string>).join(" ");
+
+    for (const value of Props) {
+      if (isCommand) {
+        const Query = (context as Context).getArg("query", -1);
         if (Query.includes(value.URL)) {
           Emoji = value.Emoji;
           Name = value.Name;
@@ -138,10 +146,9 @@ export default class MusicTools {
           Emoji = MusicEmojis.Youtube;
           Name = "Youtube";
         }
-      }
-    } else {
-      for (const value of Props) {
-        if ((args as string).includes(value.URL)) {
+      } else {
+        const args = context as string;
+        if (args.includes(value.URL)) {
           Emoji = value.Emoji;
           Name = value.Name;
           break;

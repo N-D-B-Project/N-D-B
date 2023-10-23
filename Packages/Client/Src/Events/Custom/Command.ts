@@ -18,12 +18,21 @@ export default class CommandEvent extends BaseEvent {
 
   async run(client: INDBClient, message: Message, Prefix: string) {
     if (message.channel.type === ChannelType.DM) return;
+
     const cmdTools = new CommandChecker();
     const [cmd, ...args] = message.content
       .slice(Prefix.length)
       .trim()
       .split(/ +/g);
-    const context = new Context(client, message, args as Array<string>, "None");
+    const context = new Context(
+      client,
+      message,
+      args as Array<string>,
+      (
+        await this.client.database.GuildRepo.get(message.guildId)
+      ).Settings.Premium,
+      "None"
+    );
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);
     if (_Command) {
       const Checker = await cmdTools.runCheck(context, _Command, Prefix, args);

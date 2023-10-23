@@ -19,7 +19,11 @@ export default class channelDeleteEvent extends BaseEvent {
   async run(client: INDBClient, channel: GuildChannel) {
     const guildData = await client.database.GuildRepo.get(channel.guildId);
     const { Premium } = guildData.Settings;
-    const Player = await MusicTools.getPlayer(client, channel.guildId, Premium);
+    const Player = await MusicTools.getPlayerEvent(
+      client,
+      channel.guildId,
+      Premium
+    );
     if (
       channel.type === ChannelType.GuildVoice &&
       Player &&

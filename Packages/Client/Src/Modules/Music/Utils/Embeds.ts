@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-empty-function */
-
 import { Emojis } from "@/Config/Config";
 import { INDBClient } from "@/Types";
 import { Context } from "@/Utils/Structures";
@@ -103,11 +100,7 @@ export default class MusicEmbeds {
     loadType: string,
     track?: Track
   ): Promise<EmbedBuilder> {
-    const Checker = await MusicTools.URLChecker(
-      true,
-      context.getArg("query", -1),
-      context.isSlash
-    );
+    const Checker = await MusicTools.URLChecker(true, context);
     const baseEmbed = await this.createBaseEmbed(context, "Error");
     switch (loadType) {
       case "Fail":

@@ -70,6 +70,7 @@
     "INDB",
     "lavalink",
     "Lavalink",
+    "lavalinkqueue",
     "lavaplayer",
     "Middlewares",
     "msgdm",
@@ -104,6 +105,7 @@
     "vimeo",
     "youshallnotpass",
     "youtube",
-    "Youtube"
+    "Youtube",
+    "ytmsearch"
   ]
 }

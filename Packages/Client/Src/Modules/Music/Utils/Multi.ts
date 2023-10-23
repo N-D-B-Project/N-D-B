@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-
 import { Context } from "@/Utils/Structures";
 import { MultiCommandList } from "../Types";
 import MusicTools from "./Tools";

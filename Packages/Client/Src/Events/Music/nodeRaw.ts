@@ -17,11 +17,10 @@ export default class nodeRawEvent extends BaseEvent {
 
   async run(client: INDBClient, node: LavalinkNode, payload: unknown) {
     if (Config.Debug.Lavalink) {
-      // client.logger.music(
-      //   `Raw ${"premium/common"} Lavalink Node`,
-      //   `${node.options.id}, ${JSON.stringify(payload)}`
-      // );
-      console.log(payload);
+      client.logger.music(
+        `Raw ${"premium/common"} Lavalink Node`,
+        `${node.options.id}\n${JSON.stringify(payload, null, 2)}`
+      );
     }
   }
 }

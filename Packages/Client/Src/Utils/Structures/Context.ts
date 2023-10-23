@@ -31,7 +31,6 @@ export default class Context {
   public guild: Guild;
   public createdAt: Date;
   public createdTimestamp: number;
-  public isPremium: boolean;
   private msg: Message;
   public isSub: boolean;
   public isDM: boolean;
@@ -43,6 +42,7 @@ export default class Context {
       | Array<string>
       | CommandInteractionOptionResolver
       | Array<CommandInteractionOption>,
+    public isPremium: boolean,
     Additional: IAdditional
   ) {
     this.isSlash = context instanceof CommandInteraction;
@@ -61,9 +61,6 @@ export default class Context {
     this.guild = this.context.guild;
     this.createdAt = this.context.createdAt;
     this.createdTimestamp = this.context.createdTimestamp;
-    this.isPremium = (
-      await this.client.database.GuildRepo.get(this.guild.id)
-    ).Settings.Premium;
     if (Additional === "Both") {
       this.isSub = true;
       this.isDM = true;
@@ -77,7 +74,7 @@ export default class Context {
   }
 
   /**
-   * @description Use position `-1` to get `Args.join(" ");`
+   * @description Use position `-1` to get ```TS Args.join(" ");```
    */
   public getArg(name: string, position: number) {
     return position === -1

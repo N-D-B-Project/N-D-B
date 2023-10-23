@@ -8,6 +8,6 @@ async function start(): Promise<void> {
   await client.Start();
 }
 
-start().catch((error: Error) => {
+start().catch((error: Error): void => {
   console.error(`Start Error: ${error.stack}`);
 });

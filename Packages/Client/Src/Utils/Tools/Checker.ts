@@ -1,13 +1,16 @@
+import MusicTools from "@/Modules/Music/Utils/Tools";
 import { Content } from "@/Types/client";
 import { BaseCommand, Context } from "@/Utils/Structures";
-import { ChannelType, TextChannel } from "discord.js";
+import {
+  ChannelType,
+  TextChannel,
+  VoiceChannel,
+  channelMention
+} from "discord.js";
 import { Tools } from ".";
 import CheckerEmbeds from "./Embeds";
 
 export default class CommandChecker {
-  // eslint-disable-next-line no-empty-function
-  public constructor() {}
-
   public async runCheck(
     context: Context,
     _Command: BaseCommand,
@@ -41,43 +44,43 @@ export default class CommandChecker {
       return false;
     }
 
-    // if (Options.permissions.bot) {
-    //   if (!context.guild.members.me.permissions.has(Options.permissions.bot)) {
-    //     this.SendFunction(
-    //       context,
-    //       await context.client.Translate.TFunction(
-    //         context,
-    //         "Tools/Commands:Permission:Bot",
-    //         {
-    //           PERMS: context.client.Tools.formatArray(
-    //             Options.permissions.bot as Array<string>
-    //           )
-    //         }
-    //       )
-    //     );
-    //   }
-    // }
+    if (Options.permissions.bot) {
+      if (!context.guild.members.me.permissions.has(Options.permissions.bot)) {
+        this.SendFunction(
+          context,
+          await context.client.Translate.TFunction(
+            context,
+            "Tools/Commands:Permission:Bot",
+            {
+              PERMS: context.client.Tools.formatArray(
+                Options.permissions.bot as Array<string>
+              )
+            }
+          )
+        );
+      }
+    }
 
-    // if (Options.permissions.user) {
-    //   if (
-    //     !(await context.guild.members.fetch(context.author.id)).permissions.has(
-    //       Options.permissions.user
-    //     )
-    //   ) {
-    //     this.SendFunction(
-    //       context,
-    //       await context.client.Translate.TFunction(
-    //         context,
-    //         "Tools/Commands:Permission:User",
-    //         {
-    //           PERMS: context.client.Tools.formatArray(
-    //             Options.permissions.user as Array<string>
-    //           )
-    //         }
-    //       )
-    //     );
-    //   }
-    // }
+    if (Options.permissions.user) {
+      if (
+        !(await context.guild.members.fetch(context.author.id)).permissions.has(
+          Options.permissions.user
+        )
+      ) {
+        this.SendFunction(
+          context,
+          await context.client.Translate.TFunction(
+            context,
+            "Tools/Commands:Permission:User",
+            {
+              PERMS: context.client.Tools.formatArray(
+                Options.permissions.user as Array<string>
+              )
+            }
+          )
+        );
+      }
+    }
 
     if (Options.permissions.ownerOnly && !tools.checkOwner(context.author.id)) {
       this.SendFunction(
@@ -149,20 +152,26 @@ export default class CommandChecker {
       return false;
     }
 
-    // const player = await MusicTools.getPlayer(context.client, .guildId);
-    // if (player && Options.category === "🎵 Music") {
-    //   if (.channelId !== player.textChannelId) {
-    //     const voiceChannel = await .guild.channels.fetch(
-    //       player.voiceChannelId
-    //     );
+    if (!Options.DM) {
+      const player = await MusicTools.getPlayer(context);
+      if (player && Options.category === "🎵 Music") {
+        if (context.channel.id !== player.textChannelId) {
+          const voiceChannel = (await context.client.channels.fetch(
+            player.voiceChannelId
+          )) as VoiceChannel;
 
-    //     await context.client.Translate.TFunction(context, "Tools/Music:WrongChannel",  {
-    //       TextChannel: channelMention(player.textChannelId),
-    //       VoiceChannel: channelMention(voiceChannel)
-    //     });
-    //     return false;
-    //   }
-    // }
+          await context.client.Translate.TFunction(
+            context,
+            "Tools/Music:WrongChannel",
+            {
+              TextChannel: channelMention(player.textChannelId),
+              VoiceChannel: channelMention(voiceChannel.id)
+            }
+          );
+          return false;
+        }
+      }
+    }
 
     return true;
   }
@@ -187,6 +196,7 @@ export default class CommandChecker {
               context.client,
               context.interaction,
               args.data[0].options,
+              context.isPremium,
               Additional
             );
             _SubCommand.run(newContext).catch(async (error: Error) => {

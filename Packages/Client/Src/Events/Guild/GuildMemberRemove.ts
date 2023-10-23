@@ -21,7 +21,7 @@ export default class Event extends BaseEvent {
       const { Premium } = guildData.Settings;
 
       await (
-        await MusicTools.getPlayer(client, member.guild.id, Premium)
+        await MusicTools.getPlayerEvent(client, member.guild.id, Premium)
       ).destroy();
       await client.database.GuildRepo.delete(member.guild);
     }

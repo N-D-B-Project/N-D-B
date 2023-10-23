@@ -1,5 +1,3 @@
-/* eslint-disable no-empty-function */
-
 import { INDBClient } from "@/Types";
 import { Context } from "@/Utils/Structures";
 import { EmbedBuilder, Message } from "discord.js";

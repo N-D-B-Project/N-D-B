@@ -29,7 +29,7 @@ export default class Play {
       await player.connect();
     }
 
-    if (!(await MusicTools.sameVoice(player, context))) {
+    if (!(await MusicTools.sameVoice(context))) {
       return;
     }
 
@@ -98,12 +98,10 @@ export default class Play {
     context: Context
   ): Promise<EmbedBuilder> {
     const Embeds = new MusicEmbeds(context.client);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const URL = context.getArg("query", -1);
     let isValidURL: boolean = false;
     for (const regex of Object.values(LavalinkManager.SourceLinksRegexes)) {
       if (regex.test(URL)) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         isValidURL = true;
         break;
       }

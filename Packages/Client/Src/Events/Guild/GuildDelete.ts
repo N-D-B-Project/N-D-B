@@ -19,7 +19,7 @@ module.exports = class GuildDeleteEvent extends BaseEvent {
     const guildData = await client.database.GuildRepo.get(guild.id);
     const { Premium } = guildData.Settings;
 
-    const Player = await MusicTools.getPlayer(client, guild.id, Premium);
+    const Player = await MusicTools.getPlayerEvent(client, guild.id, Premium);
     if (Player.guildId === guild.id) {
       Player.destroy();
     }

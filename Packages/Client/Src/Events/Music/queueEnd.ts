@@ -34,7 +34,6 @@ export default class queueEndEvent extends BaseEvent {
     if (Config.Music.Player.AutoLeaveEmpty.Queue.Enable) {
       setTimeout(async () => {
         try {
-          // player = client.LavalinkManager.players.get(player.guildId);
           if (!player.queue && player.queue.current) {
             const Timer = ms(Config.Music.Player.AutoLeaveEmpty.Queue.Delay);
             const embed = new EmbedBuilder()

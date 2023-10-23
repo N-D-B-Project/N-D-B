@@ -13,21 +13,16 @@ export default class Multi {
         context.channel.id
       );
     }
-    if (!(await MusicTools.Checkers(player, context))) {
-      return;
-    }
-
-    if (!(await MusicTools.hasVoice(context))) {
+    if (!(await MusicTools.Checkers(context))) {
       return;
     }
 
     if (!player.connected) {
-      player.slash = { isSlash: false };
       player.playerAuthor = context.author.id;
       await player.connect();
     }
 
-    if (!(await MusicTools.sameVoice(player, context))) {
+    if (!(await MusicTools.sameVoice(context))) {
       return;
     }
     return;

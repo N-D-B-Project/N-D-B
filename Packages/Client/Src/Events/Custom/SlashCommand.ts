@@ -35,6 +35,9 @@ export default class SlashCommandEvent extends BaseEvent {
       client,
       interaction,
       interaction.options as CommandInteractionOptionResolver,
+      (
+        await this.client.database.GuildRepo.get(interaction.guildId)
+      ).Settings.Premium,
       "Sub"
     );
     if (_Command) {
