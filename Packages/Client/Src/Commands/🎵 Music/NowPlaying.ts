@@ -33,7 +33,7 @@ export default class NowPlayingCommand extends BaseCommand {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async run(context: Context) {
-    const music = new Music(context.client);
+    const music = new Music();
     const nowplaying = await music.NowPlaying(context);
     await context.reply(nowplaying);
   }

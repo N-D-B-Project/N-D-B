@@ -20,12 +20,17 @@ export default class JoinCommand extends BaseCommand {
       },
       nsfw: false,
       ndcash: 0,
-      DM: false
+      DM: false,
+      slash: {
+        type: "Sub",
+        name: "join"
+      }
     };
     super(client, options);
   }
 
   async run(context: Context) {
-    await new Music(context.client).Join(context);
+    const music = new Music();
+    context.reply(await music.Join(context));
   }
 }

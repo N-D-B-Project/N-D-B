@@ -1,10 +1,12 @@
 import { Context } from "@/Utils/Structures";
-import { VoiceChannel } from "discord.js";
+import { VoiceChannel, channelMention } from "discord.js";
 import MusicTools from "./Tools";
 
-export default class Multi {
+export default class Join {
   public static async run(context: Context) {
     var player = await MusicTools.getPlayer(context);
+
+    if (!MusicTools.hasVoice(context)) return;
 
     if (!player) {
       player = await MusicTools.createPlayer(
@@ -13,18 +15,14 @@ export default class Multi {
         context.channel.id
       );
     }
-    if (!(await MusicTools.Checkers(context))) {
-      return;
-    }
 
     if (!player.connected) {
       player.playerAuthor = context.author.id;
       await player.connect();
     }
 
-    if (!(await MusicTools.sameVoice(context))) {
-      return;
-    }
-    return;
+    return await context.client.Translate.Guild("Tools/Music:Join", context, {
+      VoiceChannel: channelMention(player.voiceChannelId)
+    });
   }
 }

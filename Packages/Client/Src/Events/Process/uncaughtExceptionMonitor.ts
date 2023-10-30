@@ -5,7 +5,8 @@ import { BaseEvent } from "@/Utils/Structures";
 export default class uncaughtExceptionMonitorEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
-      name: "uncaughtExceptionMonitor",
+      name: "process",
+      names: ["uncaughtExceptionMonitor"],
       type: "on",
       emitter: "process",
       enable: false

@@ -28,9 +28,7 @@ export default class CommandEvent extends BaseEvent {
       client,
       message,
       args as Array<string>,
-      (
-        await this.client.database.GuildRepo.get(message.guildId)
-      ).Settings.Premium,
+      (await client.database.GuildRepo.get(message.guildId)).Settings.Premium,
       "None"
     );
     const _Command: BaseCommand = client.Tools.resolveCommand(cmd);

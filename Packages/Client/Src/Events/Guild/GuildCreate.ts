@@ -2,7 +2,7 @@ import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { Guild } from "discord.js";
 
-module.exports = class GuildCreateEvent extends BaseEvent {
+export default class GuildCreateEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "guildCreate",
@@ -18,4 +18,4 @@ module.exports = class GuildCreateEvent extends BaseEvent {
     const guildRepository = client.database.GuildRepo;
     await guildRepository.create(guild);
   }
-};
+}

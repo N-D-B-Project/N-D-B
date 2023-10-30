@@ -63,6 +63,34 @@ export default class MusicCategoryCommand extends BaseCommand {
                 "The bot enter in you voice channel and initialize an player",
               descriptionLocalizations: Localization.options.join.description,
               type: ApplicationCommandOptionType.Subcommand
+            },
+            {
+              name: "leave",
+              nameLocalizations: Localization.options.leave.name,
+              description: "leaves from voice channel",
+              descriptionLocalizations: Localization.options.leave.description,
+              type: ApplicationCommandOptionType.Subcommand
+            },
+            {
+              name: "pause",
+              nameLocalizations: Localization.options.pause.name,
+              description: "Pause the music queue",
+              descriptionLocalizations: Localization.options.pause.description,
+              type: ApplicationCommandOptionType.Subcommand
+            },
+            {
+              name: "resume",
+              nameLocalizations: Localization.options.resume.name,
+              description: "Resume the music queue",
+              descriptionLocalizations: Localization.options.resume.description,
+              type: ApplicationCommandOptionType.Subcommand
+            },
+            {
+              name: "stop",
+              nameLocalizations: Localization.options.stop.name,
+              description: "Stop the music queue",
+              descriptionLocalizations: Localization.options.stop.description,
+              type: ApplicationCommandOptionType.Subcommand
             }
           ]
         },

@@ -3,7 +3,7 @@ import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { Guild } from "discord.js";
 
-module.exports = class GuildDeleteEvent extends BaseEvent {
+export default class GuildDeleteEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "guildDelete",
@@ -26,4 +26,4 @@ module.exports = class GuildDeleteEvent extends BaseEvent {
 
     await client.database.GuildRepo.delete(guild);
   }
-};
+}

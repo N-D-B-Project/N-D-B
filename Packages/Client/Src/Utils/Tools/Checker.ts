@@ -1,12 +1,6 @@
-import MusicTools from "@/Modules/Music/Utils/Tools";
 import { Content } from "@/Types/client";
 import { BaseCommand, Context } from "@/Utils/Structures";
-import {
-  ChannelType,
-  TextChannel,
-  VoiceChannel,
-  channelMention
-} from "discord.js";
+import { ChannelType, TextChannel } from "discord.js";
 import { Tools } from ".";
 import CheckerEmbeds from "./Embeds";
 
@@ -145,33 +139,37 @@ export default class CommandChecker {
     // }
 
     if (Options.DM && context.channel.type === ChannelType.DM) {
-      await context.client.Translate.TFunction(
+      await this.SendFunction(
         context,
-        "Tools/Command:Checker:OnlyDM"
+        await context.client.Translate.TFunction(
+          context,
+          "Tools/Command:Checker:OnlyDM"
+        )
       );
       return false;
     }
 
-    if (!Options.DM) {
-      const player = await MusicTools.getPlayer(context);
-      if (player && Options.category === "🎵 Music") {
-        if (context.channel.id !== player.textChannelId) {
-          const voiceChannel = (await context.client.channels.fetch(
-            player.voiceChannelId
-          )) as VoiceChannel;
+    // const player = await MusicTools.getPlayer(context);
+    // if (player && Options.category === "🎵 Music") {
+    //   if (context.channel.id !== player.textChannelId) {
+    //     const voiceChannel = (await context.client.channels.fetch(
+    //       player.voiceChannelId
+    //     )) as VoiceChannel;
 
-          await context.client.Translate.TFunction(
-            context,
-            "Tools/Music:WrongChannel",
-            {
-              TextChannel: channelMention(player.textChannelId),
-              VoiceChannel: channelMention(voiceChannel.id)
-            }
-          );
-          return false;
-        }
-      }
-    }
+    //     await this.SendFunction(
+    //       context,
+    //       await context.client.Translate.TFunction(
+    //         context,
+    //         "Tools/Music:WrongChannel",
+    //         {
+    //           TextChannel: channelMention(player.textChannelId),
+    //           VoiceChannel: channelMention(voiceChannel.id)
+    //         }
+    //       )
+    //     );
+    //     return false;
+    //   }
+    // }
 
     return true;
   }

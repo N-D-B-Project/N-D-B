@@ -2,7 +2,7 @@ import { EventOptions, INDBClient } from "@/Types";
 import { BaseEvent } from "@/Utils/Structures";
 import { Guild } from "discord.js";
 
-module.exports = class GuildUpdateEvent extends BaseEvent {
+export default class GuildUpdateEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "guildUpdate",
@@ -17,4 +17,4 @@ module.exports = class GuildUpdateEvent extends BaseEvent {
   async run(client: INDBClient, oldGuild: Guild, newGuild: Guild) {
     await client.database.GuildRepo.update(oldGuild, newGuild);
   }
-};
+}

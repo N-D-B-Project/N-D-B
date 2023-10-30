@@ -22,6 +22,7 @@ import type {
   PermissionResolvable,
   User
 } from "discord.js";
+import { SignalConstants } from "os";
 
 export interface CommandOptions {
   name: string;
@@ -58,15 +59,15 @@ export enum eCommandType {
   CONTEXT = "Context",
   MODAL = "Modal"
 }
-
 export interface EventOptions {
   name:
     | keyof ClientEvents
     | keyof RestEvents
     | keyof EmitedEvents
-    | keyof ProcessEvents
     | keyof NodeManagerEvents
-    | keyof LavalinkManagerEvents;
+    | keyof LavalinkManagerEvents
+    | "process";
+  names?: Array<keyof ProcessEvents | keyof SignalConstants>;
   type: "on" | "once";
   emitter: "client" | "rest" | "process" | "music" | "music-node";
   enable: boolean;

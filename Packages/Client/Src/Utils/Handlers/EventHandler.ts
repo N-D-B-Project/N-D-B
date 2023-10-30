@@ -54,34 +54,18 @@ export default class EventHandler {
               event.options.name,
               (...args: unknown[]) => {
                 if (event.options.enable) {
-                  event.run(this.client, ...args);
+                  if (event.options.name === "process") {
+                    event.options.names.forEach(() => {
+                      event.run(this.client, ...args);
+                    });
+                  } else {
+                    event.run(this.client, ...args);
+                  }
                 }
               }
             );
         }
       }
-
-      // letHandlerObject = [...new Set([])]
-      //   .map(object => {
-      //     return {
-      //       emitter: object.emitter,
-      //       value: object.value
-      //     }
-      //   })
-      //   .map(async object => {
-      //     switch (event.options.emitter) {
-      //       case String(object.emitter):
-      //         Object(object.value)[event.options.type](
-      //           event.options.name,
-      //           (...args: Array<string>) => {
-      //             if (event.options.enable) {
-      //               event.run(this.client, ...args)
-      //             }
-      //           }
-      //         )
-      //         break
-      //     }
-      //   })
     });
   }
 }

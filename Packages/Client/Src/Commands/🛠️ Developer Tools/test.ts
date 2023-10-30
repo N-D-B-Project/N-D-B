@@ -33,7 +33,6 @@ export default class TestCommand extends BaseCommand {
   }
 
   async run(context: Context) {
-    console.log(context);
     const embeds = [];
     for (let i = 0; i < 10; i++) {
       embeds.push(new EmbedBuilder().setDescription(`Embed: ${i + 1}`));

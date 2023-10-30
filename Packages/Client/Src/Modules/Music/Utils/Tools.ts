@@ -57,7 +57,7 @@ export default class MusicTools {
   public static async hasVoice(context: Context): Promise<boolean> {
     const Embeds = new MusicEmbeds(context.client);
     if (!(await context.getMember()).voice.channel) {
-      context.reply(await Embeds.NoChannel(context));
+      await context.reply(await Embeds.NoChannel(context));
 
       return false;
     }
@@ -71,7 +71,7 @@ export default class MusicTools {
     );
 
     if ((await context.getMember()).voice.channelId !== player.voiceChannelId) {
-      context.reply(
+      await context.reply(
         await context.client.Translate.Guild(
           "Tools/Music:WrongChannel",
           context,
@@ -90,7 +90,7 @@ export default class MusicTools {
     const player = await this.getPlayer(context);
     if (!player) {
       const embed = await new MusicEmbeds(context.client).NoPlayer(context);
-      context.reply(embed);
+      await context.reply(embed);
       return false;
     }
     return true;

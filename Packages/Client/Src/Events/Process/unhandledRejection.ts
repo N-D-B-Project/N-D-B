@@ -4,7 +4,8 @@ import { BaseEvent } from "@/Utils/Structures";
 export default class unhandledRejectionEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
-      name: "unhandledRejection",
+      name: "process",
+      names: ["unhandledRejection"],
       type: "on",
       emitter: "process",
       enable: false

@@ -10,7 +10,7 @@ import {
   VoiceState
 } from "discord.js";
 
-module.exports = class VoiceStateUpdateEvent extends BaseEvent {
+export default class VoiceStateUpdateEvent extends BaseEvent {
   constructor(client: INDBClient) {
     const options: EventOptions = {
       name: "voiceStateUpdate",
@@ -182,4 +182,4 @@ module.exports = class VoiceStateUpdateEvent extends BaseEvent {
       }
     }
   }
-};
+}

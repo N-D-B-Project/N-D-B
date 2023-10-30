@@ -95,10 +95,11 @@
     "Amount": "{{SkipAmount}} Músicas foram puladas."
   },
   "Stop": "Player parado com sucesso! a fila de músicas foi excluída.",
-  "Leave": "Sai do canal de voz: `{{VoiceChannel}}`, fila de músicas foi excluída.",
+  "Leave": "Sai do canal de voz: {{VoiceChannel}}, fila de músicas foi excluída.",
   "Pause": "O Player foi pausado!",
   "Resume": "O Player foi resumido!",
   "Shuffle": "Fila de músicas embaralhada com sucesso!",
   "Unshuffle": "A fila de músicas voltou ao normal.",
-  "Loop": ""
+  "Loop": "",
+  "Join": "Entrei no canal de voz: {{VoiceChannel}}"
 }
