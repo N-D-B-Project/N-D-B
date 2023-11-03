@@ -2,19 +2,19 @@ import Music from "@/Modules/Music";
 import { CommandOptions, INDBClient } from "@/Types";
 import { BaseCommand, Context } from "@/Utils/Structures";
 
-export default class NowPlayingCommand extends BaseCommand {
-  constructor(client: INDBClient) {
+export default class QueueCommand extends BaseCommand {
+  public constructor(protected client: INDBClient) {
     const options: CommandOptions = {
-      name: "NowPlaying",
-      aliases: ["nowplaying", "np", "NP"],
-      description: "",
+      name: "queue",
+      aliases: [""],
+      description: "Shows the music Queue",
       category: "🎵 Music",
       usage: "",
       disable: false,
       cooldown: 0,
       permissions: {
-        bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
-        user: ["Connect", "SendMessages"],
+        bot: ["SendMessages"],
+        user: ["SendMessages"],
         guildOnly: false,
         ownerOnly: false
       },
@@ -25,15 +25,14 @@ export default class NowPlayingCommand extends BaseCommand {
       DM: false,
       slash: {
         type: "Sub",
-        name: "now_playing"
+        name: "queue"
       }
     };
     super(client, options);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async run(context: Context) {
+  public async run(context: Context) {
     const music = new Music();
-    await music.NowPlaying(context);
+    await music.Queue(context);
   }
 }

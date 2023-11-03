@@ -8,12 +8,12 @@ import ms from "parse-ms";
 import MusicEmbeds from "./Embeds";
 
 export default class MusicTools {
-  public static async getPlayer({ client, guild, isPremium }: Context) {
-    if (isPremium) {
-      return client.MusicManager.premium.getPlayer(guild.id);
+  public static async getPlayer(context: Context) {
+    if (context.isPremium) {
+      return context.client.MusicManager.premium.getPlayer(context.guild.id);
     }
 
-    return client.MusicManager.common.getPlayer(guild.id);
+    return context.client.MusicManager.common.getPlayer(context.guild.id);
   }
 
   public static async getPlayerEvent(

@@ -12,8 +12,8 @@ export default class MusicEmbeds {
     context: Context,
     color: "Error" | "Success"
   ): Promise<EmbedBuilder> {
-    if (color === "Error") var hex = "#c20e00";
-    else hex = "#00c26f";
+    const hex = color === "Error" ? "#c20e00" : "#00c26f";
+
     return new EmbedBuilder()
       .setAuthor({
         name: context.author.username,
@@ -309,13 +309,16 @@ export default class MusicEmbeds {
           context,
           { Emoji: Emojis.success }
         );
+        break;
       case "track":
         IsLoop = await this.client.Translate.Guild(
           "Tools/Music:NowPlayingEmbed:MusicLoop",
           context,
           { Emoji: Emojis.success }
         );
+        break;
     }
+
     return baseEmbed
       .setThumbnail(music.info.artworkUrl)
       .setTitle(
@@ -347,16 +350,16 @@ export default class MusicEmbeds {
             "Tools/Music:NowPlayingEmbed:Fields:Content:2",
             context,
             {
-              IsPlaying: player.playing
+              IsPlaying: player.paused
                 ? await this.client.Translate.Guild(
-                    "Tools/Music:NowPlayingEmbed:Playing",
-                    context,
-                    { Emoji: Emojis.success }
-                  )
-                : await this.client.Translate.Guild(
                     "Tools/Music:NowPlayingEmbed:Paused",
                     context,
                     { Emoji: Emojis.fail }
+                  )
+                : await this.client.Translate.Guild(
+                    "Tools/Music:NowPlayingEmbed:Playing",
+                    context,
+                    { Emoji: Emojis.success }
                   )
             }
           ),

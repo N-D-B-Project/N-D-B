@@ -7,9 +7,7 @@ export default class NowPlaying {
     if (!(await MusicTools.Checkers(context))) {
       return;
     }
-
-    return context.reply(
-      await new MusicEmbeds(context.client).NowPlaying(context)
-    );
+    const embeds = new MusicEmbeds(context.client);
+    return context.reply(await embeds.NowPlaying(context));
   }
 }

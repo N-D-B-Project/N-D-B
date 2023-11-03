@@ -5,6 +5,7 @@ import Leave from "./Utils/Leave";
 import nowPlaying from "./Utils/NowPlaying";
 import Pause from "./Utils/Pause";
 import play from "./Utils/Play";
+import Queue from "./Utils/Queue";
 import Resume from "./Utils/Resume";
 import Stop from "./Utils/Stop";
 
@@ -60,6 +61,14 @@ export default class Music {
   public async Stop(context: Context): Promise<string> {
     try {
       return await Stop.run(context);
+    } catch (error) {
+      context.client.logger.error(error);
+    }
+  }
+
+  public async Queue(context: Context): Promise<Message> {
+    try {
+      return await Queue.run(context);
     } catch (error) {
       context.client.logger.error(error);
     }

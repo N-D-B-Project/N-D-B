@@ -1,4 +1,5 @@
 import {
+  APIEmbed,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonInteraction,
@@ -12,12 +13,13 @@ import { Context } from "../Structures";
 
 export default async function Paginator(
   context: Context,
-  embeds: Array<EmbedBuilder>,
+  embeds: Array<APIEmbed>,
   time: number = 60000
-): Promise<Message | void> {
+): Promise<Message> {
   let CurrentPage: Message;
   let index: number = 0;
   let Embed = embeds[index];
+
   const PreviousButton = new ButtonBuilder()
     .setCustomId("PREVIOUS")
     .setEmoji("⬅️")
@@ -49,15 +51,24 @@ export default async function Paginator(
 
   CurrentPage = await context.send({
     embeds: [
-      Embed.setFooter({
-        text: await context.client.Translate.TFunction(
-          context,
-          "Tools/Tools:Pagination:Embed:Footer",
-          {
-            Current: index + 1,
-            Total: embeds.length
-          }
-        )
+      new EmbedBuilder(Embed).setFooter({
+        text: Embed.footer?.text
+          ? `${Embed.footer?.text} | ${await context.client.Translate.TFunction(
+              context,
+              "Tools/Tools:Pagination:Embed:Footer",
+              {
+                Current: index + 1,
+                Total: embeds.length
+              }
+            )}`
+          : await context.client.Translate.TFunction(
+              context,
+              "Tools/Tools:Pagination:Embed:Footer",
+              {
+                Current: index + 1,
+                Total: embeds.length
+              }
+            )
       })
     ],
     components: [Row]
@@ -91,17 +102,28 @@ export default async function Paginator(
         if (index === embeds.length - 1) NextButton.setDisabled(true);
         else NextButton.setDisabled(false);
         Embed = embeds[index];
+
         await context.edit({
           embeds: [
-            Embed.setFooter({
-              text: await context.client.Translate.TFunction(
-                context,
-                "Tools/Tools:Pagination:Embed:Footer",
-                {
-                  Current: index + 1,
-                  Total: embeds.length
-                }
-              )
+            new EmbedBuilder(Embed).setFooter({
+              text: Embed.footer?.text
+                ? `${Embed.footer
+                    ?.text} | ${await context.client.Translate.TFunction(
+                    context,
+                    "Tools/Tools:Pagination:Embed:Footer",
+                    {
+                      Current: index + 1,
+                      Total: embeds.length
+                    }
+                  )}`
+                : await context.client.Translate.TFunction(
+                    context,
+                    "Tools/Tools:Pagination:Embed:Footer",
+                    {
+                      Current: index + 1,
+                      Total: embeds.length
+                    }
+                  )
             })
           ],
           components: [Row]
@@ -112,15 +134,25 @@ export default async function Paginator(
       .on("end", async () => {
         CurrentPage = await context.edit({
           embeds: [
-            Embed.setFooter({
-              text: await context.client.Translate.TFunction(
-                context,
-                "Tools/Tools:Pagination:Embed:Footer",
-                {
-                  Current: index + 1,
-                  Total: embeds.length
-                }
-              )
+            new EmbedBuilder(Embed).setFooter({
+              text: Embed.footer?.text
+                ? `${Embed.footer
+                    ?.text} | ${await context.client.Translate.TFunction(
+                    context,
+                    "Tools/Tools:Pagination:Embed:Footer",
+                    {
+                      Current: index + 1,
+                      Total: embeds.length
+                    }
+                  )}`
+                : await context.client.Translate.TFunction(
+                    context,
+                    "Tools/Tools:Pagination:Embed:Footer",
+                    {
+                      Current: index + 1,
+                      Total: embeds.length
+                    }
+                  )
             })
           ],
           components: []
