@@ -3166,7 +3166,7 @@ __metadata:
     "@types/react-dom": "npm:^18.2.7"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/styled-components": "npm:^5.1.26"
-    axios: "npm:^1.4.0"
+    axios: "npm:^1.6.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-router-dom: "npm:^6.14.1"
@@ -5704,7 +5704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:*, axios@npm:^1.4.0":
+"axios@npm:*":
   version: 1.4.0
   resolution: "axios@npm:1.4.0"
   dependencies:
@@ -5712,6 +5712,17 @@ __metadata:
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
   checksum: b987e4259e5cfc93e95ee306c267a44380bbc045789a91b716e8434a75e22987344605eb4e133482fe285dd3a2e0b7e791ba26999965f04a5ecdde25f56930cb
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.0":
+  version: 1.6.2
+  resolution: "axios@npm:1.6.2"
+  dependencies:
+    follow-redirects: "npm:^1.15.0"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 612bc93f8f738a518e7c5f9de9cc782bcd36aac6bae279160ef6a10260378e21c1786520eab3336898e3d66e0839ebdf739f327fb6d0431baa4d3235703a7652
   languageName: node
   linkType: hard
 
