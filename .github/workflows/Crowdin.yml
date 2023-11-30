@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   push:
-    paths: ["Packages/Client/Src/Utils/Languages/i18next/**"]
+    paths: ["Packages/Client/src/common/Languages/i18n/**"]
     branches: [master]
 
 jobs:
@@ -32,8 +32,8 @@ jobs:
       - name: crowdin action
         uses: crowdin/github-action@v1
         with:
-          upload_sources: false
-          upload_translations: false
+          upload_sources: true
+          upload_translations: true
           download_translations: true
           localization_branch_name: l10n_crowdin_translations
           create_pull_request: true

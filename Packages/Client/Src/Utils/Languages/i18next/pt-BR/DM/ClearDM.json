@@ -1,7 +1,0 @@
-{
-  "/": "/",
-  "Embed": {
-    "Description": "{{VALUE}} Mensagens Deletadas",
-    "Footer": "Clique em 🗑️ para deletar esta mensagem"
-  }
-}

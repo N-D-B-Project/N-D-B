@@ -13,11 +13,3 @@ services:
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-  redis_ndbase:
-    build: .docker/Redis
-    container_name: redis_ndbase
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - .docker/database/redis/development:/usr/local/etc/redis

@@ -1,6 +1,6 @@
 {
   "name": "@n-d-b/n-d-b",
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@4.0.2",
   "private": true,
   "workspaces": {
     "packages": [

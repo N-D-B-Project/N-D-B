@@ -10,98 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id              String        @id
-  Username        String
-  Settings        UserSettings?
-  NDCash          NDCash?
-  // Bag       UserBag?
-  // Guilds    UserGuilds[]
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @default(now())
-  databaseVersion String        @default("Music")
-  APIUser         APIUser?
-
-  @@map("User")
-}
-
-model UserSettings {
-  id        String   @id @default(uuid())
-  Prefix    String   @default("&") @db.VarChar(4)
-  Language  String   @default("en-US")
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-}
-
-enum NDCashJobs {
-  Jobless
-}
-
-model NDCash {
-  id         String     @id @default(uuid())
-  NDCash     Int        @default(0)
-  Job        NDCashJobs @default(Jobless)
-  Level      Int        @default(1)
-  Worked     Int        @default(0)
-  DirtyMoney Int        @default(0)
-  DoubleTime Boolean    @default(false)
-  Daily      DateTime   @default(now())
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @default(now())
-  user       User       @relation(fields: [userId], references: [id])
-  userId     String     @unique
-}
-
-// model UserBag {
-//   id        String         @id @default(uuid())
-//   Gifts     UserBagGifts[]
-//   createdAt DateTime       @default(now())
-//   updatedAt DateTime       @default(now())
-//   user      User           @relation(fields: [userId], references: [id])
-//   userId    String         @unique
-// }
-
-// enum GiftsRarity {
-//   Commun
-//   Uncommun
-//   Rare
-//   Epic
-//   Legendary
-// }
-
-// model UserBagGifts {
-//   id        String      @id @default(uuid())
-//   Amount    Int         @default(0)
-//   Rarity    GiftsRarity
-//   createdAt DateTime    @default(now())
-//   updatedAt DateTime    @default(now())
-//   userBag   UserBag?    @relation(fields: [BagId], references: [id])
-//   BagId     String      @unique
-// }
-
-// model UserGuilds {
-//   id        String
-//   Level     Int      @default(1)
-//   XP        Int      @default(0)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @default(now())
-//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   userId    String   @unique
-// }
-
 model Guild {
-  id                 String               @id
-  Name               String
-  Settings           GuildSettings?
-  // GuildChannels      GuildChannels?
-  // GuildRoles         GuildRoles?
-  // Logs               GuildLogs?
-  GuildReactionRoles GuildReactionRoles[]
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @default(now())
-  databaseVersion    String               @default("Music")
+  id              String         @id
+  Name            String
+  Settings        GuildSettings?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
+  databaseVersion String         @default("Music")
 
   @@map("Guild")
 }
@@ -117,64 +32,4 @@ model GuildSettings {
   Premium    Boolean  @default(false)
   guild      Guild    @relation(fields: [guildId], references: [id])
   guildId    String   @unique
-}
-
-model GuildReactionRoles {
-  id        String   @id @default(uuid())
-  Message   String
-  Channel   String
-  Role      String
-  Emoji     String
-  Option    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  guild     Guild    @relation(fields: [guildId], references: [id])
-  guildId   String
-}
-
-// model GuildLogs {
-//   id               String  @id @default(uuid())
-//   deletedMessages  Boolean @default(false)
-//   editedMessages   Boolean @default(false)
-//   avatarChanges    Boolean @default(false)
-//   nicknameChanges  Boolean @default(false)
-//   voiceState       Boolean @default(false)
-//   reactionRole     Boolean @default(false)
-//   guild            Guild   @relation(fields: [guildId], references: [id])
-//   guildId          String  @unique
-// }
-
-// model GuildChannels {
-//   id        String   @id @default(uuid())
-//   Logs      String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @default(now())
-//   guild     Guild    @relation(fields: [guildId], references: [id])
-//   guildId   String   @unique
-// }
-
-// model GuildRoles {
-//   id        String   @id @default(uuid())
-//   Default   String
-//   Muted     String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @default(now())
-//   guild     Guild    @relation(fields: [guildId], references: [id])
-//   guildId   String   @unique
-// }
-
-model APIUser {
-  id           String @id @default(uuid())
-  email        String
-  accessToken  String
-  refreshToken String
-  user         User   @relation(fields: [userId], references: [id])
-  userId       String @unique
-}
-
-model Session {
-  id        String   @id
-  sid       String   @unique
-  data      String
-  expiresAt DateTime
 }

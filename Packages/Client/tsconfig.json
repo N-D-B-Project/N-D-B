@@ -1,14 +1,15 @@
 {
-  "ts-node": {
-    "transpileOnly": true,
-    "logError": true,
-    "ignore": ["(?:^|/)node_modules/"],
-    "files": true,
-    "skipIgnore": true
-  },
   "compilerOptions": {
-    "target": "ESNEXT",
     "module": "commonjs",
+    "declaration": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "target": "ESNEXT",
     "lib": [
       "ESNext",
       "ESNext.Array",
@@ -20,30 +21,23 @@
       "ESNext.String",
       "ESNext.WeakRef"
     ],
+    "moduleResolution": "node",
     "allowJs": true,
-    "outDir": "./Dist",
-    "rootDir": "./Src",
-    "removeComments": true,
-    "declaration": false,
+    "rootDir": ".",
     "typeRoots": ["./node_modules/@types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
     "skipDefaultLibCheck": true,
     "strict": true,
     "strictFunctionTypes": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./Src/*"]
+      "@/*": ["./*"]
     }
-  },
-  "include": ["Src", "Src/Events/Process"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  }
 }

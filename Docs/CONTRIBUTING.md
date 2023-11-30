@@ -27,7 +27,7 @@ When logging a bug, please be sure to include the following:
 - What version of TypeScript you're using (run `tsc --v`)
 - What version of Discord.js you're using (run `npm list discord.js`)
 - What version of Node.js you're using (run `node --version`)
-- What version of Java you're using (run `java --version`)
+<!-- - What version of Java you're using (run `java --version`) -->
 
 If at all possible, an isolated way to reproduce the behavior
 The behavior you expect to see, and the actual behavior

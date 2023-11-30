@@ -8,7 +8,7 @@
 files:
   [
     {
-      "source": "Packages/Client/Src/Utils/Languages/i18next/en-US/",
-      "translation": "Packages/Client/Src/Utils/Languages/i18next/%locale%/"
+      "source": "Packages/Client/src/common/Languages/i18n/en-US/",
+      "translation": "Packages/Client/src/common/Languages/i18n/%locale%/"
     }
   ]

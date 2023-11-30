@@ -45,21 +45,24 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 
 ## 📝 To-Do
 
-- [ ] Sistemas
-  - [ ] Moderação
+- [ ] Multilingual README in Docs
+- [ ] Systems
+  - [ ] Moderation
     - [ ] Manual
-    - [ ] Automática
-  - [ ] Economia
+    - [ ] Automatic
+  - [ ] Economy
   - [ ] Tickets
-  - [x] ReactionRoles
-    - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
-    - [ ] Update ReactionRoleAdd/Remove Events
-  - [ ] Music
+  - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
+    - [ ] ReactionRoles
+      - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
+      - [ ] Update ReactionRoleAdd/Remove Events
+    - [ ] Music
+    - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
+      - [ ] Partial
+      - [ ] Full
   - [ ] Sharding
   - [ ] Top.gg Autopost
   - [ ] Fix/Remove ESLint disable comment rules
-  - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
-    - [x] Partial
 
 ## 📖 Licença
 
@@ -69,6 +72,4 @@ Lançado sob a [GPL-3.0 License](https://github.com/NedcloarBR/N-D-B/blob/master
 
 - **OBS** Quase todos os repositórios que eu utilizar como referencia para a criação do N-D-B estarão citados abaixo e sempre irei fazer alterações no projeto original para se encaixar melhor ao sistema existente do N-D-B e também não ser totalmente uma "copia" deles
 
-- **[Kevin Novak](https://github.com/KevinNovak)** - [SCApi (Sharding/Clustering API)](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
-- **[peterhanania](https://github.com/peterhanania/)** - [Reaction Roles](https://github.com/peterhanania/reaction-roles)
 - Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/CONTRIBUTING.md).
