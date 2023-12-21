@@ -87,13 +87,13 @@ export class Tools {
     return wait(time);
   }
 
-  public static checkOwner(config: ConfigService, target: string) {
+  public static checkOwner(config: ConfigService<Config>, target: string) {
     return config
       .getOrThrow<Config["Discord"]>("Discord")
       .Client.Owners.includes(target);
   }
 
-  public static checkGuild(config: ConfigService, target: string) {
+  public static checkGuild(config: ConfigService<Config>, target: string) {
     return (
       config.getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity ===
         target ||
@@ -122,7 +122,7 @@ export class Tools {
 
   public static isValidURL(string: string) {
     const args = string.split(" ");
-    let url;
+    let url: URL | boolean;
     for (const arg of args) {
       try {
         url = new URL(arg);

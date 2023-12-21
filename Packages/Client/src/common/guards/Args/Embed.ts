@@ -1,11 +1,11 @@
-import { i18nService } from "@/modules/i18n/i18n.service";
 import { CommandOptions } from "@/types";
+import { Ii18nService } from "@/types/Interfaces";
 import { Client, EmbedBuilder } from "discord.js";
 import { Context } from "../../../modules/commands/Commands.context";
 
 export async function embed(
   client: Client,
-  Translate: i18nService,
+  Translate: Ii18nService,
   type: "TooManyArgs" | "NoMinArgs",
   context: Context,
   commandOptions: CommandOptions

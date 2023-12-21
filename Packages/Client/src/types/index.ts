@@ -1,18 +1,23 @@
-import { CommandDiscovery } from "@/modules/commands/Commands.discovery";
+import { CommandsDiscovery } from "@/modules/commands/Commands.discovery";
 import { LocalizationMap } from "discord-api-types/v10";
 import {
   BaseMessageOptions,
   Collection,
+  CommandInteraction,
   EmbedBuilder,
+  GuildChannel,
+  Message,
+  PartialMessage,
   PermissionResolvable,
   SlashCommandBuilder
 } from "discord.js";
+import { Context } from "vm";
 export interface AlsStore {
   PrismaConnected: boolean;
-  LegacyCommands: Collection<string, CommandDiscovery>;
+  LegacyCommands: Collection<string, CommandsDiscovery>;
   Aliases: Collection<string, string>;
-  SlashCommands: Collection<string, CommandDiscovery>;
-  SubCommands: Collection<string, CommandDiscovery>;
+  SlashCommands: Collection<string, CommandsDiscovery>;
+  SubCommands: Collection<string, CommandsDiscovery>;
 }
 
 export type Content = string | EmbedBuilder | BaseMessageOptions;
@@ -139,3 +144,15 @@ export interface Localization {
     [key: string]: Localization;
   };
 }
+
+export enum DatabaseStatus {
+  "Created",
+  "Error"
+}
+
+export type TranslateInfo =
+  | Message
+  | CommandInteraction
+  | GuildChannel
+  | PartialMessage
+  | Context;

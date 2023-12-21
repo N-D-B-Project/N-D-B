@@ -1,4 +1,5 @@
 import { Extends, Services } from "@/types/Constants";
+import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import {
   CommandProvider,
   DatabaseProvider,
@@ -18,14 +19,14 @@ import {
   Client,
   CommandInteraction,
   EmbedBuilder,
-  Guild,
   InteractionType,
+  Message,
   codeBlock
 } from "discord.js";
 import { ExplorerService } from "necord";
 import { Command } from "../../common/decorators/Commands.decorator";
-import { DatabaseService } from "../database/database.service";
-import { i18nService } from "../i18n/i18n.service";
+import { GuildEntity, UserEntity } from "../database/entities";
+import { Context } from "./Commands.context";
 import { CommandsDiscovery } from "./Commands.discovery";
 import { CommandsService } from "./Commands.service";
 import { MessageTools } from "./Message";
@@ -37,8 +38,8 @@ import { MessageTools } from "./Message";
 })
 export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
   public constructor(
-    @Inject(Services.Database) private readonly database: DatabaseService,
-    @Inject(Extends.Translate) private readonly Translate: i18nService,
+    @Inject(Services.Database) private readonly database: IDatabaseService,
+    @Inject(Extends.Translate) private readonly Translate: Ii18nService,
     @Inject(Extends.Command) private readonly commandsService: CommandsService,
     private readonly client: Client,
     private readonly eventEmitter: EventEmitter2,
@@ -58,69 +59,39 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 
   public async onApplicationBootstrap() {
     this.client.on("messageCreate", async message => {
+      let GuildPrefix: string = "";
       if (message.author.bot) return;
+      const userConfig = await this.checkConfig(message, "User");
       if (message.channel.type !== ChannelType.DM) {
-        const { config: GuildConfig, status } = await this.checkGuildConfig(
-          message.guild
-        );
-        if (status === "Created") {
-          MessageTools.send(message.channel, {
-            embeds: [
-              new EmbedBuilder()
-                .setAuthor({
-                  name: message.guild.name,
-                  iconURL: message.guild.iconURL()
-                })
-                .setTitle(
-                  await this.Translate.Guild(
-                    message,
-                    "Events/MessageCreate:ConfigurationCreated:Title"
-                  )
-                )
-                .setDescription(
-                  (await this.Translate.Guild(
-                    message,
-                    "Events/MessageCreate:ConfigurationCreated:Description"
-                  )) + codeBlock("JSON", JSON.stringify(GuildConfig, null, 3))
-                )
-
-                .setColor("#00c26f")
-                .setTimestamp()
-            ]
-          });
-        }
-
-        const { Prefix: dbPrefix } = GuildConfig.Settings;
-        const mentionRegex = RegExp(`<@!${this.client.user.id}>$`);
-        const mentionRegexPrefix = RegExp(`^<@!${this.client.user.id}> `);
-
-        const Prefix = message.content.match(mentionRegexPrefix)
-          ? message.content.match(mentionRegexPrefix)[0]
-          : dbPrefix;
-        if (message.content == Prefix) return;
-        if (!message.content.startsWith(Prefix)) return;
-
-        //TODO: Fix this, Doesn't working...
-        if (message.content.match(mentionRegex)) {
-          message.channel.send(
-            await this.Translate.Guild(
-              message,
-              "Events/MessageCreate:MyPrefix",
-              {
-                GUILD_NAME: message.guild.name,
-                PREFIX: Prefix
-              }
-            )
-          );
-          return;
-        }
-
-        if (message.content.startsWith(Prefix)) {
-          this.eventEmitter.emit("commands.legacy", message, Prefix);
-        }
-      } else if (message.channel.type === ChannelType.DM) {
-        this.eventEmitter.emit("commands.dm", message, "&");
+        const guildConfig = await this.checkConfig(message, "Guild");
+        GuildPrefix = guildConfig.Settings.Prefix;
       }
+
+      const UserPrefix = userConfig.Settings.Prefix;
+
+      const mentionRegex = RegExp(`<@!${this.client.user.id}>$`);
+      const mentionRegexPrefix = RegExp(`^<@!${this.client.user.id}> `);
+      const Prefix = message.content.match(mentionRegexPrefix)
+        ? message.content.match(mentionRegexPrefix)[0]
+        : message.channel.type !== ChannelType.DM
+        ? GuildPrefix
+        : UserPrefix;
+
+      //TODO: Fix this, Doesn't working...
+      if (message.content.match(mentionRegex)) {
+        message.channel.send(
+          await this.Translate.Guild(message, "Events/MessageCreate:MyPrefix", {
+            GUILD_NAME: message.guild.name,
+            PREFIX: Prefix
+          })
+        );
+        return;
+      }
+
+      if (message.channel.type !== ChannelType.DM) {
+        this.eventEmitter.emit("commands.legacy", message, Prefix);
+      }
+      this.eventEmitter.emit("commands.dm", message, Prefix);
     });
 
     this.client.on("interactionCreate", async interaction => {
@@ -132,20 +103,63 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
     });
   }
 
-  private async checkGuildConfig(guild: Guild) {
-    const repository = this.database.GuildRepo();
-    let config = await repository.get(guild.id);
-
-    if (!config) {
-      return {
-        status: "Created",
-        config: await repository.getCreated(guild)
-      };
+  private async checkConfig(message: Message, type: "User" | "Guild") {
+    if (type === "User") {
+      let userConfig = await this.database.UserRepo().get(message.author.id);
+      if (!userConfig) {
+        userConfig = (await this.database.UserRepo().create(message.author))
+          .callback as UserEntity;
+        await this.sendCreateMessage(message, userConfig, false);
+        return userConfig;
+      }
+      return userConfig;
     }
+    let guildConfig = await this.database.GuildRepo().get(message.guildId);
+    if (!guildConfig) {
+      guildConfig = (await this.database.GuildRepo().create(message.guild))
+        .callback as GuildEntity;
+      await this.sendCreateMessage(message, guildConfig, true);
+      return guildConfig;
+    }
+    return guildConfig;
+  }
 
-    return {
-      status: "Found",
-      config
-    };
+  private async sendCreateMessage(
+    message: Message,
+    config: UserEntity | GuildEntity,
+    isGuild: boolean
+  ) {
+    let _name = message.author.globalName;
+    let _icon = message.author.displayAvatarURL();
+
+    if (isGuild) {
+      _name = message.guild.name;
+      _icon = message.guild.iconURL();
+    }
+    const context = new Context(message, [], isGuild ? "None" : "DM");
+
+    return MessageTools.send(isGuild ? message.channel : message.author, {
+      embeds: [
+        new EmbedBuilder()
+          .setAuthor({
+            name: _name,
+            iconURL: _icon
+          })
+          .setTitle(
+            await this.Translate.TFunction(
+              context,
+              "Events/MessageCreate:ConfigurationCreated:Title"
+            )
+          )
+          .setDescription(
+            (await this.Translate.TFunction(
+              context,
+              "Events/MessageCreate:ConfigurationCreated:Description"
+            )) + codeBlock("JSON", JSON.stringify(config, null, 3))
+          )
+          .setColor("#00c26f")
+          .setTimestamp()
+      ]
+    });
   }
 }

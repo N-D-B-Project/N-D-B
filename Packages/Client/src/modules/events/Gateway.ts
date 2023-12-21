@@ -1,17 +1,15 @@
-import { AlsStore, Config } from "@/types";
-import { Repositories } from "@/types/Constants";
+import { Config } from "@/types";
+import { Services } from "@/types/Constants";
+import { IDatabaseService } from "@/types/Interfaces";
 import { Tools } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { AsyncLocalStorage } from "async_hooks";
 import { ActivityType, Client, PresenceData } from "discord.js";
 import { Context, ContextOf, On, Once } from "necord";
 
 @Injectable()
 export class GatewayEvents {
   public constructor(
-    @Inject(Repositories.ALS) private readonly als: AsyncLocalStorage<AlsStore>,
-    private readonly config: ConfigService
+    @Inject(Services.Database) private readonly database: IDatabaseService
   ) {}
 
   private readonly logger = new Logger(GatewayEvents.name);
@@ -21,12 +19,18 @@ export class GatewayEvents {
     await Tools.WAIT(2000);
     this.logger.log(`Bot logged in as ${client.user.username}`);
     this.logger.log(
-      `${this.als.getStore()["LegacyCommands"].size} Legacy Commands`
+      `${
+        this.database.AlsRepo().getStore()["LegacyCommands"].size
+      } Legacy Commands`
     );
     this.logger.log(
-      `${this.als.getStore()["SlashCommands"].size} Slash Commands`
+      `${
+        this.database.AlsRepo().getStore()["SlashCommands"].size
+      } Slash Commands`
     );
-    this.logger.log(`${this.als.getStore()["SubCommands"].size} Sub Commands`);
+    this.logger.log(
+      `${this.database.AlsRepo().getStore()["SubCommands"].size} Sub Commands`
+    );
 
     await this._setPresence(client);
   }
@@ -38,13 +42,13 @@ export class GatewayEvents {
 
   @Once("debug")
   public async onDebug(@Context() [data]: ContextOf<"debug">) {
-    if (this.config.getOrThrow<Config["Debug"]>("Debug").Client)
+    if (this.database.ConfigRepo().getOrThrow<Config["Debug"]>("Debug").Client)
       this.logger.debug(data);
   }
 
   @On("error")
   public async onError(@Context() [error]: ContextOf<"error">) {
-    this.logger.error(error);
+    this.logger.error(`\nMessage: ${error.message}\nCause: ${error.stack}`);
   }
 
   private async _setPresence(client: Client) {

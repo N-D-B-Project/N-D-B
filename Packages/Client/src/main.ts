@@ -60,7 +60,7 @@ async function bootstrap() {
       `${name} Running on Port: ${Port} in ${process.env.ENVIRONMENT} mode`
     );
   } catch (error) {
-    logger.error("An error occurred when starting: ", error);
+    logger.error("An error occurred when starting: ", (error as Error).message);
   }
 }
 bootstrap();

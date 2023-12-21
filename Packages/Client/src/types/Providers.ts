@@ -2,6 +2,7 @@ import { CommandsService } from "@/modules/commands/Commands.service";
 import { DatabaseService } from "@/modules/database/database.service";
 import { PrismaService } from "@/modules/database/prisma/Prisma.service";
 import { GuildRepository } from "@/modules/database/repositories/Guild.repository";
+import { UserRepository } from "@/modules/database/repositories/User.repository";
 import { i18nService } from "@/modules/i18n/i18n.service";
 import { AsyncLocalStorage } from "async_hooks";
 import { AlsStore } from ".";
@@ -20,6 +21,11 @@ export const AlsProvider = {
 export const GuildRepoProvider = {
   provide: Repositories.Guild,
   useClass: GuildRepository
+};
+
+export const UserRepoProvider = {
+  provide: Repositories.User,
+  useClass: UserRepository
 };
 
 export const DatabaseProvider = {

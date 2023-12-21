@@ -1,14 +1,13 @@
-import { i18nService } from "@/modules/i18n/i18n.service";
-import { Extends } from "@/types/Constants";
+import { Extends, Services } from "@/types/Constants";
+import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Tools } from "@/utils/Tools";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { Utils } from "../Utils";
 
 export class GuildPermissionGuard implements CanActivate {
   public constructor(
-    @Inject(Extends.Translate) private readonly Translate: i18nService,
-    private readonly config: ConfigService
+    @Inject(Extends.Translate) private readonly Translate: Ii18nService,
+    @Inject(Services.Database) private readonly database: IDatabaseService
   ) {}
 
   public async canActivate(
@@ -19,7 +18,7 @@ export class GuildPermissionGuard implements CanActivate {
     if (
       (commandOptions.permissions.guildOnly ||
         commandOptions.slash?.deployMode === "Guild") &&
-      !Tools.checkGuild(this.config, context.guild.id)
+      !Tools.checkGuild(this.database.ConfigRepo(), context.guild.id)
     ) {
       Utils.SendFunction(
         context,

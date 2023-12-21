@@ -1,4 +1,5 @@
 import { Extends } from "@/types/Constants";
+import { DatabaseProvider } from "@/types/Providers";
 import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
 import { I18nLoader, I18nModule } from "nestjs-i18n";
 import { i18nService } from "./i18n.service";
@@ -24,6 +25,7 @@ import { i18nService } from "./i18n.service";
     })
   ],
   providers: [
+    DatabaseProvider,
     {
       provide: Extends.Translate,
       useClass: i18nService

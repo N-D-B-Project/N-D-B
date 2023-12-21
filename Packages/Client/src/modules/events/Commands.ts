@@ -1,4 +1,5 @@
-import { Extends, Services } from "@/types/Constants";
+import { Extends } from "@/types/Constants";
+import { ICommandsService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import {
@@ -9,15 +10,11 @@ import {
 } from "discord.js";
 import { Context } from "../commands/Commands.context";
 import { RunSubCommandEvent } from "../commands/Commands.discovery";
-import { CommandsService } from "../commands/Commands.service";
-import { DatabaseService } from "../database/database.service";
 
 @Injectable()
 export class CommandsEvents {
   public constructor(
-    @Inject(Services.Database)
-    private readonly database: DatabaseService,
-    @Inject(Extends.Command) private readonly commandsService: CommandsService,
+    @Inject(Extends.Command) private readonly commandsService: ICommandsService,
     private readonly client: Client
   ) {}
 
@@ -36,16 +33,12 @@ export class CommandsEvents {
     const context = new Context(
       interaction,
       interaction.options as CommandInteractionOptionResolver,
-      (
-        await this.database.GuildRepo().get(interaction.guildId)
-      ).Settings.Premium,
       "None"
     );
     const _Command = await this.commandsService.get(
       interaction.commandName,
       context
     );
-
     if (_Command) {
       await interaction.deferReply().catch(e => {});
       _Command.execute([this.client, context]);
@@ -64,10 +57,8 @@ export class CommandsEvents {
         const newContext = new Context(
           context.interaction,
           args.data[0].options,
-          context.isPremium,
           Additional
         );
-        console.log(newContext);
         const _SubCommand = await this.commandsService.get(name, newContext);
         if (_SubCommand) {
           _SubCommand.execute([this.client, newContext]);
@@ -81,13 +72,10 @@ export class CommandsEvents {
       .slice(prefix.length)
       .trim()
       .split(/ +/g);
-    const context = new Context(
-      message,
-      args as Array<string>,
-      (await this.database.GuildRepo().get(message.guildId)).Settings.Premium,
-      type
-    );
+    const context = new Context(message, args as Array<string>, type, prefix);
     const _Command = await this.commandsService.get(cmd, context);
-    _Command.execute([this.client, context]);
+    if (_Command) {
+      _Command.execute([this.client, context]);
+    }
   }
 }

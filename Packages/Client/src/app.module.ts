@@ -8,6 +8,7 @@ import { NDBModule } from "./modules/core/NDB.module";
     NDBModule,
     ConfigModule.forRoot({
       isGlobal: true,
+      cache: true,
       load: [Config]
     })
   ],

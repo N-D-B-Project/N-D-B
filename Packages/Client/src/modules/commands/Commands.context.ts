@@ -44,7 +44,6 @@ export class Context {
       | Array<string>
       | CommandInteractionOptionResolver
       | Array<CommandInteractionOption>,
-    public isPremium: boolean,
     Additional: IAdditional,
     public prefix?: string
   ) {

@@ -1,12 +1,12 @@
-import { i18nService } from "@/modules/i18n/i18n.service";
 import { Extends } from "@/types/Constants";
+import { Ii18nService } from "@/types/Interfaces";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
 import { Utils } from "../Utils";
 import { embed } from "./Embed";
 
 export class MinArgsGuard implements CanActivate {
   public constructor(
-    @Inject(Extends.Translate) private readonly Translate: i18nService
+    @Inject(Extends.Translate) private readonly Translate: Ii18nService
   ) {}
 
   public async canActivate(

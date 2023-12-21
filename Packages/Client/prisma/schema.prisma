@@ -16,20 +16,36 @@ model Guild {
   Settings        GuildSettings?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @default(now())
-  databaseVersion String         @default("Music")
+  databaseVersion String         @default("Necord")
 
   @@map("Guild")
 }
 
 model GuildSettings {
-  id         String   @id @default(uuid())
-  Prefix     String   @default("&") @db.VarChar(4)
-  Language   String   @default("en-US")
-  AntiSpam   Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
-  ReactionDM Boolean  @default(true)
-  Premium    Boolean  @default(false)
-  guild      Guild    @relation(fields: [guildId], references: [id])
-  guildId    String   @unique
+  id        String   @id @default(uuid())
+  Prefix    String   @default("&") @db.VarChar(4)
+  Language  String   @default("en-US")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  guild     Guild    @relation(fields: [guildId], references: [id])
+  guildId   String   @unique
+}
+
+model User {
+  id        String        @id
+  Settings  UserSettings?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
+
+  @@map("User")
+}
+
+model UserSettings {
+  id        String   @id @default(uuid())
+  Prefix    String   @default("&") @db.VarChar(4)
+  Language  String   @default("en-US")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
 }

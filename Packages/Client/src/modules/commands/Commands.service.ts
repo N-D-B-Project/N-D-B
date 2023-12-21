@@ -1,22 +1,20 @@
 import { CommandError } from "@/common/errors/Command.error";
 import { Config } from "@/types";
 import { Services } from "@/types/Constants";
+import { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { Client } from "discord.js";
-import { DatabaseService } from "../database/database.service";
 import { Context } from "./Commands.context";
 import { CommandsDiscovery } from "./Commands.discovery";
 
 @Injectable()
-export class CommandsService {
+export class CommandsService implements ICommandsService {
   public constructor(
-    @Inject(Services.Database) private readonly database: DatabaseService,
-    private readonly config: ConfigService,
+    @Inject(Services.Database) private readonly database: IDatabaseService,
     private readonly client: Client
   ) {}
 
-  public async load(command: CommandsDiscovery) {
+  public async load(command: CommandsDiscovery): Promise<void> {
     const als = this.database.AlsRepo();
     const Legacy = command.toJSON().legacy?.name;
     const Aliases = command.toJSON().legacy?.aliases;
@@ -46,12 +44,12 @@ export class CommandsService {
           als.getStore()["SlashCommands"].set(Slash?.data.name, command);
           const applicationCommands = this.client.application?.commands;
           const guildCommands = this.client.guilds.cache.get(
-            this.config.getOrThrow<Config["Discord"]>("Discord").Servers
-              .NDCommunity
+            this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord")
+              .Servers.NDCommunity
           )?.commands;
           const testGuildCommands = this.client.guilds.cache.get(
-            this.config.getOrThrow<Config["Discord"]>("Discord").Servers
-              .TestGuild
+            this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord")
+              .Servers.TestGuild
           )?.commands;
           if (Slash?.deployMode === "Global") {
             await applicationCommands.create(data);
