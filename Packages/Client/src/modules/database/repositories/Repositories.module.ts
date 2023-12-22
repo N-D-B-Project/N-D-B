@@ -3,7 +3,7 @@ import { Global, Module } from "@nestjs/common";
 
 @Global()
 @Module({
-  providers: [GuildRepoProvider, UserRepoProvider],
-  exports: [GuildRepoProvider, UserRepoProvider]
+	providers: [GuildRepoProvider, UserRepoProvider],
+	exports: [GuildRepoProvider, UserRepoProvider],
 })
 export class RepositoriesModule {}

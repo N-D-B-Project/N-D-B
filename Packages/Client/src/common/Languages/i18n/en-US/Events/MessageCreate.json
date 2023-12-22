@@ -1,7 +1,7 @@
 {
-  "/": "/",
-  "ConfigurationCreated": {
-    "Title": "💾 Database",
-    "Description": "⚙️ Configuration Created"
-  }
+	"/": "/",
+	"ConfigurationCreated": {
+		"Title": "💾 Database",
+		"Description": "⚙️ Configuration Created"
+	}
 }

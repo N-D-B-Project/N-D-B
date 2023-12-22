@@ -8,77 +8,73 @@ import { PrismaService } from "../prisma/Prisma.service";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {
-  public constructor(
-    @Inject(Services.Prisma) private readonly prisma: PrismaService
-  ) {}
+	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
 
-  private readonly logger = new Logger(GuildRepository.name);
+	private readonly logger = new Logger(GuildRepository.name);
 
-  public async get(guildId: string): Promise<GuildEntity> {
-    return await this.prisma.guild.findUnique({
-      where: { id: guildId },
-      include: {
-        Settings: true
-      }
-    });
-  }
+	public async get(guildId: string): Promise<GuildEntity> {
+		return await this.prisma.guild.findUnique({
+			where: { id: guildId },
+			include: {
+				Settings: true,
+			},
+		});
+	}
 
-  public async create(
-    guild: Guild
-  ): Promise<{ callback: void | GuildEntity; status: DatabaseStatus }> {
-    let status = DatabaseStatus.Created;
-    const callback = await this.prisma.guild
-      .create({
-        data: {
-          id: guild.id,
-          Name: guild.name,
-          Settings: {
-            create: {}
-          }
-        },
-        include: {
-          Settings: true
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        status = DatabaseStatus.Error;
-      });
-    this.logger.log(`${guild.name} Configuration Crated on Database`);
-    return {
-      callback,
-      status
-    };
-  }
+	public async create(guild: Guild): Promise<{ callback: void | GuildEntity; status: DatabaseStatus }> {
+		let status = DatabaseStatus.Created;
+		const callback = await this.prisma.guild
+			.create({
+				data: {
+					id: guild.id,
+					Name: guild.name,
+					Settings: {
+						create: {},
+					},
+				},
+				include: {
+					Settings: true,
+				},
+			})
+			.catch((err) => {
+				console.log(err);
+				status = DatabaseStatus.Error;
+			});
+		this.logger.log(`${guild.name} Configuration Crated on Database`);
+		return {
+			callback,
+			status,
+		};
+	}
 
-  public async update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity> {
-    return await this.prisma.guild.update({
-      where: { id: oldGuild.id },
-      data: {
-        Name: newGuild.name,
-        updatedAt: new Date()
-      },
-      include: {
-        Settings: true
-      }
-    });
-  }
+	public async update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity> {
+		return await this.prisma.guild.update({
+			where: { id: oldGuild.id },
+			data: {
+				Name: newGuild.name,
+				updatedAt: new Date(),
+			},
+			include: {
+				Settings: true,
+			},
+		});
+	}
 
-  public async delete(guild: Guild): Promise<GuildEntity> {
-    return await this.prisma.guild.delete({
-      where: { id: guild.id },
-      include: {
-        Settings: true
-      }
-    });
-  }
+	public async delete(guild: Guild): Promise<GuildEntity> {
+		return await this.prisma.guild.delete({
+			where: { id: guild.id },
+			include: {
+				Settings: true,
+			},
+		});
+	}
 
-  public async getCreated(guild: Guild): Promise<GuildEntity> {
-    await this.create(guild).then(({ status }) => {
-      if (status === DatabaseStatus.Created) {
-        this.logger.log(`${guild.name} Configuration Crated on Database`);
-      }
-    });
-    return await this.get(guild.id);
-  }
+	public async getCreated(guild: Guild): Promise<GuildEntity> {
+		await this.create(guild).then(({ status }) => {
+			if (status === DatabaseStatus.Created) {
+				this.logger.log(`${guild.name} Configuration Crated on Database`);
+			}
+		});
+		return await this.get(guild.id);
+	}
 }

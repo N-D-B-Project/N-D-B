@@ -6,19 +6,17 @@ import { AsyncLocalStorage } from "async_hooks";
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
-  public constructor(
-    @Inject(Repositories.ALS) private readonly als: AsyncLocalStorage<AlsStore>
-  ) {
-    super();
-  }
-  private readonly logger = new Logger(PrismaService.name);
+	public constructor(@Inject(Repositories.ALS) private readonly als: AsyncLocalStorage<AlsStore>) {
+		super();
+	}
+	private readonly logger = new Logger(PrismaService.name);
 
-  async onModuleInit() {
-    let state = this.als.getStore()["PrismaConnected"];
-    if (!state) {
-      await this.$connect();
-      this.logger.log("PostgreSQL connected via Prisma");
-      this.als.getStore()["PrismaConnected"] = true;
-    }
-  }
+	async onModuleInit() {
+		const state = this.als.getStore()["PrismaConnected"];
+		if (!state) {
+			await this.$connect();
+			this.logger.log("PostgreSQL connected via Prisma");
+			this.als.getStore()["PrismaConnected"] = true;
+		}
+	}
 }

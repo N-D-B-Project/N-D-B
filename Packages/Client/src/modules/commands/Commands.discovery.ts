@@ -3,13 +3,13 @@ import { NecordBaseDiscovery } from "necord";
 import { Context, IAdditional } from "./Commands.context";
 
 export class CommandsDiscovery extends NecordBaseDiscovery<CommandOptions> {
-  public override toJSON() {
-    return this.meta;
-  }
+	public override toJSON() {
+		return this.meta;
+	}
 }
 
 export class RunSubCommandEvent {
-  context: Context;
-  SubList: Array<{ name: string }>;
-  Additional: IAdditional;
+	context: Context;
+	SubList: Array<{ name: string }>;
+	Additional: IAdditional;
 }

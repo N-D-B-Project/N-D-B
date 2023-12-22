@@ -9,36 +9,36 @@ import { AlsStore } from ".";
 import { Extends, Repositories, Services } from "./Constants";
 
 export const PrismaProvider = {
-  provide: Services.Prisma,
-  useClass: PrismaService
+	provide: Services.Prisma,
+	useClass: PrismaService,
 };
 
 export const AlsProvider = {
-  provide: Repositories.ALS,
-  useValue: new AsyncLocalStorage<AlsStore>()
+	provide: Repositories.ALS,
+	useValue: new AsyncLocalStorage<AlsStore>(),
 };
 
 export const GuildRepoProvider = {
-  provide: Repositories.Guild,
-  useClass: GuildRepository
+	provide: Repositories.Guild,
+	useClass: GuildRepository,
 };
 
 export const UserRepoProvider = {
-  provide: Repositories.User,
-  useClass: UserRepository
+	provide: Repositories.User,
+	useClass: UserRepository,
 };
 
 export const DatabaseProvider = {
-  provide: Services.Database,
-  useClass: DatabaseService
+	provide: Services.Database,
+	useClass: DatabaseService,
 };
 
 export const TranslateProvider = {
-  provide: Extends.Translate,
-  useClass: i18nService
+	provide: Extends.Translate,
+	useClass: i18nService,
 };
 
 export const CommandProvider = {
-  provide: Extends.Command,
-  useClass: CommandsService
+	provide: Extends.Command,
+	useClass: CommandsService,
 };

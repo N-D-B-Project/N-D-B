@@ -6,7 +6,7 @@ import { RepositoriesModule } from "./repositories/Repositories.module";
 
 @Global()
 @Module({
-  imports: [AlsModule, RepositoriesModule, PrismaModule],
-  providers: [DatabaseProvider]
+	imports: [AlsModule, RepositoriesModule, PrismaModule],
+	providers: [DatabaseProvider],
 })
 export class DatabaseModule {}

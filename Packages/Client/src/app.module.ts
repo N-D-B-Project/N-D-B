@@ -1,17 +1,17 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import Config from "./modules/config/Config";
+import { config } from "./modules/config/Config";
 import { NDBModule } from "./modules/core/NDB.module";
 
 @Module({
-  imports: [
-    NDBModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-      cache: true,
-      load: [Config]
-    })
-  ],
-  providers: []
+	imports: [
+		NDBModule,
+		ConfigModule.forRoot({
+			isGlobal: true,
+			cache: true,
+			load: [config],
+		}),
+	],
+	providers: [],
 })
 export class AppModule {}

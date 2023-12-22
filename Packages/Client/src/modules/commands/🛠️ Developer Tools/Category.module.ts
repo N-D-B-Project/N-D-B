@@ -5,12 +5,6 @@ import { DeveloperToolsMainSlashCommand } from "./Main.command";
 import { TestCommand } from "./Test.command";
 
 @Module({
-  providers: [
-    DeveloperToolsMainSlashCommand,
-    TestCommand,
-    EvalCommand,
-    TranslateProvider,
-    DatabaseProvider
-  ]
+	providers: [DeveloperToolsMainSlashCommand, TestCommand, EvalCommand, TranslateProvider, DatabaseProvider],
 })
 export class DeveloperToolsCommands {}

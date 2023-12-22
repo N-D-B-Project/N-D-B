@@ -1,32 +1,30 @@
 {
-  "name": "@n-d-b/n-d-b",
-  "packageManager": "yarn@4.0.2",
-  "private": true,
-  "workspaces": {
-    "packages": [
-      "Packages/*"
-    ]
-  },
-  "author": {
-    "name": "Miguel Alexandre Uhlein <NedcloarBR>",
-    "email": "nedcloar1@hotmail.com",
-    "url": "https://github.com/NedcloarBR/"
-  },
-  "scripts": {
-    "postinstall": "husky install",
-    "lint": "npx eslint --fix --ext .ts ./",
-    "format": "npx eslint --format .ts ./"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-angular": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
-    "@types/eslint": "^8",
-    "commitizen": "^4.3.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.45.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "typescript": "^5.1.6"
-  }
+	"name": "@n-d-b/n-d-b",
+	"packageManager": "yarn@4.0.2",
+	"private": true,
+	"workspaces": {
+		"packages": ["Packages/*"]
+	},
+	"author": {
+		"name": "Miguel Alexandre Uhlein <NedcloarBR>",
+		"email": "nedcloar1@hotmail.com",
+		"url": "https://github.com/NedcloarBR/"
+	},
+	"scripts": {
+		"postinstall": "husky install",
+		"format": "yarn dlx @biomejs/biome format --write ./",
+		"lint": "yarn dlx @biomejs/biome lint ./",
+		"check": "yarn dlx @biomejs/biome check --apply ./"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.4.1",
+		"@commitlint/cli": "^17.6.6",
+		"@commitlint/config-angular": "^17.6.6",
+		"@commitlint/config-conventional": "^17.6.6",
+		"commitizen": "^4.3.0",
+		"cross-env": "^7.0.3",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3",
+		"typescript": "^5.1.6"
+	}
 }

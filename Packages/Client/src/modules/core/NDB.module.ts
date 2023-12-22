@@ -9,19 +9,19 @@ import { EventsModule } from "../events/Events.module";
 import { i18nModule } from "../i18n/i18n.module";
 
 @Module({
-  imports: [
-    NecordModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (config: ConfigService) => ({
-        ...new NecordConfigService(config).createNecordOptions()
-      })
-    }),
-    DatabaseModule,
-    i18nModule,
-    EventsModule,
-    CommandsModule,
-    DeveloperToolsCommands
-  ]
+	imports: [
+		NecordModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: async (config: ConfigService) => ({
+				...new NecordConfigService(config).createNecordOptions(),
+			}),
+		}),
+		DatabaseModule,
+		i18nModule,
+		EventsModule,
+		CommandsModule,
+		DeveloperToolsCommands,
+	],
 })
 export class NDBModule {}

@@ -1,14 +1,14 @@
 {
-  "recommendations": [
-    "steoates.autoimport",
-    "ms-azuretools.vscode-docker",
-    "EditorConfig.EditorConfig",
-    "dbaeumer.vscode-eslint",
-    "eamodio.gitlens",
-    "wix.vscode-import-cost",
-    "Prisma.prisma",
-    "natqe.reload",
-    "rangav.vscode-thunder-client",
-    "styled-components.vscode-styled-components"
-  ]
+	"recommendations": [
+		"steoates.autoimport",
+		"ms-azuretools.vscode-docker",
+		"EditorConfig.EditorConfig",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		"wix.vscode-import-cost",
+		"Prisma.prisma",
+		"natqe.reload",
+		"rangav.vscode-thunder-client",
+		"styled-components.vscode-styled-components"
+	]
 }

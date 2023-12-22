@@ -1,4 +1,3 @@
 {
-  "*": "prettier --ignore-unknown --write",
-  "*.ts": "eslint --fix"
+  "*": "yarn dlx @biomejs/biome check --apply ./"
 }

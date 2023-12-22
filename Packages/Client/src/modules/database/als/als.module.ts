@@ -4,7 +4,7 @@ import { AlsService } from "./als.service";
 
 @Global()
 @Module({
-  providers: [AlsService, AlsProvider],
-  exports: [AlsProvider]
+	providers: [AlsService, AlsProvider],
+	exports: [AlsProvider],
 })
 export class AlsModule {}

@@ -6,23 +6,22 @@ import { Context } from "../../modules/commands/Commands.context";
 import { CommandsDiscovery } from "../../modules/commands/Commands.discovery";
 
 export class Utils {
-  static context(executionContext: ExecutionContext) {
-    const NecordContext = NecordExecutionContext.create(executionContext);
-    const [[client, context], command] =
-      NecordContext.getArgs<[[Client, Context], CommandsDiscovery]>();
-    const commandOptions = command.toJSON();
+	static context(executionContext: ExecutionContext) {
+		const NecordContext = NecordExecutionContext.create(executionContext);
+		const [[client, context], command] = NecordContext.getArgs<[[Client, Context], CommandsDiscovery]>();
+		const commandOptions = command.toJSON();
 
-    return {
-      client,
-      context,
-      commandOptions
-    };
-  }
+		return {
+			client,
+			context,
+			commandOptions,
+		};
+	}
 
-  static SendFunction(context: Context, content: Content) {
-    if (context.isDM) {
-      return context.sendToUserDM(content);
-    }
-    return context.reply(content);
-  }
+	static SendFunction(context: Context, content: Content) {
+		if (context.isDM) {
+			return context.sendToUserDM(content);
+		}
+		return context.reply(content);
+	}
 }
