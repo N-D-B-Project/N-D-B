@@ -1,5 +1,5 @@
-import { Extends } from "@/types/Constants";
-import { ICommandsService } from "@/types/Interfaces";
+import { Extends, Services } from "@/types/Constants";
+import { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, CommandInteraction, CommandInteractionOptionResolver, Message } from "discord.js";
@@ -9,6 +9,7 @@ import { RunSubCommandEvent } from "../commands/Commands.discovery";
 @Injectable()
 export class CommandsEvents {
 	public constructor(
+		@Inject(Services.Database) private readonly database: IDatabaseService,
 		@Inject(Extends.Command) private readonly commandsService: ICommandsService,
 		private readonly client: Client,
 	) {}
@@ -52,7 +53,7 @@ export class CommandsEvents {
 		const context = new Context(message, args as Array<string>, type, prefix);
 		const _Command = await this.commandsService.get(cmd, context);
 		if (_Command) {
-			_Command.execute([this.client, context]);
+			return _Command.execute([this.client, context]);
 		}
 	}
 }

@@ -69,10 +69,18 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 				return;
 			}
 
-			if (message.channel.type !== ChannelType.DM) {
+			if (message.content.startsWith(Prefix)) {
 				this.eventEmitter.emit("commands.legacy", message, Prefix);
+			} else {
+				const emojis = message.content.match(/(?<=:)([^:\s]+)(?=:)/g);
+				if (emojis) {
+					this.eventEmitter.emit("NotQuiteNitro", message, emojis);
+				}
 			}
-			this.eventEmitter.emit("commands.dm", message, Prefix);
+
+			if (message.channel.type === ChannelType.DM) {
+				this.eventEmitter.emit("commands.dm", message, Prefix);
+			}
 		});
 
 		this.client.on("interactionCreate", async (interaction) => {

@@ -6,6 +6,7 @@ import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
 
+import { NotQuiteNitroEvent } from "./NotQuiteNitro";
 import { ThreadEvents } from "./Thread";
 
 @Module({
@@ -20,6 +21,7 @@ import { ThreadEvents } from "./Thread";
 		CommandsEvents,
 		GuildEvents,
 		ThreadEvents,
+		NotQuiteNitroEvent,
 		DatabaseProvider,
 		TranslateProvider,
 		CommandProvider,
