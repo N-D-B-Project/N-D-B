@@ -1,7 +1,7 @@
 import util from "node:util";
 import { Context } from "@/modules/commands/Commands.context";
-import { i18nService } from "@/modules/i18n/i18n.service";
 import { Config } from "@/types";
+import { Ii18nService } from "@/types/Interfaces";
 import { ConfigService } from "@nestjs/config";
 import { CommandInteraction, GuildChannel, Message } from "discord.js";
 import ms from "parse-ms";
@@ -20,7 +20,7 @@ export class Tools {
 	}
 
 	public static async Timer(
-		Translate: i18nService,
+		Translate: Ii18nService,
 		type: "normal" | "details",
 		number: number,
 		translateInfo: Message | CommandInteraction | GuildChannel | Context,

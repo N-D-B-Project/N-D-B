@@ -1,8 +1,9 @@
 import { Extends } from "@/types/Constants";
+import { Ii18nService } from "@/types/Interfaces";
 import { DatabaseProvider } from "@/types/Providers";
 import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
 import { I18nLoader, I18nModule } from "nestjs-i18n";
-import { i18nService } from "./i18n.service";
+import { I18nService } from "./i18n.service";
 
 @Global()
 @Module({
@@ -28,12 +29,12 @@ import { i18nService } from "./i18n.service";
 		DatabaseProvider,
 		{
 			provide: Extends.Translate,
-			useClass: i18nService,
+			useClass: I18nService,
 		},
 	],
 })
 export class i18nModule implements OnModuleInit {
-	public constructor(@Inject(Extends.Translate) private readonly i18n: i18nService) {}
+	public constructor(@Inject(Extends.Translate) private readonly i18n: Ii18nService) {}
 
 	public onModuleInit() {
 		this.i18n.Logger();

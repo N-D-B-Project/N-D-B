@@ -3,7 +3,7 @@ import { DatabaseService } from "@/modules/database/database.service";
 import { PrismaService } from "@/modules/database/prisma/Prisma.service";
 import { GuildRepository } from "@/modules/database/repositories/Guild.repository";
 import { UserRepository } from "@/modules/database/repositories/User.repository";
-import { i18nService } from "@/modules/i18n/i18n.service";
+import { I18nService } from "@/modules/i18n/i18n.service";
 import { AsyncLocalStorage } from "async_hooks";
 import { AlsStore } from ".";
 import { Extends, Repositories, Services } from "./Constants";
@@ -35,7 +35,7 @@ export const DatabaseProvider = {
 
 export const TranslateProvider = {
 	provide: Extends.Translate,
-	useClass: i18nService,
+	useClass: I18nService,
 };
 
 export const CommandProvider = {

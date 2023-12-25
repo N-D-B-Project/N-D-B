@@ -441,15 +441,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.22.5":
-  version: 7.23.2
-  resolution: "@babel/runtime@npm:7.23.2"
-  dependencies:
-    regenerator-runtime: "npm:^0.14.0"
-  checksum: abdcbdd590c7e31762e1bdab94dd466823c8bcedd3ff2fde85eeb94dac7cccaef151ac37c428bda7018ededd27c9a82b4dfeb621f978ad934232475a902f8e3a
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.22.5, @babel/template@npm:^7.3.3":
   version: 7.22.5
   resolution: "@babel/template@npm:7.22.5"
@@ -1306,9 +1297,6 @@ __metadata:
     discord-api-types: "npm:^0.37.62"
     discord.js: "npm:^14.13.0"
     dotenv: "npm:^16.3.1"
-    glob: "npm:^10.3.10"
-    i18next: "npm:^23.6.0"
-    i18next-fs-backend: "npm:^2.2.0"
     jest: "npm:^29.5.0"
     moment: "npm:^2.29.4"
     necord: "npm:^6.4.1"
@@ -4822,7 +4810,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:10.3.10, glob@npm:^10.3.10":
+"glob@npm:10.3.10":
   version: 10.3.10
   resolution: "glob@npm:10.3.10"
   dependencies:
@@ -5128,22 +5116,6 @@ __metadata:
   bin:
     husky: lib/bin.js
   checksum: b754cf70fdc97c3b60fec5b80056b9c11436464953b1691bf2b5dcf0081fb6685d2c5f47abb8b2b1c49f504aabea5321fdd6496f8b755d9f6e7525a493406abb
-  languageName: node
-  linkType: hard
-
-"i18next-fs-backend@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "i18next-fs-backend@npm:2.2.0"
-  checksum: 66ad7eb2c0605bf829a027199356206a3389b56ba94209cacb43f47bc1b627b46026c5e11fc8db602097252f63a58aba7541b29ef4d33e07fa931eb2a1fef281
-  languageName: node
-  linkType: hard
-
-"i18next@npm:^23.6.0":
-  version: 23.6.0
-  resolution: "i18next@npm:23.6.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.22.5"
-  checksum: cf5ad02fdd0805cc92a5ae214818cca10590784dcefa063d9f2b1f1654da7c7842d320c95f2574674e2ac835eed118001b99e214901bb171af20d59c534534cf
   languageName: node
   linkType: hard
 
@@ -7833,13 +7805,6 @@ __metadata:
   version: 0.1.13
   resolution: "reflect-metadata@npm:0.1.13"
   checksum: 732570da35d2d96f8fdd5aac60fb263aa92f6512eaded5962b052bd9e90f22a9dec5aaf0d7ff4bfe97646c9530e8444e8435c2d80b24d0bdf938b5d47f6f5b83
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "regenerator-runtime@npm:0.14.0"
-  checksum: 6c19495baefcf5fbb18a281b56a97f0197b5f219f42e571e80877f095320afac0bdb31dab8f8186858e6126950068c3f17a1226437881e3e70446ea66751897c
   languageName: node
   linkType: hard
 

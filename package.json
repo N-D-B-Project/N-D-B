@@ -3,7 +3,9 @@
 	"packageManager": "yarn@4.0.2",
 	"private": true,
 	"workspaces": {
-		"packages": ["Packages/*"]
+		"packages": [
+			"Packages/*"
+		]
 	},
 	"author": {
 		"name": "Miguel Alexandre Uhlein <NedcloarBR>",

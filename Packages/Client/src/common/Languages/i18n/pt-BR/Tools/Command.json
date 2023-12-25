@@ -15,8 +15,8 @@
 				"1": "Mínimo de argumentos necessários",
 				"2": "Modo correto de Uso do comando",
 				"Content": {
-					"1": "{{Args}}",
-					"2": "Argumento Obrigatório: <>\nArgumento Opcional: ()\n{{Usage}}"
+					"1": "{Args}",
+					"2": "Argumento Obrigatório: <>\nArgumento Opcional: ()\n{Usage}"
 				}
 			}
 		},
@@ -27,15 +27,15 @@
 				"1": "Máximo de argumentos",
 				"2": "Modo correto de Uso do comando",
 				"Content": {
-					"1": "{{Args}}",
+					"1": "{Args}",
 					"2": "Argumento Obrigatório: <>\nArgumento Opcional: ()\n{{Usage}}"
 				}
 			}
 		},
 		"Permissions": {
-			"Bot": "Eu não tenho as seguintes permissões para executar esse comando: {{PERMS}}",
-			"User": "Você não tem as permissões: {{PERMS}} para executar esse comando"
+			"Bot": "Eu não tenho as seguintes permissões para executar esse comando: {PERMS}",
+			"User": "Você não tem as permissões: {PERMS} para executar esse comando"
 		},
-		"ReactionRole": "Antes de executar este comando utilize o comando {{PREFIX}}ReactionTypes para ver os tipos de reações que você pode usar!"
+		"ReactionRole": "Antes de executar este comando utilize o comando {PREFIX}ReactionTypes para ver os tipos de reações que você pode usar!"
 	}
 }

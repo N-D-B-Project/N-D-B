@@ -1,9 +1,19 @@
 import { Extends, Services } from "@/types/Constants";
 import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { CommandProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
+import { Tools } from "@/utils/Tools";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
-import { ChannelType, Client, CommandInteraction, EmbedBuilder, InteractionType, Message, codeBlock } from "discord.js";
+import {
+	ChannelType,
+	Client,
+	CommandInteraction,
+	EmbedBuilder,
+	InteractionType,
+	Message,
+	codeBlock,
+	userMention,
+} from "discord.js";
 import { ExplorerService } from "necord";
 import { Command } from "../../common/decorators/Commands.decorator";
 import { GuildEntity, UserEntity } from "../database/entities";
@@ -50,22 +60,26 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 
 			const UserPrefix = userConfig.Settings.Prefix;
 
-			const mentionRegex = RegExp(`<@!${this.client.user.id}>$`);
-			const mentionRegexPrefix = RegExp(`^<@!${this.client.user.id}> `);
+			const mentionRegexPrefix = RegExp(`${userMention(this.client.user.id)} `);
 			const Prefix = message.content.match(mentionRegexPrefix)
 				? message.content.match(mentionRegexPrefix)[0]
 				: message.channel.type !== ChannelType.DM
 				  ? GuildPrefix
 				  : UserPrefix;
 
-			//TODO: Fix this, Doesn't working...
-			if (message.content.match(mentionRegex)) {
-				message.channel.send(
+			if (message.content === userMention(this.client.user.id)) {
+				message.delete();
+				const PrefixMessage = await MessageTools.send(
+					message.channel,
 					await this.Translate.Guild(message, "Events/MessageCreate:MyPrefix", {
-						GUILD_NAME: message.guild.name,
-						PREFIX: Prefix,
+						Guild: message.guild.name,
+						User: userMention(message.author.id),
+						Prefix,
+						Time: `<t:${Math.floor(Date.now() / 1000 + 15)}:R>`,
 					}),
 				);
+				await Tools.WAIT(15 * 1000);
+				MessageTools.delete(PrefixMessage);
 				return;
 			}
 

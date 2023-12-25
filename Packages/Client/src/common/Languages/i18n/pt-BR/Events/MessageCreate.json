@@ -5,5 +5,7 @@
 		"Description": "⚙️ Configuração Criada"
 	},
 
-	"NQNCreationReason": "Usuário {{Username}}({{UserId}}) utilizou emoji conhecido pelo bot | Criando Webhook NotQuiteNitro"
+	"MyPrefix": "Olá {User}! Tudo bem?\nMeu prefixo para o servidor `{Guild}` atualmente é: `{Prefix}`. Você pode utilizar ele para executar comandos como `{Prefix}ajuda` para ver todos os comandos\n**Dica:** Recomenda-se utilizar os comandos (/) pois são mais fáceis de se executar!\n\n||Essa mensagem irá ser excluída {Time}||",
+
+	"NQNCreationReason": "Usuário {Username}({UserId}) utilizou emoji conhecido pelo bot | Criando Webhook NotQuiteNitro"
 }

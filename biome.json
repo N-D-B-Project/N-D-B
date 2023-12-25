@@ -44,7 +44,8 @@
 			},
 			"nursery": {
 				"noDefaultExport": "error",
-				"noDuplicateJsonKeys": "error"
+				"noDuplicateJsonKeys": "error",
+				"noUnusedImports": "error"
 			},
 			"style": {
 				"noVar": "error",
