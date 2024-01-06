@@ -12,6 +12,5 @@ import { NDBModule } from "./modules/core/NDB.module";
 			load: [config],
 		}),
 	],
-	providers: [],
 })
 export class AppModule {}

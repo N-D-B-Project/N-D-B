@@ -1,5 +1,5 @@
 import { Context } from "@/modules/commands/Commands.context";
-import { CommandsDiscovery } from "@/modules/commands/Commands.discovery";
+import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/commands/Commands.discovery";
 import { GuildEntity, UserEntity } from "@/modules/database/entities";
 import { ConfigService } from "@nestjs/config";
 import { AsyncLocalStorage } from "async_hooks";
@@ -37,6 +37,7 @@ export interface Ii18nService {
 }
 
 export interface ICommandsService {
-	load(command: CommandsDiscovery): Promise<void>;
-	get(cmdName: string, context: Context): Promise<CommandsDiscovery>;
+	loadLegacy(command: LegacyCommandsDiscovery): Promise<void>;
+	loadSlash(command: SlashCommandsDiscovery): Promise<void>;
+	get(cmdName: string, context: Context): Promise<LegacyCommandsDiscovery | SlashCommandsDiscovery>;
 }

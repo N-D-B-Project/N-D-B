@@ -15,10 +15,10 @@ import {
 	userMention,
 } from "discord.js";
 import { ExplorerService } from "necord";
-import { Command } from "../../common/decorators/Commands.decorator";
+import { LegacyCommand, SlashCommand } from "../../common/decorators";
 import { GuildEntity, UserEntity } from "../database/entities";
 import { Context } from "./Commands.context";
-import { CommandsDiscovery } from "./Commands.discovery";
+import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "./Commands.discovery";
 import { CommandsService } from "./Commands.service";
 import { MessageTools } from "./Message";
 
@@ -34,7 +34,8 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 		@Inject(Extends.Command) private readonly commandsService: CommandsService,
 		private readonly client: Client,
 		private readonly eventEmitter: EventEmitter2,
-		private readonly explorerService: ExplorerService<CommandsDiscovery>,
+		private readonly legacyExplorerService: ExplorerService<LegacyCommandsDiscovery>,
+		private readonly slashExplorerService: ExplorerService<SlashCommandsDiscovery>,
 	) {}
 
 	private readonly logger = new Logger(CommandsModule.name);
@@ -42,8 +43,11 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 	public async onModuleInit() {
 		this.logger.log("Started refreshing application commands");
 		return this.client.once("ready", async () => {
-			for (const command of this.explorerService.explore(Command.KEY)) {
-				this.commandsService.load(command);
+			for (const command of this.legacyExplorerService.explore(LegacyCommand.KEY)) {
+				this.commandsService.loadLegacy(command);
+			}
+			for (const command of this.slashExplorerService.explore(SlashCommand.KEY)) {
+				this.commandsService.loadSlash(command);
 			}
 		});
 	}
@@ -70,7 +74,7 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 			if (message.content === userMention(this.client.user.id)) {
 				message.delete();
 				const PrefixMessage = await MessageTools.send(
-					message.channel,
+					message.author,
 					await this.Translate.Guild(message, "Events/MessageCreate:MyPrefix", {
 						Guild: message.guild.name,
 						User: userMention(message.author.id),
@@ -79,7 +83,7 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 					}),
 				);
 				await Tools.WAIT(15 * 1000);
-				MessageTools.delete(PrefixMessage);
+				MessageTools.delete(PrefixMessage as Message);
 				return;
 			}
 

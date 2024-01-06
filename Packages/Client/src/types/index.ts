@@ -1,5 +1,5 @@
 import { Context } from "vm";
-import { CommandsDiscovery } from "@/modules/commands/Commands.discovery";
+import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/commands/Commands.discovery";
 import { LocalizationMap } from "discord-api-types/v10";
 import {
 	BaseMessageOptions,
@@ -14,10 +14,10 @@ import {
 } from "discord.js";
 export interface AlsStore {
 	PrismaConnected: boolean;
-	LegacyCommands: Collection<string, CommandsDiscovery>;
+	LegacyCommands: Collection<string, LegacyCommandsDiscovery>;
 	Aliases: Collection<string, string>;
-	SlashCommands: Collection<string, CommandsDiscovery>;
-	SubCommands: Collection<string, CommandsDiscovery>;
+	SlashCommands: Collection<string, SlashCommandsDiscovery>;
+	SubCommands: Collection<string, SlashCommandsDiscovery>;
 }
 
 export type Content = string | EmbedBuilder | BaseMessageOptions;
@@ -109,32 +109,35 @@ export interface Config {
 	EvalBadKeys: Array<string>;
 }
 
-export interface CommandOptions {
-	legacy?: {
-		name: string;
-		aliases?: Array<string>;
-		description: string;
-		usage: string;
-		args?: {
-			min: number;
-			max: number;
-		};
+export interface LegacyCommandOptions {
+	name: string;
+	aliases?: Array<string>;
+	description: string;
+	usage: string;
+	args?: {
+		min: number;
+		max: number;
 	};
-	permissions: {
-		user: Array<PermissionResolvable>;
-		bot: Array<PermissionResolvable>;
-		guildOnly?: boolean;
-		ownerOnly?: boolean;
-	};
+}
+
+export interface SlashCommandOptions {
+	data?: Partial<SlashCommandBuilder>;
+	deployMode?: "Test" | "Guild" | "Global";
+	type: "Main" | "Sub" | "Group";
+	name?: string;
+}
+
+export interface CommandConfigOptions {
 	category: string;
 	disable?: boolean;
 	cooldown?: number;
-	slash?: {
-		data?: Partial<SlashCommandBuilder>;
-		deployMode?: "Test" | "Guild" | "Global";
-		type: "Main" | "Sub" | "Group";
-		name?: string;
-	};
+}
+
+export interface CommandPermissionsOptions {
+	user: Array<PermissionResolvable>;
+	bot: Array<PermissionResolvable>;
+	guildOnly?: boolean;
+	ownerOnly?: boolean;
 }
 
 export interface Localization {

@@ -1,4 +1,4 @@
-import { CommandOptions } from "@/types";
+import { LegacyCommandOptions } from "@/types";
 import { Ii18nService } from "@/types/Interfaces";
 import { Client, EmbedBuilder } from "discord.js";
 import { Context } from "../../../modules/commands/Commands.context";
@@ -8,7 +8,7 @@ export async function embed(
 	Translate: Ii18nService,
 	type: "TooManyArgs" | "NoMinArgs",
 	context: Context,
-	commandOptions: CommandOptions,
+	commandOptions: LegacyCommandOptions,
 ): Promise<EmbedBuilder> {
 	return new EmbedBuilder()
 		.setAuthor({
@@ -22,13 +22,13 @@ export async function embed(
 			{
 				name: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:1"),
 				value: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:Content:1", {
-					Args: commandOptions.legacy.args.min,
+					Args: commandOptions.args.min,
 				}),
 			},
 			{
 				name: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:2"),
 				value: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:Content:2", {
-					Usage: `${context.prefix}${commandOptions.legacy.name} ${commandOptions.legacy.usage}`,
+					Usage: `${context.prefix}${commandOptions.name} ${commandOptions.usage}`,
 				}),
 			},
 		])

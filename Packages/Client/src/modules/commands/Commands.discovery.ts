@@ -1,8 +1,14 @@
-import { CommandOptions } from "@/types";
+import { LegacyCommandOptions, SlashCommandOptions } from "@/types";
 import { NecordBaseDiscovery } from "necord";
 import { Context, IAdditional } from "./Commands.context";
 
-export class CommandsDiscovery extends NecordBaseDiscovery<CommandOptions> {
+export class LegacyCommandsDiscovery extends NecordBaseDiscovery<LegacyCommandOptions> {
+	public override toJSON() {
+		return this.meta;
+	}
+}
+
+export class SlashCommandsDiscovery extends NecordBaseDiscovery<SlashCommandOptions> {
 	public override toJSON() {
 		return this.meta;
 	}

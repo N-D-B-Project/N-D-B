@@ -1,31 +1,32 @@
-import { Injectable, UseGuards } from "@nestjs/common";
-import { Command } from "../../../common/decorators/Commands.decorator";
-import { OwnerPermissionGuard } from "../../../common/guards/Permissions/Owner.Guard";
+import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators/";
+import { EnableGuard } from "@/common/guards/Enable.guard";
+import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
+import { Injectable, Logger, UseGuards } from "@nestjs/common";
 import { CommandContext } from "../Commands.context";
 
-@UseGuards(OwnerPermissionGuard)
 @Injectable()
 export class TestCommand {
-	@Command({
-		legacy: {
-			name: "test",
-			description: "",
-			usage: "",
-		},
-		permissions: {
-			user: [],
-			bot: [],
-			guildOnly: false,
-			ownerOnly: true,
-		},
-		category: "🛠️ Developer Tools",
-		slash: {
-			type: "Sub",
-			deployMode: "Test",
-			name: "test",
-		},
+	private readonly logger = new Logger(TestCommand.name);
+
+	@LegacyCommand({
+		name: "test",
+		description: "",
+		usage: "",
 	})
+	@SlashCommand({
+		type: "Sub",
+		deployMode: "Test",
+		name: "test",
+	})
+	@CommandConfig({ category: "🛠️ Developer Tools" })
+	@CommandPermissions({
+		user: [],
+		bot: [],
+		guildOnly: false,
+		ownerOnly: true,
+	})
+	@UseGuards(EnableGuard, OwnerPermissionGuard)
 	public async onCommandRun([client, context]: CommandContext) {
-		console.log("test");
+		this.logger.log("test");
 	}
 }

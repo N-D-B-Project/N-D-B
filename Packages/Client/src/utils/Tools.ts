@@ -3,7 +3,14 @@ import { Context } from "@/modules/commands/Commands.context";
 import { Config } from "@/types";
 import { Ii18nService } from "@/types/Interfaces";
 import { ConfigService } from "@nestjs/config";
-import { CommandInteraction, GuildChannel, Message } from "discord.js";
+import {
+	BaseMessageOptions,
+	CommandInteraction,
+	EmbedBuilder,
+	GuildChannel,
+	Message,
+	MessageEditOptions,
+} from "discord.js";
 import ms from "parse-ms";
 
 export class Tools {
@@ -92,5 +99,12 @@ export class Tools {
 			}
 		}
 		return url;
+	}
+
+	public static messageOptions(content: string | EmbedBuilder | BaseMessageOptions): BaseMessageOptions {
+		const options: BaseMessageOptions | MessageEditOptions =
+			typeof content === "string" ? { content } : content instanceof EmbedBuilder ? { embeds: [content] } : content;
+
+		return options;
 	}
 }

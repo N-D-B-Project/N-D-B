@@ -3,7 +3,8 @@ import { Services } from "@/types/Constants";
 import { IDatabaseService } from "@/types/Interfaces";
 import { Tools } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { ActivityType, Client, PresenceData } from "discord.js";
+import { RESTJSONErrorCodes } from "discord-api-types/v10";
+import { ActivityType, Client, DiscordAPIError, PresenceData } from "discord.js";
 import { Context, ContextOf, On, Once } from "necord";
 
 @Injectable()
@@ -11,6 +12,19 @@ export class GatewayEvents {
 	public constructor(@Inject(Services.Database) private readonly database: IDatabaseService) {}
 
 	private readonly logger = new Logger(GatewayEvents.name);
+
+	private IGNORED_ERRORS = [
+		RESTJSONErrorCodes.UnknownMessage,
+		RESTJSONErrorCodes.UnknownChannel,
+		RESTJSONErrorCodes.UnknownGuild,
+		RESTJSONErrorCodes.UnknownUser,
+		RESTJSONErrorCodes.UnknownInteraction,
+		// User blocked bot or DM disabled
+		RESTJSONErrorCodes.CannotSendMessagesToThisUser,
+		// User blocked bot or DM disabled
+		RESTJSONErrorCodes.ReactionWasBlocked,
+		RESTJSONErrorCodes.MaximumActiveThreads,
+	];
 
 	@Once("ready")
 	public async onReady(@Context() [client]: ContextOf<"ready">) {
@@ -35,6 +49,13 @@ export class GatewayEvents {
 
 	@On("error")
 	public async onError(@Context() [error]: ContextOf<"error">) {
+		if (
+			error instanceof DiscordAPIError &&
+			typeof error.code === "number" &&
+			this.IGNORED_ERRORS.includes(error.code)
+		) {
+			return;
+		}
 		this.logger.error(`\nMessage: ${error.message}\nCause: ${error.stack}`);
 	}
 

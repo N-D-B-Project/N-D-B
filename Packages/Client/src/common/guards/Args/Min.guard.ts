@@ -8,12 +8,12 @@ export class MinArgsGuard implements CanActivate {
 	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
 
 	public async canActivate(executionContext: ExecutionContext): Promise<boolean> {
-		const { client, context, commandOptions } = Utils.context(executionContext);
+		const { client, context, legacyCommandOptions } = Utils.context(executionContext);
 		const args = context.getArg("", -1);
 
 		if (!context.isSlash) {
-			if (args.length < commandOptions.legacy.args.min) {
-				Utils.SendFunction(context, await embed(client, this.Translate, "NoMinArgs", context, commandOptions));
+			if (args.length < legacyCommandOptions.args.min) {
+				Utils.SendFunction(context, await embed(client, this.Translate, "NoMinArgs", context, legacyCommandOptions));
 				return false;
 			}
 		}

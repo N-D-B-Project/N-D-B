@@ -1,5 +1,5 @@
 import { inspect } from "util";
-import { Command } from "@/common/decorators/Commands.decorator";
+import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
 import { Config } from "@/types";
 import { Services } from "@/types/Constants";
 import { IDatabaseService } from "@/types/Interfaces";
@@ -11,24 +11,24 @@ import { CommandContext } from "../Commands.context";
 export class EvalCommand {
 	public constructor(@Inject(Services.Database) private readonly database: IDatabaseService) {}
 
-	@Command({
-		legacy: {
-			name: "eval",
-			description: "",
-			usage: "",
-		},
-		permissions: {
-			user: [],
-			bot: [],
-			guildOnly: false,
-			ownerOnly: true,
-		},
+	@LegacyCommand({
+		name: "eval",
+		description: "",
+		usage: "",
+	})
+	@SlashCommand({
+		type: "Sub",
+		deployMode: "Test",
+		name: "eval",
+	})
+	@CommandConfig({
 		category: "🛠️ Developer Tools",
-		slash: {
-			type: "Sub",
-			deployMode: "Test",
-			name: "eval",
-		},
+	})
+	@CommandPermissions({
+		user: [],
+		bot: [],
+		guildOnly: false,
+		ownerOnly: true,
 	})
 	public async onCommandRun([client, context]: CommandContext) {
 		await context.delete();

@@ -8,12 +8,12 @@ export class MaxArgsGuard implements CanActivate {
 	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
 
 	public async canActivate(executionContext: ExecutionContext): Promise<boolean> {
-		const { client, context, commandOptions } = Utils.context(executionContext);
+		const { client, context, legacyCommandOptions } = Utils.context(executionContext);
 		const args = context.getArg("", -1);
 
 		if (!context.isSlash) {
-			if (args.length > commandOptions.legacy.args.max) {
-				Utils.SendFunction(context, await embed(client, this.Translate, "TooManyArgs", context, commandOptions));
+			if (args.length > legacyCommandOptions.args.max) {
+				Utils.SendFunction(context, await embed(client, this.Translate, "TooManyArgs", context, legacyCommandOptions));
 				return false;
 			}
 		}

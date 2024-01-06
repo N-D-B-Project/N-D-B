@@ -37,7 +37,7 @@ export class GuildRepository implements IGuildRepository {
 				},
 			})
 			.catch((err) => {
-				console.log(err);
+				this.logger.error(err);
 				status = DatabaseStatus.Error;
 			});
 		this.logger.log(`${guild.name} Configuration Crated on Database`);

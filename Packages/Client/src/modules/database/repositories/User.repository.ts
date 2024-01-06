@@ -35,7 +35,7 @@ export class UserRepository implements IUserRepository {
 				},
 			})
 			.catch((err) => {
-				console.log(err);
+				this.logger.error(err);
 				status = DatabaseStatus.Error;
 			});
 		this.logger.log(`${user.globalName} Configuration Crated on Database`);
