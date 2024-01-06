@@ -52,7 +52,6 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
       - [ ] Full
   - [ ] Sharding
   - [ ] Top.gg Autopost
-  - [ ] Fix/Remove ESLint disable comment rules
 
 ## 📖 Licença
 
