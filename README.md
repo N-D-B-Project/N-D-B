@@ -48,7 +48,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
       - [ ] Update ReactionRoleAdd/Remove Events
     - [ ] Music
     - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
-      - [ ] Partial
+      - [x] Partial
       - [ ] Full
   - [ ] Sharding
   - [ ] Top.gg Autopost
