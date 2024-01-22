@@ -1,8 +1,10 @@
+import { CommandConfig } from "@/common/decorators";
 import { CommandError } from "@/common/errors/Command.error";
 import { Config } from "@/types";
 import { Services } from "@/types/Constants";
 import { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
 import { Client } from "discord.js";
 import { Context } from "./Commands.context";
 import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "./Commands.discovery";
@@ -12,6 +14,7 @@ export class CommandsService implements ICommandsService {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
 		private readonly client: Client,
+		private readonly reflector: Reflector,
 	) {}
 
 	public async loadLegacy(command: LegacyCommandsDiscovery): Promise<void> {
@@ -33,6 +36,7 @@ export class CommandsService implements ICommandsService {
 		const als = this.database.AlsRepo();
 		const Slash = command.toJSON();
 		const Sub = command.toJSON().name;
+		const SubFullName = Sub + this.reflector.get(CommandConfig.KEY, command.getHandler()).category;
 
 		if (this.client.application?.partial) {
 			await this.client.application.fetch();
@@ -65,9 +69,9 @@ export class CommandsService implements ICommandsService {
 			}
 		}
 
-		if (Slash?.type === "Sub" && !als.getStore()["SubCommands"].get(Sub)) {
+		if (Slash?.type === "Sub" && !als.getStore()["SubCommands"].get(SubFullName)) {
 			if (!Slash.name) throw new CommandError(`SubCommand don't have a name: ${command.getClass()}`);
-			als.getStore()["SubCommands"].set(Sub, command);
+			als.getStore()["SubCommands"].set(SubFullName, command);
 		}
 	}
 

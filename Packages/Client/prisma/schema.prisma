@@ -11,24 +11,39 @@ datasource db {
 }
 
 model Guild {
-  id              String         @id
-  Name            String
-  Settings        GuildSettings?
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @default(now())
-  databaseVersion String         @default("Necord")
+  id                 String               @id
+  Name               String
+  Settings           GuildSettings?
+  GuildReactionRoles GuildReactionRoles[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @default(now())
+  databaseVersion    String               @default("Necord")
 
   @@map("Guild")
 }
 
 model GuildSettings {
+  id         String   @id @default(uuid())
+  Prefix     String   @default("&") @db.VarChar(4)
+  Language   String   @default("en-US")
+  ReactionDM Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  guild      Guild    @relation(fields: [guildId], references: [id])
+  guildId    String   @unique
+}
+
+model GuildReactionRoles {
   id        String   @id @default(uuid())
-  Prefix    String   @default("&") @db.VarChar(4)
-  Language  String   @default("en-US")
+  Message   String
+  Channel   String
+  Role      String
+  Emoji     String
+  Option    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   guild     Guild    @relation(fields: [guildId], references: [id])
-  guildId   String   @unique
+  guildId   String
 }
 
 model User {

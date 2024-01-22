@@ -1,43 +1,43 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "declaration": false,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "incremental": true,
-    "target": "ESNEXT",
-    "lib": [
-      "ESNext",
-      "ESNext.Array",
-      "ESNext.AsyncIterable",
-      "ESNext.Intl",
-      "ESNext.Symbol",
-      "ESNext.BigInt",
-      "ESNext.Promise",
-      "ESNext.String",
-      "ESNext.WeakRef"
-    ],
-    "moduleResolution": "node",
-    "allowJs": true,
-    "rootDir": ".",
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+	"compilerOptions": {
+		"module": "commonjs",
+		"declaration": false,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"incremental": true,
+		"target": "ESNEXT",
+		"lib": [
+			"ESNext",
+			"ESNext.Array",
+			"ESNext.AsyncIterable",
+			"ESNext.Intl",
+			"ESNext.Symbol",
+			"ESNext.BigInt",
+			"ESNext.Promise",
+			"ESNext.String",
+			"ESNext.WeakRef"
+		],
+		"moduleResolution": "node",
+		"allowJs": true,
+		"rootDir": ".",
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
 
-    "forceConsistentCasingInFileNames": true,
-    "skipDefaultLibCheck": true,
-    "strict": true,
-    "strictFunctionTypes": true,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"]
-    }
-  }
+		"forceConsistentCasingInFileNames": true,
+		"skipDefaultLibCheck": true,
+		"strict": true,
+		"strictFunctionTypes": true,
+		"noImplicitAny": false,
+		"strictNullChecks": false,
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"]
+		}
+	}
 }

@@ -52,10 +52,10 @@ export class DeveloperToolsMainSlashCommand {
 		ownerOnly: true,
 	})
 	public async onCommandRun([client, context]: CommandContext) {
-		const Payload = new RunSubCommandEvent();
-		Payload.SubList = [{ name: "eval" }, { name: "test" }];
-		Payload.context = context;
-		Payload.Additional = "Sub";
+		const Payload = new RunSubCommandEvent()
+			.setAdditional("Sub")
+			.setContext(context)
+			.setSubList([{ name: "eval" }, { name: "test" }]);
 		this.eventEmitter.emit("commands.sub", Payload);
 	}
 }

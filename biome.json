@@ -42,6 +42,9 @@
 				"noUselessSwitchCase": "error",
 				"useLiteralKeys": "off"
 			},
+			"correctness": {
+				"noSwitchDeclarations": "off"
+			},
 			"nursery": {
 				"noDefaultExport": "error",
 				"noDuplicateJsonKeys": "error",

@@ -44,6 +44,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] Tickets
   - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
     - [ ] ReactionRoles
+      - [x] Partial migrated to Necord but not tested yet
       - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
       - [ ] Update ReactionRoleAdd/Remove Events
     - [ ] Music

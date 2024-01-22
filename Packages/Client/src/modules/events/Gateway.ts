@@ -3,8 +3,9 @@ import { Services } from "@/types/Constants";
 import { IDatabaseService } from "@/types/Interfaces";
 import { Tools } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
-import { ActivityType, Client, DiscordAPIError, PresenceData } from "discord.js";
+import { ActivityType, Client, DiscordAPIError, PresenceData, REST, RateLimitData } from "discord.js";
 import { Context, ContextOf, On, Once } from "necord";
 
 @Injectable()
@@ -57,6 +58,13 @@ export class GatewayEvents {
 			return;
 		}
 		this.logger.error(`\nMessage: ${error.message}\nCause: ${error.stack}`);
+	}
+
+	@OnEvent("rest")
+	public async onRest(rest: REST) {
+		rest.on("rateLimited", async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
+			this.logger.fatal(`RateLimit on route: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`);
+		});
 	}
 
 	private async _setPresence(client: Client) {

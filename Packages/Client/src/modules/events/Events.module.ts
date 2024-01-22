@@ -1,4 +1,10 @@
-import { CommandProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
+import {
+	CommandProvider,
+	DatabaseProvider,
+	ReactionRolesEmbedsProvider,
+	ReactionRolesProvider,
+	TranslateProvider,
+} from "@/types/Providers";
 import { Module, OnApplicationBootstrap } from "@nestjs/common";
 import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 import { REST } from "discord.js";
@@ -6,7 +12,9 @@ import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
 
+import { MessageReactionEvents } from "./MessageReaction";
 import { NotQuiteNitroEvent } from "./NotQuiteNitro";
+import { ReactionRolesEvents } from "./ReactionRoles";
 import { ThreadEvents } from "./Thread";
 
 @Module({
@@ -22,9 +30,13 @@ import { ThreadEvents } from "./Thread";
 		GuildEvents,
 		ThreadEvents,
 		NotQuiteNitroEvent,
+		MessageReactionEvents,
+		ReactionRolesEvents,
 		DatabaseProvider,
 		TranslateProvider,
 		CommandProvider,
+		ReactionRolesProvider,
+		ReactionRolesEmbedsProvider,
 	],
 })
 export class EventsModule implements OnApplicationBootstrap {

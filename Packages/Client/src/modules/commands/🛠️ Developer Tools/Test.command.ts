@@ -26,7 +26,5 @@ export class TestCommand {
 		ownerOnly: true,
 	})
 	@UseGuards(EnableGuard, OwnerPermissionGuard)
-	public async onCommandRun([client, context]: CommandContext) {
-		this.logger.log("test");
-	}
+	public async onCommandRun([client, context]: CommandContext) {}
 }

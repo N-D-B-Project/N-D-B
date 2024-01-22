@@ -3,10 +3,13 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
 import { CommandsModule } from "../commands/Commands.module";
+import { ReactionRolesCommands } from "../commands/🎩 ReactionRoles/Category.module";
 import { DeveloperToolsCommands } from "../commands/🛠️ Developer Tools/Category.module";
+import { ComponentsModule } from "../components/Components.module";
 import { DatabaseModule } from "../database/database.module";
 import { EventsModule } from "../events/Events.module";
 import { i18nModule } from "../i18n/i18n.module";
+import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 
 @Module({
 	imports: [
@@ -19,9 +22,12 @@ import { i18nModule } from "../i18n/i18n.module";
 		}),
 		DatabaseModule,
 		i18nModule,
+		ComponentsModule,
+		ReactionRolesModule,
 		EventsModule,
 		CommandsModule,
 		DeveloperToolsCommands,
+		ReactionRolesCommands,
 	],
 })
 export class NDBModule {}
