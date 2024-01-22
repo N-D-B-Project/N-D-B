@@ -2,7 +2,6 @@
 	"name": "@n-d-b/client",
 	"version": "7.0.0",
 	"description": "N-D-B Project repository",
-	"main": "./Src/Root.ts",
 	"author": "NedcloarBR",
 	"license": "GPL-3.0",
 	"repository": {
@@ -21,7 +20,7 @@
 		"update": "yarn upgrade-interactive",
 		"build": "nest build",
 		"start": "nest start",
-		"start:dev": "nest start --watch",
+		"start:dev": "nest start --watch --env-file=.env",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main"
 	},
@@ -36,16 +35,13 @@
 		"class-validator": "^0.14.0",
 		"discord-api-types": "^0.37.62",
 		"discord.js": "^14.13.0",
-		"dotenv": "^16.3.1",
 		"moment": "^2.29.4",
 		"necord": "^6.4.1",
-		"nest-winston": "^1.9.4",
 		"nestjs-i18n": "^10.3.7",
 		"parse-ms": "=2.1.0",
 		"prisma": "^5.5.2",
 		"reflect-metadata": "^0.1.13",
-		"rxjs": "^7.8.1",
-		"winston": "^3.11.0"
+		"rxjs": "^7.8.1"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^10.0.1",

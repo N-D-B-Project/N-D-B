@@ -2,12 +2,10 @@ import { AppModule } from "@/app.module";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
-import { config } from "dotenv";
 import { name } from "../package.json";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
 
 async function bootstrap() {
-	config();
 	const logger = new Logger("Main");
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get<ConfigService>(ConfigService);

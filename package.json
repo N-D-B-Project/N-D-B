@@ -13,13 +13,14 @@
 		"url": "https://github.com/NedcloarBR/"
 	},
 	"scripts": {
+		"update": "yarn upgrade-interactive",
 		"postinstall": "husky install",
 		"format": "yarn dlx @biomejs/biome format --write ./",
 		"lint": "yarn dlx @biomejs/biome lint ./",
 		"check": "yarn dlx @biomejs/biome check --apply ./"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.4.1",
+		"@biomejs/biome": "^1.5.3",
 		"@commitlint/cli": "^17.6.6",
 		"@commitlint/config-angular": "^17.6.6",
 		"@commitlint/config-conventional": "^17.6.6",
