@@ -15,4 +15,42 @@
   // 	],
   // 	"description": "Log output to console"
   // }
+
+  "Command": {
+    "prefix": "!Command",
+    "body": [
+      "import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from \"@/common/decorators\";",
+      "import { Injectable, Logger } from \"@nestjs/common\";",
+      "import { SlashCommandBuilder } from \"discord.js\";",
+      "import { CommandContext } from \"../Commands.context\";",
+      "",
+      "@Injectable()",
+      "export class Command {",
+      "	private readonly logger = new Logger(Command.name);",
+      "",
+      "	@LegacyCommand({",
+      "		name: \"\",",
+      "		aliases: [\"\"],",
+      "		description: \"\",",
+      "		usage:",
+      "			\"\",",
+      "	})",
+      "	@SlashCommand({",
+      "   data: new SlashCommandBuilder(),",
+      "		type: \"Main\",",
+      "	})",
+      "	@CommandConfig({ category: \"\" })",
+      "	@CommandPermissions({",
+      "		user: [],",
+      "		bot: [],",
+      "		guildOnly: false,",
+      "		ownerOnly: false,",
+      "	})",
+      "",
+      "	public async onCommandRun([client, context]: CommandContext) {}",
+      "}",
+      ""
+    ],
+    "description": "Command"
+  }
 }
