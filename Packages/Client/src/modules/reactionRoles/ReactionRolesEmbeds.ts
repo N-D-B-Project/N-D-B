@@ -22,7 +22,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:Channel:Invalid", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Channel:Invalid", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -36,7 +36,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:ID:Invalid", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:ID:Invalid", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -50,7 +50,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:ID:NotFound", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:ID:NotFound", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -64,7 +64,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:Role:Invalid", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Role:Invalid", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -78,7 +78,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:Emoji:Invalid", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Emoji:Invalid", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -90,36 +90,35 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Author"),
+				name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Author"),
 				iconURL: context.guild.iconURL(),
 			})
 			.setColor("#00c26f")
 			.addFields([
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:1"),
+					name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:1"),
 					value: channelMention(Channel),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:2"),
+					name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:2"),
 					value: Emoji,
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:3"),
+					name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:3"),
 					value: String(Option),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:4"),
-					value: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:Content:4", {
-						MsgIdURL: await (
-							await MessageTools.get((await context.guild.channels.fetch(Channel)) as TextChannel, Message)
-						).url,
+					name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:4"),
+					value: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:Content:4", {
+						MsgIdURL: (await MessageTools.get((await context.guild.channels.fetch(Channel)) as TextChannel, Message))
+							.url,
 					}),
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/CreateReaction:Embed:Fields:5"),
+					name: await this.Translate.Guild(context, "ReactionRoles/CreateReaction:Embed:Fields:5"),
 					value: roleMention(Role),
 				},
 			]);
@@ -133,7 +132,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#00c26f")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/DeleteReaction:Removed", {
+				await this.Translate.Guild(context, "ReactionRoles/DeleteReaction:Removed", {
 					success: this.config.get<Config["Emojis"]>("Emojis").accept,
 					URL: MsgID.url,
 				}),
@@ -151,40 +150,40 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				iconURL: context.author.displayAvatarURL(),
 			})
 			.setColor("#00c26f")
-			.setDescription(await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Description"))
+			.setDescription(await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Description"))
 			.addFields(
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:1"),
+					name: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:1"),
 					value: channelMention(Channel),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:2"),
+					name: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:2"),
 					value: Emoji,
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:3"),
-					value: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:Content:3", {
+					name: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:3"),
+					value: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:Content:3", {
 						MsgIdURL: (await ((await context.guild.channels.fetch(Channel)) as TextChannel).messages.fetch(Message))
 							.url,
 					}),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:4"),
+					name: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:4"),
 					value: roleMention(Role),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Fields:5"),
+					name: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Fields:5"),
 					value: newOption.toString(),
 					inline: true,
 				},
 			)
 
 			.setFooter({
-				text: await this.Translate.Guild(context, "ReactionRole/UpdateReaction:Embed:Footer"),
+				text: await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:Embed:Footer"),
 			});
 	}
 
@@ -197,20 +196,20 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 		let color: number;
 		switch (status) {
 			case "Confirm":
-				description = "ReactionRole/DeleteAllReactions:Embed:Description:Confirm";
+				description = "ReactionRoles/DeleteAllReactions:Embed:Description:Confirm";
 				color = 0x00c26f;
 				break;
 			case "Cancel":
-				description = "ReactionRole/DeleteAllReactions:Embed:Description:Cancel";
+				description = "ReactionRoles/DeleteAllReactions:Embed:Description:Cancel";
 				color = 0xc20e00;
 				break;
 			case "Success":
-				description = "ReactionRole/DeleteAllReactions:Embed:Description:Success";
+				description = "ReactionRoles/DeleteAllReactions:Embed:Description:Success";
 				color = 0x00c26f;
 				break;
 		}
 		return new EmbedBuilder()
-			.setTitle(await this.Translate.Guild(context, "ReactionRole/DeleteAllReactions:Embed:Title"))
+			.setTitle(await this.Translate.Guild(context, "ReactionRoles/DeleteAllReactions:Embed:Title"))
 			.setAuthor({
 				name: context.author.username,
 				iconURL: context.author.displayAvatarURL(),
@@ -232,7 +231,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/CreateReaction:UnableToCreate", {
+				await this.Translate.Guild(context, "ReactionRoles/CreateReaction:UnableToCreate", {
 					fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 				}),
 			);
@@ -246,7 +245,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/DeleteReaction:UnableToDelete", {
+				await this.Translate.Guild(context, "ReactionRoles/DeleteReaction:UnableToDelete", {
 					success: this.config.get<Config["Emojis"]>("Emojis").accept,
 					URL: MsgID.url,
 				}),
@@ -260,7 +259,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				iconURL: context.author.displayAvatarURL(),
 			})
 			.setColor("#c20e00")
-			.setDescription(await this.Translate.Guild(context, "ReactionRole/DeleteAllReaction:UnableToDelete"));
+			.setDescription(await this.Translate.Guild(context, "ReactionRoles/DeleteAllReaction:UnableToDelete"));
 	}
 
 	public async UnableToUpdateReactionRoleEmbed(context: Context, MsgID: Message): Promise<EmbedBuilder> {
@@ -271,7 +270,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			})
 			.setColor("#c20e00")
 			.setDescription(
-				await this.Translate.Guild(context, "ReactionRole/UpdateReaction:UnableToUpdate", {
+				await this.Translate.Guild(context, "ReactionRoles/UpdateReaction:UnableToUpdate", {
 					success: this.config.get<Config["Emojis"]>("Emojis").accept,
 					URL: MsgID.url,
 				}),
