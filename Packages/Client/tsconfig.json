@@ -24,7 +24,7 @@
 		"moduleResolution": "node",
 		"allowJs": true,
 		"rootDir": ".",
-		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"typeRoots": ["./node_modules/@types", "**/types"],
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,

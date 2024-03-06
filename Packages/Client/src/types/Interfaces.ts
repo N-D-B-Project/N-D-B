@@ -4,7 +4,11 @@ import { GuildEntity, ReactionRolesEntity, UserEntity } from "@/modules/database
 import { ConfigService } from "@nestjs/config";
 import { AsyncLocalStorage } from "async_hooks";
 import { Client, EmbedBuilder, Guild, Message, Role, TextChannel, User } from "discord.js";
-import { AlsStore, Config, DatabaseStatus, REACTION_OPTIONS, TranslateInfo, iReaction } from ".";
+import { AlsStore, Config, Content, DatabaseStatus, REACTION_OPTIONS, TranslateInfo, iReaction } from ".";
+
+export interface INDBService {
+	buildPaginator(context: Context, embeds: Array<EmbedBuilder>, id: string): Promise<Content>;
+}
 
 export interface IDatabaseService {
 	AlsRepo(): IAsyncLocalStorage;

@@ -1,5 +1,5 @@
 import { Extends, Services } from "@/types/Constants";
-import { ICommandsService, IDatabaseService } from "@/types/Interfaces";
+import type { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, CommandInteraction, CommandInteractionOptionResolver, Message } from "discord.js";
@@ -26,7 +26,8 @@ export class CommandsEvents {
 
 	@OnEvent("commands.slash")
 	public async onInteractionCommand(interaction: CommandInteraction) {
-		const context = new Context(interaction, interaction.options as CommandInteractionOptionResolver, "None");
+		const { Premium } = (await this.database.GuildRepo().get(interaction.guildId)).Settings;
+		const context = new Context(interaction, interaction.options as CommandInteractionOptionResolver, "None", Premium);
 		const _Command = await this.commandsService.get(interaction.commandName, context);
 		if (_Command) {
 			await interaction.deferReply().catch((e) => {});
@@ -36,10 +37,11 @@ export class CommandsEvents {
 
 	@OnEvent("commands.sub")
 	public async onSubCommand({ context, SubList, Additional }: RunSubCommandEvent) {
+		const { Premium } = (await this.database.GuildRepo().get(context.guild.id)).Settings;
 		const args = await context.getInteractionArgs();
 		for (const { name } of SubList) {
 			if (args.getSubcommand() === name) {
-				const newContext = new Context(context.interaction, args.data[0].options, Additional);
+				const newContext = new Context(context.interaction, args.data[0].options, Additional, Premium);
 				const _SubCommand = await this.commandsService.get(name, newContext);
 				if (_SubCommand) {
 					_SubCommand.execute([this.client, newContext]);
@@ -49,8 +51,9 @@ export class CommandsEvents {
 	}
 
 	private async Runner(message: Message, prefix: string, type: "None" | "DM") {
+		const { Premium } = (await this.database.GuildRepo().get(message.guildId)).Settings;
 		const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
-		const context = new Context(message, args as Array<string>, type, prefix);
+		const context = new Context(message, args as Array<string>, type, Premium, prefix);
 		const _Command = await this.commandsService.get(cmd, context);
 		if (_Command) {
 			return _Command.execute([this.client, context]);

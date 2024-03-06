@@ -24,7 +24,7 @@
 
 </details>
 
-<!-- ## 🎶 Music Requirements
+## 🎶 Music Requirements
 
 <details>
   <summary>Click to expand</summary>
@@ -59,7 +59,7 @@ yandexmusic: # Line 101
 
 6. Download the [Lavalink Plugins](https://github.com/lavalink-devs/Lavalink/blob/master/PLUGINS.md) (SponsorBlock plugin, LavaSrc plugin, DuncteBot plugin)
 and put the "**.jar**" files in plugins folder in same directory of `Lavalink.jar` and `application.yml`
-   </details> -->
+   </details>
 
 ## 🤖 Configuration and Starting
 
@@ -69,10 +69,11 @@ and put the "**.jar**" files in plugins folder in same directory of `Lavalink.ja
 **NOTE:** _Example configuration files can be found [here](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Examples), just make sure to rename the files and fill it with missing data_
 
 1.  Rename the `.env.client` to `.env` and put it in `./Packages/Client/.env`
-<!-- 2.  Rename the `Lavalink.application.yml` to `application.yml` and put it in `./Packages/Lavalink` see <a href="#🎶 Music Requirements">🎶 Music Requirements</a> for more info -->
-2.  Rename the `Example.Config.ts` to `Config.ts` and put it in `./Packages/Client/Src/Config`
-3.  Now Build the Project running `npm run build` or `yarn build` **NOTE:** this commands doesn't work right now, still WIP
-4.  Finally start the N-D-B System by opening a console in that folder and typing: `npm run start`
+2.  Rename the `.env.global` to `.env` and put it in `./`
+3.  Rename the `Lavalink.application.yml` to `application.yml` and put it in `./Packages/Lavalink` see <a href="#🎶 Music Requirements">🎶 Music Requirements</a> for more info
+4.  Rename the `Example.Config.ts` to `Config.ts` and put it in `./Packages/Client/Src/Config`
+5.  Now Build the Project running `npm run build` or `yarn build` **NOTE:** this commands doesn't work right now, still WIP
+6.  Finally start the N-D-B System by opening a console in that folder and typing: `npm run start`
 
 </details>
 
@@ -89,13 +90,19 @@ and put the "**.jar**" files in plugins folder in same directory of `Lavalink.ja
    - `DatabaseName` your database name same from `DATABASE_URL`
    - `DatabasePassword` your database password same from `DATABASE_URL`
 
-   <!-- - `LavalinkHOST` if you're Self Hosting Lavalink set this config as "localhost"
+   - `LavalinkHOST` if you're Self Hosting Lavalink set this config as "localhost"
    - `LavalinkPassword` by default this config is "youshallnotpass" check your `./Packages/Lavalink/application.yml`
    - `LavalinkPort` by default this config is "2333" check your `./Packages/Lavalink/application.yml`
    - `SpotifyClientId` you can get it from: [Spotify Developer Portal](https://developer.spotify.com)
-   - `SpotifyClientSecret` you can get it from: [Spotify Developer Portal](https://developer.spotify.com) -->
+   - `SpotifyClientSecret` you can get it from: [Spotify Developer Portal](https://developer.spotify.com)
 
-2. `./Packages/Client/Src/Config/Config.ts`
+2. `./.env`
+
+- `POSTGRES_DB` The database name that is used by Prima in Client
+- `POSTGRES_DB` The database password that is used by Prima in Client
+- `LAVALINK_SERVER_PASSWORD` by default this config is "youshallnotpass" check your `./Packages/Lavalink/application.yml`
+
+3. `./Packages/Client/Src/Config/Config.ts`
 
 - `Config`
   - `NDCommunity:ID` ignore this config
@@ -104,12 +111,12 @@ and put the "**.jar**" files in plugins folder in same directory of `Lavalink.ja
   - `Client:ID` put your Bot Client ID
 - `Emojis` set your Custom Emojis full string
 
-<!-- 3. `./Packages/Lavalink/application.yml`
+4. `./Packages/Lavalink/application.yml`
    - `server:port` by default this config is "2333"
    - `lavalink:server:password` by default this config is "youshallnotpass"
    - `plugins:lavasrc:spotify:clientId` change it from `${SpotifyClientId}` to your `ClientId`, you can get it from: [Spotify Developer Portal](https://developer.spotify.com)
    - `plugins:lavasrc:spotify:clientSecret` change it from `${SpotifyClientSecret}` to your `ClientSecret`, you can get it from: [Spotify Developer Portal](https://developer.spotify.com)
    - `plugins:lavasrc:deezer:masterDecryptionKey` So... I don't really know where to get that token... Sorry
-   - `plugins:lavasrc:yandexmusic:accessToken` change it from `${YandexMusicAccessToken}` to your `AccessToken` see [This Tutorial](https://github.com/topi314/LavaSrc#yandex-music) -->
+   - `plugins:lavasrc:yandexmusic:accessToken` change it from `${YandexMusicAccessToken}` to your `AccessToken` see [This Tutorial](https://github.com/topi314/LavaSrc#yandex-music)
 
 </details>

@@ -1,4 +1,5 @@
 export enum Services {
+	NDB = "NDB_SERVICE",
 	Prisma = "PRISMA_SERVICE",
 	Database = "DATABASE_SERVICE",
 	ReactionRoles = "REACTION_ROLES_SERVICE",

@@ -97,6 +97,7 @@ export interface Config {
 			Deezer: string;
 			Facebook: string;
 			Apple: string;
+			Twitch: string;
 		};
 	};
 	URLList: {
@@ -108,6 +109,7 @@ export interface Config {
 			Deezer: string;
 			Facebook: string;
 			Apple: string;
+			Twitch: string;
 		};
 	};
 	EvalBadKeys: Array<string>;

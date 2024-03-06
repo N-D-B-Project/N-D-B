@@ -38,6 +38,7 @@ export class Context {
 		private context: Message | CommandInteraction,
 		public args: Array<string> | CommandInteractionOptionResolver | Array<CommandInteractionOption>,
 		Additional: IAdditional,
+		public isPremium: boolean,
 		public prefix?: string,
 	) {
 		this.isSlash = context instanceof CommandInteraction;

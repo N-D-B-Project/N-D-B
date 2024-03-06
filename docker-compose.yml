@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   ndbase:
@@ -13,3 +13,21 @@ services:
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+  lavalink:
+    build: Packages/Lavalink
+    container_name: lavalink
+    restart: unless-stopped
+    environment:
+      - _JAVA_OPTIONS=-Xmx6G
+      - SERVER_PORT=2333
+      - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
+    expose:
+      - 2333
+    ports:
+      - "2333:2333"
+  redis:
+    build: .docker/Redis
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"

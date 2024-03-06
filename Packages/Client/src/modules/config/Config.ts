@@ -70,6 +70,7 @@ export const config = (): Config => ({
 			Deezer: "<:deezer:932065971336802334>",
 			Facebook: "<:facebook:932066080996864070>",
 			Apple: "<:Apple:852677662983716884>",
+			Twitch: "<:twitch:998725252098052197>",
 		},
 	},
 	URLList: {
@@ -81,6 +82,7 @@ export const config = (): Config => ({
 			Deezer: "https://www.deezer",
 			Facebook: "https://facebook.com",
 			Apple: "https://music.apple.com/",
+			Twitch: "https://www.twitch.tv/",
 		},
 	},
 	EvalBadKeys: [

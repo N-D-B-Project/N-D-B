@@ -1,0 +1,9 @@
+{
+	"Labels": {
+		"Previous": "Anterior",
+		"Next": "Proximo"
+	},
+	"Embed": {
+		"Footer": "Página {Current} / {Total}"
+	}
+}

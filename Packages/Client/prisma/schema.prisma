@@ -17,7 +17,7 @@ model Guild {
   GuildReactionRoles GuildReactionRoles[]
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @default(now())
-  databaseVersion    String               @default("Necord")
+  databaseVersion    String               @default("Necord-Lavalink")
 
   @@map("Guild")
 }
@@ -27,6 +27,7 @@ model GuildSettings {
   Prefix     String   @default("&") @db.VarChar(4)
   Language   String   @default("en-US")
   ReactionDM Boolean  @default(true)
+  Premium    Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
   guild      Guild    @relation(fields: [guildId], references: [id])
@@ -47,10 +48,11 @@ model GuildReactionRoles {
 }
 
 model User {
-  id        String        @id
-  Settings  UserSettings?
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @default(now())
+  id              String        @id
+  Settings        UserSettings?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now())
+  databaseVersion String        @default("Necord-Lavalink")
 
   @@map("User")
 }
@@ -59,6 +61,7 @@ model UserSettings {
   id        String   @id @default(uuid())
   Prefix    String   @default("&") @db.VarChar(4)
   Language  String   @default("en-US")
+  Premium   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])

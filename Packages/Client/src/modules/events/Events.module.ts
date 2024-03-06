@@ -11,12 +11,10 @@ import { REST } from "discord.js";
 import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
-
 import { MessageReactionEvents } from "./MessageReaction";
 import { NotQuiteNitroEvent } from "./NotQuiteNitro";
 import { ReactionRolesEvents } from "./ReactionRoles";
 import { ThreadEvents } from "./Thread";
-
 @Module({
 	imports: [
 		EventEmitterModule.forRoot({
@@ -40,7 +38,11 @@ import { ThreadEvents } from "./Thread";
 	],
 })
 export class EventsModule implements OnApplicationBootstrap {
-	public constructor(private readonly eventEmitter: EventEmitter2, private readonly rest: REST) {}
+	public constructor(
+		private readonly eventEmitter: EventEmitter2,
+		private readonly rest: REST,
+	) {}
+
 	public async onApplicationBootstrap() {
 		this.eventEmitter.emit("rest", this.rest);
 	}

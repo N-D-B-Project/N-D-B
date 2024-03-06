@@ -127,6 +127,8 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 	}
 
 	private async sendCreateMessage(message: Message, config: UserEntity | GuildEntity, isGuild: boolean) {
+		const { Premium } = (await this.database.GuildRepo().get(message.guildId)).Settings;
+
 		let _name = message.author.globalName;
 		let _icon = message.author.displayAvatarURL();
 
@@ -134,7 +136,7 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 			_name = message.guild.name;
 			_icon = message.guild.iconURL();
 		}
-		const context = new Context(message, [], isGuild ? "None" : "DM");
+		const context = new Context(message, [], isGuild ? "None" : "DM", Premium);
 
 		return MessageTools.send(isGuild ? message.channel : message.author, {
 			embeds: [

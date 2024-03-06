@@ -2,7 +2,7 @@ import { Extends } from "@/types/Constants";
 import { Ii18nService } from "@/types/Interfaces";
 import { DatabaseProvider } from "@/types/Providers";
 import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
-import { I18nLoader, I18nModule } from "nestjs-i18n";
+import { AcceptLanguageResolver, I18nLoader, I18nModule } from "nestjs-i18n";
 import { I18nService } from "./i18n.service";
 
 @Global()
@@ -23,6 +23,7 @@ import { I18nService } from "./i18n.service";
 					},
 				};
 			},
+			resolvers: [AcceptLanguageResolver],
 		}),
 	],
 	providers: [
