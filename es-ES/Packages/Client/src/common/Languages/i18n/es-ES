@@ -1,7 +1,37 @@
 {
 	"/": "/",
-	"ConfigurationCreated": {
-		"Title": "💾 Database",
-		"Description": "⚙️ Configuration Created"
+	"Checker": {
+		"DM": "This Command cannot be executed in private messages (DMs).",
+		"OnlyDM": "This command can only be executed on private messages (DMs).",
+		"OwnerOnly": "Only Bot Creators can use this command.",
+		"GuildOnly": "This Command can only be executed on another Server (NedcloarBR Community).",
+		"NSFW": "This Command can only be executed on an NSFW Channel",
+		"Disable": "This command is disabled",
+		"NDCash": "You do not have enough NDCash to run this command.",
+		"NoMinArgs": {
+			"Title": "Invalid Command Usage Mode",
+			"Description": "Insufficient arguments",
+			"Fields": {
+				"1": "Minimum arguments required",
+				"2": "Correct way to use the command",
+				"Content": {
+					"1": "{Args}",
+					"2": "Required Argument: <>\nOptional Argument: ()\n{Usage}"
+				}
+			}
+		},
+		"TooManyArgs": {
+			"Title": "Invalid Command Usage Mode",
+			"Description": "Maximum arguments exceeded",
+			"Fields": {
+				"1": "Max Arguments",
+				"2": "Correct way to use the command",
+				"Content": {
+					"1": "{Args}",
+					"2": "Required Argument: <>\nOptional Argument: ()\n{Usage}"
+				}
+			}
+		},
+		"ReactionRole": "Before running this command use the {PREFIX}ReactionTypes command to see the types of reactions you can use!"
 	}
 }
