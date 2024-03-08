@@ -1,7 +1,7 @@
 import { CommandPermissions } from "@/common/decorators";
+import { Config } from "@/types";
 import { Extends, Services } from "@/types/Constants";
 import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
@@ -17,14 +17,18 @@ export class GuildPermissionGuard implements CanActivate {
 		const permissions = this.reflector.get(CommandPermissions.KEY, executionContext.getHandler());
 		const { context, slashCommandOptions } = Utils.context(executionContext);
 
-		if (
-			(permissions.guildOnly || slashCommandOptions?.deployMode === "Guild") &&
-			!Tools.checkGuild(this.database.ConfigRepo(), context.guild.id)
-		) {
+		if ((permissions.guildOnly || slashCommandOptions?.deployMode === "Guild") && !this.checkGuild(context.guild.id)) {
 			Utils.SendFunction(context, await this.Translate.TFunction(context, "Tools/Command:Checker:GuildOnly"));
 			return false;
 		}
 
 		return true;
+	}
+
+	private checkGuild(target: string): boolean {
+		return (
+			this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity === target ||
+			this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild === target
+		);
 	}
 }

@@ -27,4 +27,11 @@ export class Utils {
 		}
 		return context.reply(content);
 	}
+
+	public static formatArray(array: Array<string>) {
+		return new Intl.ListFormat("pt-BR", {
+			style: "short",
+			type: "conjunction",
+		}).format(array);
+	}
 }

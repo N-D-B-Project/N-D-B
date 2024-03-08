@@ -1,7 +1,6 @@
 import { CommandPermissions } from "@/common/decorators";
 import { Extends } from "@/types/Constants";
 import { Ii18nService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
@@ -21,7 +20,7 @@ export class UserPermissionGuard implements CanActivate {
 				Utils.SendFunction(
 					context,
 					await this.Translate.TFunction(context, "Tools/Commands:Permission:User", {
-						PERMS: Tools.formatArray(permissions.user as Array<string>),
+						PERMS: Utils.formatArray(permissions.user as Array<string>),
 					}),
 				);
 			}
