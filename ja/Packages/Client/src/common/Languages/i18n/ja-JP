@@ -1,8 +1,40 @@
 {
-	"Labels": {
-		"Confirm": {
-			"YES": "Sim",
-			"NO": "Não"
-		}
+	"Checker": {
+		"DM": "Este Comando não pode ser executado em mensagens privadas(DMs).",
+		"OnlyDM": "Este Comando só pode ser executado em mensagens privadas(DMs).",
+		"OwnerOnly": "Somente os Criadores do Bot podem usar este comando.",
+		"GuildOnly": "Este Comando só pode ser executado em outro Servidor (NedcloarBR Community).",
+		"NSFW": "Este Comando só pode ser executado em um Canal NSFW",
+		"Disable": "Este Comando está desabilitado",
+		"NDCash": "Você não tem NDCash suficiente para executar este comando.",
+		"NoMinArgs": {
+			"Title": "Modo de Uso do comando invalido",
+			"Description": "Argumentos insuficientes",
+			"Fields": {
+				"1": "Mínimo de argumentos necessários",
+				"2": "Modo correto de Uso do comando",
+				"Content": {
+					"1": "{Args}",
+					"2": "Argumento Obrigatório: <>\nArgumento Opcional: ()\n{Usage}"
+				}
+			}
+		},
+		"TooManyArgs": {
+			"Title": "Modo de Uso do comando invalido",
+			"Description": "Máximo de argumentos ultrapassado",
+			"Fields": {
+				"1": "Máximo de argumentos",
+				"2": "Modo correto de Uso do comando",
+				"Content": {
+					"1": "{Args}",
+					"2": "Argumento Obrigatório: <>\nArgumento Opcional: ()\n{{Usage}}"
+				}
+			}
+		},
+		"Permissions": {
+			"Bot": "Eu não tenho as seguintes permissões para executar esse comando: {PERMS}",
+			"User": "Você não tem as permissões: {PERMS} para executar esse comando"
+		},
+		"ReactionRole": "Antes de executar este comando utilize o comando {PREFIX}ReactionTypes para ver os tipos de reações que você pode usar!"
 	}
 }
