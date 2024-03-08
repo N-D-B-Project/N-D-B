@@ -1,33 +1,15 @@
 {
 	"Help": {
-		"description": "Create an ReactionRole",
-		"Usage": "<Channel> <MessageID> <Role> <Emoji> (option)\nHint use the command **ReactionTypes** to see the parameters of (option)"
+		"Description": "Remove all ReactionRoles from the Server",
+		"Usage": " "
 	},
-	"Channel": {
-		"Invalid": "{fail} Invalid Channel"
-	},
-	"ID": {
-		"Invalid": "${fail} Insert an Message ID",
-		"NotFound": "{fail} Mensagem não encontrada verifique se o ID é valido"
-	},
-	"Role": {
-		"Invalid": "{fail} Invalid or Integration Role"
-	},
-	"Emoji": {
-		"Invalid": "{fail} Invalid Emoji"
-	},
-	"UnableToCreate": "{fail} This ReactionRole could not be created because it already exists or an internal error occurred",
 	"Embed": {
-		"Author": "ReactionRoles",
-		"Fields": {
-			"1": "Channel",
-			"2": "Emoji",
-			"3": "Type",
-			"4": "Message",
-			"5": "Role",
-			"Content": {
-				"4": "[Click Here]({MsgIdURL})"
-			}
+		"Title": "Remove ReactionRoles",
+		"Description": {
+			"Confirm": "Are you sure you want to remove all Reaction Roles from the Server?\nThis action cannot be undone!",
+			"Cancel": "Operation cancelled!",
+			"Success": "All {NUMBER} ReactionRoles have been successfully removed!"
 		}
-	}
+	},
+	"UnableToDelete": "The Server does not have any ReactionRole or an internal error has occurred"
 }
