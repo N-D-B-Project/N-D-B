@@ -3,7 +3,6 @@ import { DatabaseProvider, NDBServiceProvider, TranslateProvider } from "@/types
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { ButtonStyle } from "discord.js";
 import { NecordModule } from "necord";
 import { CommandsModule } from "../commands/Commands.module";
 import { ReactionRolesCommands } from "../commands/🎩 ReactionRoles/Category.module";
@@ -28,23 +27,6 @@ import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 		NecordPaginationModule.forRoot({
 			allowSkip: false,
 			allowTraversal: false,
-			buttons: {
-				back: {
-					emoji: "⬅️",
-
-					style: ButtonStyle.Secondary,
-				},
-				first: {
-					emoji: "🏠",
-
-					style: ButtonStyle.Danger,
-				},
-				next: {
-					emoji: "➡️",
-
-					style: ButtonStyle.Secondary,
-				},
-			},
 		}),
 		DatabaseModule,
 		i18nModule,
