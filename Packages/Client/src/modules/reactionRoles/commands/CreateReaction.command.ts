@@ -4,16 +4,17 @@ import { MinArgsGuard } from "@/common/guards/Args/Min.guard";
 import { EnableGuard } from "@/common/guards/Enable.guard";
 import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
 import { iReaction } from "@/types";
-import { Extends, Services } from "@/types/Constants";
+import { Extends } from "@/types/Constants";
 import { IReactionRolesEmbeds, IReactionRolesService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
 import { Message as DMessage, TextChannel } from "discord.js";
-import { CommandContext } from "../Commands.context";
+import { CommandContext } from "../../commands/Commands.context";
+import { ReactionRoles } from "../types/constants";
 
 @Injectable()
 export class CreateReactionCommand {
 	public constructor(
-		@Inject(Services.ReactionRoles) private readonly reaction: IReactionRolesService,
+		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,
 		@Inject(Extends.ReactionRolesEmbeds) private readonly Embeds: IReactionRolesEmbeds,
 	) {}
 

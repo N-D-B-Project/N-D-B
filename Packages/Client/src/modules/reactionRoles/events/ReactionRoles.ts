@@ -1,21 +1,22 @@
+import { MessageTools } from "@/modules/commands/Message";
 import { Extends, Services } from "@/types/Constants";
 import { IDatabaseService, IReactionRolesService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
-import { OnEvent } from "@nestjs/event-emitter";
-import { Client, EmbedBuilder, MessageReaction, User, roleMention } from "discord.js";
-import { MessageTools } from "../commands/Message";
+import { Client, EmbedBuilder, roleMention } from "discord.js";
+import { Context, ContextOf, On } from "necord";
+import { ReactionRoles } from "../types/constants";
 
 @Injectable()
 export class ReactionRolesEvents {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(Services.ReactionRoles) private readonly reactionRoles: IReactionRolesService,
+		@Inject(ReactionRoles.Service) private readonly reactionRoles: IReactionRolesService,
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
 		private readonly client: Client,
 	) {}
 
-	@OnEvent("ReactionRoles.Add")
-	public async onReactionRolesAdd(reaction: MessageReaction, user: User) {
+	@On("messageReactionAdd")
+	public async onReactionRolesAdd(@Context() [reaction, user]: ContextOf<"messageReactionAdd">) {
 		if (user === this.client.user) return;
 		const TIMER: number = 10 * 1000;
 		const ReactionCooldown = new Set();
@@ -345,8 +346,8 @@ export class ReactionRolesEvents {
 		}
 	}
 
-	@OnEvent("ReactionRoles.Remove")
-	public async onReactionRolesRemove(reaction: MessageReaction, user: User) {
+	@On("messageReactionRemove")
+	public async onReactionRolesRemove(@Context() [reaction, user]: ContextOf<"messageReactionAdd">) {
 		if (user === this.client.user) return;
 
 		const TIMER: number = 10 * 1000;

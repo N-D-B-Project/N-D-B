@@ -1,13 +1,13 @@
 import { REACTION_OPTIONS, iReaction } from "@/types";
 import { Services } from "@/types/Constants";
-import { IReactionRoleRepository } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Guild, TextChannel } from "discord.js";
-import { ReactionRolesEntity } from "../entities";
-import { PrismaService } from "../prisma/Prisma.service";
+import { ReactionRolesEntity } from "../database/entities";
+import { PrismaService } from "../database/prisma/Prisma.service";
+import { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 
 @Injectable()
-export class ReactionRoleRepository implements IReactionRoleRepository {
+export class ReactionRolesRepository implements IReactionRolesRepository {
 	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
 
 	public async getAll(guild: Guild): Promise<Array<ReactionRolesEntity>> {

@@ -1,13 +1,16 @@
-import {
-	DatabaseProvider,
-	ReactionRolesEmbedsProvider,
-	ReactionRolesProvider,
-	TranslateProvider,
-} from "@/types/Providers";
+import { DatabaseProvider, TranslateProvider } from "@/types/Providers";
 import { Global, Module } from "@nestjs/common";
+import { ReactionRolesEvents } from "./events/ReactionRoles";
+import { ReactionRolesEmbedsProvider, ReactionRolesProvider } from "./types/providers";
 
 @Global()
 @Module({
-	providers: [ReactionRolesProvider, ReactionRolesEmbedsProvider, DatabaseProvider, TranslateProvider],
+	providers: [
+		ReactionRolesEvents,
+		ReactionRolesProvider,
+		ReactionRolesEmbedsProvider,
+		DatabaseProvider,
+		TranslateProvider,
+	],
 })
 export class ReactionRolesModule {}

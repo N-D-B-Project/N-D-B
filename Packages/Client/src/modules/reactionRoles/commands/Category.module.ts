@@ -1,11 +1,6 @@
-import {
-	ButtonsComponentsProvider,
-	DatabaseProvider,
-	ReactionRolesEmbedsProvider,
-	ReactionRolesProvider,
-	TranslateProvider,
-} from "@/types/Providers";
+import { ButtonsComponentsProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
 import { Module } from "@nestjs/common";
+import { ReactionRolesEmbedsProvider, ReactionRolesProvider } from "../types/providers";
 import { CreateReactionCommand } from "./CreateReaction.command";
 import { DeleteAllReactionsCommand } from "./DeleteAllReactions.command";
 import { DeleteReactionCommand } from "./DeleteReaction.command";

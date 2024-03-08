@@ -1,15 +1,16 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
 import { Buttons, ConfirmButtonEnum } from "@/modules/components/Buttons.component";
-import { Extends, Services } from "@/types/Constants";
+import { Extends } from "@/types/Constants";
 import { IReactionRolesEmbeds, IReactionRolesService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Button, ButtonContext, ComponentParam, Context as NecordContext } from "necord";
-import { CommandContext, Context } from "../Commands.context";
+import { CommandContext, Context } from "../../commands/Commands.context";
+import { ReactionRoles } from "../types/constants";
 
 @Injectable()
 export class DeleteAllReactionsCommand {
 	public constructor(
-		@Inject(Services.ReactionRoles) private readonly reaction: IReactionRolesService,
+		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,
 		@Inject(Extends.ReactionRolesEmbeds) private readonly Embeds: IReactionRolesEmbeds,
 		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 	) {}

@@ -1,6 +1,7 @@
 import { Context } from "@/modules/commands/Commands.context";
 import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/commands/Commands.discovery";
 import { GuildEntity, ReactionRolesEntity, UserEntity } from "@/modules/database/entities";
+import { IReactionRolesRepository } from "@/modules/reactionRoles/interfaces/IReactionRoleRepository";
 import { ConfigService } from "@nestjs/config";
 import { AsyncLocalStorage } from "async_hooks";
 import { Client, EmbedBuilder, Guild, Message, Role, TextChannel, User } from "discord.js";
@@ -15,7 +16,7 @@ export interface IDatabaseService {
 	ConfigRepo(): ConfigService<Config>;
 	GuildRepo(): IGuildRepository;
 	UserRepo(): IUserRepository;
-	ReactionRolesRepo(): IReactionRoleRepository;
+	ReactionRolesRepo(): IReactionRolesRepository;
 }
 
 export interface IGuildRepository {
@@ -30,26 +31,6 @@ export interface IUserRepository {
 	create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }>;
 	update(oldUser: User, newUser: User): Promise<UserEntity>;
 	delete(user: User): Promise<UserEntity>;
-}
-
-export interface IReactionRoleRepository {
-	getAll(guild: Guild): Promise<Array<ReactionRolesEntity>>;
-	getOne(guild: Guild, { Channel, Message, Role, Emoji, Option }: iReaction): Promise<ReactionRolesEntity>;
-	getInChannel(guild: Guild, channel: TextChannel): Promise<Array<ReactionRolesEntity>>;
-	create(
-		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
-	): Promise<{ status: "UnableToCreate" | "Created" }>;
-	delete(guild: Guild, { Channel, Message, Role, Emoji }: iReaction): Promise<{ status: "UnableToDelete" | "Deleted" }>;
-	deleteMany(guild: Guild): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }>;
-	update(
-		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
-		newOption: REACTION_OPTIONS,
-	): Promise<{
-		status: "UnableToUpdate" | "Updated";
-		oldOption?: REACTION_OPTIONS;
-	}>;
 }
 
 export type IAsyncLocalStorage = AsyncLocalStorage<AlsStore>;

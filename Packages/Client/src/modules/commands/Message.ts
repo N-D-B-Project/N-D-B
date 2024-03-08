@@ -6,6 +6,7 @@ import {
 	Message,
 	MessageEditOptions,
 	MessageReaction,
+	PartialUser,
 	StartThreadOptions,
 	TextBasedChannel,
 	TextChannel,
@@ -14,7 +15,7 @@ import {
 } from "discord.js";
 
 export class MessageTools {
-	public static async send(target: User | TextBasedChannel, content: Content): Promise<Message> {
+	public static async send(target: User | PartialUser | TextBasedChannel, content: Content): Promise<Message> {
 		const msgOptions = messageOptions(content);
 		return await target.send(msgOptions);
 	}
