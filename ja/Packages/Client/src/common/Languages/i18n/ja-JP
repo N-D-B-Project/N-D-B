@@ -1,9 +1,33 @@
 {
-	"UNMute": "Não me desmute! Me mutei novamente, para proteger os dados e você ter uma experiência mais rápida e suave",
+	"Help": {
+		"description": "Cria uma ReactionRole",
+		"Usage": "<Canal> <MessageID> <Cargo> <Emoji> (option)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)"
+	},
+	"Channel": {
+		"Invalid": "{fail} Canal invalido"
+	},
+	"ID": {
+		"Invalid": "${fail} Insira um ID de Mensagem",
+		"NotFound": "{fail} Mensagem não encontrada verifique se o ID é valido"
+	},
+	"Role": {
+		"Invalid": "{fail} Cargo Invalido ou é um cargo de integração"
+	},
+	"Emoji": {
+		"Invalid": "{fail} Emoji invalido"
+	},
+	"UnableToCreate": "{fail} Não foi possível criar essa ReactionRole pois ela já existe ou ocorreu um erro interno",
 	"Embed": {
-		"Title": "{EMOJI} Canal Vazio",
-		"Description": "Eu sai do canal `{CHANNEL}` pois o canal ficou vazio por: {TIME} Segundos",
-		"Description2": "Não irei sair do Canal pois o AFK está Ativo",
-		"Footer": "N-D-B Music Player"
+		"Author": "Reaction Roles",
+		"Fields": {
+			"1": "Canal",
+			"2": "Emoji",
+			"3": "Tipo",
+			"4": "Mensagem",
+			"5": "Cargo",
+			"Content": {
+				"4": "[Clique aqui]({MsgIdURL})"
+			}
+		}
 	}
 }
