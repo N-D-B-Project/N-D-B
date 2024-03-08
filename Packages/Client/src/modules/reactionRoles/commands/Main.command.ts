@@ -171,9 +171,9 @@ export class ReactionRolesMainSlashCommand {
 			.addSubcommand((subcommand) =>
 				subcommand
 					.setName("delete_all")
-					.setNameLocalizations(Localization.options.deleteall.name)
+					.setNameLocalizations(Localization.options.delete_all.name)
 					.setDescription("Find the list of ReactionRoles on the server")
-					.setDescriptionLocalizations(Localization.options.deleteall.description),
+					.setDescriptionLocalizations(Localization.options.delete_all.description),
 			)
 			.addSubcommand((subcommand) =>
 				subcommand

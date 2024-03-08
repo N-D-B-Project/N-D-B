@@ -5,7 +5,7 @@
 		"moment": "pt-br",
 		"defaultMomentFormat": "LL",
 		"default": true,
-		"aliases": ["Brazilian Portuguese", "pt-BR", "pt-br", "br"]
+		"aliases": ["Brazilian Portuguese", "br", "BR", "pt", "PT", "pt-br", "pt_br", "pt_BR", "pt-BR"]
 	},
 	{
 		"name": "en-US",
@@ -13,6 +13,6 @@
 		"moment": "en",
 		"defaultMomentFormat": "MMMM Do YYYY",
 		"default": true,
-		"aliases": ["English", "en", "en-us", "en_us", "en_US"]
+		"aliases": ["English", "en", "EN", "en-us", "en_us", "en_US", "en-US"]
 	}
 ]

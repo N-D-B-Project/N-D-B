@@ -1,8 +1,8 @@
 {
 	"Labels": {
 		"Confirm": {
-			"YES": "Sim",
-			"NO": "Não"
+			"YES": "Yes",
+			"NO": "No"
 		}
 	}
 }
