@@ -1,7 +1,21 @@
 {
 	"Help": {
-		"Description": "Mostra todos os tipos de ReactionRoles",
-		"Usage": ""
+		"Description": "Edita uma ReactionRole",
+		"Usage": "<Canal> <MessageID> <Cargo> <Emoji> (nova opção)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)"
 	},
-	"Types": "`1` - Reagir adiciona o Cargo, tirar a reação remove o Cargo \n`2` - Reagir adiciona o Cargo, tirar a reação não remove o Cargo\n`3` - Reagir removerá o Cargo, tirar a reação não a devolverá o Cargo \n`4` - Reagir removerá o Cargo, tirar a reação adiciona o Cargo \n`5` - Mesmo conceito do tipo 3 porém remove a reação\n`6` - Reagir adiciona o Cargo e reagir novamente remove o Cargo"
+	"UnableToUpdate": "Não foi possível editar essa ReactionRole devido a um erro interno",
+	"Embed": {
+		"Footer": "Reaction Roles",
+		"Description": "ReactionRole Atualizada",
+		"Fields": {
+			"1": "Canal",
+			"2": "Emoji",
+			"3": "Mensagem",
+			"4": "Cargo",
+			"5": "Nova opção",
+			"Content": {
+				"3": "[Clique aqui]({MsgIdURL})"
+			}
+		}
+	}
 }
