@@ -3,9 +3,7 @@
 	"packageManager": "yarn@4.1.0",
 	"private": true,
 	"workspaces": {
-		"packages": [
-			"Packages/*"
-		]
+		"packages": ["Packages/*"]
 	},
 	"author": {
 		"name": "Miguel Alexandre Uhlein <NedcloarBR>",
@@ -14,7 +12,7 @@
 	},
 	"scripts": {
 		"update": "yarn upgrade-interactive",
-		"postinstall": "husky install",
+		"postinstall": "husky install || true",
 		"format": "yarn dlx @biomejs/biome format --write ./",
 		"lint": "yarn dlx @biomejs/biome lint ./",
 		"check": "yarn dlx @biomejs/biome check --apply ./"
