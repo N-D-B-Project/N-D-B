@@ -1,5 +1,6 @@
 import { Content } from "@/types";
-import { Tools } from "@/utils/Tools";
+import { messageOptions } from "@/utils/Tools";
+
 import {
 	EmojiResolvable,
 	Message,
@@ -14,17 +15,17 @@ import {
 
 export class MessageTools {
 	public static async send(target: User | TextBasedChannel, content: Content): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content);
+		const msgOptions = messageOptions(content);
 		return await target.send(msgOptions);
 	}
 
 	public static async reply(message: Message, content: Content): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content);
+		const msgOptions = messageOptions(content);
 		return await message.reply(msgOptions);
 	}
 
 	public static async edit(message: Message, content: Content): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content) as MessageEditOptions;
+		const msgOptions = messageOptions(content) as MessageEditOptions;
 		return await message.edit(msgOptions);
 	}
 

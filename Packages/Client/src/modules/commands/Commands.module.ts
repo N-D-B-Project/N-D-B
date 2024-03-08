@@ -1,7 +1,7 @@
 import { Extends, Services } from "@/types/Constants";
 import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { CommandProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
-import { Tools } from "@/utils/Tools";
+import { WAIT } from "@/utils/Tools";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
@@ -82,7 +82,7 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 						Time: `<t:${Math.floor(Date.now() / 1000 + 15)}:R>`,
 					}),
 				);
-				await Tools.WAIT(15 * 1000);
+				await WAIT(15 * 1000);
 				MessageTools.delete(PrefixMessage as Message);
 				return;
 			}

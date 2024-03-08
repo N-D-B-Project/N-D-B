@@ -1,7 +1,7 @@
 import { Config } from "@/types";
 import { Extends, Services } from "@/types/Constants";
 import type { IDatabaseService, Ii18nService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
+import { Timer } from "@/utils/Tools";
 import { Inject, Injectable } from "@nestjs/common";
 import {
 	Client,
@@ -103,7 +103,6 @@ export class MusicEmbeds implements IMusicEmbeds {
 
 				break;
 			case "Success":
-				const Timer = await Tools.Timer(this.Translate, "normal", track.info.duration, context);
 				baseEmbed
 					.setColor("#00c26f")
 					.setTitle(await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Title"))
@@ -129,7 +128,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 						{
 							name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:3"),
 							value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3", {
-								TIMER: Timer,
+								TIMER: await Timer(this.Translate, "normal", track.info.duration, context),
 							}),
 							inline: true,
 						},
@@ -154,7 +153,6 @@ export class MusicEmbeds implements IMusicEmbeds {
 			Name: string;
 		},
 	): Promise<EmbedBuilder> {
-		const Timer = await Tools.Timer(this.Translate, "normal", res.playlist.duration, context);
 		const baseEmbed = await this.createBaseEmbed(context, "Success");
 		return baseEmbed
 			.setTitle(
@@ -185,7 +183,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 				{
 					name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:3"),
 					value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3", {
-						TIMER: Timer,
+						TIMER: await Timer(this.Translate, "normal", res.playlist.duration, context),
 					}),
 					inline: true,
 				},

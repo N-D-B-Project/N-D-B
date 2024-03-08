@@ -1,6 +1,6 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
 import { CommandContext, Context } from "@/modules/commands/Commands.context";
-import { Tools } from "@/utils/Tools";
+import { WAIT, isValidURL } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { EmbedBuilder, Message, VoiceChannel } from "discord.js";
 import { Player, SearchResult, SourceLinksRegexes } from "lavalink-client";
@@ -69,7 +69,7 @@ export class PlayCommand {
 			return context.reply(await this.embeds.NoArgs(context));
 		}
 
-		if (Tools.isValidURL(Search)) {
+		if (isValidURL(Search)) {
 			res = (await player.search(Search, context.author.id)) as SearchResult;
 		} else {
 			res = (await player.search(
@@ -81,7 +81,7 @@ export class PlayCommand {
 		}
 
 		const QueryAddedToQueueMessage = await context.send(await this.LoadType(res, player, context));
-		await Tools.WAIT(5 * 1000);
+		await WAIT(5 * 1000);
 		await QueryAddedToQueueMessage.delete();
 	}
 

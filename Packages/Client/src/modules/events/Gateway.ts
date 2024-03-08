@@ -1,7 +1,7 @@
 import { Config } from "@/types";
 import { Services } from "@/types/Constants";
 import { IDatabaseService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
+import { WAIT } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
@@ -29,7 +29,7 @@ export class GatewayEvents {
 
 	@Once("ready")
 	public async onReady(@Context() [client]: ContextOf<"ready">) {
-		await Tools.WAIT(2000);
+		await WAIT(2000);
 		this.logger.log(`Bot logged in as ${client.user.username}`);
 		this.logger.log(`${this.database.AlsRepo().getStore()["LegacyCommands"].size} Legacy Commands`);
 		this.logger.log(`${this.database.AlsRepo().getStore()["SlashCommands"].size} Slash Commands`);

@@ -1,5 +1,5 @@
 import { Content } from "@/types";
-import { Tools } from "@/utils/Tools";
+import { messageOptions } from "@/utils/Tools";
 import {
 	BaseMessageOptions,
 	CommandInteraction,
@@ -33,7 +33,7 @@ export class InteractionTools {
 		content: Content,
 		ephemeral: boolean,
 	): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content) as InteractionReplyOptions;
+		const msgOptions = messageOptions(content) as InteractionReplyOptions;
 
 		if (interaction.deferred || interaction.replied) {
 			return await interaction.followUp({
@@ -56,7 +56,7 @@ export class InteractionTools {
 		interaction: CommandInteraction | MessageComponentInteraction,
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content);
+		const msgOptions = messageOptions(content);
 		return (await interaction.editReply({
 			...msgOptions,
 		})) as Message;
@@ -66,7 +66,7 @@ export class InteractionTools {
 		interaction: MessageComponentInteraction,
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
-		const msgOptions = Tools.messageOptions(content) as InteractionUpdateOptions;
+		const msgOptions = messageOptions(content) as InteractionUpdateOptions;
 		return (await interaction.update({
 			...msgOptions,
 			fetchReply: true,

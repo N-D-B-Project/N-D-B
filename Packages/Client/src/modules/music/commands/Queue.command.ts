@@ -1,7 +1,7 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
 import { Extends, Services } from "@/types/Constants";
 import { INDBService, Ii18nService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
+import { Timer } from "@/utils/Tools";
 import { NecordPaginationService } from "@necord/pagination";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { EmbedBuilder, Message, UserManager } from "discord.js";
@@ -54,7 +54,6 @@ export class QueueCommand {
 			const track = queue[i];
 			const Requester = await this.users.fetch(track.requester as string);
 
-			const Timer = await Tools.Timer(this.Translate, "normal", track.info.duration, context);
 			embeds.push(
 				new EmbedBuilder()
 					.setAuthor({
@@ -100,7 +99,7 @@ export class QueueCommand {
 											"Events/PlayerEvents:trackStart:Embed:Fields:Content:3",
 
 											{
-												TIMER: Timer,
+												TIMER: await Timer(this.Translate, "normal", track.info.duration, context),
 											},
 									  )
 							}`,

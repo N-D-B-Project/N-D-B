@@ -1,6 +1,6 @@
 import { Extends } from "@/types/Constants";
 import { Ii18nService } from "@/types/Interfaces";
-import { Tools } from "@/utils/Tools";
+import { Timer, WAIT } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, GuildChannel, GuildMember, Message, TextChannel } from "discord.js";
@@ -28,8 +28,7 @@ export class TrackEvents {
 			(await (await this.client.guilds.fetch(player.guildId)).members.fetch(track.requester as string)) as GuildMember
 		).user;
 
-		const Timer = await Tools.Timer(this.Translate, "normal", track.info.duration, textChannel as GuildChannel);
-		await Tools.WAIT(500);
+		await WAIT(500);
 
 		MessageTools.send(textChannel, {
 			embeds: [
@@ -37,7 +36,7 @@ export class TrackEvents {
 					textChannel,
 					track,
 					Requester,
-					Timer,
+					await Timer(this.Translate, "normal", track.info.duration, textChannel as GuildChannel),
 					await this.service.URLChecker(false, track.info.uri),
 					this.service.formatSourceName(track.info.sourceName),
 				),
