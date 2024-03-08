@@ -1,15 +1,8 @@
 {
 	"Help": {
-		"Description": "Remove todas as ReactionRoles do Servidor",
-		"Usage": " "
+		"Description": "Remove uma ReactionRole",
+		"Usage": "<Canal> <MessageID> <Cargo> <Emoji>"
 	},
-	"Embed": {
-		"Title": "Remover ReactionRoles",
-		"Description": {
-			"Confirm": "Tem certeza que deseja remover todas as ReactionRoles do Servidor?\nEsta ação não pode ser desfeita!",
-			"Cancel": "Operação cancelada!",
-			"Success": "Todas as: {NUMBER} ReactionRoles foram removidas com sucesso!"
-		}
-	},
-	"UnableToDelete": "O Servidor não possui nenhuma ReactionRole ou ocorreu um erro interno"
+	"UnableToDelete": "Não foi possível remover a ReactionRole",
+	"Removed": "{success} ReactionRole [Removida]({URL})"
 }
