@@ -30,6 +30,7 @@ export class DeleteReactionCommand {
 		},
 	})
 	@SlashCommand({
+		deployMode: "Test",
 		type: "Sub",
 		name: "delete",
 	})

@@ -1,6 +1,17 @@
-import { DatabaseProvider, TranslateProvider } from "@/types/Providers";
+import { NDBServiceProvider } from "@/types/Providers";
 import { Global, Module } from "@nestjs/common";
 import { MusicEmbedsProvider, MusicManagerProvider, MusicServiceProvider } from ".";
+import {
+	JoinCommand,
+	LeaveCommand,
+	MusicMainSlashCommand,
+	NowPlayingCommand,
+	PauseCommand,
+	PlayCommand,
+	QueueCommand,
+	ResumeCommand,
+	StopCommand,
+} from "./commands";
 import { ChannelEvents, NodeEvents, PlayerEvents, QueueEvents, TrackEvents, VoiceEvents } from "./events";
 
 @Global()
@@ -13,11 +24,20 @@ import { ChannelEvents, NodeEvents, PlayerEvents, QueueEvents, TrackEvents, Voic
 		TrackEvents,
 		ChannelEvents,
 		VoiceEvents,
-		TranslateProvider,
-		DatabaseProvider,
+		MusicMainSlashCommand,
+		JoinCommand,
+		LeaveCommand,
+		NowPlayingCommand,
+		PauseCommand,
+		PlayCommand,
+		QueueCommand,
+		ResumeCommand,
+		StopCommand,
+		NDBServiceProvider,
 		MusicManagerProvider,
 		MusicEmbedsProvider,
 		MusicServiceProvider,
 	],
+	exports: [MusicManagerProvider, MusicEmbedsProvider, MusicServiceProvider],
 })
 export class MusicModule {}

@@ -4,8 +4,8 @@ import { EventEmitter2 } from "@nestjs/event-emitter";
 import { SlashCommandBuilder } from "discord.js";
 import { CommandConfig, CommandPermissions, SlashCommand } from "../../../common/decorators";
 import { OwnerPermissionGuard } from "../../../common/guards/Permissions/Owner.Guard";
-import { CommandContext } from "../Commands.context";
-import { RunSubCommandEvent } from "../Commands.discovery";
+import { CommandContext } from "../../commands/Commands.context";
+import { RunSubCommandEvent } from "../../commands/Commands.discovery";
 
 @UseGuards(OwnerPermissionGuard)
 @Injectable()

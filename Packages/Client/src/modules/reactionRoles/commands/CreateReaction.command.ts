@@ -32,6 +32,7 @@ export class CreateReactionCommand {
 		},
 	})
 	@SlashCommand({
+		deployMode: "Test",
 		type: "Sub",
 		name: "create",
 	})

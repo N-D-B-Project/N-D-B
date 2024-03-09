@@ -8,5 +8,6 @@ import { RepositoriesModule } from "./repositories/Repositories.module";
 @Module({
 	imports: [AlsModule, RepositoriesModule, PrismaModule],
 	providers: [DatabaseProvider],
+	exports: [DatabaseProvider],
 })
 export class DatabaseModule {}

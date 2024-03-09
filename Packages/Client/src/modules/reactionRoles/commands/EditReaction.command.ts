@@ -27,8 +27,9 @@ export class EditReactionCommand {
 			"<Channel> <MessageId> <Role> <Emoji> <new option>\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (new option)",
 	})
 	@SlashCommand({
+		deployMode: "Test",
 		type: "Sub",
-		name: "create",
+		name: "edit",
 	})
 	@CommandConfig({ category: "🎩 ReactionRole" })
 	@CommandPermissions({

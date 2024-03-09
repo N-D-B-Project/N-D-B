@@ -1,8 +1,9 @@
-import { ButtonsComponentsProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
+import { ButtonsComponentsProvider } from "@/types/Providers";
 import { Global, Module } from "@nestjs/common";
 
 @Global()
 @Module({
-	providers: [ButtonsComponentsProvider, TranslateProvider, DatabaseProvider],
+	providers: [ButtonsComponentsProvider],
+	exports: [ButtonsComponentsProvider],
 })
 export class ComponentsModule {}

@@ -1,11 +1,10 @@
-import { CommandProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
 import { Module, OnApplicationBootstrap } from "@nestjs/common";
 import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 import { REST } from "discord.js";
 import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
-import { NotQuiteNitroEvent } from "./NotQuiteNitro";
+// import { NotQuiteNitroEvent } from "./NotQuiteNitro";
 import { ThreadEvents } from "./Thread";
 @Module({
 	imports: [
@@ -14,16 +13,7 @@ import { ThreadEvents } from "./Thread";
 			maxListeners: 10,
 		}),
 	],
-	providers: [
-		GatewayEvents,
-		CommandsEvents,
-		GuildEvents,
-		ThreadEvents,
-		NotQuiteNitroEvent,
-		DatabaseProvider,
-		TranslateProvider,
-		CommandProvider,
-	],
+	providers: [GatewayEvents, CommandsEvents, GuildEvents, ThreadEvents /*NotQuiteNitroEvent*/],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(

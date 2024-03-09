@@ -1,6 +1,6 @@
 import { Extends, Services } from "@/types/Constants";
 import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
-import { CommandProvider, DatabaseProvider, TranslateProvider } from "@/types/Providers";
+import { CommandProvider } from "@/types/Providers";
 import { WAIT } from "@/utils/Tools";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
@@ -24,7 +24,7 @@ import { MessageTools } from "./Message";
 
 @Global()
 @Module({
-	providers: [CommandProvider, DatabaseProvider, TranslateProvider],
+	providers: [CommandProvider],
 	exports: [CommandProvider],
 })
 export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
@@ -44,11 +44,13 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 		this.logger.log("Started refreshing application commands");
 		return this.client.once("ready", async () => {
 			for (const command of this.legacyExplorerService.explore(LegacyCommand.KEY)) {
-				this.commandsService.loadLegacy(command);
+				await this.commandsService.loadLegacy(command);
 			}
 			for (const command of this.slashExplorerService.explore(SlashCommand.KEY)) {
-				this.commandsService.loadSlash(command);
+				await this.commandsService.loadSlash(command);
 			}
+
+			this.eventEmitter.emit("commands.registered");
 		});
 	}
 

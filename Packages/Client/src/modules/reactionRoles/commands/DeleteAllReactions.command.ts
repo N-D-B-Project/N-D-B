@@ -24,6 +24,7 @@ export class DeleteAllReactionsCommand {
 		usage: "",
 	})
 	@SlashCommand({
+		deployMode: "Test",
 		type: "Sub",
 		name: "delete_all",
 	})

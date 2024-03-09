@@ -5,6 +5,7 @@ import { Services } from "@/types/Constants";
 import { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Client } from "discord.js";
 import { Context } from "./Commands.context";
 import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "./Commands.discovery";
@@ -15,6 +16,7 @@ export class CommandsService implements ICommandsService {
 		@Inject(Services.Database) private readonly database: IDatabaseService,
 		private readonly client: Client,
 		private readonly reflector: Reflector,
+		private readonly eventEmitter: EventEmitter2,
 	) {}
 
 	public async loadLegacy(command: LegacyCommandsDiscovery): Promise<void> {

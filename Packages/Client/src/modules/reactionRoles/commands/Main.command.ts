@@ -14,9 +14,9 @@ export class ReactionRolesMainSlashCommand {
 
 	@SlashCommand({
 		data: new SlashCommandBuilder()
-			.setName("reactionrole")
+			.setName("reactionroles")
 			.setNameLocalizations(Localization.name)
-			.setDescription("Category 🎩 ReactionRole")
+			.setDescription("Category 🎩 ReactionRoles")
 			.setDescriptionLocalizations(Localization.description)
 			.setDMPermission(false)
 			.addSubcommand((subcommand) =>

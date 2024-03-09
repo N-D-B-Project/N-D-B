@@ -19,19 +19,15 @@ export class ReactionTypesCommand {
 	private readonly logger = new Logger(ReactionTypesCommand.name);
 
 	@LegacyCommand({
-		name: "CreateReaction",
-		aliases: ["CReaction", "AddReaction", "createreaction", "creaction", "ReactionCreate"],
-		description: "Cria um novo Reaction Role no servidor.",
-		usage:
-			"<Canal> <MessageID> <Cargo> <Emoji> (opção)\nDica Utilize o comando **ReactionTypes** para ver os parâmetros para (option)",
-		args: {
-			min: 4,
-			max: 5,
-		},
+		name: "ReactionTypes",
+		aliases: ["RTypes", "rtypes"],
+		description: "Mostra os tipos de ReactionRoles",
+		usage: "",
 	})
 	@SlashCommand({
+		deployMode: "Test",
 		type: "Sub",
-		name: "create",
+		name: "types",
 	})
 	@CommandConfig({ category: "🎩 ReactionRole" })
 	@CommandPermissions({

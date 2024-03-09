@@ -1,6 +1,6 @@
 import { Extends, Services } from "@/types/Constants";
 import type { ICommandsService, IDatabaseService } from "@/types/Interfaces";
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, CommandInteraction, CommandInteractionOptionResolver, Message } from "discord.js";
 import { Context } from "../commands/Commands.context";
@@ -13,6 +13,8 @@ export class CommandsEvents {
 		@Inject(Extends.Command) private readonly commandsService: ICommandsService,
 		private readonly client: Client,
 	) {}
+
+	private readonly logger = new Logger(CommandsEvents.name);
 
 	@OnEvent("commands.legacy", { async: true })
 	public async onGuildCommand(message: Message, prefix: string) {
@@ -48,6 +50,13 @@ export class CommandsEvents {
 				}
 			}
 		}
+	}
+
+	@OnEvent("commands.registered")
+	public async onCommandsRegistered() {
+		this.logger.log(`${this.database.AlsRepo().getStore()["LegacyCommands"].size} Legacy Commands`);
+		this.logger.log(`${this.database.AlsRepo().getStore()["SlashCommands"].size} Slash Commands`);
+		this.logger.log(`${this.database.AlsRepo().getStore()["SubCommands"].size} Sub Commands`);
 	}
 
 	private async Runner(message: Message, prefix: string, type: "None" | "DM") {

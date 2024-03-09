@@ -5,7 +5,7 @@ import { Services } from "@/types/Constants";
 import { IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { EmbedBuilder, codeBlock } from "discord.js";
-import { CommandContext } from "../Commands.context";
+import { CommandContext } from "../../commands/Commands.context";
 
 @Injectable()
 export class EvalCommand {
