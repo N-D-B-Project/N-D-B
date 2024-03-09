@@ -1,0 +1,8 @@
+{
+	"Help": {
+		"Description": "Delete an ReactionRole",
+		"Usage": "<Channel> <MessageID> <Role> <Emoji>"
+	},
+	"UnableToDelete": "Unable to delete ReactionRole",
+	"Removed": "{success} ReactionRole [Deleted]({URL})"
+}
