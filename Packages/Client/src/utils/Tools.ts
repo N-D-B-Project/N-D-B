@@ -18,7 +18,7 @@ export const Timer = async (
 	translateInfo: Message | CommandInteraction | GuildChannel | Context,
 ): Promise<string> => {
 	const time = ms(number);
-	const days = Translate.Guild(translateInfo, "Tools/Tools:Timer:Days");
+	const days = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Days");
 	const hours = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Hours");
 	const minutes = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Minutes");
 	const seconds = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Seconds");

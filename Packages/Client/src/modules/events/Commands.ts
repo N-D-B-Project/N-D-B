@@ -62,7 +62,7 @@ export class CommandsEvents {
 	private async Runner(message: Message, prefix: string, type: "None" | "DM") {
 		const { Premium } = (await this.database.GuildRepo().get(message.guildId)).Settings;
 		const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
-		const context = new Context(message, args as Array<string>, type, Premium, prefix);
+		const context = new Context(message, args, type, Premium, prefix);
 		const _Command = await this.commandsService.get(cmd, context);
 		if (_Command) {
 			return _Command.execute([this.client, context]);

@@ -50,8 +50,7 @@ export class QueueCommand {
 		const embeds: Array<EmbedBuilder> = [];
 		const queue: Array<Track | UnresolvedTrack> = player.queue.tracks;
 
-		for (let i = 0; i < queue.length; i++) {
-			const track = queue[i];
+		for (const track of queue) {
 			const Requester = await this.users.fetch(track.requester as string);
 
 			embeds.push(

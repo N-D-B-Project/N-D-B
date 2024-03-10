@@ -11,7 +11,7 @@ export class BaseManager extends LavalinkManager {
 		private readonly client: Client,
 		private readonly config: ConfigService,
 		private readonly eventEmitter: EventEmitter2,
-		{ clientOptions, queueOptions, debugOptions }: options,
+		{ clientOptions, queueOptions, debugOptions }: Options,
 	) {
 		const logger = new Logger(clientOptions.username);
 		super({
@@ -108,14 +108,14 @@ export class BaseManager extends LavalinkManager {
 
 	public async load(): Promise<void> {
 		try {
-			await this.init({ ...this.client.user! });
+			await this.init({ ...this.client.user });
 		} catch (error) {
 			console.log(error);
 		}
 	}
 }
 
-interface options {
+interface Options {
 	clientOptions: {
 		username: string;
 	};

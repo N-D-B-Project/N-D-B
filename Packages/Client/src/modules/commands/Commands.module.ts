@@ -67,8 +67,8 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 			const UserPrefix = userConfig.Settings.Prefix;
 
 			const mentionRegexPrefix = RegExp(`${userMention(this.client.user.id)} `);
-			const Prefix = message.content.match(mentionRegexPrefix)
-				? message.content.match(mentionRegexPrefix)[0]
+			const Prefix = mentionRegexPrefix.exec(message.content)
+				? mentionRegexPrefix.exec(message.content)[0]
 				: message.channel.type !== ChannelType.DM
 				  ? GuildPrefix
 				  : UserPrefix;
@@ -85,7 +85,7 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 					}),
 				);
 				await WAIT(15 * 1000);
-				MessageTools.delete(PrefixMessage as Message);
+				MessageTools.delete(PrefixMessage);
 				return;
 			}
 

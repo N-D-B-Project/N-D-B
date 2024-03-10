@@ -9,7 +9,6 @@ export class QueueStore implements QueueStoreManager {
 	}
 
 	public async set(guildId, stringifiedQueueData): Promise<"OK"> {
-		// await this.delete(guildId); // redis requires you to delete it first;
 		return await this.redis.set(this.id(guildId), stringifiedQueueData);
 	}
 

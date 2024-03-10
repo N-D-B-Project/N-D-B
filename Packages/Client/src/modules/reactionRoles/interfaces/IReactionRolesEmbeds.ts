@@ -1,6 +1,6 @@
 import { Context } from "@/modules/commands/Commands.context";
 import { EmbedBuilder, Message } from "discord.js";
-import { REACTION_OPTIONS, iReaction } from "../types";
+import { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {
 	InvalidChannelEmbed(context: Context): Promise<EmbedBuilder>;
@@ -10,12 +10,12 @@ export interface IReactionRolesEmbeds {
 	InvalidEmojiEmbed(context: Context): Promise<EmbedBuilder>;
 	ReactionRoleCreatedEmbed(
 		context: Context,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
+		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<EmbedBuilder>;
 	ReactionRoleRemovedEmbed(context: Context, MsgID: Message): Promise<EmbedBuilder>;
 	ReactionRoleUpdatedEmbed(
 		context: Context,
-		{ Channel, Message, Role, Emoji }: iReaction,
+		{ Channel, Message, Role, Emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder>;
 	ReactionRoleDeleteAllEmbed(

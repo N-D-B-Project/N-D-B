@@ -46,8 +46,8 @@ export class NDBService implements INDBService {
 		}
 
 		const pages: PageBuilder[] = [];
-		for (let i = 0; i < embeds.length; i++) {
-			pages.push(new PageBuilder().addEmbed(embeds[i]));
+		for (const embed of embeds) {
+			pages.push(new PageBuilder().addEmbed(embed));
 		}
 
 		return this.paginator

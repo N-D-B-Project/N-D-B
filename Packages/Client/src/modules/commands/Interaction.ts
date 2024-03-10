@@ -57,9 +57,9 @@ export class InteractionTools {
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
 		const msgOptions = messageOptions(content);
-		return (await interaction.editReply({
+		return await interaction.editReply({
 			...msgOptions,
-		})) as Message;
+		});
 	}
 
 	public static async update(
@@ -67,9 +67,9 @@ export class InteractionTools {
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
 		const msgOptions = messageOptions(content) as InteractionUpdateOptions;
-		return (await interaction.update({
+		return await interaction.update({
 			...msgOptions,
 			fetchReply: true,
-		})) as Message;
+		});
 	}
 }

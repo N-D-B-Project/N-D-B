@@ -4,8 +4,8 @@ import { REST } from "discord.js";
 import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
-// import { NotQuiteNitroEvent } from "./NotQuiteNitro";
 import { ThreadEvents } from "./Thread";
+
 @Module({
 	imports: [
 		EventEmitterModule.forRoot({
@@ -13,7 +13,7 @@ import { ThreadEvents } from "./Thread";
 			maxListeners: 10,
 		}),
 	],
-	providers: [GatewayEvents, CommandsEvents, GuildEvents, ThreadEvents /*NotQuiteNitroEvent*/],
+	providers: [GatewayEvents, CommandsEvents, GuildEvents, ThreadEvents],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(

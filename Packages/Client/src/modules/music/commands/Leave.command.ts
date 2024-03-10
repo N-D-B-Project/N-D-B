@@ -37,7 +37,7 @@ export class LeaveCommand {
 	public async onCommandRun([client, context]: CommandContext): Promise<Message> {
 		let player = await this.service.getPlayer(context);
 
-		if (!this.service.hasVoice(context)) return;
+		if (!(await this.service.hasVoice(context))) return;
 
 		if (!player) {
 			player = await this.service.createPlayer(

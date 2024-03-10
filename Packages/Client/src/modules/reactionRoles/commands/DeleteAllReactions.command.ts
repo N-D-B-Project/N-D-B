@@ -48,9 +48,9 @@ export class DeleteAllReactionsCommand {
 		@NecordContext() [interaction]: ButtonContext,
 		@ComponentParam("value") value: ConfirmButtonEnum,
 	) {
+		const { count, status } = await this.reaction.DeleteAll(this.context.guild);
 		switch (value) {
 			case ConfirmButtonEnum.Yes:
-				const { count, status } = await this.reaction.DeleteAll(this.context.guild);
 				if (status === "Deleted") {
 					this.context.edit({
 						embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(this.context, "Success", count)],

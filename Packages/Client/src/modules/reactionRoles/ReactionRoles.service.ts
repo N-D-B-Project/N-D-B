@@ -5,7 +5,7 @@ import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord
 import { Context } from "../commands/Commands.context";
 import { ReactionRolesEntity } from "../database/entities";
 import { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
-import { REACTION_OPTIONS, iReaction } from "./types";
+import { IReaction, REACTION_OPTIONS } from "./types";
 import { ReactionRoles } from "./types/constants";
 
 @Injectable()
@@ -29,7 +29,7 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async getOne(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
+		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<ReactionRolesEntity> {
 		return await this.database.ReactionRolesRepo().getOne(guild, {
 			Channel,
@@ -42,7 +42,7 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async Create(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
+		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<{ status: "UnableToCreate" | "Created" }> {
 		return await this.database.ReactionRolesRepo().create(guild, {
 			Channel,
@@ -55,7 +55,7 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async Delete(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji }: iReaction,
+		{ Channel, Message, Role, Emoji }: IReaction,
 	): Promise<{ status: "UnableToDelete" | "Deleted" }> {
 		return await this.database.ReactionRolesRepo().delete(guild, {
 			Channel,
@@ -71,7 +71,7 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async Update(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
+		{ Channel, Message, Role, Emoji, Option }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<{
 		status: "UnableToUpdate" | "Updated";

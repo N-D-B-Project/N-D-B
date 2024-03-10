@@ -22,7 +22,7 @@ export enum FetchType {
 	Channel = "Channel",
 }
 
-export interface iReactionArray {
+export interface IReactionArray {
 	message: string;
 	channel: string;
 	role: string;
@@ -30,7 +30,7 @@ export interface iReactionArray {
 	option: number;
 }
 
-export interface iReaction {
+export interface IReaction {
 	Channel: TextChannel["id"];
 	Message: Message["id"];
 	Role: Role["id"];

@@ -7,7 +7,7 @@ import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
 import { Message as DMessage, TextChannel } from "discord.js";
 import { CommandContext } from "../../commands/Commands.context";
 import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
-import { iReaction } from "../types";
+import { IReaction } from "../types";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()
@@ -54,7 +54,7 @@ export class CreateReactionCommand {
 
 		await this.reaction.CheckParams(client, context, Channel, MessageID, Message, Role, Emoji);
 
-		const data: iReaction = {
+		const data: IReaction = {
 			Channel: Channel.id,
 			Message: Message.id,
 			Role: Role.id,

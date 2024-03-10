@@ -67,7 +67,7 @@ export class CommandsService implements ICommandsService {
 					await testGuildCommands?.create(data);
 				}
 			} catch (error) {
-				throw new CommandError(`Error when Registering Application Commands: ${error}`);
+				throw new CommandError(`Error when Registering Application Commands: ${error as Error}`);
 			}
 		}
 

@@ -2,7 +2,7 @@ import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "
 import { Buttons } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Client, Message as DMessage, TextChannel } from "discord.js";
+import { Client, TextChannel } from "discord.js";
 import { CommandContext, Context } from "../../commands/Commands.context";
 import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
@@ -43,10 +43,10 @@ export class DeleteReactionCommand {
 	})
 	public async onCommandRun([client, context]: CommandContext) {
 		const Channel = (await context.getChannel(this.client, "channel", 0)) as TextChannel;
-		const MessageID = context.getArg("message", 1) as string;
-		const Message = (await Channel.messages.fetch(MessageID)) as DMessage;
+		const MessageID = context.getArg("message", 1);
+		const Message = await Channel.messages.fetch(MessageID);
 		const Role = await context.getRole(this.client, "role", 2);
-		const Emoji = context.getArg("emoji", 3) as string;
+		const Emoji = context.getArg("emoji", 3);
 
 		await this.reaction.CheckParams(client, context, Channel, MessageID, Message, Role, Emoji);
 

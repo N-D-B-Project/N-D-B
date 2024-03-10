@@ -1,11 +1,8 @@
 import { CommandInteraction } from "discord.js";
-import { Player, Queue, Track } from "lavalink-client";
+import { Player } from "lavalink-client";
 
 export default class BasePlayer extends Player {
 	private _isPremium = false;
-	private _lastSong: Array<Track> = [];
-	private _originalQueue: Queue;
-	private _isShuffle = false;
 	private _songMessage: string;
 	private _playerMessage: string;
 	private _playerAuthor: string;

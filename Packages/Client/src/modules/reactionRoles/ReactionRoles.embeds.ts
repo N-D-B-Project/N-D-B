@@ -7,7 +7,7 @@ import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, Message, TextChannel, channelMention, roleMention } from "discord.js";
 import { Context } from "../commands/Commands.context";
 import { IReactionRolesEmbeds } from "./interfaces";
-import { REACTION_OPTIONS, iReaction } from "./types";
+import { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
@@ -88,7 +88,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 
 	public async ReactionRoleCreatedEmbed(
 		context: Context,
-		{ Channel, Message, Role, Emoji, Option }: iReaction,
+		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
@@ -143,7 +143,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 
 	public async ReactionRoleUpdatedEmbed(
 		context: Context,
-		{ Channel, Message, Role, Emoji }: iReaction,
+		{ Channel, Message, Role, Emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
