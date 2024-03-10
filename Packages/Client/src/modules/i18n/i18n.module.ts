@@ -2,12 +2,12 @@ import { Extends } from "@/types/Constants";
 import { Ii18nService } from "@/types/Interfaces";
 import { TranslateProvider } from "@/types/Providers";
 import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
-import { AcceptLanguageResolver, I18nLoader, I18nModule } from "nestjs-i18n";
+import { AcceptLanguageResolver, I18nLoader, I18nModule as _I18nModule } from "nestjs-i18n";
 
 @Global()
 @Module({
 	imports: [
-		I18nModule.forRootAsync({
+		_I18nModule.forRootAsync({
 			useFactory: async () => {
 				return {
 					fallbackLanguage: "pt-BR",
@@ -28,7 +28,7 @@ import { AcceptLanguageResolver, I18nLoader, I18nModule } from "nestjs-i18n";
 	providers: [TranslateProvider],
 	exports: [TranslateProvider],
 })
-export class i18nModule implements OnModuleInit {
+export class I18nModule implements OnModuleInit {
 	public constructor(@Inject(Extends.Translate) private readonly i18n: Ii18nService) {}
 
 	public onModuleInit() {

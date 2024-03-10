@@ -4,7 +4,7 @@ import { MinArgsGuard } from "@/common/guards/Args/Min.guard";
 import { EnableGuard } from "@/common/guards/Enable.guard";
 import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
 import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
-import { Message as DMessage, TextChannel } from "discord.js";
+import { TextChannel } from "discord.js";
 import { CommandContext } from "../../commands/Commands.context";
 import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { IReaction } from "../types";
@@ -45,10 +45,10 @@ export class CreateReactionCommand {
 	@UseGuards(EnableGuard, OwnerPermissionGuard, MinArgsGuard, MaxArgsGuard)
 	public async onCommandRun([client, context]: CommandContext) {
 		const Channel = (await context.getChannel(client, "channel", 0)) as TextChannel;
-		const MessageID = context.getArg("message", 1) as string;
-		const Message = (await Channel.messages.fetch(MessageID)) as DMessage;
+		const MessageID = context.getArg("message", 1);
+		const Message = await Channel.messages.fetch(MessageID);
 		const Role = await context.getRole(client, "role", 2);
-		const Emoji = context.getArg("emoji", 3) as string;
+		const Emoji = context.getArg("emoji", 3);
 		let Option = Number(context.getArg("type", 4));
 		if (!Option || Option > 6 || Number.isNaN(Option)) Option = 1;
 
