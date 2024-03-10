@@ -3,17 +3,16 @@ import { MaxArgsGuard } from "@/common/guards/Args/Max.guard";
 import { MinArgsGuard } from "@/common/guards/Args/Min.guard";
 import { EnableGuard } from "@/common/guards/Enable.guard";
 import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
-import { Extends } from "@/types/Constants";
-import { IReactionRolesEmbeds, IReactionRolesService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
 import { CommandContext } from "../../commands/Commands.context";
+import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()
 export class ReactionTypesCommand {
 	public constructor(
 		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,
-		@Inject(Extends.ReactionRolesEmbeds) private readonly Embeds: IReactionRolesEmbeds,
+		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
 	) {}
 
 	private readonly logger = new Logger(ReactionTypesCommand.name);

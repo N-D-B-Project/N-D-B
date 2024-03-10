@@ -1,6 +1,6 @@
 import { ReactionRolesEntity } from "@/modules/database/entities";
-import { REACTION_OPTIONS, iReaction } from "@/types";
 import { Guild, TextChannel } from "discord.js";
+import { REACTION_OPTIONS, iReaction } from "../types";
 
 export interface IReactionRolesRepository {
 	getAll(guild: Guild): Promise<Array<ReactionRolesEntity>>;

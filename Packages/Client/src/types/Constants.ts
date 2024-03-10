@@ -14,6 +14,5 @@ export enum Extends {
 	Translate = "TRANSLATE",
 	Tools = "TOOLS",
 	Command = "COMMAND",
-	ReactionRolesEmbeds = "REACTION_ROLES_EMBEDS",
 	Buttons = "COMPONENTS_BUTTONS",
 }

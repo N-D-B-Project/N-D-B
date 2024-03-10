@@ -3,18 +3,14 @@ import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/comma
 import { LocalizationMap } from "discord-api-types/v10";
 import {
 	BaseMessageOptions,
-	Channel,
 	Collection,
 	CommandInteraction,
 	EmbedBuilder,
-	Emoji,
 	GuildChannel,
 	Message,
 	PartialMessage,
 	PermissionResolvable,
-	Role,
 	SlashCommandBuilder,
-	TextChannel,
 } from "discord.js";
 export interface AlsStore {
 	PrismaConnected: boolean;
@@ -160,41 +156,3 @@ export enum DatabaseStatus {
 }
 
 export type TranslateInfo = Message | CommandInteraction | GuildChannel | PartialMessage | Context;
-
-export interface ReactionsType {
-	message: Message["id"];
-	channel: Channel["id"];
-	role: Role["id"];
-	emoji: Emoji["name"] | Emoji["identifier"];
-	option: REACTION_OPTIONS;
-}
-
-export enum REACTION_OPTIONS {
-	_1 = 1,
-	_2 = 2,
-	_3 = 3,
-	_4 = 4,
-	_5 = 5,
-	_6 = 6,
-}
-
-export enum FetchType {
-	All = "All",
-	Channel = "Channel",
-}
-
-export interface iReactionArray {
-	message: string;
-	channel: string;
-	role: string;
-	emoji: string;
-	option: number;
-}
-
-export interface iReaction {
-	Channel: TextChannel["id"];
-	Message: Message["id"];
-	Role: Role["id"];
-	Emoji: Emoji["id"] | Emoji["identifier"];
-	Option?: REACTION_OPTIONS;
-}

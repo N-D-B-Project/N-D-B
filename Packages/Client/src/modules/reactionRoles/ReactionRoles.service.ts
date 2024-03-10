@@ -1,16 +1,18 @@
-import { REACTION_OPTIONS, iReaction } from "@/types";
-import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, IReactionRolesEmbeds, IReactionRolesService } from "@/types/Interfaces";
+import { Services } from "@/types/Constants";
+import { IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
 import { Context } from "../commands/Commands.context";
 import { ReactionRolesEntity } from "../database/entities";
+import { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
+import { REACTION_OPTIONS, iReaction } from "./types";
+import { ReactionRoles } from "./types/constants";
 
 @Injectable()
 export class ReactionRolesService implements IReactionRolesService {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(Extends.ReactionRolesEmbeds) private readonly embeds: IReactionRolesEmbeds,
+		@Inject(ReactionRoles.Embeds) private readonly embeds: IReactionRolesEmbeds,
 	) {}
 
 	public async Embeds(): Promise<IReactionRolesEmbeds> {

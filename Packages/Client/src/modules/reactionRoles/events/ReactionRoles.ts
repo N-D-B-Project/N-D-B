@@ -1,9 +1,10 @@
 import { MessageTools } from "@/modules/commands/Message";
 import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, IReactionRolesService, Ii18nService } from "@/types/Interfaces";
+import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, roleMention } from "discord.js";
 import { Context, ContextOf, On } from "necord";
+import { IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()
