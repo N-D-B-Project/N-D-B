@@ -9,7 +9,7 @@ import { ComponentsModule } from "../components/Components.module";
 import { DatabaseModule } from "../database/database.module";
 import { DeveloperToolsModule } from "../developerTools/DeveloperTools.module";
 import { EventsModule } from "../events/Events.module";
-import { i18nModule } from "../i18n/i18n.module";
+import { I18nModule } from "../i18n/i18n.module";
 import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 
@@ -27,7 +27,7 @@ import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 			allowTraversal: false,
 		}),
 		DatabaseModule,
-		i18nModule,
+		I18nModule,
 		ComponentsModule,
 		EventsModule,
 		CommandsModule,
