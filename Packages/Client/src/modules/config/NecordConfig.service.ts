@@ -1,11 +1,11 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { Injectable } from "@nestjs/common";
+import type { ConfigService } from "@nestjs/config";
 import { GatewayIntentBits, GatewayVersion, Options, Partials } from "discord.js";
-import { NecordModuleOptions } from "necord";
+import type { NecordModuleOptions } from "necord";
 
 @Injectable()
 export class NecordConfigService {
-	public constructor(@Inject() private readonly config: ConfigService) {}
+	public constructor(private readonly config: ConfigService) {}
 
 	createNecordOptions(): NecordModuleOptions {
 		return {
