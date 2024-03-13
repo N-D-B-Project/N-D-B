@@ -22,7 +22,8 @@
 		"start": "nest start",
 		"start:dev": "nest start --watch --env-file=.env",
 		"start:debug": "nest start --debug --watch",
-		"start:prod": "node dist/main"
+		"start:prod": "node dist/main",
+		"postinstall": "prisma generate"
 	},
 	"dependencies": {
 		"@necord/pagination": "^1.2.2",
