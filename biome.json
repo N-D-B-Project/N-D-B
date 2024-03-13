@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
 	"organizeImports": {
 		"enabled": true
 	},
@@ -30,7 +30,7 @@
 		"rules": {
 			"complexity": {
 				"noExtraBooleanCast": "warn",
-				"noForEach": "error",
+				"noForEach": { "level": "error" },
 				"noVoid": "off",
 				"noThisInStatic": "off",
 				"noStaticOnlyClass": "off",
@@ -44,7 +44,8 @@
 				"noSwitchDeclarations": "off"
 			},
 			"nursery": {
-				"noDuplicateJsonKeys": "error"
+				"noDuplicateJsonKeys": "error",
+				"noUnusedImports": "error"
 			},
 			"style": {
 				"noVar": "error",
