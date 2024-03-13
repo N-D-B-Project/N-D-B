@@ -21,13 +21,13 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.6.1",
-		"@commitlint/cli": "^19.0.3",
-		"@commitlint/config-angular": "^19.0.3",
-		"@commitlint/config-conventional": "^19.0.3",
+		"@commitlint/cli": "^19.1.0",
+		"@commitlint/config-angular": "^19.1.0",
+		"@commitlint/config-conventional": "^19.1.0",
 		"commitizen": "^4.3.0",
 		"cross-env": "^7.0.3",
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
-		"typescript": "^5.1.6"
+		"typescript": "^5.4.2"
 	}
 }
