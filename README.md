@@ -36,6 +36,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 ## 📝 To-Do
 
 - [ ] Multilingual README in Docs
+- [ ] Update [Configuration](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Configuration.md) and [Examples](https://github.com/NedcloarBR/N-D-B/tree/master/Docs/Examples)
 - [ ] Systems
   - [ ] Moderation
     - [ ] Manual
@@ -47,6 +48,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
       - [x] Partial migrated to Necord but not tested yet
       - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
       - [ ] Update ReactionRoleAdd/Remove Events
+      - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more beautiful
     - [ ] Music
     - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
       - [x] Partial
