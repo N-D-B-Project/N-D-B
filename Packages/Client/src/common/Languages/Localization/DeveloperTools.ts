@@ -1,4 +1,4 @@
-import { Localization } from "@/types";
+import { Localization } from "./types";
 
 export const DeveloperToolsLocalization: Localization = {
 	name: {

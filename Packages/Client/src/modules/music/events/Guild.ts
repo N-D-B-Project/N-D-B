@@ -1,9 +1,9 @@
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
-import { IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client } from "discord.js";
 import { Context, ContextOf, On } from "necord";
-import { IMusicService } from "../interfaces";
+import type { IMusicService } from "../interfaces";
 import { Music } from "../types/constants";
 
 @Injectable()

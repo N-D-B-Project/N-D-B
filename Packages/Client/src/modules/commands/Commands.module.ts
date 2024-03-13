@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { CommandProvider } from "@/types/Providers";
 import { WAIT } from "@/utils/Tools";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit } from "@nestjs/common";
@@ -17,6 +17,7 @@ import {
 import { ExplorerService } from "necord";
 import { LegacyCommand, SlashCommand } from "../../common/decorators";
 import { GuildEntity, UserEntity } from "../database/entities";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
 import { Context } from "./Commands.context";
 import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "./Commands.discovery";
 import { CommandsService } from "./Commands.service";

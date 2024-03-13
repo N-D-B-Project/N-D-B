@@ -1,4 +1,4 @@
-import { Config } from "@/types";
+import { Config } from "@/modules/config/types";
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";

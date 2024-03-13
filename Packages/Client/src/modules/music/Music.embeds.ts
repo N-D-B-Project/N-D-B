@@ -1,8 +1,9 @@
-import { Config } from "@/types";
-import { Extends, Services } from "@/types/Constants";
-import type { IDatabaseService, Ii18nService } from "@/types/Interfaces";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
+import { Extends } from "@/types/Constants";
 import { Timer } from "@/utils/Tools";
 import { Inject, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import {
 	Client,
 	ColorResolvable,
@@ -21,7 +22,7 @@ import type { IMusicEmbeds } from "./interfaces";
 export class MusicEmbeds implements IMusicEmbeds {
 	public constructor(
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
-		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
 		private readonly client: Client,
 	) {}
 
@@ -201,17 +202,17 @@ export class MusicEmbeds implements IMusicEmbeds {
 		switch (player.repeatMode) {
 			case "off":
 				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:NoLoop", {
-					Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").fail,
+					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 				});
 				break;
 			case "queue":
 				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:QueueLoop", {
-					Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").success,
+					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
 				});
 				break;
 			case "track":
 				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:MusicLoop", {
-					Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").success,
+					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
 				});
 				break;
 		}
@@ -233,10 +234,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:2", {
 						IsPlaying: player.paused
 							? await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Paused", {
-									Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").fail,
+									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 							  })
 							: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Playing", {
-									Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").success,
+									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
 							  }),
 					}),
 					inline: true,
@@ -246,10 +247,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:3", {
 						IsBassBoosted: player.filterManager.equalizerBands
 							? await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:ActiveBass", {
-									Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").success,
+									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
 							  })
 							: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:NoBass", {
-									Emoji: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").fail,
+									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 							  }),
 					}),
 					inline: true,
@@ -307,8 +308,8 @@ export class MusicEmbeds implements IMusicEmbeds {
 					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:2"),
 					value: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:Content:2", {
 						isPremium: player.isPremium
-							? this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").accept
-							: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").fail,
+							? this.config.getOrThrow<Config["Emojis"]>("Emojis").accept
+							: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 					}),
 					inline: true,
 				},
@@ -445,7 +446,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 			.setColor("#00c26f")
 			.setTitle(
 				await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStuck:Embed:Title", {
-					EMOJI: this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").fail,
+					EMOJI: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 				}),
 			)
 			.setDescription(

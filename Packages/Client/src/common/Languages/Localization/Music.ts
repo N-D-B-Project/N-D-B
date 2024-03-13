@@ -1,4 +1,5 @@
-import { Localization } from "@/types";
+import { Localization } from "./types";
+
 export const MusicLocalization: Localization = {
 	name: {
 		"en-US": "music",

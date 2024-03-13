@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, Message, TextChannel } from "discord.js";

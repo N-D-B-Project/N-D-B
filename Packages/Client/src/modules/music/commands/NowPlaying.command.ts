@@ -3,7 +3,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Message } from "discord.js";
 import { Music } from "../";
 import { CommandContext } from "../../commands/Commands.context";
-import { IMusicEmbeds, IMusicService } from "../interfaces";
+import type { IMusicEmbeds, IMusicService } from "../interfaces";
 
 @Injectable()
 export class NowPlayingCommand {

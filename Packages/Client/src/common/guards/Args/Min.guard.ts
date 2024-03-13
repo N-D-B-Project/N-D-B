@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
 import { Utils } from "../Utils";
 import { embed } from "./Embed";

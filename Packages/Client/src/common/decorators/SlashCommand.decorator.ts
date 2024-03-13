@@ -1,4 +1,4 @@
-import { SlashCommandOptions } from "@/types";
+import { SlashCommandOptions } from "@/modules/commands/types";
 import { Reflector } from "@nestjs/core";
 import { SlashCommandsDiscovery } from "../../modules/commands/Commands.discovery";
 

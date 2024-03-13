@@ -1,14 +1,14 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
+import type { INDBService } from "@/modules/core/interfaces/INDBService";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { INDBService, Ii18nService } from "@/types/Interfaces";
 import { Timer } from "@/utils/Tools";
-import { NecordPaginationService } from "@necord/pagination";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { EmbedBuilder, Message, UserManager } from "discord.js";
 import { Track, UnresolvedTrack } from "lavalink-client";
 import { Music } from "..";
 import { CommandContext } from "../../commands/Commands.context";
-import { IMusicService } from "../interfaces";
+import type { IMusicService } from "../interfaces";
 
 @Injectable()
 export class QueueCommand {
@@ -17,7 +17,6 @@ export class QueueCommand {
 		@Inject(Music.Service) private readonly service: IMusicService,
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
 		private readonly users: UserManager,
-		private readonly paginator: NecordPaginationService,
 	) {}
 
 	private readonly logger = new Logger(QueueCommand.name);

@@ -1,10 +1,10 @@
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Guild, TextChannel } from "discord.js";
-import { ReactionRolesEntity } from "../database/entities";
 import { PrismaService } from "../database/prisma/Prisma.service";
-import { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
-import { IReaction, REACTION_OPTIONS } from "./types";
+import { ReactionRolesEntity } from "./entities/ReactionRole.entity";
+import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
+import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {

@@ -1,13 +1,13 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import { CommandsService } from "@/modules/commands/Commands.service";
 import { Buttons } from "@/modules/components/Buttons.component";
 import { NDBService } from "@/modules/core/NDB.service";
+import { AlsStore } from "@/modules/database/als/types";
 import { DatabaseService } from "@/modules/database/database.service";
 import { PrismaService } from "@/modules/database/prisma/Prisma.service";
 import { GuildRepository } from "@/modules/database/repositories/Guild.repository";
 import { UserRepository } from "@/modules/database/repositories/User.repository";
 import { I18nService } from "@/modules/i18n/i18n.service";
-import { AsyncLocalStorage } from "async_hooks";
-import { AlsStore } from ".";
 import { Extends, Repositories, Services } from "./Constants";
 
 export const NDBServiceProvider = {

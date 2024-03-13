@@ -1,6 +1,6 @@
 import { Context } from "@/modules/commands/Commands.context";
 import { EmbedBuilder, Message } from "discord.js";
-import { IReaction, REACTION_OPTIONS } from "../types";
+import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {
 	InvalidChannelEmbed(context: Context): Promise<EmbedBuilder>;

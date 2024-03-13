@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { Timer, WAIT } from "@/utils/Tools";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
@@ -7,7 +7,7 @@ import { Client, GuildChannel, GuildMember, Message, TextChannel } from "discord
 import { Player, Track, TrackEndEvent, TrackExceptionEvent, TrackStartEvent } from "lavalink-client";
 import { Music } from "../";
 import { MessageTools } from "../../commands/Message";
-import { IMusicEmbeds, IMusicService } from "../interfaces";
+import type { IMusicEmbeds, IMusicService } from "../interfaces";
 
 @Injectable()
 export class TrackEvents {

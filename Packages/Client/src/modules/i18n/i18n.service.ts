@@ -1,16 +1,20 @@
-import { Config, TranslateInfo } from "@/types";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { User } from "discord.js";
 import { I18nService as Service } from "nestjs-i18n";
 import { Context } from "../commands/Commands.context";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
+import { TranslateInfo } from "./types";
 
 @Injectable()
 export class I18nService implements Ii18nService {
 	private logger = new Logger(I18nService.name);
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
 		private readonly i18n: Service,
 	) {}
 
@@ -18,7 +22,7 @@ export class I18nService implements Ii18nService {
 		const languages = this.i18n.getSupportedLanguages();
 		const namespaces = this.i18n.getTranslations();
 		this.logger.log(`${languages.length} linguagens foram carregadas com sucesso! (${languages.join(" | ")})`);
-		if (this.database.ConfigRepo().getOrThrow<Config["Debug"]>("Debug").Translations) this.logger.debug(namespaces);
+		if (this.config.getOrThrow<Config["Debug"]>("Debug").Translations) this.logger.debug(namespaces);
 	}
 
 	public async Guild(info: TranslateInfo, key: string, args?: unknown): Promise<string> {

@@ -1,4 +1,4 @@
-import { Content } from "@/types";
+import { Content } from "@/modules/commands/types";
 import { messageOptions } from "@/utils/Tools";
 import {
 	BaseMessageOptions,

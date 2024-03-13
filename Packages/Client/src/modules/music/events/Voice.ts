@@ -1,11 +1,13 @@
-import { Config } from "@/types";
+import { Config } from "@/modules/config/types";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { ChannelType, Client, EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
 import { Context, ContextOf, On } from "necord";
 import { Music } from "..";
-import { IMusicService } from "../interfaces";
+import type { IMusicService } from "../interfaces";
 
 export class VoiceEvents {
 	public constructor(
@@ -13,6 +15,7 @@ export class VoiceEvents {
 		@Inject(Music.Service) private readonly MusicService: IMusicService,
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
 		private readonly client: Client,
+		private readonly config: ConfigService<Config>,
 	) {}
 	private readonly logger = new Logger(VoiceEvents.name);
 
@@ -39,7 +42,7 @@ export class VoiceEvents {
 					)
 				) {
 					if (
-						this.database.ConfigRepo().getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Channel.Enable &&
+						this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Channel.Enable &&
 						player &&
 						(!oldState.channel.members ||
 							oldState.channel.members.size === 0 ||
@@ -71,8 +74,7 @@ export class VoiceEvents {
 							} catch (error) {
 								this.logger.error(String(error));
 							}
-						}, this.database.ConfigRepo().getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Channel.Delay ||
-							60000);
+						}, this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Channel.Delay || 60000);
 					}
 				}
 			}

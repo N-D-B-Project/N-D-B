@@ -5,7 +5,7 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { EmbedBuilder, Message, VoiceChannel } from "discord.js";
 import { Player, SearchResult, SourceLinksRegexes } from "lavalink-client";
 import { Music } from "../";
-import { IMusicEmbeds, IMusicService } from "../interfaces";
+import type { IMusicEmbeds, IMusicService } from "../interfaces";
 
 @Injectable()
 export class PlayCommand {
@@ -23,7 +23,7 @@ export class PlayCommand {
 		usage: "<query>",
 		args: {
 			min: 1,
-			max: Infinity,
+			max: Number.POSITIVE_INFINITY,
 		},
 	})
 	@SlashCommand({

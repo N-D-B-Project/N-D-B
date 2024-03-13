@@ -1,10 +1,11 @@
 import { Extends, Services } from "@/types/Constants";
-import type { ICommandsService, IDatabaseService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, CommandInteraction, CommandInteractionOptionResolver, Message } from "discord.js";
 import { Context } from "../commands/Commands.context";
 import { RunSubCommandEvent } from "../commands/Commands.discovery";
+import type { ICommandsService } from "../commands/interfaces/ICommandService";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
 
 @Injectable()
 export class CommandsEvents {

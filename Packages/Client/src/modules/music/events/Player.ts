@@ -1,19 +1,18 @@
-import { Config } from "@/types";
-import { Services } from "@/types/Constants";
-import { IDatabaseService } from "@/types/Interfaces";
+import { Config } from "@/modules/config/types";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, Guild, TextChannel, VoiceChannel } from "discord.js";
 import { Player } from "lavalink-client";
 import { Music } from "../";
 import { MessageTools } from "../../commands/Message";
-import { IMusicEmbeds } from "../interfaces";
+import type { IMusicEmbeds } from "../interfaces";
 
 @Injectable()
 export class PlayerEvents {
 	public constructor(
 		@Inject(Music.Embeds) private readonly embeds: IMusicEmbeds,
-		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
 		private readonly client: Client,
 	) {}
 
@@ -42,7 +41,7 @@ export class PlayerEvents {
 			}
 		});
 
-		if (this.database.ConfigRepo().getOrThrow<Config["Music"]>("Music").Client.serverDeaf) {
+		if (this.config.getOrThrow<Config["Music"]>("Music").Client.serverDeaf) {
 			for (let i = 0; i <= 5; i++) {
 				await new Promise((resolve) => {
 					setTimeout(() => {

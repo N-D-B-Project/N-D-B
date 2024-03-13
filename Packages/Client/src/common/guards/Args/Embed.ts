@@ -1,5 +1,5 @@
-import { LegacyCommandOptions } from "@/types";
-import { Ii18nService } from "@/types/Interfaces";
+import { LegacyCommandOptions } from "@/modules/commands/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Client, EmbedBuilder } from "discord.js";
 import { Context } from "../../../modules/commands/Commands.context";
 

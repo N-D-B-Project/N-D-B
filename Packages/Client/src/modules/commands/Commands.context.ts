@@ -1,4 +1,4 @@
-import { Content } from "@/types";
+import { Content } from "@/modules/commands/types";
 import {
 	Client,
 	CommandInteraction,

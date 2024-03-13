@@ -1,8 +1,8 @@
-import { AlsStore } from "@/types";
+import { AsyncLocalStorage } from "node:async_hooks";
 import { Repositories } from "@/types/Constants";
 import { Inject, Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
-import { AsyncLocalStorage } from "async_hooks";
+import { AlsStore } from "../als/types";
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {

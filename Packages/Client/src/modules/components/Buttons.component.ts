@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 import { Context } from "../commands/Commands.context";

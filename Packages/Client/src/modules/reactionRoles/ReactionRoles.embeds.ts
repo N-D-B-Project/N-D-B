@@ -1,13 +1,13 @@
 import { MessageTools } from "@/modules/commands/Message";
-import { Config } from "@/types";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, Message, TextChannel, channelMention, roleMention } from "discord.js";
 import { Context } from "../commands/Commands.context";
-import { IReactionRolesEmbeds } from "./interfaces";
-import { IReaction, REACTION_OPTIONS } from "./types";
+import type { IReactionRolesEmbeds } from "./interfaces";
+import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesEmbeds implements IReactionRolesEmbeds {

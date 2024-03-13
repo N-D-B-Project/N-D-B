@@ -1,10 +1,10 @@
-import { DatabaseStatus } from "@/types";
 import { Services } from "@/types/Constants";
-import { IGuildRepository } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Guild } from "discord.js";
 import { GuildEntity } from "../entities";
 import { PrismaService } from "../prisma/Prisma.service";
+import { DatabaseStatus } from "../types";
+import type { IGuildRepository } from "./interfaces";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {

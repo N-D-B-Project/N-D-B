@@ -1,10 +1,10 @@
-import { DatabaseStatus } from "@/types";
 import { Services } from "@/types/Constants";
-import { IUserRepository } from "@/types/Interfaces";
 import { Inject, Logger } from "@nestjs/common";
 import { User } from "discord.js";
 import { UserEntity } from "../entities";
 import { PrismaService } from "../prisma/Prisma.service";
+import { DatabaseStatus } from "../types";
+import type { IUserRepository } from "./interfaces";
 
 export class UserRepository implements IUserRepository {
 	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}

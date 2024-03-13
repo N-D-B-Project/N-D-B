@@ -6,8 +6,8 @@ import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
 import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
 import { TextChannel } from "discord.js";
 import { CommandContext } from "../../commands/Commands.context";
-import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
-import { IReaction } from "../types";
+import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
+import type { IReaction } from "../types";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()

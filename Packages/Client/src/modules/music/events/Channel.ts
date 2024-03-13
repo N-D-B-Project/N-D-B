@@ -1,11 +1,12 @@
 import { MessageTools } from "@/modules/commands/Message";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import type { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ChannelType, Client, TextChannel } from "discord.js";
 import { Context, ContextOf, On } from "necord";
 import { Music } from "../";
-import { IMusicService } from "../interfaces";
+import type { IMusicService } from "../interfaces";
 
 @Injectable()
 export class ChannelEvents {

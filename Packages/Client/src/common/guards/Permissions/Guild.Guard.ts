@@ -1,15 +1,16 @@
 import { CommandPermissions } from "@/common/decorators";
-import { Config } from "@/types";
-import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
+import { Extends } from "@/types/Constants";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
 
 export class GuildPermissionGuard implements CanActivate {
 	public constructor(
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
-		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
 		private readonly reflector: Reflector,
 	) {}
 
@@ -27,8 +28,8 @@ export class GuildPermissionGuard implements CanActivate {
 
 	private checkGuild(target: string): boolean {
 		return (
-			this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity === target ||
-			this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild === target
+			this.config.getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity === target ||
+			this.config.getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild === target
 		);
 	}
 }

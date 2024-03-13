@@ -1,11 +1,11 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Message } from "discord.js";
 import { Music } from "../";
 import { CommandContext } from "../../commands/Commands.context";
-import { IMusicService } from "../interfaces";
+import type { IMusicService } from "../interfaces";
 
 @Injectable()
 export class ResumeCommand {

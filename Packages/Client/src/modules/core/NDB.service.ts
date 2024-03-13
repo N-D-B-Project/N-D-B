@@ -1,10 +1,11 @@
-import { Content } from "@/types";
+import { Content } from "@/modules/commands/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { INDBService, Ii18nService } from "@/types/Interfaces";
 import { ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
 import { ButtonStyle, EmbedBuilder } from "discord.js";
 import { Context } from "../commands/Commands.context";
+import type { INDBService } from "./interfaces/INDBService";
 
 @Injectable()
 export class NDBService implements INDBService {

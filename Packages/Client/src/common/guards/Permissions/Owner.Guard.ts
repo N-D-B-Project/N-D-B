@@ -1,15 +1,16 @@
 import { CommandPermissions } from "@/common/decorators";
-import { Config } from "@/types";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
 
 export class OwnerPermissionGuard implements CanActivate {
 	public constructor(
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
-		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
 		private readonly reflector: Reflector,
 	) {}
 
@@ -26,6 +27,6 @@ export class OwnerPermissionGuard implements CanActivate {
 	}
 
 	private checkOwner(target: string) {
-		return this.database.ConfigRepo().getOrThrow<Config["Discord"]>("Discord").Client.Owners.includes(target);
+		return this.config.getOrThrow<Config["Discord"]>("Discord").Client.Owners.includes(target);
 	}
 }

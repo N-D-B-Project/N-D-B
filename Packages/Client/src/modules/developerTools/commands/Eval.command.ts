@@ -1,15 +1,14 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { Config } from "@/types";
-import { Services } from "@/types/Constants";
-import { IDatabaseService } from "@/types/Interfaces";
-import { Inject, Injectable } from "@nestjs/common";
+import { Config } from "@/modules/config/types";
+import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";
 import { CommandContext } from "../../commands/Commands.context";
 
 @Injectable()
 export class EvalCommand {
-	public constructor(@Inject(Services.Database) private readonly database: IDatabaseService) {}
+	public constructor(private readonly config: ConfigService<Config>) {}
 
 	@LegacyCommand({
 		name: "eval",
@@ -35,17 +34,13 @@ export class EvalCommand {
 		const content = await context.getContent();
 		const args = context.getArg("code", 0);
 		try {
-			if (
-				this.database
-					.ConfigRepo()
-					.getOrThrow<Config["EvalBadKeys"]>("EvalBadKeys")
-					.some((key) => content.includes(key))
-			) {
+			if (this.config.getOrThrow<Config["EvalBadKeys"]>("EvalBadKeys").some((key) => content.includes(key))) {
 				return await context.send({
 					content: "BAD_KEY DETECTED ABORTING EVALUATION",
 				});
 			}
 
+			// biome-ignore lint/security/noGlobalEval: <explanation>
 			const evalCode = inspect(await eval(args), {
 				depth: 0,
 			}).substring(0, 950);

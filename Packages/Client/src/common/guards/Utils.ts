@@ -1,4 +1,4 @@
-import { Content } from "@/types";
+import { Content } from "@/modules/commands/types";
 import { ExecutionContext } from "@nestjs/common";
 import { Client } from "discord.js";
 import { NecordExecutionContext } from "necord";

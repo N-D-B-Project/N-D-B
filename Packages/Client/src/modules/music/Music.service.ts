@@ -1,25 +1,25 @@
-import { Config } from "@/types";
-import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
+import { Config } from "@/modules/config/types";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
+import { Extends } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
-import { Client, VoiceChannel, channelMention } from "discord.js";
+import { ConfigService } from "@nestjs/config";
+import { VoiceChannel, channelMention } from "discord.js";
 import { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
 import ms from "parse-ms";
 import { Context } from "../commands/Commands.context";
 import { MusicEmbeds } from "./Music.embeds";
 import { MusicManager } from "./Music.manager";
-import { IMusicService } from "./interfaces";
+import type { IMusicService } from "./interfaces";
 import { Music } from "./types/constants";
 
 @Injectable()
 export class MusicService implements IMusicService {
 	public constructor(
-		@Inject(Services.Database) private readonly database: IDatabaseService,
 		@Inject(Music.Manager) private readonly MusicManager: MusicManager,
 		@Inject(Music.Embeds) private readonly embeds: MusicEmbeds,
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
-		private readonly client: Client,
+		private readonly config: ConfigService<Config>,
 	) {}
 
 	public async getPlayer(context: Context): Promise<Player> {
@@ -43,9 +43,9 @@ export class MusicService implements IMusicService {
 			guildId: voiceChannel.guildId,
 			textChannelId: textChannelId,
 			voiceChannelId: voiceChannel.id,
-			selfDeaf: this.database.ConfigRepo().getOrThrow<Config["Music"]>("Music").Client.selfDeaf,
+			selfDeaf: this.config.getOrThrow<Config["Music"]>("Music").Client.selfDeaf,
 			instaUpdateFiltersFix: false,
-			volume: this.database.ConfigRepo().getOrThrow<Config["Music"]>("Music").Volumes.Player,
+			volume: this.config.getOrThrow<Config["Music"]>("Music").Volumes.Player,
 			// vcRegion: voiceChannel.rtcRegion!
 		};
 		let player: Player;
@@ -118,8 +118,8 @@ export class MusicService implements IMusicService {
 		Emoji: string;
 		Name: string;
 	}> {
-		const URLs = this.database.ConfigRepo().getOrThrow<Config["URLList"]>("URLList").Music;
-		const MusicEmojis = this.database.ConfigRepo().getOrThrow<Config["Emojis"]>("Emojis").Music;
+		const URLs = this.config.getOrThrow<Config["URLList"]>("URLList").Music;
+		const MusicEmojis = this.config.getOrThrow<Config["Emojis"]>("Emojis").Music;
 		let Emoji: string;
 		let Name: string;
 

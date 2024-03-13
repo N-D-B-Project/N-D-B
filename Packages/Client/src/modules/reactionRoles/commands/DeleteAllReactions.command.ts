@@ -4,7 +4,7 @@ import { Extends } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Button, ButtonContext, ComponentParam, Context as NecordContext } from "necord";
 import { CommandContext, Context } from "../../commands/Commands.context";
-import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
+import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()

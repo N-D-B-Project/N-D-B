@@ -1,10 +1,11 @@
 import { MessageTools } from "@/modules/commands/Message";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { IDatabaseService, Ii18nService } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, roleMention } from "discord.js";
 import { Context, ContextOf, On } from "necord";
-import { IReactionRolesService } from "../interfaces";
+import type { IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()

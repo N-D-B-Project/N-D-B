@@ -1,8 +1,8 @@
 import { Context } from "@/modules/commands/Commands.context";
-import { ReactionRolesEntity } from "@/modules/database/entities";
 import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
-import { IReaction, REACTION_OPTIONS } from "../types";
-import { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
+import { ReactionRolesEntity } from "../entities/ReactionRole.entity";
+import type { IReaction, REACTION_OPTIONS } from "../types";
+import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 
 export interface IReactionRolesService {
 	Embeds(): Promise<IReactionRolesEmbeds>;

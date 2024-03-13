@@ -1,4 +1,4 @@
-import { LegacyCommandOptions, SlashCommandOptions } from "@/types";
+import { LegacyCommandOptions, SlashCommandOptions } from "@/modules/commands/types";
 import { NecordBaseDiscovery } from "necord";
 import { Context, IAdditional } from "./Commands.context";
 

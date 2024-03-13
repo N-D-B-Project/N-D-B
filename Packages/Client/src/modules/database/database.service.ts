@@ -1,10 +1,10 @@
-import { Config } from "@/types";
 import { Repositories } from "@/types/Constants";
-import { IAsyncLocalStorage, IDatabaseService, IGuildRepository, IUserRepository } from "@/types/Interfaces";
 import { Inject, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { IReactionRolesRepository } from "../reactionRoles/interfaces/IReactionRoleRepository";
+import type { IReactionRolesRepository } from "../reactionRoles/interfaces/IReactionRoleRepository";
 import { ReactionRoles } from "../reactionRoles/types/constants";
+import type { IAsyncLocalStorage } from "./als/interfaces/IAsyncLocalStorage";
+import type { IDatabaseService } from "./interfaces/IDatabaseService";
+import type { IGuildRepository, IUserRepository } from "./repositories/interfaces";
 
 @Injectable()
 export class DatabaseService implements IDatabaseService {
@@ -13,15 +13,10 @@ export class DatabaseService implements IDatabaseService {
 		@Inject(Repositories.Guild) private readonly guild: IGuildRepository,
 		@Inject(Repositories.User) private readonly user: IUserRepository,
 		@Inject(ReactionRoles.Repository) private readonly reactionRoles: IReactionRolesRepository,
-		private readonly config: ConfigService<Config>,
 	) {}
 
 	public AlsRepo(): IAsyncLocalStorage {
 		return this.als;
-	}
-
-	public ConfigRepo(): ConfigService<Config> {
-		return this.config;
 	}
 
 	public GuildRepo(): IGuildRepository {

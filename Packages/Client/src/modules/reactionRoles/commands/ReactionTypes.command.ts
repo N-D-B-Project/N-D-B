@@ -5,7 +5,7 @@ import { EnableGuard } from "@/common/guards/Enable.guard";
 import { OwnerPermissionGuard } from "@/common/guards/Permissions/Owner.Guard";
 import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
 import { CommandContext } from "../../commands/Commands.context";
-import { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
+import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
 @Injectable()

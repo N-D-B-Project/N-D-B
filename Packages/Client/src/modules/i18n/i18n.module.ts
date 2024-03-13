@@ -1,5 +1,5 @@
+import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { Ii18nService } from "@/types/Interfaces";
 import { TranslateProvider } from "@/types/Providers";
 import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
 import { AcceptLanguageResolver, I18nLoader, I18nModule as _I18nModule } from "nestjs-i18n";

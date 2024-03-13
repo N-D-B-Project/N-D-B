@@ -1,7 +1,6 @@
-import { Config } from "@/types";
-import { Services } from "@/types/Constants";
-import { IDatabaseService } from "@/types/Interfaces";
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Config } from "@/modules/config/types";
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import { ActivityType, Client, DiscordAPIError, PresenceData, REST, RateLimitData } from "discord.js";
@@ -9,7 +8,7 @@ import { Context, ContextOf, On, Once } from "necord";
 
 @Injectable()
 export class GatewayEvents {
-	public constructor(@Inject(Services.Database) private readonly database: IDatabaseService) {}
+	public constructor(private readonly config: ConfigService<Config>) {}
 
 	private readonly logger = new Logger(GatewayEvents.name);
 
@@ -40,7 +39,7 @@ export class GatewayEvents {
 
 	@Once("debug")
 	public async onDebug(@Context() [data]: ContextOf<"debug">) {
-		if (this.database.ConfigRepo().getOrThrow<Config["Debug"]>("Debug").Client) this.logger.debug(data);
+		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client) this.logger.debug(data);
 	}
 
 	@On("error")
