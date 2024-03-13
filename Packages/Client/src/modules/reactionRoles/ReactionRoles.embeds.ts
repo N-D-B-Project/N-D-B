@@ -224,7 +224,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor(color);
 	}
 
-	//TODO: Fazer esse Embed ser mais bonito
 	public async UnableToCreateReactionRoleEmbed(context: Context): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
