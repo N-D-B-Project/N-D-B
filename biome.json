@@ -47,6 +47,7 @@
 				"noDuplicateJsonKeys": "error"
 			},
 			"style": {
+				"useImportType": "off",
 				"noVar": "error",
 				"noUselessElse": "error",
 				"noNonNullAssertion": "off"
