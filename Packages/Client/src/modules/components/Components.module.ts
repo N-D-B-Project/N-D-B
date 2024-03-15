@@ -1,9 +1,15 @@
-import { ButtonsComponentsProvider } from "@/types/Providers";
-import { Global, Module } from "@nestjs/common";
+import { Extends } from "@/types/Constants";
+import { Global, Module, Provider } from "@nestjs/common";
+import { Buttons } from "./Buttons.component";
+
+const provider: Provider<Buttons> = {
+	provide: Extends.Buttons,
+	useClass: Buttons,
+};
 
 @Global()
 @Module({
-	providers: [ButtonsComponentsProvider],
-	exports: [ButtonsComponentsProvider],
+	providers: [provider],
+	exports: [provider],
 })
 export class ComponentsModule {}

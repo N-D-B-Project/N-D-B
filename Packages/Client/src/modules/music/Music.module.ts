@@ -1,6 +1,6 @@
-import { NDBServiceProvider } from "@/types/Providers";
 import { Global, Module } from "@nestjs/common";
 import { MusicEmbedsProvider, MusicManagerProvider, MusicServiceProvider } from ".";
+import { NDBServiceProvider } from "../core/provider/NDBService.provider";
 import {
 	JoinCommand,
 	LeaveCommand,
@@ -33,10 +33,10 @@ import { ChannelEvents, NodeEvents, PlayerEvents, QueueEvents, TrackEvents, Voic
 		QueueCommand,
 		ResumeCommand,
 		StopCommand,
-		NDBServiceProvider,
 		MusicManagerProvider,
 		MusicEmbedsProvider,
 		MusicServiceProvider,
+		NDBServiceProvider,
 	],
 	exports: [MusicManagerProvider, MusicEmbedsProvider, MusicServiceProvider],
 })

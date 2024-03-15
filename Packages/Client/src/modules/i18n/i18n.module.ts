@@ -1,8 +1,13 @@
 import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { TranslateProvider } from "@/types/Providers";
-import { Global, Inject, Module, OnModuleInit } from "@nestjs/common";
+import { Global, Inject, Module, OnModuleInit, Provider } from "@nestjs/common";
 import { AcceptLanguageResolver, I18nLoader, I18nModule as _I18nModule } from "nestjs-i18n";
+import { I18nService } from "./i18n.service";
+
+const provider: Provider<I18nService> = {
+	provide: Extends.Translate,
+	useClass: I18nService,
+};
 
 @Global()
 @Module({
@@ -25,8 +30,8 @@ import { AcceptLanguageResolver, I18nLoader, I18nModule as _I18nModule } from "n
 			resolvers: [AcceptLanguageResolver],
 		}),
 	],
-	providers: [TranslateProvider],
-	exports: [TranslateProvider],
+	providers: [provider],
+	exports: [provider],
 })
 export class I18nModule implements OnModuleInit {
 	public constructor(@Inject(Extends.Translate) private readonly i18n: Ii18nService) {}

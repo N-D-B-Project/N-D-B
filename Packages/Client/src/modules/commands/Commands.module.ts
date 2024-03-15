@@ -1,8 +1,7 @@
 import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
 import { Extends, Services } from "@/types/Constants";
-import { CommandProvider } from "@/types/Providers";
 import { WAIT } from "@/utils/Tools";
-import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit } from "@nestjs/common";
+import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit, Provider } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
 	ChannelType,
@@ -23,10 +22,15 @@ import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "./Commands.disc
 import { CommandsService } from "./Commands.service";
 import { MessageTools } from "./Message";
 
+const provider: Provider<CommandsService> = {
+	provide: Extends.Command,
+	useClass: CommandsService,
+};
+
 @Global()
 @Module({
-	providers: [CommandProvider],
-	exports: [CommandProvider],
+	providers: [provider],
+	exports: [provider],
 })
 export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 	public constructor(
