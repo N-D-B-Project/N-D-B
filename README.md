@@ -42,7 +42,9 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Manual
     - [ ] Automatic
   - [ ] Economy
+  - [ ] Starboard
   - [ ] Tickets
+  - [ ] System Logs
   - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
     - [ ] ReactionRoles
       - [x] Partial migrated to Necord but not tested yet
