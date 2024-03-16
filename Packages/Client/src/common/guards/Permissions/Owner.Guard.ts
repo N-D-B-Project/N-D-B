@@ -1,7 +1,7 @@
 import { CommandPermissions } from "@/common/decorators";
 import { Config } from "@/modules/config/types";
 import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
-import { Extends, Services } from "@/types/Constants";
+import { Extends } from "@/types/Constants";
 import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
