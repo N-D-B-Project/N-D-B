@@ -54,6 +54,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Music
     - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
       - [x] Partial
+      - [ ] Reenable when fix some bugs
       - [ ] Full
   - [ ] Sharding
     - [x] Initial Sharding System
