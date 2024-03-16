@@ -12,6 +12,7 @@ export interface Config {
 			Host: string;
 		};
 	};
+	TopGGToken: string;
 	Discord: {
 		Token: string;
 		DevToken: string;

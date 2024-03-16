@@ -12,6 +12,7 @@ export const config = (): Config => ({
 			Host: process.env.RedisHost,
 		},
 	},
+	TopGGToken: process.env.TopGGToken,
 	Discord: {
 		Token: process.env.Token,
 		DevToken: process.env.DevToken,

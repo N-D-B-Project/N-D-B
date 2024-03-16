@@ -1127,6 +1127,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jpbberry/typed-emitter@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@jpbberry/typed-emitter@npm:1.2.1"
+  checksum: 10c0/80a2c03497caa07b910b1eb029c210aaf42618ba083b0196c3dd58183f7aa264235595cf5aa596e3463428827fe4381aad6517a47767825939fc1c5da321ddcd
+  languageName: node
+  linkType: hard
+
 "@jridgewell/gen-mapping@npm:^0.3.2, @jridgewell/gen-mapping@npm:^0.3.5":
   version: 0.3.5
   resolution: "@jridgewell/gen-mapping@npm:0.3.5"
@@ -1239,6 +1246,7 @@ __metadata:
     rxjs: "npm:^7.8.1"
     source-map-support: "npm:^0.5.21"
     supertest: "npm:^6.3.4"
+    topgg-autoposter: "npm:^2.0.2"
     ts-jest: "npm:^29.1.2"
     ts-loader: "npm:^9.5.1"
     ts-node: "npm:^10.9.2"
@@ -1596,6 +1604,16 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.0"
   checksum: 10c0/2e2fb6cc57f227912814085b7b01fede050cd4746ea8d49a1e44d5a0e56a804663b0340ae2f11af7559ea9bf4d087a11f2f646197a660ea3cb04e19efc04aa63
+  languageName: node
+  linkType: hard
+
+"@top-gg/sdk@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "@top-gg/sdk@npm:3.1.6"
+  dependencies:
+    raw-body: "npm:^2.5.2"
+    undici: "npm:^5.23.0"
+  checksum: 10c0/80376a6815dfb9925179b387f48ce7e50657a94ce7ad84a039e8bbd8b075cbba5c7ae7031afaa9dbf5b781731b677fe6e6871846c401a3c1a370dd4c9ba0d1ee
   languageName: node
   linkType: hard
 
@@ -6674,7 +6692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:2.5.2":
+"raw-body@npm:2.5.2, raw-body@npm:^2.5.2":
   version: 2.5.2
   resolution: "raw-body@npm:2.5.2"
   dependencies:
@@ -7556,6 +7574,16 @@ __metadata:
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 10c0/93937279934bd66cc3270016dd8d0afec14fb7c94a05c72dc57321f8bd1fa97e5bea6d1f7c89e728d077ca31ea125b78320a616a6c6cd0e6b9cb94cb864381c1
+  languageName: node
+  linkType: hard
+
+"topgg-autoposter@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "topgg-autoposter@npm:2.0.2"
+  dependencies:
+    "@jpbberry/typed-emitter": "npm:^1.2.1"
+    "@top-gg/sdk": "npm:^3.1.6"
+  checksum: 10c0/6884cddb6683a9b7d5b09f169acd3400565556701592b921c52bfe00e0a27989175a88561a7fe2d175467eb508d3d17cd65b41d83b4588260d8111645d66af60
   languageName: node
   linkType: hard
 

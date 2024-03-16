@@ -58,7 +58,9 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] Sharding
     - [x] Initial Sharding System
     - [ ] Sharding related commands
-  - [ ] Top.gg Autopost
+  - [ ] Top.gg
+    - [x] Status Autopost
+    - [ ] Vote Reward System
 
 ## 📖 Licença
 
