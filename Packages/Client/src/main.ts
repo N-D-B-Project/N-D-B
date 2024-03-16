@@ -4,6 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { name } from "../package.json";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
+import { ShardingManager } from "./sharding";
 
 async function bootstrap() {
 	const logger = new Logger("Main");
@@ -21,8 +22,11 @@ async function bootstrap() {
 		}),
 	);
 
+	const ShardManager = new ShardingManager(configService);
+
 	try {
 		await app.listen(Port);
+		await ShardManager.init();
 
 		logger.log(`${name} Running on Port: ${Port} in ${process.env.ENVIRONMENT} mode`);
 	} catch (error) {

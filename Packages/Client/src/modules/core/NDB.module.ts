@@ -12,9 +12,15 @@ import { I18nModule } from "../i18n/i18n.module";
 import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
+import { config } from "../config/Config";
 
 @Module({
 	imports: [
+    ConfigModule.forRoot({
+			isGlobal: true,
+			cache: true,
+			load: [config],
+		}),
 		NecordModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
