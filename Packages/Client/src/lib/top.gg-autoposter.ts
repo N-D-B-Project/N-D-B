@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { DJSSharderPoster } from "topgg-autoposter";
-import { ShardingManager } from "./sharding";
+import { ShardingManager } from "./";
 
 export class TopGGAutoPoster extends DJSSharderPoster {
 	public constructor(

@@ -2,7 +2,7 @@ import path from "node:path";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ShardingManager as _ShardingManager } from "discord.js";
-import { Config } from "./modules/config/types";
+import { Config } from "../modules/config/types";
 
 export class ShardingManager extends _ShardingManager {
 	public constructor(private readonly config: ConfigService) {

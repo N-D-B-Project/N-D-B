@@ -4,9 +4,8 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { name } from "../package.json";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
+import { ShardingManager, TopGGAutoPoster } from "./lib";
 import { Config } from "./modules/config/types";
-import { ShardingManager } from "./sharding";
-import { TopGGAutoPoster } from "./top.gg-autoposter";
 
 async function bootstrap() {
 	const logger = new Logger("Main");

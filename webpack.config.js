@@ -1,12 +1,12 @@
-const path = require("node:path");
+import path from "node:path";
 
 module.exports = (options) => ({
 	...options,
 	entry: {
 		main: options.entry,
-		bot: path.join(__dirname, "src", "bot.ts"),
+		bot: path.join(__dirname, "src", "lib/bot.ts"),
 	},
 	output: {
-		filename: "[name].js",
+		filename: "lib/[name].js",
 	},
 });
