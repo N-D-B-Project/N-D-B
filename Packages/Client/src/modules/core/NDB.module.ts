@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
 import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
+import { config } from "../config/Config";
 import { DatabaseModule } from "../database/database.module";
 import { DeveloperToolsModule } from "../developerTools/DeveloperTools.module";
 import { EventsModule } from "../events/Events.module";
@@ -12,11 +13,10 @@ import { I18nModule } from "../i18n/i18n.module";
 import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
-import { config } from "../config/Config";
 
 @Module({
 	imports: [
-    ConfigModule.forRoot({
+		ConfigModule.forRoot({
 			isGlobal: true,
 			cache: true,
 			load: [config],

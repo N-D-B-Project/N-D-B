@@ -13,6 +13,11 @@
 				"include": "**/i18n/*.json",
 				"watchAssets": true,
 				"outDir": "dist/src/common/Languages/i18n"
+			},
+			{
+				"include": "**/assets/**/*",
+				"watchAssets": true,
+				"outDir": "dist/src/common/assets"
 			}
 		]
 	}
