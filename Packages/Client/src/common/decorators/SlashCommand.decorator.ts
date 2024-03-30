@@ -1,6 +1,6 @@
-import { SlashCommandOptions } from "@/modules/commands/types";
+import { SlashCommandsDiscovery } from "@/modules/bot/commands/Commands.discovery";
+import { SlashCommandOptions } from "@/modules/bot/commands/types";
 import { Reflector } from "@nestjs/core";
-import { SlashCommandsDiscovery } from "../../modules/commands/Commands.discovery";
 
 export const SlashCommand = Reflector.createDecorator<SlashCommandOptions, SlashCommandsDiscovery>({
 	transform: (options: SlashCommandOptions) => new SlashCommandsDiscovery(options),

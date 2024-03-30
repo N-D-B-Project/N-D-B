@@ -1,6 +1,6 @@
+import type { IReactionRolesRepository } from "@/modules/bot/reactionRoles/interfaces/IReactionRoleRepository";
+import { ReactionRoles } from "@/modules/bot/reactionRoles/types/constants";
 import { Inject, Injectable } from "@nestjs/common";
-import type { IReactionRolesRepository } from "../reactionRoles/interfaces/IReactionRoleRepository";
-import { ReactionRoles } from "../reactionRoles/types/constants";
 import type { IAsyncLocalStorage } from "./als/interfaces/IAsyncLocalStorage";
 import type { IDatabaseService } from "./interfaces/IDatabaseService";
 import type { IGuildRepository, IUserRepository } from "./repositories/interfaces";

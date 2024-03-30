@@ -1,4 +1,4 @@
-import type { IReactionRolesRepository } from "@/modules/reactionRoles/interfaces";
+import type { IReactionRolesRepository } from "@/modules/bot/reactionRoles/interfaces";
 import type { IAsyncLocalStorage } from "../als/interfaces/IAsyncLocalStorage";
 import type { IGuildRepository } from "../repositories/interfaces/IGuildRepository";
 import type { IUserRepository } from "../repositories/interfaces/IUserRepository";

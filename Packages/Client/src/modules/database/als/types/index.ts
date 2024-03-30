@@ -1,4 +1,4 @@
-import type { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/commands/Commands.discovery";
+import type { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/bot/commands/Commands.discovery";
 import type { Collection } from "discord.js";
 
 export interface AlsStore {

@@ -1,6 +1,6 @@
 import util from "node:util";
-import { Context } from "@/modules/commands/Commands.context";
-import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
+import { Context } from "@/modules/bot/commands/Commands.context";
+import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import {
 	BaseMessageOptions,
 	CommandInteraction,

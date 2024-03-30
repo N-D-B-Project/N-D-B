@@ -1,4 +1,4 @@
-import { ReactionRolesRepoProvider } from "@/modules/reactionRoles/types/providers";
+import { ReactionRolesRepoProvider } from "@/modules/bot/reactionRoles/types/providers";
 import { Global, Module, Provider } from "@nestjs/common";
 import { Repositories } from "../types/constants";
 import { GuildRepository } from "./Guild.repository";

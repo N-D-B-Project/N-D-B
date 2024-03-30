@@ -1,9 +1,9 @@
-import { Content } from "@/modules/commands/types";
+import { Context } from "@/modules/bot/commands/Commands.context";
+import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "@/modules/bot/commands/Commands.discovery";
+import { Content } from "@/modules/bot/commands/types";
 import { ExecutionContext } from "@nestjs/common";
 import { Client } from "discord.js";
 import { NecordExecutionContext } from "necord";
-import { Context } from "../../modules/commands/Commands.context";
-import { LegacyCommandsDiscovery, SlashCommandsDiscovery } from "../../modules/commands/Commands.discovery";
 
 export class Utils {
 	static context(executionContext: ExecutionContext) {

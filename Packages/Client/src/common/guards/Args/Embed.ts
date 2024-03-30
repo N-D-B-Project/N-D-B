@@ -1,7 +1,7 @@
-import { LegacyCommandOptions } from "@/modules/commands/types";
-import type { Ii18nService } from "@/modules/i18n/interfaces/Ii18nService";
+import { Context } from "@/modules/bot/commands/Commands.context";
+import { LegacyCommandOptions } from "@/modules/bot/commands/types";
+import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Client, EmbedBuilder } from "discord.js";
-import { Context } from "../../../modules/commands/Commands.context";
 
 export async function embed(
 	client: Client,
