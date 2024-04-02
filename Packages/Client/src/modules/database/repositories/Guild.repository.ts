@@ -40,7 +40,7 @@ export class GuildRepository implements IGuildRepository {
 				this.logger.error(err);
 				status = DatabaseStatus.Error;
 			});
-		this.logger.log(`${guild.name} Configuration Crated on Database`);
+		this.logger.log(`${guild.name} Configuration Created on Database`);
 		return {
 			callback,
 			status,

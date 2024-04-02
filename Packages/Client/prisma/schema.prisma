@@ -17,7 +17,7 @@ model Guild {
   GuildReactionRoles GuildReactionRoles[]
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @default(now())
-  databaseVersion    String               @default("Necord-Lavalink")
+  databaseVersion    String               @default("API")
 
   @@map("Guild")
 }
@@ -50,9 +50,10 @@ model GuildReactionRoles {
 model User {
   id              String        @id
   Settings        UserSettings?
+  APIUser         APIUser?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now())
-  databaseVersion String        @default("Necord-Lavalink")
+  databaseVersion String        @default("API")
 
   @@map("User")
 }
@@ -66,4 +67,12 @@ model UserSettings {
   updatedAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @unique
+}
+
+model APIUser {
+  id          String @id @default(uuid())
+  email       String
+  accessToken String
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
 }

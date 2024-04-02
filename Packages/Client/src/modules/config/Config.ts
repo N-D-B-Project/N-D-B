@@ -12,6 +12,12 @@ export const config = (): Config => ({
 			Host: process.env.RedisHost,
 		},
 	},
+	API: {
+		JwtSecret: process.env.JWT_SECRET,
+		JwtExpire: "1d",
+		CookieSecret: process.env.COOKIE_SECRET,
+		MaxAge: 86400, // 1 day in seconds
+	},
 	TopGGToken: process.env.TopGGToken,
 	Discord: {
 		Token: process.env.Token,
@@ -20,6 +26,7 @@ export const config = (): Config => ({
 			Owners: ["330047048009252864"],
 			Secret: process.env.ClientSecret,
 			ID: "708822043420000366",
+			CallbackURL: process.env.CallbackURL,
 		},
 		Servers: {
 			NDCommunity: "679066351456878633",

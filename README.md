@@ -37,31 +37,43 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 
 - [ ] Multilingual README in Docs
 - [ ] Update [Configuration](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Configuration.md) and [Examples](https://github.com/NedcloarBR/N-D-B/tree/master/Docs/Examples)
-- [ ] Systems
-  - [ ] Moderation
-    - [ ] Manual
-    - [ ] Automatic
-  - [ ] Economy
-  - [ ] Starboard
-  - [ ] Tickets
-  - [ ] System Logs
-  - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
-    - [ ] ReactionRoles
-      - [x] Partial migrated to Necord but not tested yet
-      - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
-      - [ ] Update ReactionRoleAdd/Remove Events
-      - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more beautiful
-    - [ ] Music
-    - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
-      - [x] Partial
-      - [ ] Reenable when fix some bugs
-      - [ ] Full
-  - [ ] Sharding
-    - [x] Initial Sharding System
-    - [ ] Sharding related commands
-  - [ ] Top.gg
-    - [x] Status Autopost
-    - [ ] Vote Reward System
+- [ ] [Bot Client](https://github.com/NedcloarBR/N-D-B/tree/master/Packages/Client/src/modules/bot)
+  - [ ] Systems
+    - [ ] Moderation
+      - [ ] Manual
+      - [ ] Automatic
+    - [ ] Economy
+    - [ ] Starboard
+    - [ ] Tickets
+    - [ ] System Logs
+    - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
+      - [ ] ReactionRoles
+        - [x] Partial migrated to Necord but not tested yet
+        - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
+        - [ ] Update ReactionRoleAdd/Remove Events
+        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+      - [ ] Music
+      - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
+        - [x] Partial
+        - [ ] Reenable when fix some bugs
+        - [ ] Full
+    - [ ] Sharding
+      - [x] Initial Sharding System
+      - [ ] Sharding related commands
+    - [ ] Top.gg
+      - [x] Status Autopost
+      - [ ] Vote Reward System
+- [ ] [API](https://github.com/NedcloarBR/N-D-B/tree/master/Packages/Client/src/modules/api)
+  - [ ] Port from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS)
+    - [x] Auth Module
+    - [ ] Discord Module
+    - [ ] Guild Module
+  - [x] Change Auth from Session to JWT
+  - [x] Use [Fastify](https://fastify.dev/) instead of [Express](https://expressjs.com/)
+  - [ ] Use i18n to localize api messages
+  - [ ] Tests
+    - [ ] E2E
+    - [ ] Unit
 
 ## 📖 Licença
 

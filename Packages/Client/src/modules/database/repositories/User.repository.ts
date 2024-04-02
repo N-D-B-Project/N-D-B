@@ -16,6 +16,7 @@ export class UserRepository implements IUserRepository {
 			where: { id: userId },
 			include: {
 				Settings: true,
+				APIUser: true,
 			},
 		});
 	}
@@ -29,6 +30,12 @@ export class UserRepository implements IUserRepository {
 					Settings: {
 						create: {},
 					},
+					APIUser: {
+						create: {
+							accessToken: "",
+							email: "",
+						},
+					},
 				},
 				include: {
 					Settings: true,
@@ -38,15 +45,22 @@ export class UserRepository implements IUserRepository {
 				this.logger.error(err);
 				status = DatabaseStatus.Error;
 			});
-		this.logger.log(`${user.globalName} Configuration Crated on Database`);
+		this.logger.log(`${user.username} Configuration Created on Database`);
 		return {
 			callback,
 			status,
 		};
 	}
 
-	public async update(oldUser: User, newUser: User): Promise<UserEntity> {
-		throw new Error("Method not implemented.");
+	public async update(user: User): Promise<UserEntity> {
+		return await this.prisma.user.update({
+			where: { id: user.id },
+			data: {},
+			include: {
+				Settings: true,
+				APIUser: true,
+			},
+		});
 	}
 
 	public async delete(user: User): Promise<UserEntity> {
@@ -54,6 +68,7 @@ export class UserRepository implements IUserRepository {
 			where: { id: user.id },
 			include: {
 				Settings: true,
+				APIUser: true,
 			},
 		});
 	}

@@ -1,4 +1,6 @@
 import { AppModule } from "@/app.module";
+import fastifyCookie from "@fastify/cookie";
+import fastifyHelmet from "@fastify/helmet";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -13,6 +15,24 @@ async function bootstrap() {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 	const configService = app.get<ConfigService>(ConfigService);
 	const Port = configService.get<number>("PORT");
+
+	const fastifyInstance = app.getHttpAdapter().getInstance();
+	fastifyInstance
+		.addHook("onRequest", async (req, res) => {
+			req.socket["encrypted"] = process.env.NODE_ENV === "production";
+		})
+		.decorateReply("setHeader", function (name: string, value: unknown) {
+			this.header(name, value);
+		})
+		.decorateReply("end", function () {
+			this.send("");
+		});
+
+	app.register(fastifyHelmet);
+	app.register(fastifyCookie, {
+		secret: configService.getOrThrow<Config["API"]>("API").CookieSecret,
+		hook: "onRequest",
+	});
 
 	app.useGlobalInterceptors(new CommandInterceptor());
 	app.setGlobalPrefix("api");

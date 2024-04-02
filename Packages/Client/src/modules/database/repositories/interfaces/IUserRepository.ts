@@ -5,6 +5,6 @@ import type { DatabaseStatus } from "../../types";
 export interface IUserRepository {
 	get(userId: string): Promise<UserEntity>;
 	create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }>;
-	update(oldUser: User, newUser: User): Promise<UserEntity>;
+	update(user: User): Promise<UserEntity>;
 	delete(user: User): Promise<UserEntity>;
 }

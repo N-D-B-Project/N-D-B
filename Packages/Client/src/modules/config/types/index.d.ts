@@ -12,6 +12,12 @@ export interface Config {
 			Host: string;
 		};
 	};
+	API: {
+		JwtSecret: string;
+		JwtExpire: string;
+		CookieSecret: string;
+		MaxAge: number;
+	};
 	TopGGToken: string;
 	Discord: {
 		Token: string;
@@ -20,6 +26,7 @@ export interface Config {
 			Owners: Array<string>;
 			Secret: string;
 			ID: string;
+			CallbackURL: string;
 		};
 		Servers: {
 			NDCommunity: string;
