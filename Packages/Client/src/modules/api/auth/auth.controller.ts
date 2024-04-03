@@ -1,8 +1,8 @@
 import { AuthUser } from "@/common/decorators/AuthUser.decorator";
 import { DiscordAuthGuard } from "@/common/guards/Discord.guard";
 import { JwtAuthGuard } from "@/common/guards/Jwt.guard";
-import { Config } from "@/modules/config/types";
-import { UserEntity } from "@/modules/database/entities";
+import { Config } from "@/modules/shared/config/types";
+import { UserEntity } from "@/modules/shared/database/entities";
 import { Cookies, Routes, Services, isInProduction } from "@/types/Constants";
 import { Controller, Get, HttpCode, HttpStatus, Inject, Redirect, Req, Res, UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

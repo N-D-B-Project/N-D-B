@@ -1,4 +1,4 @@
-import { UserEntity } from "@/modules/database/entities";
+import { UserEntity } from "@/modules/shared/database/entities";
 
 export interface JwtPayload {
 	id: UserEntity["API"]["userId"];

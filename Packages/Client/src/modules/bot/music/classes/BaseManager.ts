@@ -1,5 +1,5 @@
 import { LavalinkManagerEvents, NodeManagerEvents } from "@/modules/bot/music/types/lavalink-client";
-import { Config } from "@/modules/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EventEmitter2 } from "@nestjs/event-emitter";

@@ -1,5 +1,5 @@
 import { AuthService } from "@/modules/api/auth/auth.service";
-import { Config } from "@/modules/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

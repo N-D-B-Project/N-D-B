@@ -8,7 +8,7 @@ import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify
 import { name } from "../package.json";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
 import { ShardingManager, TopGGAutoPoster } from "./lib";
-import { Config } from "./modules/config/types";
+import { Config } from "./modules/shared/config/types";
 
 async function bootstrap() {
 	const logger = new Logger("Main");

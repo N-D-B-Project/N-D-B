@@ -1,6 +1,6 @@
-import { UserEntity } from "@/modules/database/entities";
-import { IAPIUserRepository } from "@/modules/database/repositories/interfaces/IAPIUserRepository";
-import { Repositories } from "@/modules/database/types/constants";
+import { UserEntity } from "@/modules/shared/database/entities";
+import { IAPIUserRepository } from "@/modules/shared/database/repositories/interfaces/IAPIUserRepository";
+import { Repositories } from "@/modules/shared/database/types/constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { IUserService } from "./interfaces/IUserService";
 import { UserDTO } from "./user.dto";

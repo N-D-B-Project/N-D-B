@@ -1,5 +1,5 @@
-import { Config } from "@/modules/config/types";
-import { UserEntity } from "@/modules/database/entities";
+import { Config } from "@/modules/shared/config/types";
+import { UserEntity } from "@/modules/shared/database/entities";
 import { Cookies, Services } from "@/types/Constants";
 import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

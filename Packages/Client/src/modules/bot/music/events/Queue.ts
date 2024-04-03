@@ -1,5 +1,5 @@
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Config } from "@/modules/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Extends } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

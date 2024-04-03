@@ -1,7 +1,7 @@
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Guild, TextChannel } from "discord.js";
-import { PrismaService } from "../../database/prisma/Prisma.service";
+import { PrismaService } from "../../shared/database/prisma/Prisma.service";
 import { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 import type { IReaction, REACTION_OPTIONS } from "./types";

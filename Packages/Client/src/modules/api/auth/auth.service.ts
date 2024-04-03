@@ -1,4 +1,4 @@
-import { UserEntity } from "@/modules/database/entities";
+import { UserEntity } from "@/modules/shared/database/entities";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";

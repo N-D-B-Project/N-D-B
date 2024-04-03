@@ -1,4 +1,4 @@
-import { UserEntity } from "@/modules/database/entities";
+import { UserEntity } from "@/modules/shared/database/entities";
 import { UserDTO } from "../../user/user.dto";
 import { JwtPayload } from "../types";
 

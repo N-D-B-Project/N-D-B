@@ -1,4 +1,4 @@
-import { Config } from "@/modules/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Services } from "@/types/Constants";
 import { Module, Provider } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

@@ -2,7 +2,7 @@ import { Extends, Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, CommandInteraction, CommandInteractionOptionResolver, Message } from "discord.js";
-import type { IDatabaseService } from "../../database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "../../shared/database/interfaces/IDatabaseService";
 import { Context } from "../commands/Commands.context";
 import { RunSubCommandEvent } from "../commands/Commands.discovery";
 import type { ICommandsService } from "../commands/interfaces/ICommandService";

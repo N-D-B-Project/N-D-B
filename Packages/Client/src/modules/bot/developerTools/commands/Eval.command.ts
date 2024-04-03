@@ -1,6 +1,6 @@
 import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { Config } from "@/modules/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";

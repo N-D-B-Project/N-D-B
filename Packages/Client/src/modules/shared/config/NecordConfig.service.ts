@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import type { ConfigService } from "@nestjs/config";
 import { GatewayIntentBits, GatewayVersion, Options, Partials } from "discord.js";
 import type { NecordModuleOptions } from "necord";
+import { Config } from "./types";
 
 @Injectable()
 export class NecordConfigService {
@@ -9,7 +10,7 @@ export class NecordConfigService {
 
 	createNecordOptions(): NecordModuleOptions {
 		return {
-			token: this.config.get<string>("Token"),
+			token: this.config.getOrThrow<Config["Discord"]>("Discord").Token,
 			skipRegistration: true,
 			shards: "auto",
 			rest: {

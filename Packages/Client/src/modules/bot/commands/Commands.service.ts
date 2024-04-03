@@ -1,7 +1,7 @@
 import { CommandConfig } from "@/common/decorators";
 import { CommandError } from "@/common/errors/Command.error";
-import { Config } from "@/modules/config/types";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Config } from "@/modules/shared/config/types";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

@@ -1,10 +1,9 @@
-import { NecordConfigService } from "@/modules/config/NecordConfig.service";
+import { NecordConfigService } from "@/modules/shared/config/NecordConfig.service";
+import { SharedModule } from "@/modules/shared/shared.module";
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
-import { config } from "../../config/Config";
-import { DatabaseModule } from "../../database/database.module";
 import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
 import { DeveloperToolsModule } from "../developerTools/DeveloperTools.module";
@@ -16,13 +15,7 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({
-			isGlobal: true,
-			cache: true,
-			load: [config],
-		}),
 		NecordModule.forRootAsync({
-			imports: [ConfigModule],
 			inject: [ConfigService],
 			useFactory: async (config: ConfigService) => ({
 				...new NecordConfigService(config).createNecordOptions(),
@@ -32,7 +25,7 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			allowSkip: false,
 			allowTraversal: false,
 		}),
-		DatabaseModule,
+		SharedModule,
 		I18nModule,
 		ComponentsModule,
 		EventsModule,

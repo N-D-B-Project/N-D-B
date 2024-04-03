@@ -1,7 +1,7 @@
 import { LegacyCommand, SlashCommand } from "@/common/decorators";
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { GuildEntity, UserEntity } from "@/modules/database/entities";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { GuildEntity, UserEntity } from "@/modules/shared/database/entities";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Extends, Services } from "@/types/Constants";
 import { WAIT } from "@/utils/Tools";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit, Provider } from "@nestjs/common";

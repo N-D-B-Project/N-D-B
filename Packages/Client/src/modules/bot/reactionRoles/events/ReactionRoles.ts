@@ -1,6 +1,6 @@
 import { MessageTools } from "@/modules/bot/commands/Message";
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Extends, Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, roleMention } from "discord.js";
