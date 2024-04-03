@@ -1,0 +1,8 @@
+### Get Bot Guilds
+GET http://localhost:4400/api/discord/botGuilds
+
+### Get User Guilds
+GET http://localhost:4400/api/discord/userGuilds
+
+### Get Mutual Guilds
+GET http://localhost:4400/api/discord/mutualGuilds

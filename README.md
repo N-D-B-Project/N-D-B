@@ -66,7 +66,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 - [ ] [API](https://github.com/NedcloarBR/N-D-B/tree/master/Packages/Client/src/modules/api)
   - [ ] Port from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS)
     - [x] Auth Module
-    - [ ] Discord Module
+    - [x] Discord Module
     - [ ] Guild Module
   - [x] Change Auth from Session to JWT
   - [x] Use [Fastify](https://fastify.dev/) instead of [Express](https://expressjs.com/)

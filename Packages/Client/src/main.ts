@@ -6,6 +6,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { name } from "../package.json";
+import { AxiosInterceptor } from "./common/interceptors/Axios.interceptor";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
 import { ShardingManager, TopGGAutoPoster } from "./lib";
 import { Config } from "./modules/shared/config/types";
@@ -34,7 +35,7 @@ async function bootstrap() {
 		hook: "onRequest",
 	});
 
-	app.useGlobalInterceptors(new CommandInterceptor());
+	app.useGlobalInterceptors(new CommandInterceptor(), new AxiosInterceptor());
 	app.setGlobalPrefix("api");
 	app.useGlobalPipes(
 		new ValidationPipe({

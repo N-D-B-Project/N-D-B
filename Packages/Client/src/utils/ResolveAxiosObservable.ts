@@ -3,15 +3,14 @@ import { Logger } from "@nestjs/common";
 import { AxiosError } from "axios";
 import { Observable, catchError, firstValueFrom } from "rxjs";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function resolveAxiosObservable<T>(source: Observable<any>): T {
+export async function resolveAxiosObservable<T>(source: Observable<T>): Promise<T> {
 	const logger = new Logger("ResolveAxiosObservable");
-	return firstValueFrom<T>(
+	return (await firstValueFrom(
 		source.pipe(
 			catchError((error: AxiosError) => {
 				logger.error(error.response.data);
 				throw new AxiosResolveError("An error happened!");
 			}),
 		),
-	) as T;
+	)) as T;
 }
