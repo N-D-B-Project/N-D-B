@@ -30,6 +30,7 @@ export class AuthController {
 		res.cookie(Cookies.JWT, jwt, {
 			httpOnly: true,
 			maxAge: this.configService.getOrThrow<Config["API"]>("API").MaxAge,
+			path: "/",
 		});
 		return;
 	}
