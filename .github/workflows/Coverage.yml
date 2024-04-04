@@ -66,7 +66,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Review
-        uses: actions/github-script@0.10.6
+        uses: actions/github-script@v7
         with:
           script: |
             github.pulls.createReview({
@@ -77,7 +77,7 @@ jobs:
             })
   
       - name: Merge PR
-        uses: actions/github-script@0.10.6
+        uses: actions/github-script@v7
         with:
           script: |
             github.pulls.merge({
