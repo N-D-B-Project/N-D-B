@@ -34,8 +34,8 @@ jobs:
       - name: Generate coverage report
         run: |
           yarn test --coverage
-          # Move coverage folder to a temporary location
-          mv coverage ../coverage/client
+          # Move coverage folder to a temporary location from Packages/Client
+          mv Packages/Client/test/coverage ../coverage/client
 
       - name: Create and switch to Coverage-Report branch
         run: |
