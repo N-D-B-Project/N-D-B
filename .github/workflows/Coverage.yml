@@ -20,12 +20,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    
-    - name: Disable Husky during CI
-      run: yarn ci-setup
 
     - name: Install dependencies
       run: yarn install
+
+    - name: Disable Husky during CI
+      run: yarn ci-setup
 
     - name: Navigate to Client package
       run: cd Packages/Client
