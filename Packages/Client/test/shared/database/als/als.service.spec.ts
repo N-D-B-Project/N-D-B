@@ -16,4 +16,8 @@ describe("AlsService", () => {
 	it("Should be Defined", () => {
 		expect(service).toBeDefined();
 	});
+
+	it("Should be Undefined", async () => {
+		expect(await service.onModuleInit()).toBeUndefined();
+	});
 });
