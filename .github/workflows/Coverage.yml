@@ -34,9 +34,10 @@ jobs:
       - name: Generate coverage report
         run: |
           yarn test --coverage
-          # Move coverage folder to a temporary location from Packages/Client
           mkdir -p ../coverage/client
-          mv Packages/Client/test/coverage/lcov-report ../coverage/client
+          mv index.html ../coverage
+          mv Packages/Client/test/coverage/lcov-report/coverage ../coverage/client
+          mv Packages/Client/test/coverage/lcov.info ../coverage/client
 
       - name: Create and switch to Coverage-Report branch
         run: |
@@ -45,17 +46,24 @@ jobs:
           git clean -f -d
 
       - name: Move coverage folder to Coverage-Report branch
-        run: mv ../coverage .
+        run: |
+          mv ../coverage/client .
+          mv ../coverage/index.html .
 
       - name: Commit changes
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
-          git commit -m "feat: Add test coverage report [skip ci]"
+          git commit -m "feat: Add test coverage report"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: Coverage-Report
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
