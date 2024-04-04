@@ -47,6 +47,7 @@ jobs:
           mv ../coverage/index.html .
 
       - name: Create Pull Request
+        id: "open-pr"
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "feat: Add test coverage report"
@@ -58,14 +59,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
     
       - name: Merge PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number
-            })
+        run: gh pr merge --merge --auto ${{ steps.open-pr.outputs.pr_number }}
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
