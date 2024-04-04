@@ -36,7 +36,7 @@ jobs:
           yarn test --coverage
           mkdir -p ../coverage/client
           mv index.html ../coverage
-          mv Packages/Client/test/coverage/lcov-report/coverage ../coverage/client
+          mv Packages/Client/test/coverage/lcov-report ../coverage/client
           mv Packages/Client/test/coverage/lcov.info ../coverage/client
 
       - name: Create and switch to Coverage-Report branch
