@@ -24,6 +24,7 @@
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"test": "vitest",
+		"test:watch": "vitest --watch",
 		"test:cov": "vitest run --coverage",
 		"test:ui": "vitest --ui",
 		"postinstall": "prisma generate"

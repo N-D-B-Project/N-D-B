@@ -8,5 +8,6 @@ export default defineConfig({
 			provider: "istanbul",
 			reportsDirectory: "./test/coverage",
 		},
+		watch: false,
 	},
 });

@@ -74,9 +74,12 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 - [ ] Tests
   - [x] Configure [Vitest](https://vitest.dev/) as Tester instead of [Jest](https://jestjs.io/)
   - [x] Generate Coverage
-  - [ ] GitHub action to auto run tests and generate coverage after a push in repository
+  - [x] GitHub action to auto run tests and generate coverage after a push in repository
   - [ ] E2E
   - [ ] Unit
+- [ ] [.github](https://github.com/NedcloarBR/N-D-B/tree/master/.github)
+  - [ ] Update actions versions
+  - [ ] Label sync action
 
 ## 📖 Licença
 
