@@ -56,6 +56,9 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add .
           git commit -m "feat: Add test coverage report"
+        
+      - name: Pull changes from remote
+        run: git pull origin Coverage-Report
 
       - name: Push changes
         uses: ad-m/github-push-action@master
