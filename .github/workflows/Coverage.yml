@@ -47,12 +47,6 @@ jobs:
       - name: Move coverage folder to Coverage-Report branch
         run: mv ../coverage .
 
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "feat: Add test coverage report"
-          git push origin Coverage-Report
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
