@@ -31,12 +31,9 @@ jobs:
           # https://typicode.github.io/husky/how-to.html#skipping-git-hooks
           HUSKY: "0"
 
-      - name: Navigate to Client package
-        run: cd Packages/Client
-
       - name: Generate coverage report
         run: |
-          yarn test:cov
+          yarn test --coverage
           # Move coverage folder to a temporary location
           mv coverage ../coverage/client
 
