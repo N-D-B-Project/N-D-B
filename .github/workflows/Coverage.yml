@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "Packages/**/*.ts"
+      - ".ts"
 
 jobs:
   generate-coverage-pr:
@@ -35,7 +35,8 @@ jobs:
         run: |
           yarn test --coverage
           # Move coverage folder to a temporary location from Packages/Client
-          mv Packages/Client/test/coverage ../coverage/client
+          mkdir -p ../coverage/client
+          mv Packages/Client/test/coverage/lcov-report ../coverage/client
 
       - name: Create and switch to Coverage-Report branch
         run: |
@@ -82,3 +83,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             })
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}

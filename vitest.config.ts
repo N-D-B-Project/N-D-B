@@ -7,6 +7,7 @@ export default defineConfig({
 		coverage: {
 			provider: "istanbul",
 			reportsDirectory: "./test/coverage",
+			reporter: ["lcov"],
 		},
 		watch: false,
 	},
