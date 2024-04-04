@@ -8,7 +8,7 @@ on:
       - "Packages/**/*.ts"
 
 jobs:
-  generate-coverage-commit:
+  generate-coverage-pr:
     strategy:
       matrix:
         node-version: [20.6.1]
@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p ../coverage/client
           mv index.html ../coverage
-          mv Packages/Client/test/coverage/lcov-report ../coverage/client
+          mv Packages/Client/test/coverage/lcov-report/** ../coverage/client
           mv Packages/Client/test/coverage/lcov.info ../coverage/client
           git rm -rf .
           git clean -f -d
@@ -56,17 +56,6 @@ jobs:
           base: "Coverage-Report"
           labels: "automated"
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Review
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.pulls.createReview({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-              event: 'APPROVE'
-            })
     
       - name: Merge PR
         uses: actions/github-script@v7
