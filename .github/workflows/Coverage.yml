@@ -23,9 +23,10 @@ jobs:
 
     - name: Install dependencies
       run: yarn install
-
-    - name: Disable Husky during CI
-      run: yarn ci-setup
+      env:
+        # Disable Husky in CI
+        # https://typicode.github.io/husky/how-to.html#skipping-git-hooks
+        HUSKY: "0"
 
     - name: Navigate to Client package
       run: cd Packages/Client
