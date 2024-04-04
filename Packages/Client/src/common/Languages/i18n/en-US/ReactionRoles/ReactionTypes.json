@@ -1,7 +1,0 @@
-{
-	"Help": {
-		"Description": "Shows all types of Reaction Roles",
-		"Usage": ""
-	},
-	"Types": "`1` - React adds the Role, taking away the reaction removes the Role\n`2` - Reacting adds the Role, taking away the reaction does not remove the Role\n`3` - Reacting will remove the Role, taking away the reaction will not return the Role \n`4` - Reacting will remove the Role, taking away the reaction adds the Role \n`5` - Same concept as type 3 but removes the reaction\n`6` - Reacting adds the Role and reacting removes the Role"
-}
