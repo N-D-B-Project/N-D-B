@@ -11,7 +11,7 @@
 
 	"files.exclude": {
 		"**/dist": true,
-		"**/node_modules": false,
+		"**/node_modules": true,
 		"**/yarn/cache": true
 	},
 	"search.exclude": {
