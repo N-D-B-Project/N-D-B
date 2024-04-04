@@ -10,12 +10,14 @@
 	"editor.tabSize": 2,
 
 	"files.exclude": {
-		"**/node_modules": true,
+		"**/dist": true,
+		"**/node_modules": false,
 		"**/yarn/cache": true
 	},
 	"search.exclude": {
 		"**/node_modules": true,
 		"**/.yarn": true,
+		"**/dist": true,
 		"**/.github": true,
 		"**/Backup": true
 	},
@@ -96,6 +98,7 @@
 		"Lavalink",
 		"lavalinkqueue",
 		"lavaplayer",
+		"lcov",
 		"mgcrea",
 		"Middlewares",
 		"msgdm",

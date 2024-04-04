@@ -71,9 +71,12 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [x] Change Auth from Session to JWT
   - [x] Use [Fastify](https://fastify.dev/) instead of [Express](https://expressjs.com/)
   - [ ] Use i18n to localize api messages
-  - [ ] Tests
-    - [ ] E2E
-    - [ ] Unit
+- [ ] Tests
+  - [x] Configure [Vitest](https://vitest.dev/) as Tester instead of [Jest](https://jestjs.io/)
+  - [x] Generate Coverage
+  - [ ] GitHub action to auto run tests and generate coverage after a push in repository
+  - [ ] E2E
+  - [ ] Unit
 
 ## 📖 Licença
 
