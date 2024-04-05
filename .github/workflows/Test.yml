@@ -22,7 +22,7 @@ jobs:
       uses: actions/setup-node@v4
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --immutable
       env:
         # Disable Husky in CI
         # https://typicode.github.io/husky/how-to.html#skipping-git-hooks
