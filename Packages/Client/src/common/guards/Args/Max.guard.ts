@@ -1,9 +1,10 @@
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Utils } from "../Utils";
 import { embed } from "./Embed";
 
+@Injectable()
 export class MaxArgsGuard implements CanActivate {
 	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
 

@@ -1,10 +1,11 @@
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Extends } from "@/types/Constants";
-import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { CommandConfig } from "../decorators";
 import { Utils } from "./Utils";
 
+@Injectable()
 export class EnableGuard implements CanActivate {
 	public constructor(
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,

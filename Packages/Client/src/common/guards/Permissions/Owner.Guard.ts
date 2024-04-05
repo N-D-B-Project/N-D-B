@@ -2,11 +2,12 @@ import { CommandPermissions } from "@/common/decorators";
 import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
 import { Extends } from "@/types/Constants";
-import { CanActivate, ExecutionContext, Inject } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
 
+@Injectable()
 export class OwnerPermissionGuard implements CanActivate {
 	public constructor(
 		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
