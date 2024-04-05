@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.54% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -114,31 +114,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { IReactionRolesRepository } from "@/modules/bot/reactionRoles/interfaces/IReactionRoleRepository";
@@ -160,24 +160,24 @@ export class DatabaseService implements IDatabaseService {
 		@Inject(ReactionRoles.Repository) private readonly reactionRoles: IReactionRolesRepository,
 	) {}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >AlsRepo(): IAsyncLocalStorage {</span>
-<span class="cstat-no" title="statement not covered" >		return this.als;</span>
+	public AlsRepo(): IAsyncLocalStorage {
+		return this.als;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >GuildRepo(): IGuildRepository {</span>
-<span class="cstat-no" title="statement not covered" >		return this.guild;</span>
+	public GuildRepo(): IGuildRepository {
+		return this.guild;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >UserRepo(): IUserRepository {</span>
-<span class="cstat-no" title="statement not covered" >		return this.user;</span>
+	public UserRepo(): IUserRepository {
+		return this.user;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >APIUserRepo(): IAPIUserRepository {</span>
-<span class="cstat-no" title="statement not covered" >		return this.apiUser;</span>
+	public APIUserRepo(): IAPIUserRepository {
+		return this.apiUser;
 	}
 &nbsp;
-	public <span class="fstat-no" title="function not covered" >ReactionRolesRepo(): IReactionRolesRepository {</span>
-<span class="cstat-no" title="statement not covered" >		return this.reactionRoles;</span>
+	public ReactionRolesRepo(): IReactionRolesRepository {
+		return this.reactionRoles;
 	}
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -187,7 +187,7 @@ export class DatabaseService implements IDatabaseService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-04T21:19:35.164Z
+                at 2024-04-05T15:56:42.822Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
