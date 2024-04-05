@@ -58,12 +58,11 @@ jobs:
           labels: "automated"
           token: ${{ secrets.GITHUB_TOKEN }}
     
-      - name: Merge PR
-        run: |
-          git checkout -b Coverage-Report
-          gh pr merge ${{ steps.open-pr.outputs.pr_number }} --merge --auto --delete-branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge Pull Request
+        uses: peter-evens/enable-pull-reuqest-automerge/v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
