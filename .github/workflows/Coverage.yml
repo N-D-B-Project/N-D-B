@@ -59,7 +59,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
     
       - name: Merge PR
-        run: gh pr merge --merge --auto ${{ steps.open-pr.outputs.pr_number }}
+        run: gh pr merge ${{ steps.open-pr.outputs.pr_number }} --merge --auto --delete-branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
