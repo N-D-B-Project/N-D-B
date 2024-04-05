@@ -61,7 +61,7 @@ jobs:
       - name: Merge PR
         run: gh pr merge --merge --auto ${{ steps.open-pr.outputs.pr_number }}
         env:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
