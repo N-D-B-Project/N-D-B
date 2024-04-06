@@ -6,13 +6,16 @@ on:
       - master
     paths:
       - "**/*.spec.ts"
+  workflow_run:
+    workflows: ["Run Tests"]
+    types:
+      - completed
 
 jobs:
   generate-coverage-pr:
     strategy:
       matrix:
         node-version: [20.6.1]
-
     runs-on: ubuntu-latest
 
     steps:
