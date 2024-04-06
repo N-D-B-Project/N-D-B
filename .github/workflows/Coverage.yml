@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "Packages/**/*.ts"
+      - "*.spec.ts"
 
 jobs:
   generate-coverage-pr:
@@ -62,7 +62,7 @@ jobs:
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+          pull-request-number: ${{ steps.open-pr.outputs.pull-request-number }}
       
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
