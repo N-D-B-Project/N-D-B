@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - "*.spec.ts"
+      - "**/*.spec.ts"
 
 jobs:
   generate-coverage-pr:
