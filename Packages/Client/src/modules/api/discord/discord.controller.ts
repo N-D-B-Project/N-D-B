@@ -3,8 +3,10 @@ import { JwtAuthGuard } from "@/common/guards/Jwt.guard";
 import { UserEntity } from "@/modules/shared/database/entities";
 import { Routes, Services } from "@/types/Constants";
 import { Controller, Get, Inject, UseGuards } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
 import { IDiscordService } from "./interfaces/IDiscordService.interface";
 
+@ApiTags(Routes.Discord)
 @Controller(Routes.Discord)
 export class DiscordController {
 	public constructor(@Inject(Services.Discord) private readonly discordService: IDiscordService) {}

@@ -5,6 +5,7 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { name } from "../package.json";
 import { AxiosInterceptor } from "./common/interceptors/Axios.interceptor";
 import { CommandInterceptor } from "./common/interceptors/Command.interceptor";
@@ -47,6 +48,15 @@ async function bootstrap() {
 
 	const ShardManager = new ShardingManager(configService);
 	const TopGGPoster = new TopGGAutoPoster(configService.getOrThrow<Config["TopGGToken"]>("TopGGToken"), ShardManager);
+
+	const SwaggerConfig = new DocumentBuilder()
+		.setTitle("N-D-B API Docs")
+		.setDescription("View and test all routes and functions of N-D-B API")
+		.setVersion("1.0")
+		.build();
+
+	const SwaggerDocument = SwaggerModule.createDocument(app, SwaggerConfig);
+	SwaggerModule.setup("docs", app, SwaggerDocument);
 
 	try {
 		await app.listen(Port, "0.0.0.0");

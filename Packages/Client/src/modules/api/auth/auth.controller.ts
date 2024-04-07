@@ -6,10 +6,12 @@ import { UserEntity } from "@/modules/shared/database/entities";
 import { Cookies, Routes, Services, isInProduction } from "@/types/Constants";
 import { Controller, Get, HttpCode, HttpStatus, Inject, Redirect, Req, Res, UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
 import { FastifyRequest } from "fastify";
 import { IAuthService } from "./interfaces/IAuthService.interface";
 
+@ApiTags(Routes.Auth)
 @Controller(Routes.Auth)
 export class AuthController {
 	public constructor(
