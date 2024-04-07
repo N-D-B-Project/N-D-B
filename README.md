@@ -78,7 +78,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [ ] E2E
   - [ ] Unit
 - [ ] [.github](https://github.com/NedcloarBR/N-D-B/tree/master/.github)
-  - [ ] Update actions versions
+  - [x] Update actions versions
   - [ ] Label sync action
 
 ## 📖 Licença
