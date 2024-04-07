@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, "JWT") {
 			jwtFromRequest: ExtractJwt.fromExtractors([
 				(request: FastifyRequest) => {
 					const data = request?.cookies[Cookies.JWT];
-					return data ? data : undefined;
+					return data;
 				},
 			]),
 			ignoreExpiration: false,

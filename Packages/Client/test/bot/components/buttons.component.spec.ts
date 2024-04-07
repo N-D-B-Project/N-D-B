@@ -1,9 +1,7 @@
-import { Context } from "@/modules/bot/commands/Commands.context";
 import { Buttons } from "@/modules/bot/components/Buttons.component";
 import { I18nModule } from "@/modules/bot/i18n/i18n.module";
 import { SharedModule } from "@/modules/shared/shared.module";
 import { Test, TestingModule } from "@nestjs/testing";
-import { ActionRowBuilder, ButtonBuilder } from "discord.js";
 import { beforeEach, describe, expect, it } from "vitest";
 
 describe("Buttons", () => {
