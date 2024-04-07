@@ -7,7 +7,7 @@ on:
     branches:
       - master
     paths:
-      - '.github/labels.yml'
+      - '.github/LABELS.yml'
 jobs:
   labeler:
     name: Labeler
