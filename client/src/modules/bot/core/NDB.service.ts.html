@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/12</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -121,8 +121,7 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,11 +130,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,8 +180,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Content } from "@/modules/bot/commands/types";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
 import { ButtonStyle, EmbedBuilder } from "discord.js";
@@ -191,22 +188,22 @@ import { Context } from "../commands/Commands.context";
 import type { INDBService } from "./interfaces/INDBService";
 &nbsp;
 @Injectable()
-export class NDBService implements INDBService {
-	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
-		private readonly paginator: NecordPaginationService,
+export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" >NDBService implements INDBService {</span></span>
+	public <span class="fstat-no" title="function not covered" >constructor(</span>
+		@Inject(LOCALIZATION_ADAPTER) private readonly <span class="cstat-no" title="statement not covered" >translate: NestedLocalizationAdapter,</span>
+		private readonly <span class="cstat-no" title="statement not covered" >paginator: NecordPaginationService,</span>
 	) {}
 &nbsp;
 <span class="fstat-no" title="function not covered" >	public async b</span>uildPaginator(context: Context, embeds: Array&lt;EmbedBuilder&gt;, id: string): Promise&lt;Content&gt; {
 		const buttons: ButtonsAppearance = <span class="cstat-no" title="statement not covered" >{</span>
 			back: {
 				emoji: "⬅️",
-				label: await this.Translate.TFunction(context, "Tools/Paginator:Labels:Previous"),
+				label: this.translate.getTranslation("Tools/Paginator:Labels:Previous", context.guild.preferredLocale),
 				style: ButtonStyle.Secondary,
 			},
 			next: {
 				emoji: "➡️",
-				label: await this.Translate.TFunction(context, "Tools/Paginator:Labels:Next"),
+				label: this.translate.getTranslation("Tools/Paginator:Labels:Next", context.guild.preferredLocale),
 				style: ButtonStyle.Secondary,
 			},
 		};
@@ -214,18 +211,18 @@ export class NDBService implements INDBService {
 <span class="cstat-no" title="statement not covered" >		for (let i = <span class="cstat-no" title="statement not covered" >0; i</span> &lt; embeds.length; i++) {</span>
 <span class="cstat-no" title="statement not covered" >			embeds[i].setFooter({</span>
 				text: embeds[i].data.footer?.text
-					? `${embeds[i].data.footer?.text} | ${await this.Translate.TFunction(
-							context,
+					? `${embeds[i].data.footer?.text} | ${this.translate.getTranslation(
 							"Tools/Paginator:Embed:Footer",
+							context.guild.preferredLocale,
 							{
-								Current: i + 1,
-								Total: embeds.length,
+								Current: String(i + 1),
+								Total: String(embeds.length),
 							},
-					  )}`
-					: await this.Translate.TFunction(context, "Tools/Paginator:Embed:Footer", {
-							Current: i + 1,
-							Total: embeds.length,
-					  }),
+						)}`
+					: this.translate.getTranslation("Tools/Paginator:Embed:Footer", context.guild.preferredLocale, {
+							Current: String(i + 1),
+							Total: String(embeds.length),
+						}),
 			});
 		}
 &nbsp;
@@ -247,7 +244,7 @@ export class NDBService implements INDBService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-12T22:29:04.482Z
+                at 2024-04-13T20:01:02.268Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

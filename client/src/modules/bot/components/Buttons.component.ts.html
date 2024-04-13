@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,17 +91,13 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -119,39 +115,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { Context } from "../commands/Commands.context";
 &nbsp;
 @Injectable()
-export class Buttons {
-	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
+export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" >Buttons {</span></span>
+	public <span class="fstat-no" title="function not covered" >constructor(@I</span>nject(LOCALIZATION_ADAPTER) private readonly <span class="cstat-no" title="statement not covered" >translate: NestedLocalizationAdapter) {</span>}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	public async C</span>onfirm(context: Context): Promise&lt;ActionRowBuilder&lt;ButtonBuilder&gt;&gt; {
+<span class="fstat-no" title="function not covered" >	public async C</span>onfirm(locale: string): Promise&lt;ActionRowBuilder&lt;ButtonBuilder&gt;&gt; {
 <span class="cstat-no" title="statement not covered" >		return new ActionRowBuilder&lt;ButtonBuilder&gt;().addComponents([</span>
 			new ButtonBuilder()
 				.setCustomId("confirm/yes")
-				.setLabel(await this.Translate.Guild(context, "Tools/Buttons:Labels:Confirm:YES"))
+				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:YES", locale))
 				.setEmoji("719710630881525881")
 				.setStyle(ButtonStyle.Success),
 			new ButtonBuilder()
 				.setCustomId("confirm/no")
-				.setLabel(await this.Translate.Guild(context, "Tools/Buttons:Labels:Confirm:NO"))
+				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:NO", locale))
 				.setEmoji("719710607405875321")
 				.setStyle(ButtonStyle.Danger),
 		]);
 	}
 }
 &nbsp;
-export enum ConfirmButtonEnum {
-	Yes = "tes",
-	No = "no",
+export <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >enum <span class="cstat-no" title="statement not covered" >C</span>onfirmButtonEnum {</span></span>
+<span class="cstat-no" title="statement not covered" >	Yes = "tes",</span>
+<span class="cstat-no" title="statement not covered" >	No = "no",</span>
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -160,7 +154,7 @@ export enum ConfirmButtonEnum {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-12T22:29:04.482Z
+                at 2024-04-13T20:01:02.268Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
