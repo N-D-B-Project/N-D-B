@@ -1,6 +1,5 @@
 import { CommandPermissions } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Utils } from "../Utils";
@@ -8,7 +7,7 @@ import { Utils } from "../Utils";
 @Injectable()
 export class BotPermissionGuard implements CanActivate {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly reflector: Reflector,
 	) {}
 
@@ -20,7 +19,7 @@ export class BotPermissionGuard implements CanActivate {
 			if (!context.guild.members.me.permissions.has(permissions.bot)) {
 				Utils.SendFunction(
 					context,
-					await this.Translate.TFunction(context, "Tools/Commands:Permission:Bot", {
+					this.translate.getTranslation("Tools/Commands:Permission:Bot", context.interaction.guildLocale, {
 						PERMS: Utils.formatArray(permissions.bot as Array<string>),
 					}),
 				);

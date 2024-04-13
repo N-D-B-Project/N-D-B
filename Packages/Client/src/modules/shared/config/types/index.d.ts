@@ -19,6 +19,7 @@ export interface Config {
 		MaxAge: number;
 	};
 	TopGGToken: string;
+	FallbackLocale: string;
 	Discord: {
 		Token: string;
 		DevToken: string;

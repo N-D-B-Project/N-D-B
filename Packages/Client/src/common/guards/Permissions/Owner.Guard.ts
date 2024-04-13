@@ -1,7 +1,6 @@
 import { CommandPermissions } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
@@ -10,7 +9,7 @@ import { Utils } from "../Utils";
 @Injectable()
 export class OwnerPermissionGuard implements CanActivate {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly config: ConfigService<Config>,
 		private readonly reflector: Reflector,
 	) {}
@@ -20,7 +19,10 @@ export class OwnerPermissionGuard implements CanActivate {
 		const { context } = Utils.context(executionContext);
 
 		if (permissions.ownerOnly && !this.checkOwner(context.author.id)) {
-			Utils.SendFunction(context, await this.Translate.TFunction(context, "Tools/Command:Checker:OwnerOnly"));
+			Utils.SendFunction(
+				context,
+				this.translate.getTranslation("Tools/Command:Checker:OwnerOnly", context.interaction.guildLocale),
+			);
 			return false;
 		}
 

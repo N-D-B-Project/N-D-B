@@ -1,7 +1,7 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
 import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
-import { Extends, Services } from "@/types/Constants";
+import { Services } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ChannelType, Client, EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
@@ -13,7 +13,7 @@ export class VoiceEvents {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
 		@Inject(Music.Service) private readonly MusicService: IMusicService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
 		private readonly config: ConfigService<Config>,
 	) {}
@@ -124,10 +124,12 @@ export class VoiceEvents {
 							name: this.client.user.tag,
 							iconURL: this.client.user.displayAvatarURL(),
 						})
-						.setDescription(await this.Translate.Guild(textChannel, "Events/VoiceStateUpdate:UNMute"))
+						.setDescription(
+							this.translate.getTranslation("Events/VoiceStateUpdate:UNMute", member.guild.preferredLocale),
+						)
 						.setTimestamp()
 						.setFooter({
-							text: await this.Translate.Guild(textChannel, "Events/VoiceStateUpdate:Embed:Footer"),
+							text: this.translate.getTranslation("Events/VoiceStateUpdate:Embed:Footer", member.guild.preferredLocale),
 						}),
 				],
 			});

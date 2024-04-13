@@ -1,6 +1,5 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
 import { Timer, WAIT } from "@/utils/Tools";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, GuildChannel, GuildMember, Message, TextChannel } from "discord.js";
@@ -12,7 +11,7 @@ import type { IMusicEmbeds, IMusicService } from "../interfaces";
 @Injectable()
 export class TrackEvents {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		@Inject(Music.Embeds) private readonly embeds: IMusicEmbeds,
 		@Inject(Music.Service) private readonly service: IMusicService,
 		private readonly client: Client,
@@ -36,7 +35,7 @@ export class TrackEvents {
 					textChannel,
 					track,
 					Requester,
-					await Timer(this.Translate, "normal", track.info.duration, textChannel as GuildChannel),
+					await Timer(this.translate, "normal", track.info.duration, textChannel.guild.preferredLocale),
 					await this.service.URLChecker(false, track.info.uri),
 					this.service.formatSourceName(track.info.sourceName),
 				),

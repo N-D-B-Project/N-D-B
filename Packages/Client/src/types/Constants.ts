@@ -19,7 +19,6 @@ export enum Routes {
 }
 
 export enum Extends {
-	Translate = "TRANSLATE",
 	Tools = "TOOLS",
 	Command = "COMMAND",
 	Buttons = "COMPONENTS_BUTTONS",

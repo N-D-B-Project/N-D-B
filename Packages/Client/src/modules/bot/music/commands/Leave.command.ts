@@ -1,6 +1,5 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Message, VoiceChannel, channelMention } from "discord.js";
 import { Music } from "../";
@@ -11,7 +10,7 @@ import type { IMusicService } from "../interfaces";
 export class LeaveCommand {
 	public constructor(
 		@Inject(Music.Service) private readonly service: IMusicService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 	) {}
 
 	private readonly logger = new Logger(LeaveCommand.name);
@@ -53,7 +52,7 @@ export class LeaveCommand {
 		}
 
 		return context.reply(
-			await this.Translate.Guild(context, "Tools/Music:Join", {
+			this.translate.getTranslation("Tools/Music:Join", context.guild.preferredLocale, {
 				VoiceChannel: channelMention(player.voiceChannelId),
 			}),
 		);

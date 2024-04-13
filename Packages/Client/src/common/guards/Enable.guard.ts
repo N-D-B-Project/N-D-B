@@ -1,5 +1,4 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { CommandConfig } from "../decorators";
@@ -8,7 +7,7 @@ import { Utils } from "./Utils";
 @Injectable()
 export class EnableGuard implements CanActivate {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly reflector: Reflector,
 	) {}
 
@@ -18,7 +17,10 @@ export class EnableGuard implements CanActivate {
 		const commandConfig = this.reflector.get(CommandConfig.KEY, executionContext.getHandler());
 
 		if (commandConfig.disable) {
-			Utils.SendFunction(context, await this.Translate.TFunction(context, "Tools/Command:Checker:Disable"));
+			Utils.SendFunction(
+				context,
+				this.translate.getTranslation("Tools/Command:Checker:Disable", context.interaction.guildLocale),
+			);
 			return false;
 		}
 

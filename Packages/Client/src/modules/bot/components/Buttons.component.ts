@@ -1,23 +1,21 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
-import { Context } from "../commands/Commands.context";
 
 @Injectable()
 export class Buttons {
-	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
+	public constructor(@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter) {}
 
-	public async Confirm(context: Context): Promise<ActionRowBuilder<ButtonBuilder>> {
+	public async Confirm(locale: string): Promise<ActionRowBuilder<ButtonBuilder>> {
 		return new ActionRowBuilder<ButtonBuilder>().addComponents([
 			new ButtonBuilder()
 				.setCustomId("confirm/yes")
-				.setLabel(await this.Translate.Guild(context, "Tools/Buttons:Labels:Confirm:YES"))
+				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:YES", locale))
 				.setEmoji("719710630881525881")
 				.setStyle(ButtonStyle.Success),
 			new ButtonBuilder()
 				.setCustomId("confirm/no")
-				.setLabel(await this.Translate.Guild(context, "Tools/Buttons:Labels:Confirm:NO"))
+				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:NO", locale))
 				.setEmoji("719710607405875321")
 				.setStyle(ButtonStyle.Danger),
 		]);

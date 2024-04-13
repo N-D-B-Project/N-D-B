@@ -1116,6 +1116,7 @@ __metadata:
     "@fastify/cookie": "npm:^9.3.1"
     "@fastify/helmet": "npm:^11.1.1"
     "@fastify/static": "npm:^7.0.3"
+    "@necord/localization": "npm:^3.1.0"
     "@necord/pagination": "npm:^1.2.2"
     "@nestjs/axios": "npm:^3.0.2"
     "@nestjs/cli": "npm:^10.3.2"
@@ -1146,7 +1147,6 @@ __metadata:
     lavalink-client: "https://github.com/Tomato6966/lavalink-client"
     moment: "npm:^2.30.1"
     necord: "npm:^6.7.0"
-    nestjs-i18n: "npm:^10.4.5"
     parse-ms: "npm:=2.1.0"
     passport: "npm:^0.7.0"
     passport-discord: "npm:^0.1.4"
@@ -1180,6 +1180,20 @@ __metadata:
     typescript: "npm:^5.4.2"
   languageName: unknown
   linkType: soft
+
+"@necord/localization@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@necord/localization@npm:3.1.0"
+  peerDependencies:
+    "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
+    "@nestjs/core": ^8.0.0 || ^9.0.0 || ^10.0.0
+    discord.js: ^14.0.0
+    necord: ^6.0.0
+    reflect-metadata: ^0.1.13
+    rxjs: ^7.2.0
+  checksum: 10c0/3de04388d32eff6b1a78bb745194df3754f52008134738791e522fc0b3afafae478dc98ad2a83aa9ba37d7192aafa23376fac8ed10fe9b80ed9c024379e6d5be
+  languageName: node
+  linkType: hard
 
 "@necord/pagination@npm:^1.2.2":
   version: 1.2.2
@@ -2307,13 +2321,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accept-language-parser@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "accept-language-parser@npm:1.5.0"
-  checksum: 10c0/d736afcd9e47eef82b821c2548c114882f41498c68f43a2223fe1800b4bed7524fc3ad72e16d0f70e0ffc90ef006ac8e2f74df27532e8aecbd4699834949aea1
-  languageName: node
-  linkType: hard
-
 "acorn-import-assertions@npm:^1.9.0":
   version: 1.9.0
   resolution: "acorn-import-assertions@npm:1.9.0"
@@ -3148,13 +3155,6 @@ __metadata:
   version: 1.2.1
   resolution: "cookie-signature@npm:1.2.1"
   checksum: 10c0/1f71acf64931d7e7684aa228a0dad70162f6993b65b2957e076833cbd6f9a2f507b8d731b15e3895dce0e7ba4c63551f4686d1a3120199fe28060c41fd493a73
-  languageName: node
-  linkType: hard
-
-"cookie@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "cookie@npm:0.5.0"
-  checksum: 10c0/c01ca3ef8d7b8187bae434434582288681273b5a9ed27521d4d7f9f7928fe0c920df0decd9f9d3bbd2d14ac432b8c8cf42b98b3bdd5bfe0e6edddeebebe8b61d
   languageName: node
   linkType: hard
 
@@ -4866,7 +4866,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iterare@npm:1.2.1, iterare@npm:^1.2.1":
+"iterare@npm:1.2.1":
   version: 1.2.1
   resolution: "iterare@npm:1.2.1"
   checksum: 10c0/02667d486e3e83ead028ba8484d927498c2ceab7e8c6a69dd881fd02abc4114f00b13abb36b592252fbb578b6e6f99ca1dfc2835408b9158c9a112a9964f453f
@@ -5754,25 +5754,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 10c0/c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
-  languageName: node
-  linkType: hard
-
-"nestjs-i18n@npm:^10.4.5":
-  version: 10.4.5
-  resolution: "nestjs-i18n@npm:10.4.5"
-  dependencies:
-    accept-language-parser: "npm:^1.5.0"
-    chokidar: "npm:^3.5.3"
-    cookie: "npm:^0.5.0"
-    iterare: "npm:^1.2.1"
-    js-yaml: "npm:^4.1.0"
-    string-format: "npm:^2.0.0"
-  peerDependencies:
-    "@nestjs/common": "*"
-    "@nestjs/core": "*"
-    class-validator: "*"
-    rxjs: "*"
-  checksum: 10c0/07deb657a5bd127c9f57224f2952ae8db170657373a6a103f734c8c0e16d57ebce41fc56b7a4d3178f074d0c454c173286fc8e71b371d6f37c4e5c9fd81e5264
   languageName: node
   linkType: hard
 
@@ -6959,13 +6940,6 @@ __metadata:
   version: 0.3.2
   resolution: "string-argv@npm:0.3.2"
   checksum: 10c0/75c02a83759ad1722e040b86823909d9a2fc75d15dd71ec4b537c3560746e33b5f5a07f7332d1e3f88319909f82190843aa2f0a0d8c8d591ec08e93d5b8dec82
-  languageName: node
-  linkType: hard
-
-"string-format@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "string-format@npm:2.0.0"
-  checksum: 10c0/7bca13ba9f942f635c74d637da5e9e375435cbd428f35eeef28c3a30f81d4e63b95ff2c6cca907d897dd3951bbf52e03e3b945a0e9681358e33bd67222436538
   languageName: node
   linkType: hard
 

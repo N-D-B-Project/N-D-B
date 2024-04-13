@@ -1,11 +1,11 @@
 import { Context } from "@/modules/bot/commands/Commands.context";
 import { LegacyCommandOptions } from "@/modules/bot/commands/types";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
+import { NestedLocalizationAdapter } from "@necord/localization";
 import { Client, EmbedBuilder } from "discord.js";
 
 export async function embed(
 	client: Client,
-	Translate: Ii18nService,
+	translate: NestedLocalizationAdapter,
 	type: "TooManyArgs" | "NoMinArgs",
 	context: Context,
 	commandOptions: LegacyCommandOptions,
@@ -15,21 +15,31 @@ export async function embed(
 			name: context.author.tag,
 			iconURL: context.author.displayAvatarURL(),
 		})
-		.setTitle(await Translate.TFunction(context, `Tools/Command:Checker:${type}:Title`))
+		.setTitle(translate.getTranslation(`Tools/Command:Checker:${type}:Title`, context.interaction.guildLocale))
 		.setColor("#c20e00")
-		.setDescription(await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Description"))
+		.setDescription(
+			translate.getTranslation("Tools/Command:Checker:NoMinArgs:Description", context.interaction.guildLocale),
+		)
 		.addFields([
 			{
-				name: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:1"),
-				value: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:Content:1", {
-					Args: commandOptions.args.min,
-				}),
+				name: translate.getTranslation("Tools/Command:Checker:NoMinArgs:Fields:1", context.interaction.guildLocale),
+				value: translate.getTranslation(
+					"Tools/Command:Checker:NoMinArgs:Fields:Content:1",
+					context.interaction.guildLocale,
+					{
+						Args: String(commandOptions.args.min),
+					},
+				),
 			},
 			{
-				name: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:2"),
-				value: await Translate.TFunction(context, "Tools/Command:Checker:NoMinArgs:Fields:Content:2", {
-					Usage: `${context.prefix}${commandOptions.name} ${commandOptions.usage}`,
-				}),
+				name: translate.getTranslation("Tools/Command:Checker:NoMinArgs:Fields:2", context.interaction.guildLocale),
+				value: translate.getTranslation(
+					"Tools/Command:Checker:NoMinArgs:Fields:Content:2",
+					context.interaction.guildLocale,
+					{
+						Usage: `${context.prefix}${commandOptions.name} ${commandOptions.usage}`,
+					},
+				),
 			},
 		])
 		.setFooter({

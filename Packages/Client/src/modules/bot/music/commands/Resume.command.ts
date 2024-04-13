@@ -1,6 +1,5 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Message } from "discord.js";
 import { Music } from "../";
@@ -11,7 +10,7 @@ import type { IMusicService } from "../interfaces";
 export class ResumeCommand {
 	public constructor(
 		@Inject(Music.Service) private readonly service: IMusicService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 	) {}
 
 	private readonly logger = new Logger(ResumeCommand.name);
@@ -38,6 +37,6 @@ export class ResumeCommand {
 		const player = await this.service.getPlayer(context);
 		if (!(await this.service.checkers(context))) return;
 		await player.resume();
-		return context.reply(await this.Translate.Guild(context, "Tools/Music:Resume"));
+		return context.reply(this.translate.getTranslation("Tools/Music:Resume", context.guild.preferredLocale));
 	}
 }

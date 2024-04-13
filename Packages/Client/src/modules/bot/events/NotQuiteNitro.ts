@@ -1,5 +1,4 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { Client, Message, TextChannel } from "discord.js";
@@ -7,7 +6,7 @@ import { Client, Message, TextChannel } from "discord.js";
 @Injectable()
 export class NotQuiteNitroEvent {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
 	) {}
 
@@ -26,10 +25,14 @@ export class NotQuiteNitroEvent {
 			const webhook = (await (message.channel as TextChannel).fetchWebhooks()).find((w) => w.name === "N-D-B_NQN");
 			if (!webhook) {
 				await (message.channel as TextChannel).createWebhook({
-					reason: await this.Translate.Guild(message, "Events/MessageCreate:NQNCreationReason", {
-						Username: message.author.username,
-						UserId: message.author.id,
-					}),
+					reason: await this.translate.getTranslation(
+						"Events/MessageCreate:NQNCreationReason",
+						message.guild.preferredLocale,
+						{
+							Username: message.author.username,
+							UserId: message.author.id,
+						},
+					),
 					name: "N-D-B_NQN",
 					avatar: this.client.user.displayAvatarURL(),
 				});

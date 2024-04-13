@@ -1,9 +1,9 @@
 import { LegacyCommand, SlashCommand } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { GuildEntity, UserEntity } from "@/modules/shared/database/entities";
 import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Extends, Services } from "@/types/Constants";
 import { WAIT } from "@/utils/Tools";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit, Provider } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
@@ -35,7 +35,7 @@ const provider: Provider<CommandsService> = {
 export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		@Inject(Extends.Command) private readonly commandsService: CommandsService,
 		private readonly client: Client,
 		private readonly eventEmitter: EventEmitter2,
@@ -75,14 +75,14 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 			const Prefix = mentionRegexPrefix.exec(message.content)
 				? mentionRegexPrefix.exec(message.content)[0]
 				: message.channel.type !== ChannelType.DM
-				  ? GuildPrefix
-				  : UserPrefix;
+					? GuildPrefix
+					: UserPrefix;
 
 			if (message.content === userMention(this.client.user.id)) {
 				message.delete();
 				const PrefixMessage = await MessageTools.send(
 					message.author,
-					await this.Translate.Guild(message, "Events/MessageCreate:MyPrefix", {
+					await this.translate.getTranslation("Events/MessageCreate:MyPrefix", message.guild.preferredLocale, {
 						Guild: message.guild.name,
 						User: userMention(message.author.id),
 						Prefix,
@@ -152,10 +152,17 @@ export class CommandsModule implements OnModuleInit, OnApplicationBootstrap {
 						name: _name,
 						iconURL: _icon,
 					})
-					.setTitle(await this.Translate.TFunction(context, "Events/MessageCreate:ConfigurationCreated:Title"))
+					.setTitle(
+						await this.translate.getTranslation(
+							"Events/MessageCreate:ConfigurationCreated:Title",
+							message.guild.preferredLocale,
+						),
+					)
 					.setDescription(
-						(await this.Translate.TFunction(context, "Events/MessageCreate:ConfigurationCreated:Description")) +
-							codeBlock("JSON", JSON.stringify(config, null, 3)),
+						(await this.translate.getTranslation(
+							"Events/MessageCreate:ConfigurationCreated:Description",
+							message.guild.preferredLocale,
+						)) + codeBlock("JSON", JSON.stringify(config, null, 3)),
 					)
 					.setColor("#00c26f")
 					.setTimestamp(),

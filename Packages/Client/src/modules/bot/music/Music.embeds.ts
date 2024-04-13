@@ -1,7 +1,6 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
-import { Extends } from "@/types/Constants";
 import { Timer } from "@/utils/Tools";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {
@@ -21,7 +20,7 @@ import type { IMusicEmbeds } from "./interfaces";
 @Injectable()
 export class MusicEmbeds implements IMusicEmbeds {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly config: ConfigService<Config>,
 		private readonly client: Client,
 	) {}
@@ -40,23 +39,31 @@ export class MusicEmbeds implements IMusicEmbeds {
 
 	public async NoPlayer(context: Context): Promise<EmbedBuilder> {
 		const baseEmbed = await this.createBaseEmbed(context, "Error");
-		return baseEmbed.setTitle(await this.Translate.Guild(context, "Tools/Music:NoPlayerEmbed:Title")).addFields([
-			{
-				name: await this.Translate.Guild(context, "Tools/Music:NoPlayerEmbed:Fields:1"),
-				value: await this.Translate.Guild(context, "Tools/Music:NoPlayerEmbed:Fields:Content:1", {
-					GuildName: context.guild.name,
-				}),
-			},
-		]);
+		return baseEmbed
+			.setTitle(this.translate.getTranslation("Tools/Music:NoPlayerEmbed:Title", context.guild.preferredLocale))
+			.addFields([
+				{
+					name: this.translate.getTranslation("Tools/Music:NoPlayerEmbed:Fields:1", context.guild.preferredLocale),
+					value: this.translate.getTranslation(
+						"Tools/Music:NoPlayerEmbed:Fields:Content:1",
+						context.guild.preferredLocale,
+						{
+							GuildName: context.guild.name,
+						},
+					),
+				},
+			]);
 	}
 
 	public async NoChannel(context: Context): Promise<EmbedBuilder> {
 		const baseEmbed = await this.createBaseEmbed(context, "Error");
 		return baseEmbed
-			.setTitle(await this.Translate.Guild(context, "Tools/Music:NoChannelEmbed:Title"))
-			.setDescription(await this.Translate.Guild(context, "Tools/Music:NoChannelEmbed:Description"))
+			.setTitle(this.translate.getTranslation("Tools/Music:NoChannelEmbed:Title", context.guild.preferredLocale))
+			.setDescription(
+				this.translate.getTranslation("Tools/Music:NoChannelEmbed:Description", context.guild.preferredLocale),
+			)
 			.setFooter({
-				text: await this.Translate.Guild(context, "Tools/Music:NoChannelEmbed:Footer"),
+				text: this.translate.getTranslation("Tools/Music:NoChannelEmbed:Footer", context.guild.preferredLocale),
 				iconURL: this.client.user.displayAvatarURL(),
 			});
 	}
@@ -64,10 +71,12 @@ export class MusicEmbeds implements IMusicEmbeds {
 	public async NoArgs(context: Context): Promise<EmbedBuilder> {
 		const baseEmbed = await this.createBaseEmbed(context, "Error");
 		return baseEmbed
-			.setTitle(await this.Translate.Guild(context, "Tools/Music:NoArgsEmbed:Title"))
-			.setDescription(await this.Translate.Guild(context, "Tools/Music:NoArgsEmbed:Description"))
+			.setTitle(this.translate.getTranslation("Tools/Music:NoArgsEmbed:Title", context.guild.preferredLocale))
+			.setDescription(
+				this.translate.getTranslation("Tools/Music:NoArgsEmbed:Description", context.guild.preferredLocale),
+			)
 			.setFooter({
-				text: await this.Translate.Guild(context, "Tools/Music:NoArgsEmbed:Footer"),
+				text: this.translate.getTranslation("Tools/Music:NoArgsEmbed:Footer", context.guild.preferredLocale),
 				iconURL: this.client.user.displayAvatarURL(),
 			});
 	}
@@ -85,20 +94,43 @@ export class MusicEmbeds implements IMusicEmbeds {
 		switch (loadType) {
 			case "Fail":
 				baseEmbed
-					.setTitle(await this.Translate.Guild(context, "Tools/Music:loadType:LOAD_FAILED:Embed:Title"))
-					.setDescription(await this.Translate.Guild(context, "Tools/Music:loadType:LOAD_FAILED:Embed:Description"))
+					.setTitle(
+						this.translate.getTranslation(
+							"Tools/Music:loadType:LOAD_FAILED:Embed:Title",
+							context.guild.preferredLocale,
+						),
+					)
+					.setDescription(
+						this.translate.getTranslation(
+							"Tools/Music:loadType:LOAD_FAILED:Embed:Description",
+							context.guild.preferredLocale,
+						),
+					)
 					.setFooter({
-						text: await this.Translate.Guild(context, "Tools/Music:loadType:LOAD_FAILED:Embed:Footer"),
+						text: this.translate.getTranslation(
+							"Tools/Music:loadType:LOAD_FAILED:Embed:Footer",
+							context.guild.preferredLocale,
+						),
 						iconURL: this.client.user.displayAvatarURL(),
 					});
 
 				break;
 			case "NoMatches":
 				baseEmbed
-					.setTitle(await this.Translate.Guild(context, "Tools/Music:loadType:NO_MATCHES:Embed:Title"))
-					.setDescription(await this.Translate.Guild(context, "Tools/Music:loadType:NO_MATCHES:Embed:Description"))
+					.setTitle(
+						this.translate.getTranslation("Tools/Music:loadType:NO_MATCHES:Embed:Title", context.guild.preferredLocale),
+					)
+					.setDescription(
+						this.translate.getTranslation(
+							"Tools/Music:loadType:NO_MATCHES:Embed:Description",
+							context.guild.preferredLocale,
+						),
+					)
 					.setFooter({
-						text: await this.Translate.Guild(context, "Tools/Music:loadType:NO_MATCHES:Embed:Footer"),
+						text: this.translate.getTranslation(
+							"Tools/Music:loadType:NO_MATCHES:Embed:Footer",
+							context.guild.preferredLocale,
+						),
 						iconURL: this.client.user.displayAvatarURL(),
 					});
 
@@ -106,37 +138,64 @@ export class MusicEmbeds implements IMusicEmbeds {
 			case "Success":
 				baseEmbed
 					.setColor("#00c26f")
-					.setTitle(await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Title"))
+					.setTitle(
+						this.translate.getTranslation("Tools/Music:loadType:SUCCESS:Embed:Title", context.guild.preferredLocale),
+					)
 					.addFields([
 						{
-							name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:1", {
-								EMOJI: Checker.Emoji,
-								NAME: Checker.Name,
-							}),
-							value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1", {
-								TITLE: track.info.title,
-								URI: track.info.uri,
-							}),
+							name: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:1",
+								context.guild.preferredLocale,
+								{
+									EMOJI: Checker.Emoji,
+									NAME: Checker.Name,
+								},
+							),
+							value: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1",
+								context.guild.preferredLocale,
+								{
+									TITLE: track.info.title,
+									URI: track.info.uri,
+								},
+							),
 							inline: true,
 						},
 						{
-							name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:2"),
-							value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2", {
-								AUTHOR: track.info.author,
-							}),
+							name: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:2",
+								context.guild.preferredLocale,
+							),
+							value: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2",
+								context.guild.preferredLocale,
+								{
+									AUTHOR: track.info.author,
+								},
+							),
 							inline: true,
 						},
 						{
-							name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:3"),
-							value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3", {
-								TIMER: await Timer(this.Translate, "normal", track.info.duration, context),
-							}),
+							name: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:3",
+								context.guild.preferredLocale,
+							),
+							value: this.translate.getTranslation(
+								"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3",
+								context.guild.preferredLocale,
+								{
+									TIMER: await Timer(this.translate, "normal", track.info.duration, context.guild.preferredLocale),
+								},
+							),
 							inline: true,
 						},
 					])
 					.setThumbnail(track.info.artworkUrl)
 					.setFooter({
-						text: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Footer"),
+						text: this.translate.getTranslation(
+							"Tools/Music:loadType:SUCCESS:Embed:Footer",
+							context.guild.preferredLocale,
+						),
 						iconURL: this.client.user.displayAvatarURL(),
 					});
 
@@ -157,40 +216,66 @@ export class MusicEmbeds implements IMusicEmbeds {
 		const baseEmbed = await this.createBaseEmbed(context, "Success");
 		return baseEmbed
 			.setTitle(
-				await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:PlaylistTitle", {
-					Quantity: res.tracks.length,
-				}),
+				this.translate.getTranslation(
+					"Tools/Music:loadType:SUCCESS:Embed:PlaylistTitle",
+					context.guild.preferredLocale,
+					{
+						Quantity: String(res.tracks.length),
+					},
+				),
 			)
 			.setThumbnail(res.playlist.thumbnail)
 			.addFields([
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:1", {
-						EMOJI: Checker.Emoji,
-						NAME: Checker.Name,
-					}),
-					value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1", {
-						TITLE: res.playlist.name ?? res.playlist.title,
-						URI: res.playlist.uri,
-					}),
+					name: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:1",
+						context.guild.preferredLocale,
+						{
+							EMOJI: Checker.Emoji,
+							NAME: Checker.Name,
+						},
+					),
+					value: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:1",
+						context.guild.preferredLocale,
+						{
+							TITLE: res.playlist.name ?? res.playlist.title,
+							URI: res.playlist.uri,
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:2"),
-					value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2", {
-						AUTHOR: res.playlist.author,
-					}),
+					name: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:2",
+						context.guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:2",
+						context.guild.preferredLocale,
+						{
+							AUTHOR: res.playlist.author,
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:3"),
-					value: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3", {
-						TIMER: await Timer(this.Translate, "normal", res.playlist.duration, context),
-					}),
+					name: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:3",
+						context.guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Tools/Music:loadType:SUCCESS:Embed:Fields:Content:3",
+						context.guild.preferredLocale,
+						{
+							TIMER: await Timer(this.translate, "normal", res.playlist.duration, context.guild.preferredLocale),
+						},
+					),
 					inline: true,
 				},
 			])
 			.setFooter({
-				text: await this.Translate.Guild(context, "Tools/Music:loadType:SUCCESS:Embed:Footer"),
+				text: this.translate.getTranslation("Tools/Music:loadType:SUCCESS:Embed:Footer", context.guild.preferredLocale),
 				iconURL: this.client.user.displayAvatarURL(),
 			});
 	}
@@ -201,79 +286,145 @@ export class MusicEmbeds implements IMusicEmbeds {
 		let IsLoop: string;
 		switch (player.repeatMode) {
 			case "off":
-				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:NoLoop", {
+				IsLoop = this.translate.getTranslation("Tools/Music:NowPlayingEmbed:NoLoop", context.guild.preferredLocale, {
 					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
 				});
 				break;
 			case "queue":
-				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:QueueLoop", {
-					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-				});
+				IsLoop = await this.translate.getTranslation(
+					"Tools/Music:NowPlayingEmbed:QueueLoop",
+					context.guild.preferredLocale,
+					{
+						Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
+					},
+				);
 				break;
 			case "track":
-				IsLoop = await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:MusicLoop", {
-					Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-				});
+				IsLoop = await this.translate.getTranslation(
+					"Tools/Music:NowPlayingEmbed:MusicLoop",
+					context.guild.preferredLocale,
+					{
+						Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
+					},
+				);
 				break;
 		}
 
 		return baseEmbed
 			.setThumbnail(music.info.artworkUrl)
-			.setTitle(await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Title"))
+			.setTitle(await this.translate.getTranslation("Tools/Music:NowPlayingEmbed:Title", context.guild.preferredLocale))
 			.setDescription(`[${music.info.title}](${music.info.uri})`)
 			.setFields([
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:1"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:1", {
-						Author: music.info.author,
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:1",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:1",
+						context.guild.preferredLocale,
+						{
+							Author: music.info.author,
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:2"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:2", {
-						IsPlaying: player.paused
-							? await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Paused", {
-									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-							  })
-							: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Playing", {
-									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-							  }),
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:2",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:2",
+						context.guild.preferredLocale,
+						{
+							IsPlaying: player.paused
+								? await this.translate.getTranslation(
+										"Tools/Music:NowPlayingEmbed:Paused",
+										context.guild.preferredLocale,
+										{
+											Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
+										},
+									)
+								: await this.translate.getTranslation(
+										"Tools/Music:NowPlayingEmbed:Playing",
+										context.guild.preferredLocale,
+										{
+											Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
+										},
+									),
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:3"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:3", {
-						IsBassBoosted: player.filterManager.equalizerBands
-							? await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:ActiveBass", {
-									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-							  })
-							: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:NoBass", {
-									Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-							  }),
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:3",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:3",
+						context.guild.preferredLocale,
+						{
+							IsBassBoosted: player.filterManager.equalizerBands
+								? await this.translate.getTranslation(
+										"Tools/Music:NowPlayingEmbed:ActiveBass",
+										context.guild.preferredLocale,
+										{
+											Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
+										},
+									)
+								: await this.translate.getTranslation(
+										"Tools/Music:NowPlayingEmbed:NoBass",
+										context.guild.preferredLocale,
+										{
+											Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
+										},
+									),
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:4"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:4", {
-						IsLoop,
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:4",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:4",
+						context.guild.preferredLocale,
+						{
+							IsLoop,
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:5"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:5", {
-						Volume: player.volume,
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:5",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:5",
+						context.guild.preferredLocale,
+						{
+							Volume: String(player.volume),
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:6"),
-					value: await this.Translate.Guild(context, "Tools/Music:NowPlayingEmbed:Fields:Content:6", {
-						Duration: progressBar,
-					}),
+					name: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:6",
+						context.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Tools/Music:NowPlayingEmbed:Fields:Content:6",
+						context.guild.preferredLocale,
+						{
+							Duration: progressBar,
+						},
+					),
 					inline: false,
 				},
 			])
@@ -295,33 +446,59 @@ export class MusicEmbeds implements IMusicEmbeds {
 				iconURL: guild.iconURL(),
 			})
 			.setColor("#00c26f")
-			.setTitle(await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Title"))
+			.setTitle(
+				await this.translate.getTranslation("Events/PlayerEvents:playerCreate:Embed:Title", guild.preferredLocale),
+			)
 			.setFields([
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:1"),
-					value: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:Content:1", {
-						TEXT: channelMention(textChannel.id),
-					}),
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:1",
+						guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:Content:1",
+						guild.preferredLocale,
+						{
+							TEXT: channelMention(textChannel.id),
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:2"),
-					value: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:Content:2", {
-						isPremium: player.isPremium
-							? this.config.getOrThrow<Config["Emojis"]>("Emojis").accept
-							: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-					}),
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:2",
+						guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:Content:2",
+						guild.preferredLocale,
+						{
+							isPremium: player.isPremium
+								? this.config.getOrThrow<Config["Emojis"]>("Emojis").accept
+								: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
+						},
+					),
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:3"),
-					value: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Fields:Content:3", {
-						VOICE: channelMention(voiceChannel.id),
-					}),
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:3",
+						guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Events/PlayerEvents:playerCreate:Embed:Fields:Content:3",
+						guild.preferredLocale,
+						{
+							VOICE: channelMention(voiceChannel.id),
+						},
+					),
 				},
 			])
 			.setFooter({
-				text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerCreate:Embed:Footer"),
+				text: await this.translate.getTranslation(
+					"Events/PlayerEvents:playerCreate:Embed:Footer",
+					guild.preferredLocale,
+				),
 				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTimestamp();
@@ -334,14 +511,26 @@ export class MusicEmbeds implements IMusicEmbeds {
 				url: this.client.user.displayAvatarURL(),
 			})
 			.setColor("#00c26f")
-			.setTitle(await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:KickEmbed:Title"))
+			.setTitle(
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:playerMove:KickEmbed:Title",
+					textChannel.guild.preferredLocale,
+				),
+			)
 			.setDescription(
-				await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:KickEmbed:Description", {
-					CHANNEL: voiceChannel.name,
-				}),
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:playerMove:KickEmbed:Description",
+					textChannel.guild.preferredLocale,
+					{
+						CHANNEL: voiceChannel.name,
+					},
+				),
 			)
 			.setFooter({
-				text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:KickEmbed:Footer"),
+				text: await this.translate.getTranslation(
+					"Events/PlayerEvents:playerMove:KickEmbed:Footer",
+					textChannel.guild.preferredLocale,
+				),
 			})
 			.setTimestamp();
 	}
@@ -363,46 +552,79 @@ export class MusicEmbeds implements IMusicEmbeds {
 				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTitle(
-				await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Title", {
-					TITLE: track.info.title,
-				}),
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:trackStart:Embed:Title",
+					textChannel.guild.preferredLocale,
+					{
+						TITLE: track.info.title,
+					},
+				),
 			)
 			.setThumbnail(track.info.artworkUrl)
 			.addFields([
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:1", {
-						EMOJI: Checker.Emoji,
-						Platform,
-					}),
-					value: `> ${await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:Content:1", {
-						URI: track.info.uri,
-					})}`,
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:trackStart:Embed:Fields:1",
+						textChannel.guild.preferredLocale,
+						{
+							EMOJI: Checker.Emoji,
+							Platform,
+						},
+					),
+					value: `> ${await this.translate.getTranslation(
+						"Events/PlayerEvents:trackStart:Embed:Fields:Content:1",
+						textChannel.guild.preferredLocale,
+						{
+							URI: track.info.uri,
+						},
+					)}`,
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:2"),
-					value: `> ${await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:Content:2", {
-						AUTHOR: track.info.author,
-					})}`,
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:trackStart:Embed:Fields:2",
+						textChannel.guild.preferredLocale,
+					),
+					value: `> ${await this.translate.getTranslation(
+						"Events/PlayerEvents:trackStart:Embed:Fields:Content:2",
+						textChannel.guild.preferredLocale,
+						{
+							AUTHOR: track.info.author,
+						},
+					)}`,
 					inline: true,
 				},
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:3"),
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:trackStart:Embed:Fields:3",
+						textChannel.guild.preferredLocale,
+					),
 					value: `> ${
 						track.info.isStream
-							? await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:Content:3²")
-							: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Fields:Content:3", {
-									TIMER: Timer,
-							  })
+							? await this.translate.getTranslation(
+									"Events/PlayerEvents:trackStart:Embed:Fields:Content:3²",
+									textChannel.guild.preferredLocale,
+								)
+							: await this.translate.getTranslation(
+									"Events/PlayerEvents:trackStart:Embed:Fields:Content:3",
+									textChannel.guild.preferredLocale,
+									{
+										TIMER: Timer,
+									},
+								)
 					}`,
 					inline: true,
 				},
 			])
 			.setColor("#00c26f")
 			.setFooter({
-				text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStart:Embed:Footer", {
-					REQUESTER: Requester.username,
-				}),
+				text: await this.translate.getTranslation(
+					"Events/PlayerEvents:trackStart:Embed:Footer",
+					textChannel.guild.preferredLocale,
+					{
+						REQUESTER: Requester.username,
+					},
+				),
 				iconURL: Requester.displayAvatarURL(),
 			})
 			.setTimestamp();
@@ -415,24 +637,43 @@ export class MusicEmbeds implements IMusicEmbeds {
 				url: this.client.user.displayAvatarURL(),
 			})
 			.setColor("#00c26f")
-			.setTitle(await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackError:Embed:Title"))
+			.setTitle(
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:trackError:Embed:Title",
+					textChannel.guild.preferredLocale,
+				),
+			)
 			.setDescription(
-				await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackError:Embed:Description", {
-					TITLE: track.info.title,
-					URI: track.info.uri,
-				}),
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:trackError:Embed:Description",
+					textChannel.guild.preferredLocale,
+					{
+						TITLE: track.info.title,
+						URI: track.info.uri,
+					},
+				),
 			)
 			.addFields([
 				{
-					name: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackError:Embed:Fields:1"),
-					value: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackError:Embed:Fields:Content:1", {
-						PAYLOAD: payload,
-					}),
+					name: await this.translate.getTranslation(
+						"Events/PlayerEvents:trackError:Embed:Fields:1",
+						textChannel.guild.preferredLocale,
+					),
+					value: await this.translate.getTranslation(
+						"Events/PlayerEvents:trackError:Embed:Fields:Content:1",
+						textChannel.guild.preferredLocale,
+						{
+							PAYLOAD: JSON.stringify(payload),
+						},
+					),
 				},
 			])
 			.setThumbnail(track.info.artworkUrl)
 			.setFooter({
-				text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackError:Embed:Footer"),
+				text: await this.translate.getTranslation(
+					"Events/PlayerEvents:trackError:Embed:Footer",
+					textChannel.guild.preferredLocale,
+				),
 			})
 			.setTimestamp();
 	}
@@ -445,19 +686,30 @@ export class MusicEmbeds implements IMusicEmbeds {
 			})
 			.setColor("#00c26f")
 			.setTitle(
-				await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStuck:Embed:Title", {
-					EMOJI: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-				}),
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:trackStuck:Embed:Title",
+					textChannel.guild.preferredLocale,
+					{
+						EMOJI: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
+					},
+				),
 			)
 			.setDescription(
-				await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStuck:Embed:Description", {
-					TITLE: track.info.title,
-					URI: track.info.uri,
-				}),
+				await this.translate.getTranslation(
+					"Events/PlayerEvents:trackStuck:Embed:Description",
+					textChannel.guild.preferredLocale,
+					{
+						TITLE: track.info.title,
+						URI: track.info.uri,
+					},
+				),
 			)
 			.setThumbnail(track.info.artworkUrl)
 			.setFooter({
-				text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:trackStuck:Embed:Footer"),
+				text: await this.translate.getTranslation(
+					"Events/PlayerEvents:trackStuck:Embed:Footer",
+					textChannel.guild.preferredLocale,
+				),
 			})
 			.setTimestamp();
 	}

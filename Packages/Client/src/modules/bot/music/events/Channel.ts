@@ -1,7 +1,7 @@
 import { MessageTools } from "@/modules/bot/commands/Message";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Extends, Services } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ChannelType, Client, TextChannel } from "discord.js";
 import { Context, ContextOf, On } from "necord";
@@ -13,7 +13,7 @@ export class ChannelEvents {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
 		@Inject(Music.Service) private readonly MusicService: IMusicService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
 	) {}
 
@@ -29,7 +29,10 @@ export class ChannelEvents {
 				Player.destroy();
 				const textChannel = (await channel.guild.channels.fetch(Player.textChannelId)) as TextChannel;
 				MessageTools.send(textChannel, {
-					content: await this.Translate.Guild(channel, "Events/ChannelDelete:Music:DeletedChannel"),
+					content: this.translate.getTranslation(
+						"Events/ChannelDelete:Music:DeletedChannel",
+						channel.guild.preferredLocale,
+					),
 				});
 			}
 		}

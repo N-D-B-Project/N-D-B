@@ -1,12 +1,11 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Utils } from "../Utils";
 import { embed } from "./Embed";
 
 @Injectable()
 export class MinArgsGuard implements CanActivate {
-	public constructor(@Inject(Extends.Translate) private readonly Translate: Ii18nService) {}
+	public constructor(@Inject(LOCALIZATION_ADAPTER) private readonly Translate: NestedLocalizationAdapter) {}
 
 	public async canActivate(executionContext: ExecutionContext): Promise<boolean> {
 		const { client, context, legacyCommandOptions } = Utils.context(executionContext);

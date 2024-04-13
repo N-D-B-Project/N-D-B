@@ -1,5 +1,8 @@
+import { JSONLocaleLoader } from "@/modules/shared/config/JSONLocale.loader";
 import { NecordConfigService } from "@/modules/shared/config/NecordConfig.service";
+import { Config } from "@/modules/shared/config/types";
 import { SharedModule } from "@/modules/shared/shared.module";
+import { GuildResolver, NecordLocalizationModule, NestedLocalizationAdapter } from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
@@ -8,7 +11,6 @@ import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
 import { DeveloperToolsModule } from "../developerTools/DeveloperTools.module";
 import { EventsModule } from "../events/Events.module";
-import { I18nModule } from "../i18n/i18n.module";
 import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
@@ -25,8 +27,17 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			allowSkip: false,
 			allowTraversal: false,
 		}),
+		NecordLocalizationModule.forRootAsync({
+			inject: [ConfigService],
+			useFactory: async (config: ConfigService) => ({
+				adapter: new NestedLocalizationAdapter({
+					fallbackLocale: config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
+					locales: await new JSONLocaleLoader("./src/common/Languages/i18n").loadTranslations(),
+				}),
+				resolvers: GuildResolver,
+			}),
+		}),
 		SharedModule,
-		I18nModule,
 		ComponentsModule,
 		EventsModule,
 		CommandsModule,

@@ -39,7 +39,7 @@ export class DeleteAllReactionsCommand {
 		this.context = context;
 		await context.send({
 			embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(context, "Confirm", null)],
-			components: [await this.Buttons.Confirm(context)],
+			components: [await this.Buttons.Confirm(context.guild.preferredLocale)],
 		});
 	}
 

@@ -1,6 +1,5 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { VoiceChannel, channelMention } from "discord.js";
@@ -18,7 +17,7 @@ export class MusicService implements IMusicService {
 	public constructor(
 		@Inject(Music.Manager) private readonly MusicManager: MusicManager,
 		@Inject(Music.Embeds) private readonly embeds: MusicEmbeds,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly config: ConfigService<Config>,
 	) {}
 
@@ -75,7 +74,7 @@ export class MusicService implements IMusicService {
 
 		if ((await context.getMember()).voice.channelId !== player.voiceChannelId) {
 			await context.reply(
-				await this.Translate.Guild(context, "Tools/Music:WrongChannel", {
+				await this.translate.getTranslation("Tools/Music:WrongChannel", context.guild.preferredLocale, {
 					TextChannel: channelMention(player.textChannelId),
 					VoiceChannel: channelMention(voiceChannel.id),
 				}),

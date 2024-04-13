@@ -1,6 +1,6 @@
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { Config } from "@/modules/shared/config/types";
 import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
@@ -12,7 +12,7 @@ import { MessageTools } from "../../commands/Message";
 @Injectable()
 export class QueueEvents {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
 		private readonly config: ConfigService<Config>,
 	) {}
@@ -38,17 +38,30 @@ export class QueueEvents {
 								url: this.client.user.displayAvatarURL(),
 							})
 							.setColor("#00c26f")
-							.setTitle(await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:queueEnd:Title"))
+							.setTitle(
+								await this.translate.getTranslation(
+									"Events/PlayerEvents:playerMove:queueEnd:Title",
+									textChannel.guild.preferredLocale,
+								),
+							)
 							.setDescription(
-								await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:queueEnd:Description", {
-									CHANNEL: voiceChannel.name,
-									Timer: Timer,
-								}),
+								await this.translate.getTranslation(
+									"Events/PlayerEvents:playerMove:queueEnd:Description",
+									textChannel.guild.preferredLocale,
+									{
+										CHANNEL: voiceChannel.name,
+										Timer: String(Timer),
+									},
+								),
 							)
 							.setFooter({
-								text: await this.Translate.Guild(textChannel, "Events/PlayerEvents:playerMove:queueEnd:Footer", {
-									TIMER: Timer,
-								}),
+								text: await this.translate.getTranslation(
+									"Events/PlayerEvents:playerMove:queueEnd:Footer",
+									textChannel.guild.preferredLocale,
+									{
+										TIMER: String(Timer),
+									},
+								),
 							})
 							.setTimestamp();
 						const Message = await MessageTools.send(textChannel, {

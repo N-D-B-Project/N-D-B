@@ -1,27 +1,19 @@
 import util from "node:util";
-import { Context } from "@/modules/bot/commands/Commands.context";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import {
-	BaseMessageOptions,
-	CommandInteraction,
-	EmbedBuilder,
-	GuildChannel,
-	Message,
-	MessageEditOptions,
-} from "discord.js";
+import { NestedLocalizationAdapter } from "@necord/localization";
+import { BaseMessageOptions, CommandInteraction, EmbedBuilder, MessageEditOptions } from "discord.js";
 import ms from "parse-ms";
 
 export const Timer = async (
-	Translate: Ii18nService,
+	translate: NestedLocalizationAdapter,
 	type: "normal" | "details",
 	number: number,
-	translateInfo: Message | CommandInteraction | GuildChannel | Context,
+	translateInfo: string,
 ): Promise<string> => {
 	const time = ms(number);
-	const days = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Days");
-	const hours = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Hours");
-	const minutes = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Minutes");
-	const seconds = await Translate.Guild(translateInfo, "Tools/Tools:Timer:Seconds");
+	const days = translate.getTranslation("Tools/Tools:Timer:Days", translateInfo);
+	const hours = translate.getTranslation("Tools/Tools:Timer:Hours", translateInfo);
+	const minutes = translate.getTranslation("Tools/Tools:Timer:Minutes", translateInfo);
+	const seconds = translate.getTranslation("Tools/Tools:Timer:Seconds", translateInfo);
 	switch (type) {
 		case "normal":
 			return ` ${time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${

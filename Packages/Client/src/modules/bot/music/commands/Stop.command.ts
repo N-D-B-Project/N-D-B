@@ -1,6 +1,5 @@
 import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Music } from "../";
 import { CommandContext } from "../../commands/Commands.context";
@@ -10,7 +9,7 @@ import type { IMusicService } from "../interfaces";
 export class StopCommand {
 	public constructor(
 		@Inject(Music.Service) private readonly service: IMusicService,
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 	) {}
 
 	private readonly logger = new Logger(StopCommand.name);
@@ -37,6 +36,6 @@ export class StopCommand {
 		const player = await this.service.getPlayer(context);
 		if (!(await this.service.checkers(context))) return;
 		await player.destroy();
-		return context.reply(await this.Translate.Guild(context, "Tools/Music:Stop"));
+		return context.reply(this.translate.getTranslation("Tools/Music:Stop", context.guild.preferredLocale));
 	}
 }

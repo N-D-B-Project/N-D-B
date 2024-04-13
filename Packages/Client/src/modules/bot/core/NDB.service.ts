@@ -1,6 +1,5 @@
 import { Content } from "@/modules/bot/commands/types";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends } from "@/types/Constants";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
 import { ButtonStyle, EmbedBuilder } from "discord.js";
@@ -10,7 +9,7 @@ import type { INDBService } from "./interfaces/INDBService";
 @Injectable()
 export class NDBService implements INDBService {
 	public constructor(
-		@Inject(Extends.Translate) private readonly Translate: Ii18nService,
+		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly paginator: NecordPaginationService,
 	) {}
 
@@ -18,12 +17,12 @@ export class NDBService implements INDBService {
 		const buttons: ButtonsAppearance = {
 			back: {
 				emoji: "⬅️",
-				label: await this.Translate.TFunction(context, "Tools/Paginator:Labels:Previous"),
+				label: this.translate.getTranslation("Tools/Paginator:Labels:Previous", context.guild.preferredLocale),
 				style: ButtonStyle.Secondary,
 			},
 			next: {
 				emoji: "➡️",
-				label: await this.Translate.TFunction(context, "Tools/Paginator:Labels:Next"),
+				label: this.translate.getTranslation("Tools/Paginator:Labels:Next", context.guild.preferredLocale),
 				style: ButtonStyle.Secondary,
 			},
 		};
@@ -31,18 +30,18 @@ export class NDBService implements INDBService {
 		for (let i = 0; i < embeds.length; i++) {
 			embeds[i].setFooter({
 				text: embeds[i].data.footer?.text
-					? `${embeds[i].data.footer?.text} | ${await this.Translate.TFunction(
-							context,
+					? `${embeds[i].data.footer?.text} | ${this.translate.getTranslation(
 							"Tools/Paginator:Embed:Footer",
+							context.guild.preferredLocale,
 							{
-								Current: i + 1,
-								Total: embeds.length,
+								Current: String(i + 1),
+								Total: String(embeds.length),
 							},
-					  )}`
-					: await this.Translate.TFunction(context, "Tools/Paginator:Embed:Footer", {
-							Current: i + 1,
-							Total: embeds.length,
-					  }),
+						)}`
+					: this.translate.getTranslation("Tools/Paginator:Embed:Footer", context.guild.preferredLocale, {
+							Current: String(i + 1),
+							Total: String(embeds.length),
+						}),
 			});
 		}
 
