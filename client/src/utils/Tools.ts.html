@@ -120,28 +120,12 @@
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,19 +151,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -194,29 +178,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import util from "node:util";
-import { Context } from "@/modules/bot/commands/Commands.context";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import {
-	BaseMessageOptions,
-	CommandInteraction,
-	EmbedBuilder,
-	GuildChannel,
-	Message,
-	MessageEditOptions,
-} from "discord.js";
+import { NestedLocalizationAdapter } from "@necord/localization";
+import { BaseMessageOptions, CommandInteraction, EmbedBuilder, MessageEditOptions } from "discord.js";
 import ms from "parse-ms";
 &nbsp;
 export const Timer = <span class="fstat-no" title="function not covered" >async (</span>
-	Translate: Ii18nService,
+	translate: NestedLocalizationAdapter,
 	type: "normal" | "details",
 	number: number,
-	translateInfo: Message | CommandInteraction | GuildChannel | Context,
+	translateInfo: string,
 ): Promise&lt;string&gt; =&gt; {
 	const time = <span class="cstat-no" title="statement not covered" >ms(number);</span>
-	const days = <span class="cstat-no" title="statement not covered" >await Translate.Guild(translateInfo, "Tools/Tools:Timer:Days");</span>
-	const hours = <span class="cstat-no" title="statement not covered" >await Translate.Guild(translateInfo, "Tools/Tools:Timer:Hours");</span>
-	const minutes = <span class="cstat-no" title="statement not covered" >await Translate.Guild(translateInfo, "Tools/Tools:Timer:Minutes");</span>
-	const seconds = <span class="cstat-no" title="statement not covered" >await Translate.Guild(translateInfo, "Tools/Tools:Timer:Seconds");</span>
+	const days = <span class="cstat-no" title="statement not covered" >translate.getTranslation("Tools/Tools:Timer:Days", translateInfo);</span>
+	const hours = <span class="cstat-no" title="statement not covered" >translate.getTranslation("Tools/Tools:Timer:Hours", translateInfo);</span>
+	const minutes = <span class="cstat-no" title="statement not covered" >translate.getTranslation("Tools/Tools:Timer:Minutes", translateInfo);</span>
+	const seconds = <span class="cstat-no" title="statement not covered" >translate.getTranslation("Tools/Tools:Timer:Seconds", translateInfo);</span>
 <span class="cstat-no" title="statement not covered" >	switch (type) {</span>
 		case "normal":
 <span class="cstat-no" title="statement not covered" >			return ` ${time.hours ? (time.hours &gt; 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${</span>
@@ -265,7 +241,7 @@ export const isValidURL = <span class="fstat-no" title="function not covered" >(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-12T22:29:04.482Z
+                at 2024-04-13T20:01:02.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

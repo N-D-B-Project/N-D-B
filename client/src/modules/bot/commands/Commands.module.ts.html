@@ -228,7 +228,14 @@
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -376,6 +383,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -394,11 +408,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { LegacyCommand, SlashCommand } from "@/common/decorators";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
 import { GuildEntity, UserEntity } from "@/modules/shared/database/entities";
 import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Extends, Services } from "@/types/Constants";
 import { WAIT } from "@/utils/Tools";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Global, Inject, Logger, Module, OnApplicationBootstrap, OnModuleInit, Provider } from "@nestjs/common";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import {
@@ -430,7 +444,7 @@ const provider: Provider&lt;CommandsService&gt; = <span class="cstat-no" title="
 export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" >CommandsModule implements OnModuleInit, OnApplicationBootstrap {</span></span>
 	public <span class="fstat-no" title="function not covered" >constructor(</span>
 		@Inject(Services.Database) private readonly <span class="cstat-no" title="statement not covered" >database: IDatabaseService,</span>
-		@Inject(Extends.Translate) private readonly <span class="cstat-no" title="statement not covered" >Translate: Ii18nService,</span>
+		@Inject(LOCALIZATION_ADAPTER) private readonly <span class="cstat-no" title="statement not covered" >translate: NestedLocalizationAdapter,</span>
 		@Inject(Extends.Command) private readonly <span class="cstat-no" title="statement not covered" >commandsService: CommandsService,</span>
 		private readonly <span class="cstat-no" title="statement not covered" >client: Client,</span>
 		private readonly <span class="cstat-no" title="statement not covered" >eventEmitter: EventEmitter2,</span>
@@ -470,14 +484,14 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 			const Prefix = <span class="cstat-no" title="statement not covered" >mentionRegexPrefix.exec(message.content)</span>
 				? mentionRegexPrefix.exec(message.content)[0]
 				: message.channel.type !== ChannelType.DM
-				  ? GuildPrefix
-				  : UserPrefix;
+					? GuildPrefix
+					: UserPrefix;
 &nbsp;
 <span class="cstat-no" title="statement not covered" >			if (message.content === userMention(this.client.user.id)) {</span>
 <span class="cstat-no" title="statement not covered" >				message.delete();</span>
 				const PrefixMessage = <span class="cstat-no" title="statement not covered" >await MessageTools.send(</span>
 					message.author,
-					await this.Translate.Guild(message, "Events/MessageCreate:MyPrefix", {
+					await this.translate.getTranslation("Events/MessageCreate:MyPrefix", message.guild.preferredLocale, {
 						Guild: message.guild.name,
 						User: userMention(message.author.id),
 						Prefix,
@@ -547,10 +561,17 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 						name: _name,
 						iconURL: _icon,
 					})
-					.setTitle(await this.Translate.TFunction(context, "Events/MessageCreate:ConfigurationCreated:Title"))
+					.setTitle(
+						await this.translate.getTranslation(
+							"Events/MessageCreate:ConfigurationCreated:Title",
+							message.guild.preferredLocale,
+						),
+					)
 					.setDescription(
-						(await this.Translate.TFunction(context, "Events/MessageCreate:ConfigurationCreated:Description")) +
-							codeBlock("JSON", JSON.stringify(config, null, 3)),
+						(await this.translate.getTranslation(
+							"Events/MessageCreate:ConfigurationCreated:Description",
+							message.guild.preferredLocale,
+						)) + codeBlock("JSON", JSON.stringify(config, null, 3)),
 					)
 					.setColor("#00c26f")
 					.setTimestamp(),
@@ -565,7 +586,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-12T22:29:04.482Z
+                at 2024-04-13T20:01:02.268Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

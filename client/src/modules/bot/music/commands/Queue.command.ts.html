@@ -183,7 +183,32 @@
 <a name='L118'></a><a href='#L118'>118</a>
 <a name='L119'></a><a href='#L119'>119</a>
 <a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,6 +263,31 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -305,9 +355,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
 import type { INDBService } from "@/modules/bot/core/interfaces/INDBService";
-import type { Ii18nService } from "@/modules/bot/i18n/interfaces/Ii18nService";
-import { Extends, Services } from "@/types/Constants";
+import { Services } from "@/types/Constants";
 import { Timer } from "@/utils/Tools";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { EmbedBuilder, Message, UserManager } from "discord.js";
 import { Track, UnresolvedTrack } from "lavalink-client";
@@ -320,7 +370,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 	public <span class="fstat-no" title="function not covered" >constructor(</span>
 		@Inject(Services.NDB) private readonly <span class="cstat-no" title="statement not covered" >NDBService: INDBService,</span>
 		@Inject(Music.Service) private readonly <span class="cstat-no" title="statement not covered" >service: IMusicService,</span>
-		@Inject(Extends.Translate) private readonly <span class="cstat-no" title="statement not covered" >Translate: Ii18nService,</span>
+		@Inject(LOCALIZATION_ADAPTER) private readonly <span class="cstat-no" title="statement not covered" >translate: NestedLocalizationAdapter,</span>
 		private readonly <span class="cstat-no" title="statement not covered" >users: UserManager,</span>
 	) {}
 &nbsp;
@@ -364,27 +414,38 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 						iconURL: client.user.displayAvatarURL(),
 					})
 					.setTitle(
-						await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Title", {
+						this.translate.getTranslation("Events/PlayerEvents:trackStart:Embed:Title", context.guild.preferredLocale, {
 							TITLE: track.info.title,
 						}),
 					)
 					.setThumbnail(track.info.artworkUrl)
 					.addFields([
 						{
-							name: await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Fields:1", {
-								EMOJI: (await this.service.URLChecker(false, track.info.uri)).Emoji,
-							}),
-							value: `&gt; ${await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Fields:Content:1", {
-								Platform: this.service.formatSourceName(track.info.sourceName),
-								URI: track.info.uri,
-							})}`,
+							name: this.translate.getTranslation(
+								"Events/PlayerEvents:trackStart:Embed:Fields:1",
+								context.guild.preferredLocale,
+								{
+									EMOJI: (await this.service.URLChecker(false, track.info.uri)).Emoji,
+								},
+							),
+							value: `&gt; ${this.translate.getTranslation(
+								"Events/PlayerEvents:trackStart:Embed:Fields:Content:1",
+								context.guild.preferredLocale,
+								{
+									Platform: this.service.formatSourceName(track.info.sourceName),
+									URI: track.info.uri,
+								},
+							)}`,
 							inline: true,
 						},
 						{
-							name: await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Fields:2"),
-							value: `&gt; ${await this.Translate.Guild(
-								context,
+							name: this.translate.getTranslation(
+								"Events/PlayerEvents:trackStart:Embed:Fields:2",
+								context.guild.preferredLocale,
+							),
+							value: `&gt; ${this.translate.getTranslation(
 								"Events/PlayerEvents:trackStart:Embed:Fields:Content:2",
+								context.guild.preferredLocale,
 &nbsp;
 								{
 									AUTHOR: track.info.author,
@@ -393,27 +454,41 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 							inline: true,
 						},
 						{
-							name: await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Fields:3"),
+							name: this.translate.getTranslation(
+								"Events/PlayerEvents:trackStart:Embed:Fields:3",
+								context.guild.preferredLocale,
+							),
 							value: `&gt; ${
 								track.info.isStream
-									? await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Fields:Content:3²")
-									: await this.Translate.Guild(
-											context,
+									? this.translate.getTranslation(
+											"Events/PlayerEvents:trackStart:Embed:Fields:Content:3²",
+											context.guild.preferredLocale,
+										)
+									: this.translate.getTranslation(
 											"Events/PlayerEvents:trackStart:Embed:Fields:Content:3",
-&nbsp;
+											context.guild.preferredLocale,
 											{
-												TIMER: await Timer(this.Translate, "normal", track.info.duration, context),
+												TIMER: await Timer(
+													this.translate,
+													"normal",
+													track.info.duration,
+													context.guild.preferredLocale,
+												),
 											},
-									  )
+										)
 							}`,
 							inline: true,
 						},
 					])
 					.setColor("#00c26f")
 					.setFooter({
-						text: await this.Translate.Guild(context, "Events/PlayerEvents:trackStart:Embed:Footer", {
-							REQUESTER: Requester.username,
-						}),
+						text: this.translate.getTranslation(
+							"Events/PlayerEvents:trackStart:Embed:Footer",
+							context.guild.preferredLocale,
+							{
+								REQUESTER: Requester.username,
+							},
+						),
 						iconURL: Requester.displayAvatarURL(),
 					})
 					.setTimestamp(),
@@ -430,7 +505,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-12T22:29:04.482Z
+                at 2024-04-13T20:01:02.268Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>
