@@ -782,8 +782,7 @@
 <a name='L717'></a><a href='#L717'>717</a>
 <a name='L718'></a><a href='#L718'>718</a>
 <a name='L719'></a><a href='#L719'>719</a>
-<a name='L720'></a><a href='#L720'>720</a>
-<a name='L721'></a><a href='#L721'>721</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L720'></a><a href='#L720'>720</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -918,7 +917,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1553,13 +1551,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Title",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Description",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								GUILD: Guild.name,
@@ -1570,11 +1568,11 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
 									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -1584,7 +1582,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -1598,13 +1596,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Title",
+							"Events.ReactionRoleAdd-Remove.Add.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Description",
+							"Events.ReactionRoleAdd-Remove.Add.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -1615,11 +1613,11 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 &nbsp;
 								{
@@ -1630,7 +1628,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -1644,13 +1642,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Title",
+							"Events.ReactionRoleAdd-Remove.Remove.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Description",
+							"Events.ReactionRoleAdd-Remove.Remove.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -1661,13 +1659,12 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
-&nbsp;
 								{
 									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
@@ -1676,7 +1673,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -1690,13 +1687,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Title",
+							"Events.ReactionRoleAdd-Remove.Error.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Description",
+							"Events.ReactionRoleAdd-Remove.Error.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -1707,11 +1704,11 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 &nbsp;
 								{
@@ -1722,7 +1719,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -1737,7 +1734,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:1",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.1",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1771,7 +1768,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:2",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.2",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1801,7 +1798,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:3",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.3",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1831,7 +1828,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:4",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.4",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1860,7 +1857,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 <span class="cstat-no" title="statement not covered" >							await Member.roles.remove(</span>
 								Role,
 								this.translate.getTranslation(
-									"Events/ReactionRoleAdd-Remove:Options:REMOVE:5",
+									"Events.ReactionRoleAdd-Remove.Options.REMOVE.5",
 									reaction.message.guild.preferredLocale,
 								),
 							);
@@ -1898,7 +1895,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:6",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.6",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1920,7 +1917,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:6",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.6",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -1979,13 +1976,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Title",
+							"Events.ReactionRoleAdd.Remove.Cooldown.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Description",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								GUILD: Guild.name,
@@ -1996,21 +1993,21 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -2024,13 +2021,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Title",
+							"Events.ReactionRoleAdd-Remove.Add.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Description",
+							"Events.ReactionRoleAdd-Remove.Add.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -2041,22 +2038,22 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 &nbsp;
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://wwwcom/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -2070,13 +2067,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Title",
+							"Events.ReactionRoleAdd-Remove.Remove.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Description",
+							"Events.ReactionRoleAdd-Remove.Remove.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -2087,21 +2084,21 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -2115,13 +2112,13 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Title",
+							"Events.ReactionRoleAdd-Remove.Error.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Description",
+							"Events.ReactionRoleAdd-Remove.Error.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -2132,21 +2129,21 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -2161,7 +2158,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:1",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE:1",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -2197,7 +2194,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:4",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.4",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -2230,7 +2227,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-14T17:07:27.152Z
+                at 2024-04-19T01:05:12.273Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

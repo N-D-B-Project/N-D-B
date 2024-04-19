@@ -114,16 +114,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,14 +147,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Message } from "discord.js";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { localizationMapByKey } from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "../";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicEmbeds, IMusicService } from "../interfaces";
 &nbsp;
-@Injectable()
+@MusicCommand()
 export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" >NowPlayingCommand {</span></span>
 	public <span class="fstat-no" title="function not covered" >constructor(</span>
 		@Inject(Music.Embeds) private readonly <span class="cstat-no" title="statement not covered" >embeds: IMusicEmbeds,</span>
@@ -164,32 +166,30 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 	) {}
 	private readonly logger = <span class="cstat-no" title="statement not covered" >new Logger(NowPlayingCommand.name);</span>
 &nbsp;
-	@LegacyCommand({
-		name: "NowPlaying",
-		aliases: ["nowplaying"],
-		description: "",
-		usage: "",
-	})
-	@SlashCommand({
+	@Subcommand({
 		name: "now_playing",
-		type: "Sub",
-		deployMode: "Test",
+		description: "Shows what song is playing and more information",
+		nameLocalizations: localizationMapByKey("Music.nowplaying.name"),
+		descriptionLocalizations: localizationMapByKey("Music.nowplaying.description"),
 	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nCommandRun([</span>client, context]: CommandContext): Promise&lt;Message&gt; {
-<span class="cstat-no" title="statement not covered" >		if (!(await this.service.checkers(context))) {</span>
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nCommandRun(@C</span>tx() [interaction]: SlashCommandContext) {
+<span class="cstat-no" title="statement not covered" >		if (!(await this.service.checkers(interaction))) {</span>
 <span class="cstat-no" title="statement not covered" >			return;</span>
 		}
 &nbsp;
-		const player = <span class="cstat-no" title="statement not covered" >await this.service.getPlayer(context);</span>
+		const player = <span class="cstat-no" title="statement not covered" >await this.service.getPlayer(interaction);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		return context.reply(await this.embeds.NowPlaying(context, player, await this.service.progressBar(player)));</span>
+<span class="cstat-no" title="statement not covered" >		return interaction.reply({</span>
+			embeds: [await this.embeds.NowPlaying(interaction, player, await this.service.progressBar(player))],
+		});
 	}
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -199,7 +199,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-14T17:07:27.152Z
+                at 2024-04-19T01:05:12.273Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>
