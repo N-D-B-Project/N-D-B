@@ -1,0 +1,18 @@
+{
+	"name": "clear",
+	"description": "Clear a number of messages in the selected channel",
+	"options": {
+		"amount": {
+			"name": "amount",
+			"description": "Amount of messages that will be deletes (1-100)"
+		},
+		"channel": {
+			"name": "channel",
+			"description": "Channel where the messages will be deleted"
+		}
+	},
+	"response": {
+		"error": "An error occurred when deleting the messages",
+		"success": "🗑️ {{amount}} message(s) deleted!\n> in {{channel}}"
+	}
+}
