@@ -1,11 +1,13 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Message } from "discord.js";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { localizationMapByKey } from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "../";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicEmbeds, IMusicService } from "../interfaces";
 
-@Injectable()
+@MusicCommand()
 export class NowPlayingCommand {
 	public constructor(
 		@Inject(Music.Embeds) private readonly embeds: IMusicEmbeds,
@@ -13,31 +15,29 @@ export class NowPlayingCommand {
 	) {}
 	private readonly logger = new Logger(NowPlayingCommand.name);
 
-	@LegacyCommand({
-		name: "NowPlaying",
-		aliases: ["nowplaying"],
-		description: "",
-		usage: "",
-	})
-	@SlashCommand({
+	@Subcommand({
 		name: "now_playing",
-		type: "Sub",
-		deployMode: "Test",
+		description: "Shows what song is playing and more information",
+		nameLocalizations: localizationMapByKey("Music.nowplaying.name"),
+		descriptionLocalizations: localizationMapByKey("Music.nowplaying.description"),
 	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext): Promise<Message> {
-		if (!(await this.service.checkers(context))) {
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext) {
+		if (!(await this.service.checkers(interaction))) {
 			return;
 		}
 
-		const player = await this.service.getPlayer(context);
+		const player = await this.service.getPlayer(interaction);
 
-		return context.reply(await this.embeds.NowPlaying(context, player, await this.service.progressBar(player)));
+		return interaction.reply({
+			embeds: [await this.embeds.NowPlaying(interaction, player, await this.service.progressBar(player))],
+		});
 	}
 }

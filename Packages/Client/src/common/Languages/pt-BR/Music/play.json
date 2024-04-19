@@ -1,0 +1,10 @@
+{
+	"name": "tocar",
+	"description": "Pesquisa uma Musica ou Playlist e toca ela em um canal de voz",
+	"options": {
+		"query": {
+			"name": "busca",
+			"description": "<URL ou Nome> da Musica ou Playlist"
+		}
+	}
+}

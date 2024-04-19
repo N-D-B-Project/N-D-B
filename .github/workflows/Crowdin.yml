@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   push:
-    paths: ["Packages/Client/src/common/Languages/i18n/**"]
+    paths: ["Packages/Client/src/common/Languages/**"]
     branches: [master]
 
 jobs:
@@ -41,6 +41,6 @@ jobs:
           pull_request_body: "New Crowdin translations by [Crowdin GH Action](https://github.com/crowdin/github-action)"
           pull_request_base_branch_name: "master"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

@@ -1,19 +1,31 @@
 import util from "node:util";
-import { NestedLocalizationAdapter } from "@necord/localization";
+import { NestedLocalizationAdapter, TranslationFn } from "@necord/localization";
 import { BaseMessageOptions, CommandInteraction, EmbedBuilder, MessageEditOptions } from "discord.js";
 import ms from "parse-ms";
 
 export const Timer = async (
-	translate: NestedLocalizationAdapter,
+	translate: NestedLocalizationAdapter | TranslationFn,
 	type: "normal" | "details",
 	number: number,
 	translateInfo: string,
 ): Promise<string> => {
 	const time = ms(number);
-	const days = translate.getTranslation("Tools/Tools:Timer:Days", translateInfo);
-	const hours = translate.getTranslation("Tools/Tools:Timer:Hours", translateInfo);
-	const minutes = translate.getTranslation("Tools/Tools:Timer:Minutes", translateInfo);
-	const seconds = translate.getTranslation("Tools/Tools:Timer:Seconds", translateInfo);
+	const days =
+		translate instanceof NestedLocalizationAdapter
+			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Days", translateInfo)
+			: (translate as TranslationFn)("Tools/Tools:Timer:Days");
+	const hours =
+		translate instanceof NestedLocalizationAdapter
+			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Hours", translateInfo)
+			: (translate as TranslationFn)("Tools/Tools:Timer:Hours");
+	const minutes =
+		translate instanceof NestedLocalizationAdapter
+			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Minutes", translateInfo)
+			: (translate as TranslationFn)("Tools/Tools:Timer:Minutes");
+	const seconds =
+		translate instanceof NestedLocalizationAdapter
+			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Seconds", translateInfo)
+			: (translate as TranslationFn)("Tools/Tools:Timer:Seconds");
 	switch (type) {
 		case "normal":
 			return ` ${time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${
@@ -54,4 +66,11 @@ export const isValidURL = (string: string): URL | boolean => {
 		}
 	}
 	return url;
+};
+
+export const formatArray = (array: Array<string>) => {
+	return new Intl.ListFormat("pt-BR", {
+		style: "short",
+		type: "conjunction",
+	}).format(array);
 };

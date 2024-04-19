@@ -9,7 +9,6 @@ import { ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
 import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
-import { DeveloperToolsModule } from "../developerTools/DeveloperTools.module";
 import { EventsModule } from "../events/Events.module";
 import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
@@ -32,16 +31,15 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			useFactory: async (config: ConfigService) => ({
 				adapter: new NestedLocalizationAdapter({
 					fallbackLocale: config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
-					locales: await new JSONLocaleLoader("./src/common/Languages/i18n").loadTranslations(),
+					locales: await new JSONLocaleLoader("./src/common/Languages/").loadTranslations(),
 				}),
 				resolvers: GuildResolver,
 			}),
 		}),
+		CommandsModule,
 		SharedModule,
 		ComponentsModule,
 		EventsModule,
-		CommandsModule,
-		DeveloperToolsModule,
 		ReactionRolesModule,
 		MusicModule,
 	],

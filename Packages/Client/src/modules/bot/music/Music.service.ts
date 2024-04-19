@@ -1,12 +1,13 @@
 import { Config } from "@/modules/shared/config/types";
+import { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { VoiceChannel, channelMention } from "discord.js";
+import { CommandInteraction, GuildMember, VoiceChannel, channelMention } from "discord.js";
 import { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
 import ms from "parse-ms";
-import { Context } from "../commands/Commands.context";
 import { MusicEmbeds } from "./Music.embeds";
 import { MusicManager } from "./Music.manager";
 import type { IMusicService } from "./interfaces";
@@ -17,16 +18,17 @@ export class MusicService implements IMusicService {
 	public constructor(
 		@Inject(Music.Manager) private readonly MusicManager: MusicManager,
 		@Inject(Music.Embeds) private readonly embeds: MusicEmbeds,
+		@Inject(Services.Database) private readonly database: IDatabaseService,
 		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
 		private readonly config: ConfigService<Config>,
 	) {}
 
-	public async getPlayer(context: Context): Promise<Player> {
-		if (context.isPremium) {
-			return this.MusicManager.premium.getPlayer(context.guild.id);
+	public async getPlayer(interaction: CommandInteraction): Promise<Player> {
+		if (this.getPremium(interaction.guildId)) {
+			return this.MusicManager.premium.getPlayer(interaction.guildId);
 		}
 
-		return this.MusicManager.common.getPlayer(context.guild.id);
+		return this.MusicManager.common.getPlayer(interaction.guildId);
 	}
 
 	public async getPlayerEvent(guildId: string, isPremium: boolean): Promise<Player> {
@@ -37,7 +39,11 @@ export class MusicService implements IMusicService {
 		return this.MusicManager.common.getPlayer(guildId);
 	}
 
-	public async createPlayer(context: Context, voiceChannel: VoiceChannel, textChannelId: string): Promise<Player> {
+	public async createPlayer(
+		interaction: CommandInteraction,
+		voiceChannel: VoiceChannel,
+		textChannelId: string,
+	): Promise<Player> {
 		const createOptions: PlayerOptions = {
 			guildId: voiceChannel.guildId,
 			textChannelId: textChannelId,
@@ -48,7 +54,7 @@ export class MusicService implements IMusicService {
 			// vcRegion: voiceChannel.rtcRegion!
 		};
 		let player: Player;
-		if (context.isPremium) {
+		if (this.getPremium(interaction.guildId)) {
 			player = this.MusicManager.premium.createPlayer(createOptions);
 			player.isPremium = true;
 		} else {
@@ -59,22 +65,24 @@ export class MusicService implements IMusicService {
 		return player;
 	}
 
-	public async hasVoice(context: Context): Promise<boolean> {
-		if (!(await context.getMember()).voice.channel) {
-			await context.reply(await this.embeds.NoChannel(context));
+	public async hasVoice(interaction: CommandInteraction): Promise<boolean> {
+		if (!(interaction.member as GuildMember).voice.channel) {
+			await interaction.reply({
+				embeds: [await this.embeds.NoChannel(interaction)],
+			});
 
 			return false;
 		}
 		return true;
 	}
 
-	public async sameVoice(context: Context): Promise<boolean> {
-		const player = await this.getPlayer(context);
-		const voiceChannel = await context.guild.channels.fetch(player.voiceChannelId);
+	public async sameVoice(interaction: CommandInteraction): Promise<boolean> {
+		const player = await this.getPlayer(interaction);
+		const voiceChannel = await interaction.guild.channels.fetch(player.voiceChannelId);
 
-		if ((await context.getMember()).voice.channelId !== player.voiceChannelId) {
-			await context.reply(
-				await this.translate.getTranslation("Tools/Music:WrongChannel", context.guild.preferredLocale, {
+		if ((interaction.member as GuildMember).voice.channelId !== player.voiceChannelId) {
+			await interaction.reply(
+				this.translate.getTranslation("Tools.Music.WrongChannel", interaction.guildLocale, {
 					TextChannel: channelMention(player.textChannelId),
 					VoiceChannel: channelMention(voiceChannel.id),
 				}),
@@ -84,26 +92,25 @@ export class MusicService implements IMusicService {
 		return true;
 	}
 
-	public async hasPlayer(context: Context): Promise<boolean> {
-		const player = await this.getPlayer(context);
+	public async hasPlayer(interaction: CommandInteraction): Promise<boolean> {
+		const player = await this.getPlayer(interaction);
 		if (!player) {
-			const embed = await this.embeds.NoPlayer(context);
-			await context.reply(embed);
+			await interaction.reply({ embeds: [await this.embeds.NoPlayer(interaction)] });
 			return false;
 		}
 		return true;
 	}
 
-	public async checkers(context: Context): Promise<boolean> {
-		if (!(await this.hasPlayer(context))) {
+	public async checkers(interaction: CommandInteraction): Promise<boolean> {
+		if (!(await this.hasPlayer(interaction))) {
 			return false;
 		}
 
-		if (!(await this.hasVoice(context))) {
+		if (!(await this.hasVoice(interaction))) {
 			return false;
 		}
 
-		if (!(await this.sameVoice(context))) {
+		if (!(await this.sameVoice(interaction))) {
 			return false;
 		}
 
@@ -112,7 +119,7 @@ export class MusicService implements IMusicService {
 
 	public async URLChecker(
 		isCommand: boolean,
-		context: Context | string,
+		query: CommandInteraction | string,
 	): Promise<{
 		Emoji: string;
 		Name: string;
@@ -139,8 +146,7 @@ export class MusicService implements IMusicService {
 
 		for (const value of Props) {
 			if (isCommand) {
-				const Query = (context as Context).getArg("query", -1);
-				if (Query.includes(value.URL)) {
+				if (((query as CommandInteraction).options.get("query").value as string).includes(value.URL)) {
 					Emoji = value.Emoji;
 					Name = value.Name;
 					break;
@@ -148,8 +154,7 @@ export class MusicService implements IMusicService {
 				Emoji = MusicEmojis.Youtube;
 				Name = "Youtube";
 			} else {
-				const args = context as string;
-				if (args.includes(value.URL)) {
+				if ((query as string).includes(value.URL)) {
 					Emoji = value.Emoji;
 					Name = value.Name;
 					break;
@@ -198,5 +203,9 @@ export class MusicService implements IMusicService {
 			case "flowery-tts":
 				return "Flowery TTS";
 		}
+	}
+
+	private async getPremium(guildId: string) {
+		return (await this.database.GuildRepo().get(guildId)).Settings.Premium;
 	}
 }

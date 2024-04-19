@@ -1,0 +1,24 @@
+{
+	"name": "deletar",
+	"description": "Deleta uma ReactionRole existente",
+	"options": {
+		"channel": {
+			"name": "canal",
+			"description": "Canal onde se localiza a ReactionRole"
+		},
+		"message": {
+			"name": "mensagem",
+			"description": "ID da mensagem utilizada na ReactionRole"
+		},
+		"role": {
+			"name": "cargo",
+			"description": "Cargo utilizado na ReactionRole"
+		},
+		"emoji": {
+			"name": "emoji",
+			"description": "Emoji utilizado na ReactionRole"
+		}
+	},
+	"UnableToDelete": "Não foi possível remover a ReactionRole",
+	"Removed": "{{success}} ReactionRole [Removida]({{URL}})"
+}

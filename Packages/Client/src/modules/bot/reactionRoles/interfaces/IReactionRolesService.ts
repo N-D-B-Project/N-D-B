@@ -1,5 +1,4 @@
-import { Context } from "@/modules/bot/commands/Commands.context";
-import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
+import { Client, CommandInteraction, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
 import { ReactionRolesEntity } from "../entities/ReactionRole.entity";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
@@ -26,11 +25,11 @@ export interface IReactionRolesService {
 
 	CheckParams(
 		client: Client,
-		context: Context,
+		interaction: CommandInteraction,
 		channel: TextChannel,
 		messageId: string,
 		message: Message,
 		role: Role,
 		emoji: string,
-	): Promise<boolean | EmbedBuilder | Message>;
+	);
 }

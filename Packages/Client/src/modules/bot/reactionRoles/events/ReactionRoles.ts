@@ -48,13 +48,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Title",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Description",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								GUILD: Guild.name,
@@ -65,11 +65,11 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
 									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
@@ -79,7 +79,7 @@ export class ReactionRolesEvents {
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -93,13 +93,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Title",
+							"Events.ReactionRoleAdd-Remove.Add.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Description",
+							"Events.ReactionRoleAdd-Remove.Add.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -110,11 +110,11 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 
 								{
@@ -125,7 +125,7 @@ export class ReactionRolesEvents {
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -139,13 +139,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Title",
+							"Events.ReactionRoleAdd-Remove.Remove.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Description",
+							"Events.ReactionRoleAdd-Remove.Remove.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -156,13 +156,12 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
-
 								{
 									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
@@ -171,7 +170,7 @@ export class ReactionRolesEvents {
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -185,13 +184,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Title",
+							"Events.ReactionRoleAdd-Remove.Error.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Description",
+							"Events.ReactionRoleAdd-Remove.Error.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: Role.name,
@@ -202,11 +201,11 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 
 								{
@@ -217,7 +216,7 @@ export class ReactionRolesEvents {
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -232,7 +231,7 @@ export class ReactionRolesEvents {
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:1",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.1",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -266,7 +265,7 @@ export class ReactionRolesEvents {
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:2",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.2",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -296,7 +295,7 @@ export class ReactionRolesEvents {
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:3",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.3",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -326,7 +325,7 @@ export class ReactionRolesEvents {
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:4",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.4",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -355,7 +354,7 @@ export class ReactionRolesEvents {
 							await Member.roles.remove(
 								Role,
 								this.translate.getTranslation(
-									"Events/ReactionRoleAdd-Remove:Options:REMOVE:5",
+									"Events.ReactionRoleAdd-Remove.Options.REMOVE.5",
 									reaction.message.guild.preferredLocale,
 								),
 							);
@@ -393,7 +392,7 @@ export class ReactionRolesEvents {
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:6",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE.6",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -415,7 +414,7 @@ export class ReactionRolesEvents {
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:6",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.6",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -474,13 +473,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Title",
+							"Events.ReactionRoleAdd.Remove.Cooldown.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Cooldown:Description",
+							"Events.ReactionRoleAdd-Remove.Cooldown.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								GUILD: Guild.name,
@@ -491,21 +490,21 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -519,13 +518,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Title",
+							"Events.ReactionRoleAdd-Remove.Add.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Add:Description",
+							"Events.ReactionRoleAdd-Remove.Add.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -536,22 +535,22 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://wwwcom/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -565,13 +564,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Title",
+							"Events.ReactionRoleAdd-Remove.Remove.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Remove:Description",
+							"Events.ReactionRoleAdd-Remove.Remove.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -582,21 +581,21 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -610,13 +609,13 @@ export class ReactionRolesEvents {
 					})
 					.setTitle(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Title",
+							"Events.ReactionRoleAdd-Remove.Error.Title",
 							reaction.message.guild.preferredLocale,
 						),
 					)
 					.setDescription(
 						this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:Error:Description",
+							"Events.ReactionRoleAdd-Remove.Error.Description",
 							reaction.message.guild.preferredLocale,
 							{
 								ROLE: roleMention(Role.id),
@@ -627,21 +626,21 @@ export class ReactionRolesEvents {
 					.addFields([
 						{
 							name: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:1",
+								"Events.ReactionRoleAdd-Remove.GlobalField.1",
 								reaction.message.guild.preferredLocale,
 							),
 							value: this.translate.getTranslation(
-								"Events/ReactionRoleAdd-Remove:GlobalField:Content",
+								"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 								reaction.message.guild.preferredLocale,
 								{
-									URL: `https://com/channels/${Guild.id}/${Channel}/${Message}`,
+									URL: `https://discord.com/channels/${Guild.id}/${Channel}/${Message}`,
 								},
 							),
 						},
 					])
 					.setFooter({
 						text: this.translate.getTranslation(
-							"Events/ReactionRoleAdd-Remove:GlobalFooter",
+							"Events.ReactionRoleAdd-Remove.GlobalFooter",
 							reaction.message.guild.preferredLocale,
 						),
 						iconURL: this.client.user.displayAvatarURL(),
@@ -656,7 +655,7 @@ export class ReactionRolesEvents {
 								.remove(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:REMOVE:1",
+										"Events.ReactionRoleAdd-Remove.Options.REMOVE:1",
 										reaction.message.guild.preferredLocale,
 									),
 								)
@@ -692,7 +691,7 @@ export class ReactionRolesEvents {
 								.add(
 									Role,
 									this.translate.getTranslation(
-										"Events/ReactionRoleAdd-Remove:Options:ADD:4",
+										"Events.ReactionRoleAdd-Remove.Options.ADD.4",
 										reaction.message.guild.preferredLocale,
 									),
 								)

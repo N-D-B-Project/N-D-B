@@ -1,0 +1,43 @@
+{
+	"name": "edit",
+	"description": "Edit an ReactionRole",
+	"options": {
+		"channel": {
+			"name": "channel",
+			"description": "Channel where ReactionRole is located"
+		},
+		"message": {
+			"name": "message",
+			"description": "Message ID used in ReactionRole"
+		},
+		"role": {
+			"name": "role",
+			"description": "Role used in ReactionRole"
+		},
+		"newRole": {
+			"name": {
+				"en-US": "new_role",
+				"description": "New role to be used in ReactionRole"
+			},
+			"emoji": {
+				"name": "emoji",
+				"description": "Emoji used in ReactionRole"
+			}
+		},
+		"UnableToUpdate": "Unable to edit this ReactionRole due to an internal error",
+		"Embed": {
+			"Footer": "ReactionRoles",
+			"Description": "ReactionRole Updated",
+			"Fields": {
+				"1": "Channel",
+				"2": "Emoji",
+				"3": "Message",
+				"4": "Role",
+				"5": "New option",
+				"Content": {
+					"3": "[Click Here]({{MsgIdURL}})"
+				}
+			}
+		}
+	}
+}

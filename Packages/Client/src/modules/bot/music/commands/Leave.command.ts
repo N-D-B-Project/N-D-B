@@ -1,58 +1,53 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Message, VoiceChannel, channelMention } from "discord.js";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { GuildMember, VoiceChannel, channelMention } from "discord.js";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "../";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicService } from "../interfaces";
 
-@Injectable()
+@MusicCommand()
 export class LeaveCommand {
-	public constructor(
-		@Inject(Music.Service) private readonly service: IMusicService,
-		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
-	) {}
+	public constructor(@Inject(Music.Service) private readonly service: IMusicService) {}
 
 	private readonly logger = new Logger(LeaveCommand.name);
 
-	@LegacyCommand({
+	@Subcommand({
 		name: "leave",
-		aliases: ["Leave"],
-		description: "Disconnect's the bot from Voice Channel",
-		usage: "",
+		description: "Leave the voice channel",
+		nameLocalizations: localizationMapByKey("Music.leave.name"),
+		descriptionLocalizations: localizationMapByKey("Music.leave.description"),
 	})
-	@SlashCommand({
-		name: "leave",
-		type: "Sub",
-		deployMode: "Test",
-	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext): Promise<Message> {
-		let player = await this.service.getPlayer(context);
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @CurrentTranslate() t: TranslationFn) {
+		let player = await this.service.getPlayer(interaction);
 
-		if (!(await this.service.hasVoice(context))) return;
+		if (!(await this.service.hasVoice(interaction))) return;
 
 		if (!player) {
 			player = await this.service.createPlayer(
-				context,
-				(await context.getMember()).voice.channel as VoiceChannel,
-				context.channel.id,
+				interaction,
+				(interaction.member as GuildMember).voice.channel as VoiceChannel,
+				interaction.channel.id,
 			);
 		}
 
 		if (!player.connected) {
-			player.playerAuthor = context.author.id;
+			player.playerAuthor = interaction.user.id;
 			await player.connect();
 		}
 
-		return context.reply(
-			this.translate.getTranslation("Tools/Music:Join", context.guild.preferredLocale, {
+		return interaction.reply(
+			t("Tools/Music:Join", {
 				VoiceChannel: channelMention(player.voiceChannelId),
 			}),
 		);

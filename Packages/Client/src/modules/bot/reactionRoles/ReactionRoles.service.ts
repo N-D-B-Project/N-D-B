@@ -1,8 +1,7 @@
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
-import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
+import { Client, CommandInteraction, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
 import type { IDatabaseService } from "../../shared/database/interfaces/IDatabaseService";
-import { Context } from "../commands/Commands.context";
 import { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
@@ -92,33 +91,15 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async CheckParams(
 		client: Client<boolean>,
-		context: Context,
+		interaction: CommandInteraction,
 		channel: TextChannel,
 		messageId: string,
 		message: Message<boolean>,
 		role: Role,
 		emoji: string,
-	): Promise<boolean | EmbedBuilder | Message> {
-		if (!context.isSlash) {
-			if (!channel) {
-				return await context.send(await this.embeds.InvalidChannelEmbed(context));
-			}
-
-			if (!messageId) {
-				return await context.send(await this.embeds.InvalidIDEmbed(context));
-			}
-
-			if (!role || role.managed) {
-				return await context.send(await this.embeds.InvalidRoleEmbed(context));
-			}
-
-			if (!emoji) {
-				return await context.send(await this.embeds.InvalidEmojiEmbed(context));
-			}
-		}
-
+	) {
 		if (!message) {
-			return await context.reply(await this.embeds.MessageNotFoundEmbed(context));
+			return await interaction.reply({ embeds: [await this.embeds.MessageNotFoundEmbed(interaction)] });
 		}
 	}
 }

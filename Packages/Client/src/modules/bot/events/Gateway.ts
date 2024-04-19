@@ -1,5 +1,7 @@
 import { Config } from "@/modules/shared/config/types";
-import { Injectable, Logger } from "@nestjs/common";
+import { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
@@ -8,7 +10,10 @@ import { Context, ContextOf, On, Once } from "necord";
 
 @Injectable()
 export class GatewayEvents {
-	public constructor(private readonly config: ConfigService<Config>) {}
+	public constructor(
+		@Inject(Services.Database) private readonly database: IDatabaseService,
+		private readonly config: ConfigService<Config>,
+	) {}
 
 	private readonly logger = new Logger(GatewayEvents.name);
 
@@ -28,8 +33,12 @@ export class GatewayEvents {
 	@Once("ready")
 	public async onReady(@Context() [client]: ContextOf<"ready">) {
 		this.logger.log(`Bot logged in as ${client.user.username}`);
-
 		await this._setPresence(client);
+		for (const guild of client.guilds.cache.values()) {
+			if (!(await this.database.GuildRepo().get(guild.id))) {
+				await this.database.GuildRepo().create(guild);
+			}
+		}
 	}
 
 	@On("warn")

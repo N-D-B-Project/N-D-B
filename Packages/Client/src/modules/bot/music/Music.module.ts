@@ -1,38 +1,15 @@
 import { Global, Module } from "@nestjs/common";
 import { MusicEmbedsProvider, MusicManagerProvider, MusicServiceProvider } from ".";
 import { NDBServiceProvider } from "../core/provider/NDBService.provider";
-import {
-	JoinCommand,
-	LeaveCommand,
-	MusicMainSlashCommand,
-	NowPlayingCommand,
-	PauseCommand,
-	PlayCommand,
-	QueueCommand,
-	ResumeCommand,
-	StopCommand,
-} from "./commands";
-import { ChannelEvents, NodeEvents, PlayerEvents, QueueEvents, TrackEvents, VoiceEvents } from "./events";
+import * as Commands from "./commands";
+import * as Events from "./events";
 
 @Global()
 @Module({
 	imports: [],
 	providers: [
-		NodeEvents,
-		PlayerEvents,
-		QueueEvents,
-		TrackEvents,
-		ChannelEvents,
-		VoiceEvents,
-		MusicMainSlashCommand,
-		JoinCommand,
-		LeaveCommand,
-		NowPlayingCommand,
-		PauseCommand,
-		PlayCommand,
-		QueueCommand,
-		ResumeCommand,
-		StopCommand,
+		...Object.values(Events),
+		...Object.values(Commands),
 		MusicManagerProvider,
 		MusicEmbedsProvider,
 		MusicServiceProvider,

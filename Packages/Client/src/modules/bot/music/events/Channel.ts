@@ -1,11 +1,11 @@
-import { MessageTools } from "@/modules/bot/commands/Message";
 import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
-import { Extends, Services } from "@/types/Constants";
+import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ChannelType, Client, TextChannel } from "discord.js";
 import { Context, ContextOf, On } from "necord";
 import { Music } from "../";
+import { MessageTools } from "../../commands/Message";
 import type { IMusicService } from "../interfaces";
 
 @Injectable()
@@ -30,7 +30,7 @@ export class ChannelEvents {
 				const textChannel = (await channel.guild.channels.fetch(Player.textChannelId)) as TextChannel;
 				MessageTools.send(textChannel, {
 					content: this.translate.getTranslation(
-						"Events/ChannelDelete:Music:DeletedChannel",
+						"Events.ChannelDelete.Music.DeletedChannel",
 						channel.guild.preferredLocale,
 					),
 				});

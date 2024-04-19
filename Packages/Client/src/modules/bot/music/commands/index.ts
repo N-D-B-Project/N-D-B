@@ -1,5 +1,4 @@
-export * from "./Main.command";
-export * from "./Play.command";
+export * from "./play/play.command";
 export * from "./Join.command";
 export * from "./Leave.command";
 export * from "./Pause.command";

@@ -1116,7 +1116,7 @@ __metadata:
     "@fastify/cookie": "npm:^9.3.1"
     "@fastify/helmet": "npm:^11.1.1"
     "@fastify/static": "npm:^7.0.3"
-    "@necord/localization": "npm:^3.1.0"
+    "@necord/localization": "npm:^3.1.2"
     "@necord/pagination": "npm:^1.2.2"
     "@nestjs/axios": "npm:^3.0.2"
     "@nestjs/cli": "npm:^10.3.2"
@@ -1144,9 +1144,9 @@ __metadata:
     discord.js: "npm:^14.14.1"
     fastify: "npm:^4.26.2"
     ioredis: "npm:^5.3.2"
-    lavalink-client: "https://github.com/Tomato6966/lavalink-client"
+    lavalink-client: "npm:^2.1.7"
     moment: "npm:^2.30.1"
-    necord: "npm:^6.7.0"
+    necord: "npm:^6.8.3"
     parse-ms: "npm:=2.1.0"
     passport: "npm:^0.7.0"
     passport-discord: "npm:^0.1.4"
@@ -1181,9 +1181,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@necord/localization@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@necord/localization@npm:3.1.0"
+"@necord/localization@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@necord/localization@npm:3.1.2"
   peerDependencies:
     "@nestjs/common": ^8.0.0 || ^9.0.0 || ^10.0.0
     "@nestjs/core": ^8.0.0 || ^9.0.0 || ^10.0.0
@@ -1191,7 +1191,7 @@ __metadata:
     necord: ^6.0.0
     reflect-metadata: ^0.1.13
     rxjs: ^7.2.0
-  checksum: 10c0/3de04388d32eff6b1a78bb745194df3754f52008134738791e522fc0b3afafae478dc98ad2a83aa9ba37d7192aafa23376fac8ed10fe9b80ed9c024379e6d5be
+  checksum: 10c0/288109461413e2041f5c77078cf9da35da1427115a34fbffcfa013f2a5f88e4bbdf3e841f3a5b75f4a95e20bd5c470002808c7deceef738c5417cc9daf6bd528
   languageName: node
   linkType: hard
 
@@ -5059,13 +5059,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lavalink-client@https://github.com/Tomato6966/lavalink-client":
-  version: 2.1.5
-  resolution: "lavalink-client@https://github.com/Tomato6966/lavalink-client.git#commit=525699b9a27cc83e048813474f21dcf3e48d513e"
+"lavalink-client@npm:^2.1.7":
+  version: 2.1.7
+  resolution: "lavalink-client@npm:2.1.7"
   dependencies:
+    tslib: "npm:^2.6.1"
     undici: "npm:^5.23.0"
     ws: "npm:^8.13.0"
-  checksum: 10c0/ef05a8f8b2d5cedff80565a4166018a581703ff8dcbf016238bd9124ea7978ff92971137b6d139a4b5f8425c586bfdc5634ae7d0dac9e5241311d4127ae7c62f
+  checksum: 10c0/3866c595b44ac2a828f6a3399ecc31ebbc5ea1319e9a28ab9b8f7ea821b3943692ea6308ce117e210b98d5f8b7da47e666bd08e304588447075bad525982322b
   languageName: node
   linkType: hard
 
@@ -5728,18 +5729,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"necord@npm:^6.7.0":
-  version: 6.8.1
-  resolution: "necord@npm:6.8.1"
+"necord@npm:^6.8.3":
+  version: 6.8.3
+  resolution: "necord@npm:6.8.3"
   dependencies:
-    path-to-regexp: "npm:6.2.1"
+    path-to-regexp: "npm:6.2.2"
   peerDependencies:
     "@nestjs/common": ^10.2.0
     "@nestjs/core": ^10.2.0
     discord.js: ^14.0.1
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/b1237b298fe67f1a681741c850a87e5e8bfd84dac080499de0cdc6ecc8f82c75baa8a061f67deae9a30940a547fe1213becad186c94c1b77a81ea6896502c9db
+  checksum: 10c0/bc4e9f020ea381bab9a24a74564e75cb908d01ff043d0012423b6a5115c5f9088dfbb262cdb39f00bb9f794f7f9bae4a98e7f2a2ca713dabbca8027c740d8448
   languageName: node
   linkType: hard
 
@@ -6086,7 +6087,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:6.2.1, path-to-regexp@npm:^6.1.0":
+"path-to-regexp@npm:6.2.2":
+  version: 6.2.2
+  resolution: "path-to-regexp@npm:6.2.2"
+  checksum: 10c0/4b60852d3501fd05ca9dd08c70033d73844e5eca14e41f499f069afa8364f780f15c5098002f93bd42af8b3514de62ac6e82a53b5662de881d2b08c9ef21ea6b
+  languageName: node
+  linkType: hard
+
+"path-to-regexp@npm:^6.1.0":
   version: 6.2.1
   resolution: "path-to-regexp@npm:6.2.1"
   checksum: 10c0/7a73811ca703e5c199e5b50b9649ab8f6f7b458a37f7dff9ea338815203f5b1f95fe8cb24d4fdfe2eab5d67ce43562d92534330babca35cdf3231f966adb9360
@@ -7369,7 +7377,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.6.2, tslib@npm:^2.1.0, tslib@npm:^2.6.2":
+"tslib@npm:2.6.2, tslib@npm:^2.1.0, tslib@npm:^2.6.1, tslib@npm:^2.6.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10c0/e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb

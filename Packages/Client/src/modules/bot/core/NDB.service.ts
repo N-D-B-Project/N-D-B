@@ -1,9 +1,8 @@
-import { Content } from "@/modules/bot/commands/types";
+import { Content } from "@/types";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
-import { ButtonStyle, EmbedBuilder } from "discord.js";
-import { Context } from "../commands/Commands.context";
+import { ButtonStyle, CommandInteraction, EmbedBuilder } from "discord.js";
 import type { INDBService } from "./interfaces/INDBService";
 
 @Injectable()
@@ -13,16 +12,20 @@ export class NDBService implements INDBService {
 		private readonly paginator: NecordPaginationService,
 	) {}
 
-	public async buildPaginator(context: Context, embeds: Array<EmbedBuilder>, id: string): Promise<Content> {
+	public async buildPaginator(
+		interaction: CommandInteraction,
+		embeds: Array<EmbedBuilder>,
+		id: string,
+	): Promise<Content> {
 		const buttons: ButtonsAppearance = {
 			back: {
 				emoji: "⬅️",
-				label: this.translate.getTranslation("Tools/Paginator:Labels:Previous", context.guild.preferredLocale),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Previous", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 			next: {
 				emoji: "➡️",
-				label: this.translate.getTranslation("Tools/Paginator:Labels:Next", context.guild.preferredLocale),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Next", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 		};
@@ -31,14 +34,14 @@ export class NDBService implements INDBService {
 			embeds[i].setFooter({
 				text: embeds[i].data.footer?.text
 					? `${embeds[i].data.footer?.text} | ${this.translate.getTranslation(
-							"Tools/Paginator:Embed:Footer",
-							context.guild.preferredLocale,
+							"Tools.Paginator.Embed.Footer",
+							interaction.guildLocale,
 							{
 								Current: String(i + 1),
 								Total: String(embeds.length),
 							},
 						)}`
-					: this.translate.getTranslation("Tools/Paginator:Embed:Footer", context.guild.preferredLocale, {
+					: this.translate.getTranslation("Tools.Paginator.Embed.Footer", interaction.guildLocale, {
 							Current: String(i + 1),
 							Total: String(embeds.length),
 						}),

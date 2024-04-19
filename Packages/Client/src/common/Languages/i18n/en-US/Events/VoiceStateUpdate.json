@@ -1,9 +1,0 @@
-{
-	"UNMute": "Don't unmute me! I've muted myself again, to protect the data and give you a faster, smoother experience",
-	"Embed": {
-		"Title": "{EMOJI} Empty Channel",
-		"Description": "I exited channel '{CHANNEL}' as the channel was empty for: {TIME} Seconds",
-		"Description2": "I will not leave the Channel because AFK is Active",
-		"Footer": "N-D-B Music Player"
-	}
-}

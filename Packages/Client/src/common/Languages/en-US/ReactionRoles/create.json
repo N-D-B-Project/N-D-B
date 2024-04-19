@@ -1,0 +1,53 @@
+{
+	"name": "create",
+	"description": "Create an ReactionRole in the server",
+	"options": {
+		"channel": {
+			"name": "channel",
+			"description": "Channel where the ReactionRole will be created"
+		},
+		"message": {
+			"name": "message",
+			"description": "Message ID that the member will react"
+		},
+		"role": {
+			"name": "role",
+			"description": "Role to be used in ReactionRole"
+		},
+		"emoji": {
+			"name": "emoji",
+			"description": "Emoji that the user will react"
+		},
+		"type": {
+			"name": "type",
+			"description": "Type of ReactionRole (1-6) (/reaction_role types)"
+		}
+	},
+	"Channel": {
+		"Invalid": "{{fail}} Invalid Channel"
+	},
+	"ID": {
+		"Invalid": "{{fail}} Insert an Message ID",
+		"NotFound": "{{fail}} Mensagem não encontrada verifique se o ID é valido"
+	},
+	"Role": {
+		"Invalid": "{{fail}} Invalid or Integration Role"
+	},
+	"Emoji": {
+		"Invalid": "{{fail}} Invalid Emoji"
+	},
+	"UnableToCreate": "{{fail}} This ReactionRole could not be created because it already exists or an internal error occurred",
+	"Embed": {
+		"Author": "ReactionRoles",
+		"Fields": {
+			"1": "Channel",
+			"2": "Emoji",
+			"3": "Type",
+			"4": "Message",
+			"5": "Role",
+			"Content": {
+				"4": "[Click Here]({{MsgIdURL}})"
+			}
+		}
+	}
+}

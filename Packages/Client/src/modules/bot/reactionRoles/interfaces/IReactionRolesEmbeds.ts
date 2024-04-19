@@ -1,30 +1,29 @@
-import { Context } from "@/modules/bot/commands/Commands.context";
-import { EmbedBuilder, Message } from "discord.js";
+import { CommandInteraction, EmbedBuilder, Message } from "discord.js";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {
-	InvalidChannelEmbed(context: Context): Promise<EmbedBuilder>;
-	InvalidIDEmbed(context: Context): Promise<EmbedBuilder>;
-	MessageNotFoundEmbed(context: Context): Promise<EmbedBuilder>;
-	InvalidRoleEmbed(context: Context): Promise<EmbedBuilder>;
-	InvalidEmojiEmbed(context: Context): Promise<EmbedBuilder>;
+	InvalidChannelEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	InvalidIDEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	MessageNotFoundEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	InvalidRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	InvalidEmojiEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
 	ReactionRoleCreatedEmbed(
-		context: Context,
+		interaction: CommandInteraction,
 		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<EmbedBuilder>;
-	ReactionRoleRemovedEmbed(context: Context, MsgID: Message): Promise<EmbedBuilder>;
+	ReactionRoleRemovedEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
 	ReactionRoleUpdatedEmbed(
-		context: Context,
+		interaction: CommandInteraction,
 		{ Channel, Message, Role, Emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder>;
 	ReactionRoleDeleteAllEmbed(
-		context: Context,
+		interaction: CommandInteraction,
 		status: "Confirm" | "Cancel" | "Success",
 		ReactionCount: number | null,
 	): Promise<EmbedBuilder>;
-	UnableToCreateReactionRoleEmbed(context: Context): Promise<EmbedBuilder>;
-	UnableToDeleteReactionRoleEmbed(context: Context, MsgID: Message): Promise<EmbedBuilder>;
-	UnableToDeleteAllReactionRoleEmbed(context: Context): Promise<EmbedBuilder>;
-	UnableToUpdateReactionRoleEmbed(context: Context, MsgID: Message): Promise<EmbedBuilder>;
+	UnableToCreateReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	UnableToDeleteReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
+	UnableToDeleteAllReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	UnableToUpdateReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
 }

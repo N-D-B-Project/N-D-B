@@ -25,8 +25,8 @@ export class NotQuiteNitroEvent {
 			const webhook = (await (message.channel as TextChannel).fetchWebhooks()).find((w) => w.name === "N-D-B_NQN");
 			if (!webhook) {
 				await (message.channel as TextChannel).createWebhook({
-					reason: await this.translate.getTranslation(
-						"Events/MessageCreate:NQNCreationReason",
+					reason: this.translate.getTranslation(
+						"Events.MessageCreate.NQNCreationReason",
 						message.guild.preferredLocale,
 						{
 							Username: message.author.username,

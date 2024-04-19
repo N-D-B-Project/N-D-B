@@ -1,4 +1,5 @@
 import { UserEntity } from "@/modules/shared/database/entities";
+import { BaseMessageOptions, EmbedBuilder } from "discord.js";
 import "fastify";
 
 declare module "fastify" {
@@ -6,3 +7,5 @@ declare module "fastify" {
 		user: UserEntity;
 	}
 }
+
+export type Content = string | EmbedBuilder | BaseMessageOptions;

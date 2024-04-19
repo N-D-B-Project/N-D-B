@@ -24,8 +24,6 @@ model Guild {
 
 model GuildSettings {
   id         String   @id @default(uuid())
-  Prefix     String   @default("&") @db.VarChar(4)
-  Language   String   @default("en-US")
   ReactionDM Boolean  @default(true)
   Premium    Boolean  @default(false)
   createdAt  DateTime @default(now())
@@ -60,8 +58,6 @@ model User {
 
 model UserSettings {
   id        String   @id @default(uuid())
-  Prefix    String   @default("&") @db.VarChar(4)
-  Language  String   @default("en-US")
   Premium   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())

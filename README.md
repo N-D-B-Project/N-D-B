@@ -50,7 +50,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
       - [ ] ReactionRoles
         - [x] Partial migrated to Necord but not tested yet
-        - [ ] Commands Update(Legacy/Slash), Builder(Legacy), Fetch(Legacy/Slash)
+        - [ ] Commands Update, Fetch
         - [ ] Update ReactionRoleAdd/Remove Events
         - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
       - [ ] Music

@@ -1,11 +1,19 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import {
+	CurrentTranslate,
+	LOCALIZATION_ADAPTER,
+	NestedLocalizationAdapter,
+	TranslationFn,
+	localizationMapByKey,
+} from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "../";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicService } from "../interfaces";
 
-@Injectable()
+@MusicCommand()
 export class StopCommand {
 	public constructor(
 		@Inject(Music.Service) private readonly service: IMusicService,
@@ -14,28 +22,24 @@ export class StopCommand {
 
 	private readonly logger = new Logger(StopCommand.name);
 
-	@LegacyCommand({
+	@Subcommand({
 		name: "stop",
-		aliases: ["Stop"],
 		description: "Stops the music queue",
-		usage: "",
+		nameLocalizations: localizationMapByKey("Music.stop.name"),
+		descriptionLocalizations: localizationMapByKey("Music.stop.description"),
 	})
-	@SlashCommand({
-		name: "stop",
-		type: "Sub",
-		deployMode: "Test",
-	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["SendMessages"],
 		user: ["SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext) {
-		const player = await this.service.getPlayer(context);
-		if (!(await this.service.checkers(context))) return;
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @CurrentTranslate() t: TranslationFn) {
+		const player = await this.service.getPlayer(interaction);
+		if (!(await this.service.checkers(interaction))) return;
 		await player.destroy();
-		return context.reply(this.translate.getTranslation("Tools/Music:Stop", context.guild.preferredLocale));
+		return interaction.reply(this.translate.getTranslation("Tools.Music.Stop", interaction.guild.preferredLocale));
 	}
 }

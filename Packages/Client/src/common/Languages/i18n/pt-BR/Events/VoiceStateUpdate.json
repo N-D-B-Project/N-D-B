@@ -1,9 +1,0 @@
-{
-	"UNMute": "Não me desmute! Me mutei novamente, para proteger os dados e você ter uma experiência mais rápida e suave",
-	"Embed": {
-		"Title": "{EMOJI} Canal Vazio",
-		"Description": "Eu sai do canal `{CHANNEL}` pois o canal ficou vazio por: {TIME} Segundos",
-		"Description2": "Não irei sair do Canal pois o AFK está Ativo",
-		"Footer": "N-D-B Music Player"
-	}
-}

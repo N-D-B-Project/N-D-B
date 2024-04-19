@@ -1,7 +1,6 @@
 import { Module, OnApplicationBootstrap } from "@nestjs/common";
 import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 import { REST } from "discord.js";
-import { CommandsEvents } from "./Commands";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
 import { ThreadEvents } from "./Thread";
@@ -13,7 +12,7 @@ import { ThreadEvents } from "./Thread";
 			maxListeners: 10,
 		}),
 	],
-	providers: [GatewayEvents, CommandsEvents, GuildEvents, ThreadEvents],
+	providers: [GatewayEvents, GuildEvents, ThreadEvents],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(

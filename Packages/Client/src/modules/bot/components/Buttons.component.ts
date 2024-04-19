@@ -10,12 +10,12 @@ export class Buttons {
 		return new ActionRowBuilder<ButtonBuilder>().addComponents([
 			new ButtonBuilder()
 				.setCustomId("confirm/yes")
-				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:YES", locale))
+				.setLabel(this.translate.getTranslation("Tools.Buttons.Labels.Confirm.YES", locale))
 				.setEmoji("719710630881525881")
 				.setStyle(ButtonStyle.Success),
 			new ButtonBuilder()
 				.setCustomId("confirm/no")
-				.setLabel(this.translate.getTranslation("Tools/Buttons:Labels:Confirm:NO", locale))
+				.setLabel(this.translate.getTranslation("Tools.Buttons.Labels.Confirm.NO", locale))
 				.setEmoji("719710607405875321")
 				.setStyle(ButtonStyle.Danger),
 		]);

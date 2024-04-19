@@ -1,0 +1,10 @@
+{
+	"name": "buscar",
+	"description": "Encontra a lista de ReactionRoles existentes no servidor",
+	"options": {
+		"type": {
+			"name": "tipo",
+			"description": "Tipo de busca"
+		}
+	}
+}

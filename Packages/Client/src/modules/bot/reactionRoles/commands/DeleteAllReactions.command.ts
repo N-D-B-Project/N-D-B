@@ -1,9 +1,12 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Buttons, ConfirmButtonEnum } from "@/modules/bot/components/Buttons.component";
 import { Extends } from "@/types/Constants";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Button, ButtonContext, ComponentParam, Context as NecordContext } from "necord";
-import { CommandContext, Context } from "../../commands/Commands.context";
+import { localizationMapByKey } from "@necord/localization";
+import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
+import { CommandInteraction } from "discord.js";
+import { Button, ButtonContext, ComponentParam, Ctx, SlashCommandContext, Subcommand } from "necord";
+import { InteractionTools } from "../../commands/Interaction";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 
@@ -16,48 +19,42 @@ export class DeleteAllReactionsCommand {
 	) {}
 
 	private readonly logger = new Logger(DeleteAllReactionsCommand.name);
-	private context: Context;
+	private context: CommandInteraction;
 
-	@LegacyCommand({
-		name: "DeleteAllReactions",
-		description: "Remove todas as Reaction Roles do Servidor",
-		usage: "",
-	})
-	@SlashCommand({
-		deployMode: "Test",
-		type: "Sub",
+	@Subcommand({
 		name: "delete_all",
+		description: "Delete all ReactionRoles in the server",
+		nameLocalizations: localizationMapByKey("ReactionRoles.deleteall.name"),
+		descriptionLocalizations: localizationMapByKey("ReactionRoles.deleteall.description"),
 	})
-	@CommandConfig({ category: "🎩 ReactionRole" })
+	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext) {
-		this.context = context;
-		await context.send({
-			embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(context, "Confirm", null)],
-			components: [await this.Buttons.Confirm(context.guild.preferredLocale)],
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext) {
+		this.context = interaction;
+		await interaction.reply({
+			embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(interaction, "Confirm", null)],
+			components: [await this.Buttons.Confirm(interaction.guildLocale)],
 		});
 	}
 
 	@Button("confirm/:value")
-	public async onButton(
-		@NecordContext() [interaction]: ButtonContext,
-		@ComponentParam("value") value: ConfirmButtonEnum,
-	) {
-		const { count, status } = await this.reaction.DeleteAll(this.context.guild);
+	public async onButton(@Ctx() [interaction]: ButtonContext, @ComponentParam("value") value: ConfirmButtonEnum) {
+		const { count, status } = await this.reaction.DeleteAll(interaction.guild);
 		switch (value) {
 			case ConfirmButtonEnum.Yes:
 				if (status === "Deleted") {
-					this.context.edit({
+					InteractionTools.editReply(this.context, {
 						embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(this.context, "Success", count)],
 						components: [],
 					});
 				} else if (status === "UnableToDelete") {
-					this.context.edit({
+					InteractionTools.editReply(this.context, {
 						embeds: [await this.Embeds.UnableToDeleteAllReactionRoleEmbed(this.context)],
 						components: [],
 					});
@@ -65,7 +62,7 @@ export class DeleteAllReactionsCommand {
 				break;
 
 			case ConfirmButtonEnum.No:
-				this.context.edit({
+				InteractionTools.editReply(this.context, {
 					embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(this.context, "Cancel", null)],
 					components: [],
 				});

@@ -71,6 +71,7 @@
 		"canvacord",
 		"clyp",
 		"clypit",
+		"codigo",
 		"commitlint",
 		"cooldown",
 		"creaction",
@@ -79,6 +80,7 @@
 		"Deezer",
 		"delayping",
 		"deletable",
+		"deleteall",
 		"deleter",
 		"discordjs",
 		"dmmsg",
@@ -144,5 +146,9 @@
 		"youtube",
 		"Youtube",
 		"ytmsearch"
-	]
+	],
+	"sonarlint.connectedMode.project": {
+		"connectionId": "SonarCloud VSCode Linter",
+		"projectKey": "NedcloarBR_N-D-B"
+	}
 }

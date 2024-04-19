@@ -125,11 +125,11 @@ export class VoiceEvents {
 							iconURL: this.client.user.displayAvatarURL(),
 						})
 						.setDescription(
-							this.translate.getTranslation("Events/VoiceStateUpdate:UNMute", member.guild.preferredLocale),
+							this.translate.getTranslation("Events.VoiceStateUpdate.UNMute", member.guild.preferredLocale),
 						)
 						.setTimestamp()
 						.setFooter({
-							text: this.translate.getTranslation("Events/VoiceStateUpdate:Embed:Footer", member.guild.preferredLocale),
+							text: this.translate.getTranslation("Events.VoiceStateUpdate.Embed.Footer", member.guild.preferredLocale),
 						}),
 				],
 			});

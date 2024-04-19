@@ -1,12 +1,19 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Message } from "discord.js";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import {
+	CurrentTranslate,
+	LOCALIZATION_ADAPTER,
+	NestedLocalizationAdapter,
+	TranslationFn,
+	localizationMapByKey,
+} from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "../";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicService } from "../interfaces";
 
-@Injectable()
+@MusicCommand()
 export class PauseCommand {
 	public constructor(
 		@Inject(Music.Service) private readonly service: IMusicService,
@@ -15,28 +22,24 @@ export class PauseCommand {
 
 	private readonly logger = new Logger(PauseCommand.name);
 
-	@LegacyCommand({
+	@Subcommand({
 		name: "pause",
-		aliases: ["Pause"],
-		description: "Pauses the music Queue",
-		usage: "",
+		description: "Pauses the music queue",
+		nameLocalizations: localizationMapByKey("Music.pause.name"),
+		descriptionLocalizations: localizationMapByKey("Music.pause.description"),
 	})
-	@SlashCommand({
-		name: "pause",
-		type: "Sub",
-		deployMode: "Test",
-	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["SendMessages"],
 		user: ["SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext): Promise<Message> {
-		const player = await this.service.getPlayer(context);
-		if (!(await this.service.checkers(context))) return;
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @CurrentTranslate() t: TranslationFn) {
+		const player = await this.service.getPlayer(interaction);
+		if (!(await this.service.checkers(interaction))) return;
 		await player.pause();
-		return context.reply(this.translate.getTranslation("Tools/Music:Pause", context.guild.preferredLocale));
+		return interaction.reply(t("Tools.Music.Pause"));
 	}
 }

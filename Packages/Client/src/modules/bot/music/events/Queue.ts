@@ -39,14 +39,14 @@ export class QueueEvents {
 							})
 							.setColor("#00c26f")
 							.setTitle(
-								await this.translate.getTranslation(
-									"Events/PlayerEvents:playerMove:queueEnd:Title",
+								this.translate.getTranslation(
+									"Events.PlayerEvents.playerMove.queueEnd.Title",
 									textChannel.guild.preferredLocale,
 								),
 							)
 							.setDescription(
-								await this.translate.getTranslation(
-									"Events/PlayerEvents:playerMove:queueEnd:Description",
+								this.translate.getTranslation(
+									"Events.PlayerEvents.playerMove.queueEnd.Description",
 									textChannel.guild.preferredLocale,
 									{
 										CHANNEL: voiceChannel.name,
@@ -55,8 +55,8 @@ export class QueueEvents {
 								),
 							)
 							.setFooter({
-								text: await this.translate.getTranslation(
-									"Events/PlayerEvents:playerMove:queueEnd:Footer",
+								text: this.translate.getTranslation(
+									"Events.PlayerEvents.playerMove.queueEnd.Footer",
 									textChannel.guild.preferredLocale,
 									{
 										TIMER: String(Timer),

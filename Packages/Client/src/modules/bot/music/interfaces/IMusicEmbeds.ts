@@ -1,13 +1,11 @@
-import type { Context } from "@/modules/bot/commands/Commands.context";
-import type { EmbedBuilder, Guild, TextChannel, User, VoiceChannel } from "discord.js";
+import type { CommandInteraction, EmbedBuilder, Guild, TextChannel, User, VoiceChannel } from "discord.js";
 import type { Player, SearchResult, Track, TrackExceptionEvent } from "lavalink-client";
 
 export interface IMusicEmbeds {
-	NoPlayer(context: Context): Promise<EmbedBuilder>;
-	NoChannel(context: Context): Promise<EmbedBuilder>;
-	NoArgs(context: Context): Promise<EmbedBuilder>;
+	NoPlayer(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	NoChannel(interaction: CommandInteraction): Promise<EmbedBuilder>;
 	LoadType(
-		context: Context,
+		interaction: CommandInteraction,
 		loadType: string,
 		Checker: {
 			Emoji: string;
@@ -16,14 +14,14 @@ export interface IMusicEmbeds {
 		track?: Track,
 	): Promise<EmbedBuilder>;
 	Playlist(
-		context: Context,
+		interaction: CommandInteraction,
 		res: SearchResult,
 		Checker: {
 			Emoji: string;
 			Name: string;
 		},
 	): Promise<EmbedBuilder>;
-	NowPlaying(context: Context, player: Player, progressBar: string): Promise<EmbedBuilder>;
+	NowPlaying(interaction: CommandInteraction, player: Player, progressBar: string): Promise<EmbedBuilder>;
 	PlayerCreate(
 		guild: Guild,
 		textChannel: TextChannel,
@@ -43,7 +41,7 @@ export interface IMusicEmbeds {
 		Platform: string,
 	): Promise<EmbedBuilder>;
 	LoadType(
-		context: Context,
+		interaction: CommandInteraction,
 		loadType: string,
 		Checker: {
 			Emoji: string;
@@ -51,7 +49,7 @@ export interface IMusicEmbeds {
 		},
 		track?: Track,
 	): Promise<EmbedBuilder>;
-	NowPlaying(context: Context, player: Player, progressBar: string): Promise<EmbedBuilder>;
+	NowPlaying(interaction: CommandInteraction, player: Player, progressBar: string): Promise<EmbedBuilder>;
 	PlayerCreate(
 		guild: Guild,
 		textChannel: TextChannel,

@@ -1,50 +1,51 @@
-import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import type { INDBService } from "@/modules/bot/core/interfaces/INDBService";
 import { Services } from "@/types/Constants";
 import { Timer } from "@/utils/Tools";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { EmbedBuilder, Message, UserManager } from "discord.js";
+import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Client, EmbedBuilder, Message, UserManager } from "discord.js";
 import { Track, UnresolvedTrack } from "lavalink-client";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { Music } from "..";
-import { CommandContext } from "../../commands/Commands.context";
+import { MusicCommand } from "../Music.decorator";
 import type { IMusicService } from "../interfaces";
 
-@Injectable()
+@MusicCommand()
 export class QueueCommand {
 	public constructor(
 		@Inject(Services.NDB) private readonly NDBService: INDBService,
 		@Inject(Music.Service) private readonly service: IMusicService,
-		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
+		private readonly client: Client,
 		private readonly users: UserManager,
 	) {}
 
 	private readonly logger = new Logger(QueueCommand.name);
 
-	@LegacyCommand({
-		name: "Queue",
-		aliases: ["queue"],
-		description: "Shows the music Queue",
-		usage: "",
-	})
-	@SlashCommand({
+	@Subcommand({
 		name: "queue",
-		type: "Sub",
-		deployMode: "Test",
+		description: "Shows the music queue",
+		nameLocalizations: localizationMapByKey("Music.queue.name"),
+		descriptionLocalizations: localizationMapByKey("Music.queue.description"),
 	})
-	@CommandConfig({ category: "🎵 Music" })
+	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun([client, context]: CommandContext): Promise<Message> {
-		if (!(await this.service.checkers(context))) {
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	public async onCommandRun(
+		@Ctx() [interaction]: SlashCommandContext,
+		@CurrentTranslate() t: TranslationFn,
+	): Promise<Message> {
+		if (!(await this.service.checkers(interaction))) {
 			return;
 		}
 
-		const player = await this.service.getPlayer(context);
+		const player = await this.service.getPlayer(interaction);
 
 		const embeds: Array<EmbedBuilder> = [];
 		const queue: Array<Track | UnresolvedTrack> = player.queue.tracks;
@@ -55,91 +56,60 @@ export class QueueCommand {
 			embeds.push(
 				new EmbedBuilder()
 					.setAuthor({
-						name: client.user.username,
-						iconURL: client.user.displayAvatarURL(),
+						name: this.client.user.username,
+						iconURL: this.client.user.displayAvatarURL(),
 					})
 					.setTitle(
-						this.translate.getTranslation("Events/PlayerEvents:trackStart:Embed:Title", context.guild.preferredLocale, {
+						t("Events.PlayerEvents.trackStart.Embed.Title", {
 							TITLE: track.info.title,
 						}),
 					)
 					.setThumbnail(track.info.artworkUrl)
 					.addFields([
 						{
-							name: this.translate.getTranslation(
-								"Events/PlayerEvents:trackStart:Embed:Fields:1",
-								context.guild.preferredLocale,
-								{
-									EMOJI: (await this.service.URLChecker(false, track.info.uri)).Emoji,
-								},
-							),
-							value: `> ${this.translate.getTranslation(
-								"Events/PlayerEvents:trackStart:Embed:Fields:Content:1",
-								context.guild.preferredLocale,
-								{
-									Platform: this.service.formatSourceName(track.info.sourceName),
-									URI: track.info.uri,
-								},
-							)}`,
+							name: t("Events.PlayerEvents.trackStart.Embed.Fields.1", {
+								EMOJI: (await this.service.URLChecker(false, track.info.uri)).Emoji,
+							}),
+							value: `> ${t("Events.PlayerEvents.trackStart.Embed.Fields.Content.1", {
+								Platform: this.service.formatSourceName(track.info.sourceName),
+								URI: track.info.uri,
+							})}`,
 							inline: true,
 						},
 						{
-							name: this.translate.getTranslation(
-								"Events/PlayerEvents:trackStart:Embed:Fields:2",
-								context.guild.preferredLocale,
-							),
-							value: `> ${this.translate.getTranslation(
-								"Events/PlayerEvents:trackStart:Embed:Fields:Content:2",
-								context.guild.preferredLocale,
-
-								{
-									AUTHOR: track.info.author,
-								},
-							)}`,
+							name: t("Events.PlayerEvents.trackStart.Embed.Fields.2", interaction.guild.preferredLocale),
+							value: `> ${t("Events.PlayerEvents.trackStart.Embed.Fields.Content.2", {
+								AUTHOR: track.info.author,
+							})}`,
 							inline: true,
 						},
 						{
-							name: this.translate.getTranslation(
-								"Events/PlayerEvents:trackStart:Embed:Fields:3",
-								context.guild.preferredLocale,
-							),
+							name: t("Events.PlayerEvents.trackStart.Embed.Fields.3", interaction.guild.preferredLocale),
 							value: `> ${
 								track.info.isStream
-									? this.translate.getTranslation(
-											"Events/PlayerEvents:trackStart:Embed:Fields:Content:3²",
-											context.guild.preferredLocale,
-										)
-									: this.translate.getTranslation(
-											"Events/PlayerEvents:trackStart:Embed:Fields:Content:3",
-											context.guild.preferredLocale,
-											{
-												TIMER: await Timer(
-													this.translate,
-													"normal",
-													track.info.duration,
-													context.guild.preferredLocale,
-												),
-											},
-										)
+									? t("Events.PlayerEvents.trackStart.Embed.Fields.Content.3²", interaction.guild.preferredLocale)
+									: t("Events.PlayerEvents.trackStart.Embed.Fields.Content.3", {
+											TIMER: await Timer(t, "normal", track.info.duration, interaction.guildLocale),
+										})
 							}`,
 							inline: true,
 						},
 					])
 					.setColor("#00c26f")
 					.setFooter({
-						text: this.translate.getTranslation(
-							"Events/PlayerEvents:trackStart:Embed:Footer",
-							context.guild.preferredLocale,
-							{
-								REQUESTER: Requester.username,
-							},
-						),
+						text: t("Events.PlayerEvents.trackStart.Embed.Footer", {
+							REQUESTER: Requester.username,
+						}),
 						iconURL: Requester.displayAvatarURL(),
 					})
 					.setTimestamp(),
 			);
 		}
 
-		await context.reply(await this.NDBService.buildPaginator(context, embeds, `queue-${context.guild.id}`));
+		await interaction.reply({
+			embeds: [
+				(await this.NDBService.buildPaginator(interaction, embeds, `queue-${interaction.guild.id}`)) as EmbedBuilder,
+			],
+		});
 	}
 }

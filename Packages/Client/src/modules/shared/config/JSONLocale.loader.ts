@@ -30,7 +30,6 @@ export class JSONLocaleLoader {
 
 			locales[langFolder] = langData;
 		}
-
 		return locales;
 	}
 }

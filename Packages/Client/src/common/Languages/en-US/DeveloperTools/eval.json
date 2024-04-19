@@ -1,0 +1,14 @@
+{
+	"name": "evaluate",
+	"description": "Evaluate some codes to test it without restart the bot every time",
+	"options": {
+		"code": {
+			"name": "code",
+			"description": "Code to begin evaluated"
+		}
+	},
+	"BadKey": "BAD_KEY Detected aborting Evaluation",
+	"Success": "Evaluated with Success!",
+	"Error": "Evaluate Error",
+	"Result": "> Input: {{input}}\n> Output: {{output}}"
+}

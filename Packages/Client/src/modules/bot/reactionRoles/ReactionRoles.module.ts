@@ -1,29 +1,11 @@
 import { Global, Module } from "@nestjs/common";
+import * as Commands from "./commands";
 import { ReactionRolesEvents } from "./events/ReactionRoles";
 import { ReactionRolesEmbedsProvider, ReactionRolesProvider } from "./types/providers";
-
-import {
-	CreateReactionCommand,
-	DeleteAllReactionsCommand,
-	DeleteReactionCommand,
-	EditReactionCommand,
-	ReactionRolesMainSlashCommand,
-	ReactionTypesCommand,
-} from "./commands";
-
+//...Object.values(Commands)
 @Global()
 @Module({
-	providers: [
-		ReactionRolesMainSlashCommand,
-		ReactionRolesEvents,
-		CreateReactionCommand,
-		DeleteAllReactionsCommand,
-		DeleteReactionCommand,
-		EditReactionCommand,
-		ReactionTypesCommand,
-		ReactionRolesProvider,
-		ReactionRolesEmbedsProvider,
-	],
+	providers: [ReactionRolesEvents, ReactionRolesProvider, ReactionRolesEmbedsProvider],
 	exports: [ReactionRolesProvider, ReactionRolesEmbedsProvider],
 })
 export class ReactionRolesModule {}
