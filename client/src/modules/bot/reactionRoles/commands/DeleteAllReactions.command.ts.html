@@ -135,10 +135,10 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,9 +156,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,9 +182,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,12 +207,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CommandConfig, CommandPermissions, LegacyCommand, SlashCommand } from "@/common/decorators";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Buttons, ConfirmButtonEnum } from "@/modules/bot/components/Buttons.component";
 import { Extends } from "@/types/Constants";
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import { Button, ButtonContext, ComponentParam, Context as NecordContext } from "necord";
-import { CommandContext, Context } from "../../commands/Commands.context";
+import { localizationMapByKey } from "@necord/localization";
+import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
+import { CommandInteraction } from "discord.js";
+import { Button, ButtonContext, ComponentParam, Ctx, SlashCommandContext, Subcommand } from "necord";
+import { InteractionTools } from "../../commands/Interaction";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 &nbsp;
@@ -231,48 +228,42 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 	) {}
 &nbsp;
 	private readonly logger = <span class="cstat-no" title="statement not covered" >new Logger(DeleteAllReactionsCommand.name);</span>
-	private context: Context;
+	private context: CommandInteraction;
 &nbsp;
-	@LegacyCommand({
-		name: "DeleteAllReactions",
-		description: "Remove todas as Reaction Roles do Servidor",
-		usage: "",
-	})
-	@SlashCommand({
-		deployMode: "Test",
-		type: "Sub",
+	@Subcommand({
 		name: "delete_all",
+		description: "Delete all ReactionRoles in the server",
+		nameLocalizations: localizationMapByKey("ReactionRoles.deleteall.name"),
+		descriptionLocalizations: localizationMapByKey("ReactionRoles.deleteall.description"),
 	})
-	@CommandConfig({ category: "🎩 ReactionRole" })
+	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
 		guildOnly: false,
 		ownerOnly: false,
 	})
-<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nCommandRun([</span>client, context]: CommandContext) {
-<span class="cstat-no" title="statement not covered" >		this.context = context;</span>
-<span class="cstat-no" title="statement not covered" >		await context.send({</span>
-			embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(context, "Confirm", null)],
-			components: [await this.Buttons.Confirm(context.guild.preferredLocale)],
+	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nCommandRun(@C</span>tx() [interaction]: SlashCommandContext) {
+<span class="cstat-no" title="statement not covered" >		this.context = interaction;</span>
+<span class="cstat-no" title="statement not covered" >		await interaction.reply({</span>
+			embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(interaction, "Confirm", null)],
+			components: [await this.Buttons.Confirm(interaction.guildLocale)],
 		});
 	}
 &nbsp;
 	@Button("confirm/:value")
-<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nButton(</span>
-		@NecordContext() [interaction]: ButtonContext,
-		@ComponentParam("value") value: ConfirmButtonEnum,
-	) {
-		const { count, status } = <span class="cstat-no" title="statement not covered" >await this.reaction.DeleteAll(this.context.guild);</span>
+<span class="fstat-no" title="function not covered" >	public async <span class="cstat-no" title="statement not covered" >o</span>nButton(@C</span>tx() [interaction]: ButtonContext, @ComponentParam("value") value: ConfirmButtonEnum) {
+		const { count, status } = <span class="cstat-no" title="statement not covered" >await this.reaction.DeleteAll(interaction.guild);</span>
 <span class="cstat-no" title="statement not covered" >		switch (value) {</span>
 			case ConfirmButtonEnum.Yes:
 <span class="cstat-no" title="statement not covered" >				if (status === "Deleted") {</span>
-<span class="cstat-no" title="statement not covered" >					this.context.edit({</span>
+<span class="cstat-no" title="statement not covered" >					InteractionTools.editReply(this.context, {</span>
 						embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(this.context, "Success", count)],
 						components: [],
 					});
 <span class="cstat-no" title="statement not covered" >				} else if (status === "UnableToDelete") {</span>
-<span class="cstat-no" title="statement not covered" >					this.context.edit({</span>
+<span class="cstat-no" title="statement not covered" >					InteractionTools.editReply(this.context, {</span>
 						embeds: [await this.Embeds.UnableToDeleteAllReactionRoleEmbed(this.context)],
 						components: [],
 					});
@@ -280,7 +271,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 <span class="cstat-no" title="statement not covered" >				break;</span>
 &nbsp;
 			case ConfirmButtonEnum.No:
-<span class="cstat-no" title="statement not covered" >				this.context.edit({</span>
+<span class="cstat-no" title="statement not covered" >				InteractionTools.editReply(this.context, {</span>
 					embeds: [await this.Embeds.ReactionRoleDeleteAllEmbed(this.context, "Cancel", null)],
 					components: [],
 				});
@@ -295,7 +286,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-14T17:07:27.152Z
+                at 2024-04-19T01:05:12.273Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

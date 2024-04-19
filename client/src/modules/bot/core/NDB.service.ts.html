@@ -121,27 +121,10 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,6 +133,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,6 +141,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,18 +160,36 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Content } from "@/modules/bot/commands/types";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Content } from "@/types";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
-import { ButtonStyle, EmbedBuilder } from "discord.js";
-import { Context } from "../commands/Commands.context";
+import { ButtonStyle, CommandInteraction, EmbedBuilder } from "discord.js";
 import type { INDBService } from "./interfaces/INDBService";
 &nbsp;
 @Injectable()
@@ -194,16 +199,20 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 		private readonly <span class="cstat-no" title="statement not covered" >paginator: NecordPaginationService,</span>
 	) {}
 &nbsp;
-<span class="fstat-no" title="function not covered" >	public async b</span>uildPaginator(context: Context, embeds: Array&lt;EmbedBuilder&gt;, id: string): Promise&lt;Content&gt; {
+<span class="fstat-no" title="function not covered" >	public async b</span>uildPaginator(
+		interaction: CommandInteraction,
+		embeds: Array&lt;EmbedBuilder&gt;,
+		id: string,
+	): Promise&lt;Content&gt; {
 		const buttons: ButtonsAppearance = <span class="cstat-no" title="statement not covered" >{</span>
 			back: {
 				emoji: "⬅️",
-				label: this.translate.getTranslation("Tools/Paginator:Labels:Previous", context.guild.preferredLocale),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Previous", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 			next: {
 				emoji: "➡️",
-				label: this.translate.getTranslation("Tools/Paginator:Labels:Next", context.guild.preferredLocale),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Next", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 		};
@@ -212,14 +221,14 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
 <span class="cstat-no" title="statement not covered" >			embeds[i].setFooter({</span>
 				text: embeds[i].data.footer?.text
 					? `${embeds[i].data.footer?.text} | ${this.translate.getTranslation(
-							"Tools/Paginator:Embed:Footer",
-							context.guild.preferredLocale,
+							"Tools.Paginator.Embed.Footer",
+							interaction.guildLocale,
 							{
 								Current: String(i + 1),
 								Total: String(embeds.length),
 							},
 						)}`
-					: this.translate.getTranslation("Tools/Paginator:Embed:Footer", context.guild.preferredLocale, {
+					: this.translate.getTranslation("Tools.Paginator.Embed.Footer", interaction.guildLocale, {
 							Current: String(i + 1),
 							Total: String(embeds.length),
 						}),
@@ -244,7 +253,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-14T17:07:27.152Z
+                at 2024-04-19T01:05:12.273Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

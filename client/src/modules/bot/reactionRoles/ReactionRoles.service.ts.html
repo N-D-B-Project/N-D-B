@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.69% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/23</span>
+                <span class='fraction'>2/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.54% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/22</span>
+                <span class='fraction'>1/13</span>
             </div>
         
             
@@ -168,26 +168,7 @@
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,8 +178,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -285,24 +265,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -313,9 +275,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
-import { Client, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
+import { Client, CommandInteraction, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
 import type { IDatabaseService } from "../../shared/database/interfaces/IDatabaseService";
-import { Context } from "../commands/Commands.context";
 import { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
@@ -405,33 +366,15 @@ export class ReactionRolesService implements IReactionRolesService {
 &nbsp;
 <span class="fstat-no" title="function not covered" >	public async C</span>heckParams(
 		client: Client&lt;boolean&gt;,
-		context: Context,
+		interaction: CommandInteraction,
 		channel: TextChannel,
 		messageId: string,
 		message: Message&lt;boolean&gt;,
 		role: Role,
 		emoji: string,
-	): Promise&lt;boolean | EmbedBuilder | Message&gt; {
-<span class="cstat-no" title="statement not covered" >		if (!context.isSlash) {</span>
-<span class="cstat-no" title="statement not covered" >			if (!channel) {</span>
-<span class="cstat-no" title="statement not covered" >				return await context.send(await this.embeds.InvalidChannelEmbed(context));</span>
-			}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >			if (!messageId) {</span>
-<span class="cstat-no" title="statement not covered" >				return await context.send(await this.embeds.InvalidIDEmbed(context));</span>
-			}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >			if (!role || role.managed) {</span>
-<span class="cstat-no" title="statement not covered" >				return await context.send(await this.embeds.InvalidRoleEmbed(context));</span>
-			}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >			if (!emoji) {</span>
-<span class="cstat-no" title="statement not covered" >				return await context.send(await this.embeds.InvalidEmojiEmbed(context));</span>
-			}
-		}
-&nbsp;
+	) {
 <span class="cstat-no" title="statement not covered" >		if (!message) {</span>
-<span class="cstat-no" title="statement not covered" >			return await context.reply(await this.embeds.MessageNotFoundEmbed(context));</span>
+<span class="cstat-no" title="statement not covered" >			return await interaction.reply({ embeds: [await this.embeds.MessageNotFoundEmbed(interaction)] });</span>
 		}
 	}
 }
@@ -442,7 +385,7 @@ export class ReactionRolesService implements IReactionRolesService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-14T17:07:27.152Z
+                at 2024-04-19T01:05:12.273Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
