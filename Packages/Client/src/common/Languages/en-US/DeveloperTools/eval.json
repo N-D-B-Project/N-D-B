@@ -10,5 +10,5 @@
 	"BadKey": "BAD_KEY Detected aborting Evaluation",
 	"Success": "Evaluated with Success!",
 	"Error": "Evaluate Error",
-	"Result": "> Input: {{input}}\n> Output: {{output}}"
+	"Result": "> Input: \n{{input}}\n> Output: \n{{output}}\n> Time: {{time}}ms"
 }

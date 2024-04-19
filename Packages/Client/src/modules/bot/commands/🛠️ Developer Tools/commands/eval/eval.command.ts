@@ -1,18 +1,19 @@
 import { inspect } from "node:util";
-import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Config } from "@/modules/shared/config/types";
 import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
 import { UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
 import { EvalDTO } from "./eval.dto";
 
 @DeveloperToolsCommand()
 export class EvalCommand {
 	public constructor(private readonly config: ConfigService<Config>) {}
+	private time: number;
 
 	@Subcommand({
 		name: "evaluate",
@@ -22,7 +23,7 @@ export class EvalCommand {
 	})
 	@CommandConfig({
 		category: "🛠️ Developer Tools",
-		disable: true,
+		disable: false,
 	})
 	@CommandPermissions({
 		user: [],
@@ -33,7 +34,7 @@ export class EvalCommand {
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() { code }: EvalDTO,
+		@Options() { code }: EvalDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
 		try {
@@ -42,18 +43,18 @@ export class EvalCommand {
 					content: t("DeveloperTools.eval.BadKey"),
 				});
 			}
-
-			// biome-ignore lint/security/noGlobalEval: <explanation>
-			const evalCode = inspect(await eval(code), {
-				depth: 0,
-			}).substring(0, 950);
+			const evalCode = await this.evaluate(code);
 			return interaction.reply({
 				embeds: [
 					new EmbedBuilder()
 						.setTitle(t("DeveloperTools.eval.Success"))
 						.setColor("#00c26f")
 						.setDescription(
-							t("DeveloperTools.eval.Result", { input: codeBlock("TS", code), output: codeBlock("TS", evalCode) }),
+							t("DeveloperTools.eval.Result", {
+								input: codeBlock("TS", code),
+								output: codeBlock("TS", evalCode),
+								time: this.time,
+							}),
 						)
 						.setTimestamp(),
 				],
@@ -68,10 +69,22 @@ export class EvalCommand {
 							t("DeveloperTools.eval.Result", {
 								input: codeBlock("TS", code),
 								output: codeBlock("SH", error as string),
+								time: this.time,
 							}),
 						),
 				],
 			});
 		}
+	}
+
+	private async evaluate(code: string): Promise<string> {
+		const start = process.hrtime();
+		// biome-ignore lint/security/noGlobalEval: <explanation>
+		const evalCode = inspect(await eval(code), {
+			depth: 0,
+		}).substring(0, 950);
+		const stop = process.hrtime(start);
+		this.time = stop[0] * 1e9 + stop[1] / 1e6;
+		return evalCode;
 	}
 }
