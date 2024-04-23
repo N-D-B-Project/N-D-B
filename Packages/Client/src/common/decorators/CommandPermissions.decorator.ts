@@ -2,8 +2,8 @@ import { Reflector } from "@nestjs/core";
 import { PermissionResolvable } from "discord.js";
 
 interface CommandPermissionsOptions {
-	user: Array<PermissionResolvable>;
-	bot: Array<PermissionResolvable>;
+	user: PermissionResolvable[];
+	bot: PermissionResolvable[];
 	guildOnly?: boolean;
 	ownerOnly?: boolean;
 }

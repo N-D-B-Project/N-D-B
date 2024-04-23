@@ -5,8 +5,8 @@ import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 
 export interface IReactionRolesService {
 	Embeds(): Promise<IReactionRolesEmbeds>;
-	getAll(guild: Guild): Promise<Array<ReactionRolesEntity>>;
-	getInChannel(guild: Guild, channel: TextChannel): Promise<Array<ReactionRolesEntity>>;
+	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;
+	getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]>;
 	getOne(guild: Guild, { Channel, Message, Role, Emoji, Option }: IReaction): Promise<ReactionRolesEntity>;
 	Create(
 		guild: Guild,

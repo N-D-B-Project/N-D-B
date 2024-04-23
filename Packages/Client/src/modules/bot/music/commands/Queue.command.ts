@@ -47,8 +47,8 @@ export class QueueCommand {
 
 		const player = await this.service.getPlayer(interaction);
 
-		const embeds: Array<EmbedBuilder> = [];
-		const queue: Array<Track | UnresolvedTrack> = player.queue.tracks;
+		const embeds: EmbedBuilder[] = [];
+		const queue: (Track | UnresolvedTrack)[] = player.queue.tracks;
 
 		for (const track of queue) {
 			const Requester = await this.users.fetch(track.requester as string);

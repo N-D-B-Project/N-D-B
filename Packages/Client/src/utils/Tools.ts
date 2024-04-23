@@ -68,7 +68,7 @@ export const isValidURL = (string: string): URL | boolean => {
 	return url;
 };
 
-export const formatArray = (array: Array<string>) => {
+export const formatArray = (array: string[]) => {
 	return new Intl.ListFormat("pt-BR", {
 		style: "short",
 		type: "conjunction",

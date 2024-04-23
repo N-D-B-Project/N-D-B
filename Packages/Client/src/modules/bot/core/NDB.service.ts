@@ -12,11 +12,7 @@ export class NDBService implements INDBService {
 		private readonly paginator: NecordPaginationService,
 	) {}
 
-	public async buildPaginator(
-		interaction: CommandInteraction,
-		embeds: Array<EmbedBuilder>,
-		id: string,
-	): Promise<Content> {
+	public async buildPaginator(interaction: CommandInteraction, embeds: EmbedBuilder[], id: string): Promise<Content> {
 		const buttons: ButtonsAppearance = {
 			back: {
 				emoji: "⬅️",

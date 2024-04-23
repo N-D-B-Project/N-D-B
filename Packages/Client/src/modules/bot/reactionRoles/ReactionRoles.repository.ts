@@ -10,7 +10,7 @@ import type { IReaction, REACTION_OPTIONS } from "./types";
 export class ReactionRolesRepository implements IReactionRolesRepository {
 	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
 
-	public async getAll(guild: Guild): Promise<Array<ReactionRolesEntity>> {
+	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
 		return await this.prisma.guildReactionRoles.findMany({
 			where: { guildId: guild.id },
 		});
@@ -30,7 +30,7 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		})[0];
 	}
 
-	public async getInChannel(guild: Guild, channel: TextChannel): Promise<Array<ReactionRolesEntity>> {
+	public async getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]> {
 		const data = await this.getAll(guild);
 		return data.filter(async (reaction) => reaction.Channel === channel.id);
 	}

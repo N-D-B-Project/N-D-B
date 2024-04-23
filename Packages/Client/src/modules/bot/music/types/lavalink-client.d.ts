@@ -143,7 +143,7 @@ declare module "lavalink-client" {
     get isPremium(): boolean;
     set isPremium(value: boolean): void;
 
-    get lastSong(): Array<Track>;
+    get lastSong(): Track[];
     set lastSong(value: Track): void;
 
     get originalQueue(): Queue;

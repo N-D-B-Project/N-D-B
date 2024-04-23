@@ -26,7 +26,7 @@ export class CommandPermissionsGuard implements CanActivate {
 			if (!interaction.guild.members.me.permissions.has(permissions.bot)) {
 				interaction.reply(
 					this.translate.getTranslation("Tools.Commands.Permission.Bot", interaction.guildLocale, {
-						PERMS: formatArray(permissions.bot as Array<string>),
+						PERMS: formatArray(permissions.bot as string[]),
 					}),
 				);
 				return false;
@@ -37,7 +37,7 @@ export class CommandPermissionsGuard implements CanActivate {
 			if (!(await interaction.guild.members.fetch(interaction.user.id)).permissions.has(permissions.user)) {
 				interaction.reply(
 					this.translate.getTranslation("Tools.Commands.Permission.User", interaction.guildLocale, {
-						PERMS: formatArray(permissions.user as Array<string>),
+						PERMS: formatArray(permissions.user as string[]),
 					}),
 				);
 			}

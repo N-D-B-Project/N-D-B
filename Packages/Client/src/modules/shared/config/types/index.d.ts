@@ -24,7 +24,7 @@ export interface Config {
 		Token: string;
 		DevToken: string;
 		Client: {
-			Owners: Array<string>;
+			Owners: string[];
 			Secret: string;
 			ID: string;
 			CallbackURL: string;
@@ -94,5 +94,5 @@ export interface Config {
 			Twitch: string;
 		};
 	};
-	EvalBadKeys: Array<string>;
+	EvalBadKeys: string[];
 }

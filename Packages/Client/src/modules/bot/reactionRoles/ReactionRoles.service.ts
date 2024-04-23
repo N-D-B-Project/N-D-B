@@ -18,11 +18,11 @@ export class ReactionRolesService implements IReactionRolesService {
 		return this.embeds;
 	}
 
-	public async getAll(guild: Guild): Promise<Array<ReactionRolesEntity>> {
+	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getAll(guild);
 	}
 
-	public async getInChannel(guild: Guild, channel: TextChannel): Promise<Array<ReactionRolesEntity>> {
+	public async getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getInChannel(guild, channel);
 	}
 
