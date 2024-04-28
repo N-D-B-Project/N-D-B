@@ -2,13 +2,14 @@ import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/de
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { WAIT, isValidURL } from "@/utils/Tools";
 import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
-import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Inject, Logger, UseGuards, UseInterceptors } from "@nestjs/common";
 import { CommandInteraction, EmbedBuilder, GuildMember, Message, VoiceChannel } from "discord.js";
-import { Player, SearchResult, SourceLinksRegexes } from "lavalink-client";
+import { Player, SearchPlatform, SearchResult, SourceLinksRegexes } from "lavalink-client";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { MusicCommand } from "../../Music.decorator";
 import type { IMusicEmbeds, IMusicService } from "../../interfaces";
 import { Music } from "../../types/constants";
+import { PlayAutoComplete } from "./play.autocomplete";
 import { PlayDTO } from "./play.dto";
 
 @MusicCommand()
@@ -34,9 +35,10 @@ export class PlayCommand {
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
+	@UseInterceptors(PlayAutoComplete)
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() { query }: PlayDTO,
+		@ValidatedOptions() { query, source }: PlayDTO,
 		@CurrentTranslate() T: TranslationFn,
 	): Promise<Message> {
 		let res: SearchResult;
@@ -70,6 +72,7 @@ export class PlayCommand {
 			res = (await player.search(
 				{
 					query,
+					source: source ? (source as SearchPlatform) : undefined,
 				},
 				interaction.user,
 			)) as SearchResult;

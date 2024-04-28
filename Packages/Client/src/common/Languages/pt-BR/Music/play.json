@@ -5,6 +5,10 @@
 		"query": {
 			"name": "busca",
 			"description": "<URL ou Nome> da Musica ou Playlist"
+		},
+		"source": {
+			"name": "local",
+			"description": "Local onde o bot vai procurar pela musica - Padrão: Youtube"
 		}
 	}
 }

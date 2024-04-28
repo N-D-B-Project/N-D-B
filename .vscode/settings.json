@@ -147,7 +147,8 @@
 		"youshallnotpass",
 		"youtube",
 		"Youtube",
-		"ytmsearch"
+		"ytmsearch",
+		"ytsearch"
 	],
 	"sonarlint.connectedMode.project": {
 		"connectionId": "SonarCloud VSCode Linter",

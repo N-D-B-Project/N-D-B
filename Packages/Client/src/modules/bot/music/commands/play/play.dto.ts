@@ -11,4 +11,14 @@ export class PlayDTO {
 		autocomplete: false,
 	})
 	public readonly query: string;
+
+	@StringOption({
+		name: "source",
+		description: "Source where the bot will be search for the music - Default: Youtube",
+		name_localizations: localizationMapByKey("Music.play.options.source.name"),
+		description_localizations: localizationMapByKey("Music.play.options.source.description"),
+		required: false,
+		autocomplete: true,
+	})
+	public readonly source: string;
 }

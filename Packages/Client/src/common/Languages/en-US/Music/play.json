@@ -5,6 +5,10 @@
 		"query": {
 			"name": "query",
 			"description": "<URL or Name> of the Music or Playlist"
+		},
+		"source": {
+			"name": "source",
+			"description": "Source where the bot will be search for the music - Default: Youtube"
 		}
 	}
 }
