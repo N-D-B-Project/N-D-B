@@ -1354,6 +1354,26 @@ BRF:0
 BRH:0
 end_of_record
 TN:
+SF:src/modules/bot/commands/🛡️ Moderation/Moderation.decorator.ts
+FNF:0
+FNH:0
+DA:4,0
+LF:1
+LH:0
+BRF:0
+BRH:0
+end_of_record
+TN:
+SF:src/modules/bot/commands/🛡️ Moderation/Moderation.module.ts
+FNF:0
+FNH:0
+DA:7,0
+LF:1
+LH:0
+BRF:0
+BRH:0
+end_of_record
+TN:
 SF:src/modules/bot/commands/🛡️ Moderation/commands/clear/clear.command.ts
 FN:29,(anonymous_3)
 FNF:1
@@ -1446,14 +1466,16 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/modules/bot/developerTools/commands/Test.command.ts
-FN:29,(anonymous_1)
-FNF:1
+SF:src/modules/bot/core/NDB.module.ts
+FN:20,(anonymous_1)
+FN:30,(anonymous_2)
+FNF:2
 FNH:0
 FNDA:0,(anonymous_1)
-DA:8,0
-DA:9,0
-DA:29,0
+FNDA:0,(anonymous_2)
+DA:20,0
+DA:30,0
+DA:47,0
 LF:3
 LH:0
 BRF:0
