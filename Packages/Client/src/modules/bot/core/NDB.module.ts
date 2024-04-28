@@ -10,7 +10,6 @@ import { NecordModule } from "necord";
 import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
 import { EventsModule } from "../events/Events.module";
-import { MusicModule } from "../music/Music.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
 
@@ -41,7 +40,6 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 		ComponentsModule,
 		EventsModule,
 		ReactionRolesModule,
-		MusicModule,
 	],
 	providers: [NDBServiceProvider],
 	exports: [NDBServiceProvider],

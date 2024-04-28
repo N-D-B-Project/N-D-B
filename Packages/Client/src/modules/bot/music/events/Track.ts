@@ -67,6 +67,8 @@ export class TrackEvents {
 	@OnEvent("track.error")
 	public async onTrackError(player: Player, track: Track, payload: TrackExceptionEvent) {
 		const textChannel = this.client.channels.cache.get(player.textChannelId) as TextChannel;
-		MessageTools.send(textChannel, { embeds: [await this.embeds.TrackError(textChannel, track, payload)] });
+		MessageTools.send(textChannel, {
+			embeds: [await this.embeds.TrackError(textChannel, track, payload.exception.message)],
+		});
 	}
 }

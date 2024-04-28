@@ -67,6 +67,6 @@ export interface IMusicEmbeds {
 		},
 		Platform: string,
 	): Promise<EmbedBuilder>;
-	TrackError(textChannel: TextChannel, track: Track, payload: TrackExceptionEvent): Promise<EmbedBuilder>;
+	TrackError(textChannel: TextChannel, track: Track, payload: string): Promise<EmbedBuilder>;
 	TrackStuck(textChannel: TextChannel, track: Track): Promise<EmbedBuilder>;
 }

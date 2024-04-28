@@ -527,7 +527,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 			.setTimestamp();
 	}
 
-	public async TrackError(textChannel: TextChannel, track: Track, payload: TrackExceptionEvent): Promise<EmbedBuilder> {
+	public async TrackError(textChannel: TextChannel, track: Track, payload: string): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
 				name: this.client.user.tag,

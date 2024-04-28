@@ -60,7 +60,7 @@ export class GatewayEvents {
 		) {
 			return;
 		}
-		this.logger.error(`\nMessage: ${error.message}\nCause: ${error.stack}`);
+		this.logger.verbose(`\nMessage: ${error.message}\nCause: ${error.stack}`);
 	}
 
 	@OnEvent("rest")
