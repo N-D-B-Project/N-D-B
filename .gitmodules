@@ -1,0 +1,6 @@
+[submodule "database"]
+path = database
+url = https://github.com/N-D-B-Project/Database.git
+[submodule "lavalink"]
+path = lavalink
+url = https://github.com/N-D-B-Project/Lavalink.git
