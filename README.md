@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="35" src="https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/common/assets/Images/Logos/Logo.png?raw=true"> N-D-B
+  <img width="35" src="https://github.com/N-D-B-Project/N-D-B/blob/master/Packages/Client/src/common/assets/Images/Logos/Logo.png?raw=true"> N-D-B
   <br>
 </h1>
 
@@ -12,7 +12,7 @@
 [![Linhas de Código](https://sonarcloud.io/api/project_badges/measure?project=NedcloarBR_N-D-B&metric=ncloc)](https://sonarcloud.io/dashboard?id=NedcloarBR_N-D-B)
 [![CodeFactor](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b/badge)](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b)
 [![Crowdin](https://badges.crowdin.net/n-d-b/localized.svg)](https://crowdin.com/project/n-d-b)
-[![Run Tests](https://github.com/NedcloarBR/N-D-B/actions/workflows/Test.yml/badge.svg)](https://github.com/NedcloarBR/N-D-B/actions/workflows/Test.yml)
+[![Run Tests](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml/badge.svg)](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml)
 
 </div>
 
@@ -21,7 +21,7 @@
   •
   <a href="📝 To-Do">To-Do</a>
   •
-  <a href="https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Configuration.md">Instalação</a>
+  <a href="https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/Configuration.md">Instalação</a>
   •
   <a href="#📖 Licença">Licença</a>
   •
@@ -37,8 +37,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 ## 📝 To-Do
 
 - [ ] Multilingual README in Docs
-- [ ] Update [Configuration](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/Configuration.md) and [Examples](https://github.com/NedcloarBR/N-D-B/tree/master/Docs/Examples)
-- [ ] [Bot Client](https://github.com/NedcloarBR/N-D-B/tree/master/Packages/Client/src/modules/bot)
+- [ ] Update [Configuration](https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/Configuration.md) and [Examples](https://github.com/N-D-B-Project/N-D-B/tree/master/Docs/Examples)
+- [ ] [Bot Client](https://github.com/N-D-B-Project/N-D-B/tree/master/Packages/Client/src/modules/bot)
   - [ ] Systems
     - [ ] Moderation
       - [ ] Manual
@@ -47,12 +47,12 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Starboard
     - [ ] Tickets
     - [ ] System Logs
-    - [ ] Update from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
+    - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
       - [ ] ReactionRoles
         - [x] Partial migrated to Necord but not tested yet
         - [ ] Commands Update, Fetch
         - [ ] Update ReactionRoleAdd/Remove Events
-        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/NedcloarBR/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
       - [ ] Music
       - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
         - [x] Partial
@@ -64,8 +64,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Top.gg
       - [x] Status Autopost
       - [ ] Vote Reward System
-- [ ] [API](https://github.com/NedcloarBR/N-D-B/tree/master/Packages/Client/src/modules/api)
-  - [ ] Port from [Legacy Branch](https://github.com/NedcloarBR/N-D-B/tree/Pure-DiscordJS)
+- [ ] [API](https://github.com/N-D-B-Project/N-D-B/tree/master/Packages/Client/src/modules/api)
+  - [ ] Port from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS)
     - [x] Auth Module
     - [x] Discord Module
     - [ ] Guild Module
@@ -78,16 +78,16 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
   - [x] GitHub action to auto run tests and generate coverage after a push in repository
   - [ ] E2E
   - [ ] Unit
-- [ ] [.github](https://github.com/NedcloarBR/N-D-B/tree/master/.github)
+- [ ] [.github](https://github.com/N-D-B-Project/N-D-B/tree/master/.github)
   - [x] Update actions versions
   - [x] Label sync action
 
 ## 📖 Licença
 
-Lançado sob a [GPL-3.0 License](https://github.com/NedcloarBR/N-D-B/blob/master/License) license.
+Lançado sob a [GPL-3.0 License](https://github.com/N-D-B-Project/N-D-B/blob/master/License) license.
 
 ## 🗞️ Créditos
 
 - **OBS** Quase todos os repositórios que eu utilizar como referencia para a criação do N-D-B estarão citados abaixo e sempre irei fazer alterações no projeto original para se encaixar melhor ao sistema existente do N-D-B e também não ser totalmente uma "copia" deles
 
-- Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/NedcloarBR/N-D-B/blob/master/Docs/CONTRIBUTING.md).
+- Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/CONTRIBUTING.md).
