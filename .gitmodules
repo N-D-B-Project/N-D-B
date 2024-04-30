@@ -4,9 +4,3 @@ url = https://github.com/N-D-B-Project/Lavalink.git
 [submodule "Database"]
 path = Database
 url = https://github.com/N-D-B-Project/Database.git
-[submodule "SharedModule"]
-path = Packages/Client/src/modules/SharedModule
-url = https://github.com/N-D-B-Project/SharedModule.git
-[submodule "Packages/Client/src/modules/SharedModule"]
-	path = Packages/Client/src/modules/SharedModule
-	url = https://github.com/N-D-B-Project/SharedModule.git
