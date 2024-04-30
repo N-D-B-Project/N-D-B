@@ -1,6 +1,9 @@
 [submodule "Lavalink"]
-path = Lavalink
-url = https://github.com/N-D-B-Project/Lavalink.git
+  path = Lavalink
+  url = https://github.com/N-D-B-Project/Lavalink.git
 [submodule "Database"]
-path = Database
-url = https://github.com/N-D-B-Project/Database.git
+  path = Database
+  url = https://github.com/N-D-B-Project/Database.git
+[submodule "SharedModule"]
+	path = src/modules/shared
+	url = https://github.com/N-D-B-Project/SharedModule.git
