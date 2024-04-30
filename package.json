@@ -1,34 +1,69 @@
 {
-	"name": "@n-d-b/n-d-b",
+	"name": "n-d-b",
+	"version": "1.0.0",
+	"description": "N-D-B Project repository",
+	"author": "NedcloarBR",
+	"license": "GPL-3.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NedcloarBR/N-D-B"
+	},
+	"bugs": {
+		"url": "https://github.com/NedcloarBR/N-D-B/issues"
+	},
+	"homepage": "https://github.com/NedcloarBR/N-D-B",
+	"engines": {
+		"node": "20.6.1"
+	},
 	"packageManager": "yarn@4.1.1",
-	"private": true,
-	"workspaces": {
-		"packages": [
-			"Packages/*"
-		]
-	},
-	"author": {
-		"name": "Miguel Alexandre Uhlein <NedcloarBR>",
-		"email": "nedcloar1@hotmail.com",
-		"url": "https://github.com/NedcloarBR/"
-	},
 	"scripts": {
 		"update": "yarn upgrade-interactive",
-		"postinstall": "husky install || true",
-		"format": "yarn dlx @biomejs/biome format --write ./",
-		"lint": "yarn dlx @biomejs/biome lint ./",
-		"check": "yarn dlx @biomejs/biome check --apply ./",
-		"test": "yarn workspaces foreach -A run test "
+		"build": "nest build",
+		"start": "nest start",
+		"start:dev": "nest start --watch --env-file=.env",
+		"start:debug": "nest start --debug --watch",
+		"start:prod": "node dist/main",
+		"test": "vitest",
+		"test:watch": "vitest --watch",
+		"test:coverage": "vitest run --coverage",
+		"test:ui": "vitest --ui",
+		"postinstall": "prisma generate"
+	},
+	"dependencies": {
+		"@necord/localization": "^3.1.2",
+		"@necord/pagination": "^1.2.2",
+		"@nestjs/common": "^10.3.3",
+		"@nestjs/config": "^3.2.0",
+		"@nestjs/core": "^10.3.3",
+		"@nestjs/event-emitter": "^2.0.4",
+		"@prisma/client": "5.11.0",
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.1",
+		"discord-api-types": "^0.37.73",
+		"discord.js": "^14.14.1",
+		"ioredis": "^5.3.2",
+		"lavalink-client": "^2.1.7",
+		"moment": "^2.30.1",
+		"necord": "^6.8.3",
+		"parse-ms": "=2.1.0",
+		"prisma": "^5.11.0",
+		"reflect-metadata": "^0.2.1",
+		"rxjs": "^7.8.1",
+		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.6.1",
-		"@commitlint/cli": "^19.1.0",
-		"@commitlint/config-angular": "^19.1.0",
-		"@commitlint/config-conventional": "^19.1.0",
-		"commitizen": "^4.3.0",
-		"cross-env": "^7.0.3",
-		"husky": "^9.0.11",
-		"lint-staged": "^15.2.2",
-		"typescript": "^5.4.2"
+		"@nestjs/cli": "^10.3.2",
+		"@nestjs/schematics": "^10.1.1",
+		"@nestjs/testing": "^10.3.3",
+		"@types/node": "^20.11.27",
+		"@vitest/coverage-istanbul": "^1.4.0",
+		"@vitest/ui": "^1.4.0",
+		"source-map-support": "^0.5.21",
+		"ts-loader": "^9.5.1",
+		"ts-node": "^10.9.2",
+		"tsconfig-paths": "^4.2.0",
+		"typescript": "^5.4.2",
+		"vite-tsconfig-paths": "^4.3.2",
+		"vitest": "^1.4.0"
 	}
 }

@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="35" src="https://github.com/N-D-B-Project/N-D-B/blob/master/Packages/Client/src/common/assets/Images/Logos/Logo.png?raw=true"> N-D-B
+  <img width="35" src="https://github.com/N-D-B-Project/N-D-B/blob/master/src/common/assets/Images/Logos/Logo.png?raw=true"> N-D-B
   <br>
 </h1>
 
@@ -21,7 +21,7 @@
   •
   <a href="📝 To-Do">To-Do</a>
   •
-  <a href="https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/Configuration.md">Instalação</a>
+  <a href="https://github.com/N-D-B-Project/Documentation/Configuration.md">Instalação</a>
   •
   <a href="#📖 Licença">Licença</a>
   •
@@ -37,8 +37,8 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
 ## 📝 To-Do
 
 - [ ] Multilingual README in Docs
-- [ ] Update [Configuration](https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/Configuration.md) and [Examples](https://github.com/N-D-B-Project/N-D-B/tree/master/Docs/Examples)
-- [ ] [Bot Client](https://github.com/N-D-B-Project/N-D-B/tree/master/Packages/Client/src/modules/bot)
+- [ ] Update [Configuration](https://github.com/N-D-B-Project/Documentation/Configuration.md) and [Examples](https://github.com/N-D-B-Project/Documentation/tree/master/Examples)
+- [ ] [Bot Client](https://github.com/N-D-B-Project/N-D-B)
   - [ ] Systems
     - [ ] Moderation
       - [ ] Manual
@@ -52,7 +52,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
         - [x] Partial migrated to Necord but not tested yet
         - [ ] Commands Update, Fetch
         - [ ] Update ReactionRoleAdd/Remove Events
-        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/Packages/Client/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
       - [ ] Music
       - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
         - [x] Partial
@@ -64,7 +64,7 @@ Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github
     - [ ] Top.gg
       - [x] Status Autopost
       - [ ] Vote Reward System
-- [ ] [API](https://github.com/N-D-B-Project/N-D-B/tree/master/Packages/Client/src/modules/api)
+- [ ] [API](https://github.com/N-D-B-Project/N-D-B/tree/master/src/modules/api)
   - [ ] Port from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS)
     - [x] Auth Module
     - [x] Discord Module
