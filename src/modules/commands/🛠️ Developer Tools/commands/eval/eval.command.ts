@@ -1,7 +1,7 @@
 import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import { Config } from "@/modules/SharedModule/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
 import { UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

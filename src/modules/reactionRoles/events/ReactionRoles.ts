@@ -1,5 +1,5 @@
-import type { IDatabaseService } from "@/modules/SharedModule/database/interfaces/IDatabaseService";
 import { MessageTools } from "@/modules/commands/Message";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";

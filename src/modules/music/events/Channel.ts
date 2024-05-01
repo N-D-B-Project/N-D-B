@@ -1,4 +1,4 @@
-import type { IDatabaseService } from "@/modules/SharedModule/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, type NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";

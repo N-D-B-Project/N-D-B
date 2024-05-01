@@ -1,4 +1,4 @@
-import type { IDatabaseService } from "@/modules/SharedModule/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, CommandInteraction, Guild, Message, Role, TextChannel } from "discord.js";

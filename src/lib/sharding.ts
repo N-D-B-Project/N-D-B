@@ -1,13 +1,13 @@
+import path from "node:path";
 import { Logger } from "@nestjs/common";
 import type { ConfigService } from "@nestjs/config";
 import { ShardingManager as _ShardingManager } from "discord.js";
-import path from "node:path";
-import type { Config } from "../modules/SharedModule/config/types";
+import type { Config } from "../modules/shared/config/types";
 
 export class ShardingManager extends _ShardingManager {
 	public constructor(private readonly config: ConfigService) {
 		super(path.join(__dirname, "bot.js"), {
-			token: config.getOrThrow<Config["Discord"]>("Discord").Token,
+			token: config.getOrThrow("Discord").Token,
 			shardList: "auto",
 			respawn: true,
 			mode: "process",

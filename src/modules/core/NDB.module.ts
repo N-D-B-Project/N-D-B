@@ -3,12 +3,12 @@ import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
-import { JSONLocaleLoader, NecordConfigService, SharedModule } from "../SharedModule";
-import { Config } from "../SharedModule/config/types";
 import { CommandsModule } from "../commands/Commands.module";
 import { ComponentsModule } from "../components/Components.module";
 import { EventsModule } from "../events/Events.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
+import { JSONLocaleLoader, NecordConfigService, SharedModule } from "../shared";
+import { Config } from "../shared/config/types";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
 
 @Module({

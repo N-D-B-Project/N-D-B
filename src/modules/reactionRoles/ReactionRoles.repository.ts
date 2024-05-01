@@ -1,4 +1,4 @@
-import { PrismaService } from "@/modules/SharedModule/database/prisma/Prisma.service";
+import { PrismaService } from "@/modules/shared/database/prisma/Prisma.service";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Guild, TextChannel } from "discord.js";

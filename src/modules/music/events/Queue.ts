@@ -1,4 +1,4 @@
-import { Config } from "@/modules/SharedModule/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Extends } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";

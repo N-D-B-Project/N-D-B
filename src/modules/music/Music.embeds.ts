@@ -1,4 +1,4 @@
-import { Config } from "@/modules/SharedModule/config/types";
+import { Config } from "@/modules/shared/config/types";
 import { Timer } from "@/utils/Tools";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
@@ -284,10 +284,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 							IsPlaying: player.paused
 								? this.translate.getTranslation("Tools.Music.NowPlayingEmbed.Paused", interaction.guildLocale, {
 										Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-									})
+								  })
 								: this.translate.getTranslation("Tools.Music.NowPlayingEmbed.Playing", interaction.guildLocale, {
 										Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-									}),
+								  }),
 						},
 					),
 					inline: true,
@@ -301,10 +301,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 							IsBassBoosted: player.filterManager.equalizerBands
 								? this.translate.getTranslation("Tools.Music.NowPlayingEmbed.ActiveBass", interaction.guildLocale, {
 										Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").success,
-									})
+								  })
 								: this.translate.getTranslation("Tools/Music:NowPlayingEmbed:NoBass", interaction.guildLocale, {
 										Emoji: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail,
-									}),
+								  }),
 						},
 					),
 					inline: true,
@@ -501,14 +501,14 @@ export class MusicEmbeds implements IMusicEmbeds {
 							? this.translate.getTranslation(
 									"Events.PlayerEvents.trackStart.Embed.Fields.Content.3²",
 									textChannel.guild.preferredLocale,
-								)
+							  )
 							: this.translate.getTranslation(
 									"Events.PlayerEvents.trackStart.Embed.Fields.Content.3",
 									textChannel.guild.preferredLocale,
 									{
 										TIMER: Timer,
 									},
-								)
+							  )
 					}`,
 					inline: true,
 				},

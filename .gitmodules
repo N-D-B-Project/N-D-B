@@ -4,6 +4,3 @@
 [submodule "Database"]
   path = Database
   url = https://github.com/N-D-B-Project/Database.git
-[submodule "SharedModule"]
-	path = src/modules/shared
-	url = https://github.com/N-D-B-Project/SharedModule.git

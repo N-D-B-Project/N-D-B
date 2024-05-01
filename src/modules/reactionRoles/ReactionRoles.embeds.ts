@@ -1,5 +1,5 @@
-import { Config } from "@/modules/SharedModule/config/types";
 import { MessageTools } from "@/modules/commands/Message";
+import { Config } from "@/modules/shared/config/types";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

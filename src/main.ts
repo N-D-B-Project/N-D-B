@@ -1,16 +1,15 @@
 import { Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { ShardingManager, TopGGAutoPoster } from "./lib";
-import type { Config } from "./modules/SharedModule/config/types";
+import {NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ConfigService } from "@nestjs/config";
 
 async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  const configService = app.get<ConfigService>(ConfigService);
 	const logger = new Logger("Main");
-  const configService = new ConfigService()
 	const ShardManager = new ShardingManager(configService);
-	const TopGGPoster = new TopGGAutoPoster(
-		configService.getOrThrow<Config["TopGGToken"]>("TopGGToken"),
-		ShardManager,
-	);
+	const TopGGPoster = new TopGGAutoPoster(configService.getOrThrow("TopGGToken"), ShardManager);
 
 	try {
 		await ShardManager.init();
