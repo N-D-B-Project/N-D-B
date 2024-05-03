@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h3 align=center>Um Bot totalmente customizável feito com <a href=https://github.com/discordjs/discord.js>discord.js</a></h3>
+<h3 align=center>🤖 A multipurpose <b><a href="https://discord.com/">Discord</a> bot</b> written in <b><a href="https://necord.org/">Necord Framework</a></b> based on <b><a href="https://discord.js.org/">Discord.js</a></b> and <b><a href="https://nestjs.com/">NestJS</a></b></h3>
 
 <div align=center>
 
@@ -17,77 +17,59 @@
 </div>
 
 <p align="center">
-  <a href="#❓ Sobre">Sobre</a>
+  <a href="#❓ About">About</a>
   •
   <a href="📝 To-Do">To-Do</a>
   •
-  <a href="https://github.com/N-D-B-Project/Documentation/Configuration.md">Instalação</a>
+  <a href="https://github.com/N-D-B-Project/Documentation/Configuration.md">Installation</a>
   •
-  <a href="#📖 Licença">Licença</a>
+  <a href="#📖 License">License</a>
   •
-  <a href="#🗞️ Créditos">Créditos</a>
+  <a href="#🗞️ Credits">Credits</a>
 </p>
 
-## ❓ Sobre
+## ❓ About
 
-N-D-B é um Bot do Discord de Código Aberto totalmente personalizável em constante crescimento com foco em melhorar sua experiencia nos servidores! Você pode convida-lo para seu servidor clicando [aqui](https://discord.com/oauth2/authorize?client_id=708822043420000366&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fauth%2Fredirect&scope=bot%20applications.commands)! Você também pode se juntar ao meu servidor oficial [NedcloarBR Community](https://discord.gg/5CHARxbaRk) para dar suas sugestões, tirar duvidas e pedir assistência! O Bot vem com muitos tipos de comandos e recursos para sua melhor experiencia!
+N-D-B is an ever-growing, fully customizable Open Source Discord Bot with a focus on improving your experience on the servers! You can invite him to your server by clicking [here](https://discord.com/oauth2/authorize?client_id=708822043420000366&permissions=8&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Fapi%2Fauth%2Fredirect&scope=bot%20applications.commands)! You can also join my official server [NedcloarBR Community](https://discord.gg/5CHARxbaRk) to give your suggestions, ask questions, and ask for assistance! The Bot comes with many types of commands and features for your best experience!
 
-Se você gostou do projeto, sinta-se livre para deixar aquela ⭐ aqui no Github para ele crescer cada vez mais!
+If you liked the project, feel free to leave the ⭐ one here on Github for it to grow more and more!
 
 ## 📝 To-Do
 
 - [ ] Multilingual README in Docs
 - [ ] Update [Configuration](https://github.com/N-D-B-Project/Documentation/Configuration.md) and [Examples](https://github.com/N-D-B-Project/Documentation/tree/master/Examples)
-- [ ] [Bot Client](https://github.com/N-D-B-Project/N-D-B)
-  - [ ] Systems
-    - [ ] Moderation
-      - [ ] Manual
-      - [ ] Automatic
-    - [ ] Economy
-    - [ ] Starboard
-    - [ ] Tickets
-    - [ ] System Logs
-    - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
-      - [ ] ReactionRoles
-        - [x] Partial migrated to Necord but not tested yet
-        - [ ] Commands Update, Fetch
-        - [ ] Update ReactionRoleAdd/Remove Events
-        - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
-      - [ ] Music
-      - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
-        - [x] Partial
-        - [ ] Reenable when fix some bugs
-        - [ ] Full
-    - [ ] Sharding
-      - [x] Initial Sharding System
-      - [ ] Sharding related commands
-    - [ ] Top.gg
-      - [x] Status Autopost
-      - [ ] Vote Reward System
-- [ ] [API](https://github.com/N-D-B-Project/N-D-B/tree/master/src/modules/api)
-  - [ ] Port from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS)
-    - [x] Auth Module
-    - [x] Discord Module
-    - [ ] Guild Module
-  - [x] Change Auth from Session to JWT
-  - [x] Use [Fastify](https://fastify.dev/) instead of [Express](https://expressjs.com/)
-  - [ ] Use i18n to localize api messages
-- [ ] Tests
-  - [x] Configure [Vitest](https://vitest.dev/) as Tester instead of [Jest](https://jestjs.io/)
-  - [x] Generate Coverage
-  - [x] GitHub action to auto run tests and generate coverage after a push in repository
-  - [ ] E2E
-  - [ ] Unit
-- [ ] [.github](https://github.com/N-D-B-Project/N-D-B/tree/master/.github)
-  - [x] Update actions versions
-  - [x] Label sync action
+- [ ] Systems
+  - [ ] Moderation
+    - [ ] Manual
+    - [ ] Automatic
+  - [ ] Economy
+  - [ ] Starboard
+  - [ ] Tickets
+  - [ ] System Logs
+  - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
+    - [ ] ReactionRoles
+      - [x] Partial migrated to Necord but not tested yet
+      - [ ] Commands Update, Fetch
+      - [ ] Update ReactionRoleAdd/Remove Events
+      - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+    - [ ] Music
+    - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
+      - [x] Partial
+      - [ ] Reenable when fix some bugs
+      - [ ] Full
+  - [ ] Sharding
+    - [x] Initial Sharding System
+    - [ ] Sharding related commands
+  - [ ] Top.gg
+    - [x] Status Autopost
+    - [ ] Vote Reward System
 
-## 📖 Licença
+## 📖 License
 
-Lançado sob a [GPL-3.0 License](https://github.com/N-D-B-Project/N-D-B/blob/master/License) license.
+[GPL-3.0 License](https://github.com/N-D-B-Project/N-D-B/blob/master/License) license.
 
-## 🗞️ Créditos
+## 🗞️ Credits
 
-- **OBS** Quase todos os repositórios que eu utilizar como referencia para a criação do N-D-B estarão citados abaixo e sempre irei fazer alterações no projeto original para se encaixar melhor ao sistema existente do N-D-B e também não ser totalmente uma "copia" deles
+- **NOTE** Almost all the repositories that I use as a reference for the creation of the N-D-B will be mentioned below and I will always make changes to the original project to better fit the existing N-D-B system and also not be a total "copy" of them
 
-- Quer ver seu nome nesta lista? - veja a pagina de [Contribuição](https://github.com/N-D-B-Project/N-D-B/blob/master/Docs/CONTRIBUTING.md).
+- Want to see your name on this list? - see the [Contribution](https://github.com/N-D-B-Project/N-D-B/blob/master/.github/CONTRIBUTING.md) page.
