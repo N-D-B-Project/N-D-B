@@ -32,6 +32,7 @@ export class PlayCommand {
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
 		guildOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

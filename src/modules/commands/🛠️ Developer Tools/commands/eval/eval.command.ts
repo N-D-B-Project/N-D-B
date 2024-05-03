@@ -29,6 +29,7 @@ export class EvalCommand {
 		user: [],
 		bot: [],
 		guildOnly: false,
+		testOnly: true,
 		ownerOnly: true,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

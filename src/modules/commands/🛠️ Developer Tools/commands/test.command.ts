@@ -20,6 +20,7 @@ export class TestCommand {
 		user: [],
 		bot: [],
 		guildOnly: false,
+		testOnly: true,
 		ownerOnly: true,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

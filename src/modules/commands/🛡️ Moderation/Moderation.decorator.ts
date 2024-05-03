@@ -6,5 +6,4 @@ export const ModerationCommand = createCommandGroupDecorator({
 	description: "Category 🛡️ Moderation",
 	nameLocalizations: localizationMapByKey("Moderation.category.name"),
 	descriptionLocalizations: localizationMapByKey("Moderation.category.description"),
-	guilds: ["679066351456878633"],
 });

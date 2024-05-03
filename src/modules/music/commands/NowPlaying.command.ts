@@ -25,7 +25,7 @@ export class NowPlayingCommand {
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
-		guildOnly: false,
+		guildOnly: false,testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

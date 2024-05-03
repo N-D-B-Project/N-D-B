@@ -27,7 +27,7 @@ export class ResumeCommand {
 	@CommandPermissions({
 		bot: ["SendMessages"],
 		user: ["SendMessages"],
-		guildOnly: false,
+		guildOnly: false,testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

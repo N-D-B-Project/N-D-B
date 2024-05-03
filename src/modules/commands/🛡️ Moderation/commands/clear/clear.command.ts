@@ -23,6 +23,7 @@ export class ClearCommand {
 		bot: [],
 		user: ["ManageMessages"],
 		guildOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

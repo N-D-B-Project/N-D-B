@@ -29,7 +29,7 @@ export class EditReactionCommand {
 	@CommandPermissions({
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
-		guildOnly: false,
+		guildOnly: false,testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

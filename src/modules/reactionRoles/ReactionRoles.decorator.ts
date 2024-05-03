@@ -7,5 +7,4 @@ export const ReactionRolesCommand = createCommandGroupDecorator({
 	nameLocalizations: localizationMapByKey("ReactionRoles.category.name"),
 	descriptionLocalizations: localizationMapByKey("ReactionRoles.category.description"),
 	dmPermission: false,
-  guilds: ["717094267243462688"]
 });

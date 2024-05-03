@@ -1,11 +1,13 @@
 import { Reflector } from "@nestjs/core";
 import { PermissionResolvable } from "discord.js";
 
-interface CommandPermissionsOptions {
+export interface CommandPermissionsOptions {
 	user: PermissionResolvable[];
 	bot: PermissionResolvable[];
-	guildOnly?: boolean;
-	ownerOnly?: boolean;
+	guildOnly: boolean;
+	testOnly: boolean;
+	ownerOnly: boolean;
+  guilds?: string[];
 }
 
 export const CommandPermissions = Reflector.createDecorator<CommandPermissionsOptions>();

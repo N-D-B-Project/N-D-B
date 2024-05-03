@@ -2,16 +2,16 @@ import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import {
   CurrentTranslate,
-  localizationMapByKey,
   type TranslationFn,
+  localizationMapByKey,
 } from "@necord/localization";
 import { Inject, Logger, UseGuards } from "@nestjs/common";
 import {
-  channelMention,
   type GuildMember,
   type VoiceChannel,
+  channelMention,
 } from "discord.js";
-import { Ctx, Subcommand, type SlashCommandContext } from "necord";
+import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { Music } from "..";
 import { MusicCommand } from "../Music.decorator";
 import type { IMusicService } from "../interfaces";
@@ -32,7 +32,7 @@ export class LeaveCommand {
 	@CommandPermissions({
 		bot: ["Connect", "EmbedLinks", "DeafenMembers", "Speak"],
 		user: ["Connect", "SendMessages"],
-		guildOnly: false,
+		guildOnly: false,testOnly: true,
 		ownerOnly: false,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)

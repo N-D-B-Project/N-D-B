@@ -11,7 +11,7 @@ export class NecordConfigService {
 	createNecordOptions(): NecordModuleOptions {
 		return {
 			token: this.config.getOrThrow<Config["Discord"]>("Discord").Token,
-			skipRegistration: false,
+			skipRegistration: true,
 			shards: "auto",
 			rest: {
 				version: GatewayVersion,
