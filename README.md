@@ -76,4 +76,4 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
 
 ### 🫱🏻‍🫲🏻 Special Thanks
 
-@wolffparkinson creation of [dynamic guilds](https://github.com/wolffparkinson/necord-playground/tree/dynamic-guilds) implemented in commit 5c72e16 with some changes
+- [@wolffparkinson](https://github.com/wolffparkinson/) | Creation of [dynamic guilds](https://github.com/wolffparkinson/necord-playground/tree/dynamic-guilds) implemented in commit [5c72e16](https://github.com/N-D-B-Project/N-D-B/commit/5c72e16351c9da21a89866fe67488bdbc0cb1c27) with some changes
