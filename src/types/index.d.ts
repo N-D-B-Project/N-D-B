@@ -1,5 +1,5 @@
-import { UserEntity } from "@/modules/shared/database/entities";
-import { BaseMessageOptions, EmbedBuilder } from "discord.js";
+import type { UserEntity } from "@/modules/database/entities";
+import type { BaseMessageOptions, EmbedBuilder } from "discord.js";
 import "fastify";
 
 declare module "fastify" {

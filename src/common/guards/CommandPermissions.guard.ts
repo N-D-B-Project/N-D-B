@@ -1,10 +1,10 @@
 import { CommandPermissions } from "@/common/decorators";
-import type { Config } from "@/modules/shared/config/types";
+import type { Config } from "@/modules/config/types";
 import { formatArray } from "@/utils/Tools";
-import { LOCALIZATION_ADAPTER, type NestedLocalizationAdapter } from "@necord/localization";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { type CanActivate, type ExecutionContext, Inject, Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
-import type { Reflector } from "@nestjs/core";
+import { ConfigService } from "@nestjs/config";
+import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";
 

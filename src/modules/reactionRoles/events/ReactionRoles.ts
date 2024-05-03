@@ -1,10 +1,10 @@
 import { MessageTools } from "@/modules/commands/Message";
-import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, roleMention } from "discord.js";
-import { Context, ContextOf, On } from "necord";
+import { Context, type ContextOf, On } from "necord";
 import type { IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
 

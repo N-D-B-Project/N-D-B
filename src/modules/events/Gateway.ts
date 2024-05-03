@@ -1,12 +1,19 @@
-import { Config } from "@/modules/shared/config/types";
-import { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import type { Config } from "@/modules/config/types";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
-import { ActivityType, Client, DiscordAPIError, PresenceData, REST, RateLimitData } from "discord.js";
-import { Context, ContextOf, On, Once } from "necord";
+import {
+	ActivityType,
+	type Client,
+	DiscordAPIError,
+	type PresenceData,
+	type REST,
+	type RateLimitData,
+} from "discord.js";
+import { Context, type ContextOf, On, Once } from "necord";
 
 @Injectable()
 export class GatewayEvents {

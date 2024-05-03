@@ -2,15 +2,16 @@ import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/de
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
 import { Client, TextChannel } from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "../../interfaces";
 import type { IReaction } from "../../types";
 import { ReactionRoles } from "../../types/constants";
 import { CreateReactionDTO } from "./CreateReaction.dto";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 
-@Injectable()
+@ReactionRolesCommand()
 export class CreateReactionCommand {
 	public constructor(
 		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,

@@ -1,19 +1,8 @@
 import type { Content } from "@/types";
-import {
-  LOCALIZATION_ADAPTER,
-  type NestedLocalizationAdapter,
-} from "@necord/localization";
-import {
-  PageBuilder,
-  type ButtonsAppearance,
-  type NecordPaginationService,
-} from "@necord/pagination";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
+import { type ButtonsAppearance, NecordPaginationService, PageBuilder } from "@necord/pagination";
 import { Inject, Injectable } from "@nestjs/common";
-import {
-  ButtonStyle,
-  type CommandInteraction,
-  type EmbedBuilder,
-} from "discord.js";
+import { ButtonStyle, type CommandInteraction, type EmbedBuilder } from "discord.js";
 import type { INDBService } from "./interfaces/INDBService";
 
 @Injectable()
@@ -23,26 +12,16 @@ export class NDBService implements INDBService {
 		private readonly paginator: NecordPaginationService,
 	) {}
 
-	public async buildPaginator(
-		interaction: CommandInteraction,
-		embeds: EmbedBuilder[],
-		id: string,
-	): Promise<Content> {
+	public async buildPaginator(interaction: CommandInteraction, embeds: EmbedBuilder[], id: string): Promise<Content> {
 		const buttons: ButtonsAppearance = {
 			back: {
 				emoji: "⬅️",
-				label: this.translate.getTranslation(
-					"Tools.Paginator.Labels.Previous",
-					interaction.guildLocale,
-				),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Previous", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 			next: {
 				emoji: "➡️",
-				label: this.translate.getTranslation(
-					"Tools.Paginator.Labels.Next",
-					interaction.guildLocale,
-				),
+				label: this.translate.getTranslation("Tools.Paginator.Labels.Next", interaction.guildLocale),
 				style: ButtonStyle.Secondary,
 			},
 		};
@@ -57,15 +36,11 @@ export class NDBService implements INDBService {
 								Current: String(i + 1),
 								Total: String(embeds.length),
 							},
-					  )}`
-					: this.translate.getTranslation(
-							"Tools.Paginator.Embed.Footer",
-							interaction.guildLocale,
-							{
-								Current: String(i + 1),
-								Total: String(embeds.length),
-							},
-					  ),
+						)}`
+					: this.translate.getTranslation("Tools.Paginator.Embed.Footer", interaction.guildLocale, {
+							Current: String(i + 1),
+							Total: String(embeds.length),
+						}),
 			});
 		}
 
@@ -75,9 +50,7 @@ export class NDBService implements INDBService {
 		}
 
 		return this.paginator
-			.register((builder) =>
-				builder.setCustomId(id).setPages(pages).setMaxPages(embeds.length),
-			)
+			.register((builder) => builder.setCustomId(id).setPages(pages).setMaxPages(embeds.length))
 			.setButtonsAppearance(buttons)
 			.build();
 	}

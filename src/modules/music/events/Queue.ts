@@ -1,11 +1,24 @@
-import { Config } from "@/modules/shared/config/types";
-import { Extends } from "@/types/Constants";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
+import type { Config } from "@/modules/config/types";
+import {
+    LOCALIZATION_ADAPTER,
+    type NestedLocalizationAdapter,
+} from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import type { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
-import { Client, EmbedBuilder, TextChannel, VoiceChannel } from "discord.js";
-import { Player, Track, TrackEndEvent, TrackExceptionEvent, TrackStuckEvent } from "lavalink-client";
+import {
+    EmbedBuilder,
+    type Client,
+    type TextChannel,
+    type VoiceChannel,
+} from "discord.js";
+import type {
+    Player,
+    Track,
+    TrackEndEvent,
+    TrackExceptionEvent,
+    TrackStuckEvent,
+} from "lavalink-client";
 import ms from "parse-ms";
 import { MessageTools } from "../../commands/Message";
 
@@ -25,13 +38,23 @@ export class QueueEvents {
 		track: Track,
 		payload: TrackEndEvent | TrackStuckEvent | TrackExceptionEvent,
 	) {
-		const textChannel = this.client.channels.cache.get(player.textChannelId) as TextChannel;
-		const voiceChannel = this.client.channels.cache.get(player.voiceChannelId) as VoiceChannel;
-		if (this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Queue.Enable) {
+		const textChannel = this.client.channels.cache.get(
+			player.textChannelId,
+		) as TextChannel;
+		const voiceChannel = this.client.channels.cache.get(
+			player.voiceChannelId,
+		) as VoiceChannel;
+		if (
+			this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty
+				.Queue.Enable
+		) {
 			setTimeout(async () => {
 				try {
 					if (!player.queue && player.queue.current) {
-						const Timer = ms(this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Queue.Delay);
+						const Timer = ms(
+							this.config.getOrThrow<Config["Music"]>("Music").Player
+								.AutoLeaveEmpty.Queue.Delay,
+						);
 						const embed = new EmbedBuilder()
 							.setAuthor({
 								name: this.client.user.tag,
@@ -82,7 +105,9 @@ export class QueueEvents {
 				} catch (error) {
 					this.logger.error("Queue End Error: ", String(error));
 				}
-			}, this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty.Queue.Delay);
+			}, this.config.getOrThrow<Config["Music"]>(
+				"Music",
+			).Player.AutoLeaveEmpty.Queue.Delay);
 		}
 	}
 }

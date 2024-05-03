@@ -1,8 +1,8 @@
-import type { IDatabaseService } from "@/modules/shared";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client } from "discord.js";
-import { Context, ContextOf, On } from "necord";
+import { Context, type ContextOf, On } from "necord";
 
 @Injectable()
 export class GuildEvents {

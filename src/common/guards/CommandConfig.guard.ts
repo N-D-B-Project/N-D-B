@@ -1,14 +1,6 @@
-import {
-  LOCALIZATION_ADAPTER,
-  type NestedLocalizationAdapter,
-} from "@necord/localization";
-import {
-  Inject,
-  Injectable,
-  type CanActivate,
-  type ExecutionContext,
-} from "@nestjs/common";
-import type { Reflector } from "@nestjs/core";
+import { LOCALIZATION_ADAPTER, type NestedLocalizationAdapter } from "@necord/localization";
+import { type CanActivate, type ExecutionContext, Inject, Injectable } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";
 import { CommandConfig } from "../decorators";
@@ -20,24 +12,14 @@ export class CommandConfigGuard implements CanActivate {
 		private readonly reflector: Reflector,
 	) {}
 
-	public async canActivate(
-		executionContext: ExecutionContext,
-	): Promise<boolean> {
-		const commandConfig = this.reflector.get(
-			CommandConfig.KEY,
-			executionContext.getHandler(),
-		);
+	public async canActivate(executionContext: ExecutionContext): Promise<boolean> {
+		const commandConfig = this.reflector.get(CommandConfig.KEY, executionContext.getHandler());
 		const context = NecordExecutionContext.create(executionContext);
 		const args = context.getArgByIndex(0);
 		const interaction = args[0] as ChatInputCommandInteraction;
 
 		if (commandConfig.disable) {
-			interaction.reply(
-				this.translate.getTranslation(
-					"Tools.Command.Checker.Disable",
-					interaction.guildLocale,
-				),
-			);
+			interaction.reply(this.translate.getTranslation("Tools.Command.Checker.Disable", interaction.guildLocale));
 			return false;
 		}
 

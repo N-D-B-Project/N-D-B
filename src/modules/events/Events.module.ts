@@ -1,6 +1,6 @@
 import { Module, type OnApplicationBootstrap } from "@nestjs/common";
-import { EventEmitterModule, type EventEmitter2 } from "@nestjs/event-emitter";
-import type { REST } from "discord.js";
+import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
+import { REST } from "discord.js";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
 import { ThreadEvents } from "./Thread";
@@ -10,6 +10,7 @@ import { ThreadEvents } from "./Thread";
 		EventEmitterModule.forRoot({
 			delimiter: ".",
 			maxListeners: 10,
+			global: true,
 		}),
 	],
 	providers: [GatewayEvents, GuildEvents, ThreadEvents],

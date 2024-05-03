@@ -1,12 +1,13 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
-import { Ctx, SlashCommand, SlashCommandContext, Subcommand } from "necord";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
+import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 
-@Injectable()
+@ReactionRolesCommand()
 export class ReactionTypesCommand {
 	public constructor(
 		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,

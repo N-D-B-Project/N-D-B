@@ -1,9 +1,9 @@
-import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, type NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ChannelType, type Client, type TextChannel } from "discord.js";
-import { Context, type ContextOf, On } from "necord";
+import { Context, On, type ContextOf } from "necord";
 import { Music } from "..";
 import { MessageTools } from "../../commands/Message";
 import type { IMusicService } from "../interfaces";

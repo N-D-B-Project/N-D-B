@@ -1,9 +1,16 @@
 import { MessageTools } from "@/modules/commands/Message";
-import { Config } from "@/modules/shared/config/types";
+import type { Config } from "@/modules/config/types";
 import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { CommandInteraction, EmbedBuilder, Message, TextChannel, channelMention, roleMention } from "discord.js";
+import {
+	type CommandInteraction,
+	EmbedBuilder,
+	type Message,
+	type TextChannel,
+	channelMention,
+	roleMention,
+} from "discord.js";
 import type { IReactionRolesEmbeds } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 

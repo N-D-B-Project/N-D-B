@@ -1,8 +1,8 @@
-import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
-import { Client } from "discord.js";
-import { Context, ContextOf, On } from "necord";
+import type { Client } from "discord.js";
+import { Context, On, type ContextOf } from "necord";
 import type { IMusicService } from "../interfaces";
 import { Music } from "../types/constants";
 

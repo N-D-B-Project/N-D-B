@@ -3,14 +3,15 @@ import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Buttons, ConfirmButtonEnum } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Injectable, Logger, UseGuards } from "@nestjs/common";
+import { Inject, Logger, UseGuards } from "@nestjs/common";
 import { CommandInteraction } from "discord.js";
 import { Button, ButtonContext, ComponentParam, Ctx, SlashCommandContext, Subcommand } from "necord";
 import { InteractionTools } from "../../commands/Interaction";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "../interfaces";
 import { ReactionRoles } from "../types/constants";
+import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 
-@Injectable()
+@ReactionRolesCommand()
 export class DeleteAllReactionsCommand {
 	public constructor(
 		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,

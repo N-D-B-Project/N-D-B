@@ -1,8 +1,15 @@
-import type { IDatabaseService } from "@/modules/shared/database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
-import { Client, CommandInteraction, Guild, Message, Role, TextChannel } from "discord.js";
-import { ReactionRolesEntity } from "./entities/ReactionRole.entity";
+import type {
+    Client,
+    CommandInteraction,
+    Guild,
+    Message,
+    Role,
+    TextChannel,
+} from "discord.js";
+import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 import { ReactionRoles } from "./types/constants";
@@ -22,7 +29,10 @@ export class ReactionRolesService implements IReactionRolesService {
 		return await this.database.ReactionRolesRepo().getAll(guild);
 	}
 
-	public async getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]> {
+	public async getInChannel(
+		guild: Guild,
+		channel: TextChannel,
+	): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getInChannel(guild, channel);
 	}
 
@@ -64,7 +74,9 @@ export class ReactionRolesService implements IReactionRolesService {
 		});
 	}
 
-	public async DeleteAll(guild: Guild): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
+	public async DeleteAll(
+		guild: Guild,
+	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
 		return await this.database.ReactionRolesRepo().deleteMany(guild);
 	}
 
@@ -99,7 +111,9 @@ export class ReactionRolesService implements IReactionRolesService {
 		emoji: string,
 	) {
 		if (!message) {
-			return await interaction.reply({ embeds: [await this.embeds.MessageNotFoundEmbed(interaction)] });
+			return await interaction.reply({
+				embeds: [await this.embeds.MessageNotFoundEmbed(interaction)],
+			});
 		}
 	}
 }

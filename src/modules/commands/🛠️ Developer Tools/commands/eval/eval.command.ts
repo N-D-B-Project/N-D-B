@@ -1,14 +1,14 @@
 import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import { Config } from "@/modules/shared/config/types";
-import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
+import type { Config } from "@/modules/config/types";
+import { CurrentTranslate, type TranslationFn, localizationMapByKey } from "@necord/localization";
 import { UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";
-import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
-import { EvalDTO } from "./eval.dto";
+import type { EvalDTO } from "./eval.dto";
 
 @DeveloperToolsCommand()
 export class EvalCommand {
