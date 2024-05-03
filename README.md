@@ -73,3 +73,7 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
 - **NOTE** Almost all the repositories that I use as a reference for the creation of the N-D-B will be mentioned below and I will always make changes to the original project to better fit the existing N-D-B system and also not be a total "copy" of them
 
 - Want to see your name on this list? - see the [Contribution](https://github.com/N-D-B-Project/N-D-B/blob/master/.github/CONTRIBUTING.md) page.
+
+### 🫱🏻‍🫲🏻 Special Thanks
+
+@wolffparkinson creation of [dynamic guilds](https://github.com/wolffparkinson/necord-playground/tree/dynamic-guilds) implemented in commit 5c72e16 with some changes
