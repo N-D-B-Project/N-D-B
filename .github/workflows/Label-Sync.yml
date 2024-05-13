@@ -7,7 +7,7 @@ on:
     branches:
       - master
     paths:
-      - '.github/LABELS.yml'
+      - '.github/labels.yml'
 jobs:
   labeler:
     name: Labeler
@@ -20,4 +20,4 @@ jobs:
         uses: crazy-max/ghaction-github-labeler@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          yaml-file: .github/LABELS.yml
+          yaml-file: .github/labels.yml

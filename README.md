@@ -66,7 +66,7 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
 
 ## 📖 License
 
-[GPL-3.0 License](https://github.com/N-D-B-Project/N-D-B/blob/master/License) license.
+[GPL-3.0 License](https://github.com/N-D-B-Project/N-D-B/blob/master/License)
 
 ## 🗞️ Credits
 
