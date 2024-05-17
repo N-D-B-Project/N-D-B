@@ -4,6 +4,7 @@ import { REST } from "discord.js";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
 import { ThreadEvents } from "./Thread";
+import { NDCEvents } from "./NDC";
 
 @Module({
 	imports: [
@@ -13,7 +14,7 @@ import { ThreadEvents } from "./Thread";
 			global: true,
 		}),
 	],
-	providers: [GatewayEvents, GuildEvents, ThreadEvents],
+	providers: [GatewayEvents, GuildEvents, ThreadEvents, NDCEvents],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(
