@@ -11,6 +11,7 @@ import { DatabaseModule } from "../database/database.module";
 import { EventsModule } from "../events/Events.module";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
+import { ScheduleModule } from "../schedule/schedule.module";
 
 @Module({
 	imports: [
@@ -40,6 +41,7 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			load: [config],
 		}),
 		DatabaseModule,
+    ScheduleModule,
 		CommandsModule,
 		ComponentsModule,
 		EventsModule,
