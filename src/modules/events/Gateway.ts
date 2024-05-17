@@ -24,7 +24,7 @@ export class GatewayEvents {
 
 	private readonly logger = new Logger(GatewayEvents.name);
 
-	private IGNORED_ERRORS = [
+	private readonly IGNORED_ERRORS = [
 		RESTJSONErrorCodes.UnknownMessage,
 		RESTJSONErrorCodes.UnknownChannel,
 		RESTJSONErrorCodes.UnknownGuild,
