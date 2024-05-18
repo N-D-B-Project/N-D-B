@@ -1,23 +1,23 @@
 import type { Config } from "@/modules/config/types";
 import {
-    LOCALIZATION_ADAPTER,
-    type NestedLocalizationAdapter,
+  LOCALIZATION_ADAPTER,
+  NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import {
-    EmbedBuilder,
-    type Client,
-    type TextChannel,
-    type VoiceChannel,
+  EmbedBuilder,
+  Client,
+  type TextChannel,
+  type VoiceChannel,
 } from "discord.js";
 import type {
-    Player,
-    Track,
-    TrackEndEvent,
-    TrackExceptionEvent,
-    TrackStuckEvent,
+  Player,
+  Track,
+  TrackEndEvent,
+  TrackExceptionEvent,
+  TrackStuckEvent,
 } from "lavalink-client";
 import ms from "parse-ms";
 import { MessageTools } from "../../commands/Message";

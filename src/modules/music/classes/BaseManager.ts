@@ -24,7 +24,7 @@ export class BaseManager extends LavalinkManager {
 					id: "localhost",
 					host: process.env.LavalinkHOST,
 					port: 2333,
-					authorization: process.env.LavalinkPassword,
+					authorization: process.env.LAVALINK_SERVER_PASSWORD,
 					retryAmount: 22,
 					retryDelay: 5000,
 				},

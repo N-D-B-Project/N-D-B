@@ -1,26 +1,26 @@
 import type { Config } from "@/modules/config/types";
 import { Timer } from "@/utils/Tools";
 import {
-    LOCALIZATION_ADAPTER,
-    type NestedLocalizationAdapter,
+  LOCALIZATION_ADAPTER,
+  NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import {
-    EmbedBuilder,
-    channelMention,
-    type Client,
-    type ColorResolvable,
-    type CommandInteraction,
-    type Guild,
-    type TextChannel,
-    type User,
-    type VoiceChannel
+  EmbedBuilder,
+  channelMention,
+  Client,
+  type ColorResolvable,
+  type CommandInteraction,
+  type Guild,
+  type TextChannel,
+  type User,
+  type VoiceChannel
 } from "discord.js";
 import {
-    type Player,
-    type SearchResult,
-    type Track
+  type Player,
+  type SearchResult,
+  type Track
 } from "lavalink-client";
 import type { IMusicEmbeds } from "./interfaces";
 

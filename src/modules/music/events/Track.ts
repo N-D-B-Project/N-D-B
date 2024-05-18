@@ -1,13 +1,12 @@
 import { Timer, WAIT } from "@/utils/Tools";
 import {
   LOCALIZATION_ADAPTER,
-  type NestedLocalizationAdapter,
+  NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import {
-  type Client,
-  type GuildMember,
+  Client,
   type Message,
   type TextChannel
 } from "discord.js";
@@ -46,7 +45,7 @@ export class TrackEvents {
 		const Requester = (
 			(await (
 				await this.client.guilds.fetch(player.guildId)
-			).members.fetch(track.requester as string)) as GuildMember
+			).members.fetch(track.requester as string))
 		).user;
 
 		await WAIT(500);

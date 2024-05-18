@@ -2,16 +2,16 @@ import type { Config } from "@/modules/config/types";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import {
-    LOCALIZATION_ADAPTER,
-    type NestedLocalizationAdapter,
+  LOCALIZATION_ADAPTER,
+  NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import {
-    channelMention,
-    type CommandInteraction,
-    type GuildMember,
-    type VoiceChannel,
+  channelMention,
+  type CommandInteraction,
+  type GuildMember,
+  type VoiceChannel,
 } from "discord.js";
 import type { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
@@ -32,7 +32,7 @@ export class MusicService implements IMusicService {
 	) {}
 
 	public async getPlayer(interaction: CommandInteraction): Promise<Player> {
-		if (this.getPremium(interaction.guildId)) {
+		if (await this.getPremium(interaction.guildId)) {
 			return this.MusicManager.premium.getPlayer(interaction.guildId);
 		}
 

@@ -1,8 +1,8 @@
 import type { Config } from "@/modules/config/types";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
-import type { Client, Guild, TextChannel, VoiceChannel } from "discord.js";
+import { Client, Guild, TextChannel, VoiceChannel } from "discord.js";
 import type { Player } from "lavalink-client";
 import { Music } from "..";
 import { MessageTools } from "../../commands/Message";
@@ -20,7 +20,7 @@ export class PlayerEvents {
 
 	@OnEvent("player.create")
 	public async onPlayerCreate(player: Player): Promise<void> {
-		const guild = (await this.client.guilds.fetch(player.guildId)) as Guild;
+		const guild = (await this.client.guilds.fetch(player.guildId));
 		this.logger.log(`Player iniciando no servidor: ${guild.name}(${guild.id})`);
 		const textChannel = this.client.channels.cache.get(player.textChannelId) as TextChannel;
 		const voiceChannel = this.client.channels.cache.get(player.voiceChannelId) as VoiceChannel;

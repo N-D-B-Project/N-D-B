@@ -2,7 +2,7 @@ import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseSe
 import { Services } from "@/types/Constants";
 import { LOCALIZATION_ADAPTER, type NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-import { ChannelType, type Client, type TextChannel } from "discord.js";
+import { ChannelType, Client, type TextChannel } from "discord.js";
 import { Context, On, type ContextOf } from "necord";
 import { Music } from "..";
 import { MessageTools } from "../../commands/Message";

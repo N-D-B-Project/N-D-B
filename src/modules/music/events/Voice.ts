@@ -2,17 +2,17 @@ import type { Config } from "@/modules/config/types";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import {
-    LOCALIZATION_ADAPTER,
-    type NestedLocalizationAdapter,
+  LOCALIZATION_ADAPTER,
+  NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import {
-    ChannelType,
-    EmbedBuilder,
-    type Client,
-    type TextChannel,
-    type VoiceChannel,
+  ChannelType,
+  EmbedBuilder,
+  Client,
+  type TextChannel,
+  type VoiceChannel,
 } from "discord.js";
 import { Context, On, type ContextOf } from "necord";
 import { Music } from "..";

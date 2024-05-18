@@ -1,7 +1,7 @@
 import { Injectable, type OnModuleInit } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
-import type { EventEmitter2 } from "@nestjs/event-emitter";
-import type { Client } from "discord.js";
+import { ConfigService } from "@nestjs/config";
+import { EventEmitter2 } from "@nestjs/event-emitter";
+import { Client } from "discord.js";
 import { CommonManager } from "./classes/CommonManager";
 import "./classes/ExtendedPlayer";
 import { PremiumManager } from "./classes/PremiumManager";

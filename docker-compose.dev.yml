@@ -1,8 +1,8 @@
 version: "3.8"
 
 include:
-  # - path: ./Lavalink/docker-compose.yml
-  #   env_file: .env
+  - path: ./Lavalink/docker-compose.yml
+    env_file: .env
   - path: ./Database/docker-compose.yml
     env_file: .env
 

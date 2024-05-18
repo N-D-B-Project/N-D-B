@@ -1,6 +1,6 @@
 import type { Config } from "@/modules/config/types";
 import { Injectable, Logger } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import type { LavalinkNode } from "lavalink-client";
 
