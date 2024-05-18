@@ -36,7 +36,7 @@
 		"editor.defaultFormatter": "Prisma.prisma",
 		"editor.formatOnSave": true
 	},
-
+  "material-icon-theme.activeIconPack": "nest",
 	"material-icon-theme.files.associations": {
 		"*.controller.ts": "nest-controller",
 		"*.module.ts": "nest-module",
