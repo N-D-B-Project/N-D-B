@@ -12,10 +12,6 @@ prisma:
 	@yarn prisma generate
 	@yarn prisma migrate dev
 
-file-mode:
-	@echo "Configuring git fileMode to false"
-	git config core.fileMode false
-
 setup:
 	@$(MAKE) install
 	@$(MAKE) prisma
@@ -27,3 +23,17 @@ start:
 	@$(MAKE) setup
 	@$(MAKE) build
 	@yarn start
+
+start-dev:
+	@$(MAKE) setup
+	@yarn start:dev
+
+restart:
+	@docker restart ndbase
+	@docker restart bot
+
+logs-prod:
+	@docker compose -f docker-compose.prod.yml logs -f
+
+logs-dev:
+	@docker compose -f docker-compose.dev.yml logs -f

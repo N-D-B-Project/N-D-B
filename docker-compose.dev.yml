@@ -8,9 +8,8 @@ include:
 
 services:
   bot:
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
+    container_name: bot
+    build: .
     restart: always
     tty: true
     volumes:
@@ -18,4 +17,4 @@ services:
       - /usr/app/node_modules
     working_dir: /usr/app
     command: >
-      make start
+      make start-dev

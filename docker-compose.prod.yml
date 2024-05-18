@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  bot:
+    container_name: bot
+    build: .
+    restart: always
+    tty: true
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      make start
