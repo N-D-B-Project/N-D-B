@@ -5,11 +5,17 @@ import { UserEntity } from "../entities";
 import { PrismaService } from "../prisma/Prisma.service";
 import { DatabaseStatus } from "../types";
 import type { IUserRepository } from "./interfaces";
+import { Prisma } from "@prisma/client";
+import { DefaultArgs } from "@prisma/client/runtime/library";
 
 export class UserRepository implements IUserRepository {
 	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
-
+  
 	private readonly logger = new Logger(UserRepository.name);
+
+  public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
+    throw new Error("Method not implemented.");
+  }
 
 	public async get(userId: string): Promise<UserEntity> {
 		return await this.prisma.user.findUnique({
@@ -20,6 +26,15 @@ export class UserRepository implements IUserRepository {
 			},
 		});
 	}
+
+  public async getAll(): Promise<UserEntity[]> {
+    return await this.prisma.user.findMany({
+			include: {
+				Settings: true,
+				APIUser: true,
+			},
+		});
+  }
 
 	public async create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;

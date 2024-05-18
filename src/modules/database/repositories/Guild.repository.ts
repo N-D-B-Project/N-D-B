@@ -5,6 +5,8 @@ import { GuildEntity } from "../entities";
 import { PrismaService } from "../prisma/Prisma.service";
 import { DatabaseStatus } from "../types";
 import type { IGuildRepository } from "./interfaces";
+import { DefaultArgs } from "@prisma/client/runtime/library";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {
@@ -12,9 +14,21 @@ export class GuildRepository implements IGuildRepository {
 
 	private readonly logger = new Logger(GuildRepository.name);
 
+  public guildSettings(): Prisma.GuildSettingsDelegate<DefaultArgs> {
+    return this.prisma.guildSettings  
+  }
+
 	public async get(guildId: string): Promise<GuildEntity> {
 		return await this.prisma.guild.findUnique({
 			where: { id: guildId },
+			include: {
+				Settings: true,
+			},
+		});
+	}
+
+	public async getAll(): Promise<GuildEntity[]> {
+		return await this.prisma.guild.findMany({
 			include: {
 				Settings: true,
 			},
