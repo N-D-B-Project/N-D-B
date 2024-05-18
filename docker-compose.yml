@@ -5,3 +5,17 @@ include:
   #   env_file: .env
   - path: ./Database/docker-compose.yml
     env_file: .env
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    restart: always
+    tty: true
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    working_dir: /usr/app
+    command: >
+      make start
