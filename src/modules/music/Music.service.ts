@@ -1,23 +1,15 @@
 import type { Config } from "@/modules/config/types";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
-import {
-  LOCALIZATION_ADAPTER,
-  NestedLocalizationAdapter,
-} from "@necord/localization";
+import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import {
-  channelMention,
-  type CommandInteraction,
-  type GuildMember,
-  type VoiceChannel,
-} from "discord.js";
+import { type CommandInteraction, type GuildMember, type VoiceChannel, channelMention } from "discord.js";
 import type { Player, PlayerOptions, SourceNames } from "lavalink-client";
 import moment from "moment";
 import ms from "parse-ms";
-import type { MusicEmbeds } from "./Music.embeds";
-import type { MusicManager } from "./Music.manager";
+import { MusicEmbeds } from "./Music.embeds";
+import { MusicManager } from "./Music.manager";
 import type { IMusicService } from "./interfaces";
 import { Music } from "./types/constants";
 
@@ -39,10 +31,7 @@ export class MusicService implements IMusicService {
 		return this.MusicManager.common.getPlayer(interaction.guildId);
 	}
 
-	public async getPlayerEvent(
-		guildId: string,
-		isPremium: boolean,
-	): Promise<Player> {
+	public async getPlayerEvent(guildId: string, isPremium: boolean): Promise<Player> {
 		if (isPremium) {
 			return this.MusicManager.premium.getPlayer(guildId);
 		}
@@ -59,14 +48,13 @@ export class MusicService implements IMusicService {
 			guildId: voiceChannel.guildId,
 			textChannelId: textChannelId,
 			voiceChannelId: voiceChannel.id,
-			selfDeaf:
-				this.config.getOrThrow<Config["Music"]>("Music").Client.selfDeaf,
+			selfDeaf: this.config.getOrThrow<Config["Music"]>("Music").Client.selfDeaf,
 			instaUpdateFiltersFix: false,
 			volume: this.config.getOrThrow<Config["Music"]>("Music").Volumes.Player,
 			// vcRegion: voiceChannel.rtcRegion!
 		};
 		let player: Player;
-		if (this.getPremium(interaction.guildId)) {
+		if (await this.getPremium(interaction.guildId)) {
 			player = this.MusicManager.premium.createPlayer(createOptions);
 			player.isPremium = true;
 		} else {
@@ -90,23 +78,14 @@ export class MusicService implements IMusicService {
 
 	public async sameVoice(interaction: CommandInteraction): Promise<boolean> {
 		const player = await this.getPlayer(interaction);
-		const voiceChannel = await interaction.guild.channels.fetch(
-			player.voiceChannelId,
-		);
+		const voiceChannel = await interaction.guild.channels.fetch(player.voiceChannelId);
 
-		if (
-			(interaction.member as GuildMember).voice.channelId !==
-			player.voiceChannelId
-		) {
+		if ((interaction.member as GuildMember).voice.channelId !== player.voiceChannelId) {
 			await interaction.reply(
-				this.translate.getTranslation(
-					"Tools.Music.WrongChannel",
-					interaction.guildLocale,
-					{
-						TextChannel: channelMention(player.textChannelId),
-						VoiceChannel: channelMention(voiceChannel.id),
-					},
-				),
+				this.translate.getTranslation("Tools.Music.WrongChannel", interaction.guildLocale, {
+					TextChannel: channelMention(player.textChannelId),
+					VoiceChannel: channelMention(voiceChannel.id),
+				}),
 			);
 			return false;
 		}
@@ -148,8 +127,7 @@ export class MusicService implements IMusicService {
 		Name: string;
 	}> {
 		const URLs = this.config.getOrThrow<Config["URLList"]>("URLList").Music;
-		const MusicEmojis =
-			this.config.getOrThrow<Config["Emojis"]>("Emojis").Music;
+		const MusicEmojis = this.config.getOrThrow<Config["Emojis"]>("Emojis").Music;
 		let Emoji: string;
 		let Name: string;
 
@@ -170,23 +148,17 @@ export class MusicService implements IMusicService {
 
 		for (const value of Props) {
 			if (isCommand) {
-				if (
-					(
-						(query as CommandInteraction).options.get("query").value as string
-					).includes(value.URL)
-				) {
+				if (((query as CommandInteraction).options.get("query").value as string).includes(value.URL)) {
 					Emoji = value.Emoji;
 					Name = value.Name;
 					break;
 				}
 				Emoji = MusicEmojis.Youtube;
 				Name = "Youtube";
-			} else {
-				if ((query as string).includes(value.URL)) {
-					Emoji = value.Emoji;
-					Name = value.Name;
-					break;
-				}
+			} else if (!isCommand && (query as string).includes(value.URL)) {
+				Emoji = value.Emoji;
+				Name = value.Name;
+				break;
 			}
 		}
 		return { Emoji, Name };
@@ -195,56 +167,15 @@ export class MusicService implements IMusicService {
 	public async progressBar(player: Player): Promise<string> {
 		const time = ms(player.queue.current.info.duration);
 		const done = ms(player.position);
-		const D1 = `[${
-			done.hours ? (done.hours > 10 ? done.hours : `0${done.hours}`) : ""
-		}${
-			done.minutes
-				? done.minutes >= 10
-					? done.minutes
-					: `0${done.minutes}`
-				: "00"
-		}:${
-			done.seconds
-				? done.seconds > 10
-					? done.seconds
-					: `0${done.seconds}`
-				: ""
-		}] `;
-		const D2 = ` [${
-			time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""
-		}${time.hours ? ":" : ""}${
-			time.minutes
-				? time.minutes >= 10
-					? time.minutes
-					: `0${time.minutes}`
-				: "00"
-		}:${
-			time.seconds
-				? time.seconds > 10
-					? time.seconds
-					: `0${time.seconds}`
-				: ""
-		}]`;
+		const D1 = `[${done.hours ? (done.hours > 10 ? done.hours : `0${done.hours}`) : ""}${
+			done.minutes ? (done.minutes >= 10 ? done.minutes : `0${done.minutes}`) : "00"
+		}:${done.seconds ? (done.seconds > 10 ? done.seconds : `0${done.seconds}`) : ""}] `;
+		const D2 = ` [${time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${
+			time.minutes ? (time.minutes >= 10 ? time.minutes : `0${time.minutes}`) : "00"
+		}:${time.seconds ? (time.seconds > 10 ? time.seconds : `0${time.seconds}`) : ""}]`;
 		const D3 = moment.duration({ ms: player.position }).asMilliseconds();
-		const progressBar = [
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-			"▬",
-		];
-		const calcul = Math.round(
-			progressBar.length * (D3 / player.queue.current.info.duration),
-		);
+		const progressBar = ["▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬"];
+		const calcul = Math.round(progressBar.length * (D3 / player.queue.current.info.duration));
 		progressBar[calcul] = "🔘";
 		return D1 + progressBar.join("") + D2;
 	}
