@@ -31,7 +31,7 @@ export class ReactionRolesEvents {
 		if (!data) return;
 
 		for (const Data of data) {
-			const SplitEmoji = Data.Emoji.replace("<:", "").replace(">", "");
+			const SplitEmoji = Data.Emoji.replace(/<:|>/g, "")
 
 			if (reaction.emoji.identifier === SplitEmoji && reaction.message.id === Data.Message) {
 				const Role = Guild.roles.cache.get(Data.Role);
@@ -455,7 +455,7 @@ export class ReactionRolesEvents {
 		if (!data) return;
 
 		for (const Data of data) {
-			const SplitEmoji = Data.Emoji.replace("<:", "").replace(">", "");
+			const SplitEmoji = Data.Emoji.replace(/<:|>/g, "");
 
 			if (reaction.emoji.identifier === SplitEmoji && reaction.message.id === Data.Message) {
 				const Role = Guild.roles.cache.get(Data.Role);
