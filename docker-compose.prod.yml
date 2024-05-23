@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   bot:
-    container_name: bot
+    container_name: ndbot
     build: .
     restart: always
     tty: true
@@ -12,3 +12,8 @@ services:
     working_dir: /usr/app
     command: >
       make start
+    networks:
+      - ndnetwork
+
+networks:
+  ndnetwork:
