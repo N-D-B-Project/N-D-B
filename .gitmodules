@@ -4,3 +4,7 @@
 [submodule "Database"]
   path = Database
   url = https://github.com/N-D-B-Project/Database.git
+[submodule "Languages"]
+	path = src/common/Languages
+	url = https://github.com/N-D-B-Project/Localization
+	branch = N-D-B
