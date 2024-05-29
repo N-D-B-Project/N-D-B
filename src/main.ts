@@ -3,8 +3,10 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ShardingManager, TopGGAutoPoster } from "./lib";
+import { NodeHandler } from "./lib/node-handler";
 
 async function bootstrap() {
+	NodeHandler();
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get<ConfigService>(ConfigService);
 	const logger = new Logger("Main");

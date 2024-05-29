@@ -36,6 +36,7 @@ export interface Config {
 	};
 	Debug: {
 		Client: boolean;
+		Shard: boolean;
 		Translations: boolean;
 		Lavalink: boolean;
 		PremiumMusicPlayer: boolean;
