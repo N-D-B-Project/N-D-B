@@ -36,7 +36,7 @@
 		"editor.defaultFormatter": "Prisma.prisma",
 		"editor.formatOnSave": true
 	},
-  "material-icon-theme.activeIconPack": "nest",
+	"material-icon-theme.activeIconPack": "nest",
 	"material-icon-theme.files.associations": {
 		"*.controller.ts": "nest-controller",
 		"*.module.ts": "nest-module",
@@ -63,7 +63,6 @@
 	},
 
 	"cSpell.words": [
-		"N-D-B-Project",
 		"Autopost",
 		"autoposter",
 		"Awkword",
@@ -77,6 +76,7 @@
 		"cooldown",
 		"creaction",
 		"createreaction",
+		"crowdin",
 		"Decrementer",
 		"deezer",
 		"Deezer",
@@ -108,6 +108,7 @@
 		"moderacao",
 		"msgdm",
 		"msgint",
+		"N-D-B-Project",
 		"ndcash",
 		"necord",
 		"Necord",

@@ -14,7 +14,7 @@ export class UserRepository implements IUserRepository {
 	private readonly logger = new Logger(UserRepository.name);
 
   public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
-    throw new Error("Method not implemented.");
+    return this.prisma.userSettings
   }
 
 	public async get(userId: string): Promise<UserEntity> {

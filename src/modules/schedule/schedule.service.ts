@@ -19,47 +19,53 @@ export class ScheduleService {
 
 	private readonly premiumUsers = ["330047048009252864", "463476708834803725"];
 
-  @Timeout(1000)
+	@Timeout(1000)
 	@Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
 	public async checkPermanentPremiumGuilds(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
 		this.logger.log("Start Checking Permanent Premium Guilds");
 		for (const guild of await this.database.GuildRepo().getAll()) {
 			if (this.premiumGuilds.includes(guild.id) && !guild.Settings.Premium) {
-				await this.database.GuildRepo().guildSettings().update({
-					where: {
-						guildId: guild.id,
-					},
-					data: {
-						Premium: true,
-					},
-				});
+				await this.database
+					.GuildRepo()
+					.guildSettings()
+					.update({
+						where: {
+							guildId: guild.id,
+						},
+						data: {
+							Premium: true,
+						},
+					});
 			}
 		}
 		const endTimestamp = new Date().getMilliseconds();
-    const time = endTimestamp - startTimestamp
+		const time = endTimestamp - startTimestamp;
 		this.logger.log(`Finished Checking Permanent Premium Guilds in ${time}ms`);
 	}
 
-  @Timeout(1000)
+	@Timeout(1000)
 	@Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
 	public async checkPermanentPremiumUsers(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
 		this.logger.log("Start Checking Permanent Premium Users");
 		for (const user of await this.database.UserRepo().getAll()) {
 			if (this.premiumUsers.includes(user.id) && !user.Settings.Premium) {
-				await this.database.UserRepo().userSettings().update({
-					where: {
-						userId: user.id,
-					},
-					data: {
-						Premium: true,
-					},
-				});
+				await this.database
+					.UserRepo()
+					.userSettings()
+					.update({
+						where: {
+							userId: user.id,
+						},
+						data: {
+							Premium: true,
+						},
+					});
 			}
 		}
 		const endTimestamp = new Date().getMilliseconds();
-    const time = endTimestamp - startTimestamp;
+		const time = endTimestamp - startTimestamp;
 		this.logger.log(`Finished Checking Permanent Premium Users in ${time}ms`);
 	}
 }
