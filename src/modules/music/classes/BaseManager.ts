@@ -1,7 +1,7 @@
 import type { Config } from "@/modules/config/types";
 import type {
-    LavalinkManagerEvents,
-    NodeManagerEvents,
+  LavalinkManagerEvents,
+  NodeManagerEvents,
 } from "@/modules/music/types/lavalink-client";
 import { Logger } from "@nestjs/common";
 import type { ConfigService } from "@nestjs/config";
@@ -25,7 +25,7 @@ export class BaseManager extends LavalinkManager {
 					host: process.env.LavalinkHOST,
 					port: 2333,
 					authorization: process.env.LAVALINK_SERVER_PASSWORD,
-					retryAmount: 22,
+					retryAmount: 4,
 					retryDelay: 5000,
 				},
 			],

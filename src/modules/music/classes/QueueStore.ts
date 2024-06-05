@@ -1,5 +1,5 @@
 import { QueueStoreManager, StoredQueue } from "lavalink-client";
-import { RedisClient } from "./RedisClient";
+import { RedisClient } from ".";
 
 export class QueueStore implements QueueStoreManager {
 	public constructor(private redis: RedisClient) {}

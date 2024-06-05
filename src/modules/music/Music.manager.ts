@@ -17,12 +17,8 @@ export class MusicManager implements OnModuleInit {
 		private readonly eventEmitter: EventEmitter2,
 	) {
 		this.common = new CommonManager(client, config, eventEmitter);
-		this.premium = new PremiumManager(
-			client,
-			config,
-			eventEmitter,
-			new RedisClient(),
-		);
+		// this.premium = new CommonManager(client, config, eventEmitter);
+		this.premium = new PremiumManager(client, config, eventEmitter, new RedisClient());
 	}
 
 	public async onModuleInit() {

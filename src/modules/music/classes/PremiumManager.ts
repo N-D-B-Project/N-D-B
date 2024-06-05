@@ -1,9 +1,7 @@
 import { ConfigService } from "@nestjs/config";
 import { EventEmitter2 } from "@nestjs/event-emitter";
 import { Client } from "discord.js";
-import { BaseManager } from "./BaseManager";
-import { QueueStore } from "./QueueStore";
-import { RedisClient } from "./RedisClient";
+import { BaseManager, QueueStore, RedisClient } from ".";
 
 export class PremiumManager extends BaseManager {
 	public constructor(client: Client, config: ConfigService, eventEmitter: EventEmitter2, redis: RedisClient) {
