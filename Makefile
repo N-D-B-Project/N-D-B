@@ -22,7 +22,7 @@ build:
 start:
 	@$(MAKE) setup
 	@$(MAKE) build
-	@yarn start
+	@yarn start:prod
 
 start-dev:
 	@$(MAKE) setup
