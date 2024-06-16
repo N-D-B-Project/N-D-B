@@ -9,7 +9,6 @@ import { JSONLocaleLoader, NecordConfigService, config } from "../config";
 import type { Config } from "../config/types";
 import { DatabaseModule } from "../database/database.module";
 import { EventsModule } from "../events/Events.module";
-import { MusicModule } from "../music";
 import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
 import { ScheduleModule } from "../schedule/schedule.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
@@ -46,7 +45,6 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 		CommandsModule,
 		ComponentsModule,
 		EventsModule,
-		MusicModule,
 		ReactionRolesModule,
 	],
 	providers: [NDBServiceProvider],
