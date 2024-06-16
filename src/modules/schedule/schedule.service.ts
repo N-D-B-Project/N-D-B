@@ -23,7 +23,7 @@ export class ScheduleService {
 	@Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
 	public async checkPermanentPremiumGuilds(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
-		this.logger.log("Start Checking Permanent Premium Guilds");
+		this.logger.log("Started Checking Permanent Premium Guilds");
 		for (const guild of await this.database.GuildRepo().getAll()) {
 			if (this.premiumGuilds.includes(guild.id) && !guild.Settings.Premium) {
 				await this.database
@@ -48,7 +48,7 @@ export class ScheduleService {
 	@Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
 	public async checkPermanentPremiumUsers(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
-		this.logger.log("Start Checking Permanent Premium Users");
+		this.logger.log("Started Checking Permanent Premium Users");
 		for (const user of await this.database.UserRepo().getAll()) {
 			if (this.premiumUsers.includes(user.id) && !user.Settings.Premium) {
 				await this.database
