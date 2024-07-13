@@ -49,7 +49,7 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
   - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
     - [ ] ReactionRoles
       - [x] Partial migrated to Necord but not tested yet
-      - [ ] Commands Update, Fetch
+      - [ ] Commands Edit, List
       - [ ] Update ReactionRoleAdd/Remove Events
       - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
     - [ ] Music
