@@ -1033,10 +1033,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nedcloarbr/biome-config@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@nedcloarbr/biome-config@npm:1.2.1"
-  checksum: 10c0/97dd8477874f1789804ebae9e1a29c00d7b4dac792ca1ebe5c134272825ede9ef2d3808d37cea568fcbdf5d5234dcd8ff2fd0cca9db96fc10fb9cf72b3ffde12
+"@nedcloarbr/biome-config@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@nedcloarbr/biome-config@npm:1.4.0"
+  checksum: 10c0/b814ce6c9191f5d7a0fe677c6feacc7eaf1f13b83bd3d68c41bd84328872359083e06bb15563b8dc0087c4f077980cf337034b64b7f22930a6823cca866731dc
   languageName: node
   linkType: hard
 
@@ -5285,7 +5285,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@necord/localization": "npm:^3.1.2"
     "@necord/pagination": "npm:^1.2.2"
-    "@nedcloarbr/biome-config": "npm:^1.2.1"
+    "@nedcloarbr/biome-config": "npm:^1.4.0"
     "@nestjs/cli": "npm:^10.3.2"
     "@nestjs/common": "npm:^10.3.3"
     "@nestjs/config": "npm:^3.2.0"

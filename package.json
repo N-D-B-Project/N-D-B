@@ -62,7 +62,7 @@
 		"@commitlint/cli": "^19.1.0",
 		"@commitlint/config-angular": "^19.1.0",
 		"@commitlint/config-conventional": "^19.1.0",
-		"@nedcloarbr/biome-config": "^1.2.1",
+		"@nedcloarbr/biome-config": "^1.4.0",
 		"@nestjs/cli": "^10.3.2",
 		"@nestjs/schematics": "^10.1.1",
 		"@nestjs/testing": "^10.3.3",
