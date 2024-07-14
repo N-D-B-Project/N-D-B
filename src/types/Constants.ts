@@ -12,17 +12,8 @@ export enum Services {
 	Discord_HTTP = "DISCORD_HTTP_SERVICE",
 }
 
-export enum Routes {
-	Auth = "auth",
-	Discord = "discord",
-}
-
 export enum Extends {
 	Tools = "TOOLS",
 	Command = "COMMAND",
 	Buttons = "COMPONENTS_BUTTONS",
-}
-
-export enum Cookies {
-	JWT = "N-D-B_JWT_SESSION",
 }
