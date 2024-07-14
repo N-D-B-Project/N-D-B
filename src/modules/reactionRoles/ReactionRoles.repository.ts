@@ -1,14 +1,13 @@
-import type { PrismaService } from "@/modules/database/prisma/Prisma.service";
-import { Services } from "@/types/Constants";
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import type { Guild, TextChannel } from "discord.js";
+import { PrismaService } from "nestjs-prisma";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {
-	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
+	public constructor(private readonly prisma: PrismaService) {}
 
 	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
 		return await this.prisma.guildReactionRoles.findMany({
@@ -30,18 +29,12 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		})[0];
 	}
 
-	public async getInChannel(
-		guild: Guild,
-		channel: TextChannel,
-	): Promise<ReactionRolesEntity[]> {
+	public async getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]> {
 		const data = await this.getAll(guild);
 		return data.filter(async (reaction) => reaction.Channel === channel.id);
 	}
 
-	private async checkIfExists(
-		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<boolean> {
+	private async checkIfExists(guild: Guild, { Channel, Message, Role, Emoji, Option }: IReaction): Promise<boolean> {
 		const GetGuild = await this.getAll(guild);
 		let Verify = false;
 		for (const reaction of GetGuild) {
@@ -124,9 +117,7 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		return { status: "Deleted" };
 	}
 
-	public async deleteMany(
-		guild: Guild,
-	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
+	public async deleteMany(guild: Guild): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
 		const count = await this.prisma.guildReactionRoles.count({
 			where: { guildId: guild.id },
 		});

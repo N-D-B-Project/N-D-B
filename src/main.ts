@@ -2,16 +2,18 @@ import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { ShardingManager, TopGGAutoPoster } from "./lib";
-import { NodeHandler } from "./lib/node-handler";
+import { NodeHandler, PrismaExceptionFilter, ShardingManager, TopGGAutoPoster } from "./lib";
 
 async function bootstrap() {
 	NodeHandler();
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get<ConfigService>(ConfigService);
+	const httpAdapter = app.getHttpAdapter();
 	const logger = new Logger("Main");
 	const ShardManager = new ShardingManager(configService);
 	const TopGGPoster = new TopGGAutoPoster(configService.getOrThrow("TopGGToken"), ShardManager);
+
+	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
 	try {
 		await ShardManager.init();

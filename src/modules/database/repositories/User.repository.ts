@@ -1,21 +1,20 @@
-import { Services } from "@/types/Constants";
-import { Inject, Logger } from "@nestjs/common";
-import { User } from "discord.js";
-import { UserEntity } from "../entities";
-import { PrismaService } from "../prisma/Prisma.service";
-import { DatabaseStatus } from "../types";
-import type { IUserRepository } from "./interfaces";
+import { Logger } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
+import { User } from "discord.js";
+import { PrismaService } from "nestjs-prisma";
+import { UserEntity } from "../entities";
+import { DatabaseStatus } from "../types";
+import { IUserRepository } from "./interfaces";
 
 export class UserRepository implements IUserRepository {
-	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
-  
+	public constructor(private readonly prisma: PrismaService) {}
+
 	private readonly logger = new Logger(UserRepository.name);
 
-  public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
-    return this.prisma.userSettings
-  }
+	public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
+		return this.prisma.userSettings;
+	}
 
 	public async get(userId: string): Promise<UserEntity> {
 		return await this.prisma.user.findUnique({
@@ -27,14 +26,14 @@ export class UserRepository implements IUserRepository {
 		});
 	}
 
-  public async getAll(): Promise<UserEntity[]> {
-    return await this.prisma.user.findMany({
+	public async getAll(): Promise<UserEntity[]> {
+		return await this.prisma.user.findMany({
 			include: {
-				Settings: true,
 				APIUser: true,
+				Settings: true,
 			},
 		});
-  }
+	}
 
 	public async create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
