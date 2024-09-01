@@ -1,32 +1,29 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators/";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { CurrentTranslate, type TranslationFn } from "@necord/localization";
+import { Injectable, Logger, UseGuards } from "@nestjs/common";
 import {
-	CurrentTranslate,
-	TranslationFn,
-	localizationMapByKey,
-} from "@necord/localization";
-import { Logger, UseGuards } from "@nestjs/common";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+	Ctx,
+	SlashCommand,
+	type SlashCommandContext,
+	Subcommand,
+} from "necord";
 import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
 
 @DeveloperToolsCommand()
-export class TestCommand {
-	private readonly logger = new Logger(TestCommand.name);
+export class HelloCommand {
+	private readonly logger = new Logger(HelloCommand.name);
 
 	@Subcommand({
-		name: "test",
-		description: "Command for Testing things",
-		nameLocalizations: localizationMapByKey("DeveloperTools.test.name"),
-		descriptionLocalizations: localizationMapByKey(
-			"DeveloperTools.test.description",
-		),
+		name: "hello_world",
+		description: "a simple hello",
 	})
 	@CommandConfig({ category: "🛠️ Developer Tools", disable: false })
 	@CommandPermissions({
 		user: [],
 		bot: [],
 		guildOnly: false,
-		testOnly: true,
+		testOnly: false,
 		ownerOnly: true,
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
@@ -34,6 +31,6 @@ export class TestCommand {
 		@Ctx() [interaction]: SlashCommandContext,
 		@CurrentTranslate() t: TranslationFn,
 	) {
-		interaction.reply(t("DeveloperTools.test.message"));
+		interaction.reply("Hello, World!");
 	}
 }

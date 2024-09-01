@@ -1,6 +1,6 @@
 import { Reflector } from "@nestjs/core";
 
-interface CommandConfigOptions {
+export interface CommandConfigOptions {
 	category: string;
 	disable: boolean;
 }

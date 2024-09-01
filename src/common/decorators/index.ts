@@ -1,3 +1,6 @@
-export { CommandPermissions } from "./CommandPermissions.decorator";
-export { CommandConfig } from "./CommandConfig.decorator";
+export {
+	CommandPermissions,
+	CommandPermissionsOptions,
+} from "./CommandPermissions.decorator";
+export { CommandConfig, CommandConfigOptions } from "./CommandConfig.decorator";
 export { ValidatedOptions } from "./ValidatedOptions.decorator";

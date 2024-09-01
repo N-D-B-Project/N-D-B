@@ -1,8 +1,9 @@
 import { Module } from "@nestjs/common";
-import * as Commands from "./index";
 import { CommandsService } from "./Commands.service";
+import * as Commands from "./index";
 
 @Module({
-	providers: [...Object.values(Commands), CommandsService],
+	imports: [...Object.values(Commands)],
+	providers: [CommandsService],
 })
 export class CommandsModule {}

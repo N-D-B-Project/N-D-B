@@ -1,6 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import type { ConfigService } from "@nestjs/config";
-import { GatewayIntentBits, GatewayVersion, Options, Partials } from "discord.js";
+import {
+	GatewayIntentBits,
+	GatewayVersion,
+	Options,
+	Partials,
+} from "discord.js";
 import type { NecordModuleOptions } from "necord";
 import { Config } from "./types";
 

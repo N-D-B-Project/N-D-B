@@ -1,4 +1,8 @@
-import { GuildResolver, NecordLocalizationModule, NestedLocalizationAdapter } from "@necord/localization";
+import {
+	GuildResolver,
+	NecordLocalizationModule,
+	NestedLocalizationAdapter,
+} from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -29,8 +33,11 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			inject: [ConfigService],
 			useFactory: async (config: ConfigService) => ({
 				adapter: new NestedLocalizationAdapter({
-					fallbackLocale: config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
-					locales: await new JSONLocaleLoader("./src/common/Languages/").loadTranslations(),
+					fallbackLocale:
+						config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
+					locales: await new JSONLocaleLoader(
+						"./src/common/Languages/",
+					).loadTranslations(),
 				}),
 				resolvers: GuildResolver,
 			}),
