@@ -1,13 +1,16 @@
 import {
-  LOCALIZATION_ADAPTER,
-  type NestedLocalizationAdapter,
+	LOCALIZATION_ADAPTER,
+	type NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 @Injectable()
 export class Buttons {
-	public constructor(@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter) {}
+	public constructor(
+		@Inject(LOCALIZATION_ADAPTER)
+		private readonly translate: NestedLocalizationAdapter,
+	) {}
 
 	public async Confirm(
 		locale: string,
@@ -38,6 +41,6 @@ export class Buttons {
 }
 
 export enum ConfirmButtonEnum {
-	Yes = "tes",
+	Yes = "yes",
 	No = "no",
 }
