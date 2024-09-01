@@ -1,7 +1,6 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Inject, Logger } from "@nestjs/common";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 import type {

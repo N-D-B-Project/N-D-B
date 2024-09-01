@@ -22,7 +22,9 @@ export class TopGGAutoPoster extends DJSSharderPoster {
 			this.logger.log("Started");
 		}
 		this.on("posted", (stats) => {
-			this.logger.log(`Posted stats to Top.gg | ${stats.serverCount} Server(s) | ${stats.shardCount} Shard(s)`);
+			this.logger.log(
+				`Posted stats to Top.gg | ${stats.serverCount} Server(s) | ${stats.shardCount} Shard(s)`,
+			);
 		}).on("error", (error) => {
 			this.logger.error(`Error when posting stats: ${error}`);
 		});

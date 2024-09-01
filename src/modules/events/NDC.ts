@@ -25,11 +25,15 @@ export class NDCEvents {
 	}
 
 	@On("voiceChannelJoin")
-	public onVoiceChannelJoin(@Context() [member, channel]: ContextOf<"voiceChannelJoin">) {
+	public onVoiceChannelJoin(
+		@Context() [member, channel]: ContextOf<"voiceChannelJoin">,
+	) {
 		if (!this.checkGuild(channel.guildId)) return;
-    if(this.ids.includes(channel.id)) {
-      member.voice.disconnect(`User entered in Placeholder channel: ${channel.name}`);
-    }
+		if (this.ids.includes(channel.id)) {
+			member.voice.disconnect(
+				`User entered in Placeholder channel: ${channel.name}`,
+			);
+		}
 	}
 
 	private checkGuild(guildId: string): boolean {

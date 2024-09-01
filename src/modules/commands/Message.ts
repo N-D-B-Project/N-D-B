@@ -1,7 +1,7 @@
-import { Content } from "@/types";
+import type { Content } from "@/types";
 import { messageOptions } from "@/utils/Tools";
 
-import {
+import type {
 	EmojiResolvable,
 	Message,
 	MessageEditOptions,
@@ -15,22 +15,34 @@ import {
 } from "discord.js";
 
 export class MessageTools {
-	public static async send(target: User | PartialUser | TextBasedChannel, content: Content): Promise<Message> {
+	public static async send(
+		target: User | PartialUser | TextBasedChannel,
+		content: Content,
+	): Promise<Message> {
 		const msgOptions = messageOptions(content);
 		return await target.send(msgOptions);
 	}
 
-	public static async reply(message: Message, content: Content): Promise<Message> {
+	public static async reply(
+		message: Message,
+		content: Content,
+	): Promise<Message> {
 		const msgOptions = messageOptions(content);
 		return await message.reply(msgOptions);
 	}
 
-	public static async edit(message: Message, content: Content): Promise<Message> {
+	public static async edit(
+		message: Message,
+		content: Content,
+	): Promise<Message> {
 		const msgOptions = messageOptions(content) as MessageEditOptions;
 		return await message.edit(msgOptions);
 	}
 
-	public static async react(message: Message, emoji: EmojiResolvable): Promise<MessageReaction> {
+	public static async react(
+		message: Message,
+		emoji: EmojiResolvable,
+	): Promise<MessageReaction> {
 		return await message.react(emoji);
 	}
 
@@ -42,7 +54,10 @@ export class MessageTools {
 		return await message.unpin();
 	}
 
-	public static async startThread(message: Message, options: StartThreadOptions): Promise<ThreadChannel> {
+	public static async startThread(
+		message: Message,
+		options: StartThreadOptions,
+	): Promise<ThreadChannel> {
 		return await message.startThread(options);
 	}
 

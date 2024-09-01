@@ -55,7 +55,8 @@ export class GatewayEvents {
 
 	@Once("debug")
 	public async onDebug(@Context() [data]: ContextOf<"debug">) {
-		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client) this.logger.debug(data);
+		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client)
+			this.logger.debug(data);
 	}
 
 	@On("error")
@@ -72,9 +73,14 @@ export class GatewayEvents {
 
 	@OnEvent("rest")
 	public async onRest(rest: REST) {
-		rest.on("rateLimited", async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
-			this.logger.fatal(`RateLimit on route: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`);
-		});
+		rest.on(
+			"rateLimited",
+			async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
+				this.logger.fatal(
+					`RateLimit on route: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`,
+				);
+			},
+		);
 	}
 
 	private async _setPresence(client: Client) {
@@ -105,7 +111,10 @@ export class GatewayEvents {
 		};
 
 		function setPresence() {
-			const activity = presences.activities[Math.floor(Math.random() * presences.activities.length)];
+			const activity =
+				presences.activities[
+					Math.floor(Math.random() * presences.activities.length)
+				];
 			client.user.setPresence({
 				activities: [activity],
 			});

@@ -3,8 +3,8 @@ import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 import { REST } from "discord.js";
 import { GatewayEvents } from "./Gateway";
 import { GuildEvents } from "./Guild";
-import { ThreadEvents } from "./Thread";
 import { NDCEvents } from "./NDC";
+import { ThreadEvents } from "./Thread";
 
 @Module({
 	imports: [

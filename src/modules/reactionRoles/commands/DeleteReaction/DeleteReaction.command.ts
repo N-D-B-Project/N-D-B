@@ -3,11 +3,10 @@ import {
 	CommandPermissions,
 	ValidatedOptions,
 } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Buttons } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger, UseGuards } from "@nestjs/common";
+import { Inject, Logger } from "@nestjs/common";
 import { Client, TextChannel } from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";

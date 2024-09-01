@@ -2,12 +2,12 @@ import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseSe
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import type {
-    Client,
-    CommandInteraction,
-    Guild,
-    Message,
-    Role,
-    TextChannel,
+	Client,
+	CommandInteraction,
+	Guild,
+	Message,
+	Role,
+	TextChannel,
 } from "discord.js";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";

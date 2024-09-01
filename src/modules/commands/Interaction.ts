@@ -1,6 +1,6 @@
-import { Content } from "@/types";
+import type { Content } from "@/types";
 import { messageOptions } from "@/utils/Tools";
-import {
+import type {
 	BaseMessageOptions,
 	CommandInteraction,
 	EmbedBuilder,
@@ -20,7 +20,9 @@ export class InteractionTools {
 		});
 	}
 
-	public static async deferUpdate(interaction: MessageComponentInteraction): Promise<unknown> {
+	public static async deferUpdate(
+		interaction: MessageComponentInteraction,
+	): Promise<unknown> {
 		return await interaction.deferUpdate();
 	}
 

@@ -11,7 +11,10 @@ export interface IReactionRolesEmbeds {
 		interaction: CommandInteraction,
 		{ Channel, Message, Role, Emoji, Option }: IReaction,
 	): Promise<EmbedBuilder>;
-	ReactionRoleRemovedEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
+	ReactionRoleRemovedEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
 	ReactionRoleUpdatedEmbed(
 		interaction: CommandInteraction,
 		{ Channel, Message, Role, Emoji }: IReaction,
@@ -22,8 +25,18 @@ export interface IReactionRolesEmbeds {
 		status: "Confirm" | "Cancel" | "Success",
 		ReactionCount: number | null,
 	): Promise<EmbedBuilder>;
-	UnableToCreateReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	UnableToDeleteReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
-	UnableToDeleteAllReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	UnableToUpdateReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
+	UnableToCreateReactionRoleEmbed(
+		interaction: CommandInteraction,
+	): Promise<EmbedBuilder>;
+	UnableToDeleteReactionRoleEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
+	UnableToDeleteAllReactionRoleEmbed(
+		interaction: CommandInteraction,
+	): Promise<EmbedBuilder>;
+	UnableToUpdateReactionRoleEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
 }

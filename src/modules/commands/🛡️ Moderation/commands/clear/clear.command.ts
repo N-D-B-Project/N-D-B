@@ -1,12 +1,11 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { WAIT } from "@/utils/Tools";
 import {
 	CurrentTranslate,
 	TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { Logger, UseGuards } from "@nestjs/common";
+import { Logger } from "@nestjs/common";
 import { channelMention } from "discord.js";
 import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
 import { ModerationCommand } from "../../Moderation.decorator";

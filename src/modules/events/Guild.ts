@@ -22,12 +22,16 @@ export class GuildEvents {
 	}
 
 	@On("guildUpdate")
-	public async onGuildUpdate(@Context() [oldGuild, newGuild]: ContextOf<"guildUpdate">) {
+	public async onGuildUpdate(
+		@Context() [oldGuild, newGuild]: ContextOf<"guildUpdate">,
+	) {
 		await this.database.GuildRepo().update(oldGuild, newGuild);
 	}
 
 	@On("guildMemberRemove")
-	public async onGuildMemberRemove(@Context() [member]: ContextOf<"guildMemberRemove">) {
+	public async onGuildMemberRemove(
+		@Context() [member]: ContextOf<"guildMemberRemove">,
+	) {
 		if (member.id === this.client.user.id) {
 			await this.database.GuildRepo().delete(member.guild);
 		}

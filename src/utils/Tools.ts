@@ -2,7 +2,6 @@ import util from "node:util";
 import { NestedLocalizationAdapter, TranslationFn } from "@necord/localization";
 import {
 	BaseMessageOptions,
-	CommandInteraction,
 	EmbedBuilder,
 	MessageEditOptions,
 } from "discord.js";

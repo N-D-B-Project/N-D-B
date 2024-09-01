@@ -8,16 +8,22 @@ export class JSONLocaleLoader {
 
 	public async loadTranslations() {
 		const locales: Record<string, Record<string, string>> = {};
-		const folders = fs.readdirSync(this.path).filter((f) => !this.ignoredFoldersAndFiles.includes(f));
+		const folders = fs
+			.readdirSync(this.path)
+			.filter((f) => !this.ignoredFoldersAndFiles.includes(f));
 
 		for (const langFolder of folders) {
 			const langPath = path.join(this.path, langFolder);
-			const namespaces = fs.readdirSync(langPath).filter((f) => !this.ignoredFoldersAndFiles.includes(f));
+			const namespaces = fs
+				.readdirSync(langPath)
+				.filter((f) => !this.ignoredFoldersAndFiles.includes(f));
 			const langData = {};
 
 			for (const namespace of namespaces) {
 				const namespacePath = path.join(langPath, namespace);
-				const files = fs.readdirSync(namespacePath).filter((f) => !this.ignoredFoldersAndFiles.includes(f));
+				const files = fs
+					.readdirSync(namespacePath)
+					.filter((f) => !this.ignoredFoldersAndFiles.includes(f));
 				const namespaceData = {};
 				for (const file of files) {
 					const filePath = path.join(namespacePath, file);

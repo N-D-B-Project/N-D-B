@@ -1,11 +1,10 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators/";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import {
 	CurrentTranslate,
 	TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { Logger, UseGuards } from "@nestjs/common";
+import { Logger } from "@nestjs/common";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
 

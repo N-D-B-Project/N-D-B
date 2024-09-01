@@ -1,7 +1,10 @@
 import { MessageTools } from "@/modules/commands/Message";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
-import { LOCALIZATION_ADAPTER, NestedLocalizationAdapter } from "@necord/localization";
+import {
+	LOCALIZATION_ADAPTER,
+	NestedLocalizationAdapter,
+} from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { Client, EmbedBuilder, roleMention } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
@@ -12,28 +15,37 @@ import { ReactionRoles } from "../types/constants";
 export class ReactionRolesEvents {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(ReactionRoles.Service) private readonly reactionRoles: IReactionRolesService,
-		@Inject(LOCALIZATION_ADAPTER) private readonly translate: NestedLocalizationAdapter,
+		@Inject(ReactionRoles.Service)
+		private readonly reactionRoles: IReactionRolesService,
+		@Inject(LOCALIZATION_ADAPTER)
+		private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
 	) {}
 
 	@On("messageReactionAdd")
-	public async onReactionRolesAdd(@Context() [reaction, user]: ContextOf<"messageReactionAdd">) {
+	public async onReactionRolesAdd(
+		@Context() [reaction, user]: ContextOf<"messageReactionAdd">,
+	) {
 		if (user === this.client.user) return;
 		const TIMER: number = 10 * 1000;
 		const ReactionCooldown = new Set();
 		const ClientCooldown = new Set();
 		const data = await this.reactionRoles.getAll(reaction.message.guild);
-		const GuildData = await this.database.GuildRepo().get(reaction.message.guildId);
+		const GuildData = await this.database
+			.GuildRepo()
+			.get(reaction.message.guildId);
 		const Guild = reaction.message.guild;
 		const Member = Guild.members.cache.get(user.id);
 
 		if (!data) return;
 
 		for (const Data of data) {
-			const SplitEmoji = Data.Emoji.replace(/<:|>/g, "")
+			const SplitEmoji = Data.Emoji.replace(/<:|>/g, "");
 
-			if (reaction.emoji.identifier === SplitEmoji && reaction.message.id === Data.Message) {
+			if (
+				reaction.emoji.identifier === SplitEmoji &&
+				reaction.message.id === Data.Message
+			) {
 				const Role = Guild.roles.cache.get(Data.Role);
 				const Message = Data.Message;
 				const Channel = Data.Channel;
@@ -226,7 +238,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 1) {
 					try {
-						if (!Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							!Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.add(
 									Role,
@@ -260,7 +276,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 2) {
 					try {
-						if (!Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							!Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.add(
 									Role,
@@ -290,7 +310,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 3) {
 					try {
-						if (Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.remove(
 									Role,
@@ -301,7 +325,9 @@ export class ReactionRolesEvents {
 								)
 								.catch(() => {});
 							if (GuildData.Settings.ReactionDM) {
-								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(() => {});
+								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
+									() => {},
+								);
 							}
 							ReactionCooldown.add(user.id);
 							setTimeout(() => {
@@ -320,7 +346,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 4) {
 					try {
-						if (Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.remove(
 									Role,
@@ -332,7 +362,9 @@ export class ReactionRolesEvents {
 								.catch(() => {});
 							ReactionCooldown.add(user.id);
 							if (GuildData.Settings.ReactionDM) {
-								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(() => {});
+								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
+									() => {},
+								);
 							}
 							setTimeout(() => {
 								ReactionCooldown.delete(user.id);
@@ -350,7 +382,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 5) {
 					try {
-						if (Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles.remove(
 								Role,
 								this.translate.getTranslation(
@@ -364,7 +400,9 @@ export class ReactionRolesEvents {
 								.catch(() => {});
 
 							if (GuildData.Settings.ReactionDM) {
-								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(() => {});
+								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
+									() => {},
+								);
 							}
 							ReactionCooldown.add(user.id);
 							setTimeout(() => {
@@ -383,7 +421,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 6) {
 					try {
-						if (Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							reaction.message.reactions.cache
 								.find((r) => r.emoji.name === Emoji.name)
 								.users.remove(user.id)
@@ -405,7 +447,11 @@ export class ReactionRolesEvents {
 
 							return;
 						}
-						if (!Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							!Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							reaction.message.reactions.cache
 								.find((r) => r.emoji.name === Emoji.name)
 								.users.remove(user.id)
@@ -442,14 +488,18 @@ export class ReactionRolesEvents {
 	}
 
 	@On("messageReactionRemove")
-	public async onReactionRolesRemove(@Context() [reaction, user]: ContextOf<"messageReactionAdd">) {
+	public async onReactionRolesRemove(
+		@Context() [reaction, user]: ContextOf<"messageReactionAdd">,
+	) {
 		if (user === this.client.user) return;
 
 		const TIMER: number = 10 * 1000;
 		const ReactionCooldown = new Set();
 		const ClientCooldown = new Set();
 		const data = await this.reactionRoles.getAll(reaction.message.guild);
-		const GuildData = await this.database.GuildRepo().get(reaction.message.guildId);
+		const GuildData = await this.database
+			.GuildRepo()
+			.get(reaction.message.guildId);
 		const Member = reaction.message.guild.members.cache.get(user.id);
 		const Guild = reaction.message.guild;
 		if (!data) return;
@@ -457,7 +507,10 @@ export class ReactionRolesEvents {
 		for (const Data of data) {
 			const SplitEmoji = Data.Emoji.replace(/<:|>/g, "");
 
-			if (reaction.emoji.identifier === SplitEmoji && reaction.message.id === Data.Message) {
+			if (
+				reaction.emoji.identifier === SplitEmoji &&
+				reaction.message.id === Data.Message
+			) {
 				const Role = Guild.roles.cache.get(Data.Role);
 				const Message = Data.Message;
 				const Channel = Data.Channel;
@@ -650,7 +703,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 1) {
 					try {
-						if (Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.remove(
 									Role,
@@ -667,7 +724,9 @@ export class ReactionRolesEvents {
 
 							if (GuildData.Settings.ReactionDM) {
 								if (ClientCooldown.has(reaction.message.guildId)) return;
-								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(() => {});
+								MessageTools.send(user, { embeds: [RemoveEmbed] }).catch(
+									() => {},
+								);
 								ClientCooldown.add(reaction.message.guildId);
 								setTimeout(() => {
 									ClientCooldown.delete(reaction.message.guildId);
@@ -686,7 +745,11 @@ export class ReactionRolesEvents {
 
 				if (Option === 4) {
 					try {
-						if (!Member.roles.cache.find((r) => r.name.toLowerCase() === Role.name.toLowerCase())) {
+						if (
+							!Member.roles.cache.find(
+								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
+							)
+						) {
 							await Member.roles
 								.add(
 									Role,

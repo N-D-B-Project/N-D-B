@@ -1,13 +1,11 @@
 import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import type { Config } from "@/modules/config/types";
 import {
 	CurrentTranslate,
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";

@@ -1,9 +1,9 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { Prisma } from "@prisma/client";
-import { DefaultArgs } from "@prisma/client/runtime/library";
-import { Guild } from "discord.js";
+import type { Prisma } from "@prisma/client";
+import type { DefaultArgs } from "@prisma/client/runtime/library";
+import type { Guild } from "discord.js";
 import { PrismaService } from "nestjs-prisma";
-import { GuildEntity } from "../entities";
+import type { GuildEntity } from "../entities";
 import { DatabaseStatus } from "../types";
 import type { IGuildRepository } from "./interfaces";
 

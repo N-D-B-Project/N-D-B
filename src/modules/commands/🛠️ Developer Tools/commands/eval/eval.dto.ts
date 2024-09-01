@@ -5,8 +5,12 @@ export class EvalDTO {
 	@StringOption({
 		name: "code",
 		description: "Code to begin evaluated",
-		name_localizations: localizationMapByKey("DeveloperTools.eval.options.code.name"),
-		description_localizations: localizationMapByKey("DeveloperTools.eval.options.code.description"),
+		name_localizations: localizationMapByKey(
+			"DeveloperTools.eval.options.code.name",
+		),
+		description_localizations: localizationMapByKey(
+			"DeveloperTools.eval.options.code.description",
+		),
 		required: true,
 		autocomplete: false,
 	})
