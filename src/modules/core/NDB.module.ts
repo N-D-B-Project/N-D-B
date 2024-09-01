@@ -28,6 +28,7 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 		NecordPaginationModule.forRoot({
 			allowSkip: false,
 			allowTraversal: false,
+			buttonsPosition: "end",
 		}),
 		NecordLocalizationModule.forRootAsync({
 			inject: [ConfigService],
