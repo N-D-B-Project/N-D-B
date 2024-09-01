@@ -1,4 +1,4 @@
-import { Logger } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { DefaultArgs } from "@prisma/client/runtime/library";
 import { User } from "discord.js";
@@ -7,6 +7,7 @@ import { UserEntity } from "../entities";
 import { DatabaseStatus } from "../types";
 import { IUserRepository } from "./interfaces";
 
+@Injectable()
 export class UserRepository implements IUserRepository {
 	public constructor(private readonly prisma: PrismaService) {}
 
@@ -35,7 +36,9 @@ export class UserRepository implements IUserRepository {
 		});
 	}
 
-	public async create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
+	public async create(
+		user: User,
+	): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
 		const callback = await this.prisma.user
 			.create({

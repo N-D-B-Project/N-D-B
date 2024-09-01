@@ -4,9 +4,7 @@ import { Repositories } from "../types/constants";
 import { GuildRepository } from "./Guild.repository";
 import { UserRepository } from "./User.repository";
 
-const providers: Provider<
-	GuildRepository | UserRepository
->[] = [
+const providers: Provider<GuildRepository | UserRepository>[] = [
 	{
 		provide: Repositories.Guild,
 		useClass: GuildRepository,

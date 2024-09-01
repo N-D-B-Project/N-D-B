@@ -34,7 +34,9 @@ export class GuildRepository implements IGuildRepository {
 		});
 	}
 
-	public async create(guild: Guild): Promise<{ callback: void | GuildEntity; status: DatabaseStatus }> {
+	public async create(
+		guild: Guild,
+	): Promise<{ callback: void | GuildEntity; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
 		const callback = await this.prisma.guild
 			.create({

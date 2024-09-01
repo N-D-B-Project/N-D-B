@@ -1,14 +1,12 @@
 import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression, Timeout } from "@nestjs/schedule";
-import { PrismaService } from "nestjs-prisma";
-import { IDatabaseService } from "../database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
 
 @Injectable()
 export class ScheduleService {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		private readonly prisma: PrismaService,
 	) {}
 
 	private readonly logger = new Logger(ScheduleService.name);
