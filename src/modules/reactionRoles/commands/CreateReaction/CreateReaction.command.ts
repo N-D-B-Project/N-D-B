@@ -1,20 +1,28 @@
-import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/decorators/";
+import {
+	CommandConfig,
+	CommandPermissions,
+	ValidatedOptions,
+} from "@/common/decorators/";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger, UseGuards } from "@nestjs/common";
 import { Client, TextChannel } from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
-import type { IReactionRolesEmbeds, IReactionRolesService } from "../../interfaces";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
+import type {
+	IReactionRolesEmbeds,
+	IReactionRolesService,
+} from "../../interfaces";
 import type { IReaction } from "../../types";
 import { ReactionRoles } from "../../types/constants";
 import { CreateReactionDTO } from "./CreateReaction.dto";
-import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 
 @ReactionRolesCommand()
 export class CreateReactionCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,
+		@Inject(ReactionRoles.Service)
+		private readonly reaction: IReactionRolesService,
 		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
 		private readonly client: Client,
 	) {}
@@ -25,17 +33,22 @@ export class CreateReactionCommand {
 		name: "create",
 		description: "Create an ReactionRole in the server",
 		nameLocalizations: localizationMapByKey("ReactionRoles.create.name"),
-		descriptionLocalizations: localizationMapByKey("ReactionRoles.create.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"ReactionRoles.create.description",
+		),
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
-		guildOnly: false,testOnly: true,
+		guildOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
-	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @ValidatedOptions() dto: CreateReactionDTO) {
+	public async onCommandRun(
+		@Ctx() [interaction]: SlashCommandContext,
+		@ValidatedOptions() dto: CreateReactionDTO,
+	) {
 		const Channel = dto.channel as TextChannel;
 		const MessageID = dto.messageId;
 		const Message = await Channel.messages.fetch(MessageID);
@@ -44,7 +57,15 @@ export class CreateReactionCommand {
 		let Option = dto.option;
 		if (!Option || Option > 6 || Number.isNaN(Option)) Option = 1;
 
-		await this.reaction.CheckParams(this.client, interaction, Channel, MessageID, Message, Role, Emoji);
+		await this.reaction.CheckParams(
+			this.client,
+			interaction,
+			Channel,
+			MessageID,
+			Message,
+			Role,
+			Emoji,
+		);
 
 		const data: IReaction = {
 			Channel: Channel.id,
@@ -57,8 +78,12 @@ export class CreateReactionCommand {
 
 		if (Created.status === "Created") {
 			await MessageTools.react(Message, Emoji);
-			return await interaction.reply({ embeds: [await this.Embeds.ReactionRoleCreatedEmbed(interaction, data)] });
+			return await interaction.reply({
+				embeds: [await this.Embeds.ReactionRoleCreatedEmbed(interaction, data)],
+			});
 		}
-		return await interaction.reply({ embeds: [await this.Embeds.UnableToCreateReactionRoleEmbed(interaction)] });
+		return await interaction.reply({
+			embeds: [await this.Embeds.UnableToCreateReactionRoleEmbed(interaction)],
+		});
 	}
 }

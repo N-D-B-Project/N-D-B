@@ -1,5 +1,5 @@
 import {
-	CommandPermissions,
+	CommandPermissionsKey,
 	type CommandPermissionsOptions,
 } from "@/common/decorators";
 import {
@@ -50,7 +50,7 @@ export class CommandsService implements OnApplicationBootstrap {
 			this.slashCommandService.remove(command.getName());
 
 			const perms: CommandPermissionsOptions = this.reflector.get(
-				CommandPermissions.KEY,
+				CommandPermissionsKey,
 				command.getHandler(),
 			);
 			const guilds = [];
@@ -86,7 +86,7 @@ export class CommandsService implements OnApplicationBootstrap {
 			this.slashCommandService.remove(command.getName());
 
 			const perms: CommandPermissionsOptions = this.reflector.get(
-				CommandPermissions.KEY,
+				CommandPermissionsKey,
 				command.getHandler(),
 			);
 			const guilds = [];

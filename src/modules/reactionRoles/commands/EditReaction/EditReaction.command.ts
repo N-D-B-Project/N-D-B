@@ -1,19 +1,27 @@
-import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/decorators";
+import {
+	CommandConfig,
+	CommandPermissions,
+	ValidatedOptions,
+} from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { Buttons } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { Inject, Logger, UseGuards } from "@nestjs/common";
 import { Client, TextChannel } from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
-import type { IReactionRolesEmbeds, IReactionRolesService } from "../../interfaces";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
+import type {
+	IReactionRolesEmbeds,
+	IReactionRolesService,
+} from "../../interfaces";
 import { ReactionRoles } from "../../types/constants";
 import { EditReactionDTO } from "./EditReaction.dto";
-import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 
 @ReactionRolesCommand()
 export class EditReactionCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service) private readonly reaction: IReactionRolesService,
+		@Inject(ReactionRoles.Service)
+		private readonly reaction: IReactionRolesService,
 		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
 		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 		private readonly client: Client,
@@ -29,18 +37,29 @@ export class EditReactionCommand {
 	@CommandPermissions({
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
-		guildOnly: false,testOnly: true,
+		guildOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
-	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @ValidatedOptions() dto: EditReactionDTO) {
+	public async onCommandRun(
+		@Ctx() [interaction]: SlashCommandContext,
+		@ValidatedOptions() dto: EditReactionDTO,
+	) {
 		const Channel = dto.channel as TextChannel;
 		const MessageID = dto.messageId;
 		const Message = await Channel.messages.fetch(MessageID);
 		const Role = dto.role;
 		const Emoji = dto.emoji;
 
-		await this.reaction.CheckParams(this.client, interaction, Channel, MessageID, Message, Role, Emoji);
+		await this.reaction.CheckParams(
+			this.client,
+			interaction,
+			Channel,
+			MessageID,
+			Message,
+			Role,
+			Emoji,
+		);
 
 		const REACT = await this.reaction.Delete(interaction.guild, {
 			Channel: Channel.id,
@@ -50,10 +69,21 @@ export class EditReactionCommand {
 		});
 
 		if (REACT.status === "Deleted") {
-			await interaction.reply({ embeds: [await this.Embeds.ReactionRoleRemovedEmbed(interaction, Message)] });
+			await interaction.reply({
+				embeds: [
+					await this.Embeds.ReactionRoleRemovedEmbed(interaction, Message),
+				],
+			});
 			await Message.reactions.cache.get(Emoji).remove();
 		} else {
-			interaction.reply({ embeds: [await this.Embeds.UnableToDeleteReactionRoleEmbed(interaction, Message)] });
+			interaction.reply({
+				embeds: [
+					await this.Embeds.UnableToDeleteReactionRoleEmbed(
+						interaction,
+						Message,
+					),
+				],
+			});
 		}
 	}
 }

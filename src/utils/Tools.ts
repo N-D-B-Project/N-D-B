@@ -1,6 +1,11 @@
 import util from "node:util";
 import { NestedLocalizationAdapter, TranslationFn } from "@necord/localization";
-import { BaseMessageOptions, CommandInteraction, EmbedBuilder, MessageEditOptions } from "discord.js";
+import {
+	BaseMessageOptions,
+	CommandInteraction,
+	EmbedBuilder,
+	MessageEditOptions,
+} from "discord.js";
 import ms from "parse-ms";
 
 export const Timer = async (
@@ -12,24 +17,40 @@ export const Timer = async (
 	const time = ms(number);
 	const days =
 		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Days", translateInfo)
+			? (translate as NestedLocalizationAdapter).getTranslation(
+					"Tools/Tools:Timer:Days",
+					translateInfo,
+				)
 			: (translate as TranslationFn)("Tools/Tools:Timer:Days");
 	const hours =
 		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Hours", translateInfo)
+			? (translate as NestedLocalizationAdapter).getTranslation(
+					"Tools/Tools:Timer:Hours",
+					translateInfo,
+				)
 			: (translate as TranslationFn)("Tools/Tools:Timer:Hours");
 	const minutes =
 		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Minutes", translateInfo)
+			? (translate as NestedLocalizationAdapter).getTranslation(
+					"Tools/Tools:Timer:Minutes",
+					translateInfo,
+				)
 			: (translate as TranslationFn)("Tools/Tools:Timer:Minutes");
 	const seconds =
 		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation("Tools/Tools:Timer:Seconds", translateInfo)
+			? (translate as NestedLocalizationAdapter).getTranslation(
+					"Tools/Tools:Timer:Seconds",
+					translateInfo,
+				)
 			: (translate as TranslationFn)("Tools/Tools:Timer:Seconds");
 	switch (type) {
 		case "normal":
 			return ` ${time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${
-				time.minutes ? (time.minutes >= 10 ? time.minutes : `0${time.minutes}`) : "00"
+				time.minutes
+					? time.minutes >= 10
+						? time.minutes
+						: `0${time.minutes}`
+					: "00"
 			}:${time.seconds ? (time.seconds > 10 ? time.seconds : `0${time.seconds}`) : ""}`;
 		case "details":
 			return ` 
@@ -41,9 +62,15 @@ export const Timer = async (
 	}
 };
 
-export const messageOptions = (content: string | EmbedBuilder | BaseMessageOptions): BaseMessageOptions => {
+export const messageOptions = (
+	content: string | EmbedBuilder | BaseMessageOptions,
+): BaseMessageOptions => {
 	const options: BaseMessageOptions | MessageEditOptions =
-		typeof content === "string" ? { content } : content instanceof EmbedBuilder ? { embeds: [content] } : content;
+		typeof content === "string"
+			? { content }
+			: content instanceof EmbedBuilder
+				? { embeds: [content] }
+				: content;
 
 	return options;
 };

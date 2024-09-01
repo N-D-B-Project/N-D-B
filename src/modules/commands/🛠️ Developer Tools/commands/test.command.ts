@@ -29,7 +29,6 @@ export class TestCommand {
 		testOnly: true,
 		ownerOnly: true,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
 		@CurrentTranslate() t: TranslationFn,

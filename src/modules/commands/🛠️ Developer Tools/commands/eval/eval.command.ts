@@ -2,7 +2,11 @@ import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import type { Config } from "@/modules/config/types";
-import { CurrentTranslate, type TranslationFn, localizationMapByKey } from "@necord/localization";
+import {
+	CurrentTranslate,
+	type TranslationFn,
+	localizationMapByKey,
+} from "@necord/localization";
 import { UseGuards } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { EmbedBuilder, codeBlock } from "discord.js";
@@ -17,9 +21,12 @@ export class EvalCommand {
 
 	@Subcommand({
 		name: "evaluate",
-		description: "Evaluate some codes to test it without restart the bot every time",
+		description:
+			"Evaluate some codes to test it without restart the bot every time",
 		nameLocalizations: localizationMapByKey("DeveloperTools.eval.name"),
-		descriptionLocalizations: localizationMapByKey("DeveloperTools.eval.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"DeveloperTools.eval.description",
+		),
 	})
 	@CommandConfig({
 		category: "🛠️ Developer Tools",
@@ -32,14 +39,17 @@ export class EvalCommand {
 		testOnly: true,
 		ownerOnly: true,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
 		@Options() { code }: EvalDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
 		try {
-			if (this.config.getOrThrow<Config["EvalBadKeys"]>("EvalBadKeys").some((key) => code.includes(key))) {
+			if (
+				this.config
+					.getOrThrow<Config["EvalBadKeys"]>("EvalBadKeys")
+					.some((key) => code.includes(key))
+			) {
 				return await interaction.reply({
 					content: t("DeveloperTools.eval.BadKey"),
 				});

@@ -42,7 +42,6 @@
       "\t\ttestOnly: true,",
       "\t\townerOnly: true,",
       "\t})",
-      "\t@UseGuards(CommandConfigGuard, CommandPermissionsGuard)",
       "\tpublic async onCommandRun(@Ctx() [interaction]: SlashCommandContext, @CurrentTranslate() t: TranslationFn) {",
       "\t\t",
       "\t}",

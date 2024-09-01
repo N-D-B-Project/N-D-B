@@ -18,7 +18,7 @@ export class HelloCommand {
 		name: "hello_world",
 		description: "a simple hello",
 	})
-	@CommandConfig({ category: "🛠️ Developer Tools", disable: false })
+	@CommandConfig({ category: "🛠️ Developer Tools", disable: true })
 	@CommandPermissions({
 		user: [],
 		bot: [],
@@ -26,7 +26,6 @@ export class HelloCommand {
 		testOnly: false,
 		ownerOnly: true,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
 		@CurrentTranslate() t: TranslationFn,
