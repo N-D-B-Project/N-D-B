@@ -3,6 +3,11 @@ import {
 	type CommandPermissionsOptions,
 } from "@/common/decorators";
 import {
+	CommandConfig,
+	CommandConfigKey,
+	CommandConfigOptions,
+} from "@/common/decorators/";
+import {
 	Injectable,
 	Logger,
 	type OnApplicationBootstrap,
@@ -48,7 +53,10 @@ export class CommandsService implements OnApplicationBootstrap {
 		this.logger.verbose(`${slashCommands.length} SlashCommand (s) explored`);
 		for (const command of slashCommands) {
 			this.slashCommandService.remove(command.getName());
-
+			const config: CommandConfigOptions = this.reflector.get(
+				CommandConfigKey,
+				command.getHandler(),
+			);
 			const perms: CommandPermissionsOptions = this.reflector.get(
 				CommandPermissionsKey,
 				command.getHandler(),
@@ -71,7 +79,7 @@ export class CommandsService implements OnApplicationBootstrap {
 			if (!guilds) return;
 
 			this.logger.verbose(
-				`Updating metadata for SlashCommand : ${command.getName()}`,
+				`Updating metadata for SlashCommand : [${config.category}] ${command.getName()}`,
 			);
 
 			command.setGuilds(guilds ?? []);
@@ -84,7 +92,10 @@ export class CommandsService implements OnApplicationBootstrap {
 		this.logger.verbose(`${subCommands.length} SubCommand (s) explored`);
 		for (const command of subCommands) {
 			this.slashCommandService.remove(command.getName());
-
+			const config: CommandConfigOptions = this.reflector.get(
+				CommandConfigKey,
+				command.getHandler(),
+			);
 			const perms: CommandPermissionsOptions = this.reflector.get(
 				CommandPermissionsKey,
 				command.getHandler(),
@@ -107,7 +118,7 @@ export class CommandsService implements OnApplicationBootstrap {
 			if (!guilds) return;
 
 			this.logger.verbose(
-				`Updating metadata for SubCommand : ${command.getName()}`,
+				`Updating metadata for SubCommand : [${config.category}] ${command.getName()}`,
 			);
 
 			command.setGuilds(guilds ?? []);
