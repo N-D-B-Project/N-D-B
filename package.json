@@ -30,7 +30,7 @@
 		"format": "yarn dlx @biomejs/biome format --write ./",
 		"lint": "yarn dlx @biomejs/biome lint ./",
 		"check": "yarn dlx @biomejs/biome check --apply ./",
-		"postinstall": "prisma generate && husky install || true"
+		"postinstall": "prisma generate && husky || true"
 	},
 	"dependencies": {
 		"@necord/localization": "^3.1.3",
