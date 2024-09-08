@@ -31,13 +31,12 @@ export class CommandConfigGuard implements CanActivate {
 		const context = NecordExecutionContext.create(executionContext);
 		const args = context.getArgByIndex(0);
 		const interaction = args[0] as ChatInputCommandInteraction;
-
+		const locale = interaction.inGuild()
+			? interaction.guildLocale
+			: (interaction as ChatInputCommandInteraction).locale;
 		if (commandConfig.disable) {
 			interaction.reply(
-				this.translate.getTranslation(
-					"Tools.Command.Checker.Disable",
-					interaction.guildLocale,
-				),
+				this.translate.getTranslation("Tools.Command.Checker.Disable", locale),
 			);
 			return false;
 		}

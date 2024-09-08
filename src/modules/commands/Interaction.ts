@@ -10,6 +10,7 @@ import type {
 	MessageComponentInteraction,
 } from "discord.js";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <Utility Class>
 export class InteractionTools {
 	public static async deferReply(
 		interaction: CommandInteraction | MessageComponentInteraction,

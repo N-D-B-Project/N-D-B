@@ -8,15 +8,15 @@ import type {
 	MessageReaction,
 	PartialUser,
 	StartThreadOptions,
-	TextBasedChannel,
 	TextChannel,
 	ThreadChannel,
 	User,
 } from "discord.js";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <Utility Class>
 export class MessageTools {
 	public static async send(
-		target: User | PartialUser | TextBasedChannel,
+		target: User | PartialUser | TextChannel,
 		content: Content,
 	): Promise<Message> {
 		const msgOptions = messageOptions(content);

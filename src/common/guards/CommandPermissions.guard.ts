@@ -36,6 +36,10 @@ export class CommandPermissionsGuard implements CanActivate {
 		const args = context.getArgByIndex(0);
 		const interaction = args[0] as ChatInputCommandInteraction;
 
+		if (interaction.channel.isDMBased()) {
+			return true;
+		}
+
 		if (permissions.bot) {
 			if (!interaction.guild.members.me.permissions.has(permissions.bot)) {
 				interaction.reply(

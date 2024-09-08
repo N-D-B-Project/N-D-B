@@ -1,3 +1,4 @@
+import * as Modules from "@/modules";
 import {
 	GuildResolver,
 	NecordLocalizationModule,
@@ -7,14 +8,8 @@ import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
-import { CommandsModule } from "../commands/Commands.module";
-import { ComponentsModule } from "../components/Components.module";
 import { JSONLocaleLoader, NecordConfigService, config } from "../config";
 import type { Config } from "../config/types";
-import { DatabaseModule } from "../database/database.module";
-import { EventsModule } from "../events/Events.module";
-import { ReactionRolesModule } from "../reactionRoles/ReactionRoles.module";
-import { ScheduleModule } from "../schedule/schedule.module";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
 
 @Module({
@@ -48,12 +43,7 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			cache: true,
 			load: [config],
 		}),
-		DatabaseModule,
-		ScheduleModule,
-		CommandsModule,
-		ComponentsModule,
-		EventsModule,
-		ReactionRolesModule,
+		...Object.values(Modules),
 	],
 	providers: [NDBServiceProvider],
 	exports: [NDBServiceProvider],

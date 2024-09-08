@@ -7,7 +7,7 @@ import {
 	Partials,
 } from "discord.js";
 import type { NecordModuleOptions } from "necord";
-import { Config } from "./types";
+import type { Config } from "./types";
 
 @Injectable()
 export class NecordConfigService {
