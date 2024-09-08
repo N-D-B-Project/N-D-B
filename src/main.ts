@@ -2,7 +2,13 @@ import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { NodeHandler, PrismaExceptionFilter, ShardingManager, TopGGAutoPoster } from "./lib";
+import {
+	NodeHandler,
+	PrismaExceptionFilter,
+	ShardingManager,
+	TopGGAutoPoster,
+	otelSDK,
+} from "./lib";
 
 async function bootstrap() {
 	NodeHandler();
@@ -11,11 +17,15 @@ async function bootstrap() {
 	const httpAdapter = app.getHttpAdapter();
 	const logger = new Logger("Main");
 	const ShardManager = new ShardingManager(configService);
-	const TopGGPoster = new TopGGAutoPoster(configService.getOrThrow("TopGGToken"), ShardManager);
+	const TopGGPoster = new TopGGAutoPoster(
+		configService.getOrThrow("TopGGToken"),
+		ShardManager,
+	);
 
 	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
 	try {
+		otelSDK.start();
 		await ShardManager.init();
 		await TopGGPoster.init();
 	} catch (error) {
