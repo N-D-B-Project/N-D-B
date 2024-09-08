@@ -13,7 +13,7 @@ import type { Config } from "./types";
 export class NecordConfigService {
 	public constructor(private readonly config: ConfigService) {}
 
-	createNecordOptions(): NecordModuleOptions {
+	public createNecordOptions(): NecordModuleOptions {
 		return {
 			token: this.config.getOrThrow<Config["Discord"]>("Discord").Token,
 			skipRegistration: true,
@@ -29,7 +29,24 @@ export class NecordConfigService {
 				parse: ["roles", "users"],
 				repliedUser: false,
 			},
-			makeCache: Options.cacheEverything(),
+			makeCache: Options.cacheWithLimits({
+				...Options.DefaultMakeCacheSettings,
+				GuildMemberManager: {
+					maxSize: 200,
+					keepOverLimit: (member) => member.id === member.client.user.id,
+				},
+			}),
+			sweepers: {
+				...Options.DefaultSweeperSettings,
+				messages: {
+					interval: 3600,
+					lifetime: 1800,
+				},
+				users: {
+					interval: 3600,
+					filter: () => (user) => user.bot && user.id !== user.client.user.id,
+				},
+			},
 			partials: [
 				Partials.Channel,
 				Partials.GuildMember,
@@ -60,6 +77,6 @@ export class NecordConfigService {
 				GatewayIntentBits.AutoModerationConfiguration,
 				GatewayIntentBits.AutoModerationExecution,
 			],
-		} as never;
+		};
 	}
 }
