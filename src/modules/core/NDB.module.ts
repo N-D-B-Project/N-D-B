@@ -1,42 +1,24 @@
 import * as Modules from "@/modules";
-import {
-	GuildResolver,
-	NecordLocalizationModule,
-	NestedLocalizationAdapter,
-} from "@necord/localization";
+import { NecordLocalizationModule } from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { NecordModule } from "necord";
-import { JSONLocaleLoader, NecordConfigService, config } from "../config";
-import type { Config } from "../config/types";
+import { NecordConfigService, config } from "../config";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
 
 @Module({
 	imports: [
 		NecordModule.forRootAsync({
 			inject: [ConfigService],
-			useFactory: async (config: ConfigService) => ({
-				...new NecordConfigService(config).createNecordOptions(),
-			}),
+			useClass: NecordConfigService,
 		}),
-		NecordPaginationModule.forRoot({
-			allowSkip: false,
-			allowTraversal: false,
-			buttonsPosition: "end",
+		NecordPaginationModule.forRootAsync({
+			useClass: NecordConfigService,
 		}),
 		NecordLocalizationModule.forRootAsync({
 			inject: [ConfigService],
-			useFactory: async (config: ConfigService) => ({
-				adapter: new NestedLocalizationAdapter({
-					fallbackLocale:
-						config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
-					locales: await new JSONLocaleLoader(
-						"./src/common/Languages/",
-					).loadTranslations(),
-				}),
-				resolvers: GuildResolver,
-			}),
+			useClass: NecordConfigService,
 		}),
 		ConfigModule.forRoot({
 			isGlobal: true,

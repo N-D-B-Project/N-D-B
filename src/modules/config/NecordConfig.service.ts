@@ -1,5 +1,11 @@
+import {
+	GuildResolver,
+	NecordLocalizationOptions,
+	NestedLocalizationAdapter,
+} from "@necord/localization";
+import { NecordPaginationOptions } from "@necord/pagination";
 import { Injectable } from "@nestjs/common";
-import type { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
 import {
 	GatewayIntentBits,
 	GatewayVersion,
@@ -7,6 +13,7 @@ import {
 	Partials,
 } from "discord.js";
 import type { NecordModuleOptions } from "necord";
+import { JSONLocaleLoader } from "./JSONLocale.loader";
 import type { Config } from "./types";
 
 @Injectable()
@@ -77,6 +84,27 @@ export class NecordConfigService {
 				GatewayIntentBits.AutoModerationConfiguration,
 				GatewayIntentBits.AutoModerationExecution,
 			],
+		};
+	}
+
+	public createNecordPaginationOptions(): NecordPaginationOptions {
+		return {
+			allowSkip: false,
+			allowTraversal: false,
+			buttonsPosition: "end",
+		};
+	}
+
+	public async createNecordLocalizationOptions(): Promise<NecordLocalizationOptions> {
+		return {
+			adapter: new NestedLocalizationAdapter({
+				fallbackLocale:
+					this.config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
+				locales: await new JSONLocaleLoader(
+					"./src/common/Languages/",
+				).loadTranslations(),
+			}),
+			resolvers: GuildResolver,
 		};
 	}
 }
