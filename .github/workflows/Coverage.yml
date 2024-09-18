@@ -15,7 +15,7 @@ jobs:
   generate-coverage-pr:
     strategy:
       matrix:
-        node-version: [20.6.1]
+        node-version: [20.9.0]
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +37,7 @@ jobs:
       - name: Generate coverage report
         run: |
           yarn test --coverage
-          
+
       - name: Setup files
         run: |
           mkdir -p ../coverage/client
@@ -60,13 +60,13 @@ jobs:
           base: "Coverage-Report"
           labels: "automated"
           token: ${{ secrets.GITHUB_TOKEN }}
-    
+
       - name: Merge Pull Request
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.open-pr.outputs.pull-request-number }}
-          
+
       - name: "Delete PR Branch"
         run: git push origin --delete test/actions/coverage-report
 

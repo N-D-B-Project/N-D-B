@@ -3,11 +3,11 @@ name: Run Tests
 on:
   push:
     branches: ["master"]
-    paths: 
+    paths:
       - "**/*.ts"
   pull_request:
     branches: ["master"]
-    paths: 
+    paths:
       - "**/*.ts"
 
 jobs:
@@ -16,25 +16,25 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.6.1]
+        node-version: [20.9.0]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: yarn install --immutable
-      env:
-        # Disable Husky in CI
-        # https://typicode.github.io/husky/how-to.html#skipping-git-hooks
-        HUSKY: "0"
+      - name: Install dependencies
+        run: yarn install --immutable
+        env:
+          # Disable Husky in CI
+          # https://typicode.github.io/husky/how-to.html#skipping-git-hooks
+          HUSKY: "0"
 
-    - name: Run tests
-      run: yarn test
-      env:
-        RUST_BACKTRACE: "full"
+      - name: Run tests
+        run: yarn test
+        env:
+          RUST_BACKTRACE: "full"
