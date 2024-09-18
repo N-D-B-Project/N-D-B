@@ -3,11 +3,15 @@ import {
 	CommandPermissions,
 	ValidatedOptions,
 } from "@/common/decorators/";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger, UseGuards } from "@nestjs/common";
-import { Client, TextChannel } from "discord.js";
+import { Inject, Logger } from "@nestjs/common";
+import {
+	ApplicationIntegrationType,
+	Client,
+	InteractionContextType,
+	TextChannel,
+} from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type {
@@ -36,6 +40,8 @@ export class CreateReactionCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.create.description",
 		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({

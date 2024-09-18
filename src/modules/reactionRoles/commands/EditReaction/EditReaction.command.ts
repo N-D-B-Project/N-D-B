@@ -5,8 +5,14 @@ import {
 } from "@/common/decorators";
 import { Buttons } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
+import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
-import { Client, TextChannel } from "discord.js";
+import {
+	ApplicationIntegrationType,
+	Client,
+	InteractionContextType,
+	TextChannel,
+} from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type {
@@ -30,7 +36,13 @@ export class EditReactionCommand {
 
 	@Subcommand({
 		name: "edit",
+		nameLocalizations: localizationMapByKey("ReactionRoles.edit.name"),
 		description: "Edit an ReactionRole",
+		descriptionLocalizations: localizationMapByKey(
+			"ReactionRoles.edit.description",
+		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({

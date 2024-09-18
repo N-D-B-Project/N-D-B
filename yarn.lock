@@ -4151,7 +4151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.16.1":
+"discord.js@npm:^14.16.2":
   version: 14.16.2
   resolution: "discord.js@npm:14.16.2"
   dependencies:
@@ -6402,7 +6402,7 @@ __metadata:
     commitizen: "npm:^4.3.0"
     cross-env: "npm:^7.0.3"
     discord-api-types: "npm:^0.37.100"
-    discord.js: "npm:^14.16.1"
+    discord.js: "npm:^14.16.2"
     husky: "npm:^9.1.5"
     ioredis: "npm:^5.4.1"
     lint-staged: "npm:^15.2.10"

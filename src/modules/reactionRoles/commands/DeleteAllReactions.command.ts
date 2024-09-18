@@ -6,7 +6,11 @@ import {
 import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
-import { CommandInteraction } from "discord.js";
+import {
+	ApplicationIntegrationType,
+	CommandInteraction,
+	InteractionContextType,
+} from "discord.js";
 import {
 	Button,
 	ButtonContext,
@@ -42,6 +46,8 @@ export class DeleteAllReactionsCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.deleteall.description",
 		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({

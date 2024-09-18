@@ -7,7 +7,12 @@ import {
 	localizationMapByKey,
 } from "@necord/localization";
 import { ConfigService } from "@nestjs/config";
-import { EmbedBuilder, codeBlock } from "discord.js";
+import {
+	ApplicationIntegrationType,
+	EmbedBuilder,
+	InteractionContextType,
+	codeBlock,
+} from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
 import type { EvalDTO } from "./eval.dto";
@@ -25,6 +30,8 @@ export class EvalCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"DeveloperTools.eval.description",
 		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({
 		category: "🛠️ Developer Tools",

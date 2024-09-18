@@ -5,6 +5,7 @@ import {
 	localizationMapByKey,
 } from "@necord/localization";
 import { Logger } from "@nestjs/common";
+import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import { Ctx, SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
 
@@ -19,6 +20,8 @@ export class TestCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"DeveloperTools.test.description",
 		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🛠️ Developer Tools", disable: false })
 	@CommandPermissions({

@@ -6,7 +6,11 @@ import {
 	localizationMapByKey,
 } from "@necord/localization";
 import { Logger } from "@nestjs/common";
-import { channelMention } from "discord.js";
+import {
+	ApplicationIntegrationType,
+	InteractionContextType,
+	channelMention,
+} from "discord.js";
 import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
 import { ModerationCommand } from "../../Moderation.decorator";
 import { ClearDTO } from "./clear.dto";
@@ -22,6 +26,8 @@ export class ClearCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"Moderation.clear.description",
 		),
+		integrationTypes: [ApplicationIntegrationType.GuildInstall],
+		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🛡️ Moderation", disable: false })
 	@CommandPermissions({
