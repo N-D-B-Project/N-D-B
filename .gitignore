@@ -66,6 +66,7 @@ lerna-debug.log*
 
 # IDE - VSCode
 .vscode/*
+!.vscode/N-D-B.code-profile
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
