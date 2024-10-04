@@ -1,4 +1,4 @@
-import util from "node:util";
+import { setTimeout } from "node:timers/promises";
 import { NestedLocalizationAdapter, TranslationFn } from "@necord/localization";
 import {
 	BaseMessageOptions,
@@ -11,37 +11,21 @@ export const Timer = async (
 	translate: NestedLocalizationAdapter | TranslationFn,
 	type: "normal" | "details",
 	number: number,
-	translateInfo: string,
+	locale: string,
 ): Promise<string> => {
 	const time = ms(number);
-	const days =
-		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation(
-					"Tools/Tools:Timer:Days",
-					translateInfo,
-				)
-			: (translate as TranslationFn)("Tools/Tools:Timer:Days");
-	const hours =
-		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation(
-					"Tools/Tools:Timer:Hours",
-					translateInfo,
-				)
-			: (translate as TranslationFn)("Tools/Tools:Timer:Hours");
-	const minutes =
-		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation(
-					"Tools/Tools:Timer:Minutes",
-					translateInfo,
-				)
-			: (translate as TranslationFn)("Tools/Tools:Timer:Minutes");
-	const seconds =
-		translate instanceof NestedLocalizationAdapter
-			? (translate as NestedLocalizationAdapter).getTranslation(
-					"Tools/Tools:Timer:Seconds",
-					translateInfo,
-				)
-			: (translate as TranslationFn)("Tools/Tools:Timer:Seconds");
+
+	function getTranslation(key: string): string {
+		return translate instanceof NestedLocalizationAdapter
+			? translate.getTranslation(`Tools.Tools.Timer.${key}`, locale)
+			: translate(key);
+	}
+
+	const days = getTranslation("Days");
+	const hours = getTranslation("Hours");
+	const minutes = getTranslation("Minutes");
+	const seconds = getTranslation("Seconds");
+
 	switch (type) {
 		case "normal":
 			return ` ${time.hours ? (time.hours > 10 ? time.hours : `0${time.hours}`) : ""}${time.hours ? ":" : ""}${
@@ -75,23 +59,7 @@ export const messageOptions = (
 };
 
 export const WAIT = async (time: number): Promise<void> => {
-	const wait = util.promisify(setTimeout);
-	return wait(time);
-};
-
-export const isValidURL = (string: string): URL | boolean => {
-	const args = string.split(" ");
-	let url: URL | boolean;
-	for (const arg of args) {
-		try {
-			url = new URL(arg);
-			url = url.protocol === "http:" || url.protocol === "https:";
-			break;
-		} catch (_) {
-			url = false;
-		}
-	}
-	return url;
+	return setTimeout(time);
 };
 
 export const formatArray = (array: string[]) => {

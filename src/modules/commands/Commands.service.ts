@@ -2,11 +2,7 @@ import {
 	CommandPermissionsKey,
 	type CommandPermissionsOptions,
 } from "@/common/decorators";
-import {
-	CommandConfig,
-	CommandConfigKey,
-	CommandConfigOptions,
-} from "@/common/decorators/";
+import { CommandConfigKey, CommandConfigOptions } from "@/common/decorators/";
 import {
 	Injectable,
 	Logger,
@@ -39,8 +35,9 @@ export class CommandsService implements OnApplicationBootstrap {
 
 	public async onApplicationBootstrap() {
 		this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
-		this.client.once("ready", async (client) =>
-			this.commandsService.registerAllCommands(),
+		this.client.once(
+			"ready",
+			async (client) => await this.commandsService.registerAllCommands(),
 		);
 		await this.updateSlashCommands();
 		await this.updateSubCommands();
