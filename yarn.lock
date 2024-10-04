@@ -847,12 +847,12 @@ __metadata:
   linkType: hard
 
 "@grpc/grpc-js@npm:^1.7.1":
-  version: 1.11.2
-  resolution: "@grpc/grpc-js@npm:1.11.2"
+  version: 1.11.3
+  resolution: "@grpc/grpc-js@npm:1.11.3"
   dependencies:
     "@grpc/proto-loader": "npm:^0.7.13"
     "@js-sdsl/ordered-map": "npm:^4.4.2"
-  checksum: 10c0/d69a1db3726d7a09a54394971bd54c77dfc2e8f48b23384771a2074ecc947b240ea065b4f1d74300e76fd47d7914071460d98702bd1512b7a9d6085eac6a6012
+  checksum: 10c0/2946a70c709688737603be573f6836beea26e4c132a50164591020860ae0e62375c1475c26017011fabfbaf6a9fa2bfdabfe9058aed11bab2f697e4242533afc
   languageName: node
   linkType: hard
 
@@ -987,6 +987,21 @@ __metadata:
   version: 1.1.0
   resolution: "@lukeed/csprng@npm:1.1.0"
   checksum: 10c0/5d6dcf478af732972083ab2889c294b57f1028fa13c2c240d7a4aaa079c2c75df7ef0dcbdda5419147fc6704b4adf96b2de92f1a9a72ac21c6350c4014fffe6c
+  languageName: node
+  linkType: hard
+
+"@necord/lavalink@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@necord/lavalink@npm:1.1.0"
+  peerDependencies:
+    "@nestjs/common": ^10.2.0
+    "@nestjs/core": ^10.2.0
+    discord.js: ^14.0.1
+    lavalink-client: ^2.3.6
+    necord: ^6.0.0
+    reflect-metadata: ^0.2.1
+    rxjs: ^7.2.0
+  checksum: 10c0/89f280019ea21ae99bb59006297ada22feaebf7403739c05f0d244670cd3cfe8e9e5c522a272d84e455790937d6bef2f0bee8e3ac0a866b2c4f2d68f7a4f3a61
   languageName: node
   linkType: hard
 
@@ -4209,9 +4224,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.4":
-  version: 1.5.24
-  resolution: "electron-to-chromium@npm:1.5.24"
-  checksum: 10c0/c20a6fc69145c0b470778ee0a952226d3480d611949bea00c9f8ed3bac0a205e5cd8ba76cfa99034d9ee717482741cf1c7e41eb151ccffc933e1eefe501d3bc7
+  version: 1.5.25
+  resolution: "electron-to-chromium@npm:1.5.25"
+  checksum: 10c0/2ea818d22592754b902df70d48b82c5d9e3cc2a221d3d0c39d7a7967780601a5cebd5fa10628c6d0ba918582c268a20392279e8bee93edba2e499681056ae143
   languageName: node
   linkType: hard
 
@@ -5747,6 +5762,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lavalink-client@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "lavalink-client@npm:2.4.0"
+  dependencies:
+    tslib: "npm:^2.7.0"
+    ws: "npm:^8.18.0"
+  checksum: 10c0/a4e83ad12a55ae64812476cebfc7a8e292764a6e0586148dafeb19f4a27bef7473f5640c9805606144b6241ab2886cc921bd198e37aa60e3f8e6d1e1bb6b0902
+  languageName: node
+  linkType: hard
+
 "libphonenumber-js@npm:^1.10.53":
   version: 1.11.8
   resolution: "libphonenumber-js@npm:1.11.8"
@@ -6374,6 +6399,7 @@ __metadata:
     "@commitlint/cli": "npm:^19.4.1"
     "@commitlint/config-angular": "npm:^19.4.1"
     "@commitlint/config-conventional": "npm:^19.4.1"
+    "@necord/lavalink": "npm:^1.1.0"
     "@necord/localization": "npm:^4.0.0"
     "@necord/pagination": "npm:^2.0.0"
     "@nedcloarbr/biome-config": "npm:^1.4.0"
@@ -6405,6 +6431,7 @@ __metadata:
     discord.js: "npm:^14.16.2"
     husky: "npm:^9.1.5"
     ioredis: "npm:^5.4.1"
+    lavalink-client: "npm:^2.4.0"
     lint-staged: "npm:^15.2.10"
     moment: "npm:^2.30.1"
     necord: "npm:^6.8.6"
@@ -8133,7 +8160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.7.0, tslib@npm:^2.1.0, tslib@npm:^2.6.2, tslib@npm:^2.6.3":
+"tslib@npm:2.7.0, tslib@npm:^2.1.0, tslib@npm:^2.6.2, tslib@npm:^2.6.3, tslib@npm:^2.7.0":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
@@ -8669,7 +8696,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.16.0":
+"ws@npm:^8.16.0, ws@npm:^8.18.0":
   version: 8.18.0
   resolution: "ws@npm:8.18.0"
   peerDependencies:

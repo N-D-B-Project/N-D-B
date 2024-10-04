@@ -1,10 +1,8 @@
 import { Module, type OnApplicationBootstrap } from "@nestjs/common";
 import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 import { REST } from "discord.js";
-import { GatewayEvents } from "./Gateway";
-import { GuildEvents } from "./Guild";
-import { NDCEvents } from "./NDC";
-import { ThreadEvents } from "./Thread";
+import * as EventsMap from "./index";
+const Events = Object.values(EventsMap);
 
 @Module({
 	imports: [
@@ -14,7 +12,7 @@ import { ThreadEvents } from "./Thread";
 			global: true,
 		}),
 	],
-	providers: [GatewayEvents, GuildEvents, ThreadEvents, NDCEvents],
+	providers: [...Events],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(

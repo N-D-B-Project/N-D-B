@@ -1,3 +1,4 @@
+import { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,
 	NecordLocalizationOptions,
@@ -12,6 +13,7 @@ import {
 	Options,
 	Partials,
 } from "discord.js";
+import { SourceLinksRegexes } from "lavalink-client";
 import type { NecordModuleOptions } from "necord";
 import { JSONLocaleLoader } from "./JSONLocale.loader";
 import type { Config } from "./types";
@@ -105,6 +107,47 @@ export class NecordConfigService {
 				).loadTranslations(),
 			}),
 			resolvers: GuildResolver,
+		};
+	}
+
+	public async createNecordLavalinkOptions(): Promise<NecordLavalinkModuleOptions> {
+		return {
+			nodes: [
+				{
+					regions: ["us-east", "us-central", "us-south", "us-west", "brazil"],
+					authorization: "youshallnotpass",
+					host: "localhost",
+					port: 2333,
+					id: "ndlavalink",
+					retryAmount: 4,
+					retryDelay: 4000,
+				},
+			],
+			autoSkip: true,
+			playerOptions: {
+				applyVolumeAsFilter: true,
+				clientBasedPositionUpdateInterval: 100,
+				defaultSearchPlatform: "ytmsearch",
+				volumeDecrementer:
+					this.config.getOrThrow<Config["Music"]>("Music").Volumes.Lavalink,
+				useUnresolvedData: true,
+				onDisconnect: {
+					autoReconnect: false,
+					destroyPlayer: false,
+				},
+			},
+			queueOptions: {
+				maxPreviousTracks: 10,
+			},
+			linksWhitelist: [
+				SourceLinksRegexes.YoutubeMusicRegex,
+				SourceLinksRegexes.YoutubeRegex,
+				SourceLinksRegexes.AllSpotifyRegex,
+			],
+			advancedOptions: {
+				enableDebugEvents:
+					this.config.getOrThrow<Config["Debug"]>("Debug").Lavalink,
+			},
 		};
 	}
 }

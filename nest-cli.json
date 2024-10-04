@@ -10,9 +10,9 @@
 		"deleteOutDir": true,
 		"assets": [
 			{
-				"include": "**/Languages/*.json",
+				"include": "**/Languages/**/*.json",
 				"watchAssets": true,
-				"outDir": "dist/src/common/Languages/"
+				"outDir": "dist/src/common/Languages"
 			},
 			{
 				"include": "**/assets/**/*",
