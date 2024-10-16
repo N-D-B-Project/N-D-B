@@ -1,9 +1,12 @@
 import { setTimeout } from "node:timers/promises";
-import { NestedLocalizationAdapter, TranslationFn } from "@necord/localization";
 import {
-	BaseMessageOptions,
+	NestedLocalizationAdapter,
+	type TranslationFn,
+} from "@necord/localization";
+import {
+	type BaseMessageOptions,
 	EmbedBuilder,
-	MessageEditOptions,
+	type MessageEditOptions,
 } from "discord.js";
 import ms from "parse-ms";
 

@@ -1,6 +1,7 @@
-import { Config } from "@/modules/config/types";
-import { NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
+import type { Config } from "@/modules/config/types";
+import { type NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
 import { Injectable, Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { Context } from "necord";
 

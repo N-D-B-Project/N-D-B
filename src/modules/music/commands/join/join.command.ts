@@ -1,10 +1,11 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { InteractionTools } from "@/modules/commands/Interaction";
 import { MusicCommand } from "@/modules/music/Music.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { NecordLavalinkService, PlayerManager } from "@necord/lavalink";
 import {
 	CurrentTranslate,
-	TranslationFn,
+	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
 import {
@@ -12,7 +13,8 @@ import {
 	InteractionContextType,
 	channelMention,
 } from "discord.js";
-import { Context, Options, SlashCommandContext, Subcommand } from "necord";
+import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { JoinDto } from "./join.dto";
 
 // TODO: Fix not connecting in another channel if already connected (move with command)

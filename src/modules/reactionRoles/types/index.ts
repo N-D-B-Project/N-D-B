@@ -1,4 +1,4 @@
-import { Channel, Emoji, Message, Role, TextChannel } from "discord.js";
+import type { Channel, Emoji, Message, Role, TextChannel } from "discord.js";
 
 export interface ReactionsType {
 	message: Message["id"];

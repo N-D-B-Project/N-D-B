@@ -1,5 +1,5 @@
 import { localizationMapByKey } from "@necord/localization";
-import { ChannelType, VoiceChannel } from "discord.js";
+import { ChannelType, type VoiceChannel } from "discord.js";
 import { ChannelOption } from "necord";
 
 export class JoinDto {

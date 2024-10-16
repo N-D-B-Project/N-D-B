@@ -1,9 +1,11 @@
 import {
 	LOCALIZATION_ADAPTER,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, Message, TextChannel } from "discord.js";
 
 @Injectable()

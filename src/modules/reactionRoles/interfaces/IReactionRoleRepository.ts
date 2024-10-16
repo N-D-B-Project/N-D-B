@@ -1,5 +1,5 @@
-import { Guild, TextChannel } from "discord.js";
-import { ReactionRolesEntity } from "../entities/ReactionRole.entity";
+import type { Guild, TextChannel } from "discord.js";
+import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesRepository {

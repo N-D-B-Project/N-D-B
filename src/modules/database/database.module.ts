@@ -1,5 +1,5 @@
 import { Services } from "@/types/Constants";
-import { Global, Module, Provider } from "@nestjs/common";
+import { Global, Module, type Provider } from "@nestjs/common";
 import { PrismaModule } from "nestjs-prisma";
 import { DatabaseService } from "./database.service";
 import { RepositoriesModule } from "./repositories/Repositories.module";

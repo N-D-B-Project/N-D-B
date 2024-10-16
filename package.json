@@ -27,10 +27,10 @@
 		"test:watch": "vitest --watch",
 		"test:coverage": "vitest run --coverage",
 		"test:ui": "vitest --ui",
-		"format": "yarn dlx @biomejs/biome format --write ./",
-		"lint": "yarn dlx @biomejs/biome lint ./",
-		"check": "yarn dlx @biomejs/biome check --apply ./",
-		"postinstall": "prisma generate && husky || true"
+		"format": "yarn biome format --write ./",
+		"lint": "yarn biome lint ./",
+		"check": "yarn biome check --write ./",
+		"postinstall": "prisma generate && husky"
 	},
 	"dependencies": {
 		"@necord/lavalink": "^1.1.0",
@@ -66,11 +66,11 @@
 		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.8.3",
+		"@biomejs/biome": "^1.9.3",
 		"@commitlint/cli": "^19.4.1",
 		"@commitlint/config-angular": "^19.4.1",
 		"@commitlint/config-conventional": "^19.4.1",
-		"@nedcloarbr/biome-config": "^1.4.0",
+		"@nedcloarbr/biome-config": "^1.6.0",
 		"@nestjs/cli": "^10.4.5",
 		"@nestjs/schematics": "^10.1.4",
 		"@nestjs/testing": "^10.4.1",

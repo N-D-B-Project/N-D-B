@@ -34,7 +34,9 @@ export const otelSDK = new NodeSDK({
 setImmediate(() => {
 	const meterProvider = metrics.getMeterProvider();
 	const meter = meterProvider.getMeter("node-metrics");
-	setupNodeMetrics(meter, { labels: resource.attributes as any });
+	setupNodeMetrics(meter, {
+		labels: resource.attributes as Record<string, string>,
+	});
 });
 
 process.on("SIGTERM", () => {

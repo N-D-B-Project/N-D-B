@@ -1,10 +1,13 @@
 import type { Content } from "@/types";
 import {
 	LOCALIZATION_ADAPTER,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
+
 import {
 	type ButtonsAppearance,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordPaginationService,
 	PageBuilder,
 } from "@necord/pagination";

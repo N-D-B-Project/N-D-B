@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Context, ContextOf, On } from "necord";
+import { Context, type ContextOf, On } from "necord";
 
 @Injectable()
 export class NDCEvents {

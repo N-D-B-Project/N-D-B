@@ -1,10 +1,11 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { InteractionTools } from "@/modules/commands/Interaction";
 import { MusicCommand } from "@/modules/music/Music.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { PlayerManager } from "@necord/lavalink";
 import {
 	CurrentTranslate,
-	TranslationFn,
+	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
 import {
@@ -12,7 +13,7 @@ import {
 	InteractionContextType,
 	channelMention,
 } from "discord.js";
-import { Context, SlashCommandContext, Subcommand } from "necord";
+import { Context, type SlashCommandContext, Subcommand } from "necord";
 
 @MusicCommand()
 export class LeaveCommand {

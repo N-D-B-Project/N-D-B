@@ -2,7 +2,7 @@ import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 import type {
 	IReactionRolesEmbeds,

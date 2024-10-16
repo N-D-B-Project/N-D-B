@@ -8,11 +8,12 @@ import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import {
 	ApplicationIntegrationType,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
 	InteractionContextType,
-	TextChannel,
+	type TextChannel,
 } from "discord.js";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type {
 	IReactionRolesEmbeds,
@@ -20,6 +21,7 @@ import type {
 } from "../../interfaces";
 import type { IReaction } from "../../types";
 import { ReactionRoles } from "../../types/constants";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes with>
 import { CreateReactionDTO } from "./CreateReaction.dto";
 
 @ReactionRolesCommand()

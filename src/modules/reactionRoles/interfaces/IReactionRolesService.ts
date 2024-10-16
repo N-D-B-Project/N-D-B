@@ -1,4 +1,4 @@
-import {
+import type {
 	Client,
 	CommandInteraction,
 	Guild,
@@ -6,7 +6,7 @@ import {
 	Role,
 	TextChannel,
 } from "discord.js";
-import { ReactionRolesEntity } from "../entities/ReactionRole.entity";
+import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 

@@ -1,11 +1,12 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { Prisma } from "@prisma/client";
-import { DefaultArgs } from "@prisma/client/runtime/library";
-import { User } from "discord.js";
+import type { Prisma } from "@prisma/client";
+import type { DefaultArgs } from "@prisma/client/runtime/library";
+import type { User } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { PrismaService } from "nestjs-prisma";
-import { UserEntity } from "../entities";
+import type { UserEntity } from "../entities";
 import { DatabaseStatus } from "../types";
-import { IUserRepository } from "./interfaces";
+import type { IUserRepository } from "./interfaces";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
@@ -38,6 +39,7 @@ export class UserRepository implements IUserRepository {
 
 	public async create(
 		user: User,
+		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
 	): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
 		const callback = await this.prisma.user

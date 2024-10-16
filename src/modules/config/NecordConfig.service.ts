@@ -1,11 +1,12 @@
-import { NecordLavalinkModuleOptions } from "@necord/lavalink";
+import type { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,
-	NecordLocalizationOptions,
+	type NecordLocalizationOptions,
 	NestedLocalizationAdapter,
 } from "@necord/localization";
-import { NecordPaginationOptions } from "@necord/pagination";
+import type { NecordPaginationOptions } from "@necord/pagination";
 import { Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import {
 	GatewayIntentBits,

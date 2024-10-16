@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import {
 	ChannelType,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
 	GuildMember,
 	PermissionResolvable,
 } from "discord.js";
-import { Context, ContextOf, On } from "necord";
+import { Context, type ContextOf, On } from "necord";
 
 @Injectable()
 export class VoiceStateUpdateEvents {

@@ -2,15 +2,22 @@ import {
 	CommandPermissionsKey,
 	type CommandPermissionsOptions,
 } from "@/common/decorators";
-import { CommandConfigKey, CommandConfigOptions } from "@/common/decorators/";
+import {
+	CommandConfigKey,
+	type CommandConfigOptions,
+} from "@/common/decorators";
 import {
 	Injectable,
 	Logger,
 	type OnApplicationBootstrap,
 } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Reflector } from "@nestjs/core";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	ExplorerService,
 	SlashCommand,

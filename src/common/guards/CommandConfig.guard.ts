@@ -8,6 +8,7 @@ import {
 	Inject,
 	Injectable,
 } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";

@@ -6,6 +6,7 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import {
 	ApplicationIntegrationType,

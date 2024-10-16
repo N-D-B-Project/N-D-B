@@ -2,6 +2,7 @@ import type { Config } from "@/modules/config/types";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";

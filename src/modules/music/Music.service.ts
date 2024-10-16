@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { isURL } from "class-validator";
-import { SourceLinksRegexes, SourceNames } from "lavalink-client";
+import { SourceLinksRegexes, type SourceNames } from "lavalink-client";
 import { config } from "../config";
 
 export class MusicService {

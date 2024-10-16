@@ -1,4 +1,4 @@
-import { Provider } from "@nestjs/common";
+import type { Provider } from "@nestjs/common";
 import { ReactionRolesEmbeds } from "../ReactionRoles.embeds";
 import { ReactionRolesRepository } from "../ReactionRoles.repository";
 import { ReactionRolesService } from "../ReactionRoles.service";

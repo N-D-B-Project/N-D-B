@@ -1,4 +1,4 @@
-import { CommandInteraction, EmbedBuilder, Message } from "discord.js";
+import type { CommandInteraction, EmbedBuilder, Message } from "discord.js";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {

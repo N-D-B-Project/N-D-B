@@ -1,6 +1,7 @@
 import path from "node:path";
-import { Config } from "@/modules/config/types";
+import type { Config } from "@/modules/config/types";
 import { Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { ShardingManager as _ShardingManager } from "discord.js";
 

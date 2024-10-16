@@ -1,6 +1,7 @@
 import { MessageTools } from "@/modules/commands/Message";
 import {
-	LavalinkManagerContextOf,
+	type LavalinkManagerContextOf,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordLavalinkService,
 	OnLavalinkManager,
 } from "@necord/lavalink";

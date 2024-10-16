@@ -1,12 +1,12 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators/";
 import {
 	CurrentTranslate,
-	TranslationFn,
+	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
 import { Logger } from "@nestjs/common";
 import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
 
 @DeveloperToolsCommand()

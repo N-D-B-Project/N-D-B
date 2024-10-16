@@ -1,11 +1,11 @@
 import {
-  BadRequestException,
-  Injectable,
-  type CallHandler,
-  type ExecutionContext,
-  type NestInterceptor,
+	BadRequestException,
+	type CallHandler,
+	type ExecutionContext,
+	Injectable,
+	type NestInterceptor,
 } from "@nestjs/common";
-import { catchError, type Observable } from "rxjs";
+import { type Observable, catchError } from "rxjs";
 import { CommandError } from "../errors/Command.error";
 
 @Injectable()

@@ -1,23 +1,25 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { InteractionTools } from "@/modules/commands/Interaction";
 import { MusicCommand } from "@/modules/music/Music.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { NecordLavalinkService, PlayerManager } from "@necord/lavalink";
 import {
 	CurrentTranslate,
-	TranslationFn,
+	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
 import { UseInterceptors } from "@nestjs/common";
 import { isURL } from "class-validator";
 import {
 	ApplicationIntegrationType,
-	EmbedBuilder,
+	type EmbedBuilder,
 	InteractionContextType,
 } from "discord.js";
-import { SearchResult } from "lavalink-client";
-import { Context, Options, SlashCommandContext, Subcommand } from "necord";
+import type { SearchResult } from "lavalink-client";
+import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
 import { MusicService } from "../../Music.service";
 import { PlayAutocompleteInterceptor } from "./play.autocomplete";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { PlayDto } from "./play.dto";
 import { PlayEmbeds } from "./play.embeds";
 

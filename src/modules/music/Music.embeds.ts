@@ -1,16 +1,19 @@
 import {
 	LOCALIZATION_ADAPTER,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 import {
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
 	EmbedBuilder,
-	Guild,
-	VoiceChannel,
+	type Guild,
+	type VoiceChannel,
 	channelMention,
 } from "discord.js";
-import { IMusicEmbeds } from "./interfaces";
+import type { IMusicEmbeds } from "./interfaces";
 
 @Injectable()
 export class MusicEmbeds implements IMusicEmbeds {

@@ -2,6 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import type { Prisma } from "@prisma/client";
 import type { DefaultArgs } from "@prisma/client/runtime/library";
 import type { Guild } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { PrismaService } from "nestjs-prisma";
 import type { GuildEntity } from "../entities";
 import { DatabaseStatus } from "../types";
@@ -36,7 +37,8 @@ export class GuildRepository implements IGuildRepository {
 
 	public async create(
 		guild: Guild,
-	): Promise<{ callback: void | GuildEntity; status: DatabaseStatus }> {
+		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
+	): Promise<{ callback: GuildEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
 		const callback = await this.prisma.guild
 			.create({

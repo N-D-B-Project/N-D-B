@@ -1,18 +1,22 @@
 import { MessageTools } from "@/modules/commands/Message";
-import { Config } from "@/modules/config/types";
+import type { Config } from "@/modules/config/types";
 import { Timer, WAIT } from "@/utils/Tools";
 import {
-	LavalinkManagerContextOf,
+	type LavalinkManagerContextOf,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordLavalinkService,
 	OnLavalinkManager,
 } from "@necord/lavalink";
 import {
 	LOCALIZATION_ADAPTER,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
-import { Client, EmbedBuilder, User, UserManager } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
 import { MusicService } from "../Music.service";
 import { PlayerProps } from "../types/constants";

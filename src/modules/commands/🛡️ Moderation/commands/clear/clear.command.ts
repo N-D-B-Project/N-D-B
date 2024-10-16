@@ -2,7 +2,7 @@ import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { WAIT } from "@/utils/Tools";
 import {
 	CurrentTranslate,
-	TranslationFn,
+	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
 import { Logger } from "@nestjs/common";
@@ -11,8 +11,9 @@ import {
 	InteractionContextType,
 	channelMention,
 } from "discord.js";
-import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ModerationCommand } from "../../Moderation.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { ClearDTO } from "./clear.dto";
 
 @ModerationCommand()

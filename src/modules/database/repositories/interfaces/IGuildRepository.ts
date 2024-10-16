@@ -10,6 +10,7 @@ export interface IGuildRepository {
 	getAll(): Promise<GuildEntity[]>;
 	create(
 		guild: Guild,
+		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
 	): Promise<{ callback: GuildEntity | void; status: DatabaseStatus }>;
 	update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity>;
 	delete(guild: Guild): Promise<GuildEntity>;

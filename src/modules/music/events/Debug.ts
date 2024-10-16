@@ -1,4 +1,7 @@
-import { LavalinkManagerContextOf, OnLavalinkManager } from "@necord/lavalink";
+import {
+	type LavalinkManagerContextOf,
+	OnLavalinkManager,
+} from "@necord/lavalink";
 import { Injectable, Logger } from "@nestjs/common";
 import { Context } from "necord";
 

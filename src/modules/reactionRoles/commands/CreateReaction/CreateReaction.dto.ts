@@ -1,5 +1,5 @@
 import { localizationMapByKey } from "@necord/localization";
-import { ChannelType, GuildTextBasedChannel, Role } from "discord.js";
+import { ChannelType, type GuildTextBasedChannel, type Role } from "discord.js";
 import { ChannelOption, NumberOption, RoleOption, StringOption } from "necord";
 
 export class CreateReactionDTO {

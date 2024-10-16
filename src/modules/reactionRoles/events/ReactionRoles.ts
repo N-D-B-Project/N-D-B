@@ -3,9 +3,11 @@ import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseSe
 import { Services } from "@/types/Constants";
 import {
 	LOCALIZATION_ADAPTER,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, EmbedBuilder, roleMention } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
 import type { IReactionRolesService } from "../interfaces";

@@ -1,5 +1,5 @@
 import { localizationMapByKey } from "@necord/localization";
-import { SearchPlatform } from "lavalink-client";
+import type { SearchPlatform } from "lavalink-client";
 import { StringOption } from "necord";
 
 export class PlayDto {

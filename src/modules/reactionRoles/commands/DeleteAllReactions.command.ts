@@ -1,5 +1,6 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import {
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Buttons,
 	ConfirmButtonEnum,
 } from "@/modules/components/Buttons.component";
@@ -8,15 +9,15 @@ import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import {
 	ApplicationIntegrationType,
-	CommandInteraction,
+	type CommandInteraction,
 	InteractionContextType,
 } from "discord.js";
 import {
 	Button,
-	ButtonContext,
+	type ButtonContext,
 	ComponentParam,
 	Ctx,
-	SlashCommandContext,
+	type SlashCommandContext,
 	Subcommand,
 } from "necord";
 import { InteractionTools } from "../../commands/Interaction";

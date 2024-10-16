@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { AutocompleteInteraction } from "discord.js";
+import type { AutocompleteInteraction } from "discord.js";
 import { DefaultSources } from "lavalink-client";
 import { AutocompleteInterceptor } from "necord";
 

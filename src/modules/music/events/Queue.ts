@@ -1,15 +1,17 @@
 import { MessageTools } from "@/modules/commands/Message";
-import { Config } from "@/modules/config/types";
+import type { Config } from "@/modules/config/types";
 import {
-	LavalinkManagerContextOf,
+	type LavalinkManagerContextOf,
+	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordLavalinkService,
 	OnLavalinkManager,
 } from "@necord/lavalink";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { Context } from "necord";
 import ms from "parse-ms";
-import { IMusicEmbeds } from "../interfaces";
+import type { IMusicEmbeds } from "../interfaces";
 import { Music } from "../types/constants";
 
 @Injectable()
