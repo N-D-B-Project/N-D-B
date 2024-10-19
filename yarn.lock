@@ -1218,9 +1218,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/schematics@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "@nestjs/schematics@npm:10.2.0"
+"@nestjs/schematics@npm:^10.2.2":
+  version: 10.2.2
+  resolution: "@nestjs/schematics@npm:10.2.2"
   dependencies:
     "@angular-devkit/core": "npm:17.3.10"
     "@angular-devkit/schematics": "npm:17.3.10"
@@ -1229,7 +1229,7 @@ __metadata:
     pluralize: "npm:8.0.0"
   peerDependencies:
     typescript: ">=4.8.2"
-  checksum: 10c0/4b8fcc388ab32a0ee94ae36dce6bcce0b782ea8cd273e1f1e7886554c7bb2cc7ff63d9fcf0eae86f50901c621165c301b3f5e0c8d26a66ef4037165678b5e33b
+  checksum: 10c0/c54c90a282978bd612154737e97c6ed5e9bd435178863b76f520c5e26e75ba070323e6c2dbdadc1485fa486ee35be837855813e4961b8da0eee921225a8e276f
   languageName: node
   linkType: hard
 
@@ -6188,7 +6188,7 @@ __metadata:
     "@nestjs/event-emitter": "npm:^2.0.4"
     "@nestjs/platform-express": "npm:^10.4.5"
     "@nestjs/schedule": "npm:^4.1.1"
-    "@nestjs/schematics": "npm:^10.2.0"
+    "@nestjs/schematics": "npm:^10.2.2"
     "@nestjs/testing": "npm:^10.4.5"
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/auto-instrumentations-node": "npm:^0.51.0"
