@@ -6213,7 +6213,7 @@ __metadata:
     moment: "npm:^2.30.1"
     necord: "npm:^6.8.6"
     nestjs-prisma: "npm:^0.23.0"
-    parse-ms: "npm:=2.1.0"
+    parse-ms: "npm:4.0.0"
     prisma: "npm:^5.21.1"
     reflect-metadata: "npm:^0.2.2"
     rxjs: "npm:^7.8.1"
@@ -6502,10 +6502,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-ms@npm:=2.1.0":
-  version: 2.1.0
-  resolution: "parse-ms@npm:2.1.0"
-  checksum: 10c0/9c5c0a95c6267c84085685556a6e102ee806c3147ec11cbb9b98e35998eb4a48a757bd6ea7bfd930062de65909a33d24985055b4394e70aa0b65ee40cef16911
+"parse-ms@npm:4.0.0":
+  version: 4.0.0
+  resolution: "parse-ms@npm:4.0.0"
+  checksum: 10c0/a7900f4f1ebac24cbf5e9708c16fb2fd482517fad353aecd7aefb8c2ba2f85ce017913ccb8925d231770404780df46244ea6fec598b3bde6490882358b4d2d16
   languageName: node
   linkType: hard
 
