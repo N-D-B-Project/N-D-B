@@ -24,5 +24,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Initialize and update git submodules
+        run: git submodule update --init --recursive
+        
       - name: Install dependencies
         run: yarn install --immutable
