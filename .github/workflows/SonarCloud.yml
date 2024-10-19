@@ -14,11 +14,7 @@ jobs:
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
-<<<<<<< HEAD
         uses: SonarSource/sonarcloud-github-action@v3.1.0
-=======
-        uses: SonarSource/sonarcloud-github-action@3.1.0
->>>>>>> 052a2f41c5a7d84ad08244d2d5c3d866693388c0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
