@@ -5,9 +5,16 @@
 
 version: 2
 updates:
+  - package-ecosystem: github-actions # See documentation for possible values
+    directory: "/" # Location of package manifests
+    rebase-strategy: "auto"
+    schedule:
+      interval: weekly
+      time: "02:00"
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
+    rebase-strategy: "auto"
     schedule:
       interval: "weekly"
       time: "02:00"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 1
