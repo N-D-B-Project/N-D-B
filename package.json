@@ -52,7 +52,7 @@
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.1",
-		"discord-api-types": "^0.37.102",
+		"discord-api-types": "^0.37.103",
 		"discord.js": "^14.16.3",
 		"ioredis": "^5.4.1",
 		"lavalink-client": "^2.4.1",
