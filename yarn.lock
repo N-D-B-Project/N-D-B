@@ -1134,9 +1134,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:^10.4.5":
-  version: 10.4.5
-  resolution: "@nestjs/core@npm:10.4.5"
+"@nestjs/core@npm:^10.4.8":
+  version: 10.4.8
+  resolution: "@nestjs/core@npm:10.4.8"
   dependencies:
     "@nuxtjs/opencollective": "npm:0.3.2"
     fast-safe-stringify: "npm:2.1.1"
@@ -1158,7 +1158,7 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: 10c0/1b6a41563fbf7911ca4f5b06414720c8f3fcdb796d785778a99a0176a0cfa9ec50a6ac3b2bb9a886ebca53521f752f10dd44f914980feb61ced6584760ab9d56
+  checksum: 10c0/1ac652f9089ec82be8cb6ba86fc83dc228adaae516bee41f1f8dc7201551c8004e9555c3655c5d1bee933da99548ca6cda5523e8ceb1d3146e1c5963b11e041a
   languageName: node
   linkType: hard
 
@@ -6224,7 +6224,7 @@ __metadata:
     "@nestjs/cli": "npm:^10.4.5"
     "@nestjs/common": "npm:^10.4.6"
     "@nestjs/config": "npm:^3.3.0"
-    "@nestjs/core": "npm:^10.4.5"
+    "@nestjs/core": "npm:^10.4.8"
     "@nestjs/event-emitter": "npm:^2.1.1"
     "@nestjs/platform-express": "npm:^10.4.6"
     "@nestjs/schedule": "npm:^4.1.1"
