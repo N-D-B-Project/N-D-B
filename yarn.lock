@@ -2755,12 +2755,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.9.1":
-  version: 22.9.1
-  resolution: "@types/node@npm:22.9.1"
+"@types/node@npm:^22.9.3":
+  version: 22.9.3
+  resolution: "@types/node@npm:22.9.3"
   dependencies:
     undici-types: "npm:~6.19.8"
-  checksum: 10c0/ea489ae603aa8874e4e88980aab6f2dad09c755da779c88dd142983bfe9609803c89415ca7781f723072934066f63daf2b3339ef084a8ad1a8079cf3958be243
+  checksum: 10c0/954ec72bf29436ea62425a9563914a9c1e93f97b18194acd51d74d13998a701977547ed2985ed3a0e97211b785436d28377116e5f613bfcf3182d9bd81d784dc
   languageName: node
   linkType: hard
 
@@ -6294,7 +6294,7 @@ __metadata:
     "@opentelemetry/semantic-conventions": "npm:^1.28.0"
     "@prisma/client": "npm:5.22.0"
     "@sesamecare-oss/opentelemetry-node-metrics": "npm:^1.1.0"
-    "@types/node": "npm:^22.9.1"
+    "@types/node": "npm:^22.9.3"
     "@vitest/coverage-istanbul": "npm:^2.1.5"
     "@vitest/ui": "npm:^2.1.5"
     class-transformer: "npm:^0.5.1"
