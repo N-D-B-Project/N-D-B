@@ -72,7 +72,7 @@
 		"@nedcloarbr/biome-config": "^1.6.0",
 		"@nestjs/cli": "^10.4.8",
 		"@nestjs/schematics": "^10.2.3",
-		"@nestjs/testing": "^10.4.8",
+		"@nestjs/testing": "^10.4.12",
 		"@types/node": "^22.9.3",
 		"@vitest/coverage-istanbul": "^2.1.5",
 		"@vitest/ui": "^2.1.5",
