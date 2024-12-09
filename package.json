@@ -60,7 +60,7 @@
 		"necord": "^6.8.6",
 		"nestjs-prisma": "^0.23.0",
 		"parse-ms": "2.1.0",
-		"prisma": "^5.22.0",
+		"prisma": "^6.0.1",
 		"reflect-metadata": "^0.2.2",
 		"rxjs": "^7.8.1",
 		"topgg-autoposter": "^2.0.2"
