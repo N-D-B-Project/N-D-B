@@ -73,7 +73,7 @@
 		"@nestjs/cli": "^10.4.8",
 		"@nestjs/schematics": "^10.2.3",
 		"@nestjs/testing": "^10.4.8",
-		"@types/node": "^22.9.3",
+		"@types/node": "^22.10.2",
 		"@vitest/coverage-istanbul": "^2.1.5",
 		"@vitest/ui": "^2.1.5",
 		"cross-env": "^7.0.3",
