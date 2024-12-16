@@ -1233,11 +1233,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/testing@npm:^10.4.8":
-  version: 10.4.8
-  resolution: "@nestjs/testing@npm:10.4.8"
+"@nestjs/testing@npm:^10.4.15":
+  version: 10.4.15
+  resolution: "@nestjs/testing@npm:10.4.15"
   dependencies:
-    tslib: "npm:2.7.0"
+    tslib: "npm:2.8.1"
   peerDependencies:
     "@nestjs/common": ^10.0.0
     "@nestjs/core": ^10.0.0
@@ -1248,7 +1248,7 @@ __metadata:
       optional: true
     "@nestjs/platform-express":
       optional: true
-  checksum: 10c0/a51518514fb3ccab56e91aee54506cd0f8fdf88113ff58442c734473a65beffb75174c09c1dd0b70a35915a2d9b5b639f4ae0ecf2b9932647e3edab56c8e22dd
+  checksum: 10c0/6d6b76791677bf6b0ae6c82f2a4b43fda489169fde7858037dd3483cc17b8885d353e9b7c51f5736cad86526afc2c2ebd0b6a1e88f5daa0be87a1546f4a6e511
   languageName: node
   linkType: hard
 
@@ -6285,7 +6285,7 @@ __metadata:
     "@nestjs/platform-express": "npm:^10.4.8"
     "@nestjs/schedule": "npm:^4.1.1"
     "@nestjs/schematics": "npm:^10.2.3"
-    "@nestjs/testing": "npm:^10.4.8"
+    "@nestjs/testing": "npm:^10.4.15"
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/auto-instrumentations-node": "npm:^0.53.0"
     "@opentelemetry/exporter-prometheus": "npm:^0.55.0"
@@ -7998,6 +7998,13 @@ __metadata:
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.8.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
   languageName: node
   linkType: hard
 
