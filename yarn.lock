@@ -4208,10 +4208,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.107":
-  version: 0.37.107
-  resolution: "discord-api-types@npm:0.37.107"
-  checksum: 10c0/2fd9607dce8fa8dfe22885fbd6869e5530f2962cf8f716efbdd4a8af14d055e80b60666b3094d9b3fc8420d5d79aa7a38bc87d312762878294220dafe48a151d
+"discord-api-types@npm:^0.37.113":
+  version: 0.37.113
+  resolution: "discord-api-types@npm:0.37.113"
+  checksum: 10c0/087853c2d1898a453e8654126295c412a4e20a78aa429875f4b6833db44c1b540019797fdc51b4ad65a7aca4069a903ca3a5e735ad77c3338f8dd4529610ef4e
   languageName: node
   linkType: hard
 
@@ -6300,7 +6300,7 @@ __metadata:
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.1"
     cross-env: "npm:^7.0.3"
-    discord-api-types: "npm:^0.37.107"
+    discord-api-types: "npm:^0.37.113"
     discord.js: "npm:^14.16.3"
     husky: "npm:^9.1.7"
     ioredis: "npm:^5.4.1"
