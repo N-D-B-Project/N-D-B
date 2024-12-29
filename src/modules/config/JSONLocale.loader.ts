@@ -4,7 +4,7 @@ import path from "node:path";
 export class JSONLocaleLoader {
 	public constructor(private readonly path: string) {}
 
-	private ignoredFoldersAndFiles = [".git", "crowdin.yml"];
+	private ignoredFoldersAndFiles = [".git", "crowdin.yml", "README.md"];
 
 	public async loadTranslations() {
 		const locales: Record<string, Record<string, string>> = {};
