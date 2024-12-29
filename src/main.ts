@@ -3,6 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import {
+	EnvChecker,
 	NodeHandler,
 	PrismaExceptionFilter,
 	ShardingManager,
@@ -16,6 +17,7 @@ async function bootstrap() {
 	const configService = app.get<ConfigService>(ConfigService);
 	const httpAdapter = app.getHttpAdapter();
 	const logger = new Logger("Main");
+	EnvChecker(configService);
 	const ShardManager = new ShardingManager(configService);
 	const TopGGPoster = new TopGGAutoPoster(
 		configService.getOrThrow("TopGGToken"),

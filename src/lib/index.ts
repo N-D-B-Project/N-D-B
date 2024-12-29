@@ -3,3 +3,4 @@ export * from "./prisma-utils";
 export * from "./sharding";
 export * from "./top.gg-autoposter";
 export * from "./tracing";
+export * from "./env-checker";
