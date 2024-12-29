@@ -10,6 +10,7 @@ services:
     build: .
     restart: always
     tty: true
+    env_file: .env
     volumes:
       - .:/usr/app
       - /usr/app/node_modules
