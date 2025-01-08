@@ -53,7 +53,7 @@
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.1",
 		"discord-api-types": "^0.37.114",
-		"discord.js": "^14.16.3",
+		"discord.js": "^14.17.2",
 		"ioredis": "^5.4.2",
 		"lavalink-client": "^2.4.4",
 		"moment": "^2.30.1",
