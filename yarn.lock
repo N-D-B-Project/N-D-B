@@ -4266,9 +4266,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.17.2":
-  version: 14.17.2
-  resolution: "discord.js@npm:14.17.2"
+"discord.js@npm:^14.17.3":
+  version: 14.17.3
+  resolution: "discord.js@npm:14.17.3"
   dependencies:
     "@discordjs/builders": "npm:^1.10.0"
     "@discordjs/collection": "npm:1.5.3"
@@ -4282,7 +4282,7 @@ __metadata:
     lodash.snakecase: "npm:4.1.1"
     tslib: "npm:^2.6.3"
     undici: "npm:6.19.8"
-  checksum: 10c0/4c88520448948afd57611f4bb206d4b4083de17817bf0277781e78d4c19090361e8d9f137551e1307b00ed54ace47e53bd6bf118c7dd973ba83c076e41611fba
+  checksum: 10c0/578bcdd7c9ed09f94dda733f317dc032511af9f635db203560d2bddb4419dab2f1bb1cbf78e65f98e1dbdba0cfca4488d7728ba08a2640f65ba038fa02482ae6
   languageName: node
   linkType: hard
 
@@ -6352,7 +6352,7 @@ __metadata:
     class-validator: "npm:^0.14.1"
     cross-env: "npm:^7.0.3"
     discord-api-types: "npm:^0.37.114"
-    discord.js: "npm:^14.17.2"
+    discord.js: "npm:^14.17.3"
     husky: "npm:^9.1.7"
     ioredis: "npm:^5.4.2"
     lavalink-client: "npm:^2.4.4"
