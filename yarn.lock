@@ -5730,13 +5730,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lavalink-client@npm:^2.4.3":
-  version: 2.4.3
-  resolution: "lavalink-client@npm:2.4.3"
+"lavalink-client@npm:^2.4.4":
+  version: 2.4.4
+  resolution: "lavalink-client@npm:2.4.4"
   dependencies:
     tslib: "npm:^2.7.0"
     ws: "npm:^8.18.0"
-  checksum: 10c0/5d58be49dbf08e7925279d7fa426fb8a524926f53221a2ec0f57edecb6bef8d4385b99ce372efc5f889385c9b401db9b755c3916b7127098c5621bff61e5c7cb
+  checksum: 10c0/d04b88903f3e6c6c7407618d3e1d4110dfe16317ec3ab180ff655d56bd3fa253a54fe2b0c65e19fb0b86f356323e780f3f10c07297d8030ff7a5c7a074aa1cfe
   languageName: node
   linkType: hard
 
@@ -6376,7 +6376,7 @@ __metadata:
     discord.js: "npm:^14.16.3"
     husky: "npm:^9.1.7"
     ioredis: "npm:^5.4.2"
-    lavalink-client: "npm:^2.4.3"
+    lavalink-client: "npm:^2.4.4"
     lint-staged: "npm:^15.3.0"
     moment: "npm:^2.30.1"
     necord: "npm:^6.8.6"
