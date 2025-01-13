@@ -80,7 +80,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^15.3.0",
 		"source-map-support": "^0.5.21",
-		"ts-loader": "^9.5.1",
+		"ts-loader": "^9.5.2",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.7.2",
