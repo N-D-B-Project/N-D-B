@@ -6359,7 +6359,7 @@ __metadata:
     lint-staged: "npm:^15.3.0"
     moment: "npm:^2.30.1"
     necord: "npm:^6.8.6"
-    nestjs-prisma: "npm:^0.24.0-dev.0"
+    nestjs-prisma: "npm:^0.24.0"
     parse-ms: "npm:2.1.0"
     prisma: "npm:^6.1.0"
     reflect-metadata: "npm:^0.2.2"
@@ -6414,9 +6414,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nestjs-prisma@npm:^0.24.0-dev.0":
-  version: 0.24.0-dev.0
-  resolution: "nestjs-prisma@npm:0.24.0-dev.0"
+"nestjs-prisma@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "nestjs-prisma@npm:0.24.0"
   dependencies:
     "@angular-devkit/core": "npm:^13.3.0"
     "@angular-devkit/schematics": "npm:^13.3.0"
@@ -6425,7 +6425,7 @@ __metadata:
     "@nestjs/common": ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
     "@prisma/client": ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     prisma: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
-  checksum: 10c0/3ab31a9b1dd95475cfbb459079f3119ca155b85bc9f3eae7d7f33586dd56354cee5085643d577025853b2d1872a691502e6c9e0f631400c6c12dbec38395a100
+  checksum: 10c0/3b15adaf7b20fc97c6bf0bdf71a586ea09cbacd90c1c24b6f801606f3aef6ea5ec053fdce7772eb7a0bdd58386ecaf317f91a175d49088d1572eee438cf86f0e
   languageName: node
   linkType: hard
 
