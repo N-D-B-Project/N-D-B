@@ -1391,6 +1391,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@opentelemetry/core@npm:1.30.1":
+  version: 1.30.1
+  resolution: "@opentelemetry/core@npm:1.30.1"
+  dependencies:
+    "@opentelemetry/semantic-conventions": "npm:1.28.0"
+  peerDependencies:
+    "@opentelemetry/api": ">=1.0.0 <1.10.0"
+  checksum: 10c0/4c25ba50a6137c2ba9ca563fb269378f3c9ca6fd1b3f15dbb6eff78eebf5656f281997cbb7be8e51c01649fd6ad091083fcd8a42dd9b5dfac907dc06d7cfa092
+  languageName: node
+  linkType: hard
+
 "@opentelemetry/exporter-logs-otlp-grpc@npm:0.57.0":
   version: 0.57.0
   resolution: "@opentelemetry/exporter-logs-otlp-grpc@npm:0.57.0"
@@ -2226,7 +2237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/resources@npm:1.30.0, @opentelemetry/resources@npm:^1.30.0":
+"@opentelemetry/resources@npm:1.30.0":
   version: 1.30.0
   resolution: "@opentelemetry/resources@npm:1.30.0"
   dependencies:
@@ -2235,6 +2246,18 @@ __metadata:
   peerDependencies:
     "@opentelemetry/api": ">=1.0.0 <1.10.0"
   checksum: 10c0/2b298193de85f8d7d05f9d71e5ea63189668f99248486246a4cfdc8667a5face205d650ef1ee6204a9f9c16d0b0e7704bb89a5d47537279c8e3378231ed35d1d
+  languageName: node
+  linkType: hard
+
+"@opentelemetry/resources@npm:^1.30.1":
+  version: 1.30.1
+  resolution: "@opentelemetry/resources@npm:1.30.1"
+  dependencies:
+    "@opentelemetry/core": "npm:1.30.1"
+    "@opentelemetry/semantic-conventions": "npm:1.28.0"
+  peerDependencies:
+    "@opentelemetry/api": ">=1.0.0 <1.10.0"
+  checksum: 10c0/688e73258283c80662bfa9a858aaf73bf3b832a18d96e546d0dddfa6dcec556cdfa087a1d0df643435293406009e4122d7fb7eeea69aa87b539d3bab756fba74
   languageName: node
   linkType: hard
 
@@ -6340,7 +6363,7 @@ __metadata:
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/auto-instrumentations-node": "npm:^0.55.2"
     "@opentelemetry/exporter-prometheus": "npm:^0.57.0"
-    "@opentelemetry/resources": "npm:^1.30.0"
+    "@opentelemetry/resources": "npm:^1.30.1"
     "@opentelemetry/sdk-node": "npm:^0.57.0"
     "@opentelemetry/semantic-conventions": "npm:^1.28.0"
     "@prisma/client": "npm:6.2.1"
