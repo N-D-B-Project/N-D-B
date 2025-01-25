@@ -1141,9 +1141,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:^10.4.15":
-  version: 10.4.15
-  resolution: "@nestjs/common@npm:10.4.15"
+"@nestjs/common@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "@nestjs/common@npm:11.0.5"
   dependencies:
     iterare: "npm:1.2.1"
     tslib: "npm:2.8.1"
@@ -1158,7 +1158,7 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 10c0/9566993fd3f805df2be632f5a16ca90d81b0deeb50e1e7cde4a49d4948c0d8d7db58b42ded70f35061e95e91a40d2adcd9e19cb2771090114eb737f62d2ea4c6
+  checksum: 10c0/e65066d076e2d36dcd728ab09499e313f29c7867c975057568522538b8537f2ba689b9f488aafe7bfa6cfdd6e33bc36d4023c725bbac681bb98b537bde2a2422
   languageName: node
   linkType: hard
 
@@ -6482,7 +6482,7 @@ __metadata:
     "@necord/pagination": "npm:^2.0.0"
     "@nedcloarbr/biome-config": "npm:^1.6.1"
     "@nestjs/cli": "npm:^10.4.9"
-    "@nestjs/common": "npm:^10.4.15"
+    "@nestjs/common": "npm:^11.0.5"
     "@nestjs/config": "npm:^4.0.0"
     "@nestjs/core": "npm:^10.4.15"
     "@nestjs/event-emitter": "npm:^2.1.1"
