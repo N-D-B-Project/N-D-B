@@ -71,7 +71,7 @@
 		"@commitlint/config-angular": "^19.7.0",
 		"@nedcloarbr/biome-config": "^1.6.1",
 		"@nestjs/cli": "^10.4.9",
-		"@nestjs/schematics": "^10.2.3",
+		"@nestjs/schematics": "^11.0.0",
 		"@nestjs/testing": "^10.4.15",
 		"@types/node": "^22.10.5",
 		"@vitest/coverage-istanbul": "^2.1.8",
