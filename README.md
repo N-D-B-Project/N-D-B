@@ -9,7 +9,6 @@
 <div align=center>
 
 [![Discord](https://img.shields.io/discord/679066351456878633.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5CHARxbaRk)
-[![Linhas de Código](https://sonarcloud.io/api/project_badges/measure?project=NedcloarBR_N-D-B&metric=ncloc)](https://sonarcloud.io/dashboard?id=NedcloarBR_N-D-B)
 [![CodeFactor](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b/badge)](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b)
 [![Crowdin](https://badges.crowdin.net/n-d-b/localized.svg)](https://crowdin.com/project/n-d-b)
 [![Run Tests](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml/badge.svg)](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml)
