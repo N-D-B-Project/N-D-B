@@ -41,7 +41,7 @@ export class CommandsService implements OnApplicationBootstrap {
 	) {}
 
 	public async onApplicationBootstrap() {
-		this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
+		// this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
 		this.client.once(
 			"ready",
 			async (client) => await this.commandsService.registerAllCommands(),
@@ -52,40 +52,61 @@ export class CommandsService implements OnApplicationBootstrap {
 		await this.commandsService.registerAllCommands();
 	}
 
+	private getCommandData(command: SlashCommandDiscovery) {
+		const config: CommandConfigOptions = this.reflector.get(
+			CommandConfigKey,
+			command.getHandler(),
+		);
+		const perms: CommandPermissionsOptions = this.reflector.get(
+			CommandPermissionsKey,
+			command.getHandler(),
+		);
+
+		return { config, perms };
+	}
+
+	private managePerms(perms: CommandPermissionsOptions): string[] {
+		const guilds = [];
+		if (perms.guildOnly) {
+			guilds.push(
+				this.configService.getOrThrow<string>("Discord.Servers.NDCommunity"),
+			);
+		}
+		if (perms.testOnly) {
+			guilds.push(
+				this.configService.getOrThrow<string>("Discord.Servers.TestGuild"),
+			);
+		}
+		if (perms.guilds) {
+			guilds.push(perms.guilds.values());
+		}
+
+		if (!guilds) return;
+
+		return guilds;
+	}
+
+	private log(
+		type: "SlashCommand" | "SubCommand",
+		category: string,
+		name: string,
+		deployMode: string,
+	): void {
+		const formattedCategory = `[${category}]`.padEnd(23);
+		this.logger.verbose(
+			`Updating metadata for ${type} : ${formattedCategory} ${name.padEnd(15)} | Deploy mode: ${deployMode}`,
+		);
+	}
+
 	private async updateSlashCommands(): Promise<void> {
 		const slashCommands = this.explorerService.explore(SlashCommand.KEY);
 		this.logger.verbose(`${slashCommands.length} SlashCommand (s) explored`);
 		for (const command of slashCommands) {
 			this.slashCommandService.remove(command.getName());
-			const config: CommandConfigOptions = this.reflector.get(
-				CommandConfigKey,
-				command.getHandler(),
-			);
-			const perms: CommandPermissionsOptions = this.reflector.get(
-				CommandPermissionsKey,
-				command.getHandler(),
-			);
-			const guilds = [];
-			if (perms.guildOnly) {
-				guilds.push(
-					this.configService.getOrThrow<string>("Discord.Servers.NDCommunity"),
-				);
-			}
-			if (perms.testOnly) {
-				guilds.push(
-					this.configService.getOrThrow<string>("Discord.Servers.TestGuild"),
-				);
-			}
-			if (perms.guilds) {
-				guilds.push(perms.guilds.values());
-			}
-
-			if (!guilds) return;
-
-			this.logger.verbose(
-				`Updating metadata for SlashCommand : [${config.category}] ${command.getName()}`,
-			);
-
+			const { config, perms } = this.getCommandData(command);
+			const guilds = this.managePerms(perms);
+			const deployMode = guilds.length > 0 ? "Guild" : "Global";
+			this.log("SlashCommand", config.category, command.getName(), deployMode);
 			command.setGuilds(guilds ?? []);
 			this.slashCommandService.add(command);
 		}
@@ -96,35 +117,10 @@ export class CommandsService implements OnApplicationBootstrap {
 		this.logger.verbose(`${subCommands.length} SubCommand (s) explored`);
 		for (const command of subCommands) {
 			this.slashCommandService.remove(command.getName());
-			const config: CommandConfigOptions = this.reflector.get(
-				CommandConfigKey,
-				command.getHandler(),
-			);
-			const perms: CommandPermissionsOptions = this.reflector.get(
-				CommandPermissionsKey,
-				command.getHandler(),
-			);
-			const guilds = [];
-			if (perms.guildOnly) {
-				guilds.push(
-					this.configService.getOrThrow<string>("Discord.Servers.NDCommunity"),
-				);
-			}
-			if (perms.testOnly) {
-				guilds.push(
-					this.configService.getOrThrow<string>("Discord.Servers.TestGuild"),
-				);
-			}
-			if (perms.guilds) {
-				guilds.push(perms.guilds.values());
-			}
-
-			if (!guilds) return;
-
-			this.logger.verbose(
-				`Updating metadata for SubCommand : [${config.category}] ${command.getName()}`,
-			);
-
+			const { config, perms } = this.getCommandData(command);
+			const guilds = this.managePerms(perms);
+			const deployMode = guilds.length > 0 ? "Guild" : "Global";
+			this.log("SubCommand", config.category, command.getName(), deployMode);
 			command.setGuilds(guilds ?? []);
 			this.slashCommandService.addSubCommand(command);
 		}
