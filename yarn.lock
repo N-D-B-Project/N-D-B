@@ -1097,17 +1097,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@necord/pagination@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@necord/pagination@npm:2.0.0"
+"@necord/pagination@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@necord/pagination@npm:2.0.2"
   peerDependencies:
-    "@nestjs/common": ^10.2.0
-    "@nestjs/core": ^10.2.0
+    "@nestjs/common": ^10.2.0 || ^11.0.0
+    "@nestjs/core": ^10.2.0 || ^11.0.0
     discord.js: ^14.0.1
     necord: ^6.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/3156703cb6f944ff1256916df93818d51d2746ba176ed5e717a4907ea05c9aadbc7d83dd21ad5a1a0f8371da37fad43f2b2868f886a08200181da15c13f4909d
+  checksum: 10c0/89224746b52bb8dc8f239c5616a052eab4b1c7d8c377bcd9be797747b5bc906daa5d7859f1b7f961c885c33167c2677bf401ac7c61c5a58faab1eb4784126a9b
   languageName: node
   linkType: hard
 
@@ -6547,7 +6547,7 @@ __metadata:
     "@commitlint/config-angular": "npm:^19.7.0"
     "@necord/lavalink": "npm:^1.1.1"
     "@necord/localization": "npm:^4.0.0"
-    "@necord/pagination": "npm:^2.0.0"
+    "@necord/pagination": "npm:^2.0.2"
     "@nedcloarbr/biome-config": "npm:^1.6.1"
     "@nestjs/cli": "npm:^10.4.9"
     "@nestjs/common": "npm:^11.0.5"
