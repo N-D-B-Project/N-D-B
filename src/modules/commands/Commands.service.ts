@@ -41,7 +41,7 @@ export class CommandsService implements OnApplicationBootstrap {
 	) {}
 
 	public async onApplicationBootstrap() {
-		// this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
+		this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
 		this.client.once(
 			"ready",
 			async (client) => await this.commandsService.registerAllCommands(),
@@ -104,6 +104,12 @@ export class CommandsService implements OnApplicationBootstrap {
 		for (const command of slashCommands) {
 			this.slashCommandService.remove(command.getName());
 			const { config, perms } = this.getCommandData(command);
+			if (!config || !perms) {
+				this.logger.error(
+					`Missing metadata for SubCommand ${command.getName()}`,
+				);
+				return;
+			}
 			const guilds = this.managePerms(perms);
 			const deployMode = guilds.length > 0 ? "Guild" : "Global";
 			this.log("SlashCommand", config.category, command.getName(), deployMode);
@@ -118,6 +124,12 @@ export class CommandsService implements OnApplicationBootstrap {
 		for (const command of subCommands) {
 			this.slashCommandService.remove(command.getName());
 			const { config, perms } = this.getCommandData(command);
+			if (!config || !perms) {
+				this.logger.error(
+					`Missing metadata for SubCommand ${command.getName()}`,
+				);
+				return;
+			}
 			const guilds = this.managePerms(perms);
 			const deployMode = guilds.length > 0 ? "Guild" : "Global";
 			this.log("SubCommand", config.category, command.getName(), deployMode);
