@@ -36,7 +36,7 @@
 		"@necord/lavalink": "^1.1.4",
 		"@necord/localization": "^4.0.2",
 		"@necord/pagination": "^2.0.2",
-		"@nestjs/common": "^11.0.6",
+		"@nestjs/common": "^11.0.7",
 		"@nestjs/config": "^4.0.0",
 		"@nestjs/core": "^11.0.6",
 		"@nestjs/event-emitter": "^3.0.0",
