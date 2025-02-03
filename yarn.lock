@@ -449,12 +449,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-angular@npm:^19.7.0":
-  version: 19.7.0
-  resolution: "@commitlint/config-angular@npm:19.7.0"
+"@commitlint/config-angular@npm:^19.7.1":
+  version: 19.7.1
+  resolution: "@commitlint/config-angular@npm:19.7.1"
   dependencies:
     "@commitlint/config-angular-type-enum": "npm:^19.5.0"
-  checksum: 10c0/56ae5af0abd810b47471eccb25a92ae05fbf5b2636a5715b06bb00c1276753a2c1cc07e0513656e7d729056e799c887b8a75099e2dff6f99f02f3c04d9d03037
+  checksum: 10c0/fc3091a642eba499ad78beee12ba8d5b6c3818a3fa2cff0ecd7cd8740c23466f7189ea672539b1d9a21cfc9c37e952b558f2782318e527f80d49e905f198021c
   languageName: node
   linkType: hard
 
@@ -6979,7 +6979,7 @@ __metadata:
   dependencies:
     "@biomejs/biome": "npm:^1.9.4"
     "@commitlint/cli": "npm:^19.7.1"
-    "@commitlint/config-angular": "npm:^19.7.0"
+    "@commitlint/config-angular": "npm:^19.7.1"
     "@necord/lavalink": "npm:^1.1.4"
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.0.2"
