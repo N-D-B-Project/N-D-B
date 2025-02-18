@@ -4,4 +4,4 @@ export { ReactionRolesModule } from "@/modules/reactionRoles/ReactionRoles.modul
 export { ScheduleModule } from "@/modules/schedule/schedule.module";
 export { CommandsModule } from "@/modules/commands/Commands.module";
 export { ComponentsModule } from "@/modules/components/Components.module";
-// export { MusicModule } from "@/modules/music/Music.module";
+export { MusicModule } from "@/modules/music/Music.module";

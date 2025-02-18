@@ -1,5 +1,5 @@
 import * as Modules from "@/modules";
-// import { NecordLavalinkModule } from "@necord/lavalink";
+import { NecordLavalinkModule } from "@necord/lavalink";
 import { NecordLocalizationModule } from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";
 import { Module } from "@nestjs/common";
@@ -21,10 +21,10 @@ import { NDBServiceProvider } from "./provider/NDBService.provider";
 			inject: [ConfigService],
 			useClass: NecordConfigService,
 		}),
-		// NecordLavalinkModule.forRootAsync({
-		// 	inject: [ConfigService],
-		// 	useClass: NecordConfigService,
-		// }),
+		NecordLavalinkModule.forRootAsync({
+			inject: [ConfigService],
+			useClass: NecordConfigService,
+		}),
 		ConfigModule.forRoot({
 			isGlobal: true,
 			cache: true,
