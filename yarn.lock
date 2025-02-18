@@ -3531,21 +3531,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@vitest/pretty-format@npm:3.0.4"
-  dependencies:
-    tinyrainbow: "npm:^2.0.0"
-  checksum: 10c0/a6d12eb454d527be592d98523b11f274be8fc6ee409333731def092a5d36939c68fa5817ae45aa48c5ca23d75f6cc1b76a3db73dff8ee7e28e0932b2ad68b42d
-  languageName: node
-  linkType: hard
-
 "@vitest/pretty-format@npm:3.0.5, @vitest/pretty-format@npm:^3.0.5":
   version: 3.0.5
   resolution: "@vitest/pretty-format@npm:3.0.5"
   dependencies:
     tinyrainbow: "npm:^2.0.0"
   checksum: 10c0/94dbe3dfffd53f880e2c1fc35da3c998b768e88a37d4248a1e531ec465d4a19ec917dd56c5ccf4f24bb1984b1376ffc55fe710c2b07ef94f9ebf61ca028a2177
+  languageName: node
+  linkType: hard
+
+"@vitest/pretty-format@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@vitest/pretty-format@npm:3.0.6"
+  dependencies:
+    tinyrainbow: "npm:^2.0.0"
+  checksum: 10c0/339b47598f2c77da0d0b7d373c2ceb94995d6154cd30b7de778bbf396d21c570de0be765f1d66793d2a30a6cc673a471be45f093a074acb8a1a71d7665713dd9
   languageName: node
   linkType: hard
 
@@ -3579,31 +3579,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/ui@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@vitest/ui@npm:3.0.4"
+"@vitest/ui@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@vitest/ui@npm:3.0.6"
   dependencies:
-    "@vitest/utils": "npm:3.0.4"
+    "@vitest/utils": "npm:3.0.6"
     fflate: "npm:^0.8.2"
     flatted: "npm:^3.3.2"
-    pathe: "npm:^2.0.2"
-    sirv: "npm:^3.0.0"
-    tinyglobby: "npm:^0.2.10"
+    pathe: "npm:^2.0.3"
+    sirv: "npm:^3.0.1"
+    tinyglobby: "npm:^0.2.11"
     tinyrainbow: "npm:^2.0.0"
   peerDependencies:
-    vitest: 3.0.4
-  checksum: 10c0/597d4083dc828b3cb6e41c6664100e122eea15e52f362e79ec835823eab493f71b5c0e8595228cacc619c7eb5bf5259d1323bb8f214fda38e9c175a6581fbc28
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@vitest/utils@npm:3.0.4"
-  dependencies:
-    "@vitest/pretty-format": "npm:3.0.4"
-    loupe: "npm:^3.1.2"
-    tinyrainbow: "npm:^2.0.0"
-  checksum: 10c0/cf36626ec1305d49196360f5bf8237aec8aeacb834927582901c52b7dbfd797abd63074ecff58854f1ddfad7f111987624aded89829561ab9acd9cb51d0672f8
+    vitest: 3.0.6
+  checksum: 10c0/96eb0602e11f5a9aa1babe6bfb7795e917df62a4cfaab32b235bf3ade91d376df34f38117282fc538363deb7f2e3eec1dd4886a9b06aa9cad9adb52380fc1475
   languageName: node
   linkType: hard
 
@@ -3615,6 +3604,17 @@ __metadata:
     loupe: "npm:^3.1.2"
     tinyrainbow: "npm:^2.0.0"
   checksum: 10c0/3c18657e6f9c58b75139b19789d7e628688efa7422a16e52670ffd5cb84ce7ced856508ddc01d2e978c64f1ee316c09fbb8d12c29557d0db0f65b9888664918b
+  languageName: node
+  linkType: hard
+
+"@vitest/utils@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@vitest/utils@npm:3.0.6"
+  dependencies:
+    "@vitest/pretty-format": "npm:3.0.6"
+    loupe: "npm:^3.1.3"
+    tinyrainbow: "npm:^2.0.0"
+  checksum: 10c0/6b0e89e26c96fcfd825e0795f586336df6a02524a11e9ac3e576b7ed9738a9e4b69cd79d0b69b23c195cc4c6bdd907f1d8f7aa79a4ee0cb85393c94a1aa85267
   languageName: node
   linkType: hard
 
@@ -5401,15 +5401,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.2":
-  version: 6.4.2
-  resolution: "fdir@npm:6.4.2"
+"fdir@npm:^6.4.3":
+  version: 6.4.3
+  resolution: "fdir@npm:6.4.3"
   peerDependencies:
     picomatch: ^3 || ^4
   peerDependenciesMeta:
     picomatch:
       optional: true
-  checksum: 10c0/34829886f34a3ca4170eca7c7180ec4de51a3abb4d380344063c0ae2e289b11d2ba8b724afee974598c83027fea363ff598caf2b51bc4e6b1e0d8b80cc530573
+  checksum: 10c0/d13c10120e9625adf21d8d80481586200759928c19405a816b77dd28eaeb80e7c59c5def3e2941508045eb06d34eb47fad865ccc8bf98e6ab988bb0ed160fb6f
   languageName: node
   linkType: hard
 
@@ -6566,6 +6566,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"loupe@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "loupe@npm:3.1.3"
+  checksum: 10c0/f5dab4144254677de83a35285be1b8aba58b3861439ce4ba65875d0d5f3445a4a496daef63100ccf02b2dbc25bf58c6db84c9cb0b96d6435331e9d0a33b48541
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^10.0.1, lru-cache@npm:^10.2.0":
   version: 10.4.3
   resolution: "lru-cache@npm:10.4.3"
@@ -7023,7 +7030,7 @@ __metadata:
     "@sesamecare-oss/opentelemetry-node-metrics": "npm:^1.1.0"
     "@types/node": "npm:^22.13.0"
     "@vitest/coverage-istanbul": "npm:^3.0.5"
-    "@vitest/ui": "npm:^3.0.4"
+    "@vitest/ui": "npm:^3.0.6"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.1"
     cross-env: "npm:^7.0.3"
@@ -7421,6 +7428,13 @@ __metadata:
   version: 2.0.2
   resolution: "pathe@npm:2.0.2"
   checksum: 10c0/21fce96ca9cebf037b075de8e5cc4ac6aa1009bce57946a72695f47ded84cf4b29f03bed721ea0f6e39b69eb1a0620bcee1f72eca46086765214a2965399b83a
+  languageName: node
+  linkType: hard
+
+"pathe@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "pathe@npm:2.0.3"
+  checksum: 10c0/c118dc5a8b5c4166011b2b70608762e260085180bb9e33e80a50dcdb1e78c010b1624f4280c492c92b05fc276715a4c357d1f9edc570f8f1b3d90b6839ebaca1
   languageName: node
   linkType: hard
 
@@ -8176,14 +8190,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sirv@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "sirv@npm:3.0.0"
+"sirv@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "sirv@npm:3.0.1"
   dependencies:
     "@polka/url": "npm:^1.0.0-next.24"
     mrmime: "npm:^2.0.0"
     totalist: "npm:^3.0.0"
-  checksum: 10c0/282c52ee5a93cafa297096ad31aa6c3004a21d4c93abe728b701e51e4329acb887f6e92f07696225414fd6bb4a7782fd64a42d0b6b6467ae0f66bd3fde90b865
+  checksum: 10c0/7cf64b28daa69b15f77b38b0efdd02c007b72bb3ec5f107b208ebf59f01b174ef63a1db3aca16d2df925501831f4c209be6ece3302b98765919ef5088b45bf80
   languageName: node
   linkType: hard
 
@@ -8572,13 +8586,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.10":
-  version: 0.2.10
-  resolution: "tinyglobby@npm:0.2.10"
+"tinyglobby@npm:^0.2.11":
+  version: 0.2.11
+  resolution: "tinyglobby@npm:0.2.11"
   dependencies:
-    fdir: "npm:^6.4.2"
+    fdir: "npm:^6.4.3"
     picomatch: "npm:^4.0.2"
-  checksum: 10c0/ce946135d39b8c0e394e488ad59f4092e8c4ecd675ef1bcd4585c47de1b325e61ec6adfbfbe20c3c2bfa6fd674c5b06de2a2e65c433f752ae170aff11793e5ef
+  checksum: 10c0/16664aa782fa1350789e9253e0ec5f7c974876d83fe7edf7467246591ad2e2bed1660c0ff1ed14c00601623780c118918b1a5fdfaa487699c1d3aa598454566b
   languageName: node
   linkType: hard
 
