@@ -74,7 +74,7 @@
 		"@nestjs/schematics": "^11.0.0",
 		"@nestjs/testing": "^11.0.7",
 		"@types/node": "^22.13.0",
-		"@vitest/coverage-istanbul": "^3.0.4",
+		"@vitest/coverage-istanbul": "^3.0.5",
 		"@vitest/ui": "^3.0.4",
 		"cross-env": "^7.0.3",
 		"husky": "^9.1.7",
