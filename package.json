@@ -15,7 +15,7 @@
 	"engines": {
 		"node": "20.9.0"
 	},
-	"packageManager": "yarn@4.4.1",
+	"packageManager": "yarn@4.6.0",
 	"scripts": {
 		"update": "yarn upgrade-interactive",
 		"build": "nest build",
@@ -60,7 +60,6 @@
 		"necord": "^6.8.7",
 		"nestjs-prisma": "^0.24.0",
 		"parse-ms": "2.1.0",
-		"prisma": "^6.4.0",
 		"reflect-metadata": "^0.2.2",
 		"rxjs": "^7.8.1",
 		"topgg-autoposter": "^2.0.2"
