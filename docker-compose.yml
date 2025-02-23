@@ -1,15 +1,17 @@
+include:
+  - path: ./Database/docker-compose.yml
+    env_file: .env
+  - path: ./Lavalink/docker-compose.yml
+    env_file: .env
+
 services:
   bot:
     container_name: ndbot
     build: .
     restart: always
     tty: true
-    volumes:
-      - .:/usr/app
-      - /usr/app/node_modules
+    env_file: .env
     working_dir: /usr/app
-    command: >
-      make start
     networks:
       - ndnetwork
 
