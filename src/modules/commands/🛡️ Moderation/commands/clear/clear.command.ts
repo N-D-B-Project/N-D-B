@@ -56,14 +56,13 @@ export class ClearCommand {
 					amount,
 					channel: channelMention(channel.id),
 				}),
-				ephemeral: false,
 			});
 			await WAIT(4000);
 			res.delete();
 		} catch (error) {
 			interaction.reply({
 				content: t("Moderation.clear.response.error"),
-				ephemeral: true,
+				flags: "Ephemeral",
 			});
 		}
 	}

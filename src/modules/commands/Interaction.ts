@@ -17,7 +17,7 @@ export class InteractionTools {
 		ephemeral = false,
 	): Promise<unknown> {
 		return interaction.deferReply({
-			ephemeral,
+			flags: ephemeral ? "Ephemeral" : undefined,
 		});
 	}
 
@@ -41,12 +41,12 @@ export class InteractionTools {
 		if (interaction.deferred || interaction.replied) {
 			return await interaction.followUp({
 				...msgOptions,
-				ephemeral,
+				flags: ephemeral ? "Ephemeral" : undefined,
 			});
 		}
 		return await interaction.reply({
 			...msgOptions,
-			ephemeral,
+			flags: ephemeral ? "Ephemeral" : undefined,
 			fetchReply: true,
 		});
 	}
