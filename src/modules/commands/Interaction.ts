@@ -44,11 +44,13 @@ export class InteractionTools {
 				flags: ephemeral ? "Ephemeral" : undefined,
 			});
 		}
-		return await interaction.reply({
+		const reply = await interaction.reply({
 			...msgOptions,
 			flags: ephemeral ? "Ephemeral" : undefined,
-			fetchReply: true,
+			withResponse: true,
 		});
+
+		return reply.resource.message;
 	}
 
 	/**
@@ -70,9 +72,11 @@ export class InteractionTools {
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
 		const msgOptions = messageOptions(content) as InteractionUpdateOptions;
-		return await interaction.update({
+		const reply = await interaction.update({
 			...msgOptions,
-			fetchReply: true,
+			withResponse: true,
 		});
+
+		return reply.resource.message;
 	}
 }
