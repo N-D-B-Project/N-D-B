@@ -1,11 +1,9 @@
-import type { Prisma } from "@prisma/client";
-import type { DefaultArgs } from "@prisma/client/runtime/library";
 import type { User } from "discord.js";
 import type { UserEntity } from "../../entities";
 import type { DatabaseStatus } from "../../types";
 
 export interface IUserRepository {
-	userSettings(): Prisma.UserSettingsDelegate<DefaultArgs>;
+	userSettings();
 	get(userId: string): Promise<UserEntity>;
 	getAll(): Promise<UserEntity[]>;
 	create(

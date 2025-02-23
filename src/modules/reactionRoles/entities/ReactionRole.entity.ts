@@ -1,3 +1,3 @@
-import type { GuildReactionRoles } from "@prisma/client";
+import type { GuildReactionRoles } from "@/__generated__/prisma";
 
 export type ReactionRolesEntity = GuildReactionRoles;

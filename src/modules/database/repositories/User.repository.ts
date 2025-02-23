@@ -1,25 +1,28 @@
-import { Injectable, Logger } from "@nestjs/common";
-import type { Prisma } from "@prisma/client";
-import type { DefaultArgs } from "@prisma/client/runtime/library";
+import { Services } from "@/types/Constants";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { User } from "discord.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { PrismaService } from "nestjs-prisma";
+import { CustomPrismaService } from "nestjs-prisma";
 import type { UserEntity } from "../entities";
+import type { ExtendedPrismaClient } from "../prisma.client";
 import { DatabaseStatus } from "../types";
 import type { IUserRepository } from "./interfaces";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
-	public constructor(private readonly prisma: PrismaService) {}
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
 
 	private readonly logger = new Logger(UserRepository.name);
 
-	public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
-		return this.prisma.userSettings;
+	public userSettings() {
+		return this.prisma.client.userSettings;
 	}
 
 	public async get(userId: string): Promise<UserEntity> {
-		return await this.prisma.user.findUnique({
+		return await this.prisma.client.user.findUnique({
 			where: { id: userId },
 			include: {
 				Settings: true,
@@ -29,7 +32,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async getAll(): Promise<UserEntity[]> {
-		return await this.prisma.user.findMany({
+		return await this.prisma.client.user.findMany({
 			include: {
 				APIUser: true,
 				Settings: true,
@@ -42,7 +45,7 @@ export class UserRepository implements IUserRepository {
 		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
 	): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
 		let status = DatabaseStatus.Created;
-		const callback = await this.prisma.user
+		const callback = await this.prisma.client.user
 			.create({
 				data: {
 					id: user.id,
@@ -72,7 +75,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async update(user: User): Promise<UserEntity> {
-		return await this.prisma.user.update({
+		return await this.prisma.client.user.update({
 			where: { id: user.id },
 			data: {},
 			include: {
@@ -83,7 +86,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async delete(user: User): Promise<UserEntity> {
-		return await this.prisma.user.delete({
+		return await this.prisma.client.user.delete({
 			where: { id: user.id },
 			include: {
 				Settings: true,

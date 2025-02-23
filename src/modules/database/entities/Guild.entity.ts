@@ -1,4 +1,4 @@
-import type { Guild, GuildSettings } from "@prisma/client";
+import type { Guild, GuildSettings } from "@/__generated__/prisma";
 
 export type GuildEntity = Guild & {
 	Settings: GuildSettings;

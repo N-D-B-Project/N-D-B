@@ -11,7 +11,7 @@ node_modules/
 **/.yarn/unplugged/
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
-**/.pnp.js
+**/.pnp.*
 
 # Config Files
 *.env
@@ -25,6 +25,7 @@ ignore/
 Backup/
 .docker/database/
 *.ignore
+**/__generated__/
 
 # misc
 .DS_Store
