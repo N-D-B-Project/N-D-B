@@ -4,6 +4,7 @@ export const DiscordAPIUrl = `https://discord.com/api/v${GatewayVersion}`;
 export const isInProduction = false;
 
 export enum Services {
+	Prisma = "PRISMA_SERVICE",
 	NDB = "NDB_SERVICE",
 	Database = "DATABASE_SERVICE",
 	User = "USER_SERVICE",

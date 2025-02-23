@@ -1,17 +1,22 @@
-import { Injectable } from "@nestjs/common";
+import type { ExtendedPrismaClient } from "@/modules/database/prisma.client";
+import { Services } from "@/types/Constants";
+import { Inject, Injectable } from "@nestjs/common";
 import type { Guild, TextChannel } from "discord.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { PrismaService } from "nestjs-prisma";
+import { CustomPrismaService } from "nestjs-prisma";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {
-	public constructor(private readonly prisma: PrismaService) {}
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
 
 	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
-		return await this.prisma.guildReactionRoles.findMany({
+		return await this.prisma.client.guildReactionRoles.findMany({
 			where: { guildId: guild.id },
 		});
 	}
@@ -74,7 +79,7 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		const Check = await this.checkIfExists(guild, data);
 
 		if (Check) return { status: "UnableToCreate" };
-		await this.prisma.guildReactionRoles
+		await this.prisma.client.guildReactionRoles
 			.create({
 				data: {
 					Channel,
@@ -108,7 +113,7 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		guild: Guild,
 		{ Channel, Message, Role, Emoji }: IReaction,
 	): Promise<{ status: "UnableToDelete" | "Deleted" }> {
-		await this.prisma.guildReactionRoles
+		await this.prisma.client.guildReactionRoles
 			.deleteMany({
 				where: {
 					guildId: guild.id,
@@ -127,10 +132,10 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 	public async deleteMany(
 		guild: Guild,
 	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
-		const count = await this.prisma.guildReactionRoles.count({
+		const count = await this.prisma.client.guildReactionRoles.count({
 			where: { guildId: guild.id },
 		});
-		await this.prisma.guildReactionRoles
+		await this.prisma.client.guildReactionRoles
 			.deleteMany({
 				where: {
 					guildId: guild.id,
@@ -163,7 +168,7 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		if (!Check) return { status: "UnableToUpdate" };
 
 		data.Option = newOption;
-		await this.prisma.guildReactionRoles.updateMany({
+		await this.prisma.client.guildReactionRoles.updateMany({
 			where: {
 				id: guild.id,
 				Channel,

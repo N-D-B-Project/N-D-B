@@ -1,13 +1,14 @@
 {
-	"recommendations": [
-		"steoates.autoimport",
-		"ms-azuretools.vscode-docker",
-		"EditorConfig.EditorConfig",
-		"eamodio.gitlens",
-		"wix.vscode-import-cost",
-		"Prisma.prisma",
-		"usernamehw.errorlens",
-		"wallabyjs.console-ninja",
-		"biomejs.biome"
-	]
+  "recommendations": [
+    "steoates.autoimport",
+    "ms-azuretools.vscode-docker",
+    "EditorConfig.EditorConfig",
+    "eamodio.gitlens",
+    "wix.vscode-import-cost",
+    "Prisma.prisma",
+    "usernamehw.errorlens",
+    "wallabyjs.console-ninja",
+    "biomejs.biome",
+    "arcanis.vscode-zipfs"
+  ]
 }
