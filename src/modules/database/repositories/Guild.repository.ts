@@ -1,25 +1,28 @@
-import { Injectable, Logger } from "@nestjs/common";
-import type { Prisma } from "@prisma/client";
-import type { DefaultArgs } from "@prisma/client/runtime/library";
+import { Services } from "@/types/Constants";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import type { Guild } from "discord.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { PrismaService } from "nestjs-prisma";
+import { CustomPrismaService } from "nestjs-prisma";
 import type { GuildEntity } from "../entities";
+import type { ExtendedPrismaClient } from "../prisma.client";
 import { DatabaseStatus } from "../types";
 import type { IGuildRepository } from "./interfaces";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {
-	public constructor(private readonly prisma: PrismaService) {}
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
 
 	private readonly logger = new Logger(GuildRepository.name);
 
-	public guildSettings(): Prisma.GuildSettingsDelegate<DefaultArgs> {
-		return this.prisma.guildSettings;
+	public guildSettings() {
+		return this.prisma.client.guildSettings;
 	}
 
 	public async get(guildId: string): Promise<GuildEntity> {
-		return await this.prisma.guild.findUnique({
+		return await this.prisma.client.guild.findUnique({
 			where: { id: guildId },
 			include: {
 				Settings: true,
@@ -28,7 +31,7 @@ export class GuildRepository implements IGuildRepository {
 	}
 
 	public async getAll(): Promise<GuildEntity[]> {
-		return await this.prisma.guild.findMany({
+		return await this.prisma.client.guild.findMany({
 			include: {
 				Settings: true,
 			},
@@ -37,10 +40,8 @@ export class GuildRepository implements IGuildRepository {
 
 	public async create(
 		guild: Guild,
-		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
-	): Promise<{ callback: GuildEntity | void; status: DatabaseStatus }> {
-		let status = DatabaseStatus.Created;
-		const callback = await this.prisma.guild
+	): Promise<{ callback: GuildEntity | undefined; status: DatabaseStatus }> {
+		return await this.prisma.client.guild
 			.create({
 				data: {
 					id: guild.id,
@@ -53,23 +54,27 @@ export class GuildRepository implements IGuildRepository {
 					Settings: true,
 				},
 			})
+			.then((data: GuildEntity) => {
+				this.logger.log(`${guild.name} Configuration Created on Database`);
+				return {
+					callback: data,
+					status: DatabaseStatus.Created,
+				};
+			})
 			.catch((err) => {
 				this.logger.error(err);
-				status = DatabaseStatus.Error;
+				return {
+					callback: undefined,
+					status: DatabaseStatus.Error,
+				};
 			});
-		this.logger.log(`${guild.name} Configuration Created on Database`);
-		return {
-			callback,
-			status,
-		};
 	}
 
 	public async update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity> {
-		return await this.prisma.guild.update({
+		return await this.prisma.client.guild.update({
 			where: { id: oldGuild.id },
 			data: {
 				Name: newGuild.name,
-				updatedAt: new Date(),
 			},
 			include: {
 				Settings: true,
@@ -78,20 +83,11 @@ export class GuildRepository implements IGuildRepository {
 	}
 
 	public async delete(guild: Guild): Promise<GuildEntity> {
-		return await this.prisma.guild.delete({
+		return await this.prisma.client.guild.delete({
 			where: { id: guild.id },
 			include: {
 				Settings: true,
 			},
 		});
-	}
-
-	public async getCreated(guild: Guild): Promise<GuildEntity> {
-		await this.create(guild).then(({ status }) => {
-			if (status === DatabaseStatus.Created) {
-				this.logger.log(`${guild.name} Configuration Crated on Database`);
-			}
-		});
-		return await this.get(guild.id);
 	}
 }
