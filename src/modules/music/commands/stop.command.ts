@@ -28,7 +28,7 @@ export class StopCommand {
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onStop(

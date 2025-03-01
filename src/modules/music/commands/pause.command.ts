@@ -28,7 +28,7 @@ export class PauseCommand {
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onPause(

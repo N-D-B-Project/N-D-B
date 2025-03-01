@@ -26,8 +26,8 @@ export class HelloCommand {
 		user: [],
 		bot: [],
 		guildOnly: false,
-		testOnly: false,
-		ownerOnly: false,
+		testOnly: true,
+		ownerOnly: true,
 	})
 	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext) {
 		interaction.reply("Hello, World!");

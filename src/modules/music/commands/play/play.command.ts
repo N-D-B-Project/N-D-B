@@ -44,7 +44,7 @@ export class PlayCommand {
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onPlay(

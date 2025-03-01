@@ -28,7 +28,7 @@ export class ResumeCommand {
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onResume(
