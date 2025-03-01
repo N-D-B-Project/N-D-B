@@ -110,6 +110,7 @@ export class CommandsService implements OnApplicationBootstrap {
 			this.slashCommandService.remove(command.getName());
 
 			const { config, perms } = this.getCommandData(command);
+			if (config.disable) return;
 			if (!config || !perms) {
 				this.logger.error(`Missing metadata for ${type} ${command.getName()}`);
 				continue;
