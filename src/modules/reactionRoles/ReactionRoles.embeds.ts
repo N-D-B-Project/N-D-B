@@ -8,11 +8,18 @@ import {
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
+	Client,
 	type CommandInteraction,
 	EmbedBuilder,
 	type Message,
+	type MessageReaction,
+	PartialMessageReaction,
+	PartialUser,
+	Role,
 	type TextChannel,
+	type User,
 	channelMention,
 	roleMention,
 } from "discord.js";
@@ -25,6 +32,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
 		private readonly config: ConfigService,
+		private readonly client: Client,
 	) {}
 
 	public async InvalidChannelEmbed(
@@ -38,7 +46,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.Channel.Invalid",
+					"ReactionRoles.create.Channel.Invalid",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -58,7 +66,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.ID.Invalid",
+					"ReactionRoles.create.ID.Invalid",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -78,7 +86,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.ID.NotFound",
+					"ReactionRoles.create.ID.NotFound",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -98,7 +106,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.Role.Invalid",
+					"ReactionRoles.create.Role.Invalid",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -118,7 +126,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.Emoji.Invalid",
+					"ReactionRoles.create.Emoji.Invalid",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -129,12 +137,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 
 	public async ReactionRoleCreatedEmbed(
 		interaction: CommandInteraction,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
 				name: this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.Embed.Author",
+					"ReactionRoles.create.Embed.Author",
 					interaction.guildLocale,
 				),
 				iconURL: interaction.guild.iconURL(),
@@ -143,43 +151,43 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.addFields([
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.1",
+						"ReactionRoles.create.Embed.Fields.1",
 						interaction.guildLocale,
 					),
-					value: channelMention(Channel),
+					value: channelMention(reaction.channel),
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.2",
+						"ReactionRoles.create.Embed.Fields.2",
 						interaction.guildLocale,
 					),
-					value: Emoji,
+					value: reaction.emoji,
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.3",
+						"ReactionRoles.create.Embed.Fields.3",
 						interaction.guildLocale,
 					),
-					value: String(Option),
+					value: String(reaction.option),
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.4",
+						"ReactionRoles.create.Embed.Fields.4",
 						interaction.guildLocale,
 					),
 					value: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.Content.4",
+						"ReactionRoles.create.Embed.Fields.Content.4",
 						interaction.guildLocale,
 						{
 							MsgIdURL: (
 								await MessageTools.get(
 									(await interaction.guild.channels.fetch(
-										Channel,
+										reaction.channel,
 									)) as TextChannel,
-									Message,
+									reaction.message,
 								)
 							).url,
 						},
@@ -187,10 +195,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.CreateReaction.Embed.Fields.5",
+						"ReactionRoles.create.Embed.Fields.5",
 						interaction.guildLocale,
 					),
-					value: roleMention(Role),
+					value: roleMention(reaction.role),
 				},
 			]);
 	}
@@ -207,7 +215,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#00c26f")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.DeleteReaction.Removed",
+					"ReactionRoles.delete.Removed",
 					interaction.guildLocale,
 					{
 						success: this.config.get<Config["Emojis"]>("Emojis").accept,
@@ -219,7 +227,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 
 	public async ReactionRoleUpdatedEmbed(
 		interaction: CommandInteraction,
-		{ Channel, Message, Role, Emoji }: IReaction,
+		{ channel, message, role, emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
@@ -230,42 +238,42 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#00c26f")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.UpdateReaction.Embed.Description",
+					"ReactionRoles.edit.Embed.Description",
 					interaction.guildLocale,
 				),
 			)
 			.addFields(
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.1",
+						"ReactionRoles.edit.Embed.Fields.1",
 						interaction.guildLocale,
 					),
-					value: channelMention(Channel),
+					value: channelMention(channel),
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.2",
+						"ReactionRoles.edit.Embed.Fields.2",
 						interaction.guildLocale,
 					),
-					value: Emoji,
+					value: emoji,
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.3",
+						"ReactionRoles.edit.Embed.Fields.3",
 						interaction.guildLocale,
 					),
 					value: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.Content.3",
+						"ReactionRoles.edit.Embed.Fields.Content.3",
 						interaction.guildLocale,
 						{
 							MsgIdURL: (
 								await (
 									(await interaction.guild.channels.fetch(
-										Channel,
+										channel,
 									)) as TextChannel
-								).messages.fetch(Message)
+								).messages.fetch(message)
 							).url,
 						},
 					),
@@ -273,15 +281,15 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.4",
+						"ReactionRoles.edit.Embed.Fields.4",
 						interaction.guildLocale,
 					),
-					value: roleMention(Role),
+					value: roleMention(role),
 					inline: true,
 				},
 				{
 					name: this.translate.getTranslation(
-						"ReactionRoles.UpdateReaction.Embed.Fields.5",
+						"ReactionRoles.edit.Embed.Fields.5",
 						interaction.guildLocale,
 					),
 					value: newOption.toString(),
@@ -291,7 +299,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 
 			.setFooter({
 				text: this.translate.getTranslation(
-					"ReactionRoles.UpdateReaction.Embed.Footer",
+					"ReactionRoles.edit.Embed.Footer",
 					interaction.guildLocale,
 				),
 			});
@@ -306,25 +314,22 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 		let color: number;
 		switch (status) {
 			case "Confirm":
-				description =
-					"ReactionRoles.DeleteAllReactions.Embed.Description.Confirm";
+				description = "ReactionRoles.deleteall.Embed.Description.Confirm";
 				color = 0x00c26f;
 				break;
 			case "Cancel":
-				description =
-					"ReactionRoles.DeleteAllReactions.Embed.Description.Cancel";
+				description = "ReactionRoles.deleteall.Embed.Description.Cancel";
 				color = 0xc20e00;
 				break;
 			case "Success":
-				description =
-					"ReactionRoles.DeleteAllReactions.Embed.Description.Success";
+				description = "ReactionRoles.deleteall.Embed.Description.Success";
 				color = 0x00c26f;
 				break;
 		}
 		return new EmbedBuilder()
 			.setTitle(
 				this.translate.getTranslation(
-					"ReactionRoles.DeleteAllReactions.Embed.Title",
+					"ReactionRoles.deleteall.Embed.Title",
 					interaction.guildLocale,
 				),
 			)
@@ -351,7 +356,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.CreateReaction.UnableToCreate",
+					"ReactionRoles.create.UnableToCreate",
 					interaction.guildLocale,
 					{
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
@@ -372,7 +377,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.DeleteReaction.UnableToDelete",
+					"ReactionRoles.delete.UnableToDelete",
 					interaction.guildLocale,
 					{
 						success: this.config.get<Config["Emojis"]>("Emojis").accept,
@@ -393,7 +398,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.DeleteAllReaction.UnableToDelete",
+					"ReactionRoles.deleteall.UnableToDelete",
 					interaction.guildLocale,
 				),
 			);
@@ -411,7 +416,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			.setColor("#c20e00")
 			.setDescription(
 				this.translate.getTranslation(
-					"ReactionRoles.UpdateReaction.UnableToUpdate",
+					"ReactionRoles.edit.UnableToUpdate",
 					interaction.guildLocale,
 					{
 						success: this.config.get<Config["Emojis"]>("Emojis").accept,
@@ -419,5 +424,230 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					},
 				),
 			);
+	}
+
+	public async EventCooldownEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		timer: number,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder> {
+		const guild = reaction.message.guild;
+		return new EmbedBuilder()
+			.setAuthor({
+				name: user.username,
+				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
+			})
+			.setTitle(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Cooldown.Title",
+					guild.preferredLocale,
+				),
+			)
+			.setDescription(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Cooldown.Description",
+					guild.preferredLocale,
+					{
+						GUILD: guild.name,
+						TIMER: String(timer),
+					},
+				),
+			)
+			.addFields([
+				{
+					name: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.1",
+						guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
+						guild.preferredLocale,
+						{
+							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
+						},
+					),
+				},
+			])
+			.setFooter({
+				text: this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.GlobalFooter",
+					guild.preferredLocale,
+				),
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setColor("#c20e00")
+			.setTimestamp();
+	}
+
+	public async EventAddEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder> {
+		const guild = reaction.message.guild;
+
+		return new EmbedBuilder()
+			.setAuthor({
+				name: user.username,
+				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
+			})
+			.setTitle(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Add.Title",
+					guild.preferredLocale,
+				),
+			)
+			.setDescription(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Add.Description",
+					guild.preferredLocale,
+					{
+						ROLE: role.name,
+						GUILD: guild.name,
+					},
+				),
+			)
+			.addFields([
+				{
+					name: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.1",
+						guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
+						guild.preferredLocale,
+
+						{
+							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
+						},
+					),
+				},
+			])
+			.setFooter({
+				text: this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.GlobalFooter",
+					guild.preferredLocale,
+				),
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setColor("#00c26f")
+			.setTimestamp();
+	}
+
+	public async EventRemoveEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder> {
+		const guild = reaction.message.guild;
+
+		return new EmbedBuilder()
+			.setAuthor({
+				name: user.username,
+				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
+			})
+			.setTitle(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Remove.Title",
+					guild.preferredLocale,
+				),
+			)
+			.setDescription(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Remove.Description",
+					guild.preferredLocale,
+					{
+						ROLE: role.name,
+						GUILD: guild.name,
+					},
+				),
+			)
+			.addFields([
+				{
+					name: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.1",
+						guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
+						guild.preferredLocale,
+						{
+							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
+						},
+					),
+				},
+			])
+			.setFooter({
+				text: this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.GlobalFooter",
+					guild.preferredLocale,
+				),
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setColor("#00c26f")
+			.setTimestamp();
+	}
+
+	public async EventErrorEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder> {
+		const guild = reaction.message.guild;
+
+		return new EmbedBuilder()
+			.setAuthor({
+				name: user.username,
+				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
+			})
+			.setTitle(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Error.Title",
+					guild.preferredLocale,
+				),
+			)
+			.setDescription(
+				this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.Error.Description",
+					guild.preferredLocale,
+					{
+						ROLE: role.name,
+						GUILD: guild.name,
+					},
+				),
+			)
+			.addFields([
+				{
+					name: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.1",
+						guild.preferredLocale,
+					),
+					value: this.translate.getTranslation(
+						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
+						guild.preferredLocale,
+
+						{
+							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
+						},
+					),
+				},
+			])
+			.setFooter({
+				text: this.translate.getTranslation(
+					"Events.ReactionRoleAdd-Remove.GlobalFooter",
+					guild.preferredLocale,
+				),
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setColor("#c20e00")
+			.setTimestamp();
 	}
 }

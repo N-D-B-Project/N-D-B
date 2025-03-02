@@ -76,10 +76,10 @@ export class EditReactionCommand {
 		);
 
 		const REACT = await this.reaction.Delete(interaction.guild, {
-			Channel: Channel.id,
-			Message: Message.id,
-			Role: Role.id,
-			Emoji,
+			channel: Channel.id,
+			message: Message.id,
+			role: Role.id,
+			emoji: Emoji,
 		});
 
 		if (REACT.status === "Deleted") {

@@ -1,17 +1,19 @@
 import { Global, Module } from "@nestjs/common";
-import * as Commands from "./commands";
-import { ReactionRolesEvents } from "./events/ReactionRoles";
+import * as CommandsMap from "./commands";
+import * as EventsMap from "./events";
 import {
 	ReactionRolesEmbedsProvider,
 	ReactionRolesProvider,
 } from "./types/providers";
+const Commands = Object.values(CommandsMap);
+const Events = Object.values(EventsMap);
 @Global()
 @Module({
 	providers: [
-		ReactionRolesEvents,
 		ReactionRolesProvider,
 		ReactionRolesEmbedsProvider,
-		...Object.values(Commands),
+		...Commands,
+		...Events,
 	],
 	exports: [ReactionRolesProvider, ReactionRolesEmbedsProvider],
 })

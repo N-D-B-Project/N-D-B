@@ -1,8 +1,4 @@
-import {
-	CommandConfig,
-	CommandPermissions,
-	ValidatedOptions,
-} from "@/common/decorators/";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
@@ -13,7 +9,7 @@ import {
 	InteractionContextType,
 	type TextChannel,
 } from "discord.js";
-import { Ctx, type SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type {
 	IReactionRolesEmbeds,
@@ -55,7 +51,7 @@ export class CreateReactionCommand {
 	})
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() dto: CreateReactionDTO,
+		@Options() dto: CreateReactionDTO,
 	) {
 		const Channel = dto.channel as TextChannel;
 		const MessageID = dto.messageId;
@@ -76,11 +72,11 @@ export class CreateReactionCommand {
 		);
 
 		const data: IReaction = {
-			Channel: Channel.id,
-			Message: Message.id,
-			Role: Role.id,
-			Emoji,
-			Option,
+			channel: Channel.id,
+			message: Message.id,
+			role: Role.id,
+			emoji: Emoji,
+			option: Option,
 		};
 		const Created = await this.reaction.Create(interaction.guild, data);
 

@@ -48,8 +48,7 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
     - [ ] ReactionRoles
       - [x] Partial migrated to Necord but not tested yet
       - [ ] Commands Edit, List
-      - [ ] Update ReactionRoleAdd/Remove Events
-      - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+      - [x] Update ReactionRoleAdd/Remove Events
     - [ ] Music
     - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
       - [x] Partial

@@ -11,7 +11,13 @@ import type {
 } from "discord.js";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
-import type { IReaction, REACTION_OPTIONS } from "./types";
+import type {
+	CreateStatus,
+	DeleteStatus,
+	IReaction,
+	REACTION_OPTIONS,
+	UpdateStatus,
+} from "./types";
 import { ReactionRoles } from "./types/constants";
 
 @Injectable()
@@ -38,67 +44,42 @@ export class ReactionRolesService implements IReactionRolesService {
 
 	public async getOne(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 	): Promise<ReactionRolesEntity> {
-		return await this.database.ReactionRolesRepo().getOne(guild, {
-			Channel,
-			Message,
-			Role,
-			Emoji,
-			Option,
-		});
+		return await this.database.ReactionRolesRepo().getOne(guild, reaction);
 	}
 
 	public async Create(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<{ status: "UnableToCreate" | "Created" }> {
-		return await this.database.ReactionRolesRepo().create(guild, {
-			Channel,
-			Message,
-			Role,
-			Emoji,
-			Option,
-		});
+		reaction: IReaction,
+	): Promise<{ status: CreateStatus }> {
+		return await this.database.ReactionRolesRepo().create(guild, reaction);
 	}
 
 	public async Delete(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji }: IReaction,
-	): Promise<{ status: "UnableToDelete" | "Deleted" }> {
-		return await this.database.ReactionRolesRepo().delete(guild, {
-			Channel,
-			Message,
-			Role,
-			Emoji,
-		});
+		reaction: IReaction,
+	): Promise<{ status: DeleteStatus }> {
+		return await this.database.ReactionRolesRepo().delete(guild, reaction);
 	}
 
 	public async DeleteAll(
 		guild: Guild,
-	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
+	): Promise<{ status: DeleteStatus; count: number }> {
 		return await this.database.ReactionRolesRepo().deleteMany(guild);
 	}
 
 	public async Update(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<{
-		status: "UnableToUpdate" | "Updated";
+		status: UpdateStatus;
 		oldOption?: REACTION_OPTIONS;
 	}> {
-		return await this.database.ReactionRolesRepo().update(
-			guild,
-			{
-				Channel,
-				Message,
-				Role,
-				Emoji,
-				Option,
-			},
-			newOption,
-		);
+		return await this.database
+			.ReactionRolesRepo()
+			.update(guild, reaction, newOption);
 	}
 
 	public async CheckParams(

@@ -14,7 +14,7 @@ node_modules/
 **/.pnp.js
 
 # Config Files
-*.env
+*.env*
 application.yml
 
 # Other files
