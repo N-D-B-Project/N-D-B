@@ -1371,9 +1371,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/platform-express@npm:^11.0.10":
-  version: 11.0.10
-  resolution: "@nestjs/platform-express@npm:11.0.10"
+"@nestjs/platform-express@npm:^11.0.11":
+  version: 11.0.11
+  resolution: "@nestjs/platform-express@npm:11.0.11"
   dependencies:
     cors: "npm:2.8.5"
     express: "npm:5.0.1"
@@ -1383,7 +1383,7 @@ __metadata:
   peerDependencies:
     "@nestjs/common": ^11.0.0
     "@nestjs/core": ^11.0.0
-  checksum: 10c0/e16eaa7c31b56bf256cd579e28680aafb7d0289f4cc63b4ea20338e1066d817b0996d808e60d51c689319ab88306fc5e1503697351d4573d78ae805e1ca1381e
+  checksum: 10c0/7a36d8d441966e5d044e6169258fe32480e3f935fc67da503cbc462826c01339e384b81fbda8e5e6579664b8ccaddca59fb8cab3cc45ef25e10d7de036a31784
   languageName: node
   linkType: hard
 
@@ -6057,7 +6057,7 @@ __metadata:
     "@nestjs/config": "npm:^4.0.0"
     "@nestjs/core": "npm:^11.0.10"
     "@nestjs/event-emitter": "npm:^3.0.0"
-    "@nestjs/platform-express": "npm:^11.0.10"
+    "@nestjs/platform-express": "npm:^11.0.11"
     "@nestjs/schedule": "npm:^5.0.1"
     "@nestjs/schematics": "npm:^11.0.1"
     "@opentelemetry/api": "npm:^1.9.0"
