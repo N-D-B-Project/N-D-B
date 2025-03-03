@@ -65,7 +65,7 @@
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-angular": "^19.7.1",
 		"@nedcloarbr/biome-config": "^1.9.0",
-		"@nestjs/cli": "^11.0.4",
+		"@nestjs/cli": "^11.0.5",
 		"@nestjs/schematics": "^11.0.1",
 		"@types/node": "^22.13.4",
 		"cross-env": "^7.0.3",
