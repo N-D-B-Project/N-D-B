@@ -2535,9 +2535,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:6.4.0":
-  version: 6.4.0
-  resolution: "@prisma/client@npm:6.4.0"
+"@prisma/client@npm:6.5.0":
+  version: 6.5.0
+  resolution: "@prisma/client@npm:6.5.0"
   peerDependencies:
     prisma: "*"
     typescript: ">=5.1.0"
@@ -2546,7 +2546,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/4eeaec153f3a8aa2c61d2abf0aa4ec26008366599c9b883071b3968dbd36b9cf8c89d19f2154292cf1d1e8b9257daf8e22b101d92dc248a004e0a94e6d45e2cc
+  checksum: 10c0/2bf6a213bd65de20092b2773b9bb105f023558da2214e92542fe745255778dee8386068ec6648d0d651e0af7443ca69ed9278aa505c0342d39a30098fd0090d2
   languageName: node
   linkType: hard
 
@@ -6066,7 +6066,7 @@ __metadata:
     "@opentelemetry/resources": "npm:^1.30.1"
     "@opentelemetry/sdk-node": "npm:^0.57.2"
     "@opentelemetry/semantic-conventions": "npm:^1.30.0"
-    "@prisma/client": "npm:6.4.0"
+    "@prisma/client": "npm:6.5.0"
     "@sesamecare-oss/opentelemetry-node-metrics": "npm:^1.1.0"
     "@types/node": "npm:^22.13.4"
     class-transformer: "npm:^0.5.1"
