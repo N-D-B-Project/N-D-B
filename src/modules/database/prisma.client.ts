@@ -3,6 +3,7 @@ import type { IReaction } from "../reactionRoles/types";
 
 export const extendedPrismaClient = new PrismaClient({
 	log: ["info"],
+	errorFormat: "pretty",
 }).$extends({
 	model: {
 		guildReactionRoles: {
