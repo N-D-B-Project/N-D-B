@@ -20,7 +20,7 @@
 		"update": "yarn upgrade-interactive",
 		"build": "nest build",
 		"start": "nest start",
-		"start:dev": "nest start --watch --env-file=.env",
+		"start:dev": "NODE_ENV=development nest start --watch --env-file=.env.development",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
 		"format": "yarn biome format --write ./",
@@ -44,12 +44,13 @@
 		"@opentelemetry/resources": "^1.30.1",
 		"@opentelemetry/sdk-node": "^0.57.2",
 		"@opentelemetry/semantic-conventions": "^1.30.0",
-		"@prisma/client": "6.4.0",
+		"@prisma/client": "6.5.0",
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.1",
 		"discord-api-types": "^0.37.119",
 		"discord.js": "^14.18.0",
+		"dotenv": "^16.4.7",
 		"ioredis": "^5.5.0",
 		"lavalink-client": "^2.4.7",
 		"moment": "^2.30.1",
@@ -71,14 +72,11 @@
 		"cross-env": "^7.0.3",
 		"husky": "^9.1.7",
 		"lint-staged": "^15.4.3",
-		"prisma": "^6.4.0",
+		"prisma": "^6.5.0",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.5.2",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.7.3"
-	},
-	"prisma": {
-		"schema": "Database/prisma/schema.prisma"
 	}
 }
