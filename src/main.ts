@@ -1,38 +1,35 @@
-import { Logger } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import {
-	EnvChecker,
 	NodeHandler,
 	PrismaExceptionFilter,
 	ShardingManager,
 	TopGGAutoPoster,
 	otelSDK,
 } from "./lib";
+import type { ConfigService } from "./modules/config/config.service";
+import { Services } from "./types/Constants";
 
 async function bootstrap() {
 	NodeHandler();
 	const app = await NestFactory.create(AppModule);
-	const configService = app.get<ConfigService>(ConfigService);
+	const configService = app.get<ConfigService>(Services.Config);
 	const httpAdapter = app.getHttpAdapter();
-	const logger = new Logger("Main");
-	EnvChecker(configService);
 	const ShardManager = new ShardingManager(configService);
-	const TopGGPoster = new TopGGAutoPoster(
-		configService.getOrThrow("TopGGToken"),
-		ShardManager,
-	);
+
+	if (configService.get("NODE_ENV") === "production") {
+		const TopGGPoster = new TopGGAutoPoster(
+			configService.get("TopGGToken"),
+			ShardManager,
+		);
+
+		await TopGGPoster.init();
+	}
 
 	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
-	try {
-		otelSDK.start();
-		await ShardManager.init();
-		await TopGGPoster.init();
-	} catch (error) {
-		await app.listen(configService.get("PORT"));
-		logger.error("An error occurred when starting: ", (error as Error).message);
-	}
+	otelSDK.start();
+	await ShardManager.init();
+	await app.listen(configService.get("PORT"));
 }
 bootstrap();

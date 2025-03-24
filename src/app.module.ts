@@ -1,14 +1,7 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { config } from "./modules/config";
+import { ConfigModule } from "./modules/config/config.module";
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({
-			isGlobal: true,
-			cache: true,
-			load: [config],
-		}),
-	],
+	imports: [ConfigModule],
 })
 export class AppModule {}

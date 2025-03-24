@@ -1,10 +1,10 @@
 import { InteractionTools } from "@/modules/commands/Interaction";
 import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { type NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
-import { Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@/modules/config";
+import { Services } from "@/types/Constants";
+import { type NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	ActionRowBuilder,
@@ -20,7 +20,7 @@ import { Button, type ButtonContext, ComponentParam, Context } from "necord";
 @Injectable()
 export class LavalinkNodeEvents {
 	public constructor(
-		private readonly config: ConfigService,
+		@Inject(Services.Config) private readonly configService: ConfigService,
 		private readonly userManger: UserManager,
 		private readonly nodeManger: NodeManager,
 	) {}
@@ -55,7 +55,7 @@ export class LavalinkNodeEvents {
 		this.logger.log(`Node: \`${node.id}\` disconnected`);
 		if (this.reconnectAttempts < 4) return;
 		const owner = await this.userManger.fetch(
-			this.config.getOrThrow<Config["Discord"]>("Discord").Client.Owners[0],
+			this.configService.get("Discord").Client.Owners[0],
 		);
 		await MessageTools.send(owner, {
 			embeds: [
@@ -80,21 +80,20 @@ export class LavalinkNodeEvents {
 		@Context() [interaction]: ButtonContext,
 		@ComponentParam("id") id: string,
 	) {
-    
 		const node = this.nodeManger.nodes.get(id);
 		if (!node.connected) {
 			node.connect();
-      const message = await InteractionTools.editReply(interaction, {
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("Node Reconnected")
-            .setColor("#00c26f")
-            .setDescription(`Node: \`${node.id}\``),
-        ],
-        components: []
-      })
+			const message = await InteractionTools.editReply(interaction, {
+				embeds: [
+					new EmbedBuilder()
+						.setTitle("Node Reconnected")
+						.setColor("#00c26f")
+						.setDescription(`Node: \`${node.id}\``),
+				],
+				components: [],
+			});
 			this.reconnectAttempts = 0;
-      setTimeout(async () => await message.delete(), 5000)
+			setTimeout(async () => await message.delete(), 5000);
 		}
 	}
 
@@ -123,7 +122,7 @@ export class LavalinkNodeEvents {
 	public onNodeRaw(
 		@Context() [node, payload]: NodeManagerContextOf<"raw">,
 	): void {
-		if (this.config.getOrThrow<Config["Debug"]>("Debug").Lavalink) {
+		if (this.configService.get("Debug").Lavalink) {
 			this.logger.debug(`Node: \`${node.id}\` emitted a raw event: ${payload}`);
 		}
 	}
