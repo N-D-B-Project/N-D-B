@@ -1,4 +1,6 @@
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import { Services } from "@/types/Constants";
 import { formatArray } from "@/utils/Tools";
 import {
 	LOCALIZATION_ADAPTER,
@@ -12,8 +14,6 @@ import {
 	Injectable,
 } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";
@@ -24,8 +24,9 @@ export class CommandPermissionsGuard implements CanActivate {
 	public constructor(
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
+		@Inject(Services.Config)
+		private readonly configService: ConfigService,
 		private readonly reflector: Reflector,
-		private readonly config: ConfigService,
 	) {}
 
 	public async canActivate(
@@ -101,16 +102,12 @@ export class CommandPermissionsGuard implements CanActivate {
 
 	private checkGuild(target: string): boolean {
 		return (
-			this.config.getOrThrow<Config["Discord"]>("Discord").Servers
-				.NDCommunity === target ||
-			this.config.getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild ===
-				target
+			this.configService.get("Discord").Servers.NDCommunity === target ||
+			this.configService.get("Discord").Servers.TestGuild === target
 		);
 	}
 
 	private checkOwner(target: string) {
-		return this.config
-			.getOrThrow<Config["Discord"]>("Discord")
-			.Client.Owners.includes(target);
+		return this.configService.get("Discord").Client.Owners.includes(target);
 	}
 }

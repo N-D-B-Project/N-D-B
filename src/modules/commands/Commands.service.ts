@@ -6,13 +6,15 @@ import {
 	CommandConfigKey,
 	type CommandConfigOptions,
 } from "@/common/decorators";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import { Services } from "@/types/Constants";
 import {
+	Inject,
 	Injectable,
 	Logger,
 	type OnApplicationBootstrap,
 } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Reflector } from "@nestjs/core";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -36,6 +38,7 @@ export class CommandsService implements OnApplicationBootstrap {
 		private readonly explorerService: ExplorerService<SlashCommandDiscovery>,
 		private readonly commandsService: NecordCommandsService,
 		private readonly reflector: Reflector,
+		@Inject(Services.Config)
 		private readonly configService: ConfigService,
 		private readonly client: Client,
 	) {}
@@ -71,14 +74,10 @@ export class CommandsService implements OnApplicationBootstrap {
 		const guilds: string[] = [];
 
 		if (perms.guildOnly) {
-			guilds.push(
-				this.configService.getOrThrow<string>("Discord.Servers.NDCommunity"),
-			);
+			guilds.push(this.configService.get("Discord").Servers.NDCommunity);
 		}
 		if (perms.testOnly) {
-			guilds.push(
-				this.configService.getOrThrow<string>("Discord.Servers.TestGuild"),
-			);
+			guilds.push(this.configService.get("Discord").Servers.TestGuild);
 		}
 		if (perms.guilds) {
 			guilds.push(...perms.guilds);

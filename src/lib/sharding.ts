@@ -1,14 +1,13 @@
 import path from "node:path";
-import type { Config } from "@/modules/config/types";
-import { Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
+import { ConfigService } from "@/modules/config";
+import { Logger } from "@nestjs/common";
 import { ShardingManager as _ShardingManager } from "discord.js";
 
 export class ShardingManager extends _ShardingManager {
-	public constructor(private readonly config: ConfigService) {
+	public constructor(private readonly configService: ConfigService) {
 		super(path.join(__dirname, "bot.js"), {
-			token: config.getOrThrow("Discord").Token,
+			token: configService.get("Token"),
 			shardList: "auto",
 			respawn: true,
 			mode: "process",
@@ -42,7 +41,7 @@ export class ShardingManager extends _ShardingManager {
 			});
 
 			shard.on("message", (message) => {
-				if (this.config.getOrThrow<Config["Debug"]>("Debug").Shard) {
+				if (this.configService.get("Debug").Shard) {
 					this.logger.verbose(message);
 				}
 			});

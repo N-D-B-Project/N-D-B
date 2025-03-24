@@ -1,3 +1,4 @@
+import { Services } from "@/types/Constants";
 import type { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,
@@ -5,9 +6,7 @@ import {
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import type { NecordPaginationOptions } from "@necord/pagination";
-import { Injectable } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
+import { Inject, Injectable } from "@nestjs/common";
 import {
 	GatewayIntentBits,
 	GatewayVersion,
@@ -17,15 +16,18 @@ import {
 import { SourceLinksRegexes } from "lavalink-client";
 import type { NecordModuleOptions } from "necord";
 import { JSONLocaleLoader } from "./JSONLocale.loader";
-import type { Config } from "./types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "./config.service";
 
 @Injectable()
 export class NecordConfigService {
-	public constructor(private readonly config: ConfigService) {}
+	public constructor(
+		@Inject(Services.Config) private readonly configService: ConfigService,
+	) {}
 
 	public createNecordOptions(): NecordModuleOptions {
 		return {
-			token: this.config.getOrThrow<Config["Discord"]>("Discord").Token,
+			token: this.configService.get("Token"),
 			skipRegistration: true,
 			shards: "auto",
 			rest: {
@@ -101,8 +103,7 @@ export class NecordConfigService {
 	public async createNecordLocalizationOptions(): Promise<NecordLocalizationOptions> {
 		return {
 			adapter: new NestedLocalizationAdapter({
-				fallbackLocale:
-					this.config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
+				fallbackLocale: this.configService.get("FallbackLocale"),
 				locales: await new JSONLocaleLoader(
 					"./src/common/Languages/",
 				).loadTranslations(),
@@ -129,8 +130,7 @@ export class NecordConfigService {
 				applyVolumeAsFilter: true,
 				clientBasedPositionUpdateInterval: 100,
 				defaultSearchPlatform: "ytmsearch",
-				volumeDecrementer:
-					this.config.getOrThrow<Config["Music"]>("Music").Volumes.Lavalink,
+				volumeDecrementer: this.configService.get("Volumes").Lavalink,
 				useUnresolvedData: true,
 				onDisconnect: {
 					autoReconnect: false,
@@ -146,8 +146,7 @@ export class NecordConfigService {
 				SourceLinksRegexes.AllSpotifyRegex,
 			],
 			advancedOptions: {
-				enableDebugEvents:
-					this.config.getOrThrow<Config["Debug"]>("Debug").Lavalink,
+				enableDebugEvents: this.configService.get("Debug").Lavalink,
 			},
 		};
 	}

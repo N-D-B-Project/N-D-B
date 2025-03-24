@@ -1,9 +1,8 @@
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import {
@@ -20,7 +19,7 @@ import { Context, type ContextOf, On, Once } from "necord";
 export class GatewayEvents {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		private readonly config: ConfigService<Config>,
+		@Inject(Services.Config) private readonly configService: ConfigService,
 	) {}
 
 	private readonly logger = new Logger(GatewayEvents.name);
@@ -56,8 +55,7 @@ export class GatewayEvents {
 
 	@Once("debug")
 	public async onDebug(@Context() [data]: ContextOf<"debug">) {
-		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client)
-			this.logger.debug(data);
+		if (this.configService.get("Debug").Client) this.logger.debug(data);
 	}
 
 	@On("error")
