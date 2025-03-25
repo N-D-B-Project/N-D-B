@@ -1,4 +1,5 @@
 import { MessageTools } from "@/modules/commands/Message";
+import { Embeds, type IMusicEmbeds } from "@/types";
 import {
 	type LavalinkManagerContextOf,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -7,13 +8,11 @@ import {
 } from "@necord/lavalink";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Context } from "necord";
-import type { IMusicEmbeds } from "../interfaces";
-import { Music, PlayerProps } from "../types/constants";
 
 @Injectable()
 export class PlayerEvents {
 	public constructor(
-		@Inject(Music.Embeds)
+		@Inject(Embeds.Music)
 		private readonly musicEmbeds: IMusicEmbeds,
 		private readonly lavalinkService: NecordLavalinkService,
 	) {}

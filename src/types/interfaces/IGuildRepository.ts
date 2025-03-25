@@ -1,6 +1,6 @@
+import type { DatabaseStatus } from "@/types";
 import type { Guild } from "discord.js";
-import type { GuildEntity } from "../../entities";
-import type { DatabaseStatus } from "../../types";
+import type { GuildEntity } from "../../modules/database/entities";
 
 export interface IGuildRepository {
 	guildSettings();

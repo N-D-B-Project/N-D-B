@@ -1,10 +1,10 @@
 import { Global, Module } from "@nestjs/common";
-import * as CommandsMap from "./commands";
-import * as EventsMap from "./events";
 import {
 	ReactionRolesEmbedsProvider,
 	ReactionRolesProvider,
-} from "./types/providers";
+} from "./ReactionRoles.providers";
+import * as CommandsMap from "./commands";
+import * as EventsMap from "./events";
 const Commands = Object.values(CommandsMap);
 const Events = Object.values(EventsMap);
 @Global()

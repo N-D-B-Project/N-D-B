@@ -8,7 +8,7 @@ import {
 	otelSDK,
 } from "./lib";
 import type { ConfigService } from "./modules/config/config.service";
-import { Services } from "./types/Constants";
+import { Services } from "./types/constants";
 
 async function bootstrap() {
 	NodeHandler();

@@ -1,18 +1,18 @@
-import { Services } from "@/types/Constants";
-import { Inject, Injectable } from "@nestjs/common";
-import type { Guild, TextChannel } from "discord.js";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { CustomPrismaService } from "nestjs-prisma";
-import type { ExtendedPrismaClient } from "../database/prisma.client";
-import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
-import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 import {
 	CreateStatus,
 	DeleteStatus,
 	type IReaction,
+	type IReactionRolesRepository,
 	type REACTION_OPTIONS,
+	Services,
 	UpdateStatus,
-} from "./types";
+} from "@/types";
+import { Inject, Injectable } from "@nestjs/common";
+import type { Guild, TextChannel } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { CustomPrismaService } from "nestjs-prisma";
+import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
+import type { ExtendedPrismaClient } from "../prisma.client";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {

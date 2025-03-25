@@ -1,5 +1,15 @@
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import {
+	type CreateStatus,
+	type DeleteStatus,
+	Embeds,
+	type IDatabaseService,
+	type IReaction,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	type REACTION_OPTIONS,
+	Services,
+	type UpdateStatus,
+} from "@/types";
 import { Inject, Injectable } from "@nestjs/common";
 import type {
 	Client,
@@ -9,27 +19,14 @@ import type {
 	Role,
 	TextChannel,
 } from "discord.js";
-import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
-import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
-import type {
-	CreateStatus,
-	DeleteStatus,
-	IReaction,
-	REACTION_OPTIONS,
-	UpdateStatus,
-} from "./types";
-import { ReactionRoles } from "./types/constants";
+import type { ReactionRolesEntity } from "../database/entities";
 
 @Injectable()
 export class ReactionRolesService implements IReactionRolesService {
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(ReactionRoles.Embeds) private readonly embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 	) {}
-
-	public async Embeds(): Promise<IReactionRolesEmbeds> {
-		return this.embeds;
-	}
 
 	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getAll(guild);

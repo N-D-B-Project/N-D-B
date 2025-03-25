@@ -1,12 +1,12 @@
-import type { Guild, TextChannel } from "discord.js";
-import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
 import type {
 	CreateStatus,
 	DeleteStatus,
 	IReaction,
 	REACTION_OPTIONS,
 	UpdateStatus,
-} from "../types";
+} from "@/types";
+import type { Guild, TextChannel } from "discord.js";
+import type { ReactionRolesEntity } from "../../modules/database/entities/ReactionRole.entity";
 
 export interface IReactionRolesRepository {
 	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;

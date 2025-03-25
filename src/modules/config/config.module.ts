@@ -1,4 +1,4 @@
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import { Global, Module, type Provider } from "@nestjs/common";
 import { ConfigModule as NestConfigModule } from "@nestjs/config";
 import { ConfigService } from "./config.service";

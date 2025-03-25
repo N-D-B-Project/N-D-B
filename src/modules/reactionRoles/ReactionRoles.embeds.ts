@@ -1,7 +1,12 @@
 import { MessageTools } from "@/modules/commands/Message";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import {
+	type IReaction,
+	type IReactionRolesEmbeds,
+	type REACTION_OPTIONS,
+	Services,
+} from "@/types";
 import {
 	LOCALIZATION_ADAPTER,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -23,8 +28,6 @@ import {
 	channelMention,
 	roleMention,
 } from "discord.js";
-import type { IReactionRolesEmbeds } from "./interfaces";
-import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesEmbeds implements IReactionRolesEmbeds {

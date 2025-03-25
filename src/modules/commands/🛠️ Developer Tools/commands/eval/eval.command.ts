@@ -2,7 +2,7 @@ import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import {
 	CurrentTranslate,
 	type TranslationFn,

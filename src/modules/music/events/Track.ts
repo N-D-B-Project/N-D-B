@@ -1,7 +1,7 @@
 import { MessageTools } from "@/modules/commands/Message";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import { PlayerProps, Services } from "@/types";
 import { Timer, WAIT } from "@/utils/Tools";
 import {
 	type LavalinkManagerContextOf,
@@ -19,7 +19,6 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
 import { MusicService } from "../Music.service";
-import { PlayerProps } from "../types/constants";
 
 @Injectable()
 export class TrackEvents {

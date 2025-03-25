@@ -1,6 +1,6 @@
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import { formatArray } from "@/utils/Tools";
 import {
 	LOCALIZATION_ADAPTER,

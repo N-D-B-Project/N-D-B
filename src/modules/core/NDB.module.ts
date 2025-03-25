@@ -1,5 +1,5 @@
 import * as Modules from "@/modules";
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import { NecordLavalinkModule } from "@necord/lavalink";
 import { NecordLocalizationModule } from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";

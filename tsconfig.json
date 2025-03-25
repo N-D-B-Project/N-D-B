@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "commonjs",
-		"declaration": false,
+		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
@@ -24,11 +24,11 @@
 		"moduleResolution": "node",
 		"allowJs": true,
 		"rootDir": ".",
-		"typeRoots": ["./node_modules/@types", "**/types"],
+		"typeRoots": ["./node_modules/@types", "./src/types"],
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-
+		"declarationDir": "./dist",
 		"forceConsistentCasingInFileNames": true,
 		"skipDefaultLibCheck": true,
 		"strict": true,

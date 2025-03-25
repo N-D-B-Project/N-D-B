@@ -1,21 +1,22 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import {
+	Embeds,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	Services,
+} from "@/types";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../interfaces";
-import { ReactionRoles } from "../types/constants";
 
 @ReactionRolesCommand()
 export class ReactionTypesCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service)
+		@Inject(Services.ReactionRoles)
 		private readonly reaction: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 	) {}
 
 	private readonly logger = new Logger(ReactionTypesCommand.name);

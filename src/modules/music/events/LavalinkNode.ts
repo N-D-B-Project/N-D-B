@@ -2,7 +2,7 @@ import { InteractionTools } from "@/modules/commands/Interaction";
 import { MessageTools } from "@/modules/commands/Message";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import { type NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>

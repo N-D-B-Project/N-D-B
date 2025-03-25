@@ -1,5 +1,5 @@
+import type { IReaction } from "@/types";
 import { PrismaClient } from "@prisma/client";
-import type { IReaction } from "../reactionRoles/types";
 
 export const extendedPrismaClient = new PrismaClient({
 	log: ["info"],

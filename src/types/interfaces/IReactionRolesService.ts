@@ -1,3 +1,11 @@
+import type { ReactionRolesEntity } from "@/modules/database/entities";
+import type {
+	CreateStatus,
+	DeleteStatus,
+	IReaction,
+	REACTION_OPTIONS,
+	UpdateStatus,
+} from "@/types";
 import type {
 	Client,
 	CommandInteraction,
@@ -6,18 +14,8 @@ import type {
 	Role,
 	TextChannel,
 } from "discord.js";
-import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
-import type {
-	CreateStatus,
-	DeleteStatus,
-	IReaction,
-	REACTION_OPTIONS,
-	UpdateStatus,
-} from "../types";
-import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 
 export interface IReactionRolesService {
-	Embeds(): Promise<IReactionRolesEmbeds>;
 	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;
 	getInChannel(
 		guild: Guild,

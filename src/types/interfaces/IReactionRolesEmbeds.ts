@@ -1,3 +1,4 @@
+import type { IReaction, REACTION_OPTIONS } from "@/types";
 import type {
 	CommandInteraction,
 	EmbedBuilder,
@@ -8,7 +9,6 @@ import type {
 	Role,
 	User,
 } from "discord.js";
-import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {
 	InvalidChannelEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;

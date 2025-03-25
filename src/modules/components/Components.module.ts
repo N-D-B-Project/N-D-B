@@ -1,4 +1,4 @@
-import { Extends } from "@/types/Constants";
+import { Extends } from "@/types";
 import { Global, Module, type Provider } from "@nestjs/common";
 import { Buttons } from "./Buttons.component";
 

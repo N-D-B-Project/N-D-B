@@ -1,6 +1,6 @@
+import type { DatabaseStatus } from "@/types";
 import type { User } from "discord.js";
-import type { UserEntity } from "../../entities";
-import type { DatabaseStatus } from "../../types";
+import type { UserEntity } from "../../modules/database/entities";
 
 export interface IUserRepository {
 	userSettings();

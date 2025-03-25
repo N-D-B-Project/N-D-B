@@ -1,10 +1,9 @@
-import type { Content } from "@/types";
+import type { Content, INDBService } from "@/types";
 import {
 	LOCALIZATION_ADAPTER,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
-
 import {
 	type ButtonsAppearance,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -17,7 +16,6 @@ import {
 	type CommandInteraction,
 	type EmbedBuilder,
 } from "discord.js";
-import type { INDBService } from "./interfaces/INDBService";
 
 @Injectable()
 export class NDBService implements INDBService {

@@ -1,7 +1,6 @@
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import { type IDatabaseService, Services } from "@/types";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { OnEvent } from "@nestjs/event-emitter";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";

@@ -1,4 +1,4 @@
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import type { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,

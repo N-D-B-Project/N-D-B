@@ -8,7 +8,7 @@ import {
 } from "@/common/decorators";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@/modules/config";
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import {
 	Inject,
 	Injectable,
