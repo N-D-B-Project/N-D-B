@@ -8,7 +8,9 @@
 	"editor.fontFamily": "FiraCode NF",
 	"editor.fontLigatures": true,
 	"editor.tabSize": 2,
-
+  "editor.codeLens": false, 
+  "editor.foldingImportsByDefault": true,
+  
 	"files.exclude": {
 		"**/dist": false,
 		"**/node_modules": true,
