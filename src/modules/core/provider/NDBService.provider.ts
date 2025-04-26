@@ -1,4 +1,4 @@
-import { Services } from "@/types/Constants";
+import { Services } from "@/types";
 import type { Provider } from "@nestjs/common";
 import { NDBService } from "../NDB.service";
 

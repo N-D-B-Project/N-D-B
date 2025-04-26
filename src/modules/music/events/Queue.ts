@@ -1,5 +1,7 @@
 import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import { Embeds, type IMusicEmbeds, Services } from "@/types";
 import {
 	type LavalinkManagerContextOf,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -7,19 +9,16 @@ import {
 	OnLavalinkManager,
 } from "@necord/lavalink";
 import { Inject, Injectable, Logger } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
+
 import { Context } from "necord";
 import ms from "parse-ms";
-import type { IMusicEmbeds } from "../interfaces";
-import { Music } from "../types/constants";
 
 @Injectable()
 export class QueueEvents {
 	public constructor(
-		@Inject(Music.Embeds) private readonly musicEmbeds: IMusicEmbeds,
+		@Inject(Embeds.Music) private readonly musicEmbeds: IMusicEmbeds,
+		@Inject(Services.Config) private readonly configService: ConfigService,
 		private readonly lavalinkService: NecordLavalinkService,
-		private readonly config: ConfigService,
 	) {}
 
 	private readonly logger = new Logger(QueueEvents.name);
@@ -30,9 +29,7 @@ export class QueueEvents {
 	): Promise<void> {
 		const { guild, textChannel, voiceChannel } =
 			await this.lavalinkService.extractPlayerData(player);
-		const config =
-			this.config.getOrThrow<Config["Music"]>("Music").Player.AutoLeaveEmpty
-				.Queue;
+		const config = this.configService.get("Player").AutoLeaveEmpty.Queue;
 		if (config.Enable) {
 			setTimeout(async () => {
 				const timer = ms(config.Delay);
