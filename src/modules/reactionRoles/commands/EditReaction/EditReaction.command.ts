@@ -5,7 +5,13 @@ import {
 } from "@/common/decorators";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Buttons } from "@/modules/components/Buttons.component";
-import { Extends } from "@/types/Constants";
+import {
+	Embeds,
+	Extends,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	Services,
+} from "@/types";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import {
@@ -17,20 +23,15 @@ import {
 } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../../interfaces";
-import { ReactionRoles } from "../../types/constants";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { EditReactionDTO } from "./EditReaction.dto";
 
 @ReactionRolesCommand()
 export class EditReactionCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service)
+		@Inject(Services.ReactionRoles)
 		private readonly reaction: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 		private readonly client: Client,
 	) {}
@@ -85,14 +86,14 @@ export class EditReactionCommand {
 		if (REACT.status === "Deleted") {
 			await interaction.reply({
 				embeds: [
-					await this.Embeds.ReactionRoleRemovedEmbed(interaction, Message),
+					await this.embeds.ReactionRoleRemovedEmbed(interaction, Message),
 				],
 			});
 			await Message.reactions.cache.get(Emoji).remove();
 		} else {
 			interaction.reply({
 				embeds: [
-					await this.Embeds.UnableToDeleteReactionRoleEmbed(
+					await this.embeds.UnableToDeleteReactionRoleEmbed(
 						interaction,
 						Message,
 					),

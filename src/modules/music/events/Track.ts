@@ -1,5 +1,7 @@
 import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import { PlayerProps, Services } from "@/types";
 import { Timer, WAIT } from "@/utils/Tools";
 import {
 	type LavalinkManagerContextOf,
@@ -14,22 +16,19 @@ import {
 } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
 import { MusicService } from "../Music.service";
-import { PlayerProps } from "../types/constants";
 
 @Injectable()
 export class TrackEvents {
 	public constructor(
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
+		@Inject(Services.Config) private readonly configService: ConfigService,
 		private readonly lavalinkService: NecordLavalinkService,
 		private readonly client: Client,
 		private readonly userManager: UserManager,
-		private readonly config: ConfigService,
 	) {}
 
 	private readonly logger = new Logger(TrackEvents.name);
@@ -216,7 +215,7 @@ export class TrackEvents {
 				this.translate.getTranslation(
 					"Events.PlayerEvents.trackStuck.Embed.Title",
 					guild.preferredLocale,
-					{ EMOJI: this.config.getOrThrow<Config["Emojis"]>("Emojis").fail },
+					{ EMOJI: this.configService.getEmoji("fail") },
 				),
 			)
 			.setDescription(

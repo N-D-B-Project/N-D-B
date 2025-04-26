@@ -1,6 +1,11 @@
 import { MessageTools } from "@/modules/commands/Message";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import {
+	Embeds,
+	type IDatabaseService,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	Services,
+} from "@/types";
 import {
 	LOCALIZATION_ADAPTER,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -10,11 +15,6 @@ import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../interfaces";
-import { ReactionRoles } from "../types/constants";
 
 @Injectable()
 export class ReactionRolesEvents {
@@ -24,9 +24,9 @@ export class ReactionRolesEvents {
 
 	public constructor(
 		@Inject(Services.Database) private readonly database: IDatabaseService,
-		@Inject(ReactionRoles.Service)
+		@Inject(Services.ReactionRoles)
 		private readonly reactionRoles: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) private readonly embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
 		private readonly client: Client,
