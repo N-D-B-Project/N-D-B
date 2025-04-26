@@ -1,13 +1,18 @@
 import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import {
+	type IReaction,
+	type IReactionRolesEmbeds,
+	type REACTION_OPTIONS,
+	Services,
+} from "@/types";
 import {
 	LOCALIZATION_ADAPTER,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	Client,
@@ -23,15 +28,13 @@ import {
 	channelMention,
 	roleMention,
 } from "discord.js";
-import type { IReactionRolesEmbeds } from "./interfaces";
-import type { IReaction, REACTION_OPTIONS } from "./types";
 
 @Injectable()
 export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	public constructor(
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
-		private readonly config: ConfigService,
+		@Inject(Services.Config) private readonly configService: ConfigService,
 		private readonly client: Client,
 	) {}
 
@@ -49,7 +52,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.Channel.Invalid",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -69,7 +72,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.ID.Invalid",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -89,7 +92,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.ID.NotFound",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -109,7 +112,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.Role.Invalid",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -129,7 +132,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.Emoji.Invalid",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -218,7 +221,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.delete.Removed",
 					interaction.guildLocale,
 					{
-						success: this.config.get<Config["Emojis"]>("Emojis").accept,
+						success: this.configService.getEmoji("success"),
 						URL: MsgID.url,
 					},
 				),
@@ -359,7 +362,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.create.UnableToCreate",
 					interaction.guildLocale,
 					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
+						fail: this.configService.getEmoji("fail"),
 					},
 				),
 			);
@@ -380,7 +383,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.delete.UnableToDelete",
 					interaction.guildLocale,
 					{
-						success: this.config.get<Config["Emojis"]>("Emojis").accept,
+						success: this.configService.getEmoji("success"),
 						URL: MsgID.url,
 					},
 				),
@@ -419,7 +422,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					"ReactionRoles.edit.UnableToUpdate",
 					interaction.guildLocale,
 					{
-						success: this.config.get<Config["Emojis"]>("Emojis").accept,
+						success: this.configService.getEmoji("success"),
 						URL: MsgID.url,
 					},
 				),
