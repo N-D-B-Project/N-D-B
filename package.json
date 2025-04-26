@@ -58,7 +58,7 @@
 		"nestjs-prisma": "^0.24.0",
 		"parse-ms": "2.1.0",
 		"reflect-metadata": "^0.2.2",
-		"rxjs": "^7.8.1",
+		"rxjs": "^7.8.2",
 		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
