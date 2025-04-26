@@ -1,10 +1,12 @@
-import { ReactionRolesRepoProvider } from "@/modules/reactionRoles/types/providers";
+import { Repositories } from "@/types";
 import { Global, Module, type Provider } from "@nestjs/common";
-import { Repositories } from "../types/constants";
 import { GuildRepository } from "./Guild.repository";
+import { ReactionRolesRepository } from "./ReactionRoles.repository";
 import { UserRepository } from "./User.repository";
 
-const providers: Provider<GuildRepository | UserRepository>[] = [
+const providers: Provider<
+	GuildRepository | UserRepository | ReactionRolesRepository
+>[] = [
 	{
 		provide: Repositories.Guild,
 		useClass: GuildRepository,
@@ -13,11 +15,15 @@ const providers: Provider<GuildRepository | UserRepository>[] = [
 		provide: Repositories.User,
 		useClass: UserRepository,
 	},
+	{
+		provide: Repositories.ReactionRoles,
+		useClass: ReactionRolesRepository,
+	},
 ];
 
 @Global()
 @Module({
-	providers: [...providers, ReactionRolesRepoProvider],
-	exports: [...providers, ReactionRolesRepoProvider],
+	providers: [...providers],
+	exports: [...providers],
 })
 export class RepositoriesModule {}
