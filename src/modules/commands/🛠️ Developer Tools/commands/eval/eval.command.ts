@@ -1,13 +1,14 @@
 import { inspect } from "node:util";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { ConfigService } from "@/modules/config";
+import { Services } from "@/types/Constants";
 import {
 	CurrentTranslate,
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { ConfigService } from "@nestjs/config";
+import { Inject } from "@nestjs/common";
 import {
 	ApplicationIntegrationType,
 	EmbedBuilder,
@@ -20,7 +21,9 @@ import type { EvalDTO } from "./eval.dto";
 
 @DeveloperToolsCommand()
 export class EvalCommand {
-	public constructor(private readonly config: ConfigService<Config>) {}
+	public constructor(
+		@Inject(Services.Config) private readonly configService: ConfigService,
+	) {}
 	private time: number;
 
 	@Subcommand({
@@ -52,9 +55,7 @@ export class EvalCommand {
 	) {
 		try {
 			if (
-				this.config
-					.getOrThrow<Config["EvalBadKeys"]>("EvalBadKeys")
-					.some((key) => code.includes(key))
+				this.configService.get("EvalBadKeys").some((key) => code.includes(key))
 			) {
 				return await interaction.reply({
 					content: t("DeveloperTools.eval.BadKey"),
