@@ -1,5 +1,12 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { MessageTools } from "@/modules/commands/Message";
+import {
+	Embeds,
+	type IReaction,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	Services,
+} from "@/types";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import {
@@ -11,21 +18,15 @@ import {
 } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../../interfaces";
-import type { IReaction } from "../../types";
-import { ReactionRoles } from "../../types/constants";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with>
 import { CreateReactionDTO } from "./CreateReaction.dto";
 
 @ReactionRolesCommand()
 export class CreateReactionCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service)
+		@Inject(Services.ReactionRoles)
 		private readonly reaction: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 		private readonly client: Client,
 	) {}
 
@@ -83,11 +84,11 @@ export class CreateReactionCommand {
 		if (Created.status === "Created") {
 			await MessageTools.react(Message, Emoji);
 			return await interaction.reply({
-				embeds: [await this.Embeds.ReactionRoleCreatedEmbed(interaction, data)],
+				embeds: [await this.embeds.ReactionRoleCreatedEmbed(interaction, data)],
 			});
 		}
 		return await interaction.reply({
-			embeds: [await this.Embeds.UnableToCreateReactionRoleEmbed(interaction)],
+			embeds: [await this.embeds.UnableToCreateReactionRoleEmbed(interaction)],
 		});
 	}
 }

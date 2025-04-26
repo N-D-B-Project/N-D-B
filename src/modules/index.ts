@@ -1,3 +1,4 @@
+export { ConfigModule } from "@/modules/config/config.module";
 export { DatabaseModule } from "@/modules/database/database.module";
 export { EventsModule } from "@/modules/events/Events.module";
 export { ReactionRolesModule } from "@/modules/reactionRoles/ReactionRoles.module";

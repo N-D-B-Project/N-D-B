@@ -4,7 +4,13 @@ import {
 	Buttons,
 	ConfirmButtonEnum,
 } from "@/modules/components/Buttons.component";
-import { Extends } from "@/types/Constants";
+import {
+	Embeds,
+	Extends,
+	type IReactionRolesEmbeds,
+	type IReactionRolesService,
+	Services,
+} from "@/types";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, Logger } from "@nestjs/common";
 import {
@@ -22,18 +28,13 @@ import {
 } from "necord";
 import { InteractionTools } from "../../commands/Interaction";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../interfaces";
-import { ReactionRoles } from "../types/constants";
 
 @ReactionRolesCommand()
 export class DeleteAllReactionsCommand {
 	public constructor(
-		@Inject(ReactionRoles.Service)
+		@Inject(Services.ReactionRoles)
 		private readonly reaction: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
+		@Inject(Embeds.ReactionRoles) private readonly embeds: IReactionRolesEmbeds,
 		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 	) {}
 
@@ -62,7 +63,7 @@ export class DeleteAllReactionsCommand {
 		this.context = interaction;
 		await interaction.reply({
 			embeds: [
-				await this.Embeds.ReactionRoleDeleteAllEmbed(
+				await this.embeds.ReactionRoleDeleteAllEmbed(
 					interaction,
 					"Confirm",
 					null,
@@ -83,7 +84,7 @@ export class DeleteAllReactionsCommand {
 				if (status === "Deleted") {
 					InteractionTools.editReply(this.context, {
 						embeds: [
-							await this.Embeds.ReactionRoleDeleteAllEmbed(
+							await this.embeds.ReactionRoleDeleteAllEmbed(
 								this.context,
 								"Success",
 								count,
@@ -94,7 +95,7 @@ export class DeleteAllReactionsCommand {
 				} else if (status === "UnableToDelete") {
 					InteractionTools.editReply(this.context, {
 						embeds: [
-							await this.Embeds.UnableToDeleteAllReactionRoleEmbed(
+							await this.embeds.UnableToDeleteAllReactionRoleEmbed(
 								this.context,
 							),
 						],
@@ -106,7 +107,7 @@ export class DeleteAllReactionsCommand {
 			case ConfirmButtonEnum.No:
 				InteractionTools.editReply(this.context, {
 					embeds: [
-						await this.Embeds.ReactionRoleDeleteAllEmbed(
+						await this.embeds.ReactionRoleDeleteAllEmbed(
 							this.context,
 							"Cancel",
 							null,
