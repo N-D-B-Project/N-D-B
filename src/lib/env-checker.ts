@@ -69,14 +69,4 @@ export function EnvChecker(configService: ConfigService) {
 			`TopGG Token not found | GET a token in https://top.gg/bot/${DiscordConfig.Client.ID}/webhooks`,
 		);
 	}
-
-	const APIConfig = configService.get<Config["API"]>("API");
-
-	if (!APIConfig.JwtSecret) {
-		throw new Error("JWT Secret not found");
-	}
-
-	if (!APIConfig.CookieSecret) {
-		throw new Error("Cookie Secret not found");
-	}
 }

@@ -7,8 +7,5 @@ dotenv.config({
 
 export default defineConfig({
 	earlyAccess: true,
-	schema: {
-		kind: "single",
-		filePath: "./Database/prisma/schema.prisma",
-	},
+	schema: "./Database/prisma/schema.prisma",
 });

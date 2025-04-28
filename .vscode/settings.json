@@ -10,7 +10,7 @@
 	"editor.tabSize": 2,
 
 	"files.exclude": {
-		"**/dist": true,
+		"**/dist": false,
 		"**/node_modules": false,
 		"**/yarn/cache": true
 	},
