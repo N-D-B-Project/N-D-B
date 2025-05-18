@@ -1,7 +1,7 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import {
 	ApplicationIntegrationType,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
@@ -29,8 +29,6 @@ export class CreateReactionCommand {
 		private readonly client: Client,
 	) {}
 
-	private readonly logger = new Logger(CreateReactionCommand.name);
-
 	@Subcommand({
 		name: "create",
 		description: "Create an ReactionRole in the server",
@@ -38,8 +36,6 @@ export class CreateReactionCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.create.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({

@@ -8,7 +8,6 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 
 @MusicCommand()
@@ -20,8 +19,6 @@ export class ResumeCommand {
 		nameLocalizations: localizationMapByKey("Music.resume.name"),
 		description: "Resume the queue",
 		descriptionLocalizations: localizationMapByKey("Music.resume.description"),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({

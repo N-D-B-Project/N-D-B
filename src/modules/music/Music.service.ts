@@ -46,6 +46,9 @@ export class MusicService {
 			yandexmusic: "Yandex Music",
 			"flowery-tts": "Flowery TTS",
 			jiosaavn: "JioSaavn",
+			tidal: "Tidal",
+			vkmusic: "VK Music",
+			qobuz: "Qobuz",
 		};
 
 		return sourceNamesMap[sourceName] || "Unknown Source";

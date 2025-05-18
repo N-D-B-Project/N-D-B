@@ -6,12 +6,8 @@ import {
 } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger } from "@nestjs/common";
-import {
-	ApplicationIntegrationType,
-	type CommandInteraction,
-	InteractionContextType,
-} from "discord.js";
+import { Inject } from "@nestjs/common";
+import type { CommandInteraction } from "discord.js";
 import {
 	Button,
 	type ButtonContext,
@@ -37,7 +33,6 @@ export class DeleteAllReactionsCommand {
 		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 	) {}
 
-	private readonly logger = new Logger(DeleteAllReactionsCommand.name);
 	private context: CommandInteraction;
 
 	@Subcommand({
@@ -47,8 +42,6 @@ export class DeleteAllReactionsCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.deleteall.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
