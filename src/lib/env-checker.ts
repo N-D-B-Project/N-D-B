@@ -17,14 +17,9 @@ export function EnvChecker(configService: ConfigService) {
 		);
 	}
 
-	if (process.env.NODE_ENV === "PRODUCTION" && !DiscordConfig.Token) {
+	if (!DiscordConfig.Token) {
 		throw new Error(
-			`[PRODUCTION] Discord token not found | GET a token in https://discord.com/developers/applications/${DiscordConfig.Client.ID}/bot`,
-		);
-	}
-	if (process.env.NODE_ENV === "DEVELOPMENT" && !DiscordConfig.DevToken) {
-		throw new Error(
-			"[DEVELOPMENT] Discord token not found | GET a token in https://discord.com/developers/applications/${config.Client.ID}/bot",
+			`Discord token not found | GET a token in https://discord.com/developers/applications/${DiscordConfig.Client.ID}/bot`,
 		);
 	}
 
@@ -62,11 +57,13 @@ export function EnvChecker(configService: ConfigService) {
 	// 		throw new Error("Redis Port not found");
 	// 	}
 
-	const TopGGToken = configService.get<Config["TopGGToken"]>("TopGGToken");
+	if (process.env.NODE_ENV === "production") {
+		const TopGGToken = configService.get<Config["TopGGToken"]>("TopGGToken");
 
-	if (!TopGGToken) {
-		throw new Error(
-			`TopGG Token not found | GET a token in https://top.gg/bot/${DiscordConfig.Client.ID}/webhooks`,
-		);
+		if (!TopGGToken) {
+			throw new Error(
+				`TopGG Token not found | GET a token in https://top.gg/bot/${DiscordConfig.Client.ID}/webhooks`,
+			);
+		}
 	}
 }
