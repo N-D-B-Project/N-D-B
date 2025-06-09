@@ -3,10 +3,8 @@ import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject } from "@nestjs/common";
 import {
-	ApplicationIntegrationType,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
-	InteractionContextType,
 	type TextChannel,
 } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
