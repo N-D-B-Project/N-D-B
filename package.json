@@ -71,7 +71,7 @@
 		"cross-env": "^7.0.3",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.2",
-		"prisma": "^6.9.0",
+		"prisma": "^6.10.1",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.5.2",
 		"ts-node": "^10.9.2",
