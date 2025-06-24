@@ -47,7 +47,7 @@
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
-		"discord-api-types": "^0.38.11",
+		"discord-api-types": "^0.38.12",
 		"discord.js": "^14.19.3",
 		"dotenv": "^16.5.0",
 		"ioredis": "^5.6.1",
