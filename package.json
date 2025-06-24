@@ -48,7 +48,7 @@
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
 		"discord-api-types": "^0.38.12",
-		"discord.js": "^14.19.3",
+		"discord.js": "^14.20.0",
 		"dotenv": "^16.5.0",
 		"ioredis": "^5.6.1",
 		"lavalink-client": "^2.5.6",
