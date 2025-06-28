@@ -1,7 +1,6 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger } from "@nestjs/common";
-import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
+import { Inject } from "@nestjs/common";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 import type {
@@ -18,8 +17,6 @@ export class ReactionTypesCommand {
 		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
 	) {}
 
-	private readonly logger = new Logger(ReactionTypesCommand.name);
-
 	@Subcommand({
 		name: "types",
 		description: "Show the types of ReactionRoles",
@@ -27,8 +24,6 @@ export class ReactionTypesCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.types.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({

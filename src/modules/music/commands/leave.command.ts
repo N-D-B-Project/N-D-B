@@ -8,11 +8,7 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import {
-	ApplicationIntegrationType,
-	InteractionContextType,
-	channelMention,
-} from "discord.js";
+import { channelMention } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 
 @MusicCommand()
@@ -24,8 +20,6 @@ export class LeaveCommand {
 		nameLocalizations: localizationMapByKey("Music.leave.name"),
 		description: "Leave from voice channel",
 		descriptionLocalizations: localizationMapByKey("Music.leave.description"),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({

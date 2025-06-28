@@ -6,27 +6,22 @@
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/NedcloarBR/N-D-B"
+		"url": "git+https://github.com/N-D-B-Project/N-D-B"
 	},
 	"bugs": {
-		"url": "https://github.com/NedcloarBR/N-D-B/issues"
+		"url": "https://github.com/N-D-B-Project/N-D-B/issues"
 	},
-	"homepage": "https://github.com/NedcloarBR/N-D-B",
+	"homepage": "https://github.com/N-D-B-Project/N-D-B",
 	"engines": {
 		"node": "20.9.0"
 	},
 	"packageManager": "yarn@4.6.0",
 	"scripts": {
-		"update": "yarn upgrade-interactive",
 		"build": "nest build",
-		"start": "nest start",
-		"start:dev": "nest start --watch --env-file=.env",
-		"start:debug": "nest start --debug --watch",
-		"start:prod": "node dist/main",
-		"test": "vitest",
-		"test:watch": "vitest --watch",
-		"test:coverage": "vitest run --coverage",
-		"test:ui": "vitest --ui",
+		"start": "NODE_ENV=production nest start --env-file=.env.production",
+		"start:dev": "NODE_ENV=development nest start --watch --env-file=.env.development",
+		"start:debug": "NODE_ENV=development nest start --debug --watch --env-file=.env.development",
+		"start:prod": "NODE_ENV=production node dist/main --env-file=.env.production",
 		"format": "yarn biome format --write ./",
 		"lint": "yarn biome lint ./",
 		"check": "yarn biome check --write ./",
@@ -37,58 +32,54 @@
 	"dependencies": {
 		"@necord/lavalink": "^1.1.4",
 		"@necord/localization": "^4.0.2",
-		"@necord/pagination": "^2.0.2",
-		"@nestjs/common": "^11.0.10",
-		"@nestjs/config": "^4.0.0",
-		"@nestjs/core": "^11.0.10",
-		"@nestjs/event-emitter": "^3.0.0",
-		"@nestjs/platform-express": "^11.0.10",
-		"@nestjs/schedule": "^5.0.1",
+		"@necord/pagination": "^2.1.0",
+		"@nestjs/common": "^11.1.3",
+		"@nestjs/config": "^4.0.2",
+		"@nestjs/core": "^11.1.3",
+		"@nestjs/event-emitter": "^3.0.1",
+		"@nestjs/platform-express": "^11.1.3",
+		"@nestjs/schedule": "^6.0.0",
 		"@opentelemetry/api": "^1.9.0",
-		"@opentelemetry/auto-instrumentations-node": "^0.56.1",
-		"@opentelemetry/exporter-prometheus": "^0.57.2",
-		"@opentelemetry/resources": "^1.30.1",
-		"@opentelemetry/sdk-node": "^0.57.2",
-		"@opentelemetry/semantic-conventions": "^1.30.0",
-		"@prisma/client": "6.4.0",
+		"@opentelemetry/auto-instrumentations-node": "^0.60.1",
+		"@opentelemetry/exporter-prometheus": "^0.202.0",
+		"@opentelemetry/resources": "^2.0.1",
+		"@opentelemetry/sdk-node": "^0.202.0",
+		"@opentelemetry/semantic-conventions": "^1.34.0",
+		"@prisma/client": "6.10.1",
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
 		"@yarnpkg/pnpify": "^4.1.3",
 		"class-transformer": "^0.5.1",
-		"class-validator": "^0.14.1",
-		"discord-api-types": "^0.37.119",
-		"discord.js": "^14.18.0",
-		"ioredis": "^5.5.0",
-		"lavalink-client": "^2.4.7",
+		"class-validator": "^0.14.2",
+		"discord-api-types": "^0.38.12",
+		"discord.js": "^14.20.0",
+		"dotenv": "^16.5.0",
+		"ioredis": "^5.6.1",
+		"lavalink-client": "^2.5.6",
 		"moment": "^2.30.1",
-		"necord": "^6.8.7",
-		"nestjs-prisma": "^0.25.0-dev",
+		"necord": "^6.8.14",
+		"nestjs-prisma": "^0.25.0",
 		"parse-ms": "2.1.0",
 		"reflect-metadata": "^0.2.2",
-		"rxjs": "^7.8.1",
+		"rxjs": "^7.8.2",
 		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@commitlint/cli": "^19.7.1",
-		"@commitlint/config-angular": "^19.7.1",
-		"@nedcloarbr/biome-config": "^1.9.0",
-		"@nestjs/cli": "^11.0.4",
-		"@nestjs/schematics": "^11.0.1",
-		"@nestjs/testing": "^11.0.10",
-		"@types/node": "^22.13.4",
-		"@vitest/coverage-istanbul": "^3.0.6",
-		"@vitest/ui": "^3.0.6",
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-angular": "^19.8.1",
+		"@nedcloarbr/biome-config": "^1.9.2",
+		"@nestjs/cli": "^11.0.7",
+		"@nestjs/schematics": "^11.0.5",
+		"@types/node": "^24.0.3",
 		"cross-env": "^7.0.3",
 		"husky": "^9.1.7",
-		"lint-staged": "^15.4.3",
-		"prisma": "6.4.0",
+		"lint-staged": "^16.1.2",
+		"prisma": "^6.10.1",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.5.2",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
-		"typescript": "^5.7.3",
-		"vite-tsconfig-paths": "^5.1.4",
-		"vitest": "^3.0.6"
+		"typescript": "^5.8.3"
 	},
 	"prisma": {
 		"schema": "Database/prisma/schema.prisma"
@@ -97,13 +88,13 @@
 		"@nedcloarbr/biome-config@1.9.0": {
 			"unplugged": true
 		},
-		"@prisma/client@6.4.0": {
+		"@prisma/client@6.10.1": {
 			"unplugged": true
 		},
-		"nestjs-prisma@0.25.0-dev.0": {
+		"nestjs-prisma@0.25.0": {
 			"unplugged": true
 		},
-		"prisma@6.4.0": {
+		"prisma@6.10.1": {
 			"unplugged": true
 		}
 	}

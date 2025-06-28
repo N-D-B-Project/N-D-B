@@ -45,9 +45,7 @@ export class VoiceStateUpdateEvents {
 	public async onVoiceChannelUndeaf(
 		@Context() [member, type]: ContextOf<"voiceChannelUndeaf">,
 	) {
-		console.log("undeaf");
 		if (this.checkMember(member)) {
-			console.log("undeaf bot");
 			member.voice.setDeaf(true);
 		}
 	}

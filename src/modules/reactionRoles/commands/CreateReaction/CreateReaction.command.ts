@@ -1,19 +1,13 @@
-import {
-	CommandConfig,
-	CommandPermissions,
-	ValidatedOptions,
-} from "@/common/decorators/";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import {
-	ApplicationIntegrationType,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
-	InteractionContextType,
 	type TextChannel,
 } from "discord.js";
-import { Ctx, type SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type {
 	IReactionRolesEmbeds,
@@ -33,8 +27,6 @@ export class CreateReactionCommand {
 		private readonly client: Client,
 	) {}
 
-	private readonly logger = new Logger(CreateReactionCommand.name);
-
 	@Subcommand({
 		name: "create",
 		description: "Create an ReactionRole in the server",
@@ -42,8 +34,6 @@ export class CreateReactionCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.create.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
@@ -55,7 +45,7 @@ export class CreateReactionCommand {
 	})
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() dto: CreateReactionDTO,
+		@Options() dto: CreateReactionDTO,
 	) {
 		const Channel = dto.channel as TextChannel;
 		const MessageID = dto.messageId;
@@ -76,11 +66,11 @@ export class CreateReactionCommand {
 		);
 
 		const data: IReaction = {
-			Channel: Channel.id,
-			Message: Message.id,
-			Role: Role.id,
-			Emoji,
-			Option,
+			channel: Channel.id,
+			message: Message.id,
+			role: Role.id,
+			emoji: Emoji,
+			option: Option,
 		};
 		const Created = await this.reaction.Create(interaction.guild, data);
 

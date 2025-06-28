@@ -10,11 +10,7 @@ import {
 } from "@necord/localization";
 import { UseInterceptors } from "@nestjs/common";
 import { isURL } from "class-validator";
-import {
-	ApplicationIntegrationType,
-	type EmbedBuilder,
-	InteractionContextType,
-} from "discord.js";
+import type { EmbedBuilder } from "discord.js";
 import type { SearchResult } from "lavalink-client";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
 import { MusicService } from "../../Music.service";
@@ -36,15 +32,13 @@ export class PlayCommand {
 		nameLocalizations: localizationMapByKey("Music.play.name"),
 		description: "play a track",
 		descriptionLocalizations: localizationMapByKey("Music.play.description"),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onPlay(

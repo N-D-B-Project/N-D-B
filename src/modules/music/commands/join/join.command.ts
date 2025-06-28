@@ -8,11 +8,7 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import {
-	ApplicationIntegrationType,
-	InteractionContextType,
-	channelMention,
-} from "discord.js";
+import { channelMention } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { JoinDto } from "./join.dto";
@@ -30,15 +26,13 @@ export class JoinCommand {
 		nameLocalizations: localizationMapByKey("Music.join.name"),
 		description: "Join a voice channel",
 		descriptionLocalizations: localizationMapByKey("Music.join.description"),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onJoin(

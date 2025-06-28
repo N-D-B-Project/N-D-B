@@ -1,34 +1,32 @@
 import type { Guild, TextChannel } from "discord.js";
 import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
-import type { IReaction, REACTION_OPTIONS } from "../types";
+import type {
+	CreateStatus,
+	DeleteStatus,
+	IReaction,
+	REACTION_OPTIONS,
+	UpdateStatus,
+} from "../types";
 
 export interface IReactionRolesRepository {
 	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;
-	getOne(
-		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<ReactionRolesEntity>;
+	getOne(guild: Guild, reaction: IReaction): Promise<ReactionRolesEntity>;
 	getInChannel(
 		guild: Guild,
 		channel: TextChannel,
 	): Promise<ReactionRolesEntity[]>;
-	create(
-		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<{ status: "UnableToCreate" | "Created" }>;
+	create(guild: Guild, reaction: IReaction): Promise<{ status: CreateStatus }>;
 	delete(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji }: IReaction,
-	): Promise<{ status: "UnableToDelete" | "Deleted" }>;
-	deleteMany(
-		guild: Guild,
-	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }>;
+		{ channel, message, role, emoji }: IReaction,
+	): Promise<{ status: DeleteStatus }>;
+	deleteMany(guild: Guild): Promise<{ status: DeleteStatus; count: number }>;
 	update(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<{
-		status: "UnableToUpdate" | "Updated";
+		status: UpdateStatus;
 		oldOption?: REACTION_OPTIONS;
 	}>;
 }

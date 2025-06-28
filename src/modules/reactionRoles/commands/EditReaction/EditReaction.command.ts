@@ -7,12 +7,10 @@ import {
 import { Buttons } from "@/modules/components/Buttons.component";
 import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import {
-	ApplicationIntegrationType,
 	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
-	InteractionContextType,
 	type TextChannel,
 } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
@@ -35,8 +33,6 @@ export class EditReactionCommand {
 		private readonly client: Client,
 	) {}
 
-	private readonly logger = new Logger(EditReactionCommand.name);
-
 	@Subcommand({
 		name: "edit",
 		nameLocalizations: localizationMapByKey("ReactionRoles.edit.name"),
@@ -44,8 +40,6 @@ export class EditReactionCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"ReactionRoles.edit.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
@@ -76,10 +70,10 @@ export class EditReactionCommand {
 		);
 
 		const REACT = await this.reaction.Delete(interaction.guild, {
-			Channel: Channel.id,
-			Message: Message.id,
-			Role: Role.id,
-			Emoji,
+			channel: Channel.id,
+			message: Message.id,
+			role: Role.id,
+			emoji: Emoji,
 		});
 
 		if (REACT.status === "Deleted") {

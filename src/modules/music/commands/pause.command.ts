@@ -8,7 +8,6 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 
 @MusicCommand()
@@ -20,15 +19,13 @@ export class PauseCommand {
 		nameLocalizations: localizationMapByKey("Music.pause.name"),
 		description: "Pause the queue",
 		descriptionLocalizations: localizationMapByKey("Music.pause.description"),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🎵 Music", disable: false })
 	@CommandPermissions({
 		bot: [],
 		user: [],
 		guildOnly: false,
-		testOnly: false,
+		testOnly: true,
 		ownerOnly: false,
 	})
 	public async onPause(

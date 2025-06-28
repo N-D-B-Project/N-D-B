@@ -5,9 +5,12 @@ import {
 	getResourceDetectors,
 } from "@opentelemetry/auto-instrumentations-node";
 import { PrometheusExporter } from "@opentelemetry/exporter-prometheus";
-import { Resource } from "@opentelemetry/resources";
+import { resourceFromAttributes } from "@opentelemetry/resources";
 import { NodeSDK } from "@opentelemetry/sdk-node";
-import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
+import {
+	ATTR_SERVICE_NAME,
+	ATTR_SERVICE_VERSION,
+} from "@opentelemetry/semantic-conventions";
 import { setupNodeMetrics } from "@sesamecare-oss/opentelemetry-node-metrics";
 
 const logger = new Logger("OpenTelemetry");
@@ -16,10 +19,9 @@ const metricReader = new PrometheusExporter({ port: 8081 }, () =>
 	logger.log("Prometheus scrape endpoint started on port 8081"),
 );
 
-const resource = new Resource({
-	[SemanticResourceAttributes.SERVICE_NAME]: "N-D-B",
-	[SemanticResourceAttributes.SERVICE_NAMESPACE]: "N-D-B Project",
-	[SemanticResourceAttributes.SERVICE_VERSION]: "1.0.0",
+const resource = resourceFromAttributes({
+	[ATTR_SERVICE_NAME]: "N-D-B",
+	[ATTR_SERVICE_VERSION]: "1.0.0",
 });
 
 const instrumentations = [getNodeAutoInstrumentations()];

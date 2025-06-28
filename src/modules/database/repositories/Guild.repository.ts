@@ -40,10 +40,8 @@ export class GuildRepository implements IGuildRepository {
 
 	public async create(
 		guild: Guild,
-		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
-	): Promise<{ callback: GuildEntity | void; status: DatabaseStatus }> {
-		let status = DatabaseStatus.Created;
-		const callback = await this.prisma.client.guild
+	): Promise<{ callback: GuildEntity | undefined; status: DatabaseStatus }> {
+		return await this.prisma.client.client.guild
 			.create({
 				data: {
 					id: guild.id,
@@ -56,15 +54,20 @@ export class GuildRepository implements IGuildRepository {
 					Settings: true,
 				},
 			})
+			.then((data: GuildEntity) => {
+				this.logger.log(`${guild.name} Configuration Created on Database`);
+				return {
+					callback: data,
+					status: DatabaseStatus.Created,
+				};
+			})
 			.catch((err) => {
 				this.logger.error(err);
-				status = DatabaseStatus.Error;
+				return {
+					callback: undefined,
+					status: DatabaseStatus.Error,
+				};
 			});
-		this.logger.log(`${guild.name} Configuration Created on Database`);
-		return {
-			callback,
-			status,
-		};
 	}
 
 	public async update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity> {
@@ -72,7 +75,6 @@ export class GuildRepository implements IGuildRepository {
 			where: { id: oldGuild.id },
 			data: {
 				Name: newGuild.name,
-				updatedAt: new Date(),
 			},
 			include: {
 				Settings: true,
@@ -87,14 +89,5 @@ export class GuildRepository implements IGuildRepository {
 				Settings: true,
 			},
 		});
-	}
-
-	public async getCreated(guild: Guild): Promise<GuildEntity> {
-		await this.create(guild).then(({ status }) => {
-			if (status === DatabaseStatus.Created) {
-				this.logger.log(`${guild.name} Configuration Crated on Database`);
-			}
-		});
-		return await this.get(guild.id);
 	}
 }

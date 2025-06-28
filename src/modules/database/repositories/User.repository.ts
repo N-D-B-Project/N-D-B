@@ -42,10 +42,8 @@ export class UserRepository implements IUserRepository {
 
 	public async create(
 		user: User,
-		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
-	): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
-		let status = DatabaseStatus.Created;
-		const callback = await this.prisma.client.user
+	): Promise<{ callback: UserEntity | undefined; status: DatabaseStatus }> {
+		return await this.prisma.client.client.user
 			.create({
 				data: {
 					id: user.id,
@@ -63,15 +61,20 @@ export class UserRepository implements IUserRepository {
 					Settings: true,
 				},
 			})
+			.then((data: UserEntity) => {
+				this.logger.log(`${user.username} Configuration Created on Database`);
+				return {
+					callback: data,
+					status: DatabaseStatus.Created,
+				};
+			})
 			.catch((err) => {
 				this.logger.error(err);
-				status = DatabaseStatus.Error;
+				return {
+					callback: undefined,
+					status: DatabaseStatus.Error,
+				};
 			});
-		this.logger.log(`${user.username} Configuration Created on Database`);
-		return {
-			callback,
-			status,
-		};
 	}
 
 	public async update(user: User): Promise<UserEntity> {

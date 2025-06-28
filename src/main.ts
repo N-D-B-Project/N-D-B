@@ -19,17 +19,22 @@ async function bootstrap() {
 	const logger = new Logger("Main");
 	EnvChecker(configService);
 	const ShardManager = new ShardingManager(configService);
-	const TopGGPoster = new TopGGAutoPoster(
-		configService.getOrThrow("TopGGToken"),
-		ShardManager,
-	);
+
+	await ShardManager.init();
+
+	if (configService.get("NODE_ENV") === "production") {
+		const TopGGPoster = new TopGGAutoPoster(
+			configService.getOrThrow("TopGGToken"),
+			ShardManager,
+		);
+
+		await TopGGPoster.init();
+	}
 
 	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
 	try {
 		otelSDK.start();
-		await ShardManager.init();
-		await TopGGPoster.init();
 	} catch (error) {
 		await app.listen(configService.get("PORT"));
 		logger.error("An error occurred when starting: ", (error as Error).message);

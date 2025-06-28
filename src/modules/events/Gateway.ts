@@ -69,6 +69,10 @@ export class GatewayEvents {
 		) {
 			return;
 		}
+		if (error.message.includes("Can't reach database server at")) {
+			this.logger.error("Database server is down.");
+			return;
+		}
 		this.logger.verbose(`\nMessage: ${error.message}\nCause: ${error.stack}`);
 	}
 

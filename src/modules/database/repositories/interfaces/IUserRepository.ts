@@ -8,8 +8,7 @@ export interface IUserRepository {
 	getAll(): Promise<UserEntity[]>;
 	create(
 		user: User,
-		// biome-ignore lint/suspicious/noConfusingVoidType: <Prisma returns void if no data is returned>
-	): Promise<{ callback: UserEntity | void; status: DatabaseStatus }>;
+	): Promise<{ callback: UserEntity | undefined; status: DatabaseStatus }>;
 	update(user: User): Promise<UserEntity>;
 	delete(user: User): Promise<UserEntity>;
 }

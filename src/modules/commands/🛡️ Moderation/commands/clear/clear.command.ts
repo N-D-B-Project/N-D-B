@@ -5,12 +5,7 @@ import {
 	type TranslationFn,
 	localizationMapByKey,
 } from "@necord/localization";
-import { Logger } from "@nestjs/common";
-import {
-	ApplicationIntegrationType,
-	InteractionContextType,
-	channelMention,
-} from "discord.js";
+import { channelMention } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ModerationCommand } from "../../Moderation.decorator";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
@@ -18,8 +13,6 @@ import { ClearDTO } from "./clear.dto";
 
 @ModerationCommand()
 export class ClearCommand {
-	private readonly logger = new Logger(ClearCommand.name);
-
 	@Subcommand({
 		name: "clear",
 		description: "Clear a number of messages in the selected channel",
@@ -27,8 +20,6 @@ export class ClearCommand {
 		descriptionLocalizations: localizationMapByKey(
 			"Moderation.clear.description",
 		),
-		integrationTypes: [ApplicationIntegrationType.GuildInstall],
-		contexts: [InteractionContextType.Guild],
 	})
 	@CommandConfig({ category: "🛡️ Moderation", disable: false })
 	@CommandPermissions({
@@ -56,14 +47,13 @@ export class ClearCommand {
 					amount,
 					channel: channelMention(channel.id),
 				}),
-				ephemeral: false,
 			});
 			await WAIT(4000);
 			res.delete();
 		} catch (error) {
 			interaction.reply({
 				content: t("Moderation.clear.response.error"),
-				ephemeral: true,
+				flags: "Ephemeral",
 			});
 		}
 	}
