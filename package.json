@@ -18,10 +18,11 @@
 	"packageManager": "yarn@4.6.0",
 	"scripts": {
 		"build": "nest build",
-		"start": "NODE_ENV=production nest start --env-file=.env.production",
-		"start:dev": "NODE_ENV=development nest start --watch --env-file=.env.development",
-		"start:debug": "NODE_ENV=development nest start --debug --watch --env-file=.env.development",
-		"start:prod": "NODE_ENV=production node dist/main --env-file=.env.production",
+		"start": "NODE_ENV=production nest start",
+		"start:dev": "NODE_ENV=development nest start --watch",
+		"start:hmr": "NODE_ENV=development nest build --webpack --webpackPath webpack.config.js --watch",
+		"start:debug": "NODE_ENV=development nest start --debug --watch",
+		"start:prod": "NODE_ENV=production node dist/main",
 		"format": "yarn biome format --write ./",
 		"lint": "yarn biome lint ./",
 		"check": "yarn biome check --write ./",
@@ -45,6 +46,7 @@
 		"@opentelemetry/semantic-conventions": "^1.34.0",
 		"@prisma/client": "6.10.1",
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
+		"chokidar": "^4.0.3",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
 		"discord-api-types": "^0.38.12",
@@ -68,14 +70,17 @@
 		"@nestjs/cli": "^11.0.7",
 		"@nestjs/schematics": "^11.0.5",
 		"@types/node": "^24.0.3",
-		"cross-env": "^7.0.3",
+		"@types/webpack-node-externals": "^3",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.1.2",
 		"prisma": "^6.10.1",
+		"run-script-webpack-plugin": "^0.2.3",
 		"source-map-support": "^0.5.21",
 		"ts-loader": "^9.5.2",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"webpack": "^5.101.0",
+		"webpack-node-externals": "^3.0.0"
 	}
 }
