@@ -185,7 +185,7 @@ export class TrackEvents {
 					value: this.translate.getTranslation(
 						"Events.PlayerEvents.trackError.Embed.Fields.Content.1",
 						guild.preferredLocale,
-						{ PAYLOAD: payload.op },
+						{ PAYLOAD: payload.exception.message },
 					),
 				},
 			])
