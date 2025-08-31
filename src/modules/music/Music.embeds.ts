@@ -90,20 +90,20 @@ export class MusicEmbeds implements IMusicEmbeds {
 			.setColor("#00c26f")
 			.setTitle(
 				this.translate.getTranslation(
-					"Events/PlayerEvents:playerMove:KickEmbed:Title",
+					"Events.PlayerEvents.playerMove.KickEmbed.Title",
 					guildLocale,
 				),
 			)
 			.setDescription(
 				this.translate.getTranslation(
-					"Events/PlayerEvents:playerMove:KickEmbed:Description",
+					"Events.PlayerEvents.playerMove.KickEmbed.Description",
 					guildLocale,
 					{ CHANNEL: voiceChannel.name },
 				),
 			)
 			.setFooter({
 				text: this.translate.getTranslation(
-					"Events/PlayerEvents:playerMove:KickEmbed:Footer",
+					"Events.PlayerEvents.playerMove.KickEmbed.Footer",
 					guildLocale,
 				),
 			})
@@ -126,20 +126,20 @@ export class MusicEmbeds implements IMusicEmbeds {
 			.setColor("#00c26f")
 			.setTitle(
 				this.translate.getTranslation(
-					"Events.PlayerEvents.playerMove.queueEnd.Title",
+					"Events.PlayerEvents.queueEnd.Embed.Title",
 					guildLocale,
 				),
 			)
 			.setDescription(
 				this.translate.getTranslation(
-					"Events.PlayerEvents.playerMove.queueEnd.Description",
+					"Events.PlayerEvents.queueEnd.Embed.Description",
 					guildLocale,
 					{ CHANNEL: voiceChannel.name, Timer: timer },
 				),
 			)
 			.setFooter({
 				text: this.translate.getTranslation(
-					"Events.PlayerEvents.playerMove.queueEnd.Footer",
+					"Events.PlayerEvents.Embed.queueEnd.Footer",
 					guildLocale,
 					{ TIMER: timer },
 				),

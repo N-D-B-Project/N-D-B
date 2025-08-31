@@ -171,7 +171,7 @@ export class TrackEvents {
 			)
 			.setDescription(
 				this.translate.getTranslation(
-					"Events.PlayerEvents.playerMove.Embed.Description",
+					"Events.PlayerEvents.trackError.Embed.Description",
 					guild.preferredLocale,
 					{ TITLE: track.info.title, URI: track.info.uri },
 				),
