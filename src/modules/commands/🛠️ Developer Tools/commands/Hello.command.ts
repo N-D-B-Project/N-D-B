@@ -13,7 +13,7 @@ export class HelloCommand {
 		user: [],
 		bot: [],
 		guildOnly: false,
-		testOnly: true,
+		testOnly: false,
 		ownerOnly: true,
 	})
 	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext) {
