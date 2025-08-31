@@ -9,6 +9,8 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Context } from "necord";
 import type { IMusicEmbeds } from "../interfaces";
 import { Music, PlayerProps } from "../types/constants";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { PlayerSaver } from "../utils/PlayerSaver";
 
 @Injectable()
 export class PlayerEvents {
@@ -16,6 +18,8 @@ export class PlayerEvents {
 		@Inject(Music.Embeds)
 		private readonly musicEmbeds: IMusicEmbeds,
 		private readonly lavalinkService: NecordLavalinkService,
+		@Inject(Music.PlayerSaver)
+		private readonly playerSaver: PlayerSaver,
 	) {}
 
 	private readonly logger = new Logger(PlayerEvents.name);
@@ -38,6 +42,7 @@ export class PlayerEvents {
 			],
 		});
 		player.set(PlayerProps.message, message.id);
+		await this.playerSaver.savePlayerOnCreate(player);
 
 		textChannel.messages.fetch(player.get(PlayerProps.message)).then((msg) => {
 			if (msg?.deletable) {
@@ -58,6 +63,7 @@ export class PlayerEvents {
 		this.logger.log(
 			`Player: \`${guild.name}(${guild.id})\` destroyed with reason: ${reason}`,
 		);
+		await this.playerSaver.deletePlayer(guild.id);
 	}
 
 	@OnLavalinkManager("playerDisconnect")
@@ -114,7 +120,9 @@ export class PlayerEvents {
 	@OnLavalinkManager("playerUpdate")
 	public async onPlayerUpdate(
 		@Context() [oldPlayer, newPlayer]: LavalinkManagerContextOf<"playerUpdate">,
-	) {}
+	) {
+		await this.playerSaver.savePlayerOnUpdate(oldPlayer, newPlayer);
+	}
 
 	@OnLavalinkManager("playerSocketClosed")
 	public async onPlayerSocketClosed(

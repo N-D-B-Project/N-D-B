@@ -1,8 +1,8 @@
 include:
   - path: ./Database/docker-compose.yml
-    env_file: .env
+    env_file: .env.development
   - path: ./Lavalink/docker-compose.yml
-    env_file: .env
+    env_file: .env.development
 
 services:
   bot:
@@ -10,7 +10,7 @@ services:
     build: .
     restart: always
     tty: true
-    env_file: .env
+    env_file: .env.development
     working_dir: /usr/app
     networks:
       - ndnetwork

@@ -9,5 +9,6 @@ const Providers = Object.values(ProvidersMap);
 @Global()
 @Module({
 	providers: [...Commands, ...Events, ...Providers],
+	exports: [...Providers],
 })
 export class MusicModule {}
