@@ -63,17 +63,14 @@ export class GatewayEvents {
 	@On("error")
 	public async onError(@Context() [error]: ContextOf<"error">) {
 		if (
-			error instanceof DiscordAPIError &&
-			typeof error.code === "number" &&
-			this.IGNORED_ERRORS.includes(error.code)
+			(error instanceof DiscordAPIError &&
+				typeof error.code === "number" &&
+				this.IGNORED_ERRORS.includes(error.code)) ||
+			!(error instanceof DiscordAPIError)
 		) {
 			return;
 		}
-		if (error.message.includes("Can't reach database server at")) {
-			this.logger.error("Database server is down.");
-			return;
-		}
-		this.logger.verbose(`\nMessage: ${error.message}\nCause: ${error.stack}`);
+		this.logger.log(`\nMessage: ${error.message}\nCause: ${error.stack}`);
 	}
 
 	@OnEvent("rest")
@@ -82,7 +79,7 @@ export class GatewayEvents {
 			"rateLimited",
 			async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
 				this.logger.fatal(
-					`RateLimit on route: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`,
+					`RateLimit on: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`,
 				);
 			},
 		);
