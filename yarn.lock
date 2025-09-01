@@ -2507,10 +2507,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/semantic-conventions@npm:^1.33.1, @opentelemetry/semantic-conventions@npm:^1.34.0":
+"@opentelemetry/semantic-conventions@npm:^1.33.1":
   version: 1.34.0
   resolution: "@opentelemetry/semantic-conventions@npm:1.34.0"
   checksum: 10c0/a51a32a5cf5c803bd2125a680d0abacbff632f3b255d0fe52379dac191114a0e8d72a34f9c46c5483ccfe91c4061c309f3cf61a19d11347e2a69779e82cfefd0
+  languageName: node
+  linkType: hard
+
+"@opentelemetry/semantic-conventions@npm:^1.36.0":
+  version: 1.36.0
+  resolution: "@opentelemetry/semantic-conventions@npm:1.36.0"
+  checksum: 10c0/edc8a6fe3ec4fc0c67ba3a92b86fb3dcc78fe1eb4f19838d8013c3232b9868540a034dd25cfe0afdd5eae752c5f0e9f42272ff46da144a2d5b35c644478e1c62
   languageName: node
   linkType: hard
 
@@ -5581,7 +5588,7 @@ __metadata:
     "@opentelemetry/exporter-prometheus": "npm:^0.202.0"
     "@opentelemetry/resources": "npm:^2.0.1"
     "@opentelemetry/sdk-node": "npm:^0.202.0"
-    "@opentelemetry/semantic-conventions": "npm:^1.34.0"
+    "@opentelemetry/semantic-conventions": "npm:^1.36.0"
     "@prisma/client": "npm:6.10.1"
     "@sesamecare-oss/opentelemetry-node-metrics": "npm:^1.1.0"
     "@types/node": "npm:^24.0.3"
