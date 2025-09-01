@@ -1168,9 +1168,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@necord/pagination@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@necord/pagination@npm:2.1.0"
+"@necord/pagination@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@necord/pagination@npm:2.2.0"
   peerDependencies:
     "@nestjs/common": ^10.2.0 || ^11.0.0
     "@nestjs/core": ^10.2.0 || ^11.0.0
@@ -1178,7 +1178,7 @@ __metadata:
     necord: ^6.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/c6e6f6f4eb3980b95065fe577fefbdf735382af4a032440d004d95f97d0a36244127532d59b5a85614fbbffbe817b8e3d8354080388cffdb9fb388ce8d23aae2
+  checksum: 10c0/139e3534d9b5b364fbd3e76e26c59ef826f37089a79adfd57175ff6e6a86a75492bd26e56a1c3a45362fefcc93b76ee3b5244a640180e817c0edde5446957787
   languageName: node
   linkType: hard
 
@@ -5565,7 +5565,7 @@ __metadata:
     "@commitlint/config-angular": "npm:^19.8.1"
     "@necord/lavalink": "npm:^1.1.5"
     "@necord/localization": "npm:^4.0.2"
-    "@necord/pagination": "npm:^2.1.0"
+    "@necord/pagination": "npm:^2.2.0"
     "@nedcloarbr/biome-config": "npm:^1.9.2"
     "@nestjs-redis/client": "npm:^0.10.1"
     "@nestjs/cli": "npm:^11.0.7"
