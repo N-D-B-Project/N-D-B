@@ -1,12 +1,4 @@
 import {
-	CommandPermissionsKey,
-	type CommandPermissionsOptions,
-} from "@/common/decorators";
-import {
-	CommandConfigKey,
-	type CommandConfigOptions,
-} from "@/common/decorators";
-import {
 	Injectable,
 	Logger,
 	type OnApplicationBootstrap,
@@ -19,13 +11,19 @@ import { Reflector } from "@nestjs/core";
 import { Client } from "discord.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
-	ExplorerService,
 	CommandsService as NecordCommandsService,
+	NecordExplorerService,
 	SlashCommand,
 	type SlashCommandDiscovery,
 	SlashCommandsService,
 	Subcommand,
 } from "necord";
+import {
+	CommandConfigKey,
+	type CommandConfigOptions,
+	CommandPermissionsKey,
+	type CommandPermissionsOptions,
+} from "@/common/decorators";
 
 @Injectable()
 export class CommandsService implements OnApplicationBootstrap {
@@ -33,7 +31,7 @@ export class CommandsService implements OnApplicationBootstrap {
 
 	public constructor(
 		private readonly slashCommandService: SlashCommandsService,
-		private readonly explorerService: ExplorerService<SlashCommandDiscovery>,
+		private readonly explorerService: NecordExplorerService<SlashCommandDiscovery>,
 		private readonly commandsService: NecordCommandsService,
 		private readonly reflector: Reflector,
 		private readonly configService: ConfigService,
@@ -43,7 +41,7 @@ export class CommandsService implements OnApplicationBootstrap {
 	public async onApplicationBootstrap(): Promise<void> {
 		this.logger.verbose("Initializing command metadata update");
 
-		this.client.once("ready", async () => {
+		this.client.once("clientReady ", async () => {
 			await this.commandsService.registerAllCommands();
 		});
 

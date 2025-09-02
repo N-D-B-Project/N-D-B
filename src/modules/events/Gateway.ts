@@ -1,20 +1,20 @@
-import type { Config } from "@/modules/config/types";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
-import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import {
 	ActivityType,
 	type Client,
 	DiscordAPIError,
 	type PresenceData,
-	type REST,
 	type RateLimitData,
+	type REST,
 } from "discord.js";
+import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import { Context, type ContextOf, On, Once } from "necord";
+import type { Config } from "@/modules/config/types";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 
 @Injectable()
 export class GatewayEvents {
@@ -38,8 +38,8 @@ export class GatewayEvents {
 		RESTJSONErrorCodes.MaximumActiveThreads,
 	];
 
-	@Once("ready")
-	public async onReady(@Context() [client]: ContextOf<"ready">) {
+	@Once("clientReady")
+	public async onClientReady(@Context() [client]: ContextOf<"clientReady">) {
 		this.logger.log(`Bot logged in as ${client.user.username}`);
 		await this._setPresence(client);
 		for (const guild of client.guilds.cache.values()) {
