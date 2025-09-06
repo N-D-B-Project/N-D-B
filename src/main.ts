@@ -1,4 +1,5 @@
 import * as dotenv from "dotenv";
+
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 import { Logger } from "@nestjs/common";
@@ -8,10 +9,10 @@ import { AppModule } from "./app.module";
 import {
 	EnvChecker,
 	NodeHandler,
+	otelSDK,
 	PrismaExceptionFilter,
 	ShardingManager,
 	TopGGAutoPoster,
-	otelSDK,
 } from "./lib";
 
 // biome-ignore lint/suspicious/noExplicitAny: any is required for HMR
@@ -37,6 +38,7 @@ async function bootstrap() {
 		await TopGGPoster.init();
 	}
 
+	app.enableShutdownHooks();
 	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
 	if (module.hot) {

@@ -5,10 +5,10 @@ import {
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import type { NecordPaginationOptions } from "@necord/pagination";
-import { InjectRedis, type Redis } from "@nestjs-redis/client";
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
+import { InjectRedis, type Redis } from "@nestjs-redis/client";
 import {
 	GatewayIntentBits,
 	GatewayVersion,
@@ -17,11 +17,9 @@ import {
 } from "discord.js";
 import { SourceLinksRegexes } from "lavalink-client";
 import type { NecordModuleOptions } from "necord";
-import { Music } from "../music/types/constants";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { PlayerSaver } from "../music/utils/PlayerSaver";
 import { QueueStore } from "../music/utils/QueueStore";
 import { JSONLocaleLoader } from "./JSONLocale.loader";
+import { PlayerStore } from "./player.store";
 import type { Config } from "./types";
 
 @Injectable()
@@ -29,7 +27,6 @@ export class NecordConfigService {
 	public constructor(
 		private readonly config: ConfigService,
 		@InjectRedis() private readonly redis: Redis,
-		@Inject(Music.PlayerSaver) private readonly playerSaver: PlayerSaver,
 	) {}
 
 	public createNecordOptions(): NecordModuleOptions {
@@ -121,8 +118,6 @@ export class NecordConfigService {
 	}
 
 	public async createNecordLavalinkOptions(): Promise<NecordLavalinkModuleOptions> {
-		const nodeSessions = await this.playerSaver.getSessions();
-
 		return {
 			nodes: [
 				{
@@ -133,9 +128,12 @@ export class NecordConfigService {
 					id: "ndlavalink",
 					retryAmount: 4,
 					retryDelay: 4000,
-					sessionId: nodeSessions.get("ndlavalink"),
 				},
 			],
+			autoResume: {
+				playerStore: new PlayerStore(this.redis),
+				timer: 360e3,
+			},
 			autoSkip: true,
 			playerOptions: {
 				applyVolumeAsFilter: true,

@@ -1,20 +1,15 @@
-import * as Modules from "@/modules";
 import { NecordLavalinkModule } from "@necord/lavalink";
 import { NecordLocalizationModule } from "@necord/localization";
 import { NecordPaginationModule } from "@necord/pagination";
-import { RedisModule, RedisToken } from "@nestjs-redis/client";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { RedisModule, RedisToken } from "@nestjs-redis/client";
 import { NecordModule } from "necord";
-import { NecordConfigService, config } from "../config";
-import { Music } from "../music/types/constants";
+import * as Modules from "@/modules";
+import { config, NecordConfigService } from "../config";
 import { NDBServiceProvider } from "./provider/NDBService.provider";
 
-const NecordConfigInjectionTokens = [
-	ConfigService,
-	RedisToken(),
-	Music.PlayerSaver,
-];
+const NecordConfigInjectionTokens = [ConfigService, RedisToken()];
 
 @Module({
 	imports: [

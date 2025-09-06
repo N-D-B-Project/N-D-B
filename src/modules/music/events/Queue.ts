@@ -1,8 +1,6 @@
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <explanation>
 import {
 	type LavalinkManagerContextOf,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordLavalinkService,
 	OnLavalinkManager,
 } from "@necord/lavalink";
@@ -11,6 +9,8 @@ import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { Context } from "necord";
 import ms from "parse-ms";
+import { MessageTools } from "@/modules/commands/Message";
+import type { Config } from "@/modules/config/types";
 import type { IMusicEmbeds } from "../interfaces";
 import { Music } from "../types/constants";
 
@@ -26,7 +26,11 @@ export class QueueEvents {
 
 	@OnLavalinkManager("queueEnd")
 	public async onQueueEnd(
-		@Context() [player, track, payload]: LavalinkManagerContextOf<"queueEnd">,
+		@Context() [
+			player,
+			_track,
+			_payloadd,
+		]: LavalinkManagerContextOf<"queueEnd">,
 	): Promise<void> {
 		const { guild, textChannel, voiceChannel } =
 			await this.lavalinkService.extractPlayerData(player);
@@ -49,7 +53,7 @@ export class QueueEvents {
 				textChannel.messages.fetch(message.id).then((msg) => {
 					if (msg?.deletable) {
 						setTimeout(async () => {
-							msg.delete().catch((error: Error) => {
+							msg.delete().catch((_error: Error) => {
 								this.logger.warn('Não consegui deletar o "Player_MESSAGE"');
 							});
 						}, 4000);

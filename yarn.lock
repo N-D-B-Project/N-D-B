@@ -1155,18 +1155,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@necord/lavalink@npm:^1.1.6":
-  version: 1.1.6
-  resolution: "@necord/lavalink@npm:1.1.6"
+"@necord/lavalink@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@necord/lavalink@npm:1.2.2"
+  dependencies:
+    tslib: "npm:^2.8.1"
   peerDependencies:
     "@nestjs/common": ^10.2.0 || ^11.0.0
     "@nestjs/core": ^10.2.0 || ^11.0.0
     discord.js: ^14.0.1
-    lavalink-client: ^2.4.0
+    lavalink-client: ^2.6.1
     necord: ^6.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/ae73e99c4a60c55b1624b4633e0fd01100da7b189ab3076a70252bb02d060adea8ae102cf7a0cec736ff38c28def9159b4183ba50eebe5c2139e4ee1de801f77
+  checksum: 10c0/b37f359eb363968860ae7319edca0a7b6c84a32efc084b7120fd9c8a766c82b04233b1b9a59b0fd10f1052564b3a72ebbd96084b10600ffea232a336582d05da
   languageName: node
   linkType: hard
 
@@ -5698,7 +5700,7 @@ __metadata:
     "@biomejs/biome": "npm:^2.2.2"
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-angular": "npm:^19.8.1"
-    "@necord/lavalink": "npm:^1.1.6"
+    "@necord/lavalink": "npm:^1.2.2"
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.2.0"
     "@nedcloarbr/biome-config": "npm:^2.0.1"
@@ -5731,7 +5733,7 @@ __metadata:
     lavalink-client: "npm:^2.6.1"
     lint-staged: "npm:^16.1.6"
     moment: "npm:^2.30.1"
-    necord: "npm:^6.11.0"
+    necord: "npm:^6.11.1"
     nestjs-prisma: "npm:^0.25.0"
     parse-ms: "npm:2.1.0"
     prisma: "npm:^6.15.0"
@@ -5757,12 +5759,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"necord@npm:^6.11.0":
-  version: 6.11.0
-  resolution: "necord@npm:6.11.0"
+"necord@npm:^6.11.1":
+  version: 6.11.1
+  resolution: "necord@npm:6.11.1"
   dependencies:
     "@nuxt/opencollective": "npm:^0.4.1"
     path-to-regexp: "npm:8.2.0"
+    tslib: "npm:^2.8.1"
   peerDependencies:
     "@nestjs/common": ^10.2.0 || ^11.0.0
     "@nestjs/core": ^10.2.0 || ^11.0.0
@@ -5770,7 +5773,7 @@ __metadata:
     discord.js: ^14.0.1
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/2902ff5154645c797b2949e23b4043e5b203b771a4f94176a476f509f0c21dfc0fc68b6cd753087b6e41742c77c2b20c3144b8b5ecc8bd2638335e1367ccd86f
+  checksum: 10c0/63197f2b268edcc5252932177c0ffaf8d338c49e3645478ffac7fd5b5f1f7a7f26d6a43b3e6fccb7159369a869e183ee7b87a9bc1ae8c07497e0e749dffd1882
   languageName: node
   linkType: hard
 

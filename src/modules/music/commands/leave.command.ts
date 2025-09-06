@@ -1,19 +1,19 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MusicCommand } from "@/modules/music/Music.decorator";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { PlayerManager } from "@necord/lavalink";
+import { PlayerManagerService } from "@necord/lavalink";
 import {
 	CurrentTranslate,
-	type TranslationFn,
 	localizationMapByKey,
+	type TranslationFn,
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { InteractionTools } from "@/modules/commands/Interaction";
+import { MusicCommand } from "@/modules/music/Music.decorator";
 
 @MusicCommand()
 export class LeaveCommand {
-	public constructor(private readonly playerManager: PlayerManager) {}
+	public constructor(private readonly playerManager: PlayerManagerService) {}
 
 	@Subcommand({
 		name: "leave",

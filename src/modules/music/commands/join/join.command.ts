@@ -1,15 +1,15 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MusicCommand } from "@/modules/music/Music.decorator";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { NecordLavalinkService, PlayerManager } from "@necord/lavalink";
+import { NecordLavalinkService, PlayerManagerService } from "@necord/lavalink";
 import {
 	CurrentTranslate,
-	type TranslationFn,
 	localizationMapByKey,
+	type TranslationFn,
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { InteractionTools } from "@/modules/commands/Interaction";
+import { MusicCommand } from "@/modules/music/Music.decorator";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { JoinDto } from "./join.dto";
 
@@ -17,7 +17,7 @@ import { JoinDto } from "./join.dto";
 @MusicCommand()
 export class JoinCommand {
 	public constructor(
-		private readonly playerManager: PlayerManager,
+		private readonly playerManager: PlayerManagerService,
 		private readonly lavalinkService: NecordLavalinkService,
 	) {}
 
