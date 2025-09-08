@@ -30,7 +30,7 @@
 		"postinstall": "prisma generate && husky"
 	},
 	"dependencies": {
-		"@necord/lavalink": "^1.1.6",
+		"@necord/lavalink": "^1.2.2",
 		"@necord/localization": "^4.0.2",
 		"@necord/pagination": "^2.2.0",
 		"@nestjs-redis/client": "^0.11.2",
