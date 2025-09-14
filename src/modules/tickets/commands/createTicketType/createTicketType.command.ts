@@ -1,18 +1,23 @@
-import { CommandConfig, CommandPermissions, ValidatedOptions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, Logger, UseGuards } from "@nestjs/common";
-import { Ctx, SlashCommandContext, Subcommand } from "necord";
+import { Inject, UseGuards } from "@nestjs/common";
+import { Ctx, type SlashCommandContext, Subcommand } from "necord";
+import {
+	CommandConfig,
+	CommandPermissions,
+	ValidatedOptions,
+} from "@/common/decorators";
+import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+// biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
 import { Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
-import { CreateTicketTypeDTO } from "./createTicketType.dto";
+import type { CreateTicketTypeDTO } from "./createTicketType.dto";
 
 @TicketCommand()
 export class CreateTicketTypeCommand {
-	public constructor(@Inject(Tickets.Service) private readonly service: TicketsService) {}
-
-	private readonly logger = new Logger(CreateTicketTypeCommand.name);
+	public constructor(
+		@Inject(Tickets.Service) private readonly service: TicketsService,
+	) {}
 
 	@Subcommand({
 		name: "create_type",

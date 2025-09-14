@@ -1,22 +1,26 @@
-import { PrismaService } from "@/modules/database/prisma/Prisma.service";
-import { IGuildRepository } from "@/modules/database/repositories/interfaces";
+import { Inject, Injectable } from "@nestjs/common";
+import type { CustomPrismaService } from "nestjs-prisma";
+import type { ExtendedPrismaClient } from "@/modules/database/prisma.client";
+import type { IGuildRepository } from "@/modules/database/repositories/interfaces";
 import { Repositories } from "@/modules/database/types/constants";
 import { Services } from "@/types/Constants";
-import { Inject, Injectable } from "@nestjs/common";
-import { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
-import { TicketTypeEntity, TicketEntity } from "../entities";
-import { ITicketsRepository } from "../interfaces";
+import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
+import type { TicketEntity, TicketTypeEntity } from "../entities";
+import type { ITicketsRepository } from "../interfaces";
 
 @Injectable()
 export class TicketsRepository implements ITicketsRepository {
 	public constructor(
-		@Inject(Services.Prisma) private readonly prisma: PrismaService,
-		@Inject(Repositories.Guild) private readonly GuildRepo: IGuildRepository,
+		@Inject(Services.Prisma)
+		readonly prismaService: CustomPrismaService<ExtendedPrismaClient>,
+		@Inject(Repositories.Guild) readonly guildRepository: IGuildRepository,
 	) {}
 
-	public async createTicketType(dto: CreateTicketTypeDTO): Promise<TicketTypeEntity> {
+	public async createTicketType(
+		dto: CreateTicketTypeDTO,
+	): Promise<TicketTypeEntity> {
 		if (await this.checkCount(dto.guildId)) {
-			return this.prisma.ticketType.create({
+			return this.prismaService.client.ticketType.create({
 				data: {
 					description: dto.description,
 					emoji: dto.emoji,
@@ -33,7 +37,7 @@ export class TicketsRepository implements ITicketsRepository {
 	}
 
 	public async getTicketTypes(guildId: string): Promise<TicketTypeEntity[]> {
-		return await this.prisma.ticketType.findMany({
+		return await this.prismaService.client.ticketType.findMany({
 			where: {
 				GuildSettings: {
 					guildId,
@@ -43,7 +47,7 @@ export class TicketsRepository implements ITicketsRepository {
 	}
 
 	public async getTicketType(name: string): Promise<TicketTypeEntity> {
-		return await this.prisma.ticketType.findFirst({
+		return await this.prismaService.client.ticketType.findFirst({
 			where: {
 				name,
 			},
@@ -51,7 +55,7 @@ export class TicketsRepository implements ITicketsRepository {
 	}
 
 	public async createTicket(dto: CreateTicketDTO): Promise<TicketEntity> {
-		return this.prisma.tickets.create({
+		return this.prismaService.client.tickets.create({
 			data: {
 				userId: dto.userId,
 				guildId: dto.guildId,
@@ -61,8 +65,9 @@ export class TicketsRepository implements ITicketsRepository {
 	}
 
 	private async checkCount(guildId: string): Promise<boolean> {
-		const isPremium = (await this.GuildRepo.get(guildId)).Settings.Premium;
-		const count = await this.prisma.ticketType.count({
+		const isPremium = (await this.guildRepository.get(guildId)).Settings
+			.Premium;
+		const count = await this.prismaService.client.ticketType.count({
 			where: {
 				GuildSettings: {
 					guildId,

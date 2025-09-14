@@ -1,6 +1,8 @@
+import { Inject, Injectable } from "@nestjs/common";
 import type { IReactionRolesRepository } from "@/modules/reactionRoles/interfaces/IReactionRoleRepository";
 import { ReactionRoles } from "@/modules/reactionRoles/types/constants";
-import { Inject, Injectable } from "@nestjs/common";
+import type { ITicketsRepository } from "../tickets/interfaces";
+import { Tickets } from "../tickets/types/constants";
 import type { IDatabaseService } from "./interfaces/IDatabaseService";
 import type {
 	IGuildRepository,
@@ -15,6 +17,8 @@ export class DatabaseService implements IDatabaseService {
 		@Inject(Repositories.User) private readonly user: IUserRepository,
 		@Inject(ReactionRoles.Repository)
 		private readonly reactionRoles: IReactionRolesRepository,
+		@Inject(Tickets.Repository)
+		private readonly ticketsRepo: ITicketsRepository,
 	) {}
 
 	public GuildRepo(): IGuildRepository {
@@ -27,5 +31,9 @@ export class DatabaseService implements IDatabaseService {
 
 	public ReactionRolesRepo(): IReactionRolesRepository {
 		return this.reactionRoles;
+	}
+
+	public TicketsRepo() {
+		return this.ticketsRepo;
 	}
 }
