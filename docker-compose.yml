@@ -3,6 +3,8 @@ include:
     env_file: .env.development
   - path: ./Lavalink/docker-compose.yml
     env_file: .env.development
+  - path: ./docker-compose.otel.yml
+    env_file: .env.development
 
 services:
   bot:

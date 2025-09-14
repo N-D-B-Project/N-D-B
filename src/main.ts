@@ -20,6 +20,7 @@ declare const module: any;
 
 async function bootstrap() {
 	NodeHandler();
+	await otelSDK.start();
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get<ConfigService>(ConfigService);
 	const httpAdapter = app.getHttpAdapter();
@@ -47,9 +48,8 @@ async function bootstrap() {
 	}
 
 	try {
-		otelSDK.start();
-	} catch (error) {
 		await app.listen(configService.get("PORT"));
+	} catch (error) {
 		logger.error("An error occurred when starting: ", (error as Error).message);
 	}
 }

@@ -1,0 +1,94 @@
+{
+	"id": null,
+	"title": "Bot Shards Monitoring",
+	"tags": ["shards", "otel"],
+	"timezone": "browser",
+	"schemaVersion": 37,
+	"version": 1,
+	"panels": [
+		{
+			"type": "graph",
+			"title": "Mensagens Processadas por Shard",
+			"datasource": {
+				"type": "prometheus",
+				"uid": "Prometheus"
+			},
+			"targets": [
+				{
+					"expr": "sum by(shardId) (messages_processed)",
+					"legendFormat": "Shard {{shardId}}",
+					"interval": ""
+				}
+			],
+			"yaxes": [
+				{ "format": "short", "label": "Mensagens", "logBase": 1, "min": 0 },
+				{ "format": "short" }
+			],
+			"xaxis": { "mode": "time" }
+		},
+		{
+			"type": "graph",
+			"title": "Erros por Shard",
+			"datasource": {
+				"type": "prometheus",
+				"uid": "Prometheus"
+			},
+			"targets": [
+				{
+					"expr": "sum by(shardId) (shard_errors)",
+					"legendFormat": "Shard {{shardId}}"
+				}
+			],
+			"yaxes": [
+				{ "format": "short", "label": "Erros", "min": 0 },
+				{ "format": "short" }
+			],
+			"xaxis": { "mode": "time" }
+		},
+		{
+			"type": "graph",
+			"title": "Latência P95 por Evento",
+			"datasource": {
+				"type": "prometheus",
+				"uid": "Prometheus"
+			},
+			"targets": [
+				{
+					"expr": "histogram_quantile(0.95, sum by(le, shardId, event) (shard_event_latency_bucket))",
+					"legendFormat": "Shard {{shardId}} - {{event}}"
+				}
+			],
+			"yaxes": [
+				{ "format": "ms", "label": "Latência P95 (ms)", "min": 0 },
+				{ "format": "short" }
+			],
+			"xaxis": { "mode": "time" }
+		},
+		{
+			"type": "table",
+			"title": "Métricas Detalhadas por Shard",
+			"datasource": {
+				"type": "prometheus",
+				"uid": "Prometheus"
+			},
+			"targets": [
+				{
+					"expr": "messages_processed",
+					"format": "time_series",
+					"legendFormat": "Mensagens Shard {{shardId}}"
+				},
+				{
+					"expr": "shard_errors",
+					"format": "time_series",
+					"legendFormat": "Erros Shard {{shardId}}"
+				}
+			],
+			"columns": [
+				{ "text": "Time", "type": "time" },
+				{ "text": "Shard", "type": "string" },
+				{ "text": "Mensagens", "type": "number" },
+				{ "text": "Erros", "type": "number" }
+			]
+		}
+	]
+}
