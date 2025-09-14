@@ -1,19 +1,20 @@
-import type { Config } from "@/modules/config/types";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
 import { OnEvent } from "@nestjs/event-emitter";
-import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import {
 	ActivityType,
 	type Client,
 	DiscordAPIError,
 	type PresenceData,
-	type REST,
 	type RateLimitData,
+	type REST,
 } from "discord.js";
+import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import { Context, type ContextOf, On, Once } from "necord";
+import type { Config } from "@/modules/config/types";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 
 @Injectable()
 export class GatewayEvents {
@@ -37,8 +38,8 @@ export class GatewayEvents {
 		RESTJSONErrorCodes.MaximumActiveThreads,
 	];
 
-	@Once("ready")
-	public async onReady(@Context() [client]: ContextOf<"ready">) {
+	@Once("clientReady")
+	public async onClientReady(@Context() [client]: ContextOf<"clientReady">) {
 		this.logger.log(`Bot logged in as ${client.user.username}`);
 		await this._setPresence(client);
 		for (const guild of client.guilds.cache.values()) {
@@ -55,26 +56,33 @@ export class GatewayEvents {
 
 	@Once("debug")
 	public async onDebug(@Context() [data]: ContextOf<"debug">) {
-		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client) this.logger.debug(data);
+		if (this.config.getOrThrow<Config["Debug"]>("Debug").Client)
+			this.logger.debug(data);
 	}
 
 	@On("error")
 	public async onError(@Context() [error]: ContextOf<"error">) {
 		if (
-			error instanceof DiscordAPIError &&
-			typeof error.code === "number" &&
-			this.IGNORED_ERRORS.includes(error.code)
+			(error instanceof DiscordAPIError &&
+				typeof error.code === "number" &&
+				this.IGNORED_ERRORS.includes(error.code)) ||
+			!(error instanceof DiscordAPIError)
 		) {
 			return;
 		}
-		this.logger.verbose(`\nMessage: ${error.message}\nCause: ${error.stack}`);
+		this.logger.log(`\nMessage: ${error.message}\nCause: ${error.stack}`);
 	}
 
 	@OnEvent("rest")
 	public async onRest(rest: REST) {
-		rest.on("rateLimited", async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
-			this.logger.fatal(`RateLimit on route: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`);
-		});
+		rest.on(
+			"rateLimited",
+			async ({ majorParameter, timeToReset, route, method }: RateLimitData) => {
+				this.logger.fatal(
+					`RateLimit on: ${method} ${route} ${majorParameter}, Time: ${timeToReset}ms`,
+				);
+			},
+		);
 	}
 
 	private async _setPresence(client: Client) {
@@ -105,7 +113,10 @@ export class GatewayEvents {
 		};
 
 		function setPresence() {
-			const activity = presences.activities[Math.floor(Math.random() * presences.activities.length)];
+			const activity =
+				presences.activities[
+					Math.floor(Math.random() * presences.activities.length)
+				];
 			client.user.setPresence({
 				activities: [activity],
 			});

@@ -1,6 +1,7 @@
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
 
@@ -22,12 +23,16 @@ export class GuildEvents {
 	}
 
 	@On("guildUpdate")
-	public async onGuildUpdate(@Context() [oldGuild, newGuild]: ContextOf<"guildUpdate">) {
+	public async onGuildUpdate(
+		@Context() [oldGuild, newGuild]: ContextOf<"guildUpdate">,
+	) {
 		await this.database.GuildRepo().update(oldGuild, newGuild);
 	}
 
 	@On("guildMemberRemove")
-	public async onGuildMemberRemove(@Context() [member]: ContextOf<"guildMemberRemove">) {
+	public async onGuildMemberRemove(
+		@Context() [member]: ContextOf<"guildMemberRemove">,
+	) {
 		if (member.id === this.client.user.id) {
 			await this.database.GuildRepo().delete(member.guild);
 		}

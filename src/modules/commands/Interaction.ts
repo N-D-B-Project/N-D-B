@@ -1,6 +1,6 @@
-import { Content } from "@/types";
+import type { Content } from "@/types";
 import { messageOptions } from "@/utils/Tools";
-import {
+import type {
 	BaseMessageOptions,
 	CommandInteraction,
 	EmbedBuilder,
@@ -10,17 +10,20 @@ import {
 	MessageComponentInteraction,
 } from "discord.js";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <Utility Class>
 export class InteractionTools {
 	public static async deferReply(
 		interaction: CommandInteraction | MessageComponentInteraction,
 		ephemeral = false,
 	): Promise<unknown> {
 		return interaction.deferReply({
-			ephemeral,
+			flags: ephemeral ? "Ephemeral" : undefined,
 		});
 	}
 
-	public static async deferUpdate(interaction: MessageComponentInteraction): Promise<unknown> {
+	public static async deferUpdate(
+		interaction: MessageComponentInteraction,
+	): Promise<unknown> {
 		return await interaction.deferUpdate();
 	}
 
@@ -38,14 +41,16 @@ export class InteractionTools {
 		if (interaction.deferred || interaction.replied) {
 			return await interaction.followUp({
 				...msgOptions,
-				ephemeral,
+				flags: ephemeral ? "Ephemeral" : undefined,
 			});
 		}
-		return await interaction.reply({
+		const reply = await interaction.reply({
 			...msgOptions,
-			ephemeral,
-			fetchReply: true,
+			flags: ephemeral ? "Ephemeral" : undefined,
+			withResponse: true,
 		});
+
+		return reply.resource.message;
 	}
 
 	/**
@@ -67,9 +72,11 @@ export class InteractionTools {
 		content: string | EmbedBuilder | BaseMessageOptions,
 	): Promise<Message> {
 		const msgOptions = messageOptions(content) as InteractionUpdateOptions;
-		return await interaction.update({
+		const reply = await interaction.update({
 			...msgOptions,
-			fetchReply: true,
+			withResponse: true,
 		});
+
+		return reply.resource.message;
 	}
 }

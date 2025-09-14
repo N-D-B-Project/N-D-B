@@ -1,61 +1,7 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"files": {
-		"ignore": ["**/Backup/*.*", "**/dist/*.*", "**/.docker/*.*"]
-	},
-	"formatter": {
-		"enabled": true,
-		"indentWidth": 2,
-		"indentStyle": "tab",
-		"lineEnding": "lf",
-		"lineWidth": 120
-	},
-	"javascript": {
-		"parser": {
-			"unsafeParameterDecoratorsEnabled": true
-		},
-		"formatter": {
-			"enabled": true,
-			"semicolons": "always",
-			"quoteStyle": "double",
-			"quoteProperties": "asNeeded",
-			"trailingComma": "all"
-		}
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"complexity": {
-				"noExtraBooleanCast": "warn",
-				"noForEach": "error",
-				"noVoid": "off",
-				"noThisInStatic": "off",
-				"noStaticOnlyClass": "off",
-				"noUselessCatch": "error",
-				"noUselessConstructor": "error",
-				"noUselessEmptyExport": "error",
-				"noUselessSwitchCase": "error",
-				"useLiteralKeys": "off"
-			},
-			"correctness": {
-				"noSwitchDeclarations": "off"
-			},
-			"nursery": {
-				"noDuplicateJsonKeys": "error"
-			},
-			"style": {
-				"useImportType": "off",
-				"noVar": "error",
-				"noUselessElse": "error",
-				"noNonNullAssertion": "off"
-			},
-			"suspicious": {
-				"noConfusingVoidType": "off",
-				"noExplicitAny": "error"
-			}
-		}
-	}
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"extends": [
+		"@nedcloarbr/biome-config/nestjs",
+		"@nedcloarbr/biome-config/ignore"
+	]
 }

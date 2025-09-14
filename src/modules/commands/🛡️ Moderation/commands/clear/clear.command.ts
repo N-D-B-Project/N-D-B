@@ -1,22 +1,25 @@
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import { WAIT } from "@/utils/Tools";
-import { CurrentTranslate, TranslationFn, localizationMapByKey } from "@necord/localization";
-import { Logger, UseGuards } from "@nestjs/common";
+import {
+	CurrentTranslate,
+	type TranslationFn,
+	localizationMapByKey,
+} from "@necord/localization";
 import { channelMention } from "discord.js";
-import { Ctx, Options, SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { ModerationCommand } from "../../Moderation.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { ClearDTO } from "./clear.dto";
 
 @ModerationCommand()
 export class ClearCommand {
-	private readonly logger = new Logger(ClearCommand.name);
-
 	@Subcommand({
 		name: "clear",
 		description: "Clear a number of messages in the selected channel",
 		nameLocalizations: localizationMapByKey("Moderation.clear.name"),
-		descriptionLocalizations: localizationMapByKey("Moderation.clear.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"Moderation.clear.description",
+		),
 	})
 	@CommandConfig({ category: "🛡️ Moderation", disable: false })
 	@CommandPermissions({
@@ -26,7 +29,6 @@ export class ClearCommand {
 		testOnly: true,
 		ownerOnly: false,
 	})
-	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async OnCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
 		@Options() { amount, channel }: ClearDTO,
@@ -41,15 +43,17 @@ export class ClearCommand {
 		try {
 			channel.bulkDelete(fetched);
 			const res = await interaction.reply({
-				content: t("Moderation.clear.response.success", { amount, channel: channelMention(channel.id) }),
-				ephemeral: false,
+				content: t("Moderation.clear.response.success", {
+					amount,
+					channel: channelMention(channel.id),
+				}),
 			});
 			await WAIT(4000);
 			res.delete();
 		} catch (error) {
 			interaction.reply({
 				content: t("Moderation.clear.response.error"),
-				ephemeral: true,
+				flags: "Ephemeral",
 			});
 		}
 	}

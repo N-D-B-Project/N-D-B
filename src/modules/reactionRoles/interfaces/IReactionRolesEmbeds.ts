@@ -1,4 +1,13 @@
-import { CommandInteraction, EmbedBuilder, Message } from "discord.js";
+import type {
+	CommandInteraction,
+	EmbedBuilder,
+	Message,
+	MessageReaction,
+	PartialMessageReaction,
+	PartialUser,
+	Role,
+	User,
+} from "discord.js";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 
 export interface IReactionRolesEmbeds {
@@ -9,12 +18,15 @@ export interface IReactionRolesEmbeds {
 	InvalidEmojiEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
 	ReactionRoleCreatedEmbed(
 		interaction: CommandInteraction,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		{ channel, message, role, emoji, option }: IReaction,
 	): Promise<EmbedBuilder>;
-	ReactionRoleRemovedEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
+	ReactionRoleRemovedEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
 	ReactionRoleUpdatedEmbed(
 		interaction: CommandInteraction,
-		{ Channel, Message, Role, Emoji }: IReaction,
+		{ channel, message, role, emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder>;
 	ReactionRoleDeleteAllEmbed(
@@ -22,8 +34,46 @@ export interface IReactionRolesEmbeds {
 		status: "Confirm" | "Cancel" | "Success",
 		ReactionCount: number | null,
 	): Promise<EmbedBuilder>;
-	UnableToCreateReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	UnableToDeleteReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
-	UnableToDeleteAllReactionRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	UnableToUpdateReactionRoleEmbed(interaction: CommandInteraction, MsgID: Message): Promise<EmbedBuilder>;
+	UnableToCreateReactionRoleEmbed(
+		interaction: CommandInteraction,
+	): Promise<EmbedBuilder>;
+	UnableToDeleteReactionRoleEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
+	UnableToDeleteAllReactionRoleEmbed(
+		interaction: CommandInteraction,
+	): Promise<EmbedBuilder>;
+	UnableToUpdateReactionRoleEmbed(
+		interaction: CommandInteraction,
+		MsgID: Message,
+	): Promise<EmbedBuilder>;
+	EventCooldownEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		timer: number,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder>;
+	EventAddEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder>;
+	EventRemoveEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder>;
+	EventErrorEmbed(
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		channel: string,
+		message: string,
+	): Promise<EmbedBuilder>;
 }

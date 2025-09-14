@@ -1,0 +1,57 @@
+services:
+  opentelemetry-collector:
+    container_name: ndopentelemetry-collector
+    hostname: ndopentelemetry-collector
+    image: otel/opentelemetry-collector:latest
+    command: [ "--config=/etc/otel-collector-config.yml", "--feature-gates=pkg.translator.prometheus.NormalizeName" ]
+    volumes:
+      - ./infra/otel-collector-config.yml:/etc/otel-collector-config.yml
+    restart: unless-stopped
+    environment:
+      - DEPLOY_ENV=dev
+    ports:
+      - "8888:8888"
+      - "8889:8889"
+      - "4317:4317"
+    depends_on:
+      - prometheus
+
+  grafana:
+    container_name: ndgrafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_INSTALL_PLUGINS=https://storage.googleapis.com/integration-artifacts/grafana-exploretraces-app/grafana-exploretraces-app-latest.zip;grafana-traces-app
+    links:
+      - opentelemetry-collector
+      - prometheus
+
+  prometheus:
+    container_name: ndprometheus
+    image: prom/prometheus:latest
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=otlp-write-receiver
+      - --enable-feature=exemplar-storage
+      - --enable-feature=native-histograms
+    volumes:
+      - ./infra/prometheus.yaml:/etc/prometheus.yaml
+      - prometheus-data:/prometheus
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "9090:9090"
+
+volumes:
+  prometheus-data:
+    name: ndprometheus-data
+  grafana-data:
+    name: ndgrafana-data

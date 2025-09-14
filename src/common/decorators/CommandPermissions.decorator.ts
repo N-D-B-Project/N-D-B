@@ -1,5 +1,6 @@
-import { Reflector } from "@nestjs/core";
-import { PermissionResolvable } from "discord.js";
+import { SetMetadata, UseGuards, applyDecorators } from "@nestjs/common";
+import type { PermissionResolvable } from "discord.js";
+import { CommandPermissionsGuard } from "../guards";
 
 export interface CommandPermissionsOptions {
 	user: PermissionResolvable[];
@@ -7,7 +8,14 @@ export interface CommandPermissionsOptions {
 	guildOnly: boolean;
 	testOnly: boolean;
 	ownerOnly: boolean;
-  guilds?: string[];
+	guilds?: string[];
 }
 
-export const CommandPermissions = Reflector.createDecorator<CommandPermissionsOptions>();
+export const CommandPermissionsKey = "discord::command::__permissions__";
+
+export const CommandPermissions = (options: CommandPermissionsOptions) => {
+	return applyDecorators(
+		SetMetadata(CommandPermissionsKey, options),
+		UseGuards(CommandPermissionsGuard),
+	);
+};

@@ -14,7 +14,7 @@ node_modules/
 **/.pnp.js
 
 # Config Files
-*.env
+*.env*
 application.yml
 
 # Other files
@@ -66,6 +66,7 @@ lerna-debug.log*
 
 # IDE - VSCode
 .vscode/*
+!.vscode/N-D-B.code-profile
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

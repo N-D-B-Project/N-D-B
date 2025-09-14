@@ -1,8 +1,16 @@
-import { Reflector } from "@nestjs/core";
+import { SetMetadata, UseGuards, applyDecorators } from "@nestjs/common";
+import { CommandConfigGuard } from "../guards";
 
-interface CommandConfigOptions {
+export interface CommandConfigOptions {
 	category: string;
 	disable: boolean;
 }
 
-export const CommandConfig = Reflector.createDecorator<CommandConfigOptions>();
+export const CommandConfigKey = "discord::command::__config__";
+
+export const CommandConfig = (options: CommandConfigOptions) => {
+	return applyDecorators(
+		SetMetadata(CommandConfigKey, options),
+		UseGuards(CommandConfigGuard),
+	);
+};

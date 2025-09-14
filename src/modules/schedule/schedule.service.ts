@@ -1,11 +1,13 @@
 import { Services } from "@/types/Constants";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression, Timeout } from "@nestjs/schedule";
-import { IDatabaseService } from "../database/interfaces/IDatabaseService";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
 
 @Injectable()
 export class ScheduleService {
-	public constructor(@Inject(Services.Database) private readonly database: IDatabaseService) {}
+	public constructor(
+		@Inject(Services.Database) private readonly database: IDatabaseService,
+	) {}
 
 	private readonly logger = new Logger(ScheduleService.name);
 
@@ -24,7 +26,12 @@ export class ScheduleService {
 	public async checkPermanentPremiumGuilds(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
 		this.logger.log("Started Checking Permanent Premium Guilds");
-		for (const guild of await this.database.GuildRepo().getAll()) {
+		const guilds = await this.database.GuildRepo().getAll();
+		if (!guilds) {
+			this.logger.log("There is no Guilds in database");
+			return;
+		}
+		for (const guild of guilds) {
 			if (this.premiumGuilds.includes(guild.id) && !guild.Settings.Premium) {
 				await this.database
 					.GuildRepo()
@@ -49,7 +56,14 @@ export class ScheduleService {
 	public async checkPermanentPremiumUsers(): Promise<void> {
 		const startTimestamp = new Date().getMilliseconds();
 		this.logger.log("Started Checking Permanent Premium Users");
-		for (const user of await this.database.UserRepo().getAll()) {
+
+		const users = await this.database.UserRepo().getAll();
+
+		if (!users) {
+			this.logger.log("There is no Uses in database");
+			return;
+		}
+		for (const user of users) {
 			if (this.premiumUsers.includes(user.id) && !user.Settings.Premium) {
 				await this.database
 					.UserRepo()

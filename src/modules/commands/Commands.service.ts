@@ -1,90 +1,136 @@
-import { CommandPermissions } from "@/common/decorators";
-import { Injectable, Logger, OnApplicationBootstrap } from "@nestjs/common";
+import {
+	Injectable,
+	Logger,
+	type OnApplicationBootstrap,
+} from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Reflector } from "@nestjs/core";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
-import { CommandsService as _CommandsService, SlashCommand, SlashCommandDiscovery, SlashCommandsService, Subcommand } from "necord";
-import { ExplorerService } from "necord/dist/necord-explorer.service";
-import { Config } from "../config/types";
-import { CommandPermissionsOptions } from "@/common/decorators/CommandPermissions.decorator";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import {
+	CommandsService as NecordCommandsService,
+	NecordExplorerService,
+	SlashCommand,
+	type SlashCommandDiscovery,
+	SlashCommandsService,
+	Subcommand,
+} from "necord";
+import {
+	CommandConfigKey,
+	type CommandConfigOptions,
+	CommandPermissionsKey,
+	type CommandPermissionsOptions,
+} from "@/common/decorators";
 
 @Injectable()
 export class CommandsService implements OnApplicationBootstrap {
 	private readonly logger = new Logger(CommandsService.name);
 
-	constructor(
+	public constructor(
 		private readonly slashCommandService: SlashCommandsService,
-		private readonly explorerService: ExplorerService<SlashCommandDiscovery>,
-		private readonly commandService: _CommandsService,
+		private readonly explorerService: NecordExplorerService<SlashCommandDiscovery>,
+		private readonly commandsService: NecordCommandsService,
 		private readonly reflector: Reflector,
 		private readonly configService: ConfigService,
 		private readonly client: Client,
 	) {}
 
-	async onApplicationBootstrap() {
-		this.client.once("ready", async (client) => this.commandService.registerAllCommands());
-		await this.updateMeta();
+	public async onApplicationBootstrap(): Promise<void> {
+		this.logger.verbose("Initializing command metadata update");
+
+		this.client.once("clientReady ", async () => {
+			await this.commandsService.registerAllCommands();
+		});
+
+		await this.updateCommands("SlashCommand", SlashCommand.KEY);
+		await this.updateCommands("SubCommand", Subcommand.KEY);
+		if (this.client.isReady()) {
+			await this.commandsService.registerAllCommands();
+		}
 	}
 
-	async updateMeta() {
-		this.logger.verbose("Updating metadata for SlashCommands | SubCommands");
+	private getCommandData(command: SlashCommandDiscovery) {
+		const config = this.reflector.get<CommandConfigOptions>(
+			CommandConfigKey,
+			command.getHandler(),
+		);
+		const perms = this.reflector.get<CommandPermissionsOptions>(
+			CommandPermissionsKey,
+			command.getHandler(),
+		);
 
-    this.updateSlashCommands();
-    this.updateSubCommands();
-
-		if (!this.client.isReady()) return;
-		await this.commandService.registerAllCommands();
+		return { config, perms };
 	}
 
-  private updateSlashCommands(): void {
-    const slashCommands = this.explorerService.explore(SlashCommand.KEY);
-    this.logger.verbose(`${slashCommands.length} SlashCommand (s) explored`);
-    for (const command of slashCommands) {
-			const perms: CommandPermissionsOptions = this.reflector.get(CommandPermissions.KEY, command.getHandler());
-			this.slashCommandService.add(command);
-			const guilds = [];
-			if (perms.guildOnly) {
-				guilds.push(this.configService.getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity);
-			}
-			if (perms.testOnly) {
-				guilds.push(this.configService.getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild);
-			}
-      if(perms.guilds) {
-        guilds.push(perms.guilds.values())
-      }
+	private getGuilds(perms: CommandPermissionsOptions): string[] {
+		const guilds: string[] = [];
 
-			if (!guilds) return;
-
-			this.logger.verbose(`Updating metadata for SlashCommand : ${command.getName()}`);
-
-			command["meta"]["guilds"] = guilds ?? [];
-			this.slashCommandService.add(command);
+		if (perms.guildOnly) {
+			guilds.push(
+				this.configService.getOrThrow<string>("Discord.Servers.NDCommunity"),
+			);
 		}
-  }
-
-  private updateSubCommands(): void {
-    const subCommands = this.explorerService.explore(Subcommand.KEY);
-    this.logger.verbose(`${subCommands.length} SubCommand (s) explored`);
-    for (const command of subCommands) {
-			const perms: CommandPermissionsOptions = this.reflector.get(CommandPermissions.KEY, command.getHandler());
-			this.slashCommandService.add(command);
-			const guilds = [];
-			if (perms.guildOnly) {
-				guilds.push(this.configService.getOrThrow<Config["Discord"]>("Discord").Servers.NDCommunity);
-			}
-			if (perms.testOnly) {
-				guilds.push(this.configService.getOrThrow<Config["Discord"]>("Discord").Servers.TestGuild);
-			}
-      if(perms.guilds) {
-        guilds.push(perms.guilds.values())
-      }
-
-			if (!guilds) return;
-
-			this.logger.verbose(`Updating metadata for SubCommand : ${command.getName()}`);
-
-			command["meta"]["guilds"] = guilds ?? [];
-			this.slashCommandService.addSubCommand(command);
+		if (perms.testOnly) {
+			guilds.push(
+				this.configService.getOrThrow<string>("Discord.Servers.TestGuild"),
+			);
 		}
-  }
+		if (perms.guilds) {
+			guilds.push(...perms.guilds);
+		}
+
+		return guilds;
+	}
+
+	private logCommandUpdate(
+		type: "SlashCommand" | "SubCommand",
+		category: string,
+		name: string,
+		deployMode: string,
+	): void {
+		const formattedCategory = `[${category}]`.padEnd(23);
+		this.logger.verbose(
+			`Updating ${type} metadata: ${formattedCategory} ${name.padEnd(15)} | Deploy mode: ${deployMode}`,
+		);
+	}
+
+	private async updateCommands(
+		type: "SlashCommand" | "SubCommand",
+		key: string,
+	): Promise<void> {
+		const commands = this.explorerService.explore(key);
+		this.logger.verbose(`${commands.length} ${type}(s) explored`);
+
+		for (const command of commands) {
+			this.slashCommandService.remove(command.getName());
+
+			const { config, perms } = this.getCommandData(command);
+			if (config.disable) return;
+			if (!config || !perms) {
+				this.logger.error(`Missing metadata for ${type} ${command.getName()}`);
+				continue;
+			}
+
+			const guilds = this.getGuilds(perms);
+			const deployMode = guilds.length > 0 ? "Guild" : "Global";
+
+			this.logCommandUpdate(
+				type,
+				config.category,
+				command.getName(),
+				deployMode,
+			);
+
+			command.setGuilds(guilds);
+
+			if (type === "SlashCommand") {
+				this.slashCommandService.add(command);
+			} else {
+				this.slashCommandService.addSubCommand(command);
+			}
+		}
+	}
 }

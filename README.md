@@ -9,10 +9,8 @@
 <div align=center>
 
 [![Discord](https://img.shields.io/discord/679066351456878633.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5CHARxbaRk)
-[![Linhas de Código](https://sonarcloud.io/api/project_badges/measure?project=NedcloarBR_N-D-B&metric=ncloc)](https://sonarcloud.io/dashboard?id=NedcloarBR_N-D-B)
 [![CodeFactor](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b/badge)](https://www.codefactor.io/repository/github/n-d-b-project/n-d-b)
 [![Crowdin](https://badges.crowdin.net/n-d-b/localized.svg)](https://crowdin.com/project/n-d-b)
-[![Run Tests](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml/badge.svg)](https://github.com/N-D-B-Project/N-D-B/actions/workflows/Test.yml)
 
 </div>
 
@@ -49,9 +47,8 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
   - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
     - [ ] ReactionRoles
       - [x] Partial migrated to Necord but not tested yet
-      - [ ] Commands Update, Fetch
-      - [ ] Update ReactionRoleAdd/Remove Events
-      - [ ] Make [UnableToCreateReactionRoleEmbed](https://github.com/N-D-B-Project/N-D-B/blob/master/src/modules/reactionRoles/ReactionRoles.embeds.ts#L227) more   beautiful
+      - [ ] Commands Edit, List
+      - [x] Update ReactionRoleAdd/Remove Events
     - [ ] Music
     - [ ] Full or Partial Clone [NQN](https://nqn.blue/)
       - [x] Partial

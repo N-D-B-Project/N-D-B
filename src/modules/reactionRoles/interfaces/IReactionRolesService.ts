@@ -1,25 +1,47 @@
-import { Client, CommandInteraction, EmbedBuilder, Guild, Message, Role, TextChannel } from "discord.js";
-import { ReactionRolesEntity } from "../entities/ReactionRole.entity";
-import type { IReaction, REACTION_OPTIONS } from "../types";
+import type {
+	Client,
+	CommandInteraction,
+	Guild,
+	Message,
+	Role,
+	TextChannel,
+} from "discord.js";
+import type { ReactionRolesEntity } from "../entities/ReactionRole.entity";
+import type {
+	CreateStatus,
+	DeleteStatus,
+	IReaction,
+	REACTION_OPTIONS,
+	UpdateStatus,
+} from "../types";
 import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 
 export interface IReactionRolesService {
 	Embeds(): Promise<IReactionRolesEmbeds>;
 	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;
-	getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]>;
-	getOne(guild: Guild, { Channel, Message, Role, Emoji, Option }: IReaction): Promise<ReactionRolesEntity>;
+	getInChannel(
+		guild: Guild,
+		channel: TextChannel,
+	): Promise<ReactionRolesEntity[]>;
+	getOne(
+		guild: Guild,
+		{ channel, message, role, emoji, option }: IReaction,
+	): Promise<ReactionRolesEntity>;
 	Create(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<{ status: "UnableToCreate" | "Created" }>;
-	Delete(guild: Guild, { Channel, Message, Role, Emoji }: IReaction): Promise<{ status: "UnableToDelete" | "Deleted" }>;
-	DeleteAll(guild: Guild): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }>;
+		{ channel, message, role, emoji, option }: IReaction,
+	): Promise<{ status: CreateStatus }>;
+	Delete(
+		guild: Guild,
+		{ channel, message, role, emoji }: IReaction,
+	): Promise<{ status: DeleteStatus }>;
+	DeleteAll(guild: Guild): Promise<{ status: DeleteStatus; count: number }>;
 	Update(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		{ channel, message, role, emoji, option }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<{
-		status: "UnableToUpdate" | "Updated";
+		status: UpdateStatus;
 		oldOption?: REACTION_OPTIONS;
 	}>;
 

@@ -1,24 +1,28 @@
 import { Services } from "@/types/Constants";
-import { Inject, Logger } from "@nestjs/common";
-import { User } from "discord.js";
-import { UserEntity } from "../entities";
-import { PrismaService } from "../prisma/Prisma.service";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import type { User } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { CustomPrismaService } from "nestjs-prisma";
+import type { UserEntity } from "../entities";
+import type { ExtendedPrismaClient } from "../prisma.client";
 import { DatabaseStatus } from "../types";
 import type { IUserRepository } from "./interfaces";
-import { Prisma } from "@prisma/client";
-import { DefaultArgs } from "@prisma/client/runtime/library";
 
+@Injectable()
 export class UserRepository implements IUserRepository {
-	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
-  
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
+
 	private readonly logger = new Logger(UserRepository.name);
 
-  public userSettings(): Prisma.UserSettingsDelegate<DefaultArgs> {
-    return this.prisma.userSettings
-  }
+	public userSettings() {
+		return this.prisma.client.userSettings;
+	}
 
 	public async get(userId: string): Promise<UserEntity> {
-		return await this.prisma.user.findUnique({
+		return await this.prisma.client.user.findUnique({
 			where: { id: userId },
 			include: {
 				Settings: true,
@@ -27,18 +31,19 @@ export class UserRepository implements IUserRepository {
 		});
 	}
 
-  public async getAll(): Promise<UserEntity[]> {
-    return await this.prisma.user.findMany({
+	public async getAll(): Promise<UserEntity[]> {
+		return await this.prisma.client.user.findMany({
 			include: {
-				Settings: true,
 				APIUser: true,
+				Settings: true,
 			},
 		});
-  }
+	}
 
-	public async create(user: User): Promise<{ callback: UserEntity | void; status: DatabaseStatus }> {
-		let status = DatabaseStatus.Created;
-		const callback = await this.prisma.user
+	public async create(
+		user: User,
+	): Promise<{ callback: UserEntity | undefined; status: DatabaseStatus }> {
+		return await this.prisma.client.user
 			.create({
 				data: {
 					id: user.id,
@@ -56,19 +61,24 @@ export class UserRepository implements IUserRepository {
 					Settings: true,
 				},
 			})
+			.then((data: UserEntity) => {
+				this.logger.log(`${user.username} Configuration Created on Database`);
+				return {
+					callback: data,
+					status: DatabaseStatus.Created,
+				};
+			})
 			.catch((err) => {
 				this.logger.error(err);
-				status = DatabaseStatus.Error;
+				return {
+					callback: undefined,
+					status: DatabaseStatus.Error,
+				};
 			});
-		this.logger.log(`${user.username} Configuration Created on Database`);
-		return {
-			callback,
-			status,
-		};
 	}
 
 	public async update(user: User): Promise<UserEntity> {
-		return await this.prisma.user.update({
+		return await this.prisma.client.user.update({
 			where: { id: user.id },
 			data: {},
 			include: {
@@ -79,7 +89,7 @@ export class UserRepository implements IUserRepository {
 	}
 
 	public async delete(user: User): Promise<UserEntity> {
-		return await this.prisma.user.delete({
+		return await this.prisma.client.user.delete({
 			where: { id: user.id },
 			include: {
 				Settings: true,

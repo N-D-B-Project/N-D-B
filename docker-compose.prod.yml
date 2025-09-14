@@ -1,20 +1,8 @@
-version: "3.8"
-
 services:
   bot:
-    container_name: ndbot
     build: .
+    env_file: .env.production
+    command: yarn start:prod
     restart: always
-    tty: true
-    volumes:
-      - .:/usr/app
-      - /usr/app/node_modules
-    working_dir: /usr/app
-    command: >
-      make start
     networks:
       - ndnetwork
-
-networks:
-  ndnetwork:
-    driver: bridge

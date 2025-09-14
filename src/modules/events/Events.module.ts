@@ -1,10 +1,10 @@
 import { Module, type OnApplicationBootstrap } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { REST } from "discord.js";
-import { GatewayEvents } from "./Gateway";
-import { GuildEvents } from "./Guild";
-import { ThreadEvents } from "./Thread";
-import { NDCEvents } from "./NDC";
+import * as EventsMap from "./index";
+const Events = Object.values(EventsMap);
 
 @Module({
 	imports: [
@@ -14,7 +14,7 @@ import { NDCEvents } from "./NDC";
 			global: true,
 		}),
 	],
-	providers: [GatewayEvents, GuildEvents, ThreadEvents, NDCEvents],
+	providers: [...Events],
 })
 export class EventsModule implements OnApplicationBootstrap {
 	public constructor(

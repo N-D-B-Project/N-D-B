@@ -1,8 +1,8 @@
 import { Services } from "@/types/Constants";
-import { Global, Module, Provider } from "@nestjs/common";
-import { AlsModule } from "./als/als.module";
+import { Global, Module, type Provider } from "@nestjs/common";
+import { CustomPrismaModule } from "nestjs-prisma";
 import { DatabaseService } from "./database.service";
-import { PrismaModule } from "./prisma/Prisma.module";
+import { extendedPrismaClient } from "./prisma.client";
 import { RepositoriesModule } from "./repositories/Repositories.module";
 
 const provider: Provider<DatabaseService> = {
@@ -12,7 +12,16 @@ const provider: Provider<DatabaseService> = {
 
 @Global()
 @Module({
-	imports: [AlsModule, RepositoriesModule, PrismaModule],
+	imports: [
+		CustomPrismaModule.forRootAsync({
+			isGlobal: true,
+			name: Services.Prisma,
+			useFactory: () => {
+				return extendedPrismaClient;
+			},
+		}),
+		RepositoriesModule,
+	],
 	providers: [provider],
 	exports: [provider],
 })

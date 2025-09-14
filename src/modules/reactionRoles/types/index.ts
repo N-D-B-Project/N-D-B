@@ -1,4 +1,4 @@
-import { Channel, Emoji, Message, Role, TextChannel } from "discord.js";
+import type { Channel, Emoji, Message, Role, TextChannel } from "discord.js";
 
 export interface ReactionsType {
 	message: Message["id"];
@@ -31,9 +31,24 @@ export interface IReactionArray {
 }
 
 export interface IReaction {
-	Channel: TextChannel["id"];
-	Message: Message["id"];
-	Role: Role["id"];
-	Emoji: Emoji["id"] | Emoji["identifier"];
-	Option?: REACTION_OPTIONS;
+	channel: TextChannel["id"];
+	message: Message["id"];
+	role: Role["id"];
+	emoji: Emoji["id"] | Emoji["identifier"];
+	option?: REACTION_OPTIONS;
+}
+
+export enum CreateStatus {
+	UnableToCreate = "UnableToCreate",
+	Created = "Created",
+}
+
+export enum DeleteStatus {
+	UnableToDelete = "UnableToDelete",
+	Deleted = "Deleted",
+}
+
+export enum UpdateStatus {
+	UnableToUpdate = "UnableToUpdate",
+	Updated = "Updated",
 }

@@ -1,87 +1,83 @@
-import type { PrismaService } from "@/modules/database/prisma/Prisma.service";
 import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import type { Guild, TextChannel } from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { CustomPrismaService } from "nestjs-prisma";
+import type { ExtendedPrismaClient } from "../database/prisma.client";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
-import type { IReaction, REACTION_OPTIONS } from "./types";
+import {
+	CreateStatus,
+	DeleteStatus,
+	type IReaction,
+	type REACTION_OPTIONS,
+	UpdateStatus,
+} from "./types";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {
-	public constructor(@Inject(Services.Prisma) private readonly prisma: PrismaService) {}
+	public constructor(
+		@Inject(Services.Prisma)
+		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+	) {}
 
 	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
-		return await this.prisma.guildReactionRoles.findMany({
+		return await this.prisma.client.guildReactionRoles.findMany({
 			where: { guildId: guild.id },
 		});
 	}
 
 	public async getOne(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		Reaction: IReaction,
 	): Promise<ReactionRolesEntity> {
-		const data = await this.getAll(guild);
-		return data.filter(async (reaction) => {
-			reaction.Channel === Channel &&
-				reaction.Message === Message &&
-				reaction.Role === Role &&
-				reaction.Emoji === Emoji &&
-				reaction.Option === Option;
-		})[0];
+		return await this.prisma.client.guildReactionRoles.findFirst({
+			where: {
+				guildId: guild.id,
+				...Reaction,
+			},
+		});
 	}
 
 	public async getInChannel(
 		guild: Guild,
 		channel: TextChannel,
 	): Promise<ReactionRolesEntity[]> {
-		const data = await this.getAll(guild);
-		return data.filter(async (reaction) => reaction.Channel === channel.id);
+		return await this.prisma.client.guildReactionRoles.findMany({
+			where: {
+				guildId: guild.id,
+				channel: channel.id,
+			},
+		});
 	}
 
 	private async checkIfExists(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 	): Promise<boolean> {
-		const GetGuild = await this.getAll(guild);
-		let Verify = false;
-		for (const reaction of GetGuild) {
-			if (
-				reaction.Channel === Channel &&
-				reaction.Message === Message &&
-				reaction.Role === Role &&
-				reaction.Emoji === Emoji &&
-				reaction.Option === Option
-			) {
-				Verify = true;
-			}
-		}
-
-		return Verify;
+		return (
+			(await this.prisma.client.guildReactionRoles.checkIfExists(
+				guild.id,
+				reaction,
+			)) !== null
+		);
 	}
 
 	public async create(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
-	): Promise<{ status: "UnableToCreate" | "Created" }> {
-		const data: IReaction = {
-			Channel,
-			Message,
-			Role,
-			Emoji,
-			Option,
-		};
+		reaction: IReaction,
+	): Promise<{ status: CreateStatus }> {
+		const Check = await this.checkIfExists(guild, reaction);
 
-		const Check = await this.checkIfExists(guild, data);
-
-		if (Check) return { status: "UnableToCreate" };
-		await this.prisma.guildReactionRoles
+		if (Check) return { status: CreateStatus.UnableToCreate };
+		await this.prisma.client.guildReactionRoles
 			.create({
 				data: {
-					Channel,
-					Message,
-					Role,
-					Emoji,
-					Option,
+					channel: reaction.channel,
+					emoji: reaction.emoji,
+					role: reaction.role,
+					option: reaction.option,
+					message: reaction.message,
 					guild: {
 						connectOrCreate: {
 							where: {
@@ -96,85 +92,76 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 				},
 			})
 			.catch((err) => {
-				if (err) return { status: "UnableToCreate" };
+				if (err) return { status: CreateStatus.UnableToCreate };
 			});
 
 		return {
-			status: "Created",
+			status: CreateStatus.Created,
 		};
 	}
 
 	public async delete(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji }: IReaction,
-	): Promise<{ status: "UnableToDelete" | "Deleted" }> {
-		await this.prisma.guildReactionRoles
+		Reaction: IReaction,
+	): Promise<{ status: DeleteStatus }> {
+		await this.prisma.client.guildReactionRoles
 			.deleteMany({
 				where: {
 					guildId: guild.id,
-					Channel,
-					Message,
-					Role,
-					Emoji,
+					...Reaction,
 				},
 			})
 			.catch((err) => {
-				if (err) return { status: "UnableToDelete" };
+				if (err) return { status: DeleteStatus.UnableToDelete };
 			});
-		return { status: "Deleted" };
+		return { status: DeleteStatus.Deleted };
 	}
 
 	public async deleteMany(
 		guild: Guild,
-	): Promise<{ status: "UnableToDelete" | "Deleted"; count: number }> {
-		const count = await this.prisma.guildReactionRoles.count({
+	): Promise<{ status: DeleteStatus; count: number }> {
+		const count = await this.prisma.client.guildReactionRoles.count({
 			where: { guildId: guild.id },
 		});
-		await this.prisma.guildReactionRoles
+		await this.prisma.client.guildReactionRoles
 			.deleteMany({
 				where: {
 					guildId: guild.id,
 				},
 			})
 			.catch((err) => {
-				if (err) return { status: "UnableToDelete" };
+				if (err) return { status: DeleteStatus.UnableToDelete };
 			});
 
-		return { status: "Deleted", count };
+		return { status: DeleteStatus.Deleted, count };
 	}
 
 	public async update(
 		guild: Guild,
-		{ Channel, Message, Role, Emoji, Option }: IReaction,
+		reaction: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<{
-		status: "UnableToUpdate" | "Updated";
+		status: UpdateStatus;
 		oldOption?: REACTION_OPTIONS;
 	}> {
-		const data: IReaction = {
-			Channel,
-			Message,
-			Role,
-			Emoji,
-			Option,
-		};
-
-		const Check = await this.checkIfExists(guild, data);
-		if (!Check) return { status: "UnableToUpdate" };
-
-		data.Option = newOption;
-		await this.prisma.guildReactionRoles.updateMany({
+		const Check = await this.checkIfExists(guild, reaction);
+		if (!Check) return { status: UpdateStatus.UnableToUpdate };
+		const oldOption = reaction.option;
+		reaction.option = newOption;
+		await this.prisma.client.guildReactionRoles.update({
 			where: {
 				id: guild.id,
-				Channel,
-				Message,
-				Role,
-				Emoji,
-				Option,
+				channel: reaction.channel,
+				emoji: reaction.emoji,
+				role: reaction.role,
+				message: reaction.message,
+				option: oldOption,
 			},
-			data,
+			data: {
+				...reaction,
+			},
 		});
 
-		return { status: "Updated", oldOption: Option };
+		return { status: UpdateStatus.Updated, oldOption };
 	}
 }
