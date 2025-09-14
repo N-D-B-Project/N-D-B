@@ -158,7 +158,6 @@ export class CommandsService implements OnApplicationBootstrap {
 
 		if (command.getOptions()) {
 			for (const option of command.getOptions()) {
-				console.log(option);
 				if (!COMMAND_NAME_REGEX.test(option.name)) {
 					this.logger.error(
 						`❌ Invalid option name "${option.name}" in command "${name}"`,
