@@ -18,9 +18,16 @@ const NecordConfigInjectionTokens = [ConfigService, RedisToken()];
 			cache: true,
 			load: [config],
 		}),
-		RedisModule.forRoot({
+		RedisModule.forRootAsync({
 			isGlobal: true,
-			options: { url: "redis://localhost:6379" },
+			inject: [ConfigService],
+			useFactory: (configService: ConfigService) => {
+				return {
+					options: {
+						url: configService.get<string>("RedisURL"),
+					},
+				};
+			},
 		}),
 		NecordModule.forRootAsync({
 			inject: NecordConfigInjectionTokens,

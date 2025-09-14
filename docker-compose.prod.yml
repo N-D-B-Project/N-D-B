@@ -1,0 +1,8 @@
+services:
+  bot:
+    build: .
+    env_file: .env.production
+    command: yarn start:prod
+    restart: always
+    networks:
+      - ndnetwork

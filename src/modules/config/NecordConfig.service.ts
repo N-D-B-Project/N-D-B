@@ -117,14 +117,14 @@ export class NecordConfigService {
 		};
 	}
 
-	public async createNecordLavalinkOptions(): Promise<NecordLavalinkModuleOptions> {
+	public createNecordLavalinkOptions(): NecordLavalinkModuleOptions {
 		return {
 			nodes: [
 				{
 					regions: ["us-east", "us-central", "us-south", "us-west", "brazil"],
-					authorization: "youshallnotpass",
-					host: "localhost",
-					port: 2333,
+					authorization: process.env.LAVALINK_SERVER_PASSWORD,
+					host: process.env.LavalinkHost as string,
+					port: Number(process.env.LavalinkPort),
 					id: "ndlavalink",
 					retryAmount: 4,
 					retryDelay: 4000,

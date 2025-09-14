@@ -1,0 +1,8 @@
+services:
+  bot:
+    volumes:
+      - .:/usr/app:cached
+      - /usr/app/node_modules
+    tty: true
+    restart: unless-stopped
+    command: yarn start:dev
