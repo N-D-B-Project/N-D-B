@@ -4352,10 +4352,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.38.16, discord-api-types@npm:^0.38.22":
+"discord-api-types@npm:^0.38.16":
   version: 0.38.22
   resolution: "discord-api-types@npm:0.38.22"
   checksum: 10c0/560d8428296139e039795c20fa8925997637014a90d94fdf909f2142c9b3cec807d3e51ff3b99babd9d78366fa52d0126183f5b33816e3488481db1660b5126d
+  languageName: node
+  linkType: hard
+
+"discord-api-types@npm:^0.38.24":
+  version: 0.38.24
+  resolution: "discord-api-types@npm:0.38.24"
+  checksum: 10c0/25b9c12e1a1a9619887daeb8ac260636df3ed7200b0cb723d8fcdc84c57bc296ef2c2df62f79341b94130dcdc5c82ee8e0ea3891237eb5cca77171abb7e9854a
   languageName: node
   linkType: hard
 
@@ -5905,7 +5912,7 @@ __metadata:
     chokidar: "npm:^4.0.3"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.2"
-    discord-api-types: "npm:^0.38.22"
+    discord-api-types: "npm:^0.38.24"
     discord.js: "npm:^14.22.1"
     dotenv: "npm:^17.2.1"
     husky: "npm:^9.1.7"
