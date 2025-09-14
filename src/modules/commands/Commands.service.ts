@@ -41,7 +41,7 @@ export class CommandsService implements OnApplicationBootstrap {
 	public async onApplicationBootstrap(): Promise<void> {
 		this.logger.verbose("Initializing command metadata update");
 
-		this.client.once("clientReady ", async () => {
+		this.client.once("clientReady", async () => {
 			await this.commandsService.registerAllCommands();
 		});
 
