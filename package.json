@@ -50,7 +50,7 @@
 		"@opentelemetry/sdk-metrics": "^2.1.0",
 		"@opentelemetry/sdk-node": "^0.205.0",
 		"@opentelemetry/semantic-conventions": "^1.37.0",
-		"@prisma/client": "6.15.0",
+		"@prisma/client": "6.16.1",
 		"@prisma/instrumentation": "^6.16.1",
 		"@sesamecare-oss/opentelemetry-node-metrics": "^1.1.0",
 		"chokidar": "^4.0.3",
