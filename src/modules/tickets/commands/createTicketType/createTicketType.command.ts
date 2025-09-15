@@ -1,17 +1,14 @@
 import { localizationMapByKey } from "@necord/localization";
 import { Inject, UseGuards } from "@nestjs/common";
-import { Ctx, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-	ValidatedOptions,
-} from "@/common/decorators";
+import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 // biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
 import { Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
-import type { CreateTicketTypeDTO } from "./createTicketType.dto";
+// biome-ignore lint/style/useImportType: dependency injection
+import { CreateTicketTypeDTO } from "./createTicketType.dto";
 
 @TicketCommand()
 export class CreateTicketTypeCommand {
@@ -35,9 +32,15 @@ export class CreateTicketTypeCommand {
 	})
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
-		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() options: CreateTicketTypeDTO,
+		@Context() [interaction]: SlashCommandContext,
+		@Options() { description, emoji, message, name }: CreateTicketTypeDTO,
 	) {
-		this.service.createTicketType({ ...options, guildId: interaction.guildId });
+		this.service.createTicketType({
+			description,
+			emoji,
+			message,
+			name,
+			guildId: interaction.guildId,
+		});
 	}
 }
