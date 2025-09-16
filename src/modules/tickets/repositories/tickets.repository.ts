@@ -19,21 +19,19 @@ export class TicketsRepository implements ITicketsRepository {
 	public async createTicketType(
 		dto: CreateTicketTypeDTO,
 	): Promise<TicketTypeEntity> {
-		if (await this.checkCount(dto.guildId)) {
-			return this.prismaService.client.ticketType.create({
-				data: {
-					description: dto.description,
-					emoji: dto.emoji,
-					message: dto.message,
-					name: dto.name,
-					GuildSettings: {
-						connect: {
-							guildId: dto.guildId,
-						},
+		return this.prismaService.client.ticketType.create({
+			data: {
+				description: dto.description,
+				emoji: dto.emoji,
+				message: dto.message,
+				name: dto.name,
+				GuildSettings: {
+					connect: {
+						guildId: dto.guildId,
 					},
 				},
-			});
-		}
+			},
+		});
 	}
 
 	public async getTicketTypes(guildId: string): Promise<TicketTypeEntity[]> {
@@ -64,23 +62,13 @@ export class TicketsRepository implements ITicketsRepository {
 		});
 	}
 
-	private async checkCount(guildId: string): Promise<boolean> {
-		const isPremium = (await this.guildRepository.get(guildId)).Settings
-			.Premium;
-		const count = await this.prismaService.client.ticketType.count({
+	public async count(guildId: string): Promise<number> {
+		return await this.prismaService.client.ticketType.count({
 			where: {
 				GuildSettings: {
 					guildId,
 				},
 			},
 		});
-
-		if (isPremium && count >= 12) {
-			return false;
-		}
-		if (!isPremium && count >= 6) {
-			return false;
-		}
-		return true;
 	}
 }

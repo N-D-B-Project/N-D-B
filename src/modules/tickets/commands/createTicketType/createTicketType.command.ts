@@ -3,9 +3,10 @@ import { Inject, UseGuards } from "@nestjs/common";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { isValidEmoji } from "@/utils/Tools";
 // biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
-import { Tickets } from "../../types/constants";
+import { CreateTicketTypeError, Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
 // biome-ignore lint/style/useImportType: dependency injection
 import { CreateTicketTypeDTO } from "./createTicketType.dto";
@@ -35,12 +36,35 @@ export class CreateTicketTypeCommand {
 		@Context() [interaction]: SlashCommandContext,
 		@Options() { description, emoji, message, name }: CreateTicketTypeDTO,
 	) {
-		this.service.createTicketType({
+		if (!isValidEmoji(emoji)) {
+			return interaction.reply({
+				content: "The provided emoji is not valid.",
+				ephemeral: true,
+			});
+		}
+
+		const ticketType = await this.service.createTicketType({
 			description,
 			emoji,
 			message,
 			name,
 			guildId: interaction.guildId,
+		});
+
+		if (ticketType === CreateTicketTypeError.Count) {
+			return interaction.reply({
+				content: "You have reached the maximum number of ticket types.",
+			});
+		}
+
+		if (ticketType === CreateTicketTypeError.Exists) {
+			return interaction.reply({
+				content: "A ticket type with this name already exists.",
+			});
+		}
+
+		return interaction.reply({
+			content: "Ticket type created successfully!",
 		});
 	}
 }
