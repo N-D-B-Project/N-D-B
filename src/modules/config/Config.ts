@@ -19,7 +19,7 @@ export const config = (): Config => ({
 		MaxAge: 86400, // 1 day in seconds
 	},
 	TopGGToken: process.env.TopGGToken,
-	FallbackLocale: "pt-BR",
+	FallbackLocale: "en-US",
 	Discord: {
 		Token: process.env.Token,
 		DevToken: process.env.DevToken,

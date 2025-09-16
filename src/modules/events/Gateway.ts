@@ -91,6 +91,12 @@ export class GatewayEvents {
 				{
 					type: ActivityType.Custom,
 					name: "WorkingAt",
+					state: `${""}N-D-B | 🎫 Tickets - 🚧 WIP`,
+					url: "https://discord.gg/5CHARxbaRk",
+				},
+				{
+					type: ActivityType.Custom,
+					name: "WorkingAt",
 					state: `${""}N-D-B | 🎵 Music Player - 🚧 WIP`,
 					url: "https://discord.gg/5CHARxbaRk",
 				},
