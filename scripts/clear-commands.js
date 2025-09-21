@@ -1,9 +1,20 @@
-const { Client, GatewayIntentBits, REST, Routes } = require("discord.js");
+const {
+	Client,
+	GatewayIntentBits,
+	REST,
+	Routes,
+	ActivityType,
+} = require("discord.js");
 require("dotenv").config({ path: ".env.production" });
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once("ready", async () => {
+	client.user.setActivity({
+		name: "🚧 Maintence Mode 🚧",
+		type: ActivityType.Custom,
+	});
+
 	const rest = new REST({ version: "10" }).setToken(process.env.Token);
 
 	try {
