@@ -3,10 +3,14 @@ import {
 	localizationMapByKey,
 	type TranslationFn,
 } from "@necord/localization";
-import { Inject, UseGuards, ValidationPipe } from "@nestjs/common";
+import { Inject, UseGuards } from "@nestjs/common";
 import { EmbedBuilder } from "discord.js";
-import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { Context, type SlashCommandContext, Subcommand } from "necord";
+import {
+	CommandConfig,
+	CommandPermissions,
+	ValidatedOptions,
+} from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 // biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
@@ -38,7 +42,7 @@ export class CreateTicketTypeCommand {
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Context() [interaction]: SlashCommandContext,
-		@Options(new ValidationPipe({ validateCustomDecorators: true })) {
+		@ValidatedOptions() {
 			description,
 			emoji,
 			message,
