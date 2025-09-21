@@ -1,4 +1,8 @@
-import { localizationMapByKey } from "@necord/localization";
+import {
+	CurrentTranslate,
+	localizationMapByKey,
+	type TranslationFn,
+} from "@necord/localization";
 import { Inject, UseGuards, ValidationPipe } from "@nestjs/common";
 import { EmbedBuilder } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
@@ -40,6 +44,7 @@ export class CreateTicketTypeCommand {
 			message,
 			name,
 		}: CreateTicketTypeDTO,
+		@CurrentTranslate() t: TranslationFn,
 	) {
 		const ticketType = await this.service.createTicketType({
 			description,
@@ -51,25 +56,37 @@ export class CreateTicketTypeCommand {
 
 		if (ticketType === CreateTicketTypeError.Count) {
 			return interaction.reply({
-				content: "You have reached the maximum number of ticket types.",
+				content: t("Tickets.type.max_types"),
 			});
 		}
 
 		if (ticketType === CreateTicketTypeError.Exists) {
 			return interaction.reply({
-				content: "A ticket type with this name already exists.",
+				content: t("Tickets.type.exists"),
 			});
 		}
 
 		return interaction.reply({
 			embeds: [
 				new EmbedBuilder()
-					.setTitle("Ticket Type Created")
+					.setTitle(t("Tickets.type.embed.title"))
 					.addFields(
-						{ name: "Name", value: name, inline: true },
-						{ name: "Description", value: description, inline: true },
-						{ name: "Emoji", value: emoji, inline: true },
-						{ name: "Message", value: message, inline: true },
+						{ name: t("Tickets.type.fields.name"), value: name, inline: true },
+						{
+							name: t("Tickets.type.fields.description"),
+							value: description,
+							inline: true,
+						},
+						{
+							name: t("Tickets.type.fields.emoji"),
+							value: emoji,
+							inline: true,
+						},
+						{
+							name: t("Tickets.type.fields.message"),
+							value: message,
+							inline: true,
+						},
 					)
 					.setColor("Green")
 					.setTimestamp(),
