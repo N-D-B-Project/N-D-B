@@ -1,9 +1,9 @@
 import { localizationMapByKey } from "@necord/localization";
-import { Inject, UseGuards } from "@nestjs/common";
+import { Inject, UseGuards, ValidationPipe } from "@nestjs/common";
+import { EmbedBuilder } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import { isValidEmoji } from "@/utils/Tools";
 // biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
 import { CreateTicketTypeError, Tickets } from "../../types/constants";
@@ -34,15 +34,13 @@ export class CreateTicketTypeCommand {
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Context() [interaction]: SlashCommandContext,
-		@Options() { description, emoji, message, name }: CreateTicketTypeDTO,
+		@Options(new ValidationPipe({ validateCustomDecorators: true })) {
+			description,
+			emoji,
+			message,
+			name,
+		}: CreateTicketTypeDTO,
 	) {
-		if (!isValidEmoji(emoji)) {
-			return interaction.reply({
-				content: "The provided emoji is not valid.",
-				ephemeral: true,
-			});
-		}
-
 		const ticketType = await this.service.createTicketType({
 			description,
 			emoji,
@@ -64,7 +62,18 @@ export class CreateTicketTypeCommand {
 		}
 
 		return interaction.reply({
-			content: "Ticket type created successfully!",
+			embeds: [
+				new EmbedBuilder()
+					.setTitle("Ticket Type Created")
+					.addFields(
+						{ name: "Name", value: name, inline: true },
+						{ name: "Description", value: description, inline: true },
+						{ name: "Emoji", value: emoji, inline: true },
+						{ name: "Message", value: message, inline: true },
+					)
+					.setColor("Green")
+					.setTimestamp(),
+			],
 		});
 	}
 }

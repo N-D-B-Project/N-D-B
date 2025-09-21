@@ -7,7 +7,6 @@ import {
 	type BaseMessageOptions,
 	EmbedBuilder,
 	type MessageEditOptions,
-	parseEmoji,
 } from "discord.js";
 import ms from "parse-ms";
 
@@ -71,10 +70,4 @@ export const formatArray = (array: string[]) => {
 		style: "short",
 		type: "conjunction",
 	}).format(array);
-};
-
-export const isValidEmoji = (emoji: string) => {
-	if (parseEmoji(emoji).id) return true;
-
-	return /\p{Extended_Pictographic}/u.test(emoji);
 };

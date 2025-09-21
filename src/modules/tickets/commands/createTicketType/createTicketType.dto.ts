@@ -1,5 +1,6 @@
 import { localizationMapByKey } from "@necord/localization";
 import { StringOption } from "necord";
+import { IsEmoji } from "@/common/decorators/validators/is-emoji-validator.decorator";
 
 export class CreateTicketTypeDTO {
 	@StringOption({
@@ -56,5 +57,6 @@ export class CreateTicketTypeDTO {
 		autocomplete: false,
 		required: true,
 	})
+	@IsEmoji()
 	public readonly emoji!: string;
 }
