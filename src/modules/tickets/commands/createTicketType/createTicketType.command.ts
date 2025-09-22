@@ -4,8 +4,13 @@ import {
 	type TranslationFn,
 } from "@necord/localization";
 import { Inject, UseGuards } from "@nestjs/common";
-import { EmbedBuilder } from "discord.js";
-import { Context, type SlashCommandContext, Subcommand } from "necord";
+import {
+	ButtonStyle,
+	ContainerBuilder,
+	MessageFlags,
+	SeparatorSpacingSize,
+} from "discord.js";
+import { Button, Context, type SlashCommandContext, Subcommand } from "necord";
 import {
 	CommandConfig,
 	CommandPermissions,
@@ -71,30 +76,51 @@ export class CreateTicketTypeCommand {
 		}
 
 		return interaction.reply({
-			embeds: [
-				new EmbedBuilder()
-					.setTitle(t("Tickets.type.embed.title"))
-					.addFields(
-						{ name: t("Tickets.type.fields.name"), value: name, inline: true },
-						{
-							name: t("Tickets.type.fields.description"),
-							value: description,
-							inline: true,
-						},
-						{
-							name: t("Tickets.type.fields.emoji"),
-							value: emoji,
-							inline: true,
-						},
-						{
-							name: t("Tickets.type.fields.message"),
-							value: message,
-							inline: true,
-						},
+			components: [
+				new ContainerBuilder()
+					.addTextDisplayComponents((text) =>
+						text.setContent(`## ${t("Tickets.type.embed.title")}`),
 					)
-					.setColor("Green")
-					.setTimestamp(),
+					.addSeparatorComponents((separator) =>
+						separator.setSpacing(SeparatorSpacingSize.Large),
+					)
+					.addTextDisplayComponents(
+						(text) => text.setContent(`### ${t("Tickets.type.embed.details")}`),
+						(text) =>
+							text.setContent(
+								`> **${t("Tickets.type.embed.fields.name")}:** ${name}\n> **${t(
+									"Tickets.type.embed.fields.description",
+								)}:** ${description}\n> **${t("Tickets.type.embed.fields.emoji")}:** ${emoji}\n> **${t("Tickets.type.embed.fields.message")}:** ${message}`,
+							),
+					)
+					.addSeparatorComponents((separator) =>
+						separator.setSpacing(SeparatorSpacingSize.Large),
+					)
+					.addSectionComponents((section) =>
+						section
+							.addTextDisplayComponents((text) =>
+								text.setContent(
+									`${t("Tickets.type.embed.next_steps", { COMMAND_MENTION: /*`</tickets create_type:1416948691612340300>`*/ "COMMAND NOT AVAILABLE" })}\n${t("Tickets.type.embed.configure")}`,
+								),
+							)
+							.setButtonAccessory((button) =>
+								button
+									.setLabel(t("Tickets.type.embed.start_configure"))
+									.setCustomId("configure")
+									.setStyle(ButtonStyle.Primary),
+							),
+					)
+					.setAccentColor(0x00ff00),
 			],
+			flags: MessageFlags.IsComponentsV2,
+		});
+	}
+
+	@Button("configure")
+	public async onConfigure(@Context() [interaction]: SlashCommandContext) {
+		return interaction.reply({
+			content: "This feature is not implemented yet.",
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 }
