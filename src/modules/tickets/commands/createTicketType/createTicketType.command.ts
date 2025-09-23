@@ -18,6 +18,8 @@ import {
 } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 // biome-ignore lint/style/useImportType: dependency injection
+import { CommandsService } from "@/modules/commands/Commands.service";
+// biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
 import { CreateTicketTypeError, Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
@@ -28,6 +30,7 @@ import { CreateTicketTypeDTO } from "./createTicketType.dto";
 export class CreateTicketTypeCommand {
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: TicketsService,
+		private readonly commandService: CommandsService,
 	) {}
 
 	@Subcommand({
@@ -75,6 +78,9 @@ export class CreateTicketTypeCommand {
 			});
 		}
 
+		const COMMAND_MENTION = await this.commandService.getCommandMention(
+			"tickets configure_type",
+		);
 		return interaction.reply({
 			components: [
 				new ContainerBuilder()
@@ -100,7 +106,7 @@ export class CreateTicketTypeCommand {
 						section
 							.addTextDisplayComponents((text) =>
 								text.setContent(
-									`${t("Tickets.type.embed.next_steps", { COMMAND_MENTION: /*`</tickets create_type:1416948691612340300>`*/ "COMMAND NOT AVAILABLE" })}\n${t("Tickets.type.embed.configure")}`,
+									`${t("Tickets.type.embed.next_steps", { COMMAND_MENTION })}\n${t("Tickets.type.embed.configure")}`,
 								),
 							)
 							.setButtonAccessory((button) =>

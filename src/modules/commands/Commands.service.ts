@@ -52,6 +52,22 @@ export class CommandsService implements OnApplicationBootstrap {
 		}
 	}
 
+	public async getCommandMention(name: string): Promise<string> {
+		if (!this.client.application?.commands.cache.size) {
+			await this.client.application?.commands.fetch();
+		}
+
+		const command = this.client.application?.commands.cache.find(
+			(cmd) => cmd.name === name.split(" ")[0],
+		);
+
+		const parts = name.split(" ");
+		parts.shift();
+		const suffix = parts.length ? ` ${parts.join(" ")}` : "";
+
+		return `</${command.name}${suffix}:${command.id}>`;
+	}
+
 	private getCommandData(command: SlashCommandDiscovery) {
 		const config = this.reflector.get<CommandConfigOptions>(
 			CommandConfigKey,
