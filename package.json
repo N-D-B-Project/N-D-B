@@ -79,7 +79,7 @@
 		"@types/node": "^24.3.3",
 		"@types/webpack-node-externals": "^3.0.4",
 		"husky": "^9.1.7",
-		"lint-staged": "^16.1.6",
+		"lint-staged": "^16.2.3",
 		"prisma": "^6.15.0",
 		"run-script-webpack-plugin": "^0.2.3",
 		"source-map-support": "^0.5.21",
