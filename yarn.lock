@@ -2965,14 +2965,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/instrumentation@npm:^6.16.1":
-  version: 6.16.1
-  resolution: "@prisma/instrumentation@npm:6.16.1"
+"@prisma/instrumentation@npm:^6.16.3":
+  version: 6.16.3
+  resolution: "@prisma/instrumentation@npm:6.16.3"
   dependencies:
     "@opentelemetry/instrumentation": "npm:^0.52.0 || ^0.53.0 || ^0.54.0 || ^0.55.0 || ^0.56.0 || ^0.57.0 || ^0.203.0"
   peerDependencies:
     "@opentelemetry/api": ^1.8
-  checksum: 10c0/2d6f8b878091bf6bee13dde0fd347fb80ff8d0402bfa3e3abadd9ad3f93be757dfce9cff8d9b5f38e001fa52facc16d90cf26b33a059162bb7d0a3ffadefba25
+  checksum: 10c0/eaca61d2f0bf8a410d7f39a1b20c2c34c37ad37b1587184d219e01d5290e9f18e5fac651926c7a57bc3fa0042fc4be5a3097503a6cacf9082925bc511ebacc76
   languageName: node
   linkType: hard
 
@@ -6115,7 +6115,7 @@ __metadata:
     "@opentelemetry/sdk-node": "npm:^0.205.0"
     "@opentelemetry/semantic-conventions": "npm:^1.37.0"
     "@prisma/client": "npm:6.15.0"
-    "@prisma/instrumentation": "npm:^6.16.1"
+    "@prisma/instrumentation": "npm:^6.16.3"
     "@sesamecare-oss/opentelemetry-node-metrics": "npm:^1.1.0"
     "@types/node": "npm:^24.3.3"
     "@types/webpack-node-externals": "npm:^3.0.4"
