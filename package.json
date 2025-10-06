@@ -56,7 +56,7 @@
 		"chokidar": "^4.0.3",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
-		"discord-api-types": "^0.38.24",
+		"discord-api-types": "^0.38.28",
 		"discord.js": "^14.22.1",
 		"dotenv": "^17.2.2",
 		"lavalink-client": "^2.6.1",
