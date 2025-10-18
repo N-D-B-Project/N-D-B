@@ -41,7 +41,7 @@ export class CommandsService implements OnApplicationBootstrap {
 	public async onApplicationBootstrap(): Promise<void> {
 		this.logger.verbose("Initializing command metadata update");
 
-		this.client.once("clientReady ", async () => {
+		this.client.once("clientReady", async () => {
 			await this.commandsService.registerAllCommands();
 		});
 
@@ -50,6 +50,22 @@ export class CommandsService implements OnApplicationBootstrap {
 		if (this.client.isReady()) {
 			await this.commandsService.registerAllCommands();
 		}
+	}
+
+	public async getCommandMention(name: string): Promise<string> {
+		if (!this.client.application?.commands.cache.size) {
+			await this.client.application?.commands.fetch();
+		}
+
+		const command = this.client.application?.commands.cache.find(
+			(cmd) => cmd.name === name.split(" ")[0],
+		);
+
+		const parts = name.split(" ");
+		parts.shift();
+		const suffix = parts.length ? ` ${parts.join(" ")}` : "";
+
+		return `</${command.name}${suffix}:${command.id}>`;
 	}
 
 	private getCommandData(command: SlashCommandDiscovery) {
@@ -106,7 +122,7 @@ export class CommandsService implements OnApplicationBootstrap {
 
 		for (const command of commands) {
 			this.slashCommandService.remove(command.getName());
-
+			if (!this.validateCommand(command)) continue;
 			const { config, perms } = this.getCommandData(command);
 			if (config.disable) return;
 			if (!config || !perms) {
@@ -132,5 +148,78 @@ export class CommandsService implements OnApplicationBootstrap {
 				this.slashCommandService.addSubCommand(command);
 			}
 		}
+	}
+
+	private validateCommand(command: SlashCommandDiscovery): boolean {
+		const COMMAND_NAME_REGEX = /^[a-z0-9_-]{1,32}$/;
+		const name = command.getName();
+
+		if (!COMMAND_NAME_REGEX.test(name)) {
+			this.logger.error(`❌ Invalid command name "${name}"`);
+			return false;
+		}
+
+		if (command.toJSON().nameLocalizations) {
+			for (const [locale, localizedName] of Object.entries(
+				command.toJSON().nameLocalizations,
+			)) {
+				if (!COMMAND_NAME_REGEX.test(localizedName as string)) {
+					this.logger.error(
+						`❌ Invalid localized name "${localizedName}" for locale "${locale}" in command "${name}"`,
+					);
+					return false;
+				}
+			}
+		}
+
+		if (command.getOptions()) {
+			for (const option of command.getOptions()) {
+				if (!COMMAND_NAME_REGEX.test(option.name)) {
+					this.logger.error(
+						`❌ Invalid option name "${option.name}" in command "${name}"`,
+					);
+					return false;
+				}
+
+				if (option.name_localizations) {
+					for (const [locale, localizedName] of Object.entries(
+						option.name_localizations,
+					)) {
+						if (!COMMAND_NAME_REGEX.test(localizedName as string)) {
+							this.logger.error(
+								`❌ Invalid localized option name "${localizedName}" for locale "${locale}" in option "${option.name}" (command "${name}")`,
+							);
+							return false;
+						}
+					}
+				}
+
+				if (option.options) {
+					for (const subOption of option.options) {
+						if (!COMMAND_NAME_REGEX.test(subOption.name)) {
+							this.logger.error(
+								`❌ Invalid sub-option name "${subOption.name}" in command "${name}"`,
+							);
+							return false;
+						}
+
+						if (subOption.name_localizations) {
+							for (const [locale, localizedName] of Object.entries(
+								subOption.name_localizations,
+							)) {
+								if (!COMMAND_NAME_REGEX.test(localizedName as string)) {
+									this.logger.error(
+										`❌ Invalid localized sub-option name "${localizedName}" for locale "${locale}" in sub-option "${subOption.name}" (command "${name}")`,
+									);
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 }
