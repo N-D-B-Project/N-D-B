@@ -62,7 +62,7 @@
 		"lavalink-client": "^2.6.1",
 		"moment": "^2.30.1",
 		"necord": "^6.11.1",
-		"nestjs-prisma": "^0.25.0",
+		"nestjs-prisma": "^0.26.0",
 		"parse-ms": "2.1.0",
 		"redis": "^5.8.2",
 		"reflect-metadata": "^0.2.2",
