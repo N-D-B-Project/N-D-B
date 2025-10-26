@@ -59,7 +59,7 @@
 		"discord-api-types": "^0.38.29",
 		"discord.js": "^14.22.1",
 		"dotenv": "^17.2.2",
-		"lavalink-client": "^2.6.1",
+		"lavalink-client": "^2.6.2",
 		"moment": "^2.30.1",
 		"necord": "^6.11.1",
 		"nestjs-prisma": "^0.26.0",
