@@ -1187,9 +1187,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@necord/lavalink@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@necord/lavalink@npm:1.2.2"
+"@necord/lavalink@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@necord/lavalink@npm:1.3.0"
   dependencies:
     tslib: "npm:^2.8.1"
   peerDependencies:
@@ -1200,7 +1200,7 @@ __metadata:
     necord: ^6.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/b37f359eb363968860ae7319edca0a7b6c84a32efc084b7120fd9c8a766c82b04233b1b9a59b0fd10f1052564b3a72ebbd96084b10600ffea232a336582d05da
+  checksum: 10c0/ae164e531a914f29ef0780937ecd377e85e1ef64f04cd5564c1eba7cea567ebb38eea2d16d114f799eef211346bc5060bab9a221a60ec8707034149ffcd2aeea
   languageName: node
   linkType: hard
 
@@ -5763,7 +5763,7 @@ __metadata:
     "@biomejs/biome": "npm:^2.3.1"
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-angular": "npm:^20.0.0"
-    "@necord/lavalink": "npm:^1.2.2"
+    "@necord/lavalink": "npm:^1.3.0"
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.2.0"
     "@nedcloarbr/biome-config": "npm:^2.0.1"
