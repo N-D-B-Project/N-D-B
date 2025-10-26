@@ -70,7 +70,7 @@
 		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.2.4",
+		"@biomejs/biome": "^2.3.1",
 		"@commitlint/cli": "^20.1.0",
 		"@commitlint/config-angular": "^20.0.0",
 		"@nedcloarbr/biome-config": "^2.0.1",
