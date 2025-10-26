@@ -19,3 +19,41 @@ updates:
       interval: "weekly"
       time: "02:00"
     open-pull-requests-limit: 10
+    # Group updates so related packages (e.g. all @nestjs/*) are proposed in a single PR.
+    # This helps keep versions in sync when a scoped library publishes coordinated releases.
+    groups:
+      nestjs:
+        patterns:
+          - "@nestjs/*"
+      commit:
+        patterns:
+          - "@commitlint/*"
+          - "lint-staged"
+          - "husky"
+      webpack:
+        patterns:
+          - "webpack"
+          - "webpack-*"
+          - "run-script-webpack-plugin"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+          - "tslib"
+          - "ts-node"
+      discord:
+        patterns:
+          - "discord.js"
+          - "@discordjs/*"
+          - "discord-api-types"
+      necord:
+        patterns:
+          - "necord"
+          - "@necord/*"
+      otel:
+        patterns:
+          - "@opentelemetry/*"
+          - "opentelemetry-*"
+          - "@sesamecare-oss/opentelemetry-node-metrics"
+          - "@prisma/instrumentation"
+
