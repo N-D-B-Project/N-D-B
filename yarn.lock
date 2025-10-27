@@ -1232,10 +1232,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nedcloarbr/biome-config@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@nedcloarbr/biome-config@npm:2.0.1"
-  checksum: 10c0/5b748881e53f24cbd4130811424b41aabecb79e737e051a57f056bb75895f2703f2dd59df162bcbfef32da740e753a9eb551c75f6bb88da1f1e99e1c47ed7e67
+"@nedcloarbr/biome-config@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@nedcloarbr/biome-config@npm:2.0.2"
+  checksum: 10c0/3c72420dd4b40cc5053d0cecea3658333463571eefeb0901b780fa9c073c940548b4485a8bfda097b6d0ca90cb25f7974993046c10d86109244a476663a72e99
   languageName: node
   linkType: hard
 
@@ -5766,7 +5766,7 @@ __metadata:
     "@necord/lavalink": "npm:^1.3.0"
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.2.0"
-    "@nedcloarbr/biome-config": "npm:^2.0.1"
+    "@nedcloarbr/biome-config": "npm:^2.0.2"
     "@nestjs-redis/client": "npm:^0.11.2"
     "@nestjs/cli": "npm:^11.0.10"
     "@nestjs/common": "npm:^11.1.7"
