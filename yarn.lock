@@ -1239,16 +1239,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs-redis/client@npm:^0.11.2":
-  version: 0.11.2
-  resolution: "@nestjs-redis/client@npm:0.11.2"
+"@nestjs-redis/client@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@nestjs-redis/client@npm:0.12.1"
   dependencies:
     tslib: "npm:^2.8.0"
   peerDependencies:
     "@nestjs/common": ^9.0.0 || ^10.0.0 || ^11.0.0
     "@nestjs/core": ^9.0.0 || ^10.0.0 || ^11.0.0
     redis: ^5.0.0
-  checksum: 10c0/506d6d12219080e0d92d399b8c5e669b7819f22e7a2f7d36c913dcccfb9f07e6f8209f8bebfb0a3011e54730c73a0433d05fc6c264e60e0dead37a3f9bc0a25d
+  checksum: 10c0/9a25b601b1b91e3043663140462b9de2db5e6c8f7f5f8b91c6f06b1a660be059a255e558c2fefb30c2ef724dc4039e078ca0c568defbcb0793fb89c5273eb75a
   languageName: node
   linkType: hard
 
@@ -5767,7 +5767,7 @@ __metadata:
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.2.0"
     "@nedcloarbr/biome-config": "npm:^2.0.1"
-    "@nestjs-redis/client": "npm:^0.11.2"
+    "@nestjs-redis/client": "npm:^0.12.1"
     "@nestjs/cli": "npm:^11.0.10"
     "@nestjs/common": "npm:^11.1.7"
     "@nestjs/config": "npm:^4.0.2"
