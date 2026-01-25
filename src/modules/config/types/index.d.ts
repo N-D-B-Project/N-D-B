@@ -8,8 +8,10 @@ export interface Config {
 		Name: string;
 		Password: string;
 		Redis: {
+      URL: string;
 			Port: string;
 			Host: string;
+      Password: string;
 		};
 	};
 	API: {

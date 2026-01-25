@@ -27,7 +27,7 @@
 		"format": "yarn biome format --write ./",
 		"lint": "yarn biome lint ./",
 		"check": "yarn biome check --write ./",
-		"postinstall": "prisma generate && husky"
+		"postinstall": "node ./scripts/postinstall.js"
 	},
 	"dependencies": {
 		"@necord/lavalink": "^1.3.0",

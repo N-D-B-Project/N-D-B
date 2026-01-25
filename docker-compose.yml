@@ -7,12 +7,12 @@ include:
     env_file: .env.development
 
 services:
-  bot:
+  ndbot:
     container_name: ndbot
     build: .
     restart: always
     tty: true
-    env_file: .env.development
+    env_file: .env.production
     working_dir: /usr/app
     networks:
       - ndnetwork

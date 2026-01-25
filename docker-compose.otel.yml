@@ -10,17 +10,19 @@ services:
     environment:
       - DEPLOY_ENV=dev
     ports:
-      - "8888:8888"
-      - "8889:8889"
-      - "4317:4317"
+      - "48888:8888"
+      - "48889:8889"
+      - "44317:4317"
     depends_on:
       - prometheus
+    networks:
+      - ndnetwork
 
   grafana:
     container_name: ndgrafana
     image: grafana/grafana:latest
     ports:
-      - "3000:3000"
+      - "43000:3000"
     volumes:
       - ./infra/grafana/provisioning:/etc/grafana/provisioning
       - grafana-data:/var/lib/grafana
@@ -33,6 +35,8 @@ services:
     links:
       - opentelemetry-collector
       - prometheus
+    networks:
+      - ndnetwork
 
   prometheus:
     container_name: ndprometheus
@@ -48,10 +52,16 @@ services:
       - prometheus-data:/prometheus
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "9090:9090"
+      - "49090:9090"
+    networks:
+      - ndnetwork
 
 volumes:
   prometheus-data:
     name: ndprometheus-data
   grafana-data:
     name: ndgrafana-data
+
+networks:
+  ndnetwork:
+    driver: bridge

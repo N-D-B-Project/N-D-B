@@ -35,21 +35,22 @@ export class MusicService {
 
 	public static formatSourceName(sourceName: SourceNames): string {
 		const sourceNamesMap: Record<SourceNames, string> = {
-			youtube: "Youtube",
-			youtubemusic: "Youtube Music",
-			soundcloud: "SoundCloud",
-			bandcamp: "Bandcamp",
-			twitch: "Twitch",
-			deezer: "Deezer",
-			spotify: "Spotify",
-			applemusic: "Apple Music",
-			yandexmusic: "Yandex Music",
-			"flowery-tts": "Flowery TTS",
-			jiosaavn: "JioSaavn",
-			tidal: "Tidal",
-			vkmusic: "VK Music",
-			qobuz: "Qobuz",
-		};
+      youtube: "Youtube",
+      youtubemusic: "Youtube Music",
+      soundcloud: "SoundCloud",
+      bandcamp: "Bandcamp",
+      twitch: "Twitch",
+      deezer: "Deezer",
+      spotify: "Spotify",
+      applemusic: "Apple Music",
+      yandexmusic: "Yandex Music",
+      "flowery-tts": "Flowery TTS",
+      jiosaavn: "JioSaavn",
+      tidal: "Tidal",
+      vkmusic: "VK Music",
+      qobuz: "Qobuz",
+      pandora: "Pandora"
+    };
 
 		return sourceNamesMap[sourceName] || "Unknown Source";
 	}

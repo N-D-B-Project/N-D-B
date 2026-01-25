@@ -20,7 +20,7 @@
 **/*.jfm
 **/charts
 **/docker-compose*
-**/compose.y*ml
+**/compose.yml
 **/Dockerfile*
 **/node_modules
 **/npm-debug.log
@@ -30,4 +30,6 @@
 **/build
 **/dist
 LICENSE
-README.md
+**/README.md
+**/.github
+**/crowdin.yml
