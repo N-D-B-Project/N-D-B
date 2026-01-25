@@ -1,6 +1,6 @@
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";

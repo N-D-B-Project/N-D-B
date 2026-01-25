@@ -1,4 +1,4 @@
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	type LavalinkManagerContextOf,
 	NecordLavalinkService,

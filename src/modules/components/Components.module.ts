@@ -1,5 +1,5 @@
-import { Extends } from "@/types/Constants";
 import { Global, Module, type Provider } from "@nestjs/common";
+import { Extends } from "@/types/Constants";
 import { Buttons } from "./Buttons.component";
 
 const provider: Provider<Buttons> = {

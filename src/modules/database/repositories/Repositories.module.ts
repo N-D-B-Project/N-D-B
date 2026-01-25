@@ -1,5 +1,5 @@
-import { ReactionRolesRepoProvider } from "@/modules/reactionRoles/types/providers";
 import { Global, Module, type Provider } from "@nestjs/common";
+import { ReactionRolesRepoProvider } from "@/modules/reactionRoles/types/providers";
 import { Repositories } from "../types/constants";
 import { GuildRepository } from "./Guild.repository";
 import { UserRepository } from "./User.repository";

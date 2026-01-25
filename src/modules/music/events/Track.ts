@@ -1,15 +1,12 @@
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { Timer, WAIT } from "@/utils/Tools";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	type LavalinkManagerContextOf,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordLavalinkService,
 	OnLavalinkManager,
 } from "@necord/lavalink";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable, Logger } from "@nestjs/common";
@@ -18,6 +15,9 @@ import { ConfigService } from "@nestjs/config";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
+import { MessageTools } from "@/modules/commands/Message";
+import type { Config } from "@/modules/config/types";
+import { Timer, WAIT } from "@/utils/Tools";
 import { MusicService } from "../Music.service";
 import { PlayerProps } from "../types/constants";
 
@@ -36,7 +36,11 @@ export class TrackEvents {
 
 	@OnLavalinkManager("trackStart")
 	public async onTrackStart(
-		@Context() [player, track, payload]: LavalinkManagerContextOf<"trackStart">,
+		@Context() [
+			player,
+			track,
+			_payload,
+		]: LavalinkManagerContextOf<"trackStart">,
 	) {
 		const { guild, textChannel } =
 			await this.lavalinkService.extractPlayerData(player);
@@ -148,7 +152,11 @@ export class TrackEvents {
 
 	@OnLavalinkManager("trackEnd")
 	public async onTrackEnd(
-		@Context() [player, track, payload]: LavalinkManagerContextOf<"trackEnd">,
+		@Context() [
+			_player,
+			_track,
+			_payload,
+		]: LavalinkManagerContextOf<"trackEnd">,
 	) {}
 
 	@OnLavalinkManager("trackError")
@@ -202,7 +210,11 @@ export class TrackEvents {
 
 	@OnLavalinkManager("trackStuck")
 	public async onTrackStuck(
-		@Context() [player, track, payload]: LavalinkManagerContextOf<"trackStuck">,
+		@Context() [
+			player,
+			track,
+			_payload,
+		]: LavalinkManagerContextOf<"trackStuck">,
 	) {
 		const { guild, textChannel } =
 			await this.lavalinkService.extractPlayerData(player);

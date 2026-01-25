@@ -1,8 +1,8 @@
-import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import type { Guild, TextChannel } from "discord.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { CustomPrismaService } from "nestjs-prisma";
+import { Services } from "@/types/Constants";
 import type { ExtendedPrismaClient } from "../database/prisma.client";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";

@@ -1,6 +1,6 @@
+import { Inject, Injectable } from "@nestjs/common";
 import type { IReactionRolesRepository } from "@/modules/reactionRoles/interfaces/IReactionRoleRepository";
 import { ReactionRoles } from "@/modules/reactionRoles/types/constants";
-import { Inject, Injectable } from "@nestjs/common";
 import type { IDatabaseService } from "./interfaces/IDatabaseService";
 import type {
 	IGuildRepository,

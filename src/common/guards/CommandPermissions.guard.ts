@@ -1,8 +1,6 @@
-import type { Config } from "@/modules/config/types";
-import { formatArray } from "@/utils/Tools";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import {
@@ -17,6 +15,8 @@ import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";
+import type { Config } from "@/modules/config/types";
+import { formatArray } from "@/utils/Tools";
 import { CommandPermissionsKey } from "../decorators";
 
 @Injectable()

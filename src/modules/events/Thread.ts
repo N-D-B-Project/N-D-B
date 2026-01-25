@@ -13,5 +13,7 @@ export class ThreadEvents {
 	}
 
 	@On("threadDelete")
-	public async onThreadDelete(@Context() [thread]: ContextOf<"threadDelete">) {}
+	public async onThreadDelete(
+		@Context() [_thread]: ContextOf<"threadDelete">,
+	) {}
 }

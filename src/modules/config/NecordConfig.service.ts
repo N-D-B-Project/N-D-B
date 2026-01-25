@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,
@@ -21,7 +22,6 @@ import { QueueStore } from "../music/utils/QueueStore";
 import { JSONLocaleLoader } from "./JSONLocale.loader";
 import { PlayerStore } from "./player.store";
 import type { Config } from "./types";
-import path from "node:path";
 
 @Injectable()
 export class NecordConfigService {

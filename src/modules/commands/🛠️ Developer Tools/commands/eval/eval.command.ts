@@ -1,15 +1,15 @@
 import { inspect } from "node:util";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import type { Config } from "@/modules/config/types";
 import {
 	CurrentTranslate,
-	type TranslationFn,
 	localizationMapByKey,
+	type TranslationFn,
 } from "@necord/localization";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
-import { EmbedBuilder, codeBlock } from "discord.js";
+import { codeBlock, EmbedBuilder } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import type { Config } from "@/modules/config/types";
 import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
 import type { EvalDTO } from "./eval.dto";
 
@@ -89,7 +89,7 @@ export class EvalCommand {
 
 	private async evaluate(code: string): Promise<string> {
 		const start = process.hrtime();
-		// biome-ignore lint/security/noGlobalEval: <explanation>
+		// biome-ignore lint/security/noGlobalEval: Used only by bot owner ("safe")
 		const evalCode = inspect(await eval(code), {
 			depth: 0,
 		}).substring(0, 950);

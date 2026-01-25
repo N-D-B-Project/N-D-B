@@ -1,15 +1,15 @@
-import { MessageTools } from "@/modules/commands/Message";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
+import { MessageTools } from "@/modules/commands/Message";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
@@ -114,7 +114,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (error) {
+					} catch (_errorrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);
@@ -168,7 +168,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);
@@ -222,7 +222,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);
@@ -276,7 +276,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);
@@ -333,7 +333,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);
@@ -418,7 +418,7 @@ export class AddReactionEvent {
 								this.ReactionCooldown.delete(user.id);
 							}, this.TIMER);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
 							this.ClientCooldown.delete(reaction.message.guildId);

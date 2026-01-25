@@ -35,7 +35,7 @@ export class ShardingManager extends _ShardingManager {
 			const shardId = shard.id;
 			const createSpan = (
 				name: string,
-				attributes: Record<string, any> = {},
+				attributes: Record<string, unknown> = {},
 			) => {
 				const span = tracer.startSpan(name, {
 					attributes: { shardId, ...attributes },

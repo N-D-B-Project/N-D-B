@@ -1,5 +1,5 @@
-import type { Config } from "@/modules/config/types";
 import type { ConfigService } from "@nestjs/config";
+import type { Config } from "@/modules/config/types";
 
 export function EnvChecker(configService: ConfigService) {
 	const DiscordConfig = configService.get<Config["Discord"]>("Discord");

@@ -1,10 +1,3 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import {
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-	Buttons,
-	ConfirmButtonEnum,
-} from "@/modules/components/Buttons.component";
-import { Extends } from "@/types/Constants";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject } from "@nestjs/common";
 import type { CommandInteraction } from "discord.js";
@@ -16,12 +9,19 @@ import {
 	type SlashCommandContext,
 	Subcommand,
 } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import {
+	Buttons,
+	ConfirmButtonEnum,
+} from "@/modules/components/Buttons.component";
+import { Extends } from "@/types/Constants";
 import { InteractionTools } from "../../commands/Interaction";
-import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
 } from "../interfaces";
+import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 import { ReactionRoles } from "../types/constants";
 
 @ReactionRolesCommand()
