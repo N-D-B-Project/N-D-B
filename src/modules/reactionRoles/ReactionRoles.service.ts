@@ -27,10 +27,6 @@ export class ReactionRolesService implements IReactionRolesService {
 		@Inject(ReactionRoles.Embeds) private readonly embeds: IReactionRolesEmbeds,
 	) {}
 
-	public async Embeds(): Promise<IReactionRolesEmbeds> {
-		return this.embeds;
-	}
-
 	public async getAll(guild: Guild): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getAll(guild);
 	}
@@ -40,13 +36,6 @@ export class ReactionRolesService implements IReactionRolesService {
 		channel: TextChannel,
 	): Promise<ReactionRolesEntity[]> {
 		return await this.database.ReactionRolesRepo().getInChannel(guild, channel);
-	}
-
-	public async getOne(
-		guild: Guild,
-		reaction: IReaction,
-	): Promise<ReactionRolesEntity> {
-		return await this.database.ReactionRolesRepo().getOne(guild, reaction);
 	}
 
 	public async Create(

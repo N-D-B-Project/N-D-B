@@ -14,19 +14,13 @@ import type {
 	REACTION_OPTIONS,
 	UpdateStatus,
 } from "../types";
-import type { IReactionRolesEmbeds } from "./IReactionRolesEmbeds";
 
 export interface IReactionRolesService {
-	Embeds(): Promise<IReactionRolesEmbeds>;
 	getAll(guild: Guild): Promise<ReactionRolesEntity[]>;
 	getInChannel(
 		guild: Guild,
 		channel: TextChannel,
 	): Promise<ReactionRolesEntity[]>;
-	getOne(
-		guild: Guild,
-		{ channel, message, role, emoji, option }: IReaction,
-	): Promise<ReactionRolesEntity>;
 	Create(
 		guild: Guild,
 		{ channel, message, role, emoji, option }: IReaction,

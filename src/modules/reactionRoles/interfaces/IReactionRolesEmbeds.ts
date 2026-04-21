@@ -2,6 +2,7 @@ import type {
 	CommandInteraction,
 	EmbedBuilder,
 	Message,
+	MessageComponentInteraction,
 	MessageReaction,
 	PartialMessageReaction,
 	PartialUser,
@@ -10,42 +11,40 @@ import type {
 } from "discord.js";
 import type { IReaction, REACTION_OPTIONS } from "../types";
 
+type AnyInteraction = CommandInteraction | MessageComponentInteraction;
+
 export interface IReactionRolesEmbeds {
-	InvalidChannelEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	InvalidIDEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	MessageNotFoundEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	InvalidRoleEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
-	InvalidEmojiEmbed(interaction: CommandInteraction): Promise<EmbedBuilder>;
+	MessageNotFoundEmbed(interaction: AnyInteraction): Promise<EmbedBuilder>;
 	ReactionRoleCreatedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		{ channel, message, role, emoji, option }: IReaction,
 	): Promise<EmbedBuilder>;
 	ReactionRoleRemovedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder>;
 	ReactionRoleUpdatedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		{ channel, message, role, emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder>;
 	ReactionRoleDeleteAllEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		status: "Confirm" | "Cancel" | "Success",
 		ReactionCount: number | null,
 	): Promise<EmbedBuilder>;
 	UnableToCreateReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 	): Promise<EmbedBuilder>;
 	UnableToDeleteReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder>;
 	UnableToDeleteAllReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 	): Promise<EmbedBuilder>;
 	UnableToUpdateReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder>;
 	EventCooldownEmbed(

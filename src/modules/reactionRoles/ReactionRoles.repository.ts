@@ -144,24 +144,26 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		status: UpdateStatus;
 		oldOption?: REACTION_OPTIONS;
 	}> {
-		const Check = await this.checkIfExists(guild, reaction);
-		if (!Check) return { status: UpdateStatus.UnableToUpdate };
-		const oldOption = reaction.option;
-		reaction.option = newOption;
-		await this.prisma.client.guildReactionRoles.update({
+		const existing = await this.prisma.client.guildReactionRoles.findFirst({
 			where: {
-				id: guild.id,
+				guildId: guild.id,
 				channel: reaction.channel,
-				emoji: reaction.emoji,
-				role: reaction.role,
 				message: reaction.message,
-				option: oldOption,
-			},
-			data: {
-				...reaction,
+				role: reaction.role,
+				emoji: reaction.emoji,
 			},
 		});
 
-		return { status: UpdateStatus.Updated, oldOption };
+		if (!existing) return { status: UpdateStatus.UnableToUpdate };
+
+		await this.prisma.client.guildReactionRoles.update({
+			where: { id: existing.id },
+			data: { option: newOption },
+		});
+
+		return {
+			status: UpdateStatus.Updated,
+			oldOption: existing.option as REACTION_OPTIONS,
+		};
 	}
 }

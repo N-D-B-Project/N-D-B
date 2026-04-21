@@ -58,7 +58,7 @@ export class CreateReactionDTO {
 
 	@NumberOption({
 		name: "type",
-		description: "Type of ReactionRole (1-6) (/reaction_role types)",
+		description: "Type of ReactionRole (1-6) (/reaction_roles types)",
 		name_localizations: localizationMapByKey(
 			"ReactionRoles.create.options.type.name",
 		),
@@ -66,6 +66,8 @@ export class CreateReactionDTO {
 			"ReactionRoles.create.options.type.description",
 		),
 		required: false,
+		min_value: 1,
+		max_value: 6,
 	})
-	public readonly option: number;
+	public readonly option?: number;
 }

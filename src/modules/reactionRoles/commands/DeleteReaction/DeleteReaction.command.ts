@@ -2,20 +2,17 @@ import { localizationMapByKey } from "@necord/localization";
 import { Inject } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, type TextChannel } from "discord.js";
-import { Ctx, type SlashCommandContext, Subcommand } from "necord";
+import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import {
 	CommandConfig,
 	CommandPermissions,
-	ValidatedOptions,
 } from "@/common/decorators";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { Buttons } from "@/modules/components/Buttons.component";
-import { Extends } from "@/types/Constants";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
 } from "../../interfaces";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
+import { DeleteStatus } from "../../types";
 import { ReactionRoles } from "../../types/constants";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { DeleteReactionDTO } from "./DeleteReaction.dto";
@@ -26,7 +23,6 @@ export class DeleteReactionCommand {
 		@Inject(ReactionRoles.Service)
 		private readonly reaction: IReactionRolesService,
 		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
-		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 		private readonly client: Client,
 	) {}
 
@@ -43,12 +39,12 @@ export class DeleteReactionCommand {
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
 		guildOnly: false,
-		testOnly: true,
+		testOnly: false,
 		ownerOnly: false,
 	})
 	public async onCommandRun(
 		@Ctx() [interaction]: SlashCommandContext,
-		@ValidatedOptions() dto: DeleteReactionDTO,
+		@Options() dto: DeleteReactionDTO,
 	) {
 		const Channel = dto.channel as TextChannel;
 		const MessageID = dto.messageId;
@@ -73,13 +69,16 @@ export class DeleteReactionCommand {
 			emoji: Emoji,
 		});
 
-		if (REACT.status === "Deleted") {
+		if (REACT.status === DeleteStatus.Deleted) {
 			await interaction.reply({
 				embeds: [
 					await this.Embeds.ReactionRoleRemovedEmbed(interaction, Message),
 				],
 			});
-			await Message.reactions.cache.get(Emoji).remove();
+			const existing = Message.reactions.cache.find(
+				(r) => r.emoji.name === Emoji || r.emoji.toString() === Emoji,
+			);
+			await existing?.remove().catch(() => {});
 		} else {
 			interaction.reply({
 				embeds: [

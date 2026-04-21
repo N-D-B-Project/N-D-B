@@ -42,7 +42,7 @@ If you liked the project, feel free to leave the ⭐ one here on Github for it t
     - [ ] Automatic
   - [ ] Economy
   - [ ] Starboard
-  - [ ] Tickets
+  - [x] Tickets
   - [ ] System Logs
   - [ ] Update from [Legacy Branch](https://github.com/N-D-B-Project/N-D-B/tree/Pure-DiscordJS) to [Necord](https://necord.org/) with my custom handle system
     - [ ] ReactionRoles

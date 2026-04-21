@@ -1,12 +1,4 @@
-import type { Channel, Emoji, Message, Role, TextChannel } from "discord.js";
-
-export interface ReactionsType {
-	message: Message["id"];
-	channel: Channel["id"];
-	role: Role["id"];
-	emoji: Emoji["name"] | Emoji["identifier"];
-	option: REACTION_OPTIONS;
-}
+import type { Emoji, Message, Role, TextChannel } from "discord.js";
 
 export enum REACTION_OPTIONS {
 	_1 = 1,
@@ -15,19 +7,6 @@ export enum REACTION_OPTIONS {
 	_4 = 4,
 	_5 = 5,
 	_6 = 6,
-}
-
-export enum FetchType {
-	All = "All",
-	Channel = "Channel",
-}
-
-export interface IReactionArray {
-	message: string;
-	channel: string;
-	role: string;
-	emoji: string;
-	option: number;
 }
 
 export interface IReaction {

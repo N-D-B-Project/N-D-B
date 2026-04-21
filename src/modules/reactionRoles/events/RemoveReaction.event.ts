@@ -5,7 +5,15 @@ import {
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { Client } from "discord.js";
+import {
+	Client,
+	type GuildMember,
+	type MessageReaction,
+	type PartialMessageReaction,
+	type PartialUser,
+	type Role,
+	type User,
+} from "discord.js";
 import { Context, type ContextOf, On } from "necord";
 import { MessageTools } from "@/modules/commands/Message";
 import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
@@ -14,7 +22,26 @@ import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
 } from "../interfaces";
+import { REACTION_OPTIONS } from "../types";
 import { ReactionRoles } from "../types/constants";
+
+type InverseAction = "remove" | "add";
+
+interface InverseStrategy {
+	action: InverseAction;
+	auditKey: string;
+}
+
+const INVERSE_STRATEGIES: Partial<Record<REACTION_OPTIONS, InverseStrategy>> = {
+	[REACTION_OPTIONS._1]: {
+		action: "remove",
+		auditKey: "Events.ReactionRoleAdd-Remove.Options.REMOVE.1",
+	},
+	[REACTION_OPTIONS._4]: {
+		action: "add",
+		auditKey: "Events.ReactionRoleAdd-Remove.Options.ADD.4",
+	},
+};
 
 @Injectable()
 export class ReactionRolesEvents {
@@ -34,164 +61,162 @@ export class ReactionRolesEvents {
 
 	@On("messageReactionRemove")
 	public async onReactionRolesRemove(
-		@Context() [reaction, user]: ContextOf<"messageReactionAdd">,
+		@Context() [reaction, user]: ContextOf<"messageReactionRemove">,
 	) {
-		if (user === this.client.user) return;
+		if (user.id === this.client.user.id) return;
 
-		const reactionsData = await this.reactionRoles.getAll(
-			reaction.message.guild,
-		);
-		const guildData = await this.database
-			.GuildRepo()
-			.get(reaction.message.guildId);
-		const Member = reaction.message.guild.members.cache.get(user.id);
-		const Guild = reaction.message.guild;
-		if (!reactionsData) return;
+		if (reaction.partial) await reaction.fetch().catch(() => null);
+		if (reaction.message.partial)
+			await reaction.message.fetch().catch(() => null);
+
+		const guild = reaction.message.guild;
+		if (!guild) return;
+
+		const reactionsData = await this.reactionRoles.getAll(guild);
+		if (!reactionsData?.length) return;
+
+		const member = await guild.members.fetch(user.id).catch(() => null);
+		if (!member) return;
+
+		const guildData = await this.database.GuildRepo().get(guild.id);
+		const emojiString = reaction.emoji.animated
+			? `<a:${reaction.emoji.name}:${reaction.emoji.id}>`
+			: `<:${reaction.emoji.name}:${reaction.emoji.id}>`;
 
 		for (const reactionData of reactionsData) {
-			const emoji = reaction.emoji.animated
-				? `<a:${reaction.emoji.name}:${reaction.emoji.id}>`
-				: `<:${reaction.emoji.name}:${reaction.emoji.id}>`;
-			if (
-				(emoji === reactionData.emoji ||
-					reaction.emoji.name === reactionData.emoji) &&
-				reaction.message.id === reactionData.message
-			) {
-				const Role = Guild.roles.cache.get(reactionData.role);
-				const {
-					message: Message,
-					channel: Channel,
-					option: Option,
-				} = reactionData;
-				if (this.ClientCooldown.has(reaction.message.guildId)) return;
-				if (this.ReactionCooldown.has(user.id)) {
-					MessageTools.send(user, {
-						embeds: [
-							await this.embeds.EventCooldownEmbed(
-								user,
-								reaction,
-								this.TIMER,
-								Channel,
-								Message,
-							),
-						],
-					});
-				}
+			const emojiMatches =
+				emojiString === reactionData.emoji ||
+				reaction.emoji.name === reactionData.emoji;
+			if (!emojiMatches || reaction.message.id !== reactionData.message) continue;
 
-				if (Option === 1) {
-					try {
-						if (
-							Member.roles.cache.find(
-								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
-							)
-						) {
-							await Member.roles
-								.remove(
-									Role,
-									this.translate.getTranslation(
-										"Events.ReactionRoleAdd-Remove.Options.REMOVE:1",
-										reaction.message.guild.preferredLocale,
-									),
-								)
-								.catch(() => {});
-							this.ReactionCooldown.add(user.id);
-							setTimeout(() => {
-								this.ReactionCooldown.delete(user.id);
-							}, 2000);
+			const role = guild.roles.cache.get(reactionData.role);
+			if (!role) continue;
 
-							if (guildData.Settings.ReactionDM) {
-								if (this.ClientCooldown.has(reaction.message.guildId)) return;
-								MessageTools.send(user, {
-									embeds: [
-										await this.embeds.EventRemoveEmbed(
-											user,
-											reaction,
-											Role,
-											Channel,
-											Message,
-										),
-									],
-								}).catch(() => {});
-								this.ClientCooldown.add(reaction.message.guildId);
-								setTimeout(() => {
-									this.ClientCooldown.delete(reaction.message.guildId);
-								}, 4000);
-							}
-						}
-					} catch (_errrrr) {
-						if (this.ClientCooldown.has(reaction.message.guildId)) return;
-						this.ClientCooldown.add(reaction.message.guildId);
-						setTimeout(() => {
-							this.ClientCooldown.delete(reaction.message.guildId);
-						}, 6000);
-						MessageTools.send(user, {
-							embeds: [
-								await this.embeds.EventErrorEmbed(
-									user,
-									reaction,
-									Role,
-									Channel,
-									Message,
-								),
-							],
-						}).catch(() => {});
-					}
-				}
+			const strategy = INVERSE_STRATEGIES[reactionData.option as REACTION_OPTIONS];
+			if (!strategy) continue;
 
-				if (Option === 4) {
-					try {
-						if (
-							!Member.roles.cache.find(
-								(r) => r.name.toLowerCase() === Role.name.toLowerCase(),
-							)
-						) {
-							await Member.roles
-								.add(
-									Role,
-									this.translate.getTranslation(
-										"Events.ReactionRoleAdd-Remove.Options.ADD.4",
-										reaction.message.guild.preferredLocale,
-									),
-								)
-								.catch(() => {});
-							if (guildData.Settings.ReactionDM) {
-								MessageTools.send(user, {
-									embeds: [
-										await this.embeds.EventAddEmbed(
-											user,
-											reaction,
-											Role,
-											Channel,
-											Message,
-										),
-									],
-								}).catch(() => {});
-							}
-							this.ReactionCooldown.add(user.id);
-							setTimeout(() => {
-								this.ReactionCooldown.delete(user.id);
-							}, 2000);
-						}
-					} catch (_errrrr) {
-						if (this.ClientCooldown.has(reaction.message.guildId)) return;
-						this.ClientCooldown.add(reaction.message.guildId);
-						setTimeout(() => {
-							this.ClientCooldown.delete(reaction.message.guildId);
-						}, 6000);
-						MessageTools.send(user, {
-							embeds: [
-								await this.embeds.EventErrorEmbed(
-									user,
-									reaction,
-									Role,
-									Channel,
-									Message,
-								),
-							],
-						}).catch(() => {});
-					}
-				}
+			if (this.ClientCooldown.has(guild.id)) return;
+			if (this.ReactionCooldown.has(user.id)) {
+				await MessageTools.send(user, {
+					embeds: [
+						await this.embeds.EventCooldownEmbed(
+							user,
+							reaction,
+							this.TIMER,
+							reactionData.channel,
+							reactionData.message,
+						),
+					],
+				}).catch(() => {});
 			}
+
+			await this.applyStrategy({
+				strategy,
+				member,
+				role,
+				reaction,
+				user,
+				reactionData,
+				dmOnChange: guildData.Settings.ReactionDM,
+			});
 		}
+	}
+
+	private async applyStrategy(params: {
+		strategy: InverseStrategy;
+		member: GuildMember;
+		role: Role;
+		reaction: MessageReaction | PartialMessageReaction;
+		user: User | PartialUser;
+		reactionData: { channel: string; message: string };
+		dmOnChange: boolean;
+	}) {
+		const { strategy, member, role, reaction, user, reactionData, dmOnChange } =
+			params;
+		const guild = reaction.message.guild;
+		const hasRole = member.roles.cache.has(role.id);
+		const auditReason = this.translate.getTranslation(
+			strategy.auditKey,
+			guild.preferredLocale,
+		);
+
+		try {
+			if (strategy.action === "remove" && hasRole) {
+				await member.roles.remove(role, auditReason);
+				await this.sendChangeDM(
+					"remove",
+					user,
+					reaction,
+					role,
+					reactionData,
+					dmOnChange,
+				);
+			} else if (strategy.action === "add" && !hasRole) {
+				await member.roles.add(role, auditReason);
+				await this.sendChangeDM(
+					"add",
+					user,
+					reaction,
+					role,
+					reactionData,
+					dmOnChange,
+				);
+			} else {
+				return;
+			}
+
+			this.armUserCooldown(user.id);
+		} catch {
+			this.armClientCooldown(guild.id);
+			await MessageTools.send(user, {
+				embeds: [
+					await this.embeds.EventErrorEmbed(
+						user,
+						reaction,
+						role,
+						reactionData.channel,
+						reactionData.message,
+					),
+				],
+			}).catch(() => {});
+		}
+	}
+
+	private async sendChangeDM(
+		kind: "add" | "remove",
+		user: User | PartialUser,
+		reaction: MessageReaction | PartialMessageReaction,
+		role: Role,
+		reactionData: { channel: string; message: string },
+		dmOnChange: boolean,
+	) {
+		if (!dmOnChange) return;
+		const embed =
+			kind === "add"
+				? await this.embeds.EventAddEmbed(
+						user,
+						reaction,
+						role,
+						reactionData.channel,
+						reactionData.message,
+					)
+				: await this.embeds.EventRemoveEmbed(
+						user,
+						reaction,
+						role,
+						reactionData.channel,
+						reactionData.message,
+					);
+		await MessageTools.send(user, { embeds: [embed] }).catch(() => {});
+	}
+
+	private armUserCooldown(userId: string) {
+		this.ReactionCooldown.add(userId);
+		setTimeout(() => this.ReactionCooldown.delete(userId), this.TIMER);
+	}
+
+	private armClientCooldown(guildId: string) {
+		this.ClientCooldown.add(guildId);
+		setTimeout(() => this.ClientCooldown.delete(guildId), this.TIMER);
 	}
 }

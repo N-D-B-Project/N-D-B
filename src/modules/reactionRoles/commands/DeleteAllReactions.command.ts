@@ -1,6 +1,15 @@
-import { localizationMapByKey } from "@necord/localization";
+import {
+	CurrentTranslate,
+	localizationMapByKey,
+	type TranslationFn,
+} from "@necord/localization";
 import { Inject } from "@nestjs/common";
-import type { CommandInteraction } from "discord.js";
+import {
+	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	MessageFlags,
+} from "discord.js";
 import {
 	Button,
 	type ButtonContext,
@@ -10,19 +19,19 @@ import {
 	Subcommand,
 } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import {
-	Buttons,
-	ConfirmButtonEnum,
-} from "@/modules/components/Buttons.component";
-import { Extends } from "@/types/Constants";
 import { InteractionTools } from "../../commands/Interaction";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
 } from "../interfaces";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
+import { DeleteStatus } from "../types";
 import { ReactionRoles } from "../types/constants";
+
+enum DeleteAllAction {
+	Yes = "yes",
+	No = "no",
+}
 
 @ReactionRolesCommand()
 export class DeleteAllReactionsCommand {
@@ -30,10 +39,7 @@ export class DeleteAllReactionsCommand {
 		@Inject(ReactionRoles.Service)
 		private readonly reaction: IReactionRolesService,
 		@Inject(ReactionRoles.Embeds) private readonly Embeds: IReactionRolesEmbeds,
-		@Inject(Extends.Buttons) private readonly Buttons: Buttons,
 	) {}
-
-	private context: CommandInteraction;
 
 	@Subcommand({
 		name: "delete_all",
@@ -45,14 +51,16 @@ export class DeleteAllReactionsCommand {
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
-		user: ["SendMessages", "AddReactions", "ManageRoles"],
-		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
-		guildOnly: false,
-		testOnly: true,
+		user: ["SendMessages", "ManageRoles"],
+		bot: ["EmbedLinks"],
+		guildOnly: true,
+		testOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun(@Ctx() [interaction]: SlashCommandContext) {
-		this.context = interaction;
+	public async onCommandRun(
+		@Ctx() [interaction]: SlashCommandContext,
+		@CurrentTranslate() t: TranslationFn,
+	) {
 		await interaction.reply({
 			embeds: [
 				await this.Embeds.ReactionRoleDeleteAllEmbed(
@@ -61,53 +69,70 @@ export class DeleteAllReactionsCommand {
 					null,
 				),
 			],
-			components: [await this.Buttons.Confirm(interaction.guildLocale)],
+			components: [this.buildButtons(interaction.user.id, t)],
+			flags: MessageFlags.Ephemeral,
 		});
 	}
 
-	@Button("confirm/:value")
+	@Button("rr_deleteall/:value/:invokerId")
 	public async onButton(
 		@Ctx() [interaction]: ButtonContext,
-		@ComponentParam("value") value: ConfirmButtonEnum,
+		@ComponentParam("value") value: DeleteAllAction,
+		@ComponentParam("invokerId") invokerId: string,
 	) {
-		const { count, status } = await this.reaction.DeleteAll(interaction.guild);
-		switch (value) {
-			case ConfirmButtonEnum.Yes:
-				if (status === "Deleted") {
-					InteractionTools.editReply(this.context, {
-						embeds: [
-							await this.Embeds.ReactionRoleDeleteAllEmbed(
-								this.context,
-								"Success",
-								count,
-							),
-						],
-						components: [],
-					});
-				} else if (status === "UnableToDelete") {
-					InteractionTools.editReply(this.context, {
-						embeds: [
-							await this.Embeds.UnableToDeleteAllReactionRoleEmbed(
-								this.context,
-							),
-						],
-						components: [],
-					});
-				}
-				break;
-
-			case ConfirmButtonEnum.No:
-				InteractionTools.editReply(this.context, {
-					embeds: [
-						await this.Embeds.ReactionRoleDeleteAllEmbed(
-							this.context,
-							"Cancel",
-							null,
-						),
-					],
-					components: [],
-				});
-				break;
+		if (interaction.user.id !== invokerId) {
+			return interaction.reply({
+				content: "Only the command invoker can use these buttons.",
+				flags: MessageFlags.Ephemeral,
+			});
 		}
+
+		if (value === DeleteAllAction.No) {
+			return InteractionTools.update(interaction, {
+				embeds: [
+					await this.Embeds.ReactionRoleDeleteAllEmbed(
+						interaction,
+						"Cancel",
+						null,
+					),
+				],
+				components: [],
+			});
+		}
+
+		const { count, status } = await this.reaction.DeleteAll(interaction.guild);
+
+		if (status === DeleteStatus.Deleted) {
+			return InteractionTools.update(interaction, {
+				embeds: [
+					await this.Embeds.ReactionRoleDeleteAllEmbed(
+						interaction,
+						"Success",
+						count,
+					),
+				],
+				components: [],
+			});
+		}
+
+		return InteractionTools.update(interaction, {
+			embeds: [await this.Embeds.UnableToDeleteAllReactionRoleEmbed(interaction)],
+			components: [],
+		});
+	}
+
+	private buildButtons(invokerId: string, t: TranslationFn) {
+		return new ActionRowBuilder<ButtonBuilder>().addComponents([
+			new ButtonBuilder()
+				.setCustomId(`rr_deleteall/${DeleteAllAction.Yes}/${invokerId}`)
+				.setLabel(t("Tools.Buttons.Labels.Confirm.YES"))
+				.setEmoji("719710630881525881")
+				.setStyle(ButtonStyle.Success),
+			new ButtonBuilder()
+				.setCustomId(`rr_deleteall/${DeleteAllAction.No}/${invokerId}`)
+				.setLabel(t("Tools.Buttons.Labels.Confirm.NO"))
+				.setEmoji("719710607405875321")
+				.setStyle(ButtonStyle.Danger),
+		]);
 	}
 }

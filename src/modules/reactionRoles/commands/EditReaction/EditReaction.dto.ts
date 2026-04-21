@@ -1,16 +1,16 @@
 import { localizationMapByKey } from "@necord/localization";
 import { ChannelType, type GuildTextBasedChannel, type Role } from "discord.js";
-import { ChannelOption, RoleOption, StringOption } from "necord";
+import { ChannelOption, NumberOption, RoleOption, StringOption } from "necord";
 
 export class EditReactionDTO {
 	@ChannelOption({
 		name: "channel",
-		description: "Channel where the ReactionRole will be created",
+		description: "Channel where the ReactionRole is located",
 		name_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.channel.name",
+			"ReactionRoles.edit.options.channel.name",
 		),
 		description_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.channel.description",
+			"ReactionRoles.edit.options.channel.description",
 		),
 		channel_types: [ChannelType.GuildText],
 		required: true,
@@ -19,12 +19,12 @@ export class EditReactionDTO {
 
 	@StringOption({
 		name: "message",
-		description: "Message ID that the member will react",
+		description: "Message ID used in ReactionRole",
 		name_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.message.name",
+			"ReactionRoles.edit.options.message.name",
 		),
 		description_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.message.description",
+			"ReactionRoles.edit.options.message.description",
 		),
 		required: true,
 	})
@@ -32,12 +32,12 @@ export class EditReactionDTO {
 
 	@RoleOption({
 		name: "role",
-		description: "Role to be used in ReactionRole",
+		description: "Role used in ReactionRole",
 		name_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.role.name",
+			"ReactionRoles.edit.options.role.name",
 		),
 		description_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.role.description",
+			"ReactionRoles.edit.options.role.description",
 		),
 		required: true,
 	})
@@ -45,14 +45,29 @@ export class EditReactionDTO {
 
 	@StringOption({
 		name: "emoji",
-		description: "Emoji that the user will react",
+		description: "Emoji used in ReactionRole",
 		name_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.emoji.name",
+			"ReactionRoles.edit.options.emoji.name",
 		),
 		description_localizations: localizationMapByKey(
-			"ReactionRoles.delete.options.emoji.description",
+			"ReactionRoles.edit.options.emoji.description",
 		),
 		required: true,
 	})
 	public readonly emoji: string;
+
+	@NumberOption({
+		name: "new_type",
+		description: "New type of ReactionRole (1-6) (/reaction_roles types)",
+		name_localizations: localizationMapByKey(
+			"ReactionRoles.edit.options.new_type.name",
+		),
+		description_localizations: localizationMapByKey(
+			"ReactionRoles.edit.options.new_type.description",
+		),
+		required: true,
+		min_value: 1,
+		max_value: 6,
+	})
+	public readonly newOption: number;
 }

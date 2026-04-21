@@ -1,26 +1,26 @@
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import {
-	LOCALIZATION_ADAPTER,
-	NestedLocalizationAdapter,
-} from "@necord/localization";
+import { LOCALIZATION_ADAPTER } from "@necord/localization";
+import type { NestedLocalizationAdapter } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+// biome-ignore lint/style/useImportType: ConfigService used as NestJS DI constructor param type
 import { ConfigService } from "@nestjs/config";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+// biome-ignore lint/style/useImportType: Client used as NestJS DI constructor param type
 import {
 	Client,
 	type CommandInteraction,
 	channelMention,
 	EmbedBuilder,
 	type Message,
+	type MessageComponentInteraction,
 	type MessageReaction,
-	PartialMessageReaction,
-	PartialUser,
-	Role,
+	type PartialMessageReaction,
+	type PartialUser,
+	type Role,
 	roleMention,
 	type TextChannel,
 	type User,
 } from "discord.js";
+
+type AnyInteraction = CommandInteraction | MessageComponentInteraction;
 import { MessageTools } from "@/modules/commands/Message";
 import type { Config } from "@/modules/config/types";
 import type { IReactionRolesEmbeds } from "./interfaces";
@@ -35,48 +35,8 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 		private readonly client: Client,
 	) {}
 
-	public async InvalidChannelEmbed(
-		interaction: CommandInteraction,
-	): Promise<EmbedBuilder> {
-		return new EmbedBuilder()
-			.setAuthor({
-				name: interaction.user.id,
-				iconURL: interaction.user.displayAvatarURL(),
-			})
-			.setColor("#c20e00")
-			.setDescription(
-				this.translate.getTranslation(
-					"ReactionRoles.create.Channel.Invalid",
-					interaction.guildLocale,
-					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
-					},
-				),
-			);
-	}
-
-	public async InvalidIDEmbed(
-		interaction: CommandInteraction,
-	): Promise<EmbedBuilder> {
-		return new EmbedBuilder()
-			.setAuthor({
-				name: interaction.user.id,
-				iconURL: interaction.user.displayAvatarURL(),
-			})
-			.setColor("#c20e00")
-			.setDescription(
-				this.translate.getTranslation(
-					"ReactionRoles.create.ID.Invalid",
-					interaction.guildLocale,
-					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
-					},
-				),
-			);
-	}
-
 	public async MessageNotFoundEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
@@ -95,48 +55,8 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 			);
 	}
 
-	public async InvalidRoleEmbed(
-		interaction: CommandInteraction,
-	): Promise<EmbedBuilder> {
-		return new EmbedBuilder()
-			.setAuthor({
-				name: interaction.user.id,
-				iconURL: interaction.user.displayAvatarURL(),
-			})
-			.setColor("#c20e00")
-			.setDescription(
-				this.translate.getTranslation(
-					"ReactionRoles.create.Role.Invalid",
-					interaction.guildLocale,
-					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
-					},
-				),
-			);
-	}
-
-	public async InvalidEmojiEmbed(
-		interaction: CommandInteraction,
-	): Promise<EmbedBuilder> {
-		return new EmbedBuilder()
-			.setAuthor({
-				name: interaction.user.id,
-				iconURL: interaction.user.displayAvatarURL(),
-			})
-			.setColor("#c20e00")
-			.setDescription(
-				this.translate.getTranslation(
-					"ReactionRoles.create.Emoji.Invalid",
-					interaction.guildLocale,
-					{
-						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
-					},
-				),
-			);
-	}
-
 	public async ReactionRoleCreatedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		reaction: IReaction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
@@ -204,7 +124,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async ReactionRoleRemovedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
@@ -226,7 +146,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async ReactionRoleUpdatedEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		{ channel, message, role, emoji }: IReaction,
 		newOption: REACTION_OPTIONS,
 	): Promise<EmbedBuilder> {
@@ -306,7 +226,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async ReactionRoleDeleteAllEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		status: "Confirm" | "Cancel" | "Success",
 		ReactionCount: number | null,
 	): Promise<EmbedBuilder> {
@@ -346,7 +266,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async UnableToCreateReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
@@ -366,7 +286,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async UnableToDeleteReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
@@ -388,7 +308,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async UnableToDeleteAllReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
@@ -405,7 +325,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	}
 
 	public async UnableToUpdateReactionRoleEmbed(
-		interaction: CommandInteraction,
+		interaction: AnyInteraction,
 		MsgID: Message,
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()

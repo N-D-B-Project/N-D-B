@@ -10,7 +10,7 @@ import type {
 	IReactionRolesService,
 } from "../../interfaces";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
-import type { IReaction } from "../../types";
+import { CreateStatus, type IReaction } from "../../types";
 import { ReactionRoles } from "../../types/constants";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with>
 import { CreateReactionDTO } from "./CreateReaction.dto";
@@ -37,7 +37,7 @@ export class CreateReactionCommand {
 		user: ["SendMessages", "AddReactions", "ManageRoles"],
 		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
 		guildOnly: false,
-		testOnly: true,
+		testOnly: false,
 		ownerOnly: false,
 	})
 	public async onCommandRun(
@@ -49,8 +49,7 @@ export class CreateReactionCommand {
 		const Message = await Channel.messages.fetch(MessageID);
 		const Role = dto.role;
 		const Emoji = dto.emoji;
-		let Option = dto.option;
-		if (!Option || Option > 6 || Number.isNaN(Option)) Option = 1;
+		const Option = dto.option ?? 1;
 
 		await this.reaction.CheckParams(
 			this.client,
@@ -71,7 +70,7 @@ export class CreateReactionCommand {
 		};
 		const Created = await this.reaction.Create(interaction.guild, data);
 
-		if (Created.status === "Created") {
+		if (Created.status === CreateStatus.Created) {
 			await MessageTools.react(Message, Emoji);
 			return await interaction.reply({
 				embeds: [await this.Embeds.ReactionRoleCreatedEmbed(interaction, data)],

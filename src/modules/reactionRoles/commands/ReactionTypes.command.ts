@@ -1,21 +1,15 @@
-import { localizationMapByKey } from "@necord/localization";
-import { Inject } from "@nestjs/common";
+import {
+	CurrentTranslate,
+	localizationMapByKey,
+	type TranslationFn,
+} from "@necord/localization";
+import { EmbedBuilder, MessageFlags } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import type {
-	IReactionRolesEmbeds,
-	IReactionRolesService,
-} from "../interfaces";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
-import { ReactionRoles } from "../types/constants";
 
 @ReactionRolesCommand()
 export class ReactionTypesCommand {
-	public constructor(
-		@Inject(ReactionRoles.Service) readonly _reaction: IReactionRolesService,
-		@Inject(ReactionRoles.Embeds) readonly _embeds: IReactionRolesEmbeds,
-	) {}
-
 	@Subcommand({
 		name: "types",
 		description: "Show the types of ReactionRoles",
@@ -26,11 +20,24 @@ export class ReactionTypesCommand {
 	})
 	@CommandConfig({ category: "🎩 ReactionRole", disable: false })
 	@CommandPermissions({
-		user: ["SendMessages", "AddReactions", "ManageRoles"],
-		bot: ["EmbedLinks", "AddReactions", "ManageRoles"],
+		user: ["SendMessages"],
+		bot: ["EmbedLinks"],
 		guildOnly: false,
-		testOnly: true,
+		testOnly: false,
 		ownerOnly: false,
 	})
-	public async onCommandRun(@Ctx() [_interaction]: SlashCommandContext) {}
+	public async onCommandRun(
+		@Ctx() [interaction]: SlashCommandContext,
+		@CurrentTranslate() t: TranslationFn,
+	) {
+		const embed = new EmbedBuilder()
+			.setTitle(t("ReactionRoles.types.EmbedTitle"))
+			.setDescription(t("ReactionRoles.types.Types"))
+			.setColor(0x5865f2);
+
+		return interaction.reply({
+			embeds: [embed],
+			flags: MessageFlags.Ephemeral,
+		});
+	}
 }
