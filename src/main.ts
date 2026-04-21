@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+const NODE_ENV = process.env.NODE_ENV || "development";
+dotenv.config({ path: `.env.${NODE_ENV}` });
 
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";

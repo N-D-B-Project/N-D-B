@@ -5,12 +5,12 @@ import {
 } from "@necord/localization";
 import { Inject, UseGuards } from "@nestjs/common";
 import {
-	ButtonStyle,
 	ContainerBuilder,
 	MessageFlags,
 	SeparatorSpacingSize,
+	parseEmoji,
 } from "discord.js";
-import { Button, Context, type SlashCommandContext, Subcommand } from "necord";
+import { Context, type SlashCommandContext, Subcommand } from "necord";
 import {
 	CommandConfig,
 	CommandPermissions,
@@ -58,6 +58,17 @@ export class CreateTicketTypeCommand {
 		}: CreateTicketTypeDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
+		const parsed = parseEmoji(emoji);
+		if (parsed?.id) {
+			const resolved = interaction.client.emojis.cache.get(parsed.id);
+			if (!resolved) {
+				return interaction.reply({
+					content: t("Tickets.type.emoji_not_found"),
+					flags: MessageFlags.Ephemeral,
+				});
+			}
+		}
+
 		const ticketType = await this.service.createTicketType({
 			description,
 			emoji,
@@ -94,39 +105,22 @@ export class CreateTicketTypeCommand {
 						(text) => text.setContent(`### ${t("Tickets.type.embed.details")}`),
 						(text) =>
 							text.setContent(
-								`> **${t("Tickets.type.embed.fields.name")}:** ${name}\n> **${t(
+								`**${t("Tickets.type.embed.fields.name")}:** ${name}\n**${t(
 									"Tickets.type.embed.fields.description",
-								)}:** ${description}\n> **${t("Tickets.type.embed.fields.emoji")}:** ${emoji}\n> **${t("Tickets.type.embed.fields.message")}:** ${message}`,
+								)}:** ${description}\n**${t("Tickets.type.embed.fields.emoji")}:** ${emoji}\n**${t("Tickets.type.embed.fields.message")}:** ${message}`,
 							),
 					)
 					.addSeparatorComponents((separator) =>
 						separator.setSpacing(SeparatorSpacingSize.Large),
 					)
-					.addSectionComponents((section) =>
-						section
-							.addTextDisplayComponents((text) =>
-								text.setContent(
-									`${t("Tickets.type.embed.next_steps", { COMMAND_MENTION })}\n${t("Tickets.type.embed.configure")}`,
-								),
-							)
-							.setButtonAccessory((button) =>
-								button
-									.setLabel(t("Tickets.type.embed.start_configure"))
-									.setCustomId("configure")
-									.setStyle(ButtonStyle.Primary),
-							),
+					.addTextDisplayComponents((text) =>
+						text.setContent(
+							t("Tickets.type.embed.next_steps", { COMMAND_MENTION }),
+						),
 					)
 					.setAccentColor(0x00ff00),
 			],
 			flags: MessageFlags.IsComponentsV2,
-		});
-	}
-
-	@Button("configure")
-	public async onConfigure(@Context() [interaction]: SlashCommandContext) {
-		return interaction.reply({
-			content: "This feature is not implemented yet.",
-			flags: MessageFlags.Ephemeral,
 		});
 	}
 }
