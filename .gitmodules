@@ -4,7 +4,8 @@
 [submodule "Database"]
   path = Database
   url = https://github.com/N-D-B-Project/Database.git
+  branch = feat/tickets
 [submodule "Languages"]
 	path = src/common/Languages
 	url = https://github.com/N-D-B-Project/Localization
-	branch = N-D-B
+	branch = N-D-B_feat/tickets

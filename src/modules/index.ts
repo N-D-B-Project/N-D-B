@@ -5,3 +5,4 @@ export { EventsModule } from "@/modules/events/Events.module";
 export { MusicModule } from "@/modules/music/Music.module";
 export { ReactionRolesModule } from "@/modules/reactionRoles/ReactionRoles.module";
 export { ScheduleModule } from "@/modules/schedule/schedule.module";
+export { TicketsModule } from "@/modules/tickets/tickets.module";
