@@ -4,8 +4,8 @@ import type { ShardingManager } from ".";
 
 export class TopGGAutoPoster extends DJSSharderPoster {
 	public constructor(
-		private readonly token: string,
-		shardManager: ShardingManager,
+		readonly token: string,
+		readonly shardManager: ShardingManager,
 	) {
 		super(token, shardManager, {
 			startPosting: false,

@@ -1,16 +1,15 @@
-import { Logger } from "@nestjs/common";
 import { isURL } from "class-validator";
 import { SourceLinksRegexes, type SourceNames } from "lavalink-client";
 import { config } from "../config";
 
+// biome-ignore lint/complexity/noStaticOnlyClass: Tooling purpose
 export class MusicService {
-	private readonly logger = new Logger(MusicService.name);
-
 	public static isValidSourceURL(url: string): boolean {
 		if (!isURL(url)) return false;
 		for (const regex of Object.values(SourceLinksRegexes)) {
 			if (regex.test(url)) return true;
 		}
+		return false;
 	}
 
 	public static async getSource(url: string) {
@@ -49,6 +48,7 @@ export class MusicService {
 			tidal: "Tidal",
 			vkmusic: "VK Music",
 			qobuz: "Qobuz",
+			pandora: "Pandora",
 		};
 
 		return sourceNamesMap[sourceName] || "Unknown Source";

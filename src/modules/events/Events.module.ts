@@ -4,6 +4,7 @@ import { EventEmitter2, EventEmitterModule } from "@nestjs/event-emitter";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { REST } from "discord.js";
 import * as EventsMap from "./index";
+
 const Events = Object.values(EventsMap);
 
 @Module({

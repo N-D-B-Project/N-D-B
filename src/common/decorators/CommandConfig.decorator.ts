@@ -1,4 +1,4 @@
-import { SetMetadata, UseGuards, applyDecorators } from "@nestjs/common";
+import { applyDecorators, SetMetadata, UseGuards } from "@nestjs/common";
 import { CommandConfigGuard } from "../guards";
 
 export interface CommandConfigOptions {

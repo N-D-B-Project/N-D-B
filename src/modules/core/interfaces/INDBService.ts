@@ -1,5 +1,5 @@
-import type { Content } from "@/types";
 import type { CommandInteraction, EmbedBuilder } from "discord.js";
+import type { Content } from "@/types";
 
 export interface INDBService {
 	buildPaginator(

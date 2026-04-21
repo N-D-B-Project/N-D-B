@@ -1,4 +1,4 @@
-import { SetMetadata, UseGuards, applyDecorators } from "@nestjs/common";
+import { applyDecorators, SetMetadata, UseGuards } from "@nestjs/common";
 import type { PermissionResolvable } from "discord.js";
 import { CommandPermissionsGuard } from "../guards";
 

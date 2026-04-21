@@ -1,10 +1,10 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators/";
 import {
 	CurrentTranslate,
-	type TranslationFn,
 	localizationMapByKey,
+	type TranslationFn,
 } from "@necord/localization";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators/";
 import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
 
 @DeveloperToolsCommand()

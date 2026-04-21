@@ -5,6 +5,7 @@ import {
 	ReactionRolesEmbedsProvider,
 	ReactionRolesProvider,
 } from "./types/providers";
+
 const Commands = Object.values(CommandsMap);
 const Events = Object.values(EventsMap);
 @Global()

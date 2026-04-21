@@ -1,12 +1,12 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { WAIT } from "@/utils/Tools";
 import {
 	CurrentTranslate,
-	type TranslationFn,
 	localizationMapByKey,
+	type TranslationFn,
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { WAIT } from "@/utils/Tools";
 import { ModerationCommand } from "../../Moderation.decorator";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
 import { ClearDTO } from "./clear.dto";
@@ -50,7 +50,7 @@ export class ClearCommand {
 			});
 			await WAIT(4000);
 			res.delete();
-		} catch (error) {
+		} catch (_error) {
 			interaction.reply({
 				content: t("Moderation.clear.response.error"),
 				flags: "Ephemeral",

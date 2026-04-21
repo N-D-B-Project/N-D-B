@@ -1,15 +1,15 @@
-import { MessageTools } from "@/modules/commands/Message";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
+import { MessageTools } from "@/modules/commands/Message";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
@@ -118,7 +118,7 @@ export class ReactionRolesEvents {
 								}, 4000);
 							}
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						if (this.ClientCooldown.has(reaction.message.guildId)) return;
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {
@@ -172,7 +172,7 @@ export class ReactionRolesEvents {
 								this.ReactionCooldown.delete(user.id);
 							}, 2000);
 						}
-					} catch (err) {
+					} catch (_errrrr) {
 						if (this.ClientCooldown.has(reaction.message.guildId)) return;
 						this.ClientCooldown.add(reaction.message.guildId);
 						setTimeout(() => {

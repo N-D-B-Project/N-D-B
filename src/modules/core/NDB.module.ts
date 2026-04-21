@@ -25,6 +25,7 @@ const NecordConfigInjectionTokens = [ConfigService, RedisToken()];
 				return {
 					options: {
 						url: configService.get<string>("RedisURL"),
+						password: configService.get<string>("RedisPassword"),
 					},
 				};
 			},

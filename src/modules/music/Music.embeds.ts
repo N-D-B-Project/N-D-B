@@ -1,17 +1,16 @@
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
+	channelMention,
 	EmbedBuilder,
 	type Guild,
 	type VoiceChannel,
-	channelMention,
 } from "discord.js";
 import type { IMusicEmbeds } from "./interfaces";
 

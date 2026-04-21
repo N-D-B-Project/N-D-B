@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NecordLavalinkModuleOptions } from "@necord/lavalink";
 import {
 	GuildResolver,
@@ -110,7 +111,7 @@ export class NecordConfigService {
 				fallbackLocale:
 					this.config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
 				locales: await new JSONLocaleLoader(
-					"./src/common/Languages/",
+					path.resolve(__dirname, "../../common/Languages/"),
 				).loadTranslations(),
 			}),
 			resolvers: GuildResolver,
@@ -122,9 +123,9 @@ export class NecordConfigService {
 			nodes: [
 				{
 					regions: ["us-east", "us-central", "us-south", "us-west", "brazil"],
-					authorization: process.env.LAVALINK_SERVER_PASSWORD,
-					host: process.env.LavalinkHost as string,
-					port: Number(process.env.LavalinkPort),
+					authorization: process.env.LAVALINK_PASSWORD,
+					host: process.env.LAVALINK_HOST as string,
+					port: Number(process.env.LAVALINK_PORT),
 					id: "ndlavalink",
 					retryAmount: 4,
 					retryDelay: 4000,

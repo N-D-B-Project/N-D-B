@@ -1,5 +1,3 @@
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
 import { Inject, Injectable } from "@nestjs/common";
 import type {
 	Client,
@@ -9,6 +7,8 @@ import type {
 	Role,
 	TextChannel,
 } from "discord.js";
+import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
+import { Services } from "@/types/Constants";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
 import type {
@@ -83,13 +83,13 @@ export class ReactionRolesService implements IReactionRolesService {
 	}
 
 	public async CheckParams(
-		client: Client<boolean>,
+		_client: Client<boolean>,
 		interaction: CommandInteraction,
-		channel: TextChannel,
-		messageId: string,
+		_channel: TextChannel,
+		_messageId: string,
 		message: Message<boolean>,
-		role: Role,
-		emoji: string,
+		_role: Role,
+		_emoji: string,
 	) {
 		if (!message) {
 			return await interaction.reply({

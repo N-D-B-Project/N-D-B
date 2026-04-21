@@ -1,13 +1,11 @@
-import type { Content } from "@/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
-
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	type ButtonsAppearance,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NecordPaginationService,
 	PageBuilder,
 } from "@necord/pagination";
@@ -17,6 +15,7 @@ import {
 	type CommandInteraction,
 	type EmbedBuilder,
 } from "discord.js";
+import type { Content } from "@/types";
 import type { INDBService } from "./interfaces/INDBService";
 
 @Injectable()

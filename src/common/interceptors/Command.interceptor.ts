@@ -5,13 +5,13 @@ import {
 	Injectable,
 	type NestInterceptor,
 } from "@nestjs/common";
-import { type Observable, catchError } from "rxjs";
+import { catchError, type Observable } from "rxjs";
 import { CommandError } from "../errors/Command.error";
 
 @Injectable()
 export class CommandInterceptor implements NestInterceptor {
 	intercept(
-		context: ExecutionContext,
+		_context: ExecutionContext,
 		next: CallHandler<unknown>,
 	): Observable<unknown> | Promise<Observable<unknown>> {
 		return next.handle().pipe(

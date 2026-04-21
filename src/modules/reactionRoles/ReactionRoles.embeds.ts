@@ -1,8 +1,6 @@
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LOCALIZATION_ADAPTER,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	NestedLocalizationAdapter,
 } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
@@ -12,17 +10,19 @@ import { ConfigService } from "@nestjs/config";
 import {
 	Client,
 	type CommandInteraction,
+	channelMention,
 	EmbedBuilder,
 	type Message,
 	type MessageReaction,
 	PartialMessageReaction,
 	PartialUser,
 	Role,
+	roleMention,
 	type TextChannel,
 	type User,
-	channelMention,
-	roleMention,
 } from "discord.js";
+import { MessageTools } from "@/modules/commands/Message";
+import type { Config } from "@/modules/config/types";
 import type { IReactionRolesEmbeds } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 

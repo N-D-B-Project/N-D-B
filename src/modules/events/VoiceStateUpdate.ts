@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	ChannelType,
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 	Client,
-	GuildMember,
-	PermissionResolvable,
+	type GuildMember,
+	type PermissionResolvable,
 } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
 
@@ -43,7 +43,7 @@ export class VoiceStateUpdateEvents {
 	// TODO: Anti undeafen
 	@On("voiceChannelUndeaf")
 	public async onVoiceChannelUndeaf(
-		@Context() [member, type]: ContextOf<"voiceChannelUndeaf">,
+		@Context() [member, _type]: ContextOf<"voiceChannelUndeaf">,
 	) {
 		if (this.checkMember(member)) {
 			member.voice.setDeaf(true);

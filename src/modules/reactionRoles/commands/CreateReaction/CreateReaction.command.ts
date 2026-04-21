@@ -1,18 +1,15 @@
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { MessageTools } from "@/modules/commands/Message";
 import { localizationMapByKey } from "@necord/localization";
 import { Inject } from "@nestjs/common";
-import {
-	// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-	Client,
-	type TextChannel,
-} from "discord.js";
+// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
+import { Client, type TextChannel } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
-import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { MessageTools } from "@/modules/commands/Message";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
 } from "../../interfaces";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import type { IReaction } from "../../types";
 import { ReactionRoles } from "../../types/constants";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with>

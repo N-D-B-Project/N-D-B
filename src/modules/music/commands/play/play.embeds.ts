@@ -1,7 +1,7 @@
-import { Timer } from "@/utils/Tools";
 import type { TranslationFn } from "@necord/localization";
 import { type ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import type { SearchResult, Track } from "lavalink-client";
+import { Timer } from "@/utils/Tools";
 import { MusicService } from "../../Music.service";
 
 export class PlayEmbeds {
