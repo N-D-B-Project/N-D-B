@@ -61,7 +61,7 @@
 		"dotenv": "^17.2.2",
 		"lavalink-client": "^2.6.2",
 		"moment": "^2.30.1",
-		"necord": "^6.11.1",
+		"necord": "^6.13.0",
 		"nestjs-prisma": "^0.26.0",
 		"parse-ms": "2.1.0",
 		"redis": "^5.9.0",
