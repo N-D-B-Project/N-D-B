@@ -1,14 +1,14 @@
-import type { Guild } from "discord.js";
-import type { GuildEntity } from "../../entities";
+import type { Guild, GuildSettings } from "@ndb/database";
+import type { Guild as DiscordGuild } from "discord.js";
 import type { DatabaseStatus } from "../../types";
 
 export interface IGuildRepository {
-	guildSettings();
-	get(guildId: string): Promise<GuildEntity>;
-	getAll(): Promise<GuildEntity[]>;
+	updateSettings(guildId: string, data: Partial<GuildSettings>): Promise<void>;
+	get(guildId: string): Promise<Guild>;
+	getAll(): Promise<Guild[]>;
 	create(
-		guild: Guild,
-	): Promise<{ callback: GuildEntity | undefined; status: DatabaseStatus }>;
-	update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity>;
-	delete(guild: Guild): Promise<GuildEntity>;
+		guild: DiscordGuild,
+	): Promise<{ callback: Guild | undefined; status: DatabaseStatus }>;
+	update(oldGuild: DiscordGuild, newGuild: DiscordGuild): Promise<Guild>;
+	delete(guild: DiscordGuild): Promise<Guild>;
 }

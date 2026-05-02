@@ -117,7 +117,7 @@ export class ReactionRolesEvents {
 				reaction,
 				user,
 				reactionData,
-				dmOnChange: guildData.Settings.ReactionDM,
+				dmOnChange: guildData.settings.reactionDM,
 			});
 		}
 	}

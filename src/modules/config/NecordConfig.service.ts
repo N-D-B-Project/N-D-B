@@ -9,7 +9,7 @@ import type { NecordPaginationOptions } from "@necord/pagination";
 import { Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
-import { InjectRedis, type Redis } from "@nestjs-redis/client";
+import { InjectRedis } from "@nestjs-redis/client";
 import {
 	GatewayIntentBits,
 	GatewayVersion,
@@ -18,6 +18,7 @@ import {
 } from "discord.js";
 import { SourceLinksRegexes } from "lavalink-client";
 import type { NecordModuleOptions } from "necord";
+import type { RedisClientType } from "redis";
 import { QueueStore } from "../music/utils/QueueStore";
 import { JSONLocaleLoader } from "./JSONLocale.loader";
 import { PlayerStore } from "./player.store";
@@ -27,7 +28,7 @@ import type { Config } from "./types";
 export class NecordConfigService {
 	public constructor(
 		private readonly config: ConfigService,
-		@InjectRedis() private readonly redis: Redis,
+		@InjectRedis() private readonly redis: RedisClientType,
 	) {}
 
 	public createNecordOptions(): NecordModuleOptions {

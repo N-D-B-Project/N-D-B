@@ -11,7 +11,6 @@ import {
 	EnvChecker,
 	NodeHandler,
 	otelSDK,
-	PrismaExceptionFilter,
 	ShardingManager,
 	TopGGAutoPoster,
 } from "./lib";
@@ -24,7 +23,6 @@ async function bootstrap() {
 	await otelSDK.start();
 	const app = await NestFactory.create(AppModule);
 	const configService = app.get<ConfigService>(ConfigService);
-	const httpAdapter = app.getHttpAdapter();
 	const logger = new Logger("Main");
 	EnvChecker(configService);
 	const ShardManager = new ShardingManager(configService, module.hot);
@@ -41,7 +39,6 @@ async function bootstrap() {
 	}
 
 	app.enableShutdownHooks();
-	app.useGlobalFilters(PrismaExceptionFilter(httpAdapter));
 
 	if (module.hot) {
 		module.hot.accept();

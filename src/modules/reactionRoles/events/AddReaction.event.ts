@@ -140,7 +140,7 @@ export class AddReactionEvent {
 				reaction,
 				user,
 				reactionData,
-				dmOnChange: guildData.Settings.ReactionDM,
+				dmOnChange: guildData.settings.reactionDM,
 			});
 		}
 	}

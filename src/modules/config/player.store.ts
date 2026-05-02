@@ -1,9 +1,9 @@
 import { BaseStore } from "@necord/lavalink";
-import type { Redis } from "@nestjs-redis/client";
 import type { PlayerJson } from "lavalink-client";
+import type { RedisClientType } from "redis";
 
 export class PlayerStore extends BaseStore {
-	public constructor(readonly redis: Redis) {
+	public constructor(readonly redis: RedisClientType) {
 		super();
 	}
 
@@ -33,7 +33,7 @@ export class PlayerStore extends BaseStore {
 			return [];
 		}
 
-		const values = await this.redis.mGet(playerKeys);
+		const values = await this.redis.mGet(playerKeys as string[]);
 
 		return playerKeys.map((key, index) => ({
 			key: key as string,

@@ -1,5 +1,7 @@
 import { Global, Module } from "@nestjs/common";
 import { APP_FILTER } from "@nestjs/core";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { GuildSettings, TicketType, Tickets as TicketsEntity } from "@ndb/database";
 import { EmojiFilter } from "@/common/filters/emoji.filter";
 import * as Commands from "./commands";
 import * as Components from "./components";
@@ -10,6 +12,7 @@ import { Tickets } from "./types/constants";
 
 @Global()
 @Module({
+	imports: [TypeOrmModule.forFeature([TicketsEntity, TicketType, GuildSettings])],
 	providers: [
 		...Object.values(Commands),
 		...Object.values(Components),

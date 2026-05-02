@@ -14,7 +14,6 @@ import {
 	ATTR_SERVICE_NAME,
 	ATTR_SERVICE_VERSION,
 } from "@opentelemetry/semantic-conventions";
-import { PrismaInstrumentation } from "@prisma/instrumentation";
 import { setupNodeMetrics } from "@sesamecare-oss/opentelemetry-node-metrics";
 import { name, version } from "../../package.json";
 
@@ -39,10 +38,7 @@ const resource = resourceFromAttributes({
 	[ATTR_SERVICE_VERSION]: version,
 });
 
-const instrumentations = [
-	getNodeAutoInstrumentations(),
-	new PrismaInstrumentation(),
-];
+const instrumentations = [getNodeAutoInstrumentations()];
 
 export const otelSDK = new NodeSDK({
 	resource,

@@ -1,14 +1,14 @@
-import type { User } from "discord.js";
-import type { UserEntity } from "../../entities";
+import type { User, UserSettings } from "@ndb/database";
+import type { User as DiscordUser } from "discord.js";
 import type { DatabaseStatus } from "../../types";
 
 export interface IUserRepository {
-	userSettings();
-	get(userId: string): Promise<UserEntity>;
-	getAll(): Promise<UserEntity[]>;
+	updateSettings(userId: string, data: Partial<UserSettings>): Promise<void>;
+	get(userId: string): Promise<User>;
+	getAll(): Promise<User[]>;
 	create(
-		user: User,
-	): Promise<{ callback: UserEntity | undefined; status: DatabaseStatus }>;
-	update(user: User): Promise<UserEntity>;
-	delete(user: User): Promise<UserEntity>;
+		user: DiscordUser,
+	): Promise<{ callback: User | undefined; status: DatabaseStatus }>;
+	update(user: DiscordUser): Promise<User>;
+	delete(user: DiscordUser): Promise<User>;
 }

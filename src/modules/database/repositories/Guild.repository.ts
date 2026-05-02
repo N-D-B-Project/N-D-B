@@ -1,93 +1,63 @@
-import { Inject, Injectable, Logger } from "@nestjs/common";
-import type { Guild } from "discord.js";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { CustomPrismaService } from "nestjs-prisma";
-import { Services } from "@/types/Constants";
-import type { GuildEntity } from "../entities";
-import type { ExtendedPrismaClient } from "../prisma.client";
+import { Injectable, Logger } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Guild, GuildSettings } from "@ndb/database";
+import type { Guild as DiscordGuild } from "discord.js";
+import { Repository } from "typeorm";
 import { DatabaseStatus } from "../types";
 import type { IGuildRepository } from "./interfaces";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {
 	public constructor(
-		@Inject(Services.Prisma)
-		private readonly prisma: CustomPrismaService<ExtendedPrismaClient>,
+		@InjectRepository(Guild)
+		private readonly guildRepo: Repository<Guild>,
+		@InjectRepository(GuildSettings)
+		private readonly guildSettingsRepo: Repository<GuildSettings>,
 	) {}
 
 	private readonly logger = new Logger(GuildRepository.name);
 
-	public guildSettings() {
-		return this.prisma.client.guildSettings;
+	public async updateSettings(guildId: string, data: Partial<GuildSettings>): Promise<void> {
+		await this.guildSettingsRepo.update({ guildId }, data);
 	}
 
-	public async get(guildId: string): Promise<GuildEntity> {
-		return await this.prisma.client.guild.findUnique({
+	public async get(guildId: string): Promise<Guild> {
+		return await this.guildRepo.findOne({
 			where: { id: guildId },
-			include: {
-				Settings: true,
-			},
+			relations: { settings: true },
 		});
 	}
 
-	public async getAll(): Promise<GuildEntity[]> {
-		return await this.prisma.client.guild.findMany({
-			include: {
-				Settings: true,
-			},
+	public async getAll(): Promise<Guild[]> {
+		return await this.guildRepo.find({
+			relations: { settings: true },
 		});
 	}
 
 	public async create(
-		guild: Guild,
-	): Promise<{ callback: GuildEntity | undefined; status: DatabaseStatus }> {
-		return await this.prisma.client.guild
-			.create({
-				data: {
-					id: guild.id,
-					Name: guild.name,
-					Settings: {
-						create: {},
-					},
-				},
-				include: {
-					Settings: true,
-				},
-			})
-			.then((data: GuildEntity) => {
-				this.logger.log(`${guild.name} Configuration Created on Database`);
-				return {
-					callback: data,
-					status: DatabaseStatus.Created,
-				};
-			})
-			.catch((err) => {
-				this.logger.error(err);
-				return {
-					callback: undefined,
-					status: DatabaseStatus.Error,
-				};
-			});
+		guild: DiscordGuild,
+	): Promise<{ callback: Guild | undefined; status: DatabaseStatus }> {
+		try {
+			const newGuild = this.guildRepo.create({ id: guild.id, name: guild.name });
+			const savedGuild = await this.guildRepo.save(newGuild);
+			const settings = this.guildSettingsRepo.create({ guildId: guild.id });
+			savedGuild.settings = await this.guildSettingsRepo.save(settings);
+			this.logger.log(`${guild.name} Configuration Created on Database`);
+			return { callback: savedGuild, status: DatabaseStatus.Created };
+		} catch (err) {
+			this.logger.error(err);
+			return { callback: undefined, status: DatabaseStatus.Error };
+		}
 	}
 
-	public async update(oldGuild: Guild, newGuild: Guild): Promise<GuildEntity> {
-		return await this.prisma.client.guild.update({
-			where: { id: oldGuild.id },
-			data: {
-				Name: newGuild.name,
-			},
-			include: {
-				Settings: true,
-			},
-		});
+	public async update(oldGuild: DiscordGuild, newGuild: DiscordGuild): Promise<Guild> {
+		await this.guildRepo.update({ id: oldGuild.id }, { name: newGuild.name });
+		return await this.get(oldGuild.id);
 	}
 
-	public async delete(guild: Guild): Promise<GuildEntity> {
-		return await this.prisma.client.guild.delete({
-			where: { id: guild.id },
-			include: {
-				Settings: true,
-			},
-		});
+	public async delete(guild: DiscordGuild): Promise<Guild> {
+		const entity = await this.get(guild.id);
+		await this.guildRepo.delete({ id: guild.id });
+		return entity;
 	}
 }

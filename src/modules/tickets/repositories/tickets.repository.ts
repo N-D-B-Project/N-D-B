@@ -1,96 +1,70 @@
-import { Inject, Injectable } from "@nestjs/common";
-import type { CustomPrismaService } from "nestjs-prisma";
-import type { ExtendedPrismaClient } from "@/modules/database/prisma.client";
-import type { IGuildRepository } from "@/modules/database/repositories/interfaces";
-import { Repositories } from "@/modules/database/types/constants";
-import { Services } from "@/types/Constants";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { GuildSettings, TicketType, Tickets } from "@ndb/database";
+import { GuildTicketsStatus } from "@ndb/database";
+import { Repository } from "typeorm";
 import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
 import type { TicketEntity, TicketTypeEntity } from "../entities";
 import type { ITicketsRepository } from "../interfaces";
+import type { PanelSettings } from "../types/constants";
 
 @Injectable()
 export class TicketsRepository implements ITicketsRepository {
 	public constructor(
-		@Inject(Services.Prisma)
-		readonly prismaService: CustomPrismaService<ExtendedPrismaClient>,
-		@Inject(Repositories.Guild) readonly guildRepository: IGuildRepository,
+		@InjectRepository(Tickets)
+		private readonly ticketsRepo: Repository<Tickets>,
+		@InjectRepository(TicketType)
+		private readonly ticketTypeRepo: Repository<TicketType>,
+		@InjectRepository(GuildSettings)
+		private readonly guildSettingsRepo: Repository<GuildSettings>,
 	) {}
 
-	public async createTicketType(
-		dto: CreateTicketTypeDTO,
-	): Promise<TicketTypeEntity> {
-		return this.prismaService.client.ticketType.create({
-			data: {
+	public async createTicketType(dto: CreateTicketTypeDTO): Promise<TicketTypeEntity> {
+		const settings = await this.guildSettingsRepo.findOne({ where: { guildId: dto.guildId } });
+		return await this.ticketTypeRepo.save(
+			this.ticketTypeRepo.create({
+				name: dto.name,
 				description: dto.description,
 				emoji: dto.emoji,
 				message: dto.message,
-				name: dto.name,
-				GuildSettings: {
-					connect: {
-						guildId: dto.guildId,
-					},
-				},
-			},
-		});
+				guildSettingsId: settings?.id ?? null,
+			}),
+		);
 	}
 
 	public async getTicketTypes(guildId: string): Promise<TicketTypeEntity[]> {
-		return await this.prismaService.client.ticketType.findMany({
-			where: {
-				GuildSettings: {
-					guildId,
-				},
-			},
+		return await this.ticketTypeRepo.find({
+			where: { guildSettings: { guildId } },
 		});
 	}
 
 	public async getTicketType(name: string): Promise<TicketTypeEntity> {
-		return await this.prismaService.client.ticketType.findFirst({
-			where: {
-				name,
-			},
-		});
+		return await this.ticketTypeRepo.findOne({ where: { name } });
 	}
 
 	public async getTicketTypeById(id: string): Promise<TicketTypeEntity> {
-		return await this.prismaService.client.ticketType.findUnique({
-			where: { id },
-		});
+		return await this.ticketTypeRepo.findOne({ where: { id } });
 	}
 
 	public async updateTicketType(
 		id: string,
 		data: Partial<Pick<TicketTypeEntity, "supportRoleId" | "categoryId" | "description" | "message" | "emoji">>,
 	): Promise<TicketTypeEntity> {
-		return await this.prismaService.client.ticketType.update({
-			where: { id },
-			data,
-		});
+		await this.ticketTypeRepo.update({ id }, data);
+		return await this.getTicketTypeById(id);
 	}
 
 	public async createTicket(dto: CreateTicketDTO): Promise<TicketEntity> {
-		return this.prismaService.client.tickets.create({
-			data: {
+		const ticketType = await this.getTicketType(dto.ticketTypeName);
+		return await this.ticketsRepo.save(
+			this.ticketsRepo.create({
 				channelId: dto.channelId,
-				User: {
-					connectOrCreate: {
-						where: { id: dto.userId },
-						create: { id: dto.userId },
-					},
-				},
-				Guild: {
-					connectOrCreate: {
-						where: { id: dto.guildId },
-						create: { id: dto.guildId, Name: dto.guildId },
-					},
-				},
-				TicketType: {
-					connect: {
-						id: (await this.getTicketType(dto.ticketTypeName)).id,
-					},
-				},
-			},
-		});
+				userId: dto.userId,
+				guildId: dto.guildId,
+				ticketTypeId: ticketType.id,
+				status: GuildTicketsStatus.OPEN,
+			}),
+		);
 	}
 
 	public async getOpenTicket(
@@ -98,50 +72,36 @@ export class TicketsRepository implements ITicketsRepository {
 		guildId: string,
 		ticketTypeId: string,
 	): Promise<TicketEntity> {
-		return await this.prismaService.client.tickets.findFirst({
-			where: {
-				userId,
-				guildId,
-				ticketTypeId,
-				status: "OPEN",
-			},
+		return await this.ticketsRepo.findOne({
+			where: { userId, guildId, ticketTypeId, status: GuildTicketsStatus.OPEN },
 		});
 	}
 
 	public async getTicketByChannelId(channelId: string): Promise<TicketEntity> {
-		return await this.prismaService.client.tickets.findFirst({
-			where: {
-				channelId,
-				status: "OPEN",
-			},
+		return await this.ticketsRepo.findOne({
+			where: { channelId, status: GuildTicketsStatus.OPEN },
 		});
 	}
 
 	public async closeTicket(id: string): Promise<TicketEntity> {
-		return await this.prismaService.client.tickets.update({
-			where: { id },
-			data: { status: "CLOSED" },
-		});
+		await this.ticketsRepo.update({ id }, { status: GuildTicketsStatus.CLOSED });
+		return await this.ticketsRepo.findOne({ where: { id } });
 	}
 
 	public async deleteTicketType(id: string): Promise<TicketTypeEntity> {
-		return await this.prismaService.client.ticketType.delete({
-			where: { id },
-		});
+		const entity = await this.getTicketTypeById(id);
+		await this.ticketTypeRepo.delete({ id });
+		return entity;
 	}
 
 	public async count(guildId: string): Promise<number> {
-		return await this.prismaService.client.ticketType.count({
-			where: {
-				GuildSettings: {
-					guildId,
-				},
-			},
+		return await this.ticketTypeRepo.count({
+			where: { guildSettings: { guildId } },
 		});
 	}
 
-	public async getPanelSettings(guildId: string) {
-		const settings = await this.prismaService.client.guildSettings.findUnique({
+	public async getPanelSettings(guildId: string): Promise<PanelSettings> {
+		return await this.guildSettingsRepo.findOne({
 			where: { guildId },
 			select: {
 				ticketPanelTitle: true,
@@ -157,22 +117,13 @@ export class TicketsRepository implements ITicketsRepository {
 				ticketDefaultMessage: true,
 			},
 		});
-		return settings;
 	}
 
-	public async updatePanelSettings(
-		guildId: string,
-		data: Partial<import("../types/constants").PanelSettings>,
-	) {
-		return await this.prismaService.client.guildSettings.update({
-			where: { guildId },
-			data,
-		});
+	public async updatePanelSettings(guildId: string, data: Partial<PanelSettings>): Promise<void> {
+		await this.guildSettingsRepo.update({ guildId }, data);
 	}
 
 	public async countTickets(guildId: string): Promise<number> {
-		return await this.prismaService.client.tickets.count({
-			where: { guildId },
-		});
+		return await this.ticketsRepo.count({ where: { guildId } });
 	}
 }

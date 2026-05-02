@@ -1,8 +1,8 @@
-import type { Redis } from "@nestjs-redis/client";
 import type { QueueStoreManager, StoredQueue } from "lavalink-client";
+import type { RedisClientType } from "redis";
 
 export class QueueStore implements QueueStoreManager {
-	public constructor(private readonly redis: Redis) {}
+	public constructor(private readonly redis: RedisClientType) {}
 
 	public async get(guildId: string): Promise<string> {
 		const data = (await this.redis.get(this.transformId(guildId))) as string;

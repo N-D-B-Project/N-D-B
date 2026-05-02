@@ -1,3 +1,1 @@
-import { Tickets } from "@prisma/client"
-
-export type TicketEntity = Tickets
+export type { Tickets as TicketEntity } from "@ndb/database";

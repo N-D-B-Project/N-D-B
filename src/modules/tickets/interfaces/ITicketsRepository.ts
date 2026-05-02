@@ -16,7 +16,7 @@ export interface ITicketsRepository {
 	closeTicket(id: string): Promise<TicketEntity>;
 	deleteTicketType(id: string): Promise<TicketTypeEntity>;
 	getPanelSettings(guildId: string): Promise<PanelSettings | null>;
-	updatePanelSettings(guildId: string, data: Partial<PanelSettings>): Promise<unknown>;
+	updatePanelSettings(guildId: string, data: Partial<PanelSettings>): Promise<void>;
 	count(guildId: string): Promise<number>;
 	countTickets(guildId: string): Promise<number>;
 }

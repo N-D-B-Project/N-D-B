@@ -1,3 +1,1 @@
-import type { GuildReactionRoles } from "@prisma/client";
-
-export type ReactionRolesEntity = GuildReactionRoles;
+export type { GuildReactionRoles as ReactionRolesEntity } from "@ndb/database";

@@ -116,8 +116,7 @@ export class TicketsService implements ITicketsService {
 	}
 
 	private async checkCount(guildId: string): Promise<boolean> {
-		const isPremium = (await this.guildRepository.get(guildId)).Settings
-			.Premium;
+		const isPremium = (await this.guildRepository.get(guildId)).settings.premium;
 		const count = await this.repository.count(guildId);
 
 		if (isPremium && count >= 12) {

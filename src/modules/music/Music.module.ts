@@ -10,7 +10,8 @@ import {
 	type OnApplicationBootstrap,
 	type OnApplicationShutdown,
 } from "@nestjs/common";
-import { InjectRedis, type Redis } from "@nestjs-redis/client";
+import { InjectRedis } from "@nestjs-redis/client";
+import type { RedisClientType } from "redis";
 import * as CommandsMap from "./commands";
 import * as EventsMap from "./events";
 import * as ProvidersMap from "./types/providers";
@@ -28,7 +29,7 @@ export class MusicModule
 	implements OnApplicationShutdown, OnApplicationBootstrap
 {
 	public constructor(
-		@InjectRedis() private readonly redis: Redis,
+		@InjectRedis() private readonly redis: RedisClientType,
 		@Inject(LAVALINK_MODULE_OPTIONS)
 		readonly lavalinkOptions: NecordLavalinkModuleOptions,
 	) {}
