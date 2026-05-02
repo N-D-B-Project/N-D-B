@@ -1157,7 +1157,7 @@ __metadata:
 
 "@ndb/database@file:./Database::locator=n-d-b%40workspace%3A.":
   version: 1.0.0
-  resolution: "@ndb/database@file:./Database#./Database::hash=92b73e&locator=n-d-b%40workspace%3A."
+  resolution: "@ndb/database@file:./Database#./Database::hash=1ffbe1&locator=n-d-b%40workspace%3A."
   dependencies:
     dotenv: "npm:^17.4.2"
     reflect-metadata: "npm:^0.2.2"
@@ -1165,7 +1165,7 @@ __metadata:
     typeorm-extension: "npm:^3.6.3"
   peerDependencies:
     pg: ">=8.0.0"
-  checksum: 10c0/e3bb2b45dd05f4be025752eb353f67bfc50122374ab4b7f99b2d37df1b3e18d791e432407a0c84717344f48357efbe99ceff2103430d0bc8d8d2475e4c234abf
+  checksum: 10c0/c9a1a6db733448d2eff42866b49059e515a0e4aa172c82c1c2674ed2f1c18896542d6a75870d4f659126092b17c15f278e8b3ad94697ec6017d5e3421168ef6d
   languageName: node
   linkType: hard
 
@@ -1308,14 +1308,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:^11.1.7":
-  version: 11.1.7
-  resolution: "@nestjs/core@npm:11.1.7"
+"@nestjs/core@npm:^11.1.18":
+  version: 11.1.19
+  resolution: "@nestjs/core@npm:11.1.19"
   dependencies:
     "@nuxt/opencollective": "npm:0.4.1"
     fast-safe-stringify: "npm:2.1.1"
     iterare: "npm:1.2.1"
-    path-to-regexp: "npm:8.3.0"
+    path-to-regexp: "npm:8.4.2"
     tslib: "npm:2.8.1"
     uid: "npm:2.0.2"
   peerDependencies:
@@ -1332,7 +1332,7 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: 10c0/e20fcf2587875a424f0141def94c7df79fa389cab9ae57a00ca7757fd1a036bb561a2ceef408c169860446ad840e06a992c328afc77d189fdebb60d6371451a6
+  checksum: 10c0/5abf4e6f071e11b0af61b7e0253d17eebc626b7fa3265eb9a0a8bbeeaaea2ebe1681c1bc3fc06c6928363402907702f712c066e49789dfd2a234cd6772b02c7b
   languageName: node
   linkType: hard
 
@@ -5943,7 +5943,7 @@ __metadata:
     "@nestjs/cli": "npm:^11.0.10"
     "@nestjs/common": "npm:^11.1.7"
     "@nestjs/config": "npm:^4.0.2"
-    "@nestjs/core": "npm:^11.1.7"
+    "@nestjs/core": "npm:^11.1.18"
     "@nestjs/event-emitter": "npm:^3.0.1"
     "@nestjs/platform-express": "npm:^11.1.7"
     "@nestjs/schedule": "npm:^6.0.1"
@@ -6281,6 +6281,13 @@ __metadata:
   version: 8.3.0
   resolution: "path-to-regexp@npm:8.3.0"
   checksum: 10c0/ee1544a73a3f294a97a4c663b0ce71bbf1621d732d80c9c9ed201b3e911a86cb628ebad691b9d40f40a3742fe22011e5a059d8eed2cf63ec2cb94f6fb4efe67c
+  languageName: node
+  linkType: hard
+
+"path-to-regexp@npm:8.4.2":
+  version: 8.4.2
+  resolution: "path-to-regexp@npm:8.4.2"
+  checksum: 10c0/05b115c49b47ad252ce05faa32930f643f23769c68b8bcfe78ad833545140c48bbffb3266986d6c8d5db13a64cf12e07e0d72d9882cab830efeefa553533ebaf
   languageName: node
   linkType: hard
 
