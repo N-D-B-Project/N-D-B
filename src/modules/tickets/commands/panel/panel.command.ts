@@ -10,11 +10,9 @@ import {
 	SeparatorSpacingSize,
 } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { Colors } from "@/types/Colors";
 import type { ITicketsService } from "../../interfaces";
 import type { PanelSettings } from "../../types/constants";
 import { Tickets } from "../../types/constants";
@@ -48,10 +46,33 @@ export class PanelCommand {
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Context() [interaction]: SlashCommandContext,
-		@Options() { title, description, color, thumbnail, image, footer, button_label, button_emoji, default_role, default_category, default_message }: PanelDTO,
+		@Options() {
+			title,
+			description,
+			color,
+			thumbnail,
+			image,
+			footer,
+			button_label,
+			button_emoji,
+			default_role,
+			default_category,
+			default_message,
+		}: PanelDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
-		const hasAnyOption = title || description || color || thumbnail || image || footer || button_label || button_emoji || default_role || default_category || default_message;
+		const hasAnyOption =
+			title ||
+			description ||
+			color ||
+			thumbnail ||
+			image ||
+			footer ||
+			button_label ||
+			button_emoji ||
+			default_role ||
+			default_category ||
+			default_message;
 
 		if (!hasAnyOption) {
 			return this.showCurrentSettings(interaction, t);
@@ -66,14 +87,18 @@ export class PanelCommand {
 
 		if (thumbnail && !URL_REGEX.test(thumbnail)) {
 			return interaction.reply({
-				content: t("Tickets.panel.invalid_url", { FIELD: t("Tickets.panel.fields.thumbnail") }),
+				content: t("Tickets.panel.invalid_url", {
+					FIELD: t("Tickets.panel.fields.thumbnail"),
+				}),
 				flags: MessageFlags.Ephemeral,
 			});
 		}
 
 		if (image && !URL_REGEX.test(image)) {
 			return interaction.reply({
-				content: t("Tickets.panel.invalid_url", { FIELD: t("Tickets.panel.fields.image") }),
+				content: t("Tickets.panel.invalid_url", {
+					FIELD: t("Tickets.panel.fields.image"),
+				}),
 				flags: MessageFlags.Ephemeral,
 			});
 		}
@@ -87,7 +112,9 @@ export class PanelCommand {
 		}
 		if (description) {
 			data.ticketPanelDesc = description;
-			changes.push(`**${t("Tickets.panel.fields.description")}:** ${description}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.description")}:** ${description}`,
+			);
 		}
 		if (color) {
 			data.ticketPanelColor = color;
@@ -107,23 +134,33 @@ export class PanelCommand {
 		}
 		if (button_label) {
 			data.ticketPanelBtnLabel = button_label;
-			changes.push(`**${t("Tickets.panel.fields.button_label")}:** ${button_label}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.button_label")}:** ${button_label}`,
+			);
 		}
 		if (button_emoji) {
 			data.ticketPanelBtnEmoji = button_emoji;
-			changes.push(`**${t("Tickets.panel.fields.button_emoji")}:** ${button_emoji}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.button_emoji")}:** ${button_emoji}`,
+			);
 		}
 		if (default_role) {
 			data.ticketDefaultRole = default_role.id;
-			changes.push(`**${t("Tickets.panel.fields.default_role")}:** ${default_role}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.default_role")}:** ${default_role}`,
+			);
 		}
 		if (default_category) {
 			data.ticketDefaultCategory = default_category.id;
-			changes.push(`**${t("Tickets.panel.fields.default_category")}:** ${default_category}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.default_category")}:** ${default_category}`,
+			);
 		}
 		if (default_message) {
 			data.ticketDefaultMessage = default_message;
-			changes.push(`**${t("Tickets.panel.fields.default_message")}:** ${default_message}`);
+			changes.push(
+				`**${t("Tickets.panel.fields.default_message")}:** ${default_message}`,
+			);
 		}
 
 		await this.service.updatePanelSettings(interaction.guildId, data);
@@ -140,7 +177,7 @@ export class PanelCommand {
 					.addTextDisplayComponents((text) =>
 						text.setContent(changes.join("\n")),
 					)
-					.setAccentColor(0x00ff00),
+					.setAccentColor(Colors.Primary),
 			],
 			flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
 		});
@@ -153,7 +190,7 @@ export class PanelCommand {
 		const current = await this.service.getPanelSettings(interaction.guildId);
 		const none = t("Tickets.panel.none");
 
-		const currentColor = current?.ticketPanelColor || "#5865F2";
+		const currentColor = current?.ticketPanelColor || "#00c26f";
 
 		const appearanceLines = [
 			`**${t("Tickets.panel.fields.title")}:** ${current?.ticketPanelTitle || t("Tickets.setup.embed.title")}`,
@@ -189,13 +226,17 @@ export class PanelCommand {
 						separator.setSpacing(SeparatorSpacingSize.Large),
 					)
 					.addTextDisplayComponents((text) =>
-						text.setContent(`### ${t("Tickets.panel.sections.appearance")}\n${appearanceLines.join("\n")}`),
+						text.setContent(
+							`### ${t("Tickets.panel.sections.appearance")}\n${appearanceLines.join("\n")}`,
+						),
 					)
 					.addSeparatorComponents((separator) =>
 						separator.setSpacing(SeparatorSpacingSize.Small),
 					)
 					.addTextDisplayComponents((text) =>
-						text.setContent(`### ${t("Tickets.panel.sections.defaults")}\n${defaultLines.join("\n")}`),
+						text.setContent(
+							`### ${t("Tickets.panel.sections.defaults")}\n${defaultLines.join("\n")}`,
+						),
 					)
 					.setAccentColor(Number.parseInt(currentColor.replace("#", ""), 16)),
 			],

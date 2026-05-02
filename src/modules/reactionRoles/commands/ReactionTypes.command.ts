@@ -6,6 +6,7 @@ import {
 import { EmbedBuilder, MessageFlags } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { Colors } from "@/types/Colors";
 import { ReactionRolesCommand } from "../ReactionRoles.decorator";
 
 @ReactionRolesCommand()
@@ -33,7 +34,7 @@ export class ReactionTypesCommand {
 		const embed = new EmbedBuilder()
 			.setTitle(t("ReactionRoles.types.EmbedTitle"))
 			.setDescription(t("ReactionRoles.types.Types"))
-			.setColor(0x5865f2);
+			.setColor(Colors.Info);
 
 		return interaction.reply({
 			embeds: [embed],

@@ -9,13 +9,12 @@ import {
 	ButtonStyle,
 	type CategoryChannel,
 	ChannelType,
-	EmbedBuilder,
 	MessageFlags,
 	PermissionFlagsBits,
 	StringSelectMenuBuilder,
 } from "discord.js";
 import { Button, type ButtonContext, Context, type StringSelectContext, StringSelect } from "necord";
-import type { ITicketsService } from "../interfaces";
+import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
 import { Tickets } from "../types/constants";
 
 @Injectable()
@@ -24,6 +23,7 @@ export class OpenTicketComponent {
 
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: ITicketsService,
+		@Inject(Tickets.Embeds) private readonly embeds: ITicketsEmbeds,
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
 	) {}
@@ -60,13 +60,8 @@ export class OpenTicketComponent {
 
 		const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
 
-		const embed = new EmbedBuilder()
-			.setTitle(t("Tickets.open.embed.select_title"))
-			.setDescription(t("Tickets.open.embed.select_description"))
-			.setColor(0x5865f2);
-
 		return interaction.reply({
-			embeds: [embed],
+			embeds: [this.embeds.SelectTypeEmbed(interaction.guildLocale)],
 			components: [row],
 			flags: MessageFlags.Ephemeral,
 		});
@@ -123,12 +118,6 @@ export class OpenTicketComponent {
 
 		const selectRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
 
-		const embed = new EmbedBuilder()
-			.setTitle(`${ticketType.emoji} ${ticketType.name}`)
-			.setDescription(ticketType.description)
-			.setColor(0x5865f2)
-			.setFooter({ text: t("Tickets.open.embed.confirm_footer") });
-
 		const openButton = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder()
 				.setCustomId(`ticket/open/${ticketTypeId}`)
@@ -138,7 +127,7 @@ export class OpenTicketComponent {
 		);
 
 		return interaction.update({
-			embeds: [embed],
+			embeds: [this.embeds.ConfirmTypeEmbed(interaction.guildLocale, ticketType)],
 			components: [selectRow, openButton],
 		});
 	}
@@ -244,13 +233,6 @@ export class OpenTicketComponent {
 			channelId: channel.id,
 		});
 
-		const ticketEmbed = new EmbedBuilder()
-			.setTitle(`${ticketType.emoji} ${ticketType.name}`)
-			.setDescription(ticketMessage)
-			.setColor(0x5865f2)
-			.setFooter({ text: t("Tickets.open.embed.footer") })
-			.setTimestamp();
-
 		const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder()
 				.setCustomId("ticket/close")
@@ -266,7 +248,9 @@ export class OpenTicketComponent {
 
 		await channel.send({
 			content: `${interaction.user}`,
-			embeds: [ticketEmbed],
+			embeds: [
+				this.embeds.OpenTicketEmbed(interaction.guildLocale, ticketType, ticketMessage),
+			],
 			components: [actionRow],
 		});
 

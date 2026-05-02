@@ -1,6 +1,7 @@
 export enum Tickets {
 	Service = "TICKETS_SERVICE",
 	Repository = "TICKETS_REPOSITORY",
+	Embeds = "TICKETS_EMBEDS",
 }
 
 export enum CreateTicketTypeError {

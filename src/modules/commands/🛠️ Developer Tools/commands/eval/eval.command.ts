@@ -10,6 +10,7 @@ import { codeBlock, EmbedBuilder } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import type { Config } from "@/modules/config/types";
+import { Colors } from "@/types/Colors";
 import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
 import type { EvalDTO } from "./eval.dto";
 
@@ -58,7 +59,7 @@ export class EvalCommand {
 				embeds: [
 					new EmbedBuilder()
 						.setTitle(t("DeveloperTools.eval.Success"))
-						.setColor("#00c26f")
+						.setColor(Colors.Primary)
 						.setDescription(
 							t("DeveloperTools.eval.Result", {
 								input: codeBlock("TS", code),
@@ -66,6 +67,10 @@ export class EvalCommand {
 								time: this.time,
 							}),
 						)
+						.setFooter({
+							text: interaction.client.user.username,
+							iconURL: interaction.client.user.displayAvatarURL(),
+						})
 						.setTimestamp(),
 				],
 			});
@@ -74,14 +79,19 @@ export class EvalCommand {
 				embeds: [
 					new EmbedBuilder()
 						.setTitle(t("DeveloperTools.eval.Error"))
-						.setColor("#c20e00")
+						.setColor(Colors.Error)
 						.setDescription(
 							t("DeveloperTools.eval.Result", {
 								input: codeBlock("TS", code),
 								output: codeBlock("SH", error as string),
 								time: this.time,
 							}),
-						),
+						)
+						.setFooter({
+							text: interaction.client.user.username,
+							iconURL: interaction.client.user.displayAvatarURL(),
+						})
+						.setTimestamp(),
 				],
 			});
 		}

@@ -4,14 +4,14 @@ import {
 	type TranslationFn,
 } from "@necord/localization";
 import { Inject, UseGuards } from "@nestjs/common";
-import { EmbedBuilder, MessageFlags } from "discord.js";
+import { MessageFlags } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 import {
 	CommandConfig,
 	CommandPermissions,
 } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import type { ITicketsService } from "../../interfaces";
+import type { ITicketsEmbeds, ITicketsService } from "../../interfaces";
 import { CloseTicketError, Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
 
@@ -19,6 +19,7 @@ import { TicketCommand } from "../tickets.decorator";
 export class CloseTicketCommand {
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: ITicketsService,
+		@Inject(Tickets.Embeds) private readonly embeds: ITicketsEmbeds,
 	) {}
 
 	@Subcommand({
@@ -49,15 +50,11 @@ export class CloseTicketCommand {
 			});
 		}
 
-		const embed = new EmbedBuilder()
-			.setTitle(t("Tickets.close.embed.title"))
-			.setDescription(
-				t("Tickets.close.embed.description", { USER: interaction.user.toString() }),
-			)
-			.setColor(0xed4245)
-			.setTimestamp();
-
-		await interaction.reply({ embeds: [embed] });
+		await interaction.reply({
+			embeds: [
+				this.embeds.CloseTicketEmbed(interaction.guildLocale, interaction.user),
+			],
+		});
 
 		setTimeout(async () => {
 			try {

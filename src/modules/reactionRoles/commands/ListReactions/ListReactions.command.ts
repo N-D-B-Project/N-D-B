@@ -27,6 +27,7 @@ import {
 	Subcommand,
 } from "necord";
 import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import { Colors } from "@/types/Colors";
 import type { IReactionRolesService } from "../../interfaces";
 import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
 import { ReactionRoles } from "../../types/constants";
@@ -74,7 +75,10 @@ export class ListReactionsCommand {
 		@CurrentTranslate() t: TranslationFn,
 	) {
 		const reactions = channel
-			? await this.reaction.getInChannel(interaction.guild, channel as TextChannel)
+			? await this.reaction.getInChannel(
+					interaction.guild,
+					channel as TextChannel,
+				)
 			: await this.reaction.getAll(interaction.guild);
 
 		if (reactions.length === 0) {
@@ -153,7 +157,7 @@ export class ListReactionsCommand {
 	) {
 		const embed = new EmbedBuilder()
 			.setTitle(t("ReactionRoles.list.embed.title"))
-			.setColor(0x5865f2)
+			.setColor(Colors.Info)
 			.setFooter({
 				text: t("ReactionRoles.list.embed.footer", {
 					PAGE: String(page + 1),

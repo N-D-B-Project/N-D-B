@@ -4,14 +4,14 @@ import {
 	type TranslationFn,
 } from "@necord/localization";
 import { Inject, UseGuards } from "@nestjs/common";
-import { EmbedBuilder, MessageFlags } from "discord.js";
+import { MessageFlags } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 import {
 	CommandConfig,
 	CommandPermissions,
 } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import type { ITicketsService } from "../../interfaces";
+import type { ITicketsEmbeds, ITicketsService } from "../../interfaces";
 import { Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
 
@@ -19,6 +19,7 @@ import { TicketCommand } from "../tickets.decorator";
 export class ListTicketTypesCommand {
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: ITicketsService,
+		@Inject(Tickets.Embeds) private readonly embeds: ITicketsEmbeds,
 	) {}
 
 	@Subcommand({
@@ -49,24 +50,8 @@ export class ListTicketTypesCommand {
 			});
 		}
 
-		const embed = new EmbedBuilder()
-			.setTitle(t("Tickets.list.embed.title"))
-			.setColor(0x5865f2)
-			.addFields(
-				ticketTypes.map((type) => ({
-					name: `${type.emoji} ${type.name}`,
-					value: type.description,
-					inline: false,
-				})),
-			)
-			.setFooter({
-				text: t("Tickets.list.embed.footer", {
-					COUNT: ticketTypes.length.toString(),
-				}),
-			});
-
 		return interaction.reply({
-			embeds: [embed],
+			embeds: [this.embeds.ListTypesEmbed(interaction.guildLocale, ticketTypes)],
 			flags: MessageFlags.Ephemeral,
 		});
 	}

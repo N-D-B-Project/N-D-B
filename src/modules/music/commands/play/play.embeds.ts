@@ -1,6 +1,7 @@
 import type { TranslationFn } from "@necord/localization";
 import { type ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import type { SearchResult, Track } from "lavalink-client";
+import { Colors } from "@/types/Colors";
 import { Timer } from "@/utils/Tools";
 import { MusicService } from "../../Music.service";
 
@@ -13,7 +14,7 @@ export class PlayEmbeds {
 	private async createBaseEmbed(
 		color: "Error" | "Success",
 	): Promise<EmbedBuilder> {
-		const hex = color === "Error" ? "#c20e00" : "#00c26f";
+		const hex = color === "Error" ? Colors.Error : Colors.Success;
 
 		return new EmbedBuilder()
 			.setAuthor({

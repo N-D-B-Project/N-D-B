@@ -1,5 +1,5 @@
-import { LOCALIZATION_ADAPTER } from "@necord/localization";
 import type { NestedLocalizationAdapter } from "@necord/localization";
+import { LOCALIZATION_ADAPTER } from "@necord/localization";
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: ConfigService used as NestJS DI constructor param type
 import { ConfigService } from "@nestjs/config";
@@ -21,8 +21,10 @@ import {
 } from "discord.js";
 
 type AnyInteraction = CommandInteraction | MessageComponentInteraction;
+
 import { MessageTools } from "@/modules/commands/Message";
 import type { Config } from "@/modules/config/types";
+import { Colors } from "@/types/Colors";
 import type { IReactionRolesEmbeds } from "./interfaces";
 import type { IReaction, REACTION_OPTIONS } from "./types";
 
@@ -40,10 +42,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.id,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
+			.setColor(Colors.Error)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.create.ID.NotFound",
@@ -52,7 +54,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 					},
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async ReactionRoleCreatedEmbed(
@@ -67,7 +74,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				),
 				iconURL: interaction.guild.iconURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.addFields([
 				{
 					name: this.translate.getTranslation(
@@ -120,7 +127,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					),
 					value: roleMention(reaction.role),
 				},
-			]);
+			])
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async ReactionRoleRemovedEmbed(
@@ -129,10 +141,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.delete.Removed",
@@ -142,7 +154,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 						URL: MsgID.url,
 					},
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async ReactionRoleUpdatedEmbed(
@@ -152,10 +169,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.edit.Embed.Description",
@@ -216,13 +233,14 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					inline: true,
 				},
 			)
-
 			.setFooter({
 				text: this.translate.getTranslation(
 					"ReactionRoles.edit.Embed.Footer",
 					interaction.guildLocale,
 				),
-			});
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async ReactionRoleDeleteAllEmbed(
@@ -235,15 +253,15 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 		switch (status) {
 			case "Confirm":
 				description = "ReactionRoles.deleteall.Embed.Description.Confirm";
-				color = 0x00c26f;
+				color = Colors.Primary;
 				break;
 			case "Cancel":
 				description = "ReactionRoles.deleteall.Embed.Description.Cancel";
-				color = 0xc20e00;
+				color = Colors.Error;
 				break;
 			case "Success":
 				description = "ReactionRoles.deleteall.Embed.Description.Success";
-				color = 0x00c26f;
+				color = Colors.Primary;
 				break;
 		}
 		return new EmbedBuilder()
@@ -262,7 +280,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					NUMBER: String(ReactionCount),
 				}),
 			)
-			.setColor(color);
+			.setColor(color)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async UnableToCreateReactionRoleEmbed(
@@ -270,10 +293,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
+			.setColor(Colors.Error)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.create.UnableToCreate",
@@ -282,7 +305,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 						fail: this.config.get<Config["Emojis"]>("Emojis").fail,
 					},
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async UnableToDeleteReactionRoleEmbed(
@@ -291,10 +319,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
+			.setColor(Colors.Error)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.delete.UnableToDelete",
@@ -304,7 +332,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 						URL: MsgID.url,
 					},
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async UnableToDeleteAllReactionRoleEmbed(
@@ -312,16 +345,21 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
+			.setColor(Colors.Error)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.deleteall.UnableToDelete",
 					interaction.guildLocale,
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async UnableToUpdateReactionRoleEmbed(
@@ -330,10 +368,10 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 	): Promise<EmbedBuilder> {
 		return new EmbedBuilder()
 			.setAuthor({
-				name: interaction.user.tag,
+				name: interaction.user.username,
 				iconURL: interaction.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
+			.setColor(Colors.Error)
 			.setDescription(
 				this.translate.getTranslation(
 					"ReactionRoles.edit.UnableToUpdate",
@@ -343,7 +381,12 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 						URL: MsgID.url,
 					},
 				),
-			);
+			)
+			.setFooter({
+				text: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
+			})
+			.setTimestamp();
 	}
 
 	public async EventCooldownEmbed(
@@ -359,6 +402,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				name: user.username,
 				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
 			})
+			.setColor(Colors.Error)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.ReactionRoleAdd-Remove.Cooldown.Title",
@@ -397,7 +441,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				),
 				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
 			.setTimestamp();
 	}
 
@@ -415,6 +458,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				name: user.username,
 				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
 			})
+			.setColor(Colors.Primary)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.ReactionRoleAdd-Remove.Add.Title",
@@ -440,7 +484,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					value: this.translate.getTranslation(
 						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 						guild.preferredLocale,
-
 						{
 							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
 						},
@@ -454,7 +497,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				),
 				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
 			.setTimestamp();
 	}
 
@@ -472,6 +514,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				name: user.username,
 				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
 			})
+			.setColor(Colors.Primary)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.ReactionRoleAdd-Remove.Remove.Title",
@@ -510,7 +553,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				),
 				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
 			.setTimestamp();
 	}
 
@@ -528,6 +570,7 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				name: user.username,
 				iconURL: user.displayAvatarURL({ extension: "gif", size: 512 }),
 			})
+			.setColor(Colors.Error)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.ReactionRoleAdd-Remove.Error.Title",
@@ -553,7 +596,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 					value: this.translate.getTranslation(
 						"Events.ReactionRoleAdd-Remove.GlobalField.Content",
 						guild.preferredLocale,
-
 						{
 							URL: `https://discord.com/channels/${guild.id}/${channel}/${message}`,
 						},
@@ -567,7 +609,6 @@ export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
 				),
 				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#c20e00")
 			.setTimestamp();
 	}
 }

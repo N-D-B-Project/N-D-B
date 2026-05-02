@@ -10,11 +10,9 @@ import {
 	SeparatorSpacingSize,
 } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { Colors } from "@/types/Colors";
 import type { ITicketsService } from "../../interfaces";
 import { ConfigureTicketTypeError, Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
@@ -48,7 +46,14 @@ export class ConfigureTicketTypeCommand {
 	@UseGuards(CommandConfigGuard, CommandPermissionsGuard)
 	public async onCommandRun(
 		@Context() [interaction]: SlashCommandContext,
-		@Options() { name, support_role, category, description, message, emoji }: ConfigureTicketTypeDTO,
+		@Options() {
+			name,
+			support_role,
+			category,
+			description,
+			message,
+			emoji,
+		}: ConfigureTicketTypeDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
 		if (!support_role && !category && !description && !message && !emoji) {
@@ -97,18 +102,14 @@ export class ConfigureTicketTypeCommand {
 			);
 		}
 		if (emoji) {
-			changes.push(
-				`**${t("Tickets.configure_type.fields.emoji")}:** ${emoji}`,
-			);
+			changes.push(`**${t("Tickets.configure_type.fields.emoji")}:** ${emoji}`);
 		}
 
 		return interaction.reply({
 			components: [
 				new ContainerBuilder()
 					.addTextDisplayComponents((text) =>
-						text.setContent(
-							`## ${t("Tickets.configure_type.embed.title")}`,
-						),
+						text.setContent(`## ${t("Tickets.configure_type.embed.title")}`),
 					)
 					.addSeparatorComponents((separator) =>
 						separator.setSpacing(SeparatorSpacingSize.Large),
@@ -123,7 +124,7 @@ export class ConfigureTicketTypeCommand {
 								`### ${t("Tickets.configure_type.embed.updated")}\n${changes.join("\n")}`,
 							),
 					)
-					.setAccentColor(0x00ff00),
+					.setAccentColor(Colors.Primary),
 			],
 			flags: MessageFlags.IsComponentsV2,
 		});

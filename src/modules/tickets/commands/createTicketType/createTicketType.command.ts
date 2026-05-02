@@ -7,8 +7,8 @@ import { Inject, UseGuards } from "@nestjs/common";
 import {
 	ContainerBuilder,
 	MessageFlags,
-	SeparatorSpacingSize,
 	parseEmoji,
+	SeparatorSpacingSize,
 } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
 import {
@@ -19,6 +19,7 @@ import {
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 // biome-ignore lint/style/useImportType: dependency injection
 import { CommandsService } from "@/modules/commands/Commands.service";
+import { Colors } from "@/types/Colors";
 // biome-ignore lint/style/useImportType: dependency injection
 import { TicketsService } from "../../tickets.service";
 import { CreateTicketTypeError, Tickets } from "../../types/constants";
@@ -118,7 +119,7 @@ export class CreateTicketTypeCommand {
 							t("Tickets.type.embed.next_steps", { COMMAND_MENTION }),
 						),
 					)
-					.setAccentColor(0x00ff00),
+					.setAccentColor(Colors.Primary),
 			],
 			flags: MessageFlags.IsComponentsV2,
 		});

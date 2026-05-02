@@ -10,11 +10,9 @@ import {
 	SeparatorSpacingSize,
 } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { Colors } from "@/types/Colors";
 import type { ITicketsService } from "../../interfaces";
 import { Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
@@ -33,7 +31,9 @@ export class ViewTicketTypeCommand {
 		name: "view_type",
 		nameLocalizations: localizationMapByKey("Tickets.view_type.name"),
 		description: "View details of a ticket type",
-		descriptionLocalizations: localizationMapByKey("Tickets.view_type.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"Tickets.view_type.description",
+		),
 	})
 	@CommandConfig({ category: "🎫 Tickets", disable: false })
 	@CommandPermissions({
@@ -88,17 +88,19 @@ export class ViewTicketTypeCommand {
 						separator.setSpacing(SeparatorSpacingSize.Large),
 					)
 					.addTextDisplayComponents(
-						(text) => text.setContent(`### ${t("Tickets.view_type.section.details")}`),
+						(text) =>
+							text.setContent(`### ${t("Tickets.view_type.section.details")}`),
 						(text) => text.setContent(details),
 					)
 					.addSeparatorComponents((separator) =>
 						separator.setSpacing(SeparatorSpacingSize.Small),
 					)
 					.addTextDisplayComponents(
-						(text) => text.setContent(`### ${t("Tickets.view_type.section.config")}`),
+						(text) =>
+							text.setContent(`### ${t("Tickets.view_type.section.config")}`),
 						(text) => text.setContent(config),
 					)
-					.setAccentColor(0x5865f2),
+					.setAccentColor(Colors.Info),
 			],
 			flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
 		});

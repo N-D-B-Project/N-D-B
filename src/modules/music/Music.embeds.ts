@@ -12,6 +12,7 @@ import {
 	type Guild,
 	type VoiceChannel,
 } from "discord.js";
+import { Colors } from "@/types/Colors";
 import type { IMusicEmbeds } from "./interfaces";
 
 @Injectable()
@@ -32,7 +33,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 				name: guild.name,
 				iconURL: guild.iconURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.PlayerEvents.playerCreate.Embed.Title",
@@ -83,10 +84,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 		)) as VoiceChannel;
 		return new EmbedBuilder()
 			.setAuthor({
-				name: this.client.user.tag,
-				url: this.client.user.displayAvatarURL(),
+				name: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.PlayerEvents.playerMove.KickEmbed.Title",
@@ -105,6 +106,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 					"Events.PlayerEvents.playerMove.KickEmbed.Footer",
 					guildLocale,
 				),
+				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTimestamp();
 	}
@@ -119,10 +121,10 @@ export class MusicEmbeds implements IMusicEmbeds {
 		)) as VoiceChannel;
 		return new EmbedBuilder()
 			.setAuthor({
-				name: this.client.user.tag,
-				url: this.client.user.displayAvatarURL(),
+				name: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.PlayerEvents.queueEnd.Embed.Title",
@@ -142,6 +144,7 @@ export class MusicEmbeds implements IMusicEmbeds {
 					guildLocale,
 					{ TIMER: timer },
 				),
+				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTimestamp();
 	}

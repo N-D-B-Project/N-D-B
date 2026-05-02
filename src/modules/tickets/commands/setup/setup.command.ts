@@ -13,12 +13,16 @@ import {
 	MessageFlags,
 	type TextChannel,
 } from "discord.js";
-import { ChannelOption, Context, Options, type SlashCommandContext, Subcommand } from "necord";
 import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+	ChannelOption,
+	Context,
+	Options,
+	type SlashCommandContext,
+	Subcommand,
+} from "necord";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+import { Colors } from "@/types/Colors";
 import type { ITicketsService } from "../../interfaces";
 import { Tickets } from "../../types/constants";
 import { TicketCommand } from "../tickets.decorator";
@@ -26,9 +30,13 @@ import { TicketCommand } from "../tickets.decorator";
 class SetupDTO {
 	@ChannelOption({
 		name: "channel",
-		name_localizations: localizationMapByKey("Tickets.setup.options.channel.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.setup.options.channel.name",
+		),
 		description: "The channel to send the ticket panel to",
-		description_localizations: localizationMapByKey("Tickets.setup.options.channel.description"),
+		description_localizations: localizationMapByKey(
+			"Tickets.setup.options.channel.description",
+		),
 		required: true,
 		channel_types: [ChannelType.GuildText],
 	})
@@ -73,12 +81,16 @@ export class SetupCommand {
 			});
 		}
 
-		const panelTitle = panelSettings?.ticketPanelTitle || t("Tickets.setup.embed.title");
-		const panelDesc = panelSettings?.ticketPanelDesc || t("Tickets.setup.embed.description");
+		const panelTitle =
+			panelSettings?.ticketPanelTitle || t("Tickets.setup.embed.title");
+		const panelDesc =
+			panelSettings?.ticketPanelDesc || t("Tickets.setup.embed.description");
 		const panelColor = panelSettings?.ticketPanelColor
 			? Number.parseInt(panelSettings.ticketPanelColor.replace("#", ""), 16)
-			: 0x5865f2;
-		const btnLabel = panelSettings?.ticketPanelBtnLabel || t("Tickets.setup.embed.open_button");
+			: Colors.Primary;
+		const btnLabel =
+			panelSettings?.ticketPanelBtnLabel ||
+			t("Tickets.setup.embed.open_button");
 		const btnEmoji = panelSettings?.ticketPanelBtnEmoji || "🎫";
 
 		const embed = new EmbedBuilder()

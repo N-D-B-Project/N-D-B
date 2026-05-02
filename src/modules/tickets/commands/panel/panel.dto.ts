@@ -32,7 +32,7 @@ export class PanelDTO {
 	@StringOption({
 		name: "color",
 		name_localizations: localizationMapByKey("Tickets.panel.options.color.name"),
-		description: "Hex color for the panel embed (e.g. #5865F2)",
+		description: "Hex color for the panel embed (e.g. #00c26f)",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.color.description",
 		),

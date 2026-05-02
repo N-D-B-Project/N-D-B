@@ -7,6 +7,7 @@ import * as Commands from "./commands";
 import * as Components from "./components";
 import { TicketsRepository } from "./repositories/tickets.repository";
 import { TranscriptService } from "./services/transcript.service";
+import { TicketEmbeds } from "./Tickets.embeds";
 import { TicketsService } from "./tickets.service";
 import { Tickets } from "./types/constants";
 
@@ -24,6 +25,10 @@ import { Tickets } from "./types/constants";
 		{
 			provide: Tickets.Repository,
 			useClass: TicketsRepository,
+		},
+		{
+			provide: Tickets.Embeds,
+			useClass: TicketEmbeds,
 		},
 		{
 			provide: APP_FILTER,

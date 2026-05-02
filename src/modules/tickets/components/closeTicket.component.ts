@@ -7,12 +7,11 @@ import {
 	ActionRowBuilder,
 	ButtonBuilder,
 	ButtonStyle,
-	EmbedBuilder,
 	MessageFlags,
 	type TextChannel,
 } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
-import type { ITicketsService } from "../interfaces";
+import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
 import { TranscriptService } from "../services/transcript.service";
 import { CloseTicketError, Tickets } from "../types/constants";
 
@@ -22,6 +21,7 @@ export class CloseTicketComponent {
 
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: ITicketsService,
+		@Inject(Tickets.Embeds) private readonly embeds: ITicketsEmbeds,
 		@Inject(LOCALIZATION_ADAPTER)
 		private readonly translate: NestedLocalizationAdapter,
 		private readonly transcriptService: TranscriptService,
@@ -102,16 +102,10 @@ export class CloseTicketComponent {
 			this.logger.error(`Failed to generate close transcript: ${error}`);
 		}
 
-		const embed = new EmbedBuilder()
-			.setTitle(t("Tickets.close.embed.title"))
-			.setDescription(
-				t("Tickets.close.embed.description", { USER: interaction.user.toString() }),
-			)
-			.setColor(0xed4245)
-			.setTimestamp();
-
 		await interaction.channel.send({
-			embeds: [embed],
+			embeds: [
+				this.embeds.CloseTicketEmbed(interaction.guildLocale, interaction.user),
+			],
 		});
 
 		setTimeout(async () => {

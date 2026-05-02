@@ -17,6 +17,7 @@ import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
 import { MessageTools } from "@/modules/commands/Message";
 import type { Config } from "@/modules/config/types";
+import { Colors } from "@/types/Colors";
 import { Timer, WAIT } from "@/utils/Tools";
 import { MusicService } from "../Music.service";
 import { PlayerProps } from "../types/constants";
@@ -121,7 +122,7 @@ export class TrackEvents {
 					inline: true,
 				},
 			])
-			.setColor("#00c26f")
+			.setColor(Colors.Primary)
 			.setFooter({
 				text: this.translate.getTranslation(
 					"Events.PlayerEvents.trackStart.Embed.Footer",
@@ -167,10 +168,10 @@ export class TrackEvents {
 			await this.lavalinkService.extractPlayerData(player);
 		const embed = new EmbedBuilder()
 			.setAuthor({
-				name: this.client.user.tag,
-				url: this.client.user.displayAvatarURL(),
+				name: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Error)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.PlayerEvents.trackError.Embed.Title",
@@ -203,6 +204,7 @@ export class TrackEvents {
 					"Events.PlayerEvents.trackError.Embed.Footer",
 					guild.preferredLocale,
 				),
+				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTimestamp();
 		MessageTools.send(textChannel, { embeds: [embed] });
@@ -220,10 +222,10 @@ export class TrackEvents {
 			await this.lavalinkService.extractPlayerData(player);
 		const embed = new EmbedBuilder()
 			.setAuthor({
-				name: this.client.user.tag,
-				url: this.client.user.displayAvatarURL(),
+				name: this.client.user.username,
+				iconURL: this.client.user.displayAvatarURL(),
 			})
-			.setColor("#00c26f")
+			.setColor(Colors.Warning)
 			.setTitle(
 				this.translate.getTranslation(
 					"Events.PlayerEvents.trackStuck.Embed.Title",
@@ -244,6 +246,7 @@ export class TrackEvents {
 					"Events.PlayerEvents.trackStuck.Embed.Footer",
 					guild.preferredLocale,
 				),
+				iconURL: this.client.user.displayAvatarURL(),
 			})
 			.setTimestamp();
 		MessageTools.send(textChannel, { embeds: [embed] });

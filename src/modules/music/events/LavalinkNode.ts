@@ -16,6 +16,7 @@ import { Button, type ButtonContext, ComponentParam, Context } from "necord";
 import { InteractionTools } from "@/modules/commands/Interaction";
 import { MessageTools } from "@/modules/commands/Message";
 import type { Config } from "@/modules/config/types";
+import { Colors } from "@/types/Colors";
 @Injectable()
 export class LavalinkNodeEvents {
 	public constructor(
@@ -60,8 +61,13 @@ export class LavalinkNodeEvents {
 			embeds: [
 				new EmbedBuilder()
 					.setTitle("Node Disconnected")
-					.setColor("#c20e00")
-					.setDescription(`Node: \`${node.id}\``),
+					.setColor(Colors.Error)
+					.setDescription(`Node: \`${node.id}\``)
+					.setFooter({
+						text: owner.client.user.username,
+						iconURL: owner.client.user.displayAvatarURL(),
+					})
+					.setTimestamp(),
 			],
 			components: [
 				new ActionRowBuilder<ButtonBuilder>().addComponents([
@@ -86,8 +92,13 @@ export class LavalinkNodeEvents {
 				embeds: [
 					new EmbedBuilder()
 						.setTitle("Node Reconnected")
-						.setColor("#00c26f")
-						.setDescription(`Node: \`${node.id}\``),
+						.setColor(Colors.Primary)
+						.setDescription(`Node: \`${node.id}\``)
+						.setFooter({
+							text: interaction.client.user.username,
+							iconURL: interaction.client.user.displayAvatarURL(),
+						})
+						.setTimestamp(),
 				],
 				components: [],
 			});
