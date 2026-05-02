@@ -1,7 +1,22 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.1/schema.json",
-  "extends": [
-    "@nedcloarbr/biome-config/nestjs",
-    "@nedcloarbr/biome-config/ignore"
-  ]
+	"$schema": "https://biomejs.dev/schemas/2.3.15/schema.json",
+	"extends": [
+		"@nedcloarbr/biome-config/nestjs",
+		"@nedcloarbr/biome-config/ignore"
+	],
+	"files": {
+		"includes": [
+			"!**/dist",
+			"!**/out",
+			"!**/build",
+			"!**/coverage",
+			"!**/.vscode",
+			"!**/.idea",
+			"!**/.atom",
+			"!**/.yarn",
+			"!**/.next",
+			"!**/*.pnp.*",
+			"!**/.nx"
+		]
+	}
 }

@@ -1,8 +1,8 @@
+import { APIUser, User, UserSettings } from "@ndb/database";
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { APIUser, User, UserSettings } from "@ndb/database";
 import type { User as DiscordUser } from "discord.js";
-import { Repository } from "typeorm";
+import type { Repository } from "typeorm";
 import { DatabaseStatus } from "../types";
 import type { IUserRepository } from "./interfaces";
 
@@ -19,7 +19,10 @@ export class UserRepository implements IUserRepository {
 
 	private readonly logger = new Logger(UserRepository.name);
 
-	public async updateSettings(userId: string, data: Partial<UserSettings>): Promise<void> {
+	public async updateSettings(
+		userId: string,
+		data: Partial<UserSettings>,
+	): Promise<void> {
 		await this.userSettingsRepo.update({ userId }, data);
 	}
 
@@ -44,7 +47,11 @@ export class UserRepository implements IUserRepository {
 			const savedUser = await this.userRepo.save(newUser);
 			const settings = this.userSettingsRepo.create({ userId: user.id });
 			savedUser.settings = await this.userSettingsRepo.save(settings);
-			const apiUser = this.apiUserRepo.create({ userId: user.id, email: "", accessToken: "" });
+			const apiUser = this.apiUserRepo.create({
+				userId: user.id,
+				email: "",
+				accessToken: "",
+			});
 			savedUser.apiUser = await this.apiUserRepo.save(apiUser);
 			this.logger.log(`${user.username} Configuration Created on Database`);
 			return { callback: savedUser, status: DatabaseStatus.Created };

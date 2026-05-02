@@ -12,8 +12,8 @@ import {
 } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
 import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
-import { TranscriptService } from "../services/transcript.service";
-import { CloseTicketError, Tickets } from "../types/constants";
+import type { TranscriptService } from "../services/transcript.service";
+import { Tickets } from "../types/constants";
 
 @Injectable()
 export class CloseTicketComponent {
@@ -28,9 +28,7 @@ export class CloseTicketComponent {
 	) {}
 
 	@Button("ticket/close")
-	public async onCloseTicket(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onCloseTicket(@Context() [interaction]: ButtonContext) {
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
 
@@ -53,9 +51,7 @@ export class CloseTicketComponent {
 	}
 
 	@Button("ticket/close/confirm")
-	public async onConfirmClose(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onConfirmClose(@Context() [interaction]: ButtonContext) {
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
 
@@ -82,19 +78,36 @@ export class CloseTicketComponent {
 				const guildName = interaction.guild.name;
 				const channelName = channel.name;
 
-				const txt = this.transcriptService.generateTxt(messages, channelName, guildName);
-				const html = this.transcriptService.generateHtml(messages, channelName, guildName);
+				const txt = this.transcriptService.generateTxt(
+					messages,
+					channelName,
+					guildName,
+				);
+				const html = this.transcriptService.generateHtml(
+					messages,
+					channelName,
+					guildName,
+				);
 
 				const ticketOwnerId = result.userId;
 				if (ticketOwnerId) {
-					const owner = await interaction.client.users.fetch(ticketOwnerId).catch(() => null);
+					const owner = await interaction.client.users
+						.fetch(ticketOwnerId)
+						.catch(() => null);
 					if (owner) {
-						await owner.send({
-							content: t("Tickets.transcript.close_dm", { CHANNEL: channelName, GUILD: guildName }),
-							files: [txt, html],
-						}).catch(() => {
-							this.logger.warn(`Could not DM close transcript to ${ticketOwnerId}`);
-						});
+						await owner
+							.send({
+								content: t("Tickets.transcript.close_dm", {
+									CHANNEL: channelName,
+									GUILD: guildName,
+								}),
+								files: [txt, html],
+							})
+							.catch(() => {
+								this.logger.warn(
+									`Could not DM close transcript to ${ticketOwnerId}`,
+								);
+							});
 					}
 				}
 			}
@@ -118,9 +131,7 @@ export class CloseTicketComponent {
 	}
 
 	@Button("ticket/close/cancel")
-	public async onCancelClose(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onCancelClose(@Context() [interaction]: ButtonContext) {
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
 

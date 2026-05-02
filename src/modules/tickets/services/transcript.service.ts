@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { AttachmentBuilder, type Message, type TextChannel } from "discord.js";
+import { AttachmentBuilder, type TextChannel } from "discord.js";
 
 interface TranscriptMessage {
 	author: string;
@@ -11,7 +11,9 @@ interface TranscriptMessage {
 
 @Injectable()
 export class TranscriptService {
-	public async fetchMessages(channel: TextChannel): Promise<TranscriptMessage[]> {
+	public async fetchMessages(
+		channel: TextChannel,
+	): Promise<TranscriptMessage[]> {
 		const messages: TranscriptMessage[] = [];
 		let lastId: string | undefined;
 
@@ -39,7 +41,11 @@ export class TranscriptService {
 		return messages.reverse();
 	}
 
-	public generateTxt(messages: TranscriptMessage[], channelName: string, guildName: string): AttachmentBuilder {
+	public generateTxt(
+		messages: TranscriptMessage[],
+		channelName: string,
+		guildName: string,
+	): AttachmentBuilder {
 		const header = `Transcript - #${channelName} (${guildName})\nGenerated at: ${new Date().toISOString()}\n${"=".repeat(60)}\n\n`;
 
 		const lines = messages.map((msg) => {
@@ -58,19 +64,29 @@ export class TranscriptService {
 		});
 	}
 
-	public generateHtml(messages: TranscriptMessage[], channelName: string, guildName: string): AttachmentBuilder {
+	public generateHtml(
+		messages: TranscriptMessage[],
+		channelName: string,
+		guildName: string,
+	): AttachmentBuilder {
 		const messagesHtml = messages
 			.map((msg) => {
 				const time = msg.timestamp.toISOString().replace("T", " ").slice(0, 19);
-				const escapedContent = this.escapeHtml(msg.content).replace(/\n/g, "<br>");
-				const attachmentsHtml = msg.attachments.length > 0
-					? `<div class="attachments">${msg.attachments.map((url) => {
-							if (/\.(png|jpg|jpeg|gif|webp)$/i.test(url)) {
-								return `<a href="${this.escapeHtml(url)}" target="_blank"><img src="${this.escapeHtml(url)}" alt="attachment"></a>`;
-							}
-							return `<a href="${this.escapeHtml(url)}" target="_blank">${this.escapeHtml(url)}</a>`;
-						}).join("")}</div>`
-					: "";
+				const escapedContent = this.escapeHtml(msg.content).replace(
+					/\n/g,
+					"<br>",
+				);
+				const attachmentsHtml =
+					msg.attachments.length > 0
+						? `<div class="attachments">${msg.attachments
+								.map((url) => {
+									if (/\.(png|jpg|jpeg|gif|webp)$/i.test(url)) {
+										return `<a href="${this.escapeHtml(url)}" target="_blank"><img src="${this.escapeHtml(url)}" alt="attachment"></a>`;
+									}
+									return `<a href="${this.escapeHtml(url)}" target="_blank">${this.escapeHtml(url)}</a>`;
+								})
+								.join("")}</div>`
+						: "";
 
 				return `<div class="message"><div class="header"><span class="author">${this.escapeHtml(msg.author)}</span><span class="time">${time}</span></div><div class="content">${escapedContent}</div>${attachmentsHtml}</div>`;
 			})

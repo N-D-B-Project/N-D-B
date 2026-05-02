@@ -1,8 +1,12 @@
+import {
+	GuildSettings,
+	GuildTicketsStatus,
+	Tickets,
+	TicketType,
+} from "@ndb/database";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { GuildSettings, TicketType, Tickets } from "@ndb/database";
-import { GuildTicketsStatus } from "@ndb/database";
-import { Repository } from "typeorm";
+import type { Repository } from "typeorm";
 import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
 import type { TicketEntity, TicketTypeEntity } from "../entities";
 import type { ITicketsRepository } from "../interfaces";
@@ -19,8 +23,12 @@ export class TicketsRepository implements ITicketsRepository {
 		private readonly guildSettingsRepo: Repository<GuildSettings>,
 	) {}
 
-	public async createTicketType(dto: CreateTicketTypeDTO): Promise<TicketTypeEntity> {
-		const settings = await this.guildSettingsRepo.findOne({ where: { guildId: dto.guildId } });
+	public async createTicketType(
+		dto: CreateTicketTypeDTO,
+	): Promise<TicketTypeEntity> {
+		const settings = await this.guildSettingsRepo.findOne({
+			where: { guildId: dto.guildId },
+		});
 		return await this.ticketTypeRepo.save(
 			this.ticketTypeRepo.create({
 				name: dto.name,
@@ -48,7 +56,12 @@ export class TicketsRepository implements ITicketsRepository {
 
 	public async updateTicketType(
 		id: string,
-		data: Partial<Pick<TicketTypeEntity, "supportRoleId" | "categoryId" | "description" | "message" | "emoji">>,
+		data: Partial<
+			Pick<
+				TicketTypeEntity,
+				"supportRoleId" | "categoryId" | "description" | "message" | "emoji"
+			>
+		>,
 	): Promise<TicketTypeEntity> {
 		await this.ticketTypeRepo.update({ id }, data);
 		return await this.getTicketTypeById(id);
@@ -84,7 +97,10 @@ export class TicketsRepository implements ITicketsRepository {
 	}
 
 	public async closeTicket(id: string): Promise<TicketEntity> {
-		await this.ticketsRepo.update({ id }, { status: GuildTicketsStatus.CLOSED });
+		await this.ticketsRepo.update(
+			{ id },
+			{ status: GuildTicketsStatus.CLOSED },
+		);
 		return await this.ticketsRepo.findOne({ where: { id } });
 	}
 
@@ -119,7 +135,10 @@ export class TicketsRepository implements ITicketsRepository {
 		});
 	}
 
-	public async updatePanelSettings(guildId: string, data: Partial<PanelSettings>): Promise<void> {
+	public async updatePanelSettings(
+		guildId: string,
+		data: Partial<PanelSettings>,
+	): Promise<void> {
 		await this.guildSettingsRepo.update({ guildId }, data);
 	}
 

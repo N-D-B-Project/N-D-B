@@ -6,10 +6,7 @@ import {
 import { Inject, UseGuards } from "@nestjs/common";
 import { MessageFlags } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import type { ITicketsEmbeds, ITicketsService } from "../../interfaces";
 import { Tickets } from "../../types/constants";
@@ -51,7 +48,9 @@ export class ListTicketTypesCommand {
 		}
 
 		return interaction.reply({
-			embeds: [this.embeds.ListTypesEmbed(interaction.guildLocale, ticketTypes)],
+			embeds: [
+				this.embeds.ListTypesEmbed(interaction.guildLocale, ticketTypes),
+			],
 			flags: MessageFlags.Ephemeral,
 		});
 	}

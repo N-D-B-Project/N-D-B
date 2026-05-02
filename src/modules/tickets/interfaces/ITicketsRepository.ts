@@ -1,4 +1,4 @@
-import type { ConfigureTicketTypeDTO, CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
+import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
 import type { TicketEntity, TicketTypeEntity } from "../entities";
 import type { CreateTicketTypeError, PanelSettings } from "../types/constants";
 
@@ -9,14 +9,29 @@ export interface ITicketsRepository {
 	getTicketTypes(guildId: string): Promise<TicketTypeEntity[]>;
 	getTicketType(name: string): Promise<TicketTypeEntity>;
 	getTicketTypeById(id: string): Promise<TicketTypeEntity>;
-	updateTicketType(id: string, data: Partial<Pick<TicketTypeEntity, "supportRoleId" | "categoryId" | "description" | "message" | "emoji">>): Promise<TicketTypeEntity>;
+	updateTicketType(
+		id: string,
+		data: Partial<
+			Pick<
+				TicketTypeEntity,
+				"supportRoleId" | "categoryId" | "description" | "message" | "emoji"
+			>
+		>,
+	): Promise<TicketTypeEntity>;
 	createTicket(dto: CreateTicketDTO): Promise<TicketEntity>;
-	getOpenTicket(userId: string, guildId: string, ticketTypeId: string): Promise<TicketEntity>;
+	getOpenTicket(
+		userId: string,
+		guildId: string,
+		ticketTypeId: string,
+	): Promise<TicketEntity>;
 	getTicketByChannelId(channelId: string): Promise<TicketEntity>;
 	closeTicket(id: string): Promise<TicketEntity>;
 	deleteTicketType(id: string): Promise<TicketTypeEntity>;
 	getPanelSettings(guildId: string): Promise<PanelSettings | null>;
-	updatePanelSettings(guildId: string, data: Partial<PanelSettings>): Promise<void>;
+	updatePanelSettings(
+		guildId: string,
+		data: Partial<PanelSettings>,
+	): Promise<void>;
 	count(guildId: string): Promise<number>;
 	countTickets(guildId: string): Promise<number>;
 }

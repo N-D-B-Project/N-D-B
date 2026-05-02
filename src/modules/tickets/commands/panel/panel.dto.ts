@@ -5,7 +5,9 @@ import { ChannelOption, RoleOption, StringOption } from "necord";
 export class PanelDTO {
 	@StringOption({
 		name: "title",
-		name_localizations: localizationMapByKey("Tickets.panel.options.title.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.title.name",
+		),
 		description: "Custom title for the ticket panel",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.title.description",
@@ -31,7 +33,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "color",
-		name_localizations: localizationMapByKey("Tickets.panel.options.color.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.color.name",
+		),
 		description: "Hex color for the panel embed (e.g. #00c26f)",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.color.description",
@@ -44,7 +48,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "thumbnail",
-		name_localizations: localizationMapByKey("Tickets.panel.options.thumbnail.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.thumbnail.name",
+		),
 		description: "Thumbnail image URL for the panel embed",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.thumbnail.description",
@@ -55,7 +61,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "image",
-		name_localizations: localizationMapByKey("Tickets.panel.options.image.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.image.name",
+		),
 		description: "Large image URL for the panel embed",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.image.description",
@@ -66,7 +74,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "footer",
-		name_localizations: localizationMapByKey("Tickets.panel.options.footer.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.footer.name",
+		),
 		description: "Footer text for the panel embed",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.footer.description",
@@ -78,7 +88,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "button_label",
-		name_localizations: localizationMapByKey("Tickets.panel.options.button_label.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.button_label.name",
+		),
 		description: "Custom label for the open ticket button",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.button_label.description",
@@ -90,7 +102,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "button_emoji",
-		name_localizations: localizationMapByKey("Tickets.panel.options.button_emoji.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.button_emoji.name",
+		),
 		description: "Custom emoji for the open ticket button",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.button_emoji.description",
@@ -101,7 +115,9 @@ export class PanelDTO {
 
 	@RoleOption({
 		name: "default_role",
-		name_localizations: localizationMapByKey("Tickets.panel.options.default_role.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.default_role.name",
+		),
 		description: "Default support role for all ticket types",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.default_role.description",
@@ -112,7 +128,9 @@ export class PanelDTO {
 
 	@ChannelOption({
 		name: "default_category",
-		name_localizations: localizationMapByKey("Tickets.panel.options.default_category.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.default_category.name",
+		),
 		description: "Default category for all ticket channels",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.default_category.description",
@@ -124,7 +142,9 @@ export class PanelDTO {
 
 	@StringOption({
 		name: "default_message",
-		name_localizations: localizationMapByKey("Tickets.panel.options.default_message.name"),
+		name_localizations: localizationMapByKey(
+			"Tickets.panel.options.default_message.name",
+		),
 		description: "Default message shown when a ticket is opened",
 		description_localizations: localizationMapByKey(
 			"Tickets.panel.options.default_message.description",

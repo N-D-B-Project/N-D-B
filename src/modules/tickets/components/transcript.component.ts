@@ -5,7 +5,7 @@ import {
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { MessageFlags, type TextChannel } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
-import { TranscriptService } from "../services/transcript.service";
+import type { TranscriptService } from "../services/transcript.service";
 
 @Injectable()
 export class TranscriptComponent {
@@ -18,9 +18,7 @@ export class TranscriptComponent {
 	) {}
 
 	@Button("ticket/transcript")
-	public async onTranscript(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onTranscript(@Context() [interaction]: ButtonContext) {
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
 
@@ -39,15 +37,25 @@ export class TranscriptComponent {
 			const guildName = interaction.guild.name;
 			const channelName = channel.name;
 
-			const txt = this.transcriptService.generateTxt(messages, channelName, guildName);
-			const html = this.transcriptService.generateHtml(messages, channelName, guildName);
+			const txt = this.transcriptService.generateTxt(
+				messages,
+				channelName,
+				guildName,
+			);
+			const html = this.transcriptService.generateHtml(
+				messages,
+				channelName,
+				guildName,
+			);
 
-			await interaction.user.send({
-				content: t("Tickets.transcript.dm_message", { CHANNEL: channelName }),
-				files: [txt, html],
-			}).catch(() => {
-				this.logger.warn(`Could not DM transcript to ${interaction.user.id}`);
-			});
+			await interaction.user
+				.send({
+					content: t("Tickets.transcript.dm_message", { CHANNEL: channelName }),
+					files: [txt, html],
+				})
+				.catch(() => {
+					this.logger.warn(`Could not DM transcript to ${interaction.user.id}`);
+				});
 
 			return interaction.editReply({
 				content: t("Tickets.transcript.sent"),

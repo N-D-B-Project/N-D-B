@@ -1,5 +1,5 @@
 import { localizationMapByKey } from "@necord/localization";
-import { ChannelType, type CategoryChannel, type Role } from "discord.js";
+import { type CategoryChannel, ChannelType, type Role } from "discord.js";
 import { ChannelOption, RoleOption, StringOption } from "necord";
 
 export class ConfigureTicketTypeDTO {

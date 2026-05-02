@@ -1,8 +1,8 @@
+import { GuildReactionRoles } from "@ndb/database";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { GuildReactionRoles } from "@ndb/database";
 import type { Guild, TextChannel } from "discord.js";
-import { Repository } from "typeorm";
+import type { Repository } from "typeorm";
 import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
 import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
 import {
@@ -24,19 +24,28 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		return await this.rrRepo.find({ where: { guildId: guild.id } });
 	}
 
-	public async getOne(guild: Guild, Reaction: IReaction): Promise<ReactionRolesEntity> {
+	public async getOne(
+		guild: Guild,
+		Reaction: IReaction,
+	): Promise<ReactionRolesEntity> {
 		return await this.rrRepo.findOne({
 			where: { guildId: guild.id, ...Reaction },
 		});
 	}
 
-	public async getInChannel(guild: Guild, channel: TextChannel): Promise<ReactionRolesEntity[]> {
+	public async getInChannel(
+		guild: Guild,
+		channel: TextChannel,
+	): Promise<ReactionRolesEntity[]> {
 		return await this.rrRepo.find({
 			where: { guildId: guild.id, channel: channel.id },
 		});
 	}
 
-	private async checkIfExists(guild: Guild, reaction: IReaction): Promise<boolean> {
+	private async checkIfExists(
+		guild: Guild,
+		reaction: IReaction,
+	): Promise<boolean> {
 		return !!(await this.rrRepo.findOne({
 			where: {
 				guildId: guild.id,
@@ -49,7 +58,10 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		}));
 	}
 
-	public async create(guild: Guild, reaction: IReaction): Promise<{ status: CreateStatus }> {
+	public async create(
+		guild: Guild,
+		reaction: IReaction,
+	): Promise<{ status: CreateStatus }> {
 		if (await this.checkIfExists(guild, reaction)) {
 			return { status: CreateStatus.UnableToCreate };
 		}
@@ -71,7 +83,10 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		}
 	}
 
-	public async delete(guild: Guild, Reaction: IReaction): Promise<{ status: DeleteStatus }> {
+	public async delete(
+		guild: Guild,
+		Reaction: IReaction,
+	): Promise<{ status: DeleteStatus }> {
 		try {
 			await this.rrRepo.delete({ guildId: guild.id, ...Reaction });
 			return { status: DeleteStatus.Deleted };
@@ -80,7 +95,9 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 		}
 	}
 
-	public async deleteMany(guild: Guild): Promise<{ status: DeleteStatus; count: number }> {
+	public async deleteMany(
+		guild: Guild,
+	): Promise<{ status: DeleteStatus; count: number }> {
 		const count = await this.rrRepo.count({ where: { guildId: guild.id } });
 		try {
 			await this.rrRepo.delete({ guildId: guild.id });
@@ -109,6 +126,9 @@ export class ReactionRolesRepository implements IReactionRolesRepository {
 
 		await this.rrRepo.update({ id: existing.id }, { option: newOption });
 
-		return { status: UpdateStatus.Updated, oldOption: existing.option as REACTION_OPTIONS };
+		return {
+			status: UpdateStatus.Updated,
+			oldOption: existing.option as REACTION_OPTIONS,
+		};
 	}
 }

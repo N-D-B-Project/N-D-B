@@ -33,7 +33,9 @@ export class ScheduleService {
 		}
 		for (const guild of guilds) {
 			if (this.premiumGuilds.includes(guild.id) && !guild.settings?.premium) {
-				await this.database.GuildRepo().updateSettings(guild.id, { premium: true });
+				await this.database
+					.GuildRepo()
+					.updateSettings(guild.id, { premium: true });
 			}
 		}
 		const endTimestamp = new Date().getMilliseconds();
@@ -55,7 +57,9 @@ export class ScheduleService {
 		}
 		for (const user of users) {
 			if (this.premiumUsers.includes(user.id) && !user.settings?.premium) {
-				await this.database.UserRepo().updateSettings(user.id, { premium: true });
+				await this.database
+					.UserRepo()
+					.updateSettings(user.id, { premium: true });
 			}
 		}
 		const endTimestamp = new Date().getMilliseconds();

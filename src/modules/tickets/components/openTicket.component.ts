@@ -2,7 +2,7 @@ import {
 	LOCALIZATION_ADAPTER,
 	type NestedLocalizationAdapter,
 } from "@necord/localization";
-import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -13,14 +13,18 @@ import {
 	PermissionFlagsBits,
 	StringSelectMenuBuilder,
 } from "discord.js";
-import { Button, type ButtonContext, Context, type StringSelectContext, StringSelect } from "necord";
+import {
+	Button,
+	type ButtonContext,
+	Context,
+	StringSelect,
+	type StringSelectContext,
+} from "necord";
 import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
 import { Tickets } from "../types/constants";
 
 @Injectable()
 export class OpenTicketComponent {
-	private readonly logger = new Logger(OpenTicketComponent.name);
-
 	public constructor(
 		@Inject(Tickets.Service) private readonly service: ITicketsService,
 		@Inject(Tickets.Embeds) private readonly embeds: ITicketsEmbeds,
@@ -29,9 +33,7 @@ export class OpenTicketComponent {
 	) {}
 
 	@Button("ticket/panel_open")
-	public async onPanelOpen(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onPanelOpen(@Context() [interaction]: ButtonContext) {
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
 
@@ -50,15 +52,18 @@ export class OpenTicketComponent {
 			.addOptions(
 				ticketTypes.map((type) => ({
 					label: type.name,
-					description: type.description.length > 100
-						? `${type.description.slice(0, 97)}...`
-						: type.description,
+					description:
+						type.description.length > 100
+							? `${type.description.slice(0, 97)}...`
+							: type.description,
 					value: type.id,
 					emoji: type.emoji,
 				})),
 			);
 
-		const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
+		const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+			selectMenu,
+		);
 
 		return interaction.reply({
 			embeds: [this.embeds.SelectTypeEmbed(interaction.guildLocale)],
@@ -68,9 +73,7 @@ export class OpenTicketComponent {
 	}
 
 	@StringSelect("ticket/select_type")
-	public async onSelectType(
-		@Context() [interaction]: StringSelectContext,
-	) {
+	public async onSelectType(@Context() [interaction]: StringSelectContext) {
 		const ticketTypeId = interaction.values[0];
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
@@ -107,16 +110,18 @@ export class OpenTicketComponent {
 			.addOptions(
 				ticketTypes.map((type) => ({
 					label: type.name,
-					description: type.description.length > 100
-						? `${type.description.slice(0, 97)}...`
-						: type.description,
+					description:
+						type.description.length > 100
+							? `${type.description.slice(0, 97)}...`
+							: type.description,
 					value: type.id,
 					emoji: type.emoji,
 					default: type.id === ticketTypeId,
 				})),
 			);
 
-		const selectRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
+		const selectRow =
+			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(selectMenu);
 
 		const openButton = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder()
@@ -127,15 +132,15 @@ export class OpenTicketComponent {
 		);
 
 		return interaction.update({
-			embeds: [this.embeds.ConfirmTypeEmbed(interaction.guildLocale, ticketType)],
+			embeds: [
+				this.embeds.ConfirmTypeEmbed(interaction.guildLocale, ticketType),
+			],
 			components: [selectRow, openButton],
 		});
 	}
 
 	@Button("ticket/open/:ticketTypeId")
-	public async onOpenTicket(
-		@Context() [interaction]: ButtonContext,
-	) {
+	public async onOpenTicket(@Context() [interaction]: ButtonContext) {
 		const ticketTypeId = interaction.customId.split("/")[2];
 		const t = (key: string, args?: Record<string, string>) =>
 			this.translate.getTranslation(key, interaction.guildLocale, args);
@@ -170,11 +175,18 @@ export class OpenTicketComponent {
 			components: [],
 		});
 
-		const globalSettings = await this.service.getPanelSettings(interaction.guildId);
+		const globalSettings = await this.service.getPanelSettings(
+			interaction.guildId,
+		);
 
-		const supportRoleId = ticketType.supportRoleId || globalSettings?.ticketDefaultRole;
-		const categoryId = ticketType.categoryId || globalSettings?.ticketDefaultCategory;
-		const ticketMessage = ticketType.message || globalSettings?.ticketDefaultMessage || ticketType.description;
+		const supportRoleId =
+			ticketType.supportRoleId || globalSettings?.ticketDefaultRole;
+		const categoryId =
+			ticketType.categoryId || globalSettings?.ticketDefaultCategory;
+		const ticketMessage =
+			ticketType.message ||
+			globalSettings?.ticketDefaultMessage ||
+			ticketType.description;
 
 		const permissionOverwrites = [
 			{
@@ -213,7 +225,9 @@ export class OpenTicketComponent {
 		}
 
 		const parent = categoryId
-			? (interaction.guild.channels.cache.get(categoryId) as CategoryChannel | undefined) ?? null
+			? ((interaction.guild.channels.cache.get(categoryId) as
+					| CategoryChannel
+					| undefined) ?? null)
 			: null;
 
 		const ticketCount = await this.service.countTickets(interaction.guildId);
@@ -249,7 +263,11 @@ export class OpenTicketComponent {
 		await channel.send({
 			content: `${interaction.user}`,
 			embeds: [
-				this.embeds.OpenTicketEmbed(interaction.guildLocale, ticketType, ticketMessage),
+				this.embeds.OpenTicketEmbed(
+					interaction.guildLocale,
+					ticketType,
+					ticketMessage,
+				),
 			],
 			components: [actionRow],
 		});

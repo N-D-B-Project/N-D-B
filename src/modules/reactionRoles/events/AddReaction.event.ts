@@ -110,7 +110,8 @@ export class AddReactionEvent {
 			const emojiMatches =
 				emojiString === reactionData.emoji ||
 				reaction.emoji.name === reactionData.emoji;
-			if (!emojiMatches || reaction.message.id !== reactionData.message) continue;
+			if (!emojiMatches || reaction.message.id !== reactionData.message)
+				continue;
 
 			const role = guild.roles.cache.get(reactionData.role);
 			if (!role) continue;

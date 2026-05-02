@@ -3,10 +3,7 @@ import { Inject } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, type TextChannel } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,

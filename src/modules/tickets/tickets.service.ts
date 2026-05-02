@@ -1,13 +1,16 @@
 import { Inject, Injectable } from "@nestjs/common";
 import type { IGuildRepository } from "../database/repositories/interfaces";
 import { Repositories } from "../database/types/constants";
-import type { ConfigureTicketTypeDTO, CreateTicketDTO, CreateTicketTypeDTO } from "./dto";
+import type {
+	ConfigureTicketTypeDTO,
+	CreateTicketDTO,
+	CreateTicketTypeDTO,
+} from "./dto";
 import type { TicketEntity, TicketTypeEntity } from "./entities";
 import type { ITicketsRepository, ITicketsService } from "./interfaces";
 import {
 	CloseTicketError,
 	ConfigureTicketTypeError,
-	CreateTicketError,
 	CreateTicketTypeError,
 	DeleteTicketTypeError,
 	Tickets,
@@ -52,7 +55,12 @@ export class TicketsService implements ITicketsService {
 
 		if (!ticketType) return ConfigureTicketTypeError.NotFound;
 
-		const data: Partial<Pick<TicketTypeEntity, "supportRoleId" | "categoryId" | "description" | "message" | "emoji">> = {};
+		const data: Partial<
+			Pick<
+				TicketTypeEntity,
+				"supportRoleId" | "categoryId" | "description" | "message" | "emoji"
+			>
+		> = {};
 		if (dto.supportRoleId !== undefined) data.supportRoleId = dto.supportRoleId;
 		if (dto.categoryId !== undefined) data.categoryId = dto.categoryId;
 		if (dto.description !== undefined) data.description = dto.description;
@@ -91,7 +99,7 @@ export class TicketsService implements ITicketsService {
 
 	public async deleteTicketType(
 		name: string,
-		guildId: string,
+		_guildId: string,
 	): Promise<TicketTypeEntity | DeleteTicketTypeError> {
 		const ticketType = await this.repository.getTicketType(name);
 
@@ -116,7 +124,8 @@ export class TicketsService implements ITicketsService {
 	}
 
 	private async checkCount(guildId: string): Promise<boolean> {
-		const isPremium = (await this.guildRepository.get(guildId)).settings.premium;
+		const isPremium = (await this.guildRepository.get(guildId)).settings
+			.premium;
 		const count = await this.repository.count(guildId);
 
 		if (isPremium && count >= 12) {

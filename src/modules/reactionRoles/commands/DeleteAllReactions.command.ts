@@ -116,7 +116,9 @@ export class DeleteAllReactionsCommand {
 		}
 
 		return InteractionTools.update(interaction, {
-			embeds: [await this.Embeds.UnableToDeleteAllReactionRoleEmbed(interaction)],
+			embeds: [
+				await this.Embeds.UnableToDeleteAllReactionRoleEmbed(interaction),
+			],
 			components: [],
 		});
 	}

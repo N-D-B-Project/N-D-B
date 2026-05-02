@@ -30,7 +30,9 @@ export class DeleteTicketTypeCommand {
 		name: "delete_type",
 		nameLocalizations: localizationMapByKey("Tickets.delete_type.name"),
 		description: "Delete a ticket type",
-		descriptionLocalizations: localizationMapByKey("Tickets.delete_type.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"Tickets.delete_type.description",
+		),
 	})
 	@CommandConfig({ category: "🎫 Tickets", disable: false })
 	@CommandPermissions({
@@ -46,7 +48,10 @@ export class DeleteTicketTypeCommand {
 		@ValidatedOptions() { name }: DeleteTicketTypeDTO,
 		@CurrentTranslate() t: TranslationFn,
 	) {
-		const result = await this.service.deleteTicketType(name, interaction.guildId);
+		const result = await this.service.deleteTicketType(
+			name,
+			interaction.guildId,
+		);
 
 		if (result === DeleteTicketTypeError.NotFound) {
 			return interaction.reply({

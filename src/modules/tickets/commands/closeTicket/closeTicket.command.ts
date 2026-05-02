@@ -6,10 +6,7 @@ import {
 import { Inject, UseGuards } from "@nestjs/common";
 import { MessageFlags } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
-import {
-	CommandConfig,
-	CommandPermissions,
-} from "@/common/decorators";
+import { CommandConfig, CommandPermissions } from "@/common/decorators";
 import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
 import type { ITicketsEmbeds, ITicketsService } from "../../interfaces";
 import { CloseTicketError, Tickets } from "../../types/constants";
@@ -26,7 +23,9 @@ export class CloseTicketCommand {
 		name: "close",
 		nameLocalizations: localizationMapByKey("Tickets.close_cmd.name"),
 		description: "Close the current ticket",
-		descriptionLocalizations: localizationMapByKey("Tickets.close_cmd.description"),
+		descriptionLocalizations: localizationMapByKey(
+			"Tickets.close_cmd.description",
+		),
 	})
 	@CommandConfig({ category: "🎫 Tickets", disable: false })
 	@CommandPermissions({

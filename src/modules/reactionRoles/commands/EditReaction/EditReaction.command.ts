@@ -44,7 +44,9 @@ export class EditReactionCommand {
 		@Options() dto: EditReactionDTO,
 	) {
 		const channel = dto.channel as TextChannel;
-		const message = await channel.messages.fetch(dto.messageId).catch(() => null);
+		const message = await channel.messages
+			.fetch(dto.messageId)
+			.catch(() => null);
 
 		if (!message) {
 			return await interaction.reply({
