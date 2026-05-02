@@ -1157,7 +1157,7 @@ __metadata:
 
 "@ndb/database@file:./Database::locator=n-d-b%40workspace%3A.":
   version: 1.0.0
-  resolution: "@ndb/database@file:./Database#./Database::hash=92b73e&locator=n-d-b%40workspace%3A."
+  resolution: "@ndb/database@file:./Database#./Database::hash=1ffbe1&locator=n-d-b%40workspace%3A."
   dependencies:
     dotenv: "npm:^17.4.2"
     reflect-metadata: "npm:^0.2.2"
@@ -1165,7 +1165,7 @@ __metadata:
     typeorm-extension: "npm:^3.6.3"
   peerDependencies:
     pg: ">=8.0.0"
-  checksum: 10c0/e3bb2b45dd05f4be025752eb353f67bfc50122374ab4b7f99b2d37df1b3e18d791e432407a0c84717344f48357efbe99ceff2103430d0bc8d8d2475e4c234abf
+  checksum: 10c0/c9a1a6db733448d2eff42866b49059e515a0e4aa172c82c1c2674ed2f1c18896542d6a75870d4f659126092b17c15f278e8b3ad94697ec6017d5e3421168ef6d
   languageName: node
   linkType: hard
 
@@ -6557,11 +6557,11 @@ __metadata:
   linkType: hard
 
 "qs@npm:^6.14.0":
-  version: 6.14.0
-  resolution: "qs@npm:6.14.0"
+  version: 6.15.1
+  resolution: "qs@npm:6.15.1"
   dependencies:
     side-channel: "npm:^1.1.0"
-  checksum: 10c0/8ea5d91bf34f440598ee389d4a7d95820e3b837d3fd9f433871f7924801becaa0cd3b3b4628d49a7784d06a8aea9bc4554d2b6d8d584e2d221dc06238a42909c
+  checksum: 10c0/19ee504f0ebff72598503e38cd6d9bd7b52a8ab62ae18b1e6bee3d4db58469bd65871ef1893a881bafb0f80ef2f9ab586e1f255cf25cc8d816c0f5a704721d97
   languageName: node
   linkType: hard
 
