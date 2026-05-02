@@ -5,7 +5,8 @@ import {
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { MessageFlags, type TextChannel } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
-import type { TranscriptService } from "../services/transcript.service";
+// biome-ignore lint/style/useImportType: Cannot use ImportType in DI
+import { TranscriptService } from "../services/transcript.service";
 
 @Injectable()
 export class TranscriptComponent {

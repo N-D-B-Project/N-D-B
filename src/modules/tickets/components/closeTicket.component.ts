@@ -12,7 +12,8 @@ import {
 } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
 import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
-import type { TranscriptService } from "../services/transcript.service";
+// biome-ignore lint/style/useImportType: Cannot use ImportType in DI
+import { TranscriptService } from "../services/transcript.service";
 import { Tickets } from "../types/constants";
 
 @Injectable()
