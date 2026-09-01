@@ -3,8 +3,8 @@ import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import type { Guild as DiscordGuild } from "discord.js";
 import type { Repository } from "typeorm";
-import { DatabaseStatus } from "../types";
-import type { IGuildRepository } from "./interfaces";
+import { DatabaseStatus } from "../types/index.js";
+import type { IGuildRepository } from "./interfaces/index.js";
 
 @Injectable()
 export class GuildRepository implements IGuildRepository {

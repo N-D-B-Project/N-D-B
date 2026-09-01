@@ -5,8 +5,8 @@ import {
 import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, EmbedBuilder, type User } from "discord.js";
-import { Colors } from "@/types/Colors";
-import type { ITicketsEmbeds, TicketTypeData } from "./interfaces";
+import { Colors } from "#src/types/Colors.js";
+import type { ITicketsEmbeds, TicketTypeData } from "./interfaces/index.js";
 
 @Injectable()
 export class TicketEmbeds implements ITicketsEmbeds {

@@ -6,9 +6,9 @@ import {
 } from "@necord/lavalink";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Context } from "necord";
-import { MessageTools } from "@/modules/commands/Message";
-import type { IMusicEmbeds } from "../interfaces";
-import { Music, PlayerProps } from "../types/constants";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { IMusicEmbeds } from "../interfaces/index.js";
+import { Music, PlayerProps } from "../types/constants.js";
 @Injectable()
 export class PlayerEvents {
 	public constructor(

@@ -12,9 +12,9 @@ import {
 import { Global, Module, type Provider } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Services } from "@/types/Constants";
-import { DatabaseService } from "./database.service";
-import { RepositoriesModule } from "./repositories/Repositories.module";
+import { Services } from "#src/types/Constants.js";
+import { DatabaseService } from "./database.service.js";
+import { RepositoriesModule } from "./repositories/Repositories.module.js";
 
 const provider: Provider<DatabaseService> = {
 	provide: Services.Database,

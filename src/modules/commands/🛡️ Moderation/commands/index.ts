@@ -1,1 +1,1 @@
-export * from "./clear/clear.command";
+export * from "./clear/clear.command.js";

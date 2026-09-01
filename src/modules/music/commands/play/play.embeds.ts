@@ -1,9 +1,9 @@
 import type { TranslationFn } from "@necord/localization";
 import { type ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import type { SearchResult, Track } from "lavalink-client";
-import { Colors } from "@/types/Colors";
-import { Timer } from "@/utils/Tools";
-import { MusicService } from "../../Music.service";
+import { Colors } from "#src/types/Colors.js";
+import { Timer } from "#src/utils/Tools.js";
+import { MusicService } from "../../Music.service.js";
 
 export class PlayEmbeds {
 	public constructor(

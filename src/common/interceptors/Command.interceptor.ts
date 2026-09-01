@@ -6,7 +6,7 @@ import {
 	type NestInterceptor,
 } from "@nestjs/common";
 import { catchError, type Observable } from "rxjs";
-import { CommandError } from "../errors/Command.error";
+import { CommandError } from "../errors/Command.error.js";
 
 @Injectable()
 export class CommandInterceptor implements NestInterceptor {

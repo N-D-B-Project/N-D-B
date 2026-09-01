@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { Logger } from "@nestjs/common";
 import { metrics } from "@opentelemetry/api";
 import {
@@ -15,7 +17,18 @@ import {
 	ATTR_SERVICE_VERSION,
 } from "@opentelemetry/semantic-conventions";
 import { setupNodeMetrics } from "@sesamecare-oss/opentelemetry-node-metrics";
-import { name, version } from "../../package.json";
+
+const findPackageJson = (from: string): string => {
+	const candidate = join(from, "package.json");
+	if (existsSync(candidate)) return candidate;
+	const parent = dirname(from);
+	if (parent === from) throw new Error("package.json not found");
+	return findPackageJson(parent);
+};
+
+const { name, version } = JSON.parse(
+	readFileSync(findPackageJson(import.meta.dirname), "utf8"),
+) as { name: string; version: string };
 
 const logger = new Logger("OpenTelemetry");
 

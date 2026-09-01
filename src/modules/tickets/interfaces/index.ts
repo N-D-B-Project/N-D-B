@@ -1,3 +1,3 @@
-export * from "./ITicketsEmbeds";
-export * from "./ITicketsRepository";
-export * from "./ITicketsService";
+export * from "./ITicketsEmbeds.js";
+export * from "./ITicketsRepository.js";
+export * from "./ITicketsService.js";

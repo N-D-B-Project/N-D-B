@@ -1,6 +1,6 @@
 import type { User, UserSettings } from "@ndb/database";
 import type { User as DiscordUser } from "discord.js";
-import type { DatabaseStatus } from "../../types";
+import type { DatabaseStatus } from "../../types/index.js";
 
 export interface IUserRepository {
 	updateSettings(userId: string, data: Partial<UserSettings>): Promise<void>;

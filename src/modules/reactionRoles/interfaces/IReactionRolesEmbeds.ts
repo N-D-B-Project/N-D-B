@@ -9,7 +9,7 @@ import type {
 	Role,
 	User,
 } from "discord.js";
-import type { IReaction, REACTION_OPTIONS } from "../types";
+import type { IReaction, REACTION_OPTIONS } from "../types/index.js";
 
 type AnyInteraction = CommandInteraction | MessageComponentInteraction;
 

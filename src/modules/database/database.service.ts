@@ -1,14 +1,14 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { IReactionRolesRepository } from "@/modules/reactionRoles/interfaces/IReactionRoleRepository";
-import { ReactionRoles } from "@/modules/reactionRoles/types/constants";
-import type { ITicketsRepository } from "../tickets/interfaces";
-import { Tickets } from "../tickets/types/constants";
-import type { IDatabaseService } from "./interfaces/IDatabaseService";
+import type { IReactionRolesRepository } from "#src/modules/reactionRoles/interfaces/IReactionRoleRepository.js";
+import { ReactionRoles } from "#src/modules/reactionRoles/types/constants.js";
+import type { ITicketsRepository } from "../tickets/interfaces/index.js";
+import { Tickets } from "../tickets/types/constants.js";
+import type { IDatabaseService } from "./interfaces/IDatabaseService.js";
 import type {
 	IGuildRepository,
 	IUserRepository,
-} from "./repositories/interfaces";
-import { Repositories } from "./types/constants";
+} from "./repositories/interfaces/index.js";
+import { Repositories } from "./types/constants.js";
 
 @Injectable()
 export class DatabaseService implements IDatabaseService {

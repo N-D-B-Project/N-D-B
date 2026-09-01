@@ -1,11 +1,11 @@
 export {
 	CommandConfig,
 	CommandConfigKey,
-	CommandConfigOptions,
-} from "./CommandConfig.decorator";
+	type CommandConfigOptions,
+} from "./CommandConfig.decorator.js";
 export {
 	CommandPermissions,
 	CommandPermissionsKey,
-	CommandPermissionsOptions,
-} from "./CommandPermissions.decorator";
-export { ValidatedOptions } from "./ValidatedOptions.decorator";
+	type CommandPermissionsOptions,
+} from "./CommandPermissions.decorator.js";
+export { ValidatedOptions } from "./ValidatedOptions.decorator.js";

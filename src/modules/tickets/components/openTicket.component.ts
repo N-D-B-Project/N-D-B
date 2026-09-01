@@ -20,8 +20,8 @@ import {
 	StringSelect,
 	type StringSelectContext,
 } from "necord";
-import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
-import { Tickets } from "../types/constants";
+import type { ITicketsEmbeds, ITicketsService } from "../interfaces/index.js";
+import { Tickets } from "../types/constants.js";
 
 @Injectable()
 export class OpenTicketComponent {

@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"declaration": false,
+		"module": "nodenext",
+		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
@@ -9,7 +9,7 @@
 		"sourceMap": true,
 		"outDir": "./dist",
 		"incremental": true,
-		"target": "ESNEXT",
+		"target": "ES2023",
 		"lib": [
 			"ESNext",
 			"ESNext.Array",
@@ -21,23 +21,25 @@
 			"ESNext.String",
 			"ESNext.WeakRef"
 		],
-		"moduleResolution": "node",
+		"moduleResolution": "nodenext",
+		"resolvePackageJsonExports": true,
 		"allowJs": true,
 		"rootDir": ".",
 		"typeRoots": ["./node_modules/@types", "**/types"],
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-
+		"isolatedModules": true,
+		"strictPropertyInitialization": false,
 		"forceConsistentCasingInFileNames": true,
 		"skipDefaultLibCheck": true,
 		"strict": true,
 		"strictFunctionTypes": true,
 		"noImplicitAny": false,
 		"strictNullChecks": false,
-		"baseUrl": "./src",
+		"types": ["node"],
 		"paths": {
-			"@/*": ["./*"]
+			"discord.js": ["./node_modules/discord.js/typings/index.d.mts"]
 		}
 	}
 }

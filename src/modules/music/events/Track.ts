@@ -15,12 +15,12 @@ import { ConfigService } from "@nestjs/config";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, EmbedBuilder, type User, UserManager } from "discord.js";
 import { Context } from "necord";
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { Colors } from "@/types/Colors";
-import { Timer, WAIT } from "@/utils/Tools";
-import { MusicService } from "../Music.service";
-import { PlayerProps } from "../types/constants";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { Config } from "#src/modules/config/types/index.js";
+import { Colors } from "#src/types/Colors.js";
+import { Timer, WAIT } from "#src/utils/Tools.js";
+import { MusicService } from "../Music.service.js";
+import { PlayerProps } from "../types/constants.js";
 
 @Injectable()
 export class TrackEvents {

@@ -1,2 +1,2 @@
-export * from "./IGuildRepository";
-export * from "./IUserRepository";
+export * from "./IGuildRepository.js";
+export * from "./IUserRepository.js";

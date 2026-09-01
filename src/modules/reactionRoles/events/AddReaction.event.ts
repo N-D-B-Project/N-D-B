@@ -15,15 +15,15 @@ import {
 	type User,
 } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
-import { MessageTools } from "@/modules/commands/Message";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { IDatabaseService } from "#src/modules/database/interfaces/IDatabaseService.js";
+import { Services } from "#src/types/Constants.js";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
-} from "../interfaces";
-import { REACTION_OPTIONS } from "../types";
-import { ReactionRoles } from "../types/constants";
+} from "../interfaces/index.js";
+import { ReactionRoles } from "../types/constants.js";
+import { REACTION_OPTIONS } from "../types/index.js";
 
 type Action = "add" | "remove" | "toggle";
 

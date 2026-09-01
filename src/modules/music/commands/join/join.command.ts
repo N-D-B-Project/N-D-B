@@ -7,11 +7,14 @@ import {
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MusicCommand } from "@/modules/music/Music.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { InteractionTools } from "#src/modules/commands/Interaction.js";
+import { MusicCommand } from "#src/modules/music/Music.decorator.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
-import { JoinDto } from "./join.dto";
+import { JoinDto } from "./join.dto.js";
 
 // TODO: Fix not connecting in another channel if already connected (move with command)
 @MusicCommand()

@@ -1,6 +1,6 @@
 import { Global, Module } from "@nestjs/common";
 import { ScheduleModule as _ScheduleModule } from "@nestjs/schedule";
-import { ScheduleService } from "./schedule.service";
+import { ScheduleService } from "./schedule.service.js";
 
 @Global()
 @Module({

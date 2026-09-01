@@ -6,14 +6,14 @@ import {
 import { Global, Module } from "@nestjs/common";
 import { APP_FILTER } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { EmojiFilter } from "@/common/filters/emoji.filter";
-import * as Commands from "./commands";
-import * as Components from "./components";
-import { TicketsRepository } from "./repositories/tickets.repository";
-import { TranscriptService } from "./services/transcript.service";
-import { TicketEmbeds } from "./Tickets.embeds";
-import { TicketsService } from "./tickets.service";
-import { Tickets } from "./types/constants";
+import { EmojiFilter } from "#src/common/filters/emoji.filter.js";
+import * as Commands from "./commands/index.js";
+import * as Components from "./components/index.js";
+import { TicketsRepository } from "./repositories/tickets.repository.js";
+import { TranscriptService } from "./services/transcript.service.js";
+import { TicketEmbeds } from "./Tickets.embeds.js";
+import { TicketsService } from "./tickets.service.js";
+import { Tickets } from "./types/constants.js";
 
 @Global()
 @Module({

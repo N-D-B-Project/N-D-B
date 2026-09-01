@@ -5,9 +5,12 @@ import {
 } from "@necord/localization";
 import { EmbedBuilder, MessageFlags } from "discord.js";
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { Colors } from "@/types/Colors";
-import { ReactionRolesCommand } from "../ReactionRoles.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { Colors } from "#src/types/Colors.js";
+import { ReactionRolesCommand } from "../ReactionRoles.decorator.js";
 
 @ReactionRolesCommand()
 export class ReactionTypesCommand {

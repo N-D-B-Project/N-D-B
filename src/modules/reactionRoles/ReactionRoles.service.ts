@@ -7,18 +7,21 @@ import type {
 	Role,
 	TextChannel,
 } from "discord.js";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
-import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
-import type { IReactionRolesEmbeds, IReactionRolesService } from "./interfaces";
+import type { IDatabaseService } from "#src/modules/database/interfaces/IDatabaseService.js";
+import { Services } from "#src/types/Constants.js";
+import type { ReactionRolesEntity } from "./entities/ReactionRole.entity.js";
+import type {
+	IReactionRolesEmbeds,
+	IReactionRolesService,
+} from "./interfaces/index.js";
+import { ReactionRoles } from "./types/constants.js";
 import type {
 	CreateStatus,
 	DeleteStatus,
 	IReaction,
 	REACTION_OPTIONS,
 	UpdateStatus,
-} from "./types";
-import { ReactionRoles } from "./types/constants";
+} from "./types/index.js";
 
 @Injectable()
 export class ReactionRolesService implements IReactionRolesService {

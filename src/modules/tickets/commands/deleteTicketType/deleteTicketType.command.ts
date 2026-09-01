@@ -10,14 +10,17 @@ import {
 	CommandConfig,
 	CommandPermissions,
 	ValidatedOptions,
-} from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import type { ITicketsService } from "../../interfaces";
-import { DeleteTicketTypeError, Tickets } from "../../types/constants";
-import { TicketCommand } from "../tickets.decorator";
-import { TicketTypeNameAutocomplete } from "../ticketTypeName.autocomplete";
+} from "#src/common/decorators/index.js";
+import {
+	CommandConfigGuard,
+	CommandPermissionsGuard,
+} from "#src/common/guards/index.js";
+import type { ITicketsService } from "../../interfaces/index.js";
+import { DeleteTicketTypeError, Tickets } from "../../types/constants.js";
+import { TicketCommand } from "../tickets.decorator.js";
+import { TicketTypeNameAutocomplete } from "../ticketTypeName.autocomplete.js";
 // biome-ignore lint/style/useImportType: dependency injection
-import { DeleteTicketTypeDTO } from "./deleteTicketType.dto";
+import { DeleteTicketTypeDTO } from "./deleteTicketType.dto.js";
 
 @TicketCommand()
 export class DeleteTicketTypeCommand {

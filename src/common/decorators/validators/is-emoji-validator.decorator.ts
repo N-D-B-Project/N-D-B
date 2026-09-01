@@ -4,7 +4,7 @@ import {
 	type ValidationOptions,
 } from "class-validator";
 import { parseEmoji } from "discord.js";
-import { EmojiError } from "@/common/errors/Emoji.error";
+import { EmojiError } from "#src/common/errors/Emoji.error.js";
 
 export function IsEmoji(validationOptions?: ValidationOptions) {
 	// biome-ignore lint/complexity/noBannedTypes: ~

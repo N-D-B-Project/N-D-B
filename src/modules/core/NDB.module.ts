@@ -5,9 +5,9 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { RedisModule, RedisToken } from "@nestjs-redis/client";
 import { NecordModule } from "necord";
-import * as Modules from "@/modules";
-import { config, NecordConfigService } from "../config";
-import { NDBServiceProvider } from "./provider/NDBService.provider";
+import * as Modules from "#src/modules/index.js";
+import { config, NecordConfigService } from "../config/index.js";
+import { NDBServiceProvider } from "./provider/NDBService.provider.js";
 
 const NecordConfigInjectionTokens = [ConfigService, RedisToken()];
 

@@ -5,11 +5,14 @@ import {
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { WAIT } from "@/utils/Tools";
-import { ModerationCommand } from "../../Moderation.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { WAIT } from "#src/utils/Tools.js";
+import { ModerationCommand } from "../../Moderation.decorator.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
-import { ClearDTO } from "./clear.dto";
+import { ClearDTO } from "./clear.dto.js";
 
 @ModerationCommand()
 export class ClearCommand {

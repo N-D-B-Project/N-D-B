@@ -10,14 +10,17 @@ import { isURL } from "class-validator";
 import type { EmbedBuilder } from "discord.js";
 import type { SearchResult } from "lavalink-client";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MusicCommand } from "@/modules/music/Music.decorator";
-import { MusicService } from "../../Music.service";
-import { PlayAutocompleteInterceptor } from "./play.autocomplete";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { InteractionTools } from "#src/modules/commands/Interaction.js";
+import { MusicCommand } from "#src/modules/music/Music.decorator.js";
+import { MusicService } from "../../Music.service.js";
+import { PlayAutocompleteInterceptor } from "./play.autocomplete.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
-import { PlayDto } from "./play.dto";
-import { PlayEmbeds } from "./play.embeds";
+import { PlayDto } from "./play.dto.js";
+import { PlayEmbeds } from "./play.embeds.js";
 
 @MusicCommand()
 export class PlayCommand {

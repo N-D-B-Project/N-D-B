@@ -6,11 +6,20 @@ import {
 import { Inject, UseGuards } from "@nestjs/common";
 import { MessageFlags } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import type { ITicketsEmbeds, ITicketsService } from "../../interfaces";
-import { CloseTicketError, Tickets } from "../../types/constants";
-import { TicketCommand } from "../tickets.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import {
+	CommandConfigGuard,
+	CommandPermissionsGuard,
+} from "#src/common/guards/index.js";
+import type {
+	ITicketsEmbeds,
+	ITicketsService,
+} from "../../interfaces/index.js";
+import { CloseTicketError, Tickets } from "../../types/constants.js";
+import { TicketCommand } from "../tickets.decorator.js";
 
 @TicketCommand()
 export class CloseTicketCommand {

@@ -1,6 +1,6 @@
 import { Global, Module, type Provider } from "@nestjs/common";
-import { Extends } from "@/types/Constants";
-import { Buttons } from "./Buttons.component";
+import { Extends } from "#src/types/Constants.js";
+import { Buttons } from "./Buttons.component.js";
 
 const provider: Provider<Buttons> = {
 	provide: Extends.Buttons,

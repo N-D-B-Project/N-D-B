@@ -8,11 +8,14 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { codeBlock, EmbedBuilder } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import type { Config } from "@/modules/config/types";
-import { Colors } from "@/types/Colors";
-import { DeveloperToolsCommand } from "../../DeveloperTools.decorator";
-import type { EvalDTO } from "./eval.dto";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import type { Config } from "#src/modules/config/types/index.js";
+import { Colors } from "#src/types/Colors.js";
+import { DeveloperToolsCommand } from "../../DeveloperTools.decorator.js";
+import type { EvalDTO } from "./eval.dto.js";
 
 @DeveloperToolsCommand()
 export class EvalCommand {

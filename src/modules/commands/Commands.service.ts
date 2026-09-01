@@ -23,7 +23,7 @@ import {
 	type CommandConfigOptions,
 	CommandPermissionsKey,
 	type CommandPermissionsOptions,
-} from "@/common/decorators";
+} from "#src/common/decorators/index.js";
 
 @Injectable()
 export class CommandsService implements OnApplicationBootstrap {

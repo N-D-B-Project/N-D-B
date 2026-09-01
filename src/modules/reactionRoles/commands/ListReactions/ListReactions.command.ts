@@ -26,13 +26,16 @@ import {
 	type SlashCommandContext,
 	Subcommand,
 } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { Colors } from "@/types/Colors";
-import type { IReactionRolesService } from "../../interfaces";
-import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
-import { ReactionRoles } from "../../types/constants";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { Colors } from "#src/types/Colors.js";
+import type { IReactionRolesService } from "../../interfaces/index.js";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator.js";
+import { ReactionRoles } from "../../types/constants.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
-import { ListReactionsDTO } from "./ListReactions.dto";
+import { ListReactionsDTO } from "./ListReactions.dto.js";
 
 const PAGE_SIZE = 5;
 

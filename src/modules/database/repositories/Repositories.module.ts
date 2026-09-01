@@ -8,10 +8,10 @@ import {
 } from "@ndb/database";
 import { Global, Module, type Provider } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ReactionRolesRepoProvider } from "@/modules/reactionRoles/types/providers";
-import { Repositories } from "../types/constants";
-import { GuildRepository } from "./Guild.repository";
-import { UserRepository } from "./User.repository";
+import { ReactionRolesRepoProvider } from "#src/modules/reactionRoles/types/providers.js";
+import { Repositories } from "../types/constants.js";
+import { GuildRepository } from "./Guild.repository.js";
+import { UserRepository } from "./User.repository.js";
 
 const providers: Provider<GuildRepository | UserRepository>[] = [
 	{

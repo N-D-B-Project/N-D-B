@@ -1,8 +1,8 @@
 import type { Provider } from "@nestjs/common";
-import { ReactionRolesEmbeds } from "../ReactionRoles.embeds";
-import { ReactionRolesRepository } from "../ReactionRoles.repository";
-import { ReactionRolesService } from "../ReactionRoles.service";
-import { ReactionRoles } from "./constants";
+import { ReactionRolesEmbeds } from "../ReactionRoles.embeds.js";
+import { ReactionRolesRepository } from "../ReactionRoles.repository.js";
+import { ReactionRolesService } from "../ReactionRoles.service.js";
+import { ReactionRoles } from "./constants.js";
 
 export const ReactionRolesProvider: Provider<ReactionRolesService> = {
 	provide: ReactionRoles.Service,

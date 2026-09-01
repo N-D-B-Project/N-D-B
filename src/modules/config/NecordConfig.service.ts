@@ -19,10 +19,10 @@ import {
 import { SourceLinksRegexes } from "lavalink-client";
 import type { NecordModuleOptions } from "necord";
 import type { RedisClientType } from "redis";
-import { QueueStore } from "../music/utils/QueueStore";
-import { JSONLocaleLoader } from "./JSONLocale.loader";
-import { PlayerStore } from "./player.store";
-import type { Config } from "./types";
+import { QueueStore } from "../music/utils/QueueStore.js";
+import { JSONLocaleLoader } from "./JSONLocale.loader.js";
+import { PlayerStore } from "./player.store.js";
+import type { Config } from "./types/index.js";
 
 @Injectable()
 export class NecordConfigService {
@@ -112,7 +112,7 @@ export class NecordConfigService {
 				fallbackLocale:
 					this.config.getOrThrow<Config["FallbackLocale"]>("FallbackLocale"),
 				locales: await new JSONLocaleLoader(
-					path.resolve(__dirname, "../../common/Languages/"),
+					path.resolve(import.meta.dirname, "../../common/Languages/"),
 				).loadTranslations(),
 			}),
 			resolvers: GuildResolver,

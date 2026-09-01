@@ -1,6 +1,6 @@
 import { applyDecorators, SetMetadata, UseGuards } from "@nestjs/common";
 import type { PermissionResolvable } from "discord.js";
-import { CommandPermissionsGuard } from "../guards";
+import { CommandPermissionsGuard } from "../guards/index.js";
 
 export interface CommandPermissionsOptions {
 	user: PermissionResolvable[];

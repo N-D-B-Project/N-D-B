@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression, Timeout } from "@nestjs/schedule";
-import { Services } from "@/types/Constants";
-import type { IDatabaseService } from "../database/interfaces/IDatabaseService";
+import { Services } from "#src/types/Constants.js";
+import type { IDatabaseService } from "../database/interfaces/IDatabaseService.js";
 
 @Injectable()
 export class ScheduleService {

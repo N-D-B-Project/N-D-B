@@ -1,4 +1,4 @@
-import type { Config, ENVIRONMENT } from "./types";
+import type { Config, ENVIRONMENT } from "./types/index.js";
 
 export const config = (): Config => ({
 	ENVIRONMENT: process.env.ENVIRONMENT as ENVIRONMENT,

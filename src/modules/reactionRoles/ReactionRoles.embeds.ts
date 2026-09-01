@@ -22,11 +22,11 @@ import {
 
 type AnyInteraction = CommandInteraction | MessageComponentInteraction;
 
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { Colors } from "@/types/Colors";
-import type { IReactionRolesEmbeds } from "./interfaces";
-import type { IReaction, REACTION_OPTIONS } from "./types";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { Config } from "#src/modules/config/types/index.js";
+import { Colors } from "#src/types/Colors.js";
+import type { IReactionRolesEmbeds } from "./interfaces/index.js";
+import type { IReaction, REACTION_OPTIONS } from "./types/index.js";
 
 @Injectable()
 export class ReactionRolesEmbeds implements IReactionRolesEmbeds {
