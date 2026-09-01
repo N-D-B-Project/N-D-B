@@ -1,4 +1,8 @@
-import { type NodeManagerContextOf, OnNodeManager } from "@necord/lavalink";
+import {
+	InjectNodeManager,
+	type NodeManagerContextOf,
+	OnNodeManager,
+} from "@necord/lavalink";
 import { Injectable, Logger } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { ConfigService } from "@nestjs/config";
@@ -10,19 +14,18 @@ import {
 	EmbedBuilder,
 	UserManager,
 } from "discord.js";
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
-import { NodeManager } from "lavalink-client";
+import type { NodeManager } from "lavalink-client";
 import { Button, type ButtonContext, ComponentParam, Context } from "necord";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { Colors } from "@/types/Colors";
+import { InteractionTools } from "#src/modules/commands/Interaction.js";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { Config } from "#src/modules/config/types/index.js";
+import { Colors } from "#src/types/Colors.js";
 @Injectable()
 export class LavalinkNodeEvents {
 	public constructor(
 		private readonly config: ConfigService,
 		private readonly userManager: UserManager,
-		private readonly nodeManager: NodeManager,
+		@InjectNodeManager() private readonly nodeManager: NodeManager,
 	) {}
 
 	private readonly logger = new Logger(LavalinkNodeEvents.name);
