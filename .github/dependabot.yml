@@ -30,17 +30,11 @@ updates:
           - "@commitlint/*"
           - "lint-staged"
           - "husky"
-      webpack:
-        patterns:
-          - "webpack"
-          - "webpack-*"
-          - "run-script-webpack-plugin"
       typescript:
         patterns:
           - "typescript"
           - "@types/*"
           - "tslib"
-          - "ts-node"
       discord:
         patterns:
           - "discord.js"
@@ -55,5 +49,4 @@ updates:
           - "@opentelemetry/*"
           - "opentelemetry-*"
           - "@sesamecare-oss/opentelemetry-node-metrics"
-          - "@prisma/instrumentation"
 
