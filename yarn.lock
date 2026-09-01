@@ -825,7 +825,7 @@ __metadata:
 
 "@ndb/database@file:./Database::locator=n-d-b%40workspace%3A.":
   version: 1.0.0
-  resolution: "@ndb/database@file:./Database#./Database::hash=d3747a&locator=n-d-b%40workspace%3A."
+  resolution: "@ndb/database@file:./Database#./Database::hash=d21ec4&locator=n-d-b%40workspace%3A."
   dependencies:
     dotenv: "npm:^17.4.2"
     reflect-metadata: "npm:^0.2.2"
@@ -833,13 +833,13 @@ __metadata:
     typeorm-extension: "npm:^3.6.3"
   peerDependencies:
     pg: ">=8.0.0"
-  checksum: 10c0/d1873758d0b169e27af0172071be2863beb67a6c4b2a68fe3421b67955ff3e0a4f37860908d09356c8b28bfeda1c008101ee7da6905d7084d2f80b828816f06a
+  checksum: 10c0/9db0a47aed2f8e6254a9b20f966f5b7f348e2247d785527d3c12f603d60e7e7633013eae8488d431804d0926197c5096797d8cd475603243b4126d263b8ba8be
   languageName: node
   linkType: hard
 
-"@necord/lavalink@file:/home/nedcloarbr/Projects/Github/NedcloarBR/Necord/lavalink/necord-lavalink-1.3.0.tgz::locator=n-d-b%40workspace%3A.":
+"@necord/lavalink@npm:^1.3.0":
   version: 1.3.0
-  resolution: "@necord/lavalink@file:/home/nedcloarbr/Projects/Github/NedcloarBR/Necord/lavalink/necord-lavalink-1.3.0.tgz#/home/nedcloarbr/Projects/Github/NedcloarBR/Necord/lavalink/necord-lavalink-1.3.0.tgz::hash=d79aba&locator=n-d-b%40workspace%3A."
+  resolution: "@necord/lavalink@npm:1.3.0"
   dependencies:
     tslib: "npm:^2.8.1"
   peerDependencies:
@@ -850,7 +850,7 @@ __metadata:
     necord: ^6.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/28df723951d1deb99779fd87f82b9e1d843027262bf1658d2cf26aea570565cff185f2122e5f7099da0e4cf88973fadd2494e8a4e75f067dddb6ad35a47b789f
+  checksum: 10c0/ae164e531a914f29ef0780937ecd377e85e1ef64f04cd5564c1eba7cea567ebb38eea2d16d114f799eef211346bc5060bab9a221a60ec8707034149ffcd2aeea
   languageName: node
   linkType: hard
 
@@ -4889,7 +4889,7 @@ __metadata:
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-angular": "npm:^20.0.0"
     "@ndb/database": "file:./Database"
-    "@necord/lavalink": "file:/home/nedcloarbr/Projects/Github/NedcloarBR/Necord/lavalink/necord-lavalink-1.3.0.tgz"
+    "@necord/lavalink": "npm:^1.3.0"
     "@necord/localization": "npm:^4.0.2"
     "@necord/pagination": "npm:^2.2.0"
     "@nedcloarbr/biome-config": "npm:^2.0.2"
