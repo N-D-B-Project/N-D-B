@@ -1,6 +1,6 @@
 import { Global, Module } from "@nestjs/common";
-import { CommandsService } from "./Commands.service";
-import * as Commands from "./index";
+import { CommandsService } from "./Commands.service.js";
+import * as Commands from "./index.js";
 
 @Global()
 @Module({

@@ -1,1 +1,1 @@
-export * from "./IMusicEmbeds";
+export * from "./IMusicEmbeds.js";

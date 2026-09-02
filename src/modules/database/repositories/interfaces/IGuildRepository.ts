@@ -1,6 +1,6 @@
 import type { Guild, GuildSettings } from "@ndb/database";
 import type { Guild as DiscordGuild } from "discord.js";
-import type { DatabaseStatus } from "../../types";
+import type { DatabaseStatus } from "../../types/index.js";
 
 export interface IGuildRepository {
 	updateSettings(guildId: string, data: Partial<GuildSettings>): Promise<void>;

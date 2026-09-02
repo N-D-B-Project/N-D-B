@@ -13,10 +13,10 @@ import {
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { NodeManager } from "lavalink-client";
 import { Button, type ButtonContext, ComponentParam, Context } from "necord";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MessageTools } from "@/modules/commands/Message";
-import type { Config } from "@/modules/config/types";
-import { Colors } from "@/types/Colors";
+import { InteractionTools } from "#src/modules/commands/Interaction.js";
+import { MessageTools } from "#src/modules/commands/Message.js";
+import type { Config } from "#src/modules/config/types/index.js";
+import { Colors } from "#src/types/Colors.js";
 @Injectable()
 export class LavalinkNodeEvents {
 	public constructor(

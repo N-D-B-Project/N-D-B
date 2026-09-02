@@ -11,10 +11,10 @@ import {
 	type TextChannel,
 } from "discord.js";
 import { Button, type ButtonContext, Context } from "necord";
-import type { ITicketsEmbeds, ITicketsService } from "../interfaces";
+import type { ITicketsEmbeds, ITicketsService } from "../interfaces/index.js";
 // biome-ignore lint/style/useImportType: Cannot use ImportType in DI
-import { TranscriptService } from "../services/transcript.service";
-import { Tickets } from "../types/constants";
+import { TranscriptService } from "../services/transcript.service.js";
+import { Tickets } from "../types/constants.js";
 
 @Injectable()
 export class CloseTicketComponent {

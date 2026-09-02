@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import * as Commands from "./commands";
+import * as Commands from "./commands/index.js";
 
 @Module({
 	providers: [...Object.values(Commands)],

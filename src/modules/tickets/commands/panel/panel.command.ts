@@ -10,15 +10,21 @@ import {
 	SeparatorSpacingSize,
 } from "discord.js";
 import { Context, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import { Colors } from "@/types/Colors";
-import type { ITicketsService } from "../../interfaces";
-import type { PanelSettings } from "../../types/constants";
-import { Tickets } from "../../types/constants";
-import { TicketCommand } from "../tickets.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import {
+	CommandConfigGuard,
+	CommandPermissionsGuard,
+} from "#src/common/guards/index.js";
+import { Colors } from "#src/types/Colors.js";
+import type { ITicketsService } from "../../interfaces/index.js";
+import type { PanelSettings } from "../../types/constants.js";
+import { Tickets } from "../../types/constants.js";
+import { TicketCommand } from "../tickets.decorator.js";
 // biome-ignore lint/style/useImportType: dependency injection
-import { PanelDTO } from "./panel.dto";
+import { PanelDTO } from "./panel.dto.js";
 
 const HEX_COLOR_REGEX = /^#[0-9A-Fa-f]{6}$/;
 const URL_REGEX = /^https?:\/\/.+/;

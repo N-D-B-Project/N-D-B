@@ -10,7 +10,7 @@ import {
 	Inject,
 } from "@nestjs/common";
 import type { ChatInputCommandInteraction } from "discord.js";
-import { EmojiError } from "../errors/Emoji.error";
+import { EmojiError } from "../errors/Emoji.error.js";
 
 @Catch(EmojiError)
 export class EmojiFilter implements ExceptionFilter {

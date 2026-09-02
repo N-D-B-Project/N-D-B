@@ -2,8 +2,8 @@ import { Inject, Injectable } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client } from "discord.js";
 import { Context, type ContextOf, On } from "necord";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import type { IDatabaseService } from "#src/modules/database/interfaces/IDatabaseService.js";
+import { Services } from "#src/types/Constants.js";
 
 @Injectable()
 export class GuildEvents {

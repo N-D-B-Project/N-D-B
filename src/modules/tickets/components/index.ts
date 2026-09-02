@@ -1,3 +1,3 @@
-export * from "./closeTicket.component";
-export * from "./openTicket.component";
-export * from "./transcript.component";
+export * from "./closeTicket.component.js";
+export * from "./openTicket.component.js";
+export * from "./transcript.component.js";

@@ -6,17 +6,14 @@ dotenv.config({ path: `.env.${NODE_ENV}` });
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
+import { AppModule } from "./app.module.js";
 import {
 	EnvChecker,
 	NodeHandler,
 	otelSDK,
 	ShardingManager,
 	TopGGAutoPoster,
-} from "./lib";
-
-// biome-ignore lint/suspicious/noExplicitAny: any is required for HMR
-declare const module: any;
+} from "./lib/index.js";
 
 async function bootstrap() {
 	NodeHandler();
@@ -25,7 +22,7 @@ async function bootstrap() {
 	const configService = app.get<ConfigService>(ConfigService);
 	const logger = new Logger("Main");
 	EnvChecker(configService);
-	const ShardManager = new ShardingManager(configService, module.hot);
+	const ShardManager = new ShardingManager(configService);
 
 	await ShardManager.init();
 
@@ -40,15 +37,11 @@ async function bootstrap() {
 
 	app.enableShutdownHooks();
 
-	if (module.hot) {
-		module.hot.accept();
-		module.hot.dispose(() => app.close());
-	}
-
 	try {
 		await app.listen(configService.get("PORT"));
 	} catch (error) {
 		logger.error("An error occurred when starting: ", (error as Error).message);
 	}
 }
-bootstrap();
+
+await bootstrap();

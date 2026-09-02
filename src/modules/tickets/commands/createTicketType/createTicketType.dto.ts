@@ -1,6 +1,6 @@
 import { localizationMapByKey } from "@necord/localization";
 import { StringOption } from "necord";
-import { IsEmoji } from "@/common/decorators/validators/is-emoji-validator.decorator";
+import { IsEmoji } from "#src/common/decorators/validators/is-emoji-validator.decorator.js";
 
 export class CreateTicketTypeDTO {
 	@StringOption({

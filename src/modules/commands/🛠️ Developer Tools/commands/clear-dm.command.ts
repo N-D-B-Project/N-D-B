@@ -1,6 +1,9 @@
 import { Ctx, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators/";
-import { DeveloperToolsCommand } from "../DeveloperTools.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { DeveloperToolsCommand } from "../DeveloperTools.decorator.js";
 
 @DeveloperToolsCommand()
 export class ClearDMCommand {

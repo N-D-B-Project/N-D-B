@@ -12,12 +12,12 @@
 			{
 				"include": "**/Languages",
 				"watchAssets": true,
-				"outDir": "dist/src/"
+				"outDir": "dist/"
 			},
 			{
 				"include": "**/assets",
 				"watchAssets": true,
-				"outDir": "dist/src/"
+				"outDir": "dist/"
 			}
 		]
 	}

@@ -7,10 +7,10 @@ import {
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import type { Repository } from "typeorm";
-import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto";
-import type { TicketEntity, TicketTypeEntity } from "../entities";
-import type { ITicketsRepository } from "../interfaces";
-import type { PanelSettings } from "../types/constants";
+import type { CreateTicketDTO, CreateTicketTypeDTO } from "../dto/index.js";
+import type { TicketEntity, TicketTypeEntity } from "../entities/index.js";
+import type { ITicketsRepository } from "../interfaces/index.js";
+import type { PanelSettings } from "../types/constants.js";
 
 @Injectable()
 export class TicketsRepository implements ITicketsRepository {

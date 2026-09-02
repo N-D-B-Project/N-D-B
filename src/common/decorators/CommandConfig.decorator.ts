@@ -1,5 +1,5 @@
 import { applyDecorators, SetMetadata, UseGuards } from "@nestjs/common";
-import { CommandConfigGuard } from "../guards";
+import { CommandConfigGuard } from "../guards/index.js";
 
 export interface CommandConfigOptions {
 	category: string;

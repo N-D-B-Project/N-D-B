@@ -1,8 +1,8 @@
-export { CommandsModule } from "@/modules/commands/Commands.module";
-export { ComponentsModule } from "@/modules/components/Components.module";
-export { DatabaseModule } from "@/modules/database/database.module";
-export { EventsModule } from "@/modules/events/Events.module";
-export { MusicModule } from "@/modules/music/Music.module";
-export { ReactionRolesModule } from "@/modules/reactionRoles/ReactionRoles.module";
-export { ScheduleModule } from "@/modules/schedule/schedule.module";
-export { TicketsModule } from "@/modules/tickets/tickets.module";
+export { CommandsModule } from "#src/modules/commands/Commands.module.js";
+export { ComponentsModule } from "#src/modules/components/Components.module.js";
+export { DatabaseModule } from "#src/modules/database/database.module.js";
+export { EventsModule } from "#src/modules/events/Events.module.js";
+export { MusicModule } from "#src/modules/music/Music.module.js";
+export { ReactionRolesModule } from "#src/modules/reactionRoles/ReactionRoles.module.js";
+export { ScheduleModule } from "#src/modules/schedule/schedule.module.js";
+export { TicketsModule } from "#src/modules/tickets/tickets.module.js";

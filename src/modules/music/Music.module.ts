@@ -1,7 +1,6 @@
-// biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import {
 	LAVALINK_MODULE_OPTIONS,
-	NecordLavalinkModuleOptions,
+	type NecordLavalinkModuleOptions,
 } from "@necord/lavalink";
 import {
 	Global,
@@ -12,9 +11,9 @@ import {
 } from "@nestjs/common";
 import { InjectRedis } from "@nestjs-redis/client";
 import type { RedisClientType } from "redis";
-import * as CommandsMap from "./commands";
-import * as EventsMap from "./events";
-import * as ProvidersMap from "./types/providers";
+import * as CommandsMap from "./commands/index.js";
+import * as EventsMap from "./events/index.js";
+import * as ProvidersMap from "./types/providers.js";
 
 const Commands = Object.values(CommandsMap);
 const Events = Object.values(EventsMap);

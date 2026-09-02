@@ -15,17 +15,20 @@ import {
 	CommandConfig,
 	CommandPermissions,
 	ValidatedOptions,
-} from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
+} from "#src/common/decorators/index.js";
+import {
+	CommandConfigGuard,
+	CommandPermissionsGuard,
+} from "#src/common/guards/index.js";
 // biome-ignore lint/style/useImportType: dependency injection
-import { CommandsService } from "@/modules/commands/Commands.service";
-import { Colors } from "@/types/Colors";
+import { CommandsService } from "#src/modules/commands/Commands.service.js";
+import { Colors } from "#src/types/Colors.js";
 // biome-ignore lint/style/useImportType: dependency injection
-import { TicketsService } from "../../tickets.service";
-import { CreateTicketTypeError, Tickets } from "../../types/constants";
-import { TicketCommand } from "../tickets.decorator";
+import { TicketsService } from "../../tickets.service.js";
+import { CreateTicketTypeError, Tickets } from "../../types/constants.js";
+import { TicketCommand } from "../tickets.decorator.js";
 // biome-ignore lint/style/useImportType: dependency injection
-import { CreateTicketTypeDTO } from "./createTicketType.dto";
+import { CreateTicketTypeDTO } from "./createTicketType.dto.js";
 
 @TicketCommand()
 export class CreateTicketTypeCommand {

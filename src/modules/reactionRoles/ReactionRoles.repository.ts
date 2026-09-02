@@ -3,15 +3,15 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import type { Guild, TextChannel } from "discord.js";
 import type { Repository } from "typeorm";
-import type { ReactionRolesEntity } from "./entities/ReactionRole.entity";
-import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository";
+import type { ReactionRolesEntity } from "./entities/ReactionRole.entity.js";
+import type { IReactionRolesRepository } from "./interfaces/IReactionRoleRepository.js";
 import {
 	CreateStatus,
 	DeleteStatus,
 	type IReaction,
 	type REACTION_OPTIONS,
 	UpdateStatus,
-} from "./types";
+} from "./types/index.js";
 
 @Injectable()
 export class ReactionRolesRepository implements IReactionRolesRepository {

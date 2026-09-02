@@ -2,15 +2,15 @@ import type {
 	ConfigureTicketTypeDTO,
 	CreateTicketDTO,
 	CreateTicketTypeDTO,
-} from "../dto";
-import type { TicketEntity, TicketTypeEntity } from "../entities";
+} from "../dto/index.js";
+import type { TicketEntity, TicketTypeEntity } from "../entities/index.js";
 import type {
 	CloseTicketError,
 	ConfigureTicketTypeError,
 	CreateTicketTypeError,
 	DeleteTicketTypeError,
 	PanelSettings,
-} from "../types/constants";
+} from "../types/constants.js";
 
 export interface ITicketsService {
 	createTicketType(

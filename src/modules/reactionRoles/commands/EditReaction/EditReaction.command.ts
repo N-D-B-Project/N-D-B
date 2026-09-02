@@ -3,16 +3,19 @@ import { Inject } from "@nestjs/common";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in Injected classes>
 import { Client, type TextChannel } from "discord.js";
 import { Ctx, Options, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
-} from "../../interfaces";
-import { ReactionRolesCommand } from "../../ReactionRoles.decorator";
-import { type REACTION_OPTIONS, UpdateStatus } from "../../types";
-import { ReactionRoles } from "../../types/constants";
+} from "../../interfaces/index.js";
+import { ReactionRolesCommand } from "../../ReactionRoles.decorator.js";
+import { ReactionRoles } from "../../types/constants.js";
+import { type REACTION_OPTIONS, UpdateStatus } from "../../types/index.js";
 // biome-ignore lint/style/useImportType: <Cannot useImportType in classes with validation system>
-import { EditReactionDTO } from "./EditReaction.dto";
+import { EditReactionDTO } from "./EditReaction.dto.js";
 
 @ReactionRolesCommand()
 export class EditReactionCommand {

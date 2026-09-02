@@ -9,8 +9,8 @@ import type {
 	ThreadChannel,
 	User,
 } from "discord.js";
-import type { Content } from "@/types";
-import { messageOptions } from "@/utils/Tools";
+import type { Content } from "#src/types/index.js";
+import { messageOptions } from "#src/utils/Tools.js";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <Utility Class>
 export class MessageTools {

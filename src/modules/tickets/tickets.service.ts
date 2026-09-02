@@ -1,20 +1,23 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { IGuildRepository } from "../database/repositories/interfaces";
-import { Repositories } from "../database/types/constants";
+import type { IGuildRepository } from "../database/repositories/interfaces/index.js";
+import { Repositories } from "../database/types/constants.js";
 import type {
 	ConfigureTicketTypeDTO,
 	CreateTicketDTO,
 	CreateTicketTypeDTO,
-} from "./dto";
-import type { TicketEntity, TicketTypeEntity } from "./entities";
-import type { ITicketsRepository, ITicketsService } from "./interfaces";
+} from "./dto/index.js";
+import type { TicketEntity, TicketTypeEntity } from "./entities/index.js";
+import type {
+	ITicketsRepository,
+	ITicketsService,
+} from "./interfaces/index.js";
 import {
 	CloseTicketError,
 	ConfigureTicketTypeError,
 	CreateTicketTypeError,
 	DeleteTicketTypeError,
 	Tickets,
-} from "./types/constants";
+} from "./types/constants.js";
 
 @Injectable()
 export class TicketsService implements ITicketsService {
@@ -114,7 +117,7 @@ export class TicketsService implements ITicketsService {
 
 	public async updatePanelSettings(
 		guildId: string,
-		data: Partial<import("./types/constants").PanelSettings>,
+		data: Partial<import("./types/constants.js").PanelSettings>,
 	) {
 		return await this.repository.updatePanelSettings(guildId, data);
 	}

@@ -12,9 +12,9 @@ import {
 } from "discord.js";
 import { RESTJSONErrorCodes } from "discord-api-types/v10";
 import { Context, type ContextOf, On, Once } from "necord";
-import type { Config } from "@/modules/config/types";
-import type { IDatabaseService } from "@/modules/database/interfaces/IDatabaseService";
-import { Services } from "@/types/Constants";
+import type { Config } from "#src/modules/config/types/index.js";
+import type { IDatabaseService } from "#src/modules/database/interfaces/IDatabaseService.js";
+import { Services } from "#src/types/Constants.js";
 
 @Injectable()
 export class GatewayEvents {

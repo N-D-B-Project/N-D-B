@@ -12,7 +12,7 @@ import {
 import { Reflector } from "@nestjs/core";
 import type { ChatInputCommandInteraction } from "discord.js";
 import { NecordExecutionContext } from "necord";
-import { CommandConfigKey } from "../decorators";
+import { CommandConfigKey } from "../decorators/index.js";
 
 @Injectable()
 export class CommandConfigGuard implements CanActivate {

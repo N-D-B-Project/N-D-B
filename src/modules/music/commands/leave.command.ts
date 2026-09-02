@@ -7,9 +7,12 @@ import {
 } from "@necord/localization";
 import { channelMention } from "discord.js";
 import { Context, type SlashCommandContext, Subcommand } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "@/modules/commands/Interaction";
-import { MusicCommand } from "@/modules/music/Music.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { InteractionTools } from "#src/modules/commands/Interaction.js";
+import { MusicCommand } from "#src/modules/music/Music.decorator.js";
 
 @MusicCommand()
 export class LeaveCommand {

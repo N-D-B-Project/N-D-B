@@ -20,12 +20,18 @@ import {
 	type SlashCommandContext,
 	Subcommand,
 } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { CommandConfigGuard, CommandPermissionsGuard } from "@/common/guards";
-import { Colors } from "@/types/Colors";
-import type { ITicketsService } from "../../interfaces";
-import { Tickets } from "../../types/constants";
-import { TicketCommand } from "../tickets.decorator";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import {
+	CommandConfigGuard,
+	CommandPermissionsGuard,
+} from "#src/common/guards/index.js";
+import { Colors } from "#src/types/Colors.js";
+import type { ITicketsService } from "../../interfaces/index.js";
+import { Tickets } from "../../types/constants.js";
+import { TicketCommand } from "../tickets.decorator.js";
 
 class SetupDTO {
 	@ChannelOption({

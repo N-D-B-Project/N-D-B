@@ -1,8 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import type { AutocompleteInteraction } from "discord.js";
 import { AutocompleteInterceptor } from "necord";
-import type { ITicketsService } from "../interfaces";
-import { Tickets } from "../types/constants";
+import type { ITicketsService } from "../interfaces/index.js";
+import { Tickets } from "../types/constants.js";
 
 @Injectable()
 export class TicketTypeNameAutocomplete extends AutocompleteInterceptor {

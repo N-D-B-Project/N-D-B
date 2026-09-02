@@ -1,2 +1,2 @@
-export * from "./AddReaction.event";
-export * from "./RemoveReaction.event";
+export * from "./AddReaction.event.js";
+export * from "./RemoveReaction.event.js";

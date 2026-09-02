@@ -1,6 +1,6 @@
 import { isURL } from "class-validator";
 import { SourceLinksRegexes, type SourceNames } from "lavalink-client";
-import { config } from "../config";
+import { config } from "../config/index.js";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: Tooling purpose
 export class MusicService {

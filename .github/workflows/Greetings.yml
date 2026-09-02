@@ -20,8 +20,8 @@ jobs:
       - name: Greet first-time contributors
         uses: actions/first-interaction@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: |
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: |
             Hi @{{author}} 👋
 
             Thank you for opening your first issue in this repository — we appreciate the report!
@@ -31,7 +31,7 @@ jobs:
             When possible, include reproduction steps, environment information (Node/Yarn/OS), and relevant logs or stack traces so we can triage faster.
 
             Maintainers will take a look soon. Thank you!
-          pr-message: |
+          pr_message: |
             Hi @{{author}} 👋
 
             Thanks for your first pull request — welcome and thank you for contributing!

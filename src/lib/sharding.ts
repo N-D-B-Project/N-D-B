@@ -13,11 +13,8 @@ export class ShardingManager extends _ShardingManager {
 		},
 	);
 
-	public constructor(
-		private readonly config: ConfigService,
-		withHRM: boolean,
-	) {
-		super(path.join(__dirname, withHRM ? "lib" : "", "bot.js"), {
+	public constructor(private readonly config: ConfigService) {
+		super(path.join(import.meta.dirname, "bot.js"), {
 			token: config.getOrThrow("Discord").Token,
 			shardList: "auto",
 			respawn: true,

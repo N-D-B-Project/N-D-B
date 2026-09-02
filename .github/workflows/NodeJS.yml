@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.9.0]
+        node-version: [22.22.3]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:

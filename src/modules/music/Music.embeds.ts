@@ -12,8 +12,8 @@ import {
 	type Guild,
 	type VoiceChannel,
 } from "discord.js";
-import { Colors } from "@/types/Colors";
-import type { IMusicEmbeds } from "./interfaces";
+import { Colors } from "#src/types/Colors.js";
+import type { IMusicEmbeds } from "./interfaces/index.js";
 
 @Injectable()
 export class MusicEmbeds implements IMusicEmbeds {

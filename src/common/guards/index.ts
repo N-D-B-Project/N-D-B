@@ -1,2 +1,2 @@
-export * from "./CommandConfig.guard";
-export * from "./CommandPermissions.guard";
+export * from "./CommandConfig.guard.js";
+export * from "./CommandPermissions.guard.js";

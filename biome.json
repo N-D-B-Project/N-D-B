@@ -6,6 +6,7 @@
 	],
 	"files": {
 		"includes": [
+			"!**/Database",
 			"!**/dist",
 			"!**/out",
 			"!**/build",

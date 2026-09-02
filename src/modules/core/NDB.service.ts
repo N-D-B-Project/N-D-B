@@ -15,8 +15,8 @@ import {
 	type CommandInteraction,
 	type EmbedBuilder,
 } from "discord.js";
-import type { Content } from "@/types";
-import type { INDBService } from "./interfaces/INDBService";
+import type { Content } from "#src/types/index.js";
+import type { INDBService } from "./interfaces/INDBService.js";
 
 @Injectable()
 export class NDBService implements INDBService {

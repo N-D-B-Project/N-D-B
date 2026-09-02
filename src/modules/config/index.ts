@@ -1,3 +1,3 @@
-export * from "./Config";
-export * from "./JSONLocale.loader";
-export * from "./NecordConfig.service";
+export * from "./Config.js";
+export * from "./JSONLocale.loader.js";
+export * from "./NecordConfig.service.js";

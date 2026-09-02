@@ -18,15 +18,18 @@ import {
 	type SlashCommandContext,
 	Subcommand,
 } from "necord";
-import { CommandConfig, CommandPermissions } from "@/common/decorators";
-import { InteractionTools } from "../../commands/Interaction";
+import {
+	CommandConfig,
+	CommandPermissions,
+} from "#src/common/decorators/index.js";
+import { InteractionTools } from "../../commands/Interaction.js";
 import type {
 	IReactionRolesEmbeds,
 	IReactionRolesService,
-} from "../interfaces";
-import { ReactionRolesCommand } from "../ReactionRoles.decorator";
-import { DeleteStatus } from "../types";
-import { ReactionRoles } from "../types/constants";
+} from "../interfaces/index.js";
+import { ReactionRolesCommand } from "../ReactionRoles.decorator.js";
+import { ReactionRoles } from "../types/constants.js";
+import { DeleteStatus } from "../types/index.js";
 
 enum DeleteAllAction {
 	Yes = "yes",

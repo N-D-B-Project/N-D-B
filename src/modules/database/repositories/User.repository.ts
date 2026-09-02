@@ -3,8 +3,8 @@ import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import type { User as DiscordUser } from "discord.js";
 import type { Repository } from "typeorm";
-import { DatabaseStatus } from "../types";
-import type { IUserRepository } from "./interfaces";
+import { DatabaseStatus } from "../types/index.js";
+import type { IUserRepository } from "./interfaces/index.js";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
