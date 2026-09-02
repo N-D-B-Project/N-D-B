@@ -836,48 +836,52 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@necord/lavalink@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@necord/lavalink@npm:1.3.0"
+"@necord/lavalink@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@necord/lavalink@npm:2.0.0"
   dependencies:
     tslib: "npm:^2.8.1"
   peerDependencies:
-    "@nestjs/common": ^10.2.0 || ^11.0.0
-    "@nestjs/core": ^10.2.0 || ^11.0.0
+    "@nestjs/common": ^10.2.0 || ^11.0.0 || ^12.0.0
+    "@nestjs/core": ^10.2.0 || ^11.0.0 || ^12.0.0
     discord.js: ^14.0.1
     lavalink-client: ^2.6.1
-    necord: ^6.0.0
+    necord: ^7.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/ae164e531a914f29ef0780937ecd377e85e1ef64f04cd5564c1eba7cea567ebb38eea2d16d114f799eef211346bc5060bab9a221a60ec8707034149ffcd2aeea
+  checksum: 10c0/9b613c68f982fb7f68d1b3f4b28bc25170daea474fe72aef8c35ab0432ed83312387971c51e00a56268988cc18e5cf28678b67b760aac5ad941fa0e355ce35e1
   languageName: node
   linkType: hard
 
-"@necord/localization@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@necord/localization@npm:4.0.2"
+"@necord/localization@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@necord/localization@npm:5.0.0"
+  dependencies:
+    tslib: "npm:^2.8.1"
   peerDependencies:
-    "@nestjs/common": ^10.2.0 || ^11.0.0
-    "@nestjs/core": ^10.2.0 || ^11.0.0
+    "@nestjs/common": ^10.2.0 || ^11.0.0 || ^12.0.0
+    "@nestjs/core": ^10.2.0 || ^11.0.0 || ^12.0.0
     discord.js: ^14.0.1
-    necord: ^6.0.0
+    necord: ^7.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/a279f892c6f13bf5e24bbffe5db714110078cacce281abfbfb69863b37633656ff7c10c3e4ad31a6163293db7fe88988e3f079d74750c924f57523498038dfc0
+  checksum: 10c0/782e4a80b3977cced5898061d00d0b43bcdb0299a875444caa6ea7e1c19fe16f2b3adb313feb9ae39e3b7a22e90489380405d2133ce33765132edbe989e6c765
   languageName: node
   linkType: hard
 
-"@necord/pagination@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@necord/pagination@npm:2.2.0"
+"@necord/pagination@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@necord/pagination@npm:3.0.0"
+  dependencies:
+    tslib: "npm:^2.8.1"
   peerDependencies:
-    "@nestjs/common": ^10.2.0 || ^11.0.0
-    "@nestjs/core": ^10.2.0 || ^11.0.0
+    "@nestjs/common": ^10.2.0 || ^11.0.0 || ^12.0.0
+    "@nestjs/core": ^10.2.0 || ^11.0.0 || ^12.0.0
     discord.js: ^14.0.1
-    necord: ^6.0.0
+    necord: ^7.0.0
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/139e3534d9b5b364fbd3e76e26c59ef826f37089a79adfd57175ff6e6a86a75492bd26e56a1c3a45362fefcc93b76ee3b5244a640180e817c0edde5446957787
+  checksum: 10c0/e0bafb948639d3783be948103463cea6e3fd87e8ad1debb9a831e9d4c3fea1dda0ce2424be36814fa13d2fa0abd434fb81a8c77cb91abf14212442c8fbcb72e6
   languageName: node
   linkType: hard
 
@@ -4463,13 +4467,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lavalink-client@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "lavalink-client@npm:2.6.2"
+"lavalink-client@npm:^2.11.0":
+  version: 2.11.0
+  resolution: "lavalink-client@npm:2.11.0"
   dependencies:
     tslib: "npm:^2.8.1"
-    ws: "npm:^8.18.3"
-  checksum: 10c0/25ee9adb1cc8e4113f8eb1b0ba20b30e46f3e6160f57e9b23a3d20718c8e68a6c3dd31472fee6d85806a159a5e343814f297ea48784450810129abe4db9317fb
+    ws: "npm:^8.21.3"
+  checksum: 10c0/105b130a641d9e6f6d7401727aa994aafc16978b3575fdf9e2f32c410f6c21ca0015bec0672ec9cc332a062de88631b38463b1cbcdef9d48ae08a6a642f47cc2
   languageName: node
   linkType: hard
 
@@ -4888,9 +4892,9 @@ __metadata:
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-angular": "npm:^20.0.0"
     "@ndb/database": "portal:./Database"
-    "@necord/lavalink": "npm:^1.3.0"
-    "@necord/localization": "npm:^4.0.2"
-    "@necord/pagination": "npm:^2.2.0"
+    "@necord/lavalink": "npm:^2.0.0"
+    "@necord/localization": "npm:^5.0.0"
+    "@necord/pagination": "npm:^3.0.0"
     "@nedcloarbr/biome-config": "npm:^2.0.2"
     "@nestjs-redis/client": "npm:^0.12.1"
     "@nestjs/cli": "npm:^12.0.0"
@@ -4920,10 +4924,10 @@ __metadata:
     discord.js: "npm:^14.27.0"
     dotenv: "npm:^17.2.2"
     husky: "npm:^9.1.7"
-    lavalink-client: "npm:^2.6.2"
+    lavalink-client: "npm:^2.11.0"
     lint-staged: "npm:^16.2.6"
     moment: "npm:^2.30.1"
-    necord: "npm:^6.14.0"
+    necord: "npm:^7.0.0"
     parse-ms: "npm:^4.0.0"
     pg: "npm:^8.13.3"
     redis: "npm:^5.9.0"
@@ -4933,7 +4937,7 @@ __metadata:
     topgg-autoposter: "npm:^2.0.2"
     typeorm: "npm:^0.3.25"
     typeorm-extension: "npm:^3.6.3"
-    typescript: "npm:^6.0.2"
+    typescript: "npm:^6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4944,21 +4948,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"necord@npm:^6.14.0":
-  version: 6.14.0
-  resolution: "necord@npm:6.14.0"
+"necord@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "necord@npm:7.0.0"
   dependencies:
     "@nuxt/opencollective": "npm:^0.4.1"
     path-to-regexp: "npm:8.4.2"
     tslib: "npm:^2.8.1"
   peerDependencies:
-    "@nestjs/common": ^10.2.0 || ^11.0.0
-    "@nestjs/core": ^10.2.0 || ^11.0.0
+    "@nestjs/common": ^10.2.0 || ^11.0.0 || ^12.0.0
+    "@nestjs/core": ^10.2.0 || ^11.0.0 || ^12.0.0
     discord-api-types: ^0.37.99
     discord.js: ^14.0.1
     reflect-metadata: ^0.2.1
     rxjs: ^7.2.0
-  checksum: 10c0/92ec5667b46a8ba5a0166dcb2c41db9769cab09d79b1bf9c26ddfa0ff0b0e772dd2c16da832f77c8b25f6a700035b90f69a59c13b61e517fd9fe8e0c739ff27e
+  checksum: 10c0/689c13b8bbeebe40fdd680e009524518000ea1b3ce3b7db50ff5a2de85839dd6b725a15e78bf0010da4a2642e5bc008a8c44b46e33497093242905c751abfe25
   languageName: node
   linkType: hard
 
@@ -6305,7 +6309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^6.0.2, typescript@npm:~6.0.2":
+"typescript@npm:^6.0.3, typescript@npm:~6.0.2":
   version: 6.0.3
   resolution: "typescript@npm:6.0.3"
   bin:
@@ -6315,7 +6319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^6.0.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~6.0.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^6.0.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~6.0.2#optional!builtin<compat/typescript>":
   version: 6.0.3
   resolution: "typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"
   bin:
@@ -6536,9 +6540,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.18.3":
-  version: 8.18.3
-  resolution: "ws@npm:8.18.3"
+"ws@npm:^8.21.3":
+  version: 8.21.3
+  resolution: "ws@npm:8.21.3"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -6547,7 +6551,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 10c0/eac918213de265ef7cb3d4ca348b891a51a520d839aa51cdb8ca93d4fa7ff9f6ccb339ccee89e4075324097f0a55157c89fa3f7147bde9d8d7e90335dc087b53
+  checksum: 10c0/7b28dc2863ea0e2cece68d142a3eee90361021b73f750431e6d8076bb7dede5fdfdb75b3d29534b62f411261147b76b1bc80fb5cc63ab0aabd467280e85b22e0
   languageName: node
   linkType: hard
 
